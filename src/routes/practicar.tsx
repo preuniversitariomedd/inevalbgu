@@ -42,14 +42,8 @@ function ListaAreas() {
           {AREAS.map((area) => {
             const n = preguntasPorArea(area).length;
             const disabled = n === 0;
-            return (
-              <Link
-                key={area}
-                to="/practicar/$area"
-                params={{ area }}
-                disabled={disabled}
-                className={`flex items-center gap-4 rounded-2xl border bg-gradient-card p-5 shadow-soft transition ${disabled ? "pointer-events-none opacity-50" : "hover:-translate-y-0.5 hover:shadow-strong"}`}
-              >
+            const inner = (
+              <>
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   {ICONS[area]}
                 </div>
@@ -60,6 +54,22 @@ function ListaAreas() {
                   </p>
                 </div>
                 <span className="text-primary">→</span>
+              </>
+            );
+            const baseCls = "flex items-center gap-4 rounded-2xl border bg-gradient-card p-5 shadow-soft transition";
+            if (disabled) {
+              return (
+                <div key={area} className={`${baseCls} opacity-50`}>{inner}</div>
+              );
+            }
+            return (
+              <Link
+                key={area}
+                to="/practicar/$area"
+                params={{ area }}
+                className={`${baseCls} hover:-translate-y-0.5 hover:shadow-strong`}
+              >
+                {inner}
               </Link>
             );
           })}
