@@ -1,9 +1,11 @@
 import type { Pregunta } from "./tipos";
 import { preguntasAlgebra } from "./preguntas-algebra";
+import { preguntasFunciones } from "./preguntas-funciones";
 
 export const BANCO_PREGUNTAS: Pregunta[] = [
   ...preguntasAlgebra,
-  // Próximos bloques se agregarán aquí: Funciones, Geometría, Estadística, Sucesiones
+  ...preguntasFunciones,
+  // Próximos bloques se agregarán aquí: Geometría, Estadística, Sucesiones
 ];
 
 export function preguntasPorArea(area: string): Pregunta[] {
@@ -25,5 +27,5 @@ export function preguntasAleatorias(items: Pregunta[], n: number): Pregunta[] {
   return copy.slice(0, Math.min(n, copy.length));
 }
 
-export { preguntasAlgebra };
+export { preguntasAlgebra, preguntasFunciones };
 export * from "./tipos";
