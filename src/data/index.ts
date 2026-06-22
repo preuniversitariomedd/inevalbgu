@@ -27,5 +27,5 @@ export function preguntasAleatorias(items: Pregunta[], n: number): Pregunta[] {
   return copy.slice(0, Math.min(n, copy.length));
 }
 
-export { preguntasAlgebra };
+export { preguntasAlgebra, preguntasFunciones };
 export * from "./tipos";
