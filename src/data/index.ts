@@ -1,9 +1,11 @@
 import type { Pregunta } from "./tipos";
 import { preguntasAlgebra } from "./preguntas-algebra";
+import { preguntasFunciones } from "./preguntas-funciones";
 
 export const BANCO_PREGUNTAS: Pregunta[] = [
   ...preguntasAlgebra,
-  // Próximos bloques se agregarán aquí: Funciones, Geometría, Estadística, Sucesiones
+  ...preguntasFunciones,
+  // Próximos bloques se agregarán aquí: Geometría, Estadística, Sucesiones
 ];
 
 export function preguntasPorArea(area: string): Pregunta[] {
