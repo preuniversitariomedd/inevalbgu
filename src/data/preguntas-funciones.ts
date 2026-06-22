@@ -2817,5 +2817,69 @@ export const preguntasFunciones: Pregunta[] = [
     ],
     "respuestaCorrecta": 3,
     "explicacion": "CM(12) = 12 − 20 + 150/12 = −8 + 12.5 = 4.5 (aprox)."
+  },
+  {
+    "id": "fun-177",
+    "area": "Funciones",
+    "tema": "Función cuadrática",
+    "subtema": "Vértice, raíces, eje de simetría",
+    "nivel": "Intermedio",
+    "enunciado": "Determine el vértice de la parábola y = x² − 4x.",
+    "opciones": [
+      "(2, −4)",
+      "(−2, 4)",
+      "(2, 4)",
+      "(4, 0)"
+    ],
+    "respuestaCorrecta": 0,
+    "explicacion": "x_v = 4/2 = 2. y_v = 4 − 8 = −4. Vértice (2, −4)."
+  },
+  {
+    "id": "fun-178",
+    "area": "Funciones",
+    "tema": "Función cuadrática",
+    "subtema": "Vértice, raíces, eje de simetría",
+    "nivel": "Intermedio",
+    "enunciado": "Las raíces de f(x) = x² − 9 son:",
+    "opciones": [
+      "No tiene raíces reales",
+      "x = 3 y x = −3",
+      "x = 9 y x = −9",
+      "x = ±9"
+    ],
+    "respuestaCorrecta": 1,
+    "explicacion": "x² − 9 = 0 ⇒ x² = 9 ⇒ x = ±3."
+  },
+  {
+    "id": "fun-179",
+    "area": "Funciones",
+    "tema": "Función cuadrática",
+    "subtema": "Vértice, raíces, eje de simetría",
+    "nivel": "Avanzado",
+    "enunciado": "La parábola y = (x − 5)² − 2 tiene como eje de simetría:",
+    "opciones": [
+      "x = −2",
+      "x = 2",
+      "x = 5",
+      "x = −5"
+    ],
+    "respuestaCorrecta": 2,
+    "explicacion": "En la forma y = (x − h)² + k, el eje es x = h = 5."
+  },
+  {
+    "id": "fun-180",
+    "area": "Funciones",
+    "tema": "Función cuadrática",
+    "subtema": "Vértice, raíces, eje de simetría",
+    "nivel": "Avanzado",
+    "enunciado": "Determine las raíces de f(x) = 2x² + 5x − 3 usando la fórmula general.",
+    "opciones": [
+      "x = −1/2 y x = 3",
+      "x = 5 y x = −3",
+      "No tiene raíces reales",
+      "x = 1/2 y x = −3"
+    ],
+    "respuestaCorrecta": 3,
+    "explicacion": "x = (−5 ± √(25 + 24))/4 = (−5 ± 7)/4 ⇒ 1/2 o −3."
   }
 ];
