@@ -9,38 +9,109 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SimulacroRouteImport } from './routes/simulacro'
+import { Route as ProgresoRouteImport } from './routes/progreso'
+import { Route as PracticarRouteImport } from './routes/practicar'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PracticarAreaRouteImport } from './routes/practicar.$area'
 
+const SimulacroRoute = SimulacroRouteImport.update({
+  id: '/simulacro',
+  path: '/simulacro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgresoRoute = ProgresoRouteImport.update({
+  id: '/progreso',
+  path: '/progreso',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PracticarRoute = PracticarRouteImport.update({
+  id: '/practicar',
+  path: '/practicar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PracticarAreaRoute = PracticarAreaRouteImport.update({
+  id: '/$area',
+  path: '/$area',
+  getParentRoute: () => PracticarRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/practicar': typeof PracticarRouteWithChildren
+  '/progreso': typeof ProgresoRoute
+  '/simulacro': typeof SimulacroRoute
+  '/practicar/$area': typeof PracticarAreaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/practicar': typeof PracticarRouteWithChildren
+  '/progreso': typeof ProgresoRoute
+  '/simulacro': typeof SimulacroRoute
+  '/practicar/$area': typeof PracticarAreaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/practicar': typeof PracticarRouteWithChildren
+  '/progreso': typeof ProgresoRoute
+  '/simulacro': typeof SimulacroRoute
+  '/practicar/$area': typeof PracticarAreaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/practicar'
+    | '/progreso'
+    | '/simulacro'
+    | '/practicar/$area'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/practicar' | '/progreso' | '/simulacro' | '/practicar/$area'
+  id:
+    | '__root__'
+    | '/'
+    | '/practicar'
+    | '/progreso'
+    | '/simulacro'
+    | '/practicar/$area'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PracticarRoute: typeof PracticarRouteWithChildren
+  ProgresoRoute: typeof ProgresoRoute
+  SimulacroRoute: typeof SimulacroRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/simulacro': {
+      id: '/simulacro'
+      path: '/simulacro'
+      fullPath: '/simulacro'
+      preLoaderRoute: typeof SimulacroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progreso': {
+      id: '/progreso'
+      path: '/progreso'
+      fullPath: '/progreso'
+      preLoaderRoute: typeof ProgresoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/practicar': {
+      id: '/practicar'
+      path: '/practicar'
+      fullPath: '/practicar'
+      preLoaderRoute: typeof PracticarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +119,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/practicar/$area': {
+      id: '/practicar/$area'
+      path: '/$area'
+      fullPath: '/practicar/$area'
+      preLoaderRoute: typeof PracticarAreaRouteImport
+      parentRoute: typeof PracticarRoute
+    }
   }
 }
 
+interface PracticarRouteChildren {
+  PracticarAreaRoute: typeof PracticarAreaRoute
+}
+
+const PracticarRouteChildren: PracticarRouteChildren = {
+  PracticarAreaRoute: PracticarAreaRoute,
+}
+
+const PracticarRouteWithChildren = PracticarRoute._addFileChildren(
+  PracticarRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PracticarRoute: PracticarRouteWithChildren,
+  ProgresoRoute: ProgresoRoute,
+  SimulacroRoute: SimulacroRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
