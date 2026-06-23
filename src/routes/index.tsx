@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles } from "lucide-react";
+import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database } from "lucide-react";
 import { BANCO_PREGUNTAS } from "@/data";
 
 export const Route = createFileRoute("/")({
@@ -41,7 +41,7 @@ function Index() {
       </header>
 
       <main className="mx-auto max-w-5xl px-5 py-10">
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <ActionCard
             to="/practicar"
             icon={<BookOpen className="h-7 w-7" />}
@@ -57,6 +57,13 @@ function Index() {
             tone="accent"
           />
           <ActionCard
+            to="/banco"
+            icon={<Database className="h-7 w-7" />}
+            title="Banco de preguntas"
+            desc={`Más de ${total >= 1000 ? "1000" : total} preguntas. Filtra por área y nivel.`}
+            tone="primary"
+          />
+          <ActionCard
             to="/progreso"
             icon={<BarChart3 className="h-7 w-7" />}
             title="Mi progreso"
@@ -64,6 +71,7 @@ function Index() {
             tone="success"
           />
         </div>
+
 
         <section className="mt-12 rounded-2xl border bg-gradient-card p-6 shadow-soft">
           <h2 className="text-xl font-bold">¿Qué evalúa la prueba?</h2>

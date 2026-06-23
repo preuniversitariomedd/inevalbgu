@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SimulacroRouteImport } from './routes/simulacro'
 import { Route as ProgresoRouteImport } from './routes/progreso'
 import { Route as PracticarRouteImport } from './routes/practicar'
+import { Route as BancoRouteImport } from './routes/banco'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PracticarAreaRouteImport } from './routes/practicar.$area'
 
@@ -30,6 +31,11 @@ const PracticarRoute = PracticarRouteImport.update({
   path: '/practicar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BancoRoute = BancoRouteImport.update({
+  id: '/banco',
+  path: '/banco',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,6 +49,7 @@ const PracticarAreaRoute = PracticarAreaRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/banco': typeof BancoRoute
   '/practicar': typeof PracticarRouteWithChildren
   '/progreso': typeof ProgresoRoute
   '/simulacro': typeof SimulacroRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/banco': typeof BancoRoute
   '/practicar': typeof PracticarRouteWithChildren
   '/progreso': typeof ProgresoRoute
   '/simulacro': typeof SimulacroRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/banco': typeof BancoRoute
   '/practicar': typeof PracticarRouteWithChildren
   '/progreso': typeof ProgresoRoute
   '/simulacro': typeof SimulacroRoute
@@ -67,15 +76,23 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/banco'
     | '/practicar'
     | '/progreso'
     | '/simulacro'
     | '/practicar/$area'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/practicar' | '/progreso' | '/simulacro' | '/practicar/$area'
+  to:
+    | '/'
+    | '/banco'
+    | '/practicar'
+    | '/progreso'
+    | '/simulacro'
+    | '/practicar/$area'
   id:
     | '__root__'
     | '/'
+    | '/banco'
     | '/practicar'
     | '/progreso'
     | '/simulacro'
@@ -84,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BancoRoute: typeof BancoRoute
   PracticarRoute: typeof PracticarRouteWithChildren
   ProgresoRoute: typeof ProgresoRoute
   SimulacroRoute: typeof SimulacroRoute
@@ -110,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/practicar'
       fullPath: '/practicar'
       preLoaderRoute: typeof PracticarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/banco': {
+      id: '/banco'
+      path: '/banco'
+      fullPath: '/banco'
+      preLoaderRoute: typeof BancoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -143,6 +168,7 @@ const PracticarRouteWithChildren = PracticarRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BancoRoute: BancoRoute,
   PracticarRoute: PracticarRouteWithChildren,
   ProgresoRoute: ProgresoRoute,
   SimulacroRoute: SimulacroRoute,
