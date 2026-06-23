@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Timer } from "lucide-react";
+import { ArrowLeft, Timer, RotateCcw } from "lucide-react";
 import { AREAS } from "@/data/tipos";
-import { BANCO_PREGUNTAS, preguntasAleatorias, preguntasPorArea } from "@/data";
+import type { Pregunta } from "@/data/tipos";
+import { BANCO_SIMULACRO, preguntasAleatorias } from "@/data";
+import { preguntasRepaso } from "@/data";
 import { PreguntaCard } from "@/components/PreguntaCard";
 import { guardarRespuesta } from "@/lib/progreso";
 
@@ -14,37 +16,55 @@ export const Route = createFileRoute("/simulacro")({
   component: Simulacro,
 });
 
-function nivelLogro(score: number): { nombre: string; color: string } {
-  if (score < 550) return { nombre: "Insuficiente", color: "text-destructive" };
-  if (score < 700) return { nombre: "Elemental", color: "text-warning" };
-  if (score < 850) return { nombre: "Satisfactorio", color: "text-primary" };
-  return { nombre: "Excelente", color: "text-success" };
+const NIVELES_INFO = [
+  { rango: "0–549", nombre: "Insuficiente", color: "text-destructive", desc: "Los aprendizajes mínimos no se evidencian. Refuerza desde lo básico cada área." },
+  { rango: "550–699", nombre: "Elemental", color: "text-warning", desc: "Reconoces conceptos pero te falta seguridad en la resolución. Practica más problemas aplicados." },
+  { rango: "700–849", nombre: "Satisfactorio", color: "text-primary", desc: "Dominas los contenidos del nivel. Trabaja en velocidad y en preguntas avanzadas." },
+  { rango: "850–1000", nombre: "Excelente", color: "text-success", desc: "Dominio sobresaliente. ¡Estás listo para la prueba!" },
+] as const;
+
+function nivelLogro(score: number) {
+  if (score < 550) return NIVELES_INFO[0];
+  if (score < 700) return NIVELES_INFO[1];
+  if (score < 850) return NIVELES_INFO[2];
+  return NIVELES_INFO[3];
 }
+
+interface Resp { pregunta: Pregunta; correcta: boolean; idx: number }
 
 function Simulacro() {
   const [iniciado, setIniciado] = useState(false);
   const [terminado, setTerminado] = useState(false);
+  const [revisando, setRevisando] = useState(false);
   const [idx, setIdx] = useState(0);
-  const [respuestas, setRespuestas] = useState<{ pregunta: any; correcta: boolean; idx: number }[]>([]);
+  const [respuestas, setRespuestas] = useState<Resp[]>([]);
   const [restante, setRestante] = useState(DURACION_MIN * 60);
 
-  const sesion = useMemo(() => {
+  // Build a non-repeating session proportional across the 6 sources.
+  const sesion = useMemo<Pregunta[]>(() => {
     if (!iniciado) return [];
-    // proporcional por área
-    const out: any[] = [];
-    const perArea = Math.floor(TOTAL_PREG / AREAS.length);
+    const elegidas: Pregunta[] = [];
+    const ids = new Set<string>();
+    // 5 áreas temáticas: ~ (TOTAL_PREG * 0.8)/5 c/u; repaso: ~20%
+    const perArea = Math.max(1, Math.floor((TOTAL_PREG * 0.8) / AREAS.length));
     for (const a of AREAS) {
-      const pool = preguntasPorArea(a);
-      out.push(...preguntasAleatorias(pool, perArea));
+      const pool = BANCO_SIMULACRO.filter((p) => p.area === a && !ids.has(p.id));
+      const pick = preguntasAleatorias(pool, perArea);
+      pick.forEach((p) => ids.add(p.id));
+      elegidas.push(...pick);
     }
-    // completar con cualquiera
-    if (out.length < TOTAL_PREG) {
-      const faltan = TOTAL_PREG - out.length;
-      const ids = new Set(out.map((p) => p.id));
-      const extras = preguntasAleatorias(BANCO_PREGUNTAS.filter((p) => !ids.has(p.id)), faltan);
-      out.push(...extras);
+    const repasoPool = preguntasRepaso.filter((p) => !ids.has(p.id));
+    const repCount = Math.max(0, TOTAL_PREG - elegidas.length - 2);
+    const repPick = preguntasAleatorias(repasoPool, repCount);
+    repPick.forEach((p) => ids.add(p.id));
+    elegidas.push(...repPick);
+    // completar si falta
+    if (elegidas.length < TOTAL_PREG) {
+      const resto = BANCO_SIMULACRO.filter((p) => !ids.has(p.id));
+      const extras = preguntasAleatorias(resto, TOTAL_PREG - elegidas.length);
+      elegidas.push(...extras);
     }
-    return preguntasAleatorias(out, out.length);
+    return preguntasAleatorias(elegidas, elegidas.length).slice(0, TOTAL_PREG);
   }, [iniciado]);
 
   useEffect(() => {
@@ -58,6 +78,11 @@ function Simulacro() {
     return () => clearInterval(t);
   }, [iniciado, terminado]);
 
+  function reiniciar() {
+    setIniciado(false); setTerminado(false); setRevisando(false);
+    setIdx(0); setRespuestas([]); setRestante(DURACION_MIN * 60);
+  }
+
   if (!iniciado) {
     return (
       <div className="min-h-screen bg-background">
@@ -67,15 +92,13 @@ function Simulacro() {
             <Timer className="h-10 w-10 text-primary" />
             <h1 className="mt-3 text-3xl font-extrabold">Simulacro de examen</h1>
             <p className="mt-2 text-muted-foreground">
-              {TOTAL_PREG} preguntas mezcladas de todas las áreas, en <strong>{DURACION_MIN} minutos</strong>. No verás
-              las respuestas hasta finalizar. Al terminar, calcularemos tu <strong>nivel de logro</strong> según la
-              escala oficial del INEVAL.
+              {TOTAL_PREG} preguntas mezcladas de las 5 áreas + preguntas integradoras de repaso, en <strong>{DURACION_MIN} minutos</strong>.
+              No verás las respuestas hasta finalizar. Al terminar, calcularemos tu <strong>nivel de logro</strong> según la escala oficial del INEVAL.
             </p>
             <ul className="mt-4 space-y-1 text-sm">
-              <li>• 0–549 → <span className="font-semibold text-destructive">Insuficiente</span></li>
-              <li>• 550–699 → <span className="font-semibold text-warning">Elemental</span></li>
-              <li>• 700–849 → <span className="font-semibold text-primary">Satisfactorio</span></li>
-              <li>• 850–1000 → <span className="font-semibold text-success">Excelente</span></li>
+              {NIVELES_INFO.map(n => (
+                <li key={n.nombre}>• {n.rango} → <span className={`font-semibold ${n.color}`}>{n.nombre}</span></li>
+              ))}
             </ul>
             <button onClick={() => setIniciado(true)} className="mt-6 w-full rounded-xl bg-primary px-5 py-3 text-base font-bold text-primary-foreground shadow-soft hover:bg-primary/90">
               Empezar simulacro
@@ -88,43 +111,92 @@ function Simulacro() {
 
   if (terminado || idx >= sesion.length) {
     const aciertos = respuestas.filter((r) => r.correcta).length;
-    const total = sesion.length;
+    const total = sesion.length || TOTAL_PREG;
     const score = Math.round((aciertos / total) * 1000);
     const nivel = nivelLogro(score);
-    const porArea: Record<string, { ok: number; total: number }> = {};
-    for (const r of respuestas) {
-      porArea[r.pregunta.area] ||= { ok: 0, total: 0 };
-      porArea[r.pregunta.area].total++;
-      if (r.correcta) porArea[r.pregunta.area].ok++;
+    const errores = respuestas.filter((r) => !r.correcta);
+
+    if (revisando) {
+      return (
+        <div className="min-h-screen bg-background">
+          <div className="mx-auto max-w-3xl px-5 py-8">
+            <button onClick={() => setRevisando(false)} className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground">
+              <ArrowLeft className="h-4 w-4" /> Volver al resultado
+            </button>
+            <h2 className="mt-4 text-2xl font-extrabold">Revisión de errores</h2>
+            <p className="mt-1 text-sm text-muted-foreground">Estas son las preguntas que fallaste con la explicación paso a paso.</p>
+            {errores.length === 0 ? (
+              <div className="mt-6 rounded-2xl border bg-success/10 p-6 text-center font-semibold text-success">¡No tuviste errores! 🎉</div>
+            ) : (
+              <div className="mt-5 space-y-4">
+                {errores.map((r, k) => {
+                  const tuya = r.pregunta.opciones[r.idx];
+                  const correcta = r.pregunta.opciones[r.pregunta.respuestaCorrecta];
+                  return (
+                    <div key={k} className="rounded-2xl border bg-card p-5 shadow-soft">
+                      <div className="flex flex-wrap gap-2 text-xs">
+                        <span className="rounded-full bg-secondary px-2.5 py-1 font-semibold">{r.pregunta.area}</span>
+                        <span className="rounded-full border px-2.5 py-1">{r.pregunta.nivel}</span>
+                      </div>
+                      <p className="mt-3 font-medium">{r.pregunta.enunciado}</p>
+                      <p className="mt-3 text-sm"><span className="font-semibold text-destructive">Tu respuesta:</span> {tuya}</p>
+                      <p className="text-sm"><span className="font-semibold text-success">Respuesta correcta:</span> {correcta}</p>
+                      <div className="mt-3 rounded-lg bg-primary/5 p-3 text-sm leading-relaxed">{r.pregunta.explicacion}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+      );
     }
+
+    // Por área (solo las 5 áreas temáticas)
+    const porArea: Record<string, { ok: number; total: number }> = {};
+    for (const a of AREAS) porArea[a] = { ok: 0, total: 0 };
+    for (const r of respuestas) {
+      if (porArea[r.pregunta.area]) {
+        porArea[r.pregunta.area].total++;
+        if (r.correcta) porArea[r.pregunta.area].ok++;
+      }
+    }
+
     return (
       <div className="min-h-screen bg-background">
         <div className="mx-auto max-w-2xl px-5 py-10">
           <div className="rounded-2xl border bg-gradient-card p-8 shadow-strong">
             <div className="text-center">
               <div className="text-sm font-semibold text-muted-foreground">Resultado del simulacro</div>
-              <div className="mt-2 text-5xl font-extrabold">{score}</div>
-              <div className={`mt-1 text-xl font-bold ${nivel.color}`}>{nivel.nombre}</div>
-              <div className="mt-1 text-sm text-muted-foreground">{aciertos} de {total} correctas</div>
+              <div className="mt-2 text-5xl font-extrabold">{score}<span className="text-2xl text-muted-foreground"> / 1000</span></div>
+              <div className={`mt-2 text-xl font-bold ${nivel.color}`}>{nivel.nombre}</div>
+              <p className="mt-1 text-sm text-muted-foreground">{aciertos} de {total} correctas</p>
+              <p className="mx-auto mt-3 max-w-md text-sm">{nivel.desc}</p>
             </div>
-            <h3 className="mt-6 mb-2 font-bold">Aciertos por área</h3>
+            <h3 className="mt-6 mb-2 font-bold">Desglose por área</h3>
             <div className="space-y-2">
               {Object.entries(porArea).map(([a, v]) => {
-                const pct = Math.round((v.ok / v.total) * 100);
+                const pct = v.total > 0 ? Math.round((v.ok / v.total) * 100) : 0;
                 return (
                   <div key={a}>
                     <div className="flex justify-between text-sm font-medium">
-                      <span>{a}</span><span>{v.ok}/{v.total} ({pct}%)</span>
+                      <span className="truncate pr-2">{a}</span>
+                      <span>{v.ok}/{v.total} ({pct}%)</span>
                     </div>
                     <div className="mt-1 h-2 overflow-hidden rounded-full bg-muted">
-                      <div className="h-full bg-primary" style={{ width: `${pct}%` }} />
+                      <div className="h-full bg-primary transition-all" style={{ width: `${pct}%` }} />
                     </div>
                   </div>
                 );
               })}
             </div>
-            <div className="mt-6 flex justify-center gap-2">
-              <button onClick={() => { setIniciado(false); setTerminado(false); setIdx(0); setRespuestas([]); setRestante(DURACION_MIN*60); }} className="rounded-xl bg-primary px-5 py-2.5 font-semibold text-primary-foreground hover:bg-primary/90">Otro simulacro</button>
+            <div className="mt-6 flex flex-wrap justify-center gap-2">
+              <button onClick={() => setRevisando(true)} className="rounded-xl border-2 border-primary px-5 py-2.5 font-semibold text-primary hover:bg-primary/5">
+                Revisar mis errores ({errores.length})
+              </button>
+              <button onClick={reiniciar} className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-5 py-2.5 font-semibold text-primary-foreground hover:bg-primary/90">
+                <RotateCcw className="h-4 w-4" /> Otro simulacro
+              </button>
               <Link to="/" className="rounded-xl border-2 px-5 py-2.5 font-semibold hover:bg-secondary">Inicio</Link>
             </div>
           </div>
@@ -155,7 +227,6 @@ function Simulacro() {
           onResponder={(ok, i) => {
             setRespuestas((r) => [...r, { pregunta: p, correcta: ok, idx: i }]);
             guardarRespuesta({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok });
-            // auto-advance in simulacro
             setTimeout(() => setIdx((x) => x + 1), 100);
           }}
           onSiguiente={() => setIdx((x) => x + 1)}
