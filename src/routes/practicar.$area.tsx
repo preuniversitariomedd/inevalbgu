@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { preguntasAleatorias, preguntasPorAreaYNivel } from "@/data";
+import type { Pregunta } from "@/data/tipos";
 import { PreguntaCard } from "@/components/PreguntaCard";
 import { guardarRespuesta } from "@/lib/progreso";
 import { toast } from "sonner";
@@ -16,7 +17,7 @@ function PracticarArea() {
   const { area } = Route.useParams();
   const areaDecoded = decodeURIComponent(area);
   const [nivel, setNivel] = useState<NivelSel | null>(null);
-  const [sesion, setSesion] = useState<ReturnType<typeof preguntasAleatorias> | null>(null);
+  const [sesion, setSesion] = useState<Pregunta[] | null>(null);
   const [idx, setIdx] = useState(0);
   const [aciertos, setAciertos] = useState(0);
 
