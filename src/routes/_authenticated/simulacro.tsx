@@ -6,7 +6,7 @@ import type { Pregunta } from "@/data/tipos";
 import { BANCO_SIMULACRO, preguntasAleatorias } from "@/data";
 import { preguntasRepaso } from "@/data";
 import { PreguntaCard } from "@/components/PreguntaCard";
-import { guardarRespuesta } from "@/lib/progreso";
+import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso";
 
 const DURACION_MIN = 40;
 const TOTAL_PREG = 30;
@@ -39,6 +39,8 @@ function Simulacro() {
   const [idx, setIdx] = useState(0);
   const [respuestas, setRespuestas] = useState<Resp[]>([]);
   const [restante, setRestante] = useState(DURACION_MIN * 60);
+  const [sesionId, setSesionId] = useState<string | null>(null);
+  const [guardadoFinal, setGuardadoFinal] = useState(false);
 
   // Build a non-repeating session proportional across the 6 sources.
   const sesion = useMemo<Pregunta[]>(() => {
