@@ -240,7 +240,7 @@ function Simulacro() {
           mostrarFeedback={false}
           onResponder={(ok, i) => {
             setRespuestas((r) => [...r, { pregunta: p, correcta: ok, idx: i }]);
-            guardarRespuesta({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok });
+            guardarRespuesta({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, sesionId });
             setTimeout(() => setIdx((x) => x + 1), 100);
           }}
           onSiguiente={() => setIdx((x) => x + 1)}
