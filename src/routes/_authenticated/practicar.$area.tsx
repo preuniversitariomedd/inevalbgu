@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { preguntasAleatorias, preguntasPorAreaYNivel } from "@/data";
 import type { Pregunta } from "@/data/tipos";
 import { PreguntaCard } from "@/components/PreguntaCard";
-import { guardarRespuesta } from "@/lib/progreso";
+import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/practicar/$area")({
@@ -18,12 +18,14 @@ function PracticarArea() {
   const areaDecoded = decodeURIComponent(area);
   const [nivel, setNivel] = useState<NivelSel | null>(null);
   const [sesion, setSesion] = useState<Pregunta[] | null>(null);
+  const [sesionId, setSesionId] = useState<string | null>(null);
+  const [finalizada, setFinalizada] = useState(false);
   const [idx, setIdx] = useState(0);
   const [aciertos, setAciertos] = useState(0);
 
   const disponibles = useMemo(() => preguntasPorAreaYNivel(areaDecoded, nivel ?? "Todos"), [areaDecoded, nivel]);
 
-  function iniciar(n: NivelSel) {
+  async function iniciar(n: NivelSel) {
     const pool = preguntasPorAreaYNivel(areaDecoded, n);
     if (pool.length === 0) {
       toast.error("No hay preguntas disponibles para este nivel");
@@ -33,6 +35,9 @@ function PracticarArea() {
     setSesion(preguntasAleatorias(pool, Math.min(15, pool.length)));
     setIdx(0);
     setAciertos(0);
+    setFinalizada(false);
+    const id = await iniciarSesion("practica", areaDecoded);
+    setSesionId(id);
   }
 
   if (!sesion) {
