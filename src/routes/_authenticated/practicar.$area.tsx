@@ -75,6 +75,10 @@ function PracticarArea() {
   // resultado
   if (idx >= sesion.length) {
     const pct = Math.round((aciertos / sesion.length) * 100);
+    if (!finalizada) {
+      setFinalizada(true);
+      void finalizarSesion(sesionId, sesion.length, aciertos);
+    }
     return (
       <div className="min-h-screen bg-background">
         <div className="mx-auto max-w-2xl px-5 py-10">
@@ -84,7 +88,7 @@ function PracticarArea() {
             <p className="mt-1 text-lg font-semibold text-primary">{pct}% de aciertos</p>
             <p className="mt-3 text-sm text-muted-foreground">{areaDecoded} · Nivel {nivel}</p>
             <div className="mt-6 flex flex-wrap justify-center gap-2">
-              <button onClick={() => { setSesion(null); setNivel(null); }} className="rounded-xl bg-primary px-5 py-2.5 font-semibold text-primary-foreground hover:bg-primary/90">
+              <button onClick={() => { setSesion(null); setNivel(null); setSesionId(null); }} className="rounded-xl bg-primary px-5 py-2.5 font-semibold text-primary-foreground hover:bg-primary/90">
                 Otra sesión
               </button>
               <Link to="/progreso" className="rounded-xl border-2 px-5 py-2.5 font-semibold hover:bg-secondary">
@@ -114,7 +118,7 @@ function PracticarArea() {
           pregunta={p}
           onResponder={(ok) => {
             if (ok) setAciertos((a) => a + 1);
-            guardarRespuesta({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok });
+            guardarRespuesta({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, sesionId });
           }}
           onSiguiente={() => setIdx((i) => i + 1)}
           esUltima={idx === sesion.length - 1}
