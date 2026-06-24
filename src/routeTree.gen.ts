@@ -9,180 +9,293 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SimulacroRouteImport } from './routes/simulacro'
-import { Route as ProgresoRouteImport } from './routes/progreso'
-import { Route as PracticarRouteImport } from './routes/practicar'
-import { Route as BancoRouteImport } from './routes/banco'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as PracticarAreaRouteImport } from './routes/practicar.$area'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedSimulacroRouteImport } from './routes/_authenticated/simulacro'
+import { Route as AuthenticatedProgresoRouteImport } from './routes/_authenticated/progreso'
+import { Route as AuthenticatedPracticarRouteImport } from './routes/_authenticated/practicar'
+import { Route as AuthenticatedCambiarPasswordRouteImport } from './routes/_authenticated/cambiar-password'
+import { Route as AuthenticatedBancoRouteImport } from './routes/_authenticated/banco'
+import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authenticated/practicar.$area'
 
-const SimulacroRoute = SimulacroRouteImport.update({
-  id: '/simulacro',
-  path: '/simulacro',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProgresoRoute = ProgresoRouteImport.update({
-  id: '/progreso',
-  path: '/progreso',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PracticarRoute = PracticarRouteImport.update({
-  id: '/practicar',
-  path: '/practicar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BancoRoute = BancoRouteImport.update({
-  id: '/banco',
-  path: '/banco',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const PracticarAreaRoute = PracticarAreaRouteImport.update({
-  id: '/$area',
-  path: '/$area',
-  getParentRoute: () => PracticarRoute,
+const AuthenticatedSimulacroRoute = AuthenticatedSimulacroRouteImport.update({
+  id: '/simulacro',
+  path: '/simulacro',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedProgresoRoute = AuthenticatedProgresoRouteImport.update({
+  id: '/progreso',
+  path: '/progreso',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPracticarRoute = AuthenticatedPracticarRouteImport.update({
+  id: '/practicar',
+  path: '/practicar',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCambiarPasswordRoute =
+  AuthenticatedCambiarPasswordRouteImport.update({
+    id: '/cambiar-password',
+    path: '/cambiar-password',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedBancoRoute = AuthenticatedBancoRouteImport.update({
+  id: '/banco',
+  path: '/banco',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedPracticarAreaRoute =
+  AuthenticatedPracticarAreaRouteImport.update({
+    id: '/$area',
+    path: '/$area',
+    getParentRoute: () => AuthenticatedPracticarRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/banco': typeof BancoRoute
-  '/practicar': typeof PracticarRouteWithChildren
-  '/progreso': typeof ProgresoRoute
-  '/simulacro': typeof SimulacroRoute
-  '/practicar/$area': typeof PracticarAreaRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/auth': typeof AuthRoute
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/banco': typeof AuthenticatedBancoRoute
+  '/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
+  '/practicar': typeof AuthenticatedPracticarRouteWithChildren
+  '/progreso': typeof AuthenticatedProgresoRoute
+  '/simulacro': typeof AuthenticatedSimulacroRoute
+  '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/banco': typeof BancoRoute
-  '/practicar': typeof PracticarRouteWithChildren
-  '/progreso': typeof ProgresoRoute
-  '/simulacro': typeof SimulacroRoute
-  '/practicar/$area': typeof PracticarAreaRoute
+  '/auth': typeof AuthRoute
+  '/banco': typeof AuthenticatedBancoRoute
+  '/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
+  '/practicar': typeof AuthenticatedPracticarRouteWithChildren
+  '/progreso': typeof AuthenticatedProgresoRoute
+  '/simulacro': typeof AuthenticatedSimulacroRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/banco': typeof BancoRoute
-  '/practicar': typeof PracticarRouteWithChildren
-  '/progreso': typeof ProgresoRoute
-  '/simulacro': typeof SimulacroRoute
-  '/practicar/$area': typeof PracticarAreaRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/_authenticated/banco': typeof AuthenticatedBancoRoute
+  '/_authenticated/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
+  '/_authenticated/practicar': typeof AuthenticatedPracticarRouteWithChildren
+  '/_authenticated/progreso': typeof AuthenticatedProgresoRoute
+  '/_authenticated/simulacro': typeof AuthenticatedSimulacroRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/practicar/$area': typeof AuthenticatedPracticarAreaRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
+    | '/admin'
     | '/banco'
+    | '/cambiar-password'
     | '/practicar'
     | '/progreso'
     | '/simulacro'
     | '/practicar/$area'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
+    | '/auth'
     | '/banco'
+    | '/cambiar-password'
     | '/practicar'
     | '/progreso'
     | '/simulacro'
+    | '/'
     | '/practicar/$area'
+    | '/admin'
   id:
     | '__root__'
-    | '/'
-    | '/banco'
-    | '/practicar'
-    | '/progreso'
-    | '/simulacro'
-    | '/practicar/$area'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/admin'
+    | '/_authenticated/banco'
+    | '/_authenticated/cambiar-password'
+    | '/_authenticated/practicar'
+    | '/_authenticated/progreso'
+    | '/_authenticated/simulacro'
+    | '/_authenticated/'
+    | '/_authenticated/practicar/$area'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  BancoRoute: typeof BancoRoute
-  PracticarRoute: typeof PracticarRouteWithChildren
-  ProgresoRoute: typeof ProgresoRoute
-  SimulacroRoute: typeof SimulacroRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/simulacro': {
-      id: '/simulacro'
-      path: '/simulacro'
-      fullPath: '/simulacro'
-      preLoaderRoute: typeof SimulacroRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/progreso': {
-      id: '/progreso'
-      path: '/progreso'
-      fullPath: '/progreso'
-      preLoaderRoute: typeof ProgresoRouteImport
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/practicar': {
-      id: '/practicar'
-      path: '/practicar'
-      fullPath: '/practicar'
-      preLoaderRoute: typeof PracticarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/banco': {
-      id: '/banco'
-      path: '/banco'
-      fullPath: '/banco'
-      preLoaderRoute: typeof BancoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
+    '/_authenticated/': {
+      id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/practicar/$area': {
-      id: '/practicar/$area'
+    '/_authenticated/simulacro': {
+      id: '/_authenticated/simulacro'
+      path: '/simulacro'
+      fullPath: '/simulacro'
+      preLoaderRoute: typeof AuthenticatedSimulacroRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/progreso': {
+      id: '/_authenticated/progreso'
+      path: '/progreso'
+      fullPath: '/progreso'
+      preLoaderRoute: typeof AuthenticatedProgresoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/practicar': {
+      id: '/_authenticated/practicar'
+      path: '/practicar'
+      fullPath: '/practicar'
+      preLoaderRoute: typeof AuthenticatedPracticarRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/cambiar-password': {
+      id: '/_authenticated/cambiar-password'
+      path: '/cambiar-password'
+      fullPath: '/cambiar-password'
+      preLoaderRoute: typeof AuthenticatedCambiarPasswordRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/banco': {
+      id: '/_authenticated/banco'
+      path: '/banco'
+      fullPath: '/banco'
+      preLoaderRoute: typeof AuthenticatedBancoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/practicar/$area': {
+      id: '/_authenticated/practicar/$area'
       path: '/$area'
       fullPath: '/practicar/$area'
-      preLoaderRoute: typeof PracticarAreaRouteImport
-      parentRoute: typeof PracticarRoute
+      preLoaderRoute: typeof AuthenticatedPracticarAreaRouteImport
+      parentRoute: typeof AuthenticatedPracticarRoute
     }
   }
 }
 
-interface PracticarRouteChildren {
-  PracticarAreaRoute: typeof PracticarAreaRoute
+interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
-const PracticarRouteChildren: PracticarRouteChildren = {
-  PracticarAreaRoute: PracticarAreaRoute,
+const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
+  {
+    AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  }
+
+const AuthenticatedAdminRouteRouteWithChildren =
+  AuthenticatedAdminRouteRoute._addFileChildren(
+    AuthenticatedAdminRouteRouteChildren,
+  )
+
+interface AuthenticatedPracticarRouteChildren {
+  AuthenticatedPracticarAreaRoute: typeof AuthenticatedPracticarAreaRoute
 }
 
-const PracticarRouteWithChildren = PracticarRoute._addFileChildren(
-  PracticarRouteChildren,
-)
+const AuthenticatedPracticarRouteChildren: AuthenticatedPracticarRouteChildren =
+  {
+    AuthenticatedPracticarAreaRoute: AuthenticatedPracticarAreaRoute,
+  }
+
+const AuthenticatedPracticarRouteWithChildren =
+  AuthenticatedPracticarRoute._addFileChildren(
+    AuthenticatedPracticarRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
+  AuthenticatedBancoRoute: typeof AuthenticatedBancoRoute
+  AuthenticatedCambiarPasswordRoute: typeof AuthenticatedCambiarPasswordRoute
+  AuthenticatedPracticarRoute: typeof AuthenticatedPracticarRouteWithChildren
+  AuthenticatedProgresoRoute: typeof AuthenticatedProgresoRoute
+  AuthenticatedSimulacroRoute: typeof AuthenticatedSimulacroRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
+  AuthenticatedBancoRoute: AuthenticatedBancoRoute,
+  AuthenticatedCambiarPasswordRoute: AuthenticatedCambiarPasswordRoute,
+  AuthenticatedPracticarRoute: AuthenticatedPracticarRouteWithChildren,
+  AuthenticatedProgresoRoute: AuthenticatedProgresoRoute,
+  AuthenticatedSimulacroRoute: AuthenticatedSimulacroRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  BancoRoute: BancoRoute,
-  PracticarRoute: PracticarRouteWithChildren,
-  ProgresoRoute: ProgresoRoute,
-  SimulacroRoute: SimulacroRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

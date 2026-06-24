@@ -4,7 +4,7 @@ import { ArrowLeft, Database, Search } from "lucide-react";
 import { BANCO_PREGUNTAS } from "@/data";
 import { AREAS } from "@/data/tipos";
 
-export const Route = createFileRoute("/banco")({
+export const Route = createFileRoute("/_authenticated/banco")({
   head: () => ({ meta: [{ title: "Banco de preguntas — INEVAL_UEDE" }] }),
   component: Banco,
 });

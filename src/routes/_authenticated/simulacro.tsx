@@ -6,12 +6,12 @@ import type { Pregunta } from "@/data/tipos";
 import { BANCO_SIMULACRO, preguntasAleatorias } from "@/data";
 import { preguntasRepaso } from "@/data";
 import { PreguntaCard } from "@/components/PreguntaCard";
-import { guardarRespuesta } from "@/lib/progreso";
+import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso";
 
 const DURACION_MIN = 40;
 const TOTAL_PREG = 30;
 
-export const Route = createFileRoute("/simulacro")({
+export const Route = createFileRoute("/_authenticated/simulacro")({
   head: () => ({ meta: [{ title: "Simulacro de examen — INEVAL_UEDE" }] }),
   component: Simulacro,
 });
@@ -39,6 +39,8 @@ function Simulacro() {
   const [idx, setIdx] = useState(0);
   const [respuestas, setRespuestas] = useState<Resp[]>([]);
   const [restante, setRestante] = useState(DURACION_MIN * 60);
+  const [sesionId, setSesionId] = useState<string | null>(null);
+  const [guardadoFinal, setGuardadoFinal] = useState(false);
 
   // Build a non-repeating session proportional across the 6 sources.
   const sesion = useMemo<Pregunta[]>(() => {
@@ -81,6 +83,13 @@ function Simulacro() {
   function reiniciar() {
     setIniciado(false); setTerminado(false); setRevisando(false);
     setIdx(0); setRespuestas([]); setRestante(DURACION_MIN * 60);
+    setSesionId(null); setGuardadoFinal(false);
+  }
+
+  async function empezar() {
+    setIniciado(true);
+    const id = await iniciarSesion("simulacro", null);
+    setSesionId(id);
   }
 
   if (!iniciado) {
@@ -100,7 +109,7 @@ function Simulacro() {
                 <li key={n.nombre}>• {n.rango} → <span className={`font-semibold ${n.color}`}>{n.nombre}</span></li>
               ))}
             </ul>
-            <button onClick={() => setIniciado(true)} className="mt-6 w-full rounded-xl bg-primary px-5 py-3 text-base font-bold text-primary-foreground shadow-soft hover:bg-primary/90">
+            <button onClick={empezar} className="mt-6 w-full rounded-xl bg-primary px-5 py-3 text-base font-bold text-primary-foreground shadow-soft hover:bg-primary/90">
               Empezar simulacro
             </button>
           </div>
@@ -115,6 +124,11 @@ function Simulacro() {
     const score = Math.round((aciertos / total) * 1000);
     const nivel = nivelLogro(score);
     const errores = respuestas.filter((r) => !r.correcta);
+    if (!guardadoFinal) {
+      setGuardadoFinal(true);
+      void finalizarSesion(sesionId, total, aciertos, score, nivel.nombre);
+    }
+
 
     if (revisando) {
       return (
@@ -226,7 +240,7 @@ function Simulacro() {
           mostrarFeedback={false}
           onResponder={(ok, i) => {
             setRespuestas((r) => [...r, { pregunta: p, correcta: ok, idx: i }]);
-            guardarRespuesta({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok });
+            guardarRespuesta({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, sesionId });
             setTimeout(() => setIdx((x) => x + 1), 100);
           }}
           onSiguiente={() => setIdx((x) => x + 1)}

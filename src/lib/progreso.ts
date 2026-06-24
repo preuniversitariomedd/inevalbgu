@@ -1,66 +1,73 @@
-// localStorage persistence for student progress
-export interface RespuestaRegistro {
+// Capa de progreso del estudiante. Reemplaza el almacenamiento en localStorage
+// por server functions que escriben en Lovable Cloud (Supabase).
+import {
+  guardarRespuestaFn,
+  iniciarSesionPracticaFn,
+  finalizarSesionPracticaFn,
+} from "./progreso.functions";
+
+let _sesionActualId: string | null = null;
+
+export function getSesionActualId(): string | null {
+  return _sesionActualId;
+}
+
+export async function iniciarSesion(tipo: "practica" | "simulacro", area: string | null = null) {
+  try {
+    const res = await iniciarSesionPracticaFn({ data: { tipo, area } });
+    _sesionActualId = res.id;
+    return res.id;
+  } catch (e) {
+    console.error("iniciarSesion fallo", e);
+    return null;
+  }
+}
+
+export async function finalizarSesion(
+  sesionId: string | null,
+  totalPreguntas: number,
+  correctas: number,
+  puntajeIneval?: number | null,
+  nivelLogro?: string | null,
+) {
+  if (!sesionId) return;
+  try {
+    await finalizarSesionPracticaFn({
+      data: {
+        sesionId,
+        totalPreguntas,
+        correctas,
+        puntajeIneval: puntajeIneval ?? null,
+        nivelLogro: nivelLogro ?? null,
+      },
+    });
+  } catch (e) {
+    console.error("finalizarSesion fallo", e);
+  } finally {
+    _sesionActualId = null;
+  }
+}
+
+export interface RespuestaInput {
   preguntaId: string;
   area: string;
   subtema: string;
   nivel: string;
   correcta: boolean;
-  ts: number;
+  sesionId?: string | null;
 }
 
-export interface Progreso {
-  respuestas: RespuestaRegistro[];
-  diasActivos: string[]; // ISO yyyy-mm-dd
-}
-
-const KEY = "ineval_uede_progreso_v1";
-
-export function leerProgreso(): Progreso {
-  if (typeof window === "undefined") return { respuestas: [], diasActivos: [] };
-  try {
-    const raw = localStorage.getItem(KEY);
-    if (!raw) return { respuestas: [], diasActivos: [] };
-    return JSON.parse(raw) as Progreso;
-  } catch {
-    return { respuestas: [], diasActivos: [] };
-  }
-}
-
-export function guardarRespuesta(r: Omit<RespuestaRegistro, "ts">) {
-  const prog = leerProgreso();
-  prog.respuestas.push({ ...r, ts: Date.now() });
-  const hoy = new Date().toISOString().slice(0, 10);
-  if (!prog.diasActivos.includes(hoy)) prog.diasActivos.push(hoy);
-  localStorage.setItem(KEY, JSON.stringify(prog));
-}
-
-export function reiniciarProgreso() {
-  localStorage.removeItem(KEY);
-}
-
-export function calcularRacha(diasActivos: string[]): number {
-  if (diasActivos.length === 0) return 0;
-  const set = new Set(diasActivos);
-  let racha = 0;
-  const d = new Date();
-  for (;;) {
-    const iso = d.toISOString().slice(0, 10);
-    if (set.has(iso)) {
-      racha++;
-      d.setDate(d.getDate() - 1);
-    } else {
-      if (racha === 0) {
-        // allow starting yesterday
-        d.setDate(d.getDate() - 1);
-        const iso2 = d.toISOString().slice(0, 10);
-        if (set.has(iso2)) {
-          racha++;
-          d.setDate(d.getDate() - 1);
-          continue;
-        }
-      }
-      break;
-    }
-  }
-  return racha;
+// Fire-and-forget para no bloquear la UI.
+export function guardarRespuesta(r: RespuestaInput) {
+  const sesionId = r.sesionId ?? _sesionActualId ?? null;
+  void guardarRespuestaFn({
+    data: {
+      preguntaId: r.preguntaId,
+      area: r.area,
+      subtema: r.subtema,
+      nivel: r.nivel,
+      correcta: r.correcta,
+      sesionId,
+    },
+  }).catch((e) => console.error("guardarRespuesta fallo", e));
 }

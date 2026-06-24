@@ -3,7 +3,7 @@ import { ArrowLeft, Sigma, FunctionSquare, Triangle, PieChart, ListOrdered } fro
 import { AREAS } from "@/data/tipos";
 import { preguntasPorArea } from "@/data";
 
-export const Route = createFileRoute("/practicar")({
+export const Route = createFileRoute("/_authenticated/practicar")({
   head: () => ({
     meta: [
       { title: "Practicar por tema — INEVAL_UEDE" },
