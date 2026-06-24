@@ -14,16 +14,197 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          cedula: string
+          created_at: string
+          fecha_nacimiento: string
+          id: string
+          institucion: string
+          nombres: string
+          primera_vez: boolean
+          updated_at: string
+        }
+        Insert: {
+          cedula: string
+          created_at?: string
+          fecha_nacimiento: string
+          id: string
+          institucion: string
+          nombres: string
+          primera_vez?: boolean
+          updated_at?: string
+        }
+        Update: {
+          cedula?: string
+          created_at?: string
+          fecha_nacimiento?: string
+          id?: string
+          institucion?: string
+          nombres?: string
+          primera_vez?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      respuestas: {
+        Row: {
+          area: string
+          correcta: boolean
+          id: string
+          nivel: string
+          pregunta_id: string
+          respondida_en: string
+          sesion_id: string | null
+          subtema: string
+          user_id: string
+        }
+        Insert: {
+          area: string
+          correcta: boolean
+          id?: string
+          nivel: string
+          pregunta_id: string
+          respondida_en?: string
+          sesion_id?: string | null
+          subtema: string
+          user_id: string
+        }
+        Update: {
+          area?: string
+          correcta?: boolean
+          id?: string
+          nivel?: string
+          pregunta_id?: string
+          respondida_en?: string
+          sesion_id?: string | null
+          subtema?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "respuestas_sesion_id_fkey"
+            columns: ["sesion_id"]
+            isOneToOne: false
+            referencedRelation: "sesiones_practica"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sesiones_conexion: {
+        Row: {
+          finalizada: boolean
+          id: string
+          iniciada_en: string
+          segundos_oculto: number
+          segundos_visible: number
+          ultima_interaccion: string
+          ultimo_heartbeat: string
+          user_agent: string | null
+          user_id: string
+          visible: boolean
+        }
+        Insert: {
+          finalizada?: boolean
+          id?: string
+          iniciada_en?: string
+          segundos_oculto?: number
+          segundos_visible?: number
+          ultima_interaccion?: string
+          ultimo_heartbeat?: string
+          user_agent?: string | null
+          user_id: string
+          visible?: boolean
+        }
+        Update: {
+          finalizada?: boolean
+          id?: string
+          iniciada_en?: string
+          segundos_oculto?: number
+          segundos_visible?: number
+          ultima_interaccion?: string
+          ultimo_heartbeat?: string
+          user_agent?: string | null
+          user_id?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
+      sesiones_practica: {
+        Row: {
+          area: string | null
+          correctas: number
+          finalizada_en: string | null
+          id: string
+          iniciada_en: string
+          nivel_logro: string | null
+          puntaje_ineval: number | null
+          tipo: string
+          total_preguntas: number
+          user_id: string
+        }
+        Insert: {
+          area?: string | null
+          correctas?: number
+          finalizada_en?: string | null
+          id?: string
+          iniciada_en?: string
+          nivel_logro?: string | null
+          puntaje_ineval?: number | null
+          tipo: string
+          total_preguntas?: number
+          user_id: string
+        }
+        Update: {
+          area?: string | null
+          correctas?: number
+          finalizada_en?: string | null
+          id?: string
+          iniciada_en?: string
+          nivel_logro?: string | null
+          puntaje_ineval?: number | null
+          tipo?: string
+          total_preguntas?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "estudiante" | "administrador"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +331,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["estudiante", "administrador"],
+    },
   },
 } as const
