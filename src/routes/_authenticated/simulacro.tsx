@@ -83,6 +83,13 @@ function Simulacro() {
   function reiniciar() {
     setIniciado(false); setTerminado(false); setRevisando(false);
     setIdx(0); setRespuestas([]); setRestante(DURACION_MIN * 60);
+    setSesionId(null); setGuardadoFinal(false);
+  }
+
+  async function empezar() {
+    setIniciado(true);
+    const id = await iniciarSesion("simulacro", null);
+    setSesionId(id);
   }
 
   if (!iniciado) {
@@ -102,7 +109,7 @@ function Simulacro() {
                 <li key={n.nombre}>• {n.rango} → <span className={`font-semibold ${n.color}`}>{n.nombre}</span></li>
               ))}
             </ul>
-            <button onClick={() => setIniciado(true)} className="mt-6 w-full rounded-xl bg-primary px-5 py-3 text-base font-bold text-primary-foreground shadow-soft hover:bg-primary/90">
+            <button onClick={empezar} className="mt-6 w-full rounded-xl bg-primary px-5 py-3 text-base font-bold text-primary-foreground shadow-soft hover:bg-primary/90">
               Empezar simulacro
             </button>
           </div>
