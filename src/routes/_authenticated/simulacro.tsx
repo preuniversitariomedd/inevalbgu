@@ -124,6 +124,11 @@ function Simulacro() {
     const score = Math.round((aciertos / total) * 1000);
     const nivel = nivelLogro(score);
     const errores = respuestas.filter((r) => !r.correcta);
+    if (!guardadoFinal) {
+      setGuardadoFinal(true);
+      void finalizarSesion(sesionId, total, aciertos, score, nivel.nombre);
+    }
+
 
     if (revisando) {
       return (
