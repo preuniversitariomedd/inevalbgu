@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database } from "lucide-react";
 import { BANCO_PREGUNTAS } from "@/data";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
       { title: "INEVAL_UEDE — Practica Matemática para 1ro BGU" },

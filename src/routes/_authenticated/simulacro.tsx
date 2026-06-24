@@ -11,7 +11,7 @@ import { guardarRespuesta } from "@/lib/progreso";
 const DURACION_MIN = 40;
 const TOTAL_PREG = 30;
 
-export const Route = createFileRoute("/simulacro")({
+export const Route = createFileRoute("/_authenticated/simulacro")({
   head: () => ({ meta: [{ title: "Simulacro de examen — INEVAL_UEDE" }] }),
   component: Simulacro,
 });

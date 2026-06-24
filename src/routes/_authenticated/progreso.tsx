@@ -4,7 +4,7 @@ import { ArrowLeft, Flame, BookOpen, TrendingDown, RotateCcw } from "lucide-reac
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, CartesianGrid } from "recharts";
 import { leerProgreso, calcularRacha, reiniciarProgreso, type Progreso } from "@/lib/progreso";
 
-export const Route = createFileRoute("/progreso")({
+export const Route = createFileRoute("/_authenticated/progreso")({
   head: () => ({ meta: [{ title: "Mi progreso — INEVAL_UEDE" }] }),
   component: ProgresoPage,
 });

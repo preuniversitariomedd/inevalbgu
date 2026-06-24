@@ -9,169 +9,172 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SimulacroRouteImport } from './routes/simulacro'
-import { Route as ProgresoRouteImport } from './routes/progreso'
-import { Route as PracticarRouteImport } from './routes/practicar'
-import { Route as BancoRouteImport } from './routes/banco'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as PracticarAreaRouteImport } from './routes/practicar.$area'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedSimulacroRouteImport } from './routes/_authenticated/simulacro'
+import { Route as AuthenticatedProgresoRouteImport } from './routes/_authenticated/progreso'
+import { Route as AuthenticatedPracticarRouteImport } from './routes/_authenticated/practicar'
+import { Route as AuthenticatedBancoRouteImport } from './routes/_authenticated/banco'
+import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authenticated/practicar.$area'
 
-const SimulacroRoute = SimulacroRouteImport.update({
-  id: '/simulacro',
-  path: '/simulacro',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProgresoRoute = ProgresoRouteImport.update({
-  id: '/progreso',
-  path: '/progreso',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PracticarRoute = PracticarRouteImport.update({
-  id: '/practicar',
-  path: '/practicar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BancoRoute = BancoRouteImport.update({
-  id: '/banco',
-  path: '/banco',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/_authenticated/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PracticarAreaRoute = PracticarAreaRouteImport.update({
-  id: '/$area',
-  path: '/$area',
-  getParentRoute: () => PracticarRoute,
+const AuthenticatedSimulacroRoute = AuthenticatedSimulacroRouteImport.update({
+  id: '/_authenticated/simulacro',
+  path: '/simulacro',
+  getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedProgresoRoute = AuthenticatedProgresoRouteImport.update({
+  id: '/_authenticated/progreso',
+  path: '/progreso',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedPracticarRoute = AuthenticatedPracticarRouteImport.update({
+  id: '/_authenticated/practicar',
+  path: '/practicar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedBancoRoute = AuthenticatedBancoRouteImport.update({
+  id: '/_authenticated/banco',
+  path: '/banco',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedPracticarAreaRoute =
+  AuthenticatedPracticarAreaRouteImport.update({
+    id: '/$area',
+    path: '/$area',
+    getParentRoute: () => AuthenticatedPracticarRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/banco': typeof BancoRoute
-  '/practicar': typeof PracticarRouteWithChildren
-  '/progreso': typeof ProgresoRoute
-  '/simulacro': typeof SimulacroRoute
-  '/practicar/$area': typeof PracticarAreaRoute
+  '/banco': typeof AuthenticatedBancoRoute
+  '/practicar': typeof AuthenticatedPracticarRouteWithChildren
+  '/progreso': typeof AuthenticatedProgresoRoute
+  '/simulacro': typeof AuthenticatedSimulacroRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/banco': typeof BancoRoute
-  '/practicar': typeof PracticarRouteWithChildren
-  '/progreso': typeof ProgresoRoute
-  '/simulacro': typeof SimulacroRoute
-  '/practicar/$area': typeof PracticarAreaRoute
+  '/banco': typeof AuthenticatedBancoRoute
+  '/practicar': typeof AuthenticatedPracticarRouteWithChildren
+  '/progreso': typeof AuthenticatedProgresoRoute
+  '/simulacro': typeof AuthenticatedSimulacroRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/banco': typeof BancoRoute
-  '/practicar': typeof PracticarRouteWithChildren
-  '/progreso': typeof ProgresoRoute
-  '/simulacro': typeof SimulacroRoute
-  '/practicar/$area': typeof PracticarAreaRoute
+  '/_authenticated/banco': typeof AuthenticatedBancoRoute
+  '/_authenticated/practicar': typeof AuthenticatedPracticarRouteWithChildren
+  '/_authenticated/progreso': typeof AuthenticatedProgresoRoute
+  '/_authenticated/simulacro': typeof AuthenticatedSimulacroRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/practicar/$area': typeof AuthenticatedPracticarAreaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/banco'
     | '/practicar'
     | '/progreso'
     | '/simulacro'
+    | '/'
     | '/practicar/$area'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/banco'
     | '/practicar'
     | '/progreso'
     | '/simulacro'
+    | '/'
     | '/practicar/$area'
   id:
     | '__root__'
-    | '/'
-    | '/banco'
-    | '/practicar'
-    | '/progreso'
-    | '/simulacro'
-    | '/practicar/$area'
+    | '/_authenticated/banco'
+    | '/_authenticated/practicar'
+    | '/_authenticated/progreso'
+    | '/_authenticated/simulacro'
+    | '/_authenticated/'
+    | '/_authenticated/practicar/$area'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  BancoRoute: typeof BancoRoute
-  PracticarRoute: typeof PracticarRouteWithChildren
-  ProgresoRoute: typeof ProgresoRoute
-  SimulacroRoute: typeof SimulacroRoute
+  AuthenticatedBancoRoute: typeof AuthenticatedBancoRoute
+  AuthenticatedPracticarRoute: typeof AuthenticatedPracticarRouteWithChildren
+  AuthenticatedProgresoRoute: typeof AuthenticatedProgresoRoute
+  AuthenticatedSimulacroRoute: typeof AuthenticatedSimulacroRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/simulacro': {
-      id: '/simulacro'
-      path: '/simulacro'
-      fullPath: '/simulacro'
-      preLoaderRoute: typeof SimulacroRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/progreso': {
-      id: '/progreso'
-      path: '/progreso'
-      fullPath: '/progreso'
-      preLoaderRoute: typeof ProgresoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/practicar': {
-      id: '/practicar'
-      path: '/practicar'
-      fullPath: '/practicar'
-      preLoaderRoute: typeof PracticarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/banco': {
-      id: '/banco'
-      path: '/banco'
-      fullPath: '/banco'
-      preLoaderRoute: typeof BancoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
+    '/_authenticated/': {
+      id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/practicar/$area': {
-      id: '/practicar/$area'
+    '/_authenticated/simulacro': {
+      id: '/_authenticated/simulacro'
+      path: '/simulacro'
+      fullPath: '/simulacro'
+      preLoaderRoute: typeof AuthenticatedSimulacroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/progreso': {
+      id: '/_authenticated/progreso'
+      path: '/progreso'
+      fullPath: '/progreso'
+      preLoaderRoute: typeof AuthenticatedProgresoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/practicar': {
+      id: '/_authenticated/practicar'
+      path: '/practicar'
+      fullPath: '/practicar'
+      preLoaderRoute: typeof AuthenticatedPracticarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/banco': {
+      id: '/_authenticated/banco'
+      path: '/banco'
+      fullPath: '/banco'
+      preLoaderRoute: typeof AuthenticatedBancoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/practicar/$area': {
+      id: '/_authenticated/practicar/$area'
       path: '/$area'
       fullPath: '/practicar/$area'
-      preLoaderRoute: typeof PracticarAreaRouteImport
-      parentRoute: typeof PracticarRoute
+      preLoaderRoute: typeof AuthenticatedPracticarAreaRouteImport
+      parentRoute: typeof AuthenticatedPracticarRoute
     }
   }
 }
 
-interface PracticarRouteChildren {
-  PracticarAreaRoute: typeof PracticarAreaRoute
+interface AuthenticatedPracticarRouteChildren {
+  AuthenticatedPracticarAreaRoute: typeof AuthenticatedPracticarAreaRoute
 }
 
-const PracticarRouteChildren: PracticarRouteChildren = {
-  PracticarAreaRoute: PracticarAreaRoute,
-}
+const AuthenticatedPracticarRouteChildren: AuthenticatedPracticarRouteChildren =
+  {
+    AuthenticatedPracticarAreaRoute: AuthenticatedPracticarAreaRoute,
+  }
 
-const PracticarRouteWithChildren = PracticarRoute._addFileChildren(
-  PracticarRouteChildren,
-)
+const AuthenticatedPracticarRouteWithChildren =
+  AuthenticatedPracticarRoute._addFileChildren(
+    AuthenticatedPracticarRouteChildren,
+  )
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  BancoRoute: BancoRoute,
-  PracticarRoute: PracticarRouteWithChildren,
-  ProgresoRoute: ProgresoRoute,
-  SimulacroRoute: SimulacroRoute,
+  AuthenticatedBancoRoute: AuthenticatedBancoRoute,
+  AuthenticatedPracticarRoute: AuthenticatedPracticarRouteWithChildren,
+  AuthenticatedProgresoRoute: AuthenticatedProgresoRoute,
+  AuthenticatedSimulacroRoute: AuthenticatedSimulacroRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

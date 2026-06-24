@@ -7,7 +7,7 @@ import { PreguntaCard } from "@/components/PreguntaCard";
 import { guardarRespuesta } from "@/lib/progreso";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/practicar/$area")({
+export const Route = createFileRoute("/_authenticated/practicar/$area")({
   component: PracticarArea,
 });
 
