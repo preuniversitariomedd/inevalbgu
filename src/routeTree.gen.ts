@@ -17,6 +17,8 @@ import { Route as AuthenticatedProgresoRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedPracticarRouteImport } from './routes/_authenticated/practicar'
 import { Route as AuthenticatedCambiarPasswordRouteImport } from './routes/_authenticated/cambiar-password'
 import { Route as AuthenticatedBancoRouteImport } from './routes/_authenticated/banco'
+import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authenticated/practicar.$area'
 
 const AuthRoute = AuthRouteImport.update({
@@ -59,6 +61,16 @@ const AuthenticatedBancoRoute = AuthenticatedBancoRouteImport.update({
   path: '/banco',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
 const AuthenticatedPracticarAreaRoute =
   AuthenticatedPracticarAreaRouteImport.update({
     id: '/$area',
@@ -69,12 +81,14 @@ const AuthenticatedPracticarAreaRoute =
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/auth': typeof AuthRoute
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/banco': typeof AuthenticatedBancoRoute
   '/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
   '/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/progreso': typeof AuthenticatedProgresoRoute
   '/simulacro': typeof AuthenticatedSimulacroRoute
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -85,11 +99,13 @@ export interface FileRoutesByTo {
   '/simulacro': typeof AuthenticatedSimulacroRoute
   '/': typeof AuthenticatedIndexRoute
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/banco': typeof AuthenticatedBancoRoute
   '/_authenticated/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
   '/_authenticated/practicar': typeof AuthenticatedPracticarRouteWithChildren
@@ -97,18 +113,21 @@ export interface FileRoutesById {
   '/_authenticated/simulacro': typeof AuthenticatedSimulacroRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/practicar/$area': typeof AuthenticatedPracticarAreaRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/auth'
+    | '/admin'
     | '/banco'
     | '/cambiar-password'
     | '/practicar'
     | '/progreso'
     | '/simulacro'
     | '/practicar/$area'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -119,10 +138,12 @@ export interface FileRouteTypes {
     | '/simulacro'
     | '/'
     | '/practicar/$area'
+    | '/admin'
   id:
     | '__root__'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/admin'
     | '/_authenticated/banco'
     | '/_authenticated/cambiar-password'
     | '/_authenticated/practicar'
@@ -130,6 +151,7 @@ export interface FileRouteTypes {
     | '/_authenticated/simulacro'
     | '/_authenticated/'
     | '/_authenticated/practicar/$area'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -195,6 +217,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBancoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/practicar/$area': {
       id: '/_authenticated/practicar/$area'
       path: '/$area'
@@ -204,6 +240,20 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
+  {
+    AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  }
+
+const AuthenticatedAdminRouteRouteWithChildren =
+  AuthenticatedAdminRouteRoute._addFileChildren(
+    AuthenticatedAdminRouteRouteChildren,
+  )
 
 interface AuthenticatedPracticarRouteChildren {
   AuthenticatedPracticarAreaRoute: typeof AuthenticatedPracticarAreaRoute
@@ -220,6 +270,7 @@ const AuthenticatedPracticarRouteWithChildren =
   )
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
   AuthenticatedBancoRoute: typeof AuthenticatedBancoRoute
   AuthenticatedCambiarPasswordRoute: typeof AuthenticatedCambiarPasswordRoute
   AuthenticatedPracticarRoute: typeof AuthenticatedPracticarRouteWithChildren
@@ -229,6 +280,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
   AuthenticatedBancoRoute: AuthenticatedBancoRoute,
   AuthenticatedCambiarPasswordRoute: AuthenticatedCambiarPasswordRoute,
   AuthenticatedPracticarRoute: AuthenticatedPracticarRouteWithChildren,
