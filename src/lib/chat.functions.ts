@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import type { UIMessage } from "ai";
+
 
 export const listarHilosFn = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
