@@ -52,8 +52,8 @@ export const renombrarHiloFn = createServerFn({ method: "POST" })
 
 export type StoredMessage = {
   id: string;
-  role: UIMessage["role"];
-  parts: UIMessage["parts"];
+  role: "user" | "assistant" | "system";
+  parts: unknown;
 };
 
 export const cargarMensajesFn = createServerFn({ method: "GET" })
@@ -68,8 +68,8 @@ export const cargarMensajesFn = createServerFn({ method: "GET" })
     if (error) throw new Error(error.message);
     const out: StoredMessage[] = (rows ?? []).map((r) => ({
       id: (r.message_id as string | null) ?? (r.id as string),
-      role: r.role as UIMessage["role"],
-      parts: (r.parts ?? []) as UIMessage["parts"],
+      role: r.role as StoredMessage["role"],
+      parts: r.parts ?? [],
     }));
     return out;
   });

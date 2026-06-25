@@ -39,7 +39,7 @@ function TutorThread() {
     return <div className="flex h-full items-center justify-center p-6 text-sm text-muted-foreground">Cargando…</div>;
   }
 
-  return <ChatWindow threadId={threadId} initial={initialMessages} />;
+  return <ChatWindow threadId={threadId} initial={initialMessages as unknown as UIMessage[]} />;
 }
 
 function ChatWindow({ threadId, initial }: { threadId: string; initial: UIMessage[] }) {
@@ -72,7 +72,7 @@ function ChatWindow({ threadId, initial }: { threadId: string; initial: UIMessag
   useEffect(() => { textareaRef.current?.focus(); }, [threadId]);
   useEffect(() => { if (status === "ready") textareaRef.current?.focus(); }, [status]);
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (_msg: unknown, e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const text = input.trim();
     if (!text || status === "submitted" || status === "streaming") return;
