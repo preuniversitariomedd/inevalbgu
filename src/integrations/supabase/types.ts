@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       profiles: {
         Row: {
+          bloqueado: boolean
           cedula: string
           created_at: string
           fecha_nacimiento: string
@@ -26,6 +27,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          bloqueado?: boolean
           cedula: string
           created_at?: string
           fecha_nacimiento: string
@@ -36,6 +38,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          bloqueado?: boolean
           cedula?: string
           created_at?: string
           fecha_nacimiento?: string

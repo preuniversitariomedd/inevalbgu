@@ -176,6 +176,31 @@ export const editarEstudianteFn = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+// Bloquear / desbloquear estudiante (solo admin)
+export const toggleBloqueoEstudianteFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) =>
+    z.object({ userId: z.string().uuid(), bloqueado: z.boolean() }).parse(d),
+  )
+  .handler(async ({ data, context }) => {
+    const { data: isAdmin } = await context.supabase.rpc("has_role", {
+      _user_id: context.userId,
+      _role: "administrador",
+    });
+    if (!isAdmin) throw new Error("Solo administradores.");
+    const { error } = await context.supabase
+      .from("profiles")
+      .update({ bloqueado: data.bloqueado })
+      .eq("id", data.userId);
+    if (error) throw new Error(error.message);
+    // Invalidar sesiones activas del usuario bloqueado
+    if (data.bloqueado) {
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      await supabaseAdmin.auth.admin.signOut(data.userId).catch(() => {});
+    }
+    return { ok: true };
+  });
+
 // Listar estudiantes (solo admin)
 export const listarEstudiantesFn = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
@@ -187,10 +212,9 @@ export const listarEstudiantesFn = createServerFn({ method: "GET" })
     if (!isAdmin) throw new Error("Solo administradores.");
     const { data, error } = await context.supabase
       .from("profiles")
-      .select("id, cedula, nombres, institucion, fecha_nacimiento, primera_vez, created_at")
+      .select("id, cedula, nombres, institucion, fecha_nacimiento, primera_vez, bloqueado, created_at")
       .order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
-    // Filtrar al propio admin de la lista de "estudiantes": traer solo cuentas con rol estudiante
     const { data: roles } = await context.supabase.from("user_roles").select("user_id, role");
     const estudianteIds = new Set(
       (roles ?? []).filter((r) => r.role === "estudiante").map((r) => r.user_id),
