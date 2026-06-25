@@ -11,9 +11,13 @@ export const Route = createFileRoute("/_authenticated")({
     // Si primera_vez = true, forzar cambio de contraseña.
     const { data: profile } = await supabase
       .from("profiles")
-      .select("primera_vez")
+      .select("primera_vez, bloqueado")
       .eq("id", data.user.id)
       .maybeSingle();
+    if (profile?.bloqueado) {
+      await supabase.auth.signOut();
+      throw redirect({ to: "/auth", search: { bloqueado: 1 } as never });
+    }
     if (profile?.primera_vez && typeof window !== "undefined") {
       if (window.location.pathname !== "/cambiar-password") {
         throw redirect({ to: "/cambiar-password" });
