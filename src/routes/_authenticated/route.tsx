@@ -16,7 +16,7 @@ export const Route = createFileRoute("/_authenticated")({
       .maybeSingle();
     if (profile?.bloqueado) {
       await supabase.auth.signOut();
-      throw redirect({ to: "/auth", search: { bloqueado: 1 } as never });
+      throw redirect({ to: "/auth" });
     }
     if (profile?.primera_vez && typeof window !== "undefined") {
       if (window.location.pathname !== "/cambiar-password") {
