@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database } from "lucide-react";
+import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database, MessageCircle } from "lucide-react";
 import { BANCO_PREGUNTAS } from "@/data";
 
 export const Route = createFileRoute("/_authenticated/")({
@@ -69,6 +69,16 @@ function Index() {
             title="Mi progreso"
             desc="Aciertos por área, racha de días y tus temas débiles."
             tone="success"
+          />
+        </div>
+
+        <div className="mt-4">
+          <ActionCard
+            to="/tutor"
+            icon={<MessageCircle className="h-7 w-7" />}
+            title="Tutor IA · PreBGU"
+            desc="Chat pedagógico con metodología Piaget para Matemática, Física, Química y técnicas de estudio. Gratis."
+            tone="accent"
           />
         </div>
 
