@@ -37,6 +37,9 @@ function AdminLayout() {
         <Link to="/admin" className="border-b-2 border-primary px-3 py-2 text-sm font-semibold">
           Estudiantes
         </Link>
+        <Link to="/tutor" className="border-b-2 border-transparent px-3 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
+          Tutor IA
+        </Link>
       </nav>
       <div className="mt-5">
         <Outlet />
