@@ -50,6 +50,12 @@ export const renombrarHiloFn = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+export type StoredMessage = {
+  id: string;
+  role: UIMessage["role"];
+  parts: UIMessage["parts"];
+};
+
 export const cargarMensajesFn = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: { threadId: string }) => input)
@@ -60,9 +66,10 @@ export const cargarMensajesFn = createServerFn({ method: "GET" })
       .eq("thread_id", data.threadId)
       .order("created_at", { ascending: true });
     if (error) throw new Error(error.message);
-    return (rows ?? []).map((r): UIMessage => ({
+    const out: StoredMessage[] = (rows ?? []).map((r) => ({
       id: (r.message_id as string | null) ?? (r.id as string),
       role: r.role as UIMessage["role"],
       parts: (r.parts ?? []) as UIMessage["parts"],
     }));
+    return out;
   });

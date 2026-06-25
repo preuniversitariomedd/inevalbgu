@@ -105,10 +105,11 @@ export const Route = createFileRoute("/api/chat")({
           ? `\n\nCONTEXTO RECIENTE (no repitas estas respuestas literalmente, varía ejemplos y enfoque):\n${lastAssistants.map((t, i) => `(${i + 1}) ${t.slice(0, 400)}`).join("\n")}`
           : "";
 
+        const modelMessages = await convertToModelMessages(messages);
         const result = streamText({
           model,
           system: TUTOR_SYSTEM_PROMPT + antiRepetSystem,
-          messages: convertToModelMessages(messages),
+          messages: modelMessages,
           temperature: 0.7,
         });
 
