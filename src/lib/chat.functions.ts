@@ -50,10 +50,12 @@ export const renombrarHiloFn = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+type Json = string | number | boolean | null | { [k: string]: Json } | Json[];
+
 export type StoredMessage = {
   id: string;
   role: "user" | "assistant" | "system";
-  parts: unknown;
+  parts: Json;
 };
 
 export const cargarMensajesFn = createServerFn({ method: "GET" })
@@ -69,7 +71,7 @@ export const cargarMensajesFn = createServerFn({ method: "GET" })
     const out: StoredMessage[] = (rows ?? []).map((r) => ({
       id: (r.message_id as string | null) ?? (r.id as string),
       role: r.role as StoredMessage["role"],
-      parts: r.parts ?? [],
+      parts: (r.parts ?? []) as Json,
     }));
     return out;
   });
