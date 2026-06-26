@@ -24,6 +24,10 @@ import { Route as AuthenticatedTutorIndexRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedTutorThreadIdRouteImport } from './routes/_authenticated/tutor.$threadId'
 import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authenticated/practicar.$area'
+import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
+import { Route as AuthenticatedAdminGruposRouteImport } from './routes/_authenticated/admin/grupos'
+import { Route as AuthenticatedAdminBrandingRouteImport } from './routes/_authenticated/admin/branding'
+import { Route as AuthenticatedAdminEstudianteIdRouteImport } from './routes/_authenticated/admin/estudiante.$id'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -102,6 +106,29 @@ const AuthenticatedPracticarAreaRoute =
     path: '/$area',
     getParentRoute: () => AuthenticatedPracticarRoute,
   } as any)
+const AuthenticatedAdminRolesRoute = AuthenticatedAdminRolesRouteImport.update({
+  id: '/roles',
+  path: '/roles',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminGruposRoute =
+  AuthenticatedAdminGruposRouteImport.update({
+    id: '/grupos',
+    path: '/grupos',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminBrandingRoute =
+  AuthenticatedAdminBrandingRouteImport.update({
+    id: '/branding',
+    path: '/branding',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminEstudianteIdRoute =
+  AuthenticatedAdminEstudianteIdRouteImport.update({
+    id: '/estudiante/$id',
+    path: '/estudiante/$id',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
@@ -114,10 +141,14 @@ export interface FileRoutesByFullPath {
   '/simulacro': typeof AuthenticatedSimulacroRoute
   '/tutor': typeof AuthenticatedTutorRouteWithChildren
   '/api/chat': typeof ApiChatRoute
+  '/admin/branding': typeof AuthenticatedAdminBrandingRoute
+  '/admin/grupos': typeof AuthenticatedAdminGruposRoute
+  '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/tutor/': typeof AuthenticatedTutorIndexRoute
+  '/admin/estudiante/$id': typeof AuthenticatedAdminEstudianteIdRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -128,10 +159,14 @@ export interface FileRoutesByTo {
   '/simulacro': typeof AuthenticatedSimulacroRoute
   '/api/chat': typeof ApiChatRoute
   '/': typeof AuthenticatedIndexRoute
+  '/admin/branding': typeof AuthenticatedAdminBrandingRoute
+  '/admin/grupos': typeof AuthenticatedAdminGruposRoute
+  '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/tutor': typeof AuthenticatedTutorIndexRoute
+  '/admin/estudiante/$id': typeof AuthenticatedAdminEstudianteIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -146,10 +181,14 @@ export interface FileRoutesById {
   '/_authenticated/tutor': typeof AuthenticatedTutorRouteWithChildren
   '/api/chat': typeof ApiChatRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/admin/branding': typeof AuthenticatedAdminBrandingRoute
+  '/_authenticated/admin/grupos': typeof AuthenticatedAdminGruposRoute
+  '/_authenticated/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/_authenticated/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/_authenticated/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/tutor/': typeof AuthenticatedTutorIndexRoute
+  '/_authenticated/admin/estudiante/$id': typeof AuthenticatedAdminEstudianteIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -164,10 +203,14 @@ export interface FileRouteTypes {
     | '/simulacro'
     | '/tutor'
     | '/api/chat'
+    | '/admin/branding'
+    | '/admin/grupos'
+    | '/admin/roles'
     | '/practicar/$area'
     | '/tutor/$threadId'
     | '/admin/'
     | '/tutor/'
+    | '/admin/estudiante/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -178,10 +221,14 @@ export interface FileRouteTypes {
     | '/simulacro'
     | '/api/chat'
     | '/'
+    | '/admin/branding'
+    | '/admin/grupos'
+    | '/admin/roles'
     | '/practicar/$area'
     | '/tutor/$threadId'
     | '/admin'
     | '/tutor'
+    | '/admin/estudiante/$id'
   id:
     | '__root__'
     | '/_authenticated'
@@ -195,10 +242,14 @@ export interface FileRouteTypes {
     | '/_authenticated/tutor'
     | '/api/chat'
     | '/_authenticated/'
+    | '/_authenticated/admin/branding'
+    | '/_authenticated/admin/grupos'
+    | '/_authenticated/admin/roles'
     | '/_authenticated/practicar/$area'
     | '/_authenticated/tutor/$threadId'
     | '/_authenticated/admin/'
     | '/_authenticated/tutor/'
+    | '/_authenticated/admin/estudiante/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -314,16 +365,52 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPracticarAreaRouteImport
       parentRoute: typeof AuthenticatedPracticarRoute
     }
+    '/_authenticated/admin/roles': {
+      id: '/_authenticated/admin/roles'
+      path: '/roles'
+      fullPath: '/admin/roles'
+      preLoaderRoute: typeof AuthenticatedAdminRolesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/grupos': {
+      id: '/_authenticated/admin/grupos'
+      path: '/grupos'
+      fullPath: '/admin/grupos'
+      preLoaderRoute: typeof AuthenticatedAdminGruposRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/branding': {
+      id: '/_authenticated/admin/branding'
+      path: '/branding'
+      fullPath: '/admin/branding'
+      preLoaderRoute: typeof AuthenticatedAdminBrandingRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/estudiante/$id': {
+      id: '/_authenticated/admin/estudiante/$id'
+      path: '/estudiante/$id'
+      fullPath: '/admin/estudiante/$id'
+      preLoaderRoute: typeof AuthenticatedAdminEstudianteIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
 
 interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminBrandingRoute: typeof AuthenticatedAdminBrandingRoute
+  AuthenticatedAdminGruposRoute: typeof AuthenticatedAdminGruposRoute
+  AuthenticatedAdminRolesRoute: typeof AuthenticatedAdminRolesRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminEstudianteIdRoute: typeof AuthenticatedAdminEstudianteIdRoute
 }
 
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
+    AuthenticatedAdminBrandingRoute: AuthenticatedAdminBrandingRoute,
+    AuthenticatedAdminGruposRoute: AuthenticatedAdminGruposRoute,
+    AuthenticatedAdminRolesRoute: AuthenticatedAdminRolesRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+    AuthenticatedAdminEstudianteIdRoute: AuthenticatedAdminEstudianteIdRoute,
   }
 
 const AuthenticatedAdminRouteRouteWithChildren =
