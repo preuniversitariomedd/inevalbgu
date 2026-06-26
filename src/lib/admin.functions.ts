@@ -432,11 +432,21 @@ export const actualizarBrandingFn = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     await ensureAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const updates: Record<string, any> = { updated_by: context.userId };
+    const updates: {
+      updated_by: string;
+      titulo?: string | null;
+      subtitulo?: string | null;
+      logo_url?: string | null;
+      hero_url?: string | null;
+    } = { updated_by: context.userId };
     if (data.titulo !== undefined) updates.titulo = data.titulo;
     if (data.subtitulo !== undefined) updates.subtitulo = data.subtitulo;
 
-    async function uploadIfPresent(field: "logo_url" | "hero_url", base64?: string | null, ct?: string | null) {
+    async function uploadIfPresent(
+      field: "logo_url" | "hero_url",
+      base64?: string | null,
+      ct?: string | null,
+    ) {
       if (!base64) return;
       const buf = Buffer.from(base64, "base64");
       const ext = (ct ?? "image/png").split("/")[1] ?? "png";
@@ -457,3 +467,4 @@ export const actualizarBrandingFn = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
