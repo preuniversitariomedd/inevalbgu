@@ -73,13 +73,23 @@ export const finalizarSesionPracticaFn = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
-export const obtenerProgresoFn = createServerFn({ method: "GET" })
+export const obtenerProgresoFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
+  .inputValidator((d: unknown) =>
+    z.object({ targetUserId: z.string().uuid().optional() }).optional().parse(d ?? {}),
+  )
+  .handler(async ({ data, context }) => {
+    let userId = context.userId;
+    if (data?.targetUserId && data.targetUserId !== context.userId) {
+      const { data: staff } = await context.supabase.rpc("is_staff", { _user_id: context.userId });
+      if (!staff) throw new Error("Sin permisos para ver otros estudiantes.");
+      userId = data.targetUserId;
+    }
+
     const { data: respuestas, error } = await context.supabase
       .from("respuestas")
       .select("pregunta_id, area, subtema, nivel, correcta, respondida_en")
-      .eq("user_id", context.userId)
+      .eq("user_id", userId)
       .order("respondida_en", { ascending: false })
       .limit(5000);
     if (error) throw new Error(error.message);
@@ -87,10 +97,11 @@ export const obtenerProgresoFn = createServerFn({ method: "GET" })
     const { data: sesiones, error: e2 } = await context.supabase
       .from("sesiones_practica")
       .select("id, tipo, area, total_preguntas, correctas, iniciada_en, finalizada_en, puntaje_ineval, nivel_logro")
-      .eq("user_id", context.userId)
+      .eq("user_id", userId)
       .order("iniciada_en", { ascending: false })
       .limit(500);
     if (e2) throw new Error(e2.message);
 
-    return { respuestas: respuestas ?? [], sesiones: sesiones ?? [] };
+    return { respuestas: respuestas ?? [], sesiones: sesiones ?? [], viewedUserId: userId };
   });
+
