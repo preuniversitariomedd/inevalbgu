@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      app_branding: {
+        Row: {
+          hero_url: string | null
+          id: boolean
+          logo_url: string | null
+          subtitulo: string | null
+          titulo: string | null
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          hero_url?: string | null
+          id?: boolean
+          logo_url?: string | null
+          subtitulo?: string | null
+          titulo?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          hero_url?: string | null
+          id?: boolean
+          logo_url?: string | null
+          subtitulo?: string | null
+          titulo?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       chat_messages: {
         Row: {
           created_at: string
@@ -79,12 +109,66 @@ export type Database = {
         }
         Relationships: []
       }
+      grupo_estudiantes: {
+        Row: {
+          created_at: string
+          grupo_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          grupo_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          grupo_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "grupo_estudiantes_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      grupos: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          descripcion: string | null
+          id: string
+          nombre: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          descripcion?: string | null
+          id?: string
+          nombre: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          descripcion?: string | null
+          id?: string
+          nombre?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           bloqueado: boolean
           cedula: string
           created_at: string
           fecha_nacimiento: string
+          genero: Database["public"]["Enums"]["genero_tipo"] | null
           id: string
           institucion: string
           nombres: string
@@ -96,6 +180,7 @@ export type Database = {
           cedula: string
           created_at?: string
           fecha_nacimiento: string
+          genero?: Database["public"]["Enums"]["genero_tipo"] | null
           id: string
           institucion: string
           nombres: string
@@ -107,6 +192,7 @@ export type Database = {
           cedula?: string
           created_at?: string
           fecha_nacimiento?: string
+          genero?: Database["public"]["Enums"]["genero_tipo"] | null
           id?: string
           institucion?: string
           nombres?: string
@@ -270,9 +356,11 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_staff: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
-      app_role: "estudiante" | "administrador"
+      app_role: "estudiante" | "administrador" | "docente"
+      genero_tipo: "masculino" | "femenino" | "otro"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -400,7 +488,8 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["estudiante", "administrador"],
+      app_role: ["estudiante", "administrador", "docente"],
+      genero_tipo: ["masculino", "femenino", "otro"],
     },
   },
 } as const

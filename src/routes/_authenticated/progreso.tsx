@@ -18,14 +18,19 @@ import { obtenerProgresoFn } from "@/lib/progreso.functions";
 
 export const Route = createFileRoute("/_authenticated/progreso")({
   head: () => ({ meta: [{ title: "Mi progreso — INEVAL_UEDE" }] }),
+  validateSearch: (s: Record<string, unknown>) => ({
+    as: typeof s.as === "string" ? s.as : undefined,
+  }),
   component: ProgresoPage,
 });
 
 function ProgresoPage() {
+  const { as } = Route.useSearch();
   const { data, isLoading } = useQuery({
-    queryKey: ["progreso"],
-    queryFn: () => obtenerProgresoFn(),
+    queryKey: ["progreso", as ?? "me"],
+    queryFn: () => obtenerProgresoFn({ data: as ? { targetUserId: as } : {} }),
   });
+
 
   if (isLoading) {
     return (
@@ -120,7 +125,16 @@ function ProgresoPage() {
       >
         <ArrowLeft className="h-4 w-4" /> Inicio
       </Link>
-      <h1 className="mt-4 text-3xl font-extrabold sm:text-4xl">Mi progreso</h1>
+      {as && (
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-accent/40 bg-accent/10 px-4 py-2 text-sm">
+          <span>👁️ Estás viendo el progreso de otro estudiante (modo staff).</span>
+          <Link to="/admin/estudiante/$id" params={{ id: as }} className="font-semibold text-accent hover:underline">
+            Volver al perfil
+          </Link>
+        </div>
+      )}
+      <h1 className="mt-4 text-3xl font-extrabold sm:text-4xl">{as ? "Progreso del estudiante" : "Mi progreso"}</h1>
+
 
       <div className="mt-5 grid gap-3 sm:grid-cols-3">
         <StatCard label="Preguntas respondidas" value={total} />
