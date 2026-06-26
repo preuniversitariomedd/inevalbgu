@@ -18,14 +18,19 @@ import { obtenerProgresoFn } from "@/lib/progreso.functions";
 
 export const Route = createFileRoute("/_authenticated/progreso")({
   head: () => ({ meta: [{ title: "Mi progreso — INEVAL_UEDE" }] }),
+  validateSearch: (s: Record<string, unknown>) => ({
+    as: typeof s.as === "string" ? s.as : undefined,
+  }),
   component: ProgresoPage,
 });
 
 function ProgresoPage() {
+  const { as } = Route.useSearch();
   const { data, isLoading } = useQuery({
-    queryKey: ["progreso"],
-    queryFn: () => obtenerProgresoFn(),
+    queryKey: ["progreso", as ?? "me"],
+    queryFn: () => obtenerProgresoFn({ data: as ? { targetUserId: as } : {} }),
   });
+
 
   if (isLoading) {
     return (
