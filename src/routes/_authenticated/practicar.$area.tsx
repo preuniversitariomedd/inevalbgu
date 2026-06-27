@@ -124,7 +124,12 @@ function PracticarArea() {
       <div className="mx-auto max-w-3xl px-5 py-6">
         <div className="mb-3 flex items-center justify-between text-sm">
           <Link to="/practicar" className="font-medium text-muted-foreground hover:text-foreground">← Salir</Link>
-          <span className="font-semibold">Pregunta {idx + 1} de {sesion.length}</span>
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1 font-mono text-xs font-semibold tabular-nums">
+              <Timer className="h-3.5 w-3.5" /> {fmt(Math.floor((ahora - (inicio ?? ahora)) / 1000))}
+            </span>
+            <span className="font-semibold">Pregunta {idx + 1} de {sesion.length}</span>
+          </div>
         </div>
         <div className="mb-5 h-2 overflow-hidden rounded-full bg-muted">
           <div className="h-full bg-primary transition-all" style={{ width: `${progreso}%` }} />
