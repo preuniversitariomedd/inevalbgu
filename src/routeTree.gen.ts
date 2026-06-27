@@ -27,6 +27,7 @@ import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authen
 import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
 import { Route as AuthenticatedAdminPresenciaRouteImport } from './routes/_authenticated/admin/presencia'
 import { Route as AuthenticatedAdminGruposRouteImport } from './routes/_authenticated/admin/grupos'
+import { Route as AuthenticatedAdminCalificacionesRouteImport } from './routes/_authenticated/admin/calificaciones'
 import { Route as AuthenticatedAdminBrandingRouteImport } from './routes/_authenticated/admin/branding'
 import { Route as AuthenticatedAdminEstudianteIdRouteImport } from './routes/_authenticated/admin/estudiante.$id'
 
@@ -124,6 +125,12 @@ const AuthenticatedAdminGruposRoute =
     path: '/grupos',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminCalificacionesRoute =
+  AuthenticatedAdminCalificacionesRouteImport.update({
+    id: '/calificaciones',
+    path: '/calificaciones',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminBrandingRoute =
   AuthenticatedAdminBrandingRouteImport.update({
     id: '/branding',
@@ -149,6 +156,7 @@ export interface FileRoutesByFullPath {
   '/tutor': typeof AuthenticatedTutorRouteWithChildren
   '/api/chat': typeof ApiChatRoute
   '/admin/branding': typeof AuthenticatedAdminBrandingRoute
+  '/admin/calificaciones': typeof AuthenticatedAdminCalificacionesRoute
   '/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
@@ -168,6 +176,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/': typeof AuthenticatedIndexRoute
   '/admin/branding': typeof AuthenticatedAdminBrandingRoute
+  '/admin/calificaciones': typeof AuthenticatedAdminCalificacionesRoute
   '/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
@@ -191,6 +200,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/admin/branding': typeof AuthenticatedAdminBrandingRoute
+  '/_authenticated/admin/calificaciones': typeof AuthenticatedAdminCalificacionesRoute
   '/_authenticated/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/_authenticated/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/_authenticated/admin/roles': typeof AuthenticatedAdminRolesRoute
@@ -214,6 +224,7 @@ export interface FileRouteTypes {
     | '/tutor'
     | '/api/chat'
     | '/admin/branding'
+    | '/admin/calificaciones'
     | '/admin/grupos'
     | '/admin/presencia'
     | '/admin/roles'
@@ -233,6 +244,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/'
     | '/admin/branding'
+    | '/admin/calificaciones'
     | '/admin/grupos'
     | '/admin/presencia'
     | '/admin/roles'
@@ -255,6 +267,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/_authenticated/'
     | '/_authenticated/admin/branding'
+    | '/_authenticated/admin/calificaciones'
     | '/_authenticated/admin/grupos'
     | '/_authenticated/admin/presencia'
     | '/_authenticated/admin/roles'
@@ -399,6 +412,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminGruposRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/calificaciones': {
+      id: '/_authenticated/admin/calificaciones'
+      path: '/calificaciones'
+      fullPath: '/admin/calificaciones'
+      preLoaderRoute: typeof AuthenticatedAdminCalificacionesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/branding': {
       id: '/_authenticated/admin/branding'
       path: '/branding'
@@ -418,6 +438,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBrandingRoute: typeof AuthenticatedAdminBrandingRoute
+  AuthenticatedAdminCalificacionesRoute: typeof AuthenticatedAdminCalificacionesRoute
   AuthenticatedAdminGruposRoute: typeof AuthenticatedAdminGruposRoute
   AuthenticatedAdminPresenciaRoute: typeof AuthenticatedAdminPresenciaRoute
   AuthenticatedAdminRolesRoute: typeof AuthenticatedAdminRolesRoute
@@ -428,6 +449,8 @@ interface AuthenticatedAdminRouteRouteChildren {
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
     AuthenticatedAdminBrandingRoute: AuthenticatedAdminBrandingRoute,
+    AuthenticatedAdminCalificacionesRoute:
+      AuthenticatedAdminCalificacionesRoute,
     AuthenticatedAdminGruposRoute: AuthenticatedAdminGruposRoute,
     AuthenticatedAdminPresenciaRoute: AuthenticatedAdminPresenciaRoute,
     AuthenticatedAdminRolesRoute: AuthenticatedAdminRolesRoute,
