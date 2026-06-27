@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowLeft, Timer } from "lucide-react";
 import { preguntasAleatorias, preguntasPorAreaYNivel } from "@/data";
 import type { Pregunta } from "@/data/tipos";
 import { PreguntaCard } from "@/components/PreguntaCard";
@@ -10,6 +10,12 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/_authenticated/practicar/$area")({
   component: PracticarArea,
 });
+
+function fmt(seg: number) {
+  const m = Math.floor(seg / 60).toString().padStart(2, "0");
+  const s = (seg % 60).toString().padStart(2, "0");
+  return `${m}:${s}`;
+}
 
 type NivelSel = "Básico" | "Intermedio" | "Avanzado" | "Todos";
 
