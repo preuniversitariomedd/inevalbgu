@@ -83,14 +83,14 @@ export const heartbeatSesionConexionFn = createServerFn({ method: "POST" })
       .maybeSingle();
     if (ge) throw new Error(ge.message);
     if (!cur) throw new Error("Sesión no encontrada.");
-    const upd: Record<string, unknown> = {
+    const upd = {
       ultimo_heartbeat: now,
       visible: data.visible,
       segundos_visible: (cur.segundos_visible ?? 0) + data.deltaVisible,
       segundos_oculto: (cur.segundos_oculto ?? 0) + data.deltaOculto,
       segundos_interaccion: (cur.segundos_interaccion ?? 0) + data.deltaInteraccion,
+      ...(data.interactuo ? { ultima_interaccion: now } : {}),
     };
-    if (data.interactuo) upd.ultima_interaccion = now;
     const { error } = await context.supabase
       .from("sesiones_conexion")
       .update(upd)
