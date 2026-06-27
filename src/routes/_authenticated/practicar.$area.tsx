@@ -103,6 +103,7 @@ function PracticarArea() {
             <h2 className="mt-2 text-4xl font-extrabold">{aciertos} / {sesion.length}</h2>
             <p className="mt-1 text-lg font-semibold text-primary">{pct}% de aciertos</p>
             <p className="mt-3 text-sm text-muted-foreground">{areaDecoded} · Nivel {nivel}</p>
+            <p className="mt-1 inline-flex items-center gap-1 text-xs font-mono text-muted-foreground"><Timer className="h-3.5 w-3.5" /> Tiempo: {fmt(Math.floor(((inicio ? ahora - inicio : 0)) / 1000))}</p>
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               <button onClick={() => { setSesion(null); setNivel(null); setSesionId(null); }} className="rounded-xl bg-primary px-5 py-2.5 font-semibold text-primary-foreground hover:bg-primary/90">
                 Otra sesión
