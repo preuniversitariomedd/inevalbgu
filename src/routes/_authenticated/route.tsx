@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
+import { usePresencia } from "@/lib/usePresencia";
 import { LogOut, GraduationCap, Shield } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated")({
@@ -54,6 +55,8 @@ function AuthedLayout() {
     queryFn: () => obtenerBrandingFn(),
     staleTime: 60_000,
   });
+  usePresencia(true);
+
 
   useEffect(() => {
     void supabase

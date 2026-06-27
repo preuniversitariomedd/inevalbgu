@@ -247,9 +247,13 @@ export type Database = {
       }
       sesiones_conexion: {
         Row: {
+          dispositivo: string | null
           finalizada: boolean
+          finalizada_en: string | null
           id: string
           iniciada_en: string
+          ip: string | null
+          segundos_interaccion: number
           segundos_oculto: number
           segundos_visible: number
           ultima_interaccion: string
@@ -259,9 +263,13 @@ export type Database = {
           visible: boolean
         }
         Insert: {
+          dispositivo?: string | null
           finalizada?: boolean
+          finalizada_en?: string | null
           id?: string
           iniciada_en?: string
+          ip?: string | null
+          segundos_interaccion?: number
           segundos_oculto?: number
           segundos_visible?: number
           ultima_interaccion?: string
@@ -271,9 +279,13 @@ export type Database = {
           visible?: boolean
         }
         Update: {
+          dispositivo?: string | null
           finalizada?: boolean
+          finalizada_en?: string | null
           id?: string
           iniciada_en?: string
+          ip?: string | null
+          segundos_interaccion?: number
           segundos_oculto?: number
           segundos_visible?: number
           ultima_interaccion?: string

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowLeft, Timer } from "lucide-react";
 import { preguntasAleatorias, preguntasPorAreaYNivel } from "@/data";
 import type { Pregunta } from "@/data/tipos";
 import { PreguntaCard } from "@/components/PreguntaCard";
@@ -10,6 +10,12 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/_authenticated/practicar/$area")({
   component: PracticarArea,
 });
+
+function fmt(seg: number) {
+  const m = Math.floor(seg / 60).toString().padStart(2, "0");
+  const s = (seg % 60).toString().padStart(2, "0");
+  return `${m}:${s}`;
+}
 
 type NivelSel = "Básico" | "Intermedio" | "Avanzado" | "Todos";
 
@@ -22,6 +28,14 @@ function PracticarArea() {
   const [finalizada, setFinalizada] = useState(false);
   const [idx, setIdx] = useState(0);
   const [aciertos, setAciertos] = useState(0);
+  const [inicio, setInicio] = useState<number | null>(null);
+  const [ahora, setAhora] = useState<number>(Date.now());
+
+  useEffect(() => {
+    if (!inicio || idx >= (sesion?.length ?? 0)) return;
+    const t = setInterval(() => setAhora(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, [inicio, idx, sesion]);
 
   const disponibles = useMemo(() => preguntasPorAreaYNivel(areaDecoded, nivel ?? "Todos"), [areaDecoded, nivel]);
 
@@ -36,6 +50,8 @@ function PracticarArea() {
     setIdx(0);
     setAciertos(0);
     setFinalizada(false);
+    setInicio(Date.now());
+    setAhora(Date.now());
     const id = await iniciarSesion("practica", areaDecoded);
     setSesionId(id);
   }
@@ -87,6 +103,7 @@ function PracticarArea() {
             <h2 className="mt-2 text-4xl font-extrabold">{aciertos} / {sesion.length}</h2>
             <p className="mt-1 text-lg font-semibold text-primary">{pct}% de aciertos</p>
             <p className="mt-3 text-sm text-muted-foreground">{areaDecoded} · Nivel {nivel}</p>
+            <p className="mt-1 inline-flex items-center gap-1 text-xs font-mono text-muted-foreground"><Timer className="h-3.5 w-3.5" /> Tiempo: {fmt(Math.floor(((inicio ? ahora - inicio : 0)) / 1000))}</p>
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               <button onClick={() => { setSesion(null); setNivel(null); setSesionId(null); }} className="rounded-xl bg-primary px-5 py-2.5 font-semibold text-primary-foreground hover:bg-primary/90">
                 Otra sesión
@@ -108,7 +125,12 @@ function PracticarArea() {
       <div className="mx-auto max-w-3xl px-5 py-6">
         <div className="mb-3 flex items-center justify-between text-sm">
           <Link to="/practicar" className="font-medium text-muted-foreground hover:text-foreground">← Salir</Link>
-          <span className="font-semibold">Pregunta {idx + 1} de {sesion.length}</span>
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1 font-mono text-xs font-semibold tabular-nums">
+              <Timer className="h-3.5 w-3.5" /> {fmt(Math.floor((ahora - (inicio ?? ahora)) / 1000))}
+            </span>
+            <span className="font-semibold">Pregunta {idx + 1} de {sesion.length}</span>
+          </div>
         </div>
         <div className="mb-5 h-2 overflow-hidden rounded-full bg-muted">
           <div className="h-full bg-primary transition-all" style={{ width: `${progreso}%` }} />
