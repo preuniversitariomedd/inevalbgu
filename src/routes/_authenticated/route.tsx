@@ -55,6 +55,8 @@ function AuthedLayout() {
     queryFn: () => obtenerBrandingFn(),
     staleTime: 60_000,
   });
+  usePresencia(true);
+
 
   useEffect(() => {
     void supabase
