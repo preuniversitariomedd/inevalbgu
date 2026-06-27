@@ -28,6 +28,14 @@ function PracticarArea() {
   const [finalizada, setFinalizada] = useState(false);
   const [idx, setIdx] = useState(0);
   const [aciertos, setAciertos] = useState(0);
+  const [inicio, setInicio] = useState<number | null>(null);
+  const [ahora, setAhora] = useState<number>(Date.now());
+
+  useEffect(() => {
+    if (!inicio || idx >= (sesion?.length ?? 0)) return;
+    const t = setInterval(() => setAhora(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, [inicio, idx, sesion]);
 
   const disponibles = useMemo(() => preguntasPorAreaYNivel(areaDecoded, nivel ?? "Todos"), [areaDecoded, nivel]);
 
@@ -42,6 +50,8 @@ function PracticarArea() {
     setIdx(0);
     setAciertos(0);
     setFinalizada(false);
+    setInicio(Date.now());
+    setAhora(Date.now());
     const id = await iniciarSesion("practica", areaDecoded);
     setSesionId(id);
   }
