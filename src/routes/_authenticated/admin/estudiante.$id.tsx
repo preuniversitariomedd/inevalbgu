@@ -136,6 +136,48 @@ function VistaEstudiante() {
           </ul>
         )}
       </div>
+
+      <div className="rounded-2xl border bg-card shadow-soft">
+        <div className="border-b px-5 py-3 text-sm font-semibold flex items-center gap-2">
+          <Wifi className="h-4 w-4" /> Historial de conexiones
+        </div>
+        {!conexiones || conexiones.length === 0 ? (
+          <p className="px-5 py-6 text-sm text-muted-foreground">Sin conexiones registradas aún.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="bg-secondary/60 text-xs uppercase tracking-wide text-muted-foreground">
+                <tr>
+                  <th className="px-3 py-2 text-left">Inicio</th>
+                  <th className="px-3 py-2 text-left">Fin</th>
+                  <th className="px-3 py-2 text-left">Disp.</th>
+                  <th className="px-3 py-2 text-left">IP</th>
+                  <th className="px-3 py-2 text-right">Visible</th>
+                  <th className="px-3 py-2 text-right">2º plano</th>
+                  <th className="px-3 py-2 text-right">Interacción</th>
+                </tr>
+              </thead>
+              <tbody>
+                {conexiones.map((c: any) => {
+                  const Ic = c.dispositivo === "mobile" ? Smartphone : c.dispositivo === "tablet" ? Tablet : Monitor;
+                  const dur = (n: number) => `${Math.floor(n / 60)}m ${n % 60}s`;
+                  return (
+                    <tr key={c.id} className="border-t">
+                      <td className="px-3 py-2 text-xs">{new Date(c.iniciada_en).toLocaleString("es-EC")}</td>
+                      <td className="px-3 py-2 text-xs">{c.finalizada_en ? new Date(c.finalizada_en).toLocaleString("es-EC") : c.finalizada ? "—" : <span className="text-emerald-600 font-semibold">en curso</span>}</td>
+                      <td className="px-3 py-2"><Ic className="h-4 w-4 inline" /> <span className="text-xs">{c.dispositivo ?? "—"}</span></td>
+                      <td className="px-3 py-2 font-mono text-xs">{c.ip || "—"}</td>
+                      <td className="px-3 py-2 text-right tabular-nums text-xs">{dur(c.segundos_visible ?? 0)}</td>
+                      <td className="px-3 py-2 text-right tabular-nums text-xs text-amber-600">{dur(c.segundos_oculto ?? 0)}</td>
+                      <td className="px-3 py-2 text-right tabular-nums text-xs text-primary font-semibold">{dur(c.segundos_interaccion ?? 0)}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
