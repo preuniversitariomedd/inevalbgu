@@ -17,9 +17,14 @@ function VistaEstudiante() {
   const { id } = Route.useParams();
   const navigate = useNavigate();
   const fn = useServerFn(obtenerProgresoAlumnoFn);
+  const fnHist = useServerFn(historialConexionesFn);
   const { data, isLoading, error } = useQuery({
     queryKey: ["admin", "progreso", id],
     queryFn: () => fn({ data: { userId: id } }),
+  });
+  const { data: conexiones } = useQuery({
+    queryKey: ["admin", "conexiones", id],
+    queryFn: () => fnHist({ data: { userId: id, limite: 50 } }),
   });
 
   if (isLoading) return <div className="p-10 text-center text-muted-foreground">Cargando…</div>;
