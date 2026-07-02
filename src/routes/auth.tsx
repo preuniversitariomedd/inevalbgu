@@ -55,14 +55,14 @@ function AuthPage() {
           <p className="mt-1 text-sm text-muted-foreground">
             Usa tu número de cédula y la contraseña que te entregó tu docente.
           </p>
-          <label className="mt-5 block text-sm font-semibold">Cédula</label>
+          <label className="mt-5 block text-sm font-semibold">Cédula o documento</label>
           <input
-            inputMode="numeric"
-            maxLength={10}
+            inputMode="text"
+            maxLength={20}
             value={cedula}
-            onChange={(e) => setCedula(e.target.value.replace(/\D/g, ""))}
+            onChange={(e) => setCedula(e.target.value.replace(/[^A-Za-z0-9-]/g, "").toUpperCase())}
             className="mt-1 w-full rounded-md border px-3 py-2"
-            placeholder="10 dígitos"
+            placeholder="10 dígitos (Ecuador) o documento extranjero"
             required
           />
           <label className="mt-3 block text-sm font-semibold">Contraseña</label>
@@ -138,11 +138,11 @@ function SetupAdmin({ onDone }: { onDone: () => void }) {
   return (
     <form onSubmit={submit} className="mt-3 space-y-2">
       <input
-        inputMode="numeric"
-        maxLength={10}
-        placeholder="Cédula"
+        inputMode="text"
+        maxLength={20}
+        placeholder="Cédula (10 dígitos) o documento extranjero"
         value={cedula}
-        onChange={(e) => setCedula(e.target.value.replace(/\D/g, ""))}
+        onChange={(e) => setCedula(e.target.value.replace(/[^A-Za-z0-9-]/g, "").toUpperCase())}
         className="w-full rounded-md border px-3 py-2 text-sm"
         required
       />

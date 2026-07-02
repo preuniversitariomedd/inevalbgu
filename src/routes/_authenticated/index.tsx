@@ -99,8 +99,8 @@ function Index() {
           <ActionCard
             to="/tutor"
             icon={<MessageCircle className="h-7 w-7" />}
-            title="Tutor IA · PreBGU"
-            desc="Chat pedagógico con metodología Piaget para Matemática, Física, Química y técnicas de estudio. Gratis."
+            title="Mr. Victor · Tutor virtual"
+            desc="Conversa con Mr. Victor: tutor con metodología Piaget en Matemática, Física, Química y técnicas de estudio."
             tone="accent"
           />
         </div>

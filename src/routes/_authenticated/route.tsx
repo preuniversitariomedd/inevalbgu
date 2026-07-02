@@ -1,10 +1,11 @@
 import { createFileRoute, Outlet, redirect, Link, useRouter } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 import { usePresencia } from "@/lib/usePresencia";
-import { LogOut, GraduationCap, Shield } from "lucide-react";
+import { LogOut, GraduationCap, Shield, PartyPopper } from "lucide-react";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
@@ -50,6 +51,7 @@ function AuthedLayout() {
   };
   const router = useRouter();
   const [cedula, setCedula] = useState<string>("");
+  const bienvenidaShown = useRef(false);
   const { data: branding } = useQuery({
     queryKey: ["branding"],
     queryFn: () => obtenerBrandingFn(),
@@ -61,10 +63,25 @@ function AuthedLayout() {
   useEffect(() => {
     void supabase
       .from("profiles")
-      .select("cedula")
+      .select("cedula, nombres")
       .eq("id", ctx.user.id)
       .maybeSingle()
-      .then(({ data }) => setCedula(data?.cedula ?? ""));
+      .then(({ data }) => {
+        setCedula(data?.cedula ?? "");
+        if (data?.nombres && !bienvenidaShown.current) {
+          const key = `welcome:${ctx.user.id}`;
+          if (typeof sessionStorage !== "undefined" && !sessionStorage.getItem(key)) {
+            const nombre = data.nombres.split(" ")[0];
+            toast.success(`¡Bienvenido, ${nombre}! 🎓`, {
+              description: "Listo para practicar. ¡Que tengas una gran sesión!",
+              icon: <PartyPopper className="h-5 w-5" />,
+              duration: 5000,
+            });
+            sessionStorage.setItem(key, "1");
+            bienvenidaShown.current = true;
+          }
+        }
+      });
   }, [ctx.user.id]);
 
   async function logout() {

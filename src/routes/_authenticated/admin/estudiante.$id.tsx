@@ -57,6 +57,10 @@ function VistaEstudiante() {
             <h2 className="text-2xl font-extrabold">{profile.nombres}</h2>
             <p className="text-sm text-muted-foreground">CI {profile.cedula} · {profile.institucion}</p>
             <p className="text-xs text-muted-foreground">Edad: {edad.texto} · Género: {profile.genero ?? "—"}</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Registrado el {new Date(profile.created_at).toLocaleString("es-EC")} · por{" "}
+              <b>{(profile as any).creado_por_nombre ?? "—"}</b>
+            </p>
           </div>
           <div className="flex flex-wrap gap-1.5">
             {profile.bloqueado ? <Badge variant="destructive">Bloqueado</Badge> : <Badge variant="secondary">Activo</Badge>}

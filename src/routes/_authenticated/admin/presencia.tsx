@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect, useMemo, useState } from "react";
-import { listarPresenciaFn } from "@/lib/presencia.functions";
-import { Smartphone, Tablet, Monitor, Eye, EyeOff, Wifi, AlertTriangle, RefreshCw } from "lucide-react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { listarPresenciaFn, listarAlertasPresenciaFn, resolverAlertaFn } from "@/lib/presencia.functions";
+import { Smartphone, Tablet, Monitor, Eye, EyeOff, Wifi, AlertTriangle, RefreshCw, BellRing, Check } from "lucide-react";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/presencia")({
   component: PresenciaPage,
@@ -22,19 +23,52 @@ function fmtDur(seg: number) {
   return `${h}h ${m % 60}m`;
 }
 
+function tipoLabel(t: string) {
+  if (t === "segundo_plano") return "Segundo plano prolongado";
+  if (t === "inactivo") return "Sin interacción";
+  if (t === "desconexion") return "Desconexión inesperada";
+  return t;
+}
+
 function PresenciaPage() {
-  const [tab, setTab] = useState<"vivo" | "alertas">("vivo");
+  const qc = useQueryClient();
+  const [tab, setTab] = useState<"vivo" | "alertas" | "historial">("vivo");
   const [now, setNow] = useState(Date.now());
+  const notifiedRef = useRef<Set<string>>(new Set());
+
   const q = useQuery({
     queryKey: ["presencia"],
     queryFn: () => listarPresenciaFn(),
     refetchInterval: 10_000,
+  });
+  const qa = useQuery({
+    queryKey: ["alertas-presencia"],
+    queryFn: () => listarAlertasPresenciaFn(),
+    refetchInterval: 15_000,
+  });
+  const resolver = useMutation({
+    mutationFn: (id: string) => resolverAlertaFn({ data: { id } }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["alertas-presencia"] }),
   });
 
   useEffect(() => {
     const t = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(t);
   }, []);
+
+  // Toast para alertas nuevas (no resueltas) que aún no notificamos en esta sesión
+  useEffect(() => {
+    const list = qa.data ?? [];
+    for (const a of list) {
+      if (a.resuelta_en) continue;
+      if (notifiedRef.current.has(a.id)) continue;
+      notifiedRef.current.add(a.id);
+      toast.warning(`${tipoLabel(a.tipo)} · ${a.profile?.nombres ?? "Estudiante"}`, {
+        description: a.detalle ?? "",
+        icon: <BellRing className="h-5 w-5" />,
+      });
+    }
+  }, [qa.data]);
 
   const rows = q.data ?? [];
   const enVivo = useMemo(
@@ -45,47 +79,29 @@ function PresenciaPage() {
       }),
     [rows, now],
   );
-  const alertas = useMemo(
-    () =>
-      rows
-        .map((r: any) => {
-          const lhb = new Date(r.ultimo_heartbeat).getTime();
-          const li = new Date(r.ultima_interaccion ?? r.iniciada_en).getTime();
-          const segSinInter = Math.floor((now - li) / 1000);
-          const ocultoMucho = !r.visible && (r.segundos_oculto ?? 0) > 180;
-          const inactivoMucho = segSinInter > 300;
-          return { r, segSinInter, lhb, ocultoMucho, inactivoMucho };
-        })
-        .filter((x) => x.ocultoMucho || x.inactivoMucho),
-    [rows, now],
-  );
+  const alertasActivas = (qa.data ?? []).filter((a: any) => !a.resuelta_en);
+  const historial = (qa.data ?? []).filter((a: any) => a.resuelta_en);
 
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
         <div className="flex gap-1 rounded-xl bg-secondary p-1">
-          <button
-            className={`rounded-lg px-3 py-1.5 text-sm font-semibold ${tab === "vivo" ? "bg-background shadow-soft" : ""}`}
-            onClick={() => setTab("vivo")}
-          >
+          <button className={`rounded-lg px-3 py-1.5 text-sm font-semibold ${tab === "vivo" ? "bg-background shadow-soft" : ""}`} onClick={() => setTab("vivo")}>
             <Wifi className="mr-1 inline h-4 w-4" /> En vivo ({enVivo.length})
           </button>
-          <button
-            className={`rounded-lg px-3 py-1.5 text-sm font-semibold ${tab === "alertas" ? "bg-background shadow-soft" : ""}`}
-            onClick={() => setTab("alertas")}
-          >
-            <AlertTriangle className="mr-1 inline h-4 w-4" /> Alertas ({alertas.length})
+          <button className={`rounded-lg px-3 py-1.5 text-sm font-semibold ${tab === "alertas" ? "bg-background shadow-soft" : ""}`} onClick={() => setTab("alertas")}>
+            <AlertTriangle className="mr-1 inline h-4 w-4" /> Alertas ({alertasActivas.length})
+          </button>
+          <button className={`rounded-lg px-3 py-1.5 text-sm font-semibold ${tab === "historial" ? "bg-background shadow-soft" : ""}`} onClick={() => setTab("historial")}>
+            Historial ({historial.length})
           </button>
         </div>
-        <button
-          onClick={() => q.refetch()}
-          className="inline-flex items-center gap-1 rounded-lg border px-3 py-1.5 text-sm font-semibold hover:bg-secondary"
-        >
+        <button onClick={() => { q.refetch(); qa.refetch(); }} className="inline-flex items-center gap-1 rounded-lg border px-3 py-1.5 text-sm font-semibold hover:bg-secondary">
           <RefreshCw className="h-3.5 w-3.5" /> Actualizar
         </button>
       </div>
 
-      {tab === "vivo" ? (
+      {tab === "vivo" && (
         <div className="overflow-x-auto rounded-2xl border bg-card shadow-soft">
           <table className="w-full text-sm">
             <thead className="bg-secondary/60 text-xs uppercase tracking-wide text-muted-foreground">
@@ -141,35 +157,43 @@ function PresenciaPage() {
             </tbody>
           </table>
         </div>
-      ) : (
+      )}
+
+      {(tab === "alertas" || tab === "historial") && (
         <div className="space-y-2">
-          {alertas.length === 0 && (
+          {(tab === "alertas" ? alertasActivas : historial).length === 0 && (
             <div className="rounded-2xl border bg-card p-6 text-center text-sm text-muted-foreground shadow-soft">
-              Sin alertas. Todos los estudiantes activos están interactuando.
+              {tab === "alertas" ? "Sin alertas activas." : "Aún no hay alertas resueltas."}
             </div>
           )}
-          {alertas.map(({ r, segSinInter, ocultoMucho, inactivoMucho }) => (
-            <div key={r.id} className="flex items-center justify-between rounded-2xl border bg-card p-3 shadow-soft">
+          {(tab === "alertas" ? alertasActivas : historial).map((a: any) => (
+            <div key={a.id} className="flex items-center justify-between rounded-2xl border bg-card p-3 shadow-soft">
               <div>
-                <div className="font-semibold">{r.profile?.nombres ?? "—"} · CI {r.profile?.cedula ?? "—"}</div>
+                <div className="font-semibold">{a.profile?.nombres ?? "—"} · CI {a.profile?.cedula ?? "—"}</div>
                 <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                  <span className="inline-flex items-center gap-1">{dispoIcon(r.dispositivo)} {r.dispositivo ?? "—"}</span>
-                  <span className="font-mono">{r.ip || "—"}</span>
-                  {ocultoMucho && (
-                    <span className="rounded-full bg-amber-100 px-2 py-0.5 font-semibold text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
-                      Segundo plano {fmtDur(r.segundos_oculto ?? 0)}
-                    </span>
-                  )}
-                  {inactivoMucho && (
-                    <span className="rounded-full bg-rose-100 px-2 py-0.5 font-semibold text-rose-700 dark:bg-rose-900/40 dark:text-rose-300">
-                      Sin interacción {fmtDur(segSinInter)}
-                    </span>
-                  )}
+                  <span className={`rounded-full px-2 py-0.5 font-semibold ${
+                    a.tipo === "desconexion" ? "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300" :
+                    a.tipo === "inactivo" ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300" :
+                    "bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300"
+                  }`}>{tipoLabel(a.tipo)}</span>
+                  <span>{a.detalle}</span>
+                  <span className="font-mono">{new Date(a.disparada_en).toLocaleString("es-EC")}</span>
+                  {a.resuelta_en && <span className="text-emerald-700">✓ resuelta {new Date(a.resuelta_en).toLocaleString("es-EC")}</span>}
                 </div>
               </div>
-              <Link to="/admin/estudiante/$id" params={{ id: r.user_id }} className="text-xs font-semibold text-primary hover:underline">
-                Ver perfil
-              </Link>
+              <div className="flex items-center gap-2">
+                <Link to="/admin/estudiante/$id" params={{ id: a.user_id }} className="text-xs font-semibold text-primary hover:underline">
+                  Ver perfil
+                </Link>
+                {!a.resuelta_en && (
+                  <button
+                    onClick={() => resolver.mutate(a.id)}
+                    className="inline-flex items-center gap-1 rounded-lg border px-2 py-1 text-xs font-semibold hover:bg-secondary"
+                  >
+                    <Check className="h-3 w-3" /> Marcar resuelta
+                  </button>
+                )}
+              </div>
             </div>
           ))}
         </div>

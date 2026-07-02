@@ -39,7 +39,7 @@ export const existeAdminFn = createServerFn({ method: "GET" }).handler(async () 
 });
 
 const adminInicialSchema = z.object({
-  cedula: z.string().length(10),
+  cedula: z.string().min(6).max(20),
   nombres: z.string().min(2).max(120),
   password: z.string().min(8),
 });
@@ -83,7 +83,7 @@ export const crearAdminInicialFn = createServerFn({ method: "POST" })
 
 // ---------- Crear / editar estudiante ----------
 const crearEstudianteSchema = z.object({
-  cedula: z.string().length(10),
+  cedula: z.string().min(6).max(20),
   nombres: z.string().min(2).max(120),
   institucion: z.string().min(1).max(160),
   fechaNacimiento: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
@@ -115,6 +115,7 @@ export const crearEstudianteFn = createServerFn({ method: "POST" })
       fecha_nacimiento: data.fechaNacimiento,
       genero: data.genero,
       primera_vez: true,
+      creado_por: context.userId,
     });
     if (pe) {
       await supabaseAdmin.auth.admin.deleteUser(userId);
@@ -206,7 +207,7 @@ export const listarEstudiantesFn = createServerFn({ method: "GET" })
     const { data: profiles, error } = await context.supabase
       .from("profiles")
       .select(
-        "id, cedula, nombres, institucion, fecha_nacimiento, genero, primera_vez, bloqueado, created_at",
+        "id, cedula, nombres, institucion, fecha_nacimiento, genero, primera_vez, bloqueado, created_at, creado_por",
       )
       .order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
@@ -228,7 +229,23 @@ export const listarEstudiantesFn = createServerFn({ method: "GET" })
       if (nombre) arr.push({ id: v.grupo_id, nombre });
       byUser.set(v.user_id, arr);
     }
-    return estudiantes.map((e: any) => ({ ...e, grupos: byUser.get(e.id) ?? [] }));
+    // Resolver quién creó a cada estudiante
+    const creadorIds = Array.from(
+      new Set(estudiantes.map((e: any) => e.creado_por).filter(Boolean)),
+    ) as string[];
+    let creadores = new Map<string, string>();
+    if (creadorIds.length) {
+      const { data: creadorProfs } = await context.supabase
+        .from("profiles")
+        .select("id, nombres")
+        .in("id", creadorIds);
+      creadores = new Map((creadorProfs ?? []).map((p: any) => [p.id, p.nombres]));
+    }
+    return estudiantes.map((e: any) => ({
+      ...e,
+      grupos: byUser.get(e.id) ?? [],
+      creado_por_nombre: e.creado_por ? creadores.get(e.creado_por) ?? null : null,
+    }));
   });
 
 // ---------- Progreso por alumno (staff) ----------
@@ -240,11 +257,21 @@ export const obtenerProgresoAlumnoFn = createServerFn({ method: "POST" })
     const { data: profile } = await context.supabase
       .from("profiles")
       .select(
-        "id, cedula, nombres, institucion, fecha_nacimiento, genero, primera_vez, bloqueado, created_at",
+        "id, cedula, nombres, institucion, fecha_nacimiento, genero, primera_vez, bloqueado, created_at, creado_por",
       )
       .eq("id", data.userId)
       .maybeSingle();
     if (!profile) throw new Error("Estudiante no encontrado.");
+    let creado_por_nombre: string | null = null;
+    if (profile.creado_por) {
+      const { data: cp } = await context.supabase
+        .from("profiles")
+        .select("nombres")
+        .eq("id", profile.creado_por)
+        .maybeSingle();
+      creado_por_nombre = cp?.nombres ?? null;
+    }
+    (profile as any).creado_por_nombre = creado_por_nombre;
     const { data: respuestas } = await context.supabase
       .from("respuestas")
       .select("pregunta_id, area, subtema, nivel, correcta, respondida_en")

@@ -14,6 +14,47 @@ export type Database = {
   }
   public: {
     Tables: {
+      alertas_presencia: {
+        Row: {
+          created_at: string
+          detalle: string | null
+          disparada_en: string
+          id: string
+          resuelta_en: string | null
+          sesion_id: string | null
+          tipo: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          detalle?: string | null
+          disparada_en?: string
+          id?: string
+          resuelta_en?: string | null
+          sesion_id?: string | null
+          tipo: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          detalle?: string | null
+          disparada_en?: string
+          id?: string
+          resuelta_en?: string | null
+          sesion_id?: string | null
+          tipo?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "alertas_presencia_sesion_id_fkey"
+            columns: ["sesion_id"]
+            isOneToOne: false
+            referencedRelation: "sesiones_conexion"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       app_branding: {
         Row: {
           hero_url: string | null
@@ -166,6 +207,7 @@ export type Database = {
         Row: {
           bloqueado: boolean
           cedula: string
+          creado_por: string | null
           created_at: string
           fecha_nacimiento: string
           genero: Database["public"]["Enums"]["genero_tipo"] | null
@@ -178,6 +220,7 @@ export type Database = {
         Insert: {
           bloqueado?: boolean
           cedula: string
+          creado_por?: string | null
           created_at?: string
           fecha_nacimiento: string
           genero?: Database["public"]["Enums"]["genero_tipo"] | null
@@ -190,6 +233,7 @@ export type Database = {
         Update: {
           bloqueado?: boolean
           cedula?: string
+          creado_por?: string | null
           created_at?: string
           fecha_nacimiento?: string
           genero?: Database["public"]["Enums"]["genero_tipo"] | null
