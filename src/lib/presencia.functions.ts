@@ -113,11 +113,42 @@ export const finalizarSesionConexionFn = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
-// ---------- Vista admin: en vivo + alertas ----------
+// ---------- Auto-cierre de sesiones huérfanas ----------
+// Marca finalizadas todas las sesiones cuyo último heartbeat sea > STALE segundos.
+const STALE_SECONDS = 120;
+async function cerrarSesionesHuerfanas(supabase: any) {
+  const stale = new Date(Date.now() - STALE_SECONDS * 1000).toISOString();
+  const { data: viejas } = await supabase
+    .from("sesiones_conexion")
+    .select("id, user_id, ultimo_heartbeat")
+    .eq("finalizada", false)
+    .lt("ultimo_heartbeat", stale)
+    .limit(500);
+  if (!viejas || viejas.length === 0) return [] as any[];
+  await supabase
+    .from("sesiones_conexion")
+    .update({ finalizada: true, finalizada_en: new Date().toISOString() })
+    .in("id", viejas.map((v: any) => v.id));
+  // Registra alertas de desconexión inesperada
+  const alerts = viejas.map((v: any) => ({
+    user_id: v.user_id,
+    sesion_id: v.id,
+    tipo: "desconexion" as const,
+    detalle: `Sesión cerrada por inactividad de heartbeat (>${STALE_SECONDS}s).`,
+  }));
+  await supabase.from("alertas_presencia").upsert(alerts, {
+    onConflict: "sesion_id,tipo",
+    ignoreDuplicates: true,
+  });
+  return viejas;
+}
+
+// ---------- Vista admin: en vivo + generación de alertas ----------
 export const listarPresenciaFn = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     await ensureStaff(context);
+    await cerrarSesionesHuerfanas(context.supabase);
     const desde = new Date(Date.now() - 90_000).toISOString(); // último heartbeat < 90s = en vivo
     const { data: sesiones, error } = await context.supabase
       .from("sesiones_conexion")
@@ -138,10 +169,78 @@ export const listarPresenciaFn = createServerFn({ method: "GET" })
         .in("id", ids);
       perfiles = new Map((profs ?? []).map((p: any) => [p.id, p]));
     }
+    // Detectar y persistir alertas nuevas (segundo plano prolongado / inactividad)
+    const now = Date.now();
+    const nuevasAlertas: any[] = [];
+    for (const s of sesiones ?? []) {
+      const segOculto = s.segundos_oculto ?? 0;
+      const segSinInter = Math.floor(
+        (now - new Date(s.ultima_interaccion ?? s.iniciada_en).getTime()) / 1000,
+      );
+      if (!s.visible && segOculto > 180) {
+        nuevasAlertas.push({
+          user_id: s.user_id,
+          sesion_id: s.id,
+          tipo: "segundo_plano",
+          detalle: `Segundo plano ${Math.round(segOculto / 60)} min`,
+        });
+      }
+      if (segSinInter > 300) {
+        nuevasAlertas.push({
+          user_id: s.user_id,
+          sesion_id: s.id,
+          tipo: "inactivo",
+          detalle: `Sin interacción ${Math.round(segSinInter / 60)} min`,
+        });
+      }
+    }
+    if (nuevasAlertas.length) {
+      await context.supabase.from("alertas_presencia").upsert(nuevasAlertas, {
+        onConflict: "sesion_id,tipo",
+        ignoreDuplicates: true,
+      });
+    }
     return (sesiones ?? []).map((s: any) => ({
       ...s,
       profile: perfiles.get(s.user_id) ?? null,
     }));
+  });
+
+// ---------- Historial de alertas ----------
+export const listarAlertasPresenciaFn = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await ensureStaff(context);
+    await cerrarSesionesHuerfanas(context.supabase);
+    const { data: alertas, error } = await context.supabase
+      .from("alertas_presencia")
+      .select("id, user_id, sesion_id, tipo, detalle, disparada_en, resuelta_en")
+      .order("disparada_en", { ascending: false })
+      .limit(200);
+    if (error) throw new Error(error.message);
+    const ids = Array.from(new Set((alertas ?? []).map((a: any) => a.user_id)));
+    let perfiles = new Map<string, any>();
+    if (ids.length) {
+      const { data: profs } = await context.supabase
+        .from("profiles")
+        .select("id, cedula, nombres")
+        .in("id", ids);
+      perfiles = new Map((profs ?? []).map((p: any) => [p.id, p]));
+    }
+    return (alertas ?? []).map((a: any) => ({ ...a, profile: perfiles.get(a.user_id) ?? null }));
+  });
+
+export const resolverAlertaFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ data, context }) => {
+    await ensureStaff(context);
+    const { error } = await context.supabase
+      .from("alertas_presencia")
+      .update({ resuelta_en: new Date().toISOString() })
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
   });
 
 // ---------- Historial de conexiones por estudiante ----------
