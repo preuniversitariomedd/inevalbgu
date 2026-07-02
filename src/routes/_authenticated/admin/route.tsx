@@ -33,7 +33,7 @@ function AdminLayout() {
     { to: "/admin/grupos", label: "Grupos", icon: Layers, show: true },
     { to: "/admin/roles", label: "Roles", icon: Shield, show: ctx.esAdmin },
     { to: "/admin/branding", label: "Branding", icon: ImageIcon, show: ctx.esAdmin },
-    { to: "/tutor", label: "Tutor IA", icon: MessageCircle, show: true },
+    { to: "/tutor", label: "Mr. Victor", icon: MessageCircle, show: true },
   ];
 
   return (
@@ -49,7 +49,7 @@ function AdminLayout() {
           <h1 className="text-2xl font-extrabold">Panel de {ctx.esAdmin ? "administración" : "docencia"}</h1>
           <p className="text-sm text-muted-foreground">
             {ctx.esAdmin
-              ? "Control total: estudiantes, grupos, roles, branding y tutor IA."
+              ? "Control total: estudiantes, grupos, roles, branding y Mr. Victor."
               : "Gestiona estudiantes, verifica avances y revisa estadísticas."}
           </p>
         </div>

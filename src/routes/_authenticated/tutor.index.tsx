@@ -11,7 +11,7 @@ function TutorEmpty() {
       <div className="rounded-2xl bg-primary/10 p-4 text-primary">
         <GraduationCap className="h-10 w-10" />
       </div>
-      <h2 className="mt-4 text-xl font-bold">Hola, soy tu PreBGU Tutor</h2>
+      <h2 className="mt-4 text-xl font-bold">Hola, soy Mr. Victor 👋</h2>
       <p className="mt-2 max-w-md text-sm text-muted-foreground">
         Empieza una conversación nueva desde la izquierda. Te guiaré con preguntas para entender qué sabes
         y avanzar paso a paso, al estilo Piaget.
