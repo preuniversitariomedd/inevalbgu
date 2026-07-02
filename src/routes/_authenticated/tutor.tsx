@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useEffect } from "react";
 
 export const Route = createFileRoute("/_authenticated/tutor")({
-  head: () => ({ meta: [{ title: "Tutor IA — PreBGU" }] }),
+  head: () => ({ meta: [{ title: "Mr. Victor — Tutor virtual" }] }),
   component: TutorLayout,
 });
 
@@ -54,9 +54,9 @@ function TutorLayout() {
           <GraduationCap className="h-5 w-5" />
         </div>
         <div>
-          <h1 className="text-2xl font-extrabold">PreBGU Tutor</h1>
+          <h1 className="text-2xl font-extrabold">Mr. Victor <span className="text-muted-foreground font-medium text-base">· Tutor virtual</span></h1>
           <p className="text-sm text-muted-foreground">
-            Tu tutor pedagógico con metodología Piaget. Matemática, Física, Química y técnicas de estudio.
+            Aprende conmigo con metodología Piaget. Matemática, Física, Química y técnicas de estudio.
           </p>
         </div>
       </header>
