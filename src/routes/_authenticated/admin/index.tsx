@@ -500,14 +500,14 @@ function AdminEstudiantes() {
           </DialogHeader>
           <form onSubmit={enviarForm} className="space-y-3">
             <div>
-              <Label htmlFor="cedula">Cédula (10 dígitos)</Label>
+              <Label htmlFor="cedula">Cédula o documento (extranjero permitido)</Label>
               <Input
                 id="cedula"
-                inputMode="numeric"
-                maxLength={10}
+                inputMode="text"
+                maxLength={20}
                 disabled={!!modoEdicion}
                 value={form.cedula}
-                onChange={(e) => setForm({ ...form, cedula: e.target.value.replace(/\D/g, "") })}
+                onChange={(e) => setForm({ ...form, cedula: e.target.value.replace(/[^A-Za-z0-9-]/g, "").toUpperCase() })}
               />
               {errores.cedula && <p className="mt-1 text-xs text-destructive">{errores.cedula}</p>}
             </div>
