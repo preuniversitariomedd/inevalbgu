@@ -78,6 +78,8 @@ type Estudiante = {
   primera_vez: boolean;
   bloqueado: boolean;
   created_at: string;
+  creado_por: string | null;
+  creado_por_nombre: string | null;
   grupos: { id: string; nombre: string }[];
 };
 
@@ -399,6 +401,7 @@ function AdminEstudiantes() {
                 <TableHead>Institución</TableHead>
                 <TableHead>Grupos</TableHead>
                 <TableHead>Edad</TableHead>
+                <TableHead>Registrado</TableHead>
                 <TableHead>Estado</TableHead>
                 <TableHead className="text-right">Acciones</TableHead>
               </TableRow>
@@ -431,6 +434,14 @@ function AdminEstudiantes() {
                       </div>
                     </TableCell>
                     <TableCell className="text-xs">{edad.texto}</TableCell>
+                    <TableCell className="text-xs">
+                      <div className="whitespace-nowrap">
+                        {new Date(e.created_at).toLocaleDateString("es-EC", { day: "2-digit", month: "short", year: "numeric" })}
+                      </div>
+                      <div className="text-[10px] text-muted-foreground">
+                        por {e.creado_por_nombre ?? "—"}
+                      </div>
+                    </TableCell>
                     <TableCell>
                       <div className="flex flex-wrap gap-1">
                         {e.bloqueado ? (
