@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 import { usePresencia } from "@/lib/usePresencia";
-import { LogOut, GraduationCap, Shield, PartyPopper } from "lucide-react";
+import { LogOut, GraduationCap, Shield, PartyPopper, MessageCircle } from "lucide-react";
+import { useMensajesNoLeidos } from "@/components/chat/ChatShell";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated")({
@@ -104,6 +105,7 @@ function AuthedLayout() {
             <span className="hidden sm:inline">{branding?.titulo || "INEVAL_UEDE"}</span>
           </Link>
           <div className="flex items-center gap-2 text-sm">
+            <MensajesLink />
             {ctx.esStaff && (
               <Link
                 to="/admin"
@@ -126,5 +128,24 @@ function AuthedLayout() {
       </nav>
       <Outlet />
     </div>
+  );
+}
+
+function MensajesLink() {
+  const q = useMensajesNoLeidos(true);
+  const total = (q.data as any)?.total ?? 0;
+  return (
+    <Link
+      to="/mensajes"
+      className="relative inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-medium hover:bg-secondary"
+    >
+      <MessageCircle className="h-4 w-4" />
+      <span className="hidden sm:inline">Mensajes</span>
+      {total > 0 && (
+        <span className="absolute -right-1 -top-1 grid min-w-5 place-items-center rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-1 text-[10px] font-bold text-white shadow">
+          {total > 99 ? "99+" : total}
+        </span>
+      )}
+    </Link>
   );
 }

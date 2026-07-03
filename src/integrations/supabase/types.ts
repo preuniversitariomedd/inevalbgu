@@ -150,6 +150,65 @@ export type Database = {
         }
         Relationships: []
       }
+      conversacion_participantes: {
+        Row: {
+          conversacion_id: string
+          joined_at: string
+          no_leidos: number
+          ultima_lectura_at: string | null
+          user_id: string
+        }
+        Insert: {
+          conversacion_id: string
+          joined_at?: string
+          no_leidos?: number
+          ultima_lectura_at?: string | null
+          user_id: string
+        }
+        Update: {
+          conversacion_id?: string
+          joined_at?: string
+          no_leidos?: number
+          ultima_lectura_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversacion_participantes_conversacion_id_fkey"
+            columns: ["conversacion_id"]
+            isOneToOne: false
+            referencedRelation: "conversaciones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      conversaciones: {
+        Row: {
+          created_at: string
+          created_by: string
+          id: string
+          ultimo_mensaje_at: string
+          ultimo_mensaje_preview: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          id?: string
+          ultimo_mensaje_at?: string
+          ultimo_mensaje_preview?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          id?: string
+          ultimo_mensaje_at?: string
+          ultimo_mensaje_preview?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       grupo_estudiantes: {
         Row: {
           created_at: string
@@ -202,6 +261,47 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      mensajes: {
+        Row: {
+          attachment_path: string | null
+          attachment_tipo: string | null
+          contenido: string | null
+          conversacion_id: string
+          created_at: string
+          es_admin_intervencion: boolean
+          id: string
+          sender_id: string
+        }
+        Insert: {
+          attachment_path?: string | null
+          attachment_tipo?: string | null
+          contenido?: string | null
+          conversacion_id: string
+          created_at?: string
+          es_admin_intervencion?: boolean
+          id?: string
+          sender_id: string
+        }
+        Update: {
+          attachment_path?: string | null
+          attachment_tipo?: string | null
+          contenido?: string | null
+          conversacion_id?: string
+          created_at?: string
+          es_admin_intervencion?: boolean
+          id?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mensajes_conversacion_id_fkey"
+            columns: ["conversacion_id"]
+            isOneToOne: false
+            referencedRelation: "conversaciones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -405,6 +505,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      es_participante: {
+        Args: { _conv_id: string; _user_id: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

@@ -17,6 +17,7 @@ import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedSimulacroRouteImport } from './routes/_authenticated/simulacro'
 import { Route as AuthenticatedProgresoRouteImport } from './routes/_authenticated/progreso'
 import { Route as AuthenticatedPracticarRouteImport } from './routes/_authenticated/practicar'
+import { Route as AuthenticatedMensajesRouteImport } from './routes/_authenticated/mensajes'
 import { Route as AuthenticatedCambiarPasswordRouteImport } from './routes/_authenticated/cambiar-password'
 import { Route as AuthenticatedBancoRouteImport } from './routes/_authenticated/banco'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
@@ -26,6 +27,7 @@ import { Route as AuthenticatedTutorThreadIdRouteImport } from './routes/_authen
 import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authenticated/practicar.$area'
 import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
 import { Route as AuthenticatedAdminPresenciaRouteImport } from './routes/_authenticated/admin/presencia'
+import { Route as AuthenticatedAdminMensajesRouteImport } from './routes/_authenticated/admin/mensajes'
 import { Route as AuthenticatedAdminGruposRouteImport } from './routes/_authenticated/admin/grupos'
 import { Route as AuthenticatedAdminCalificacionesRouteImport } from './routes/_authenticated/admin/calificaciones'
 import { Route as AuthenticatedAdminBrandingRouteImport } from './routes/_authenticated/admin/branding'
@@ -68,6 +70,11 @@ const AuthenticatedProgresoRoute = AuthenticatedProgresoRouteImport.update({
 const AuthenticatedPracticarRoute = AuthenticatedPracticarRouteImport.update({
   id: '/practicar',
   path: '/practicar',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMensajesRoute = AuthenticatedMensajesRouteImport.update({
+  id: '/mensajes',
+  path: '/mensajes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCambiarPasswordRoute =
@@ -119,6 +126,12 @@ const AuthenticatedAdminPresenciaRoute =
     path: '/presencia',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminMensajesRoute =
+  AuthenticatedAdminMensajesRouteImport.update({
+    id: '/mensajes',
+    path: '/mensajes',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminGruposRoute =
   AuthenticatedAdminGruposRouteImport.update({
     id: '/grupos',
@@ -150,6 +163,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/banco': typeof AuthenticatedBancoRoute
   '/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
+  '/mensajes': typeof AuthenticatedMensajesRoute
   '/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/progreso': typeof AuthenticatedProgresoRoute
   '/simulacro': typeof AuthenticatedSimulacroRoute
@@ -158,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/admin/branding': typeof AuthenticatedAdminBrandingRoute
   '/admin/calificaciones': typeof AuthenticatedAdminCalificacionesRoute
   '/admin/grupos': typeof AuthenticatedAdminGruposRoute
+  '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
@@ -170,6 +185,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/banco': typeof AuthenticatedBancoRoute
   '/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
+  '/mensajes': typeof AuthenticatedMensajesRoute
   '/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/progreso': typeof AuthenticatedProgresoRoute
   '/simulacro': typeof AuthenticatedSimulacroRoute
@@ -178,6 +194,7 @@ export interface FileRoutesByTo {
   '/admin/branding': typeof AuthenticatedAdminBrandingRoute
   '/admin/calificaciones': typeof AuthenticatedAdminCalificacionesRoute
   '/admin/grupos': typeof AuthenticatedAdminGruposRoute
+  '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
@@ -193,6 +210,7 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/banco': typeof AuthenticatedBancoRoute
   '/_authenticated/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
+  '/_authenticated/mensajes': typeof AuthenticatedMensajesRoute
   '/_authenticated/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/_authenticated/progreso': typeof AuthenticatedProgresoRoute
   '/_authenticated/simulacro': typeof AuthenticatedSimulacroRoute
@@ -202,6 +220,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/branding': typeof AuthenticatedAdminBrandingRoute
   '/_authenticated/admin/calificaciones': typeof AuthenticatedAdminCalificacionesRoute
   '/_authenticated/admin/grupos': typeof AuthenticatedAdminGruposRoute
+  '/_authenticated/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/_authenticated/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/_authenticated/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/_authenticated/practicar/$area': typeof AuthenticatedPracticarAreaRoute
@@ -218,6 +237,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/banco'
     | '/cambiar-password'
+    | '/mensajes'
     | '/practicar'
     | '/progreso'
     | '/simulacro'
@@ -226,6 +246,7 @@ export interface FileRouteTypes {
     | '/admin/branding'
     | '/admin/calificaciones'
     | '/admin/grupos'
+    | '/admin/mensajes'
     | '/admin/presencia'
     | '/admin/roles'
     | '/practicar/$area'
@@ -238,6 +259,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/banco'
     | '/cambiar-password'
+    | '/mensajes'
     | '/practicar'
     | '/progreso'
     | '/simulacro'
@@ -246,6 +268,7 @@ export interface FileRouteTypes {
     | '/admin/branding'
     | '/admin/calificaciones'
     | '/admin/grupos'
+    | '/admin/mensajes'
     | '/admin/presencia'
     | '/admin/roles'
     | '/practicar/$area'
@@ -260,6 +283,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/banco'
     | '/_authenticated/cambiar-password'
+    | '/_authenticated/mensajes'
     | '/_authenticated/practicar'
     | '/_authenticated/progreso'
     | '/_authenticated/simulacro'
@@ -269,6 +293,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/branding'
     | '/_authenticated/admin/calificaciones'
     | '/_authenticated/admin/grupos'
+    | '/_authenticated/admin/mensajes'
     | '/_authenticated/admin/presencia'
     | '/_authenticated/admin/roles'
     | '/_authenticated/practicar/$area'
@@ -342,6 +367,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPracticarRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/mensajes': {
+      id: '/_authenticated/mensajes'
+      path: '/mensajes'
+      fullPath: '/mensajes'
+      preLoaderRoute: typeof AuthenticatedMensajesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/cambiar-password': {
       id: '/_authenticated/cambiar-password'
       path: '/cambiar-password'
@@ -405,6 +437,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPresenciaRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/mensajes': {
+      id: '/_authenticated/admin/mensajes'
+      path: '/mensajes'
+      fullPath: '/admin/mensajes'
+      preLoaderRoute: typeof AuthenticatedAdminMensajesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/grupos': {
       id: '/_authenticated/admin/grupos'
       path: '/grupos'
@@ -440,6 +479,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBrandingRoute: typeof AuthenticatedAdminBrandingRoute
   AuthenticatedAdminCalificacionesRoute: typeof AuthenticatedAdminCalificacionesRoute
   AuthenticatedAdminGruposRoute: typeof AuthenticatedAdminGruposRoute
+  AuthenticatedAdminMensajesRoute: typeof AuthenticatedAdminMensajesRoute
   AuthenticatedAdminPresenciaRoute: typeof AuthenticatedAdminPresenciaRoute
   AuthenticatedAdminRolesRoute: typeof AuthenticatedAdminRolesRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
@@ -452,6 +492,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminCalificacionesRoute:
       AuthenticatedAdminCalificacionesRoute,
     AuthenticatedAdminGruposRoute: AuthenticatedAdminGruposRoute,
+    AuthenticatedAdminMensajesRoute: AuthenticatedAdminMensajesRoute,
     AuthenticatedAdminPresenciaRoute: AuthenticatedAdminPresenciaRoute,
     AuthenticatedAdminRolesRoute: AuthenticatedAdminRolesRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
@@ -494,6 +535,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
   AuthenticatedBancoRoute: typeof AuthenticatedBancoRoute
   AuthenticatedCambiarPasswordRoute: typeof AuthenticatedCambiarPasswordRoute
+  AuthenticatedMensajesRoute: typeof AuthenticatedMensajesRoute
   AuthenticatedPracticarRoute: typeof AuthenticatedPracticarRouteWithChildren
   AuthenticatedProgresoRoute: typeof AuthenticatedProgresoRoute
   AuthenticatedSimulacroRoute: typeof AuthenticatedSimulacroRoute
@@ -505,6 +547,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
   AuthenticatedBancoRoute: AuthenticatedBancoRoute,
   AuthenticatedCambiarPasswordRoute: AuthenticatedCambiarPasswordRoute,
+  AuthenticatedMensajesRoute: AuthenticatedMensajesRoute,
   AuthenticatedPracticarRoute: AuthenticatedPracticarRouteWithChildren,
   AuthenticatedProgresoRoute: AuthenticatedProgresoRoute,
   AuthenticatedSimulacroRoute: AuthenticatedSimulacroRoute,
@@ -523,13 +566,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

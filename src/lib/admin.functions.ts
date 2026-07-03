@@ -495,3 +495,16 @@ export const actualizarBrandingFn = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+
+export const listarEstudiantesGrupoFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ grupoId: z.string().uuid() }).parse(d))
+  .handler(async ({ data, context }) => {
+    await ensureStaff(context);
+    const { data: rows, error } = await context.supabase
+      .from("grupo_estudiantes")
+      .select("user_id")
+      .eq("grupo_id", data.grupoId);
+    if (error) throw new Error(error.message);
+    return (rows ?? []).map((r: any) => r.user_id as string);
+  });

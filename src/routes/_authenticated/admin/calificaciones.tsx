@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { calificacionesEstudiantesFn } from "@/lib/presencia.functions";
-import { Download, FileSpreadsheet, FileText } from "lucide-react";
+import { listarGruposFn, listarEstudiantesGrupoFn } from "@/lib/admin.functions";
+import { Download, FileSpreadsheet, FileText, Users } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/calificaciones")({
@@ -82,14 +84,48 @@ async function exportarPdf(filas: Fila[]) {
 }
 
 function CalificacionesPage() {
+  const [grupoId, setGrupoId] = useState<string>("");
   const q = useQuery({
     queryKey: ["calificaciones"],
     queryFn: () => calificacionesEstudiantesFn() as Promise<Fila[]>,
   });
-  const filas = q.data ?? [];
+  const grpQ = useQuery({ queryKey: ["admin", "grupos"], queryFn: () => listarGruposFn() });
+  const miembrosQ = useQuery({
+    queryKey: ["admin", "grupo-miembros", grupoId],
+    queryFn: () => listarEstudiantesGrupoFn({ data: { grupoId } }) as Promise<string[]>,
+    enabled: !!grupoId,
+  });
+  const todas = q.data ?? [];
+  const filas = useMemo(() => {
+    if (!grupoId) return todas;
+    const set = new Set(miembrosQ.data ?? []);
+    return todas.filter((f) => set.has(f.id));
+  }, [todas, grupoId, miembrosQ.data]);
+  const prom = filas.length ? filas.reduce((a, f) => a + f.nota, 0) / filas.length : 0;
+
+
 
   return (
     <div>
+      <div className="mb-3 flex flex-wrap items-center gap-3 rounded-2xl border bg-card p-3 shadow-soft">
+        <label className="inline-flex items-center gap-2 text-sm font-semibold"><Users className="h-4 w-4" /> Grupo</label>
+        <select
+          value={grupoId}
+          onChange={(e) => setGrupoId(e.target.value)}
+          className="rounded-lg border bg-background px-2 py-1.5 text-sm"
+        >
+          <option value="">Todos los estudiantes</option>
+          {((grpQ.data ?? []) as any[]).map((g) => (
+            <option key={g.id} value={g.id}>{g.nombre} ({g.total})</option>
+          ))}
+        </select>
+        <div className="ml-auto text-sm">
+          <span className="text-muted-foreground">Promedio del grupo:</span>{" "}
+          <span className={`font-bold ${notaColor(prom)}`}>{prom.toFixed(2)} / 10</span>
+          <span className="ml-2 text-xs text-muted-foreground">({filas.length} estudiantes)</span>
+        </div>
+      </div>
+
       <div className="mb-4 rounded-2xl border bg-gradient-to-br from-primary/5 to-accent/5 p-4 shadow-soft">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="text-sm text-muted-foreground">

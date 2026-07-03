@@ -1,0 +1,163 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { ChatShell } from "@/components/chat/ChatShell";
+import { enviarMensajeMasivoFn } from "@/lib/mensajes.functions";
+import { listarEstudiantesFn, listarGruposFn } from "@/lib/admin.functions";
+import { Megaphone, Loader2, Send, X, Users } from "lucide-react";
+import { toast } from "sonner";
+
+export const Route = createFileRoute("/_authenticated/admin/mensajes")({
+  component: AdminMensajesPage,
+});
+
+type Tab = "mis" | "todos";
+
+function AdminMensajesPage() {
+  const ctx = Route.useRouteContext() as { esAdmin: boolean; esDocente: boolean };
+  const parentCtx = (Route as any).useRouteContext() as { user: { id: string } };
+  const [tab, setTab] = useState<Tab>("mis");
+  const [masivoOpen, setMasivoOpen] = useState(false);
+  const scope = tab === "todos" && ctx.esAdmin ? "all" : "mine";
+  return (
+    <div>
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex gap-1 rounded-full border bg-card p-1">
+          <button
+            onClick={() => setTab("mis")}
+            className={`rounded-full px-3 py-1.5 text-sm font-semibold ${tab === "mis" ? "bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white shadow-soft" : "text-muted-foreground"}`}
+          >
+            Mis chats
+          </button>
+          {ctx.esAdmin && (
+            <button
+              onClick={() => setTab("todos")}
+              className={`rounded-full px-3 py-1.5 text-sm font-semibold ${tab === "todos" ? "bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white shadow-soft" : "text-muted-foreground"}`}
+            >
+              Todos
+            </button>
+          )}
+        </div>
+        <button
+          onClick={() => setMasivoOpen(true)}
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-rose-500 px-4 py-2 text-sm font-bold text-white shadow-soft transition hover:scale-[1.02]"
+        >
+          <Megaphone className="h-4 w-4" /> Mensaje masivo
+        </button>
+      </div>
+      <ChatShell currentUserId={parentCtx.user.id} scope={scope} esAdmin={ctx.esAdmin} />
+      {masivoOpen && <MasivoDialog onClose={() => setMasivoOpen(false)} />}
+    </div>
+  );
+}
+
+function MasivoDialog({ onClose }: { onClose: () => void }) {
+  const [contenido, setContenido] = useState("");
+  const [seleccionadosUsr, setSelU] = useState<Set<string>>(new Set());
+  const [seleccionadosGrp, setSelG] = useState<Set<string>>(new Set());
+  const [busq, setBusq] = useState("");
+
+  const estQ = useQuery({ queryKey: ["admin", "estudiantes"], queryFn: () => listarEstudiantesFn() });
+  const grpQ = useQuery({ queryKey: ["admin", "grupos"], queryFn: () => listarGruposFn() });
+
+  const estudiantes = useMemo(() => {
+    const t = busq.trim().toLowerCase();
+    const lista = (estQ.data ?? []) as any[];
+    if (!t) return lista;
+    return lista.filter((e) => e.nombres.toLowerCase().includes(t) || e.cedula.includes(t));
+  }, [estQ.data, busq]);
+
+  const enviar = useMutation({
+    mutationFn: () =>
+      enviarMensajeMasivoFn({
+        data: {
+          contenido,
+          userIds: Array.from(seleccionadosUsr),
+          grupoIds: Array.from(seleccionadosGrp),
+        },
+      }),
+    onSuccess: (r: any) => {
+      toast.success(`Enviado a ${r.enviados} usuarios.`);
+      onClose();
+    },
+    onError: (e: any) => toast.error(e.message ?? "Error"),
+  });
+
+  function toggle(set: Set<string>, id: string, setter: (s: Set<string>) => void) {
+    const n = new Set(set);
+    if (n.has(id)) n.delete(id);
+    else n.add(id);
+    setter(n);
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 grid place-items-center bg-black/50 p-4 backdrop-blur">
+      <div className="flex w-full max-w-2xl flex-col overflow-hidden rounded-2xl border bg-card shadow-strong">
+        <div className="flex items-center justify-between border-b bg-gradient-to-r from-amber-400/10 to-rose-500/10 px-4 py-3">
+          <h2 className="inline-flex items-center gap-2 font-extrabold"><Megaphone className="h-5 w-5 text-rose-500" /> Mensaje masivo</h2>
+          <button onClick={onClose} className="grid h-8 w-8 place-items-center rounded-full hover:bg-secondary"><X className="h-4 w-4" /></button>
+        </div>
+        <div className="grid gap-4 p-4 md:grid-cols-2">
+          <div>
+            <label className="text-xs font-semibold uppercase text-muted-foreground">Grupos</label>
+            <div className="mt-1 max-h-40 overflow-y-auto rounded-xl border p-2">
+              {(grpQ.data ?? []).length === 0 && <p className="p-2 text-xs text-muted-foreground">Sin grupos.</p>}
+              {((grpQ.data ?? []) as any[]).map((g) => (
+                <label key={g.id} className="flex cursor-pointer items-center gap-2 rounded p-1.5 text-sm hover:bg-secondary">
+                  <input
+                    type="checkbox"
+                    checked={seleccionadosGrp.has(g.id)}
+                    onChange={() => toggle(seleccionadosGrp, g.id, setSelG)}
+                  />
+                  <Users className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span className="font-medium">{g.nombre}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label className="text-xs font-semibold uppercase text-muted-foreground">Estudiantes</label>
+            <input
+              value={busq}
+              onChange={(e) => setBusq(e.target.value)}
+              placeholder="Buscar…"
+              className="mt-1 w-full rounded-lg border px-2 py-1 text-sm"
+            />
+            <div className="mt-1 max-h-40 overflow-y-auto rounded-xl border p-2">
+              {estudiantes.map((e: any) => (
+                <label key={e.id} className="flex cursor-pointer items-center gap-2 rounded p-1.5 text-sm hover:bg-secondary">
+                  <input
+                    type="checkbox"
+                    checked={seleccionadosUsr.has(e.id)}
+                    onChange={() => toggle(seleccionadosUsr, e.id, setSelU)}
+                  />
+                  <span className="truncate">{e.nombres}</span>
+                  <span className="ml-auto font-mono text-[10px] text-muted-foreground">{e.cedula}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="border-t p-4">
+          <textarea
+            value={contenido}
+            onChange={(e) => setContenido(e.target.value)}
+            rows={3}
+            placeholder="Escribe el mensaje…"
+            className="w-full rounded-xl border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+          />
+          <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
+            <span>{seleccionadosUsr.size} directos · {seleccionadosGrp.size} grupos</span>
+            <button
+              disabled={enviar.isPending || !contenido.trim() || (!seleccionadosUsr.size && !seleccionadosGrp.size)}
+              onClick={() => enviar.mutate()}
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-4 py-2 font-bold text-white shadow-soft disabled:opacity-40"
+            >
+              {enviar.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />} Enviar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
