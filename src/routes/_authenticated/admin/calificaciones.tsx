@@ -84,11 +84,26 @@ async function exportarPdf(filas: Fila[]) {
 }
 
 function CalificacionesPage() {
+  const [grupoId, setGrupoId] = useState<string>("");
   const q = useQuery({
     queryKey: ["calificaciones"],
     queryFn: () => calificacionesEstudiantesFn() as Promise<Fila[]>,
   });
-  const filas = q.data ?? [];
+  const grpQ = useQuery({ queryKey: ["admin", "grupos"], queryFn: () => listarGruposFn() });
+  const miembrosQ = useQuery({
+    queryKey: ["admin", "grupo-miembros", grupoId],
+    queryFn: () => listarEstudiantesGrupoFn({ data: { grupoId } }) as Promise<string[]>,
+    enabled: !!grupoId,
+  });
+  const todas = q.data ?? [];
+  const filas = useMemo(() => {
+    if (!grupoId) return todas;
+    const set = new Set(miembrosQ.data ?? []);
+    return todas.filter((f) => set.has(f.id));
+  }, [todas, grupoId, miembrosQ.data]);
+  const prom = filas.length ? filas.reduce((a, f) => a + f.nota, 0) / filas.length : 0;
+
+
 
   return (
     <div>
