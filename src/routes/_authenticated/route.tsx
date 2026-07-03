@@ -130,3 +130,22 @@ function AuthedLayout() {
     </div>
   );
 }
+
+function MensajesLink() {
+  const q = useMensajesNoLeidos(true);
+  const total = (q.data as any)?.total ?? 0;
+  return (
+    <Link
+      to="/mensajes"
+      className="relative inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-medium hover:bg-secondary"
+    >
+      <MessageCircle className="h-4 w-4" />
+      <span className="hidden sm:inline">Mensajes</span>
+      {total > 0 && (
+        <span className="absolute -right-1 -top-1 grid min-w-5 place-items-center rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-1 text-[10px] font-bold text-white shadow">
+          {total > 99 ? "99+" : total}
+        </span>
+      )}
+    </Link>
+  );
+}
