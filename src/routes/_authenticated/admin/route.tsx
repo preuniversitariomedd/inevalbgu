@@ -31,6 +31,7 @@ function AdminLayout() {
     { to: "/admin/presencia", label: "Presencia", icon: Wifi, show: true },
     { to: "/admin/calificaciones", label: "Calificaciones", icon: FileSpreadsheet, show: true },
     { to: "/admin/grupos", label: "Grupos", icon: Layers, show: true },
+    { to: "/admin/mensajes", label: "Mensajes", icon: Send, show: true },
     { to: "/admin/roles", label: "Roles", icon: Shield, show: ctx.esAdmin },
     { to: "/admin/branding", label: "Branding", icon: ImageIcon, show: ctx.esAdmin },
     { to: "/tutor", label: "Mr. Victor", icon: MessageCircle, show: true },
