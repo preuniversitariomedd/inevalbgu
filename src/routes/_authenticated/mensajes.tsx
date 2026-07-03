@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_authenticated/mensajes")({
 });
 
 function MensajesPage() {
-  const ctx = (Route as any).useRouteContext() as { user: { id: string }; esAdmin: boolean };
+  const ctx = Route.useRouteContext() as { user: { id: string }; esAdmin: boolean };
   return (
     <div className="mx-auto max-w-6xl px-3 py-4 md:px-5">
       <h1 className="mb-3 flex items-center gap-2 text-2xl font-extrabold">
