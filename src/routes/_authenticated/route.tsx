@@ -105,6 +105,7 @@ function AuthedLayout() {
             <span className="hidden sm:inline">{branding?.titulo || "INEVAL_UEDE"}</span>
           </Link>
           <div className="flex items-center gap-2 text-sm">
+            <MensajesLink />
             {ctx.esStaff && (
               <Link
                 to="/admin"
