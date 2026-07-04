@@ -29,7 +29,6 @@ import {
   Check,
   CheckCheck,
   Trash2,
-  MoreVertical,
 } from "lucide-react";
 import { toast } from "sonner";
 
