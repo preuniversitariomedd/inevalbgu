@@ -30,7 +30,7 @@ function VistaEstudiante() {
   if (isLoading) return <div className="p-10 text-center text-muted-foreground">Cargando…</div>;
   if (error || !data) return <div className="p-10 text-center text-destructive">{(error as Error)?.message ?? "Error"}</div>;
 
-  const { profile, respuestas, sesiones } = data;
+  const { profile, respuestas, sesiones, grupos } = data as any;
   const edad = calcularEdad(profile.fecha_nacimiento);
   const total = respuestas.length;
   const aciertos = respuestas.filter((r: any) => r.correcta).length;
