@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ChatShell } from "@/components/chat/ChatShell";
-import { enviarMensajeMasivoFn } from "@/lib/mensajes.functions";
+import { enviarMensajeMasivoFn, enviarMensajeMasivoRolFn } from "@/lib/mensajes.functions";
 import { listarEstudiantesFn, listarGruposFn } from "@/lib/admin.functions";
 import { Megaphone, Loader2, Send, X, Users } from "lucide-react";
 import { toast } from "sonner";
