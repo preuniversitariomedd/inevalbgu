@@ -46,8 +46,9 @@ type Conversacion = {
   ultimo_mensaje_preview: string | null;
   no_leidos: number;
   soy_participante: boolean;
-  otro: { id: string; nombres: string; cedula: string } | null;
-  participantes: { id: string; nombres: string; cedula: string }[];
+  otro_ultima_lectura_at: string | null;
+  otro: { id: string; nombres: string; cedula: string; avatar_url?: string | null } | null;
+  participantes: { id: string; nombres: string; cedula: string; avatar_url?: string | null }[];
 };
 
 type Mensaje = {
@@ -58,6 +59,7 @@ type Mensaje = {
   attachment_tipo: string | null;
   attachment_url?: string | null;
   es_admin_intervencion: boolean;
+  leido_por_otro?: boolean;
   created_at: string;
 };
 
