@@ -10,6 +10,8 @@ import {
   listarUsuariosChatFn,
   marcarLeidoFn,
   presenciaUsuarioFn,
+  borrarConversacionFn,
+  borrarMensajeFn,
 } from "@/lib/mensajes.functions";
 import {
   ArrowLeft,
@@ -24,6 +26,10 @@ import {
   Monitor,
   Smartphone,
   Tablet,
+  Check,
+  CheckCheck,
+  Trash2,
+  MoreVertical,
 } from "lucide-react";
 import { toast } from "sonner";
 
