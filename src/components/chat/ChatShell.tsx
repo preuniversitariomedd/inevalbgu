@@ -412,7 +412,25 @@ function ChatPanel({
           {(msgsQ.data ?? []).map((m) => {
             const mine = m.sender_id === currentUserId;
             return (
-              <li key={m.id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>
+              <li key={m.id} className={`group/msg flex items-end gap-1 ${mine ? "justify-end" : "justify-start"}`}>
+                {esAdmin && mine && (
+                  <button
+                    onClick={async () => {
+                      if (!confirm("¿Borrar este mensaje?")) return;
+                      try {
+                        await borrarMensajeFn({ data: { id: m.id } });
+                        qc.invalidateQueries({ queryKey: ["mensajes", "msgs", conv.id] });
+                        qc.invalidateQueries({ queryKey: ["mensajes", "convs"] });
+                      } catch (e: any) {
+                        toast.error(e.message ?? "Error");
+                      }
+                    }}
+                    title="Borrar mensaje"
+                    className="grid h-6 w-6 place-items-center rounded-full text-rose-500 opacity-0 transition hover:bg-rose-500 hover:text-white group-hover/msg:opacity-100"
+                  >
+                    <Trash2 className="h-3 w-3" />
+                  </button>
+                )}
                 <div
                   className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm shadow-soft ${
                     mine
@@ -433,8 +451,15 @@ function ChatPanel({
                     />
                   )}
                   {m.contenido && <p className="whitespace-pre-wrap break-words">{m.contenido}</p>}
-                  <div className={`mt-0.5 text-right text-[10px] ${mine ? "text-white/80" : "text-slate-500"}`}>
-                    {new Date(m.created_at).toLocaleTimeString("es-EC", { hour: "2-digit", minute: "2-digit" })}
+                  <div className={`mt-0.5 flex items-center justify-end gap-1 text-[10px] ${mine ? "text-white/80" : "text-slate-500"}`}>
+                    <span>{new Date(m.created_at).toLocaleTimeString("es-EC", { hour: "2-digit", minute: "2-digit" })}</span>
+                    {mine && (
+                      m.leido_por_otro ? (
+                        <CheckCheck className="h-3.5 w-3.5 text-cyan-200" aria-label="Leído" />
+                      ) : (
+                        <Check className="h-3.5 w-3.5" aria-label="Entregado" />
+                      )
+                    )}
                   </div>
                 </div>
               </li>
