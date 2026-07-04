@@ -172,9 +172,9 @@ function MasivoDialog({ onClose }: { onClose: () => void }) {
             className="w-full rounded-xl border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
           />
           <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
-            <span>{seleccionadosUsr.size} directos · {seleccionadosGrp.size} grupos</span>
+            <span>{audiencia ? `Audiencia: ${audiencia}` : `${seleccionadosUsr.size} directos · ${seleccionadosGrp.size} grupos`}</span>
             <button
-              disabled={enviar.isPending || !contenido.trim() || (!seleccionadosUsr.size && !seleccionadosGrp.size)}
+              disabled={enviar.isPending || !contenido.trim() || (!audiencia && !seleccionadosUsr.size && !seleccionadosGrp.size)}
               onClick={() => enviar.mutate()}
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-4 py-2 font-bold text-white shadow-soft disabled:opacity-40"
             >
