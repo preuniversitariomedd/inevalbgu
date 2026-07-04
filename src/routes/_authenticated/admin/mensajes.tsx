@@ -55,6 +55,7 @@ function MasivoDialog({ onClose }: { onClose: () => void }) {
   const [contenido, setContenido] = useState("");
   const [seleccionadosUsr, setSelU] = useState<Set<string>>(new Set());
   const [seleccionadosGrp, setSelG] = useState<Set<string>>(new Set());
+  const [audiencia, setAudiencia] = useState<"" | "todos" | "estudiantes" | "docentes" | "administradores">("");
   const [busq, setBusq] = useState("");
 
   const estQ = useQuery({ queryKey: ["admin", "estudiantes"], queryFn: () => listarEstudiantesFn() });
@@ -68,14 +69,18 @@ function MasivoDialog({ onClose }: { onClose: () => void }) {
   }, [estQ.data, busq]);
 
   const enviar = useMutation({
-    mutationFn: () =>
-      enviarMensajeMasivoFn({
+    mutationFn: () => {
+      if (audiencia) {
+        return enviarMensajeMasivoRolFn({ data: { contenido, audiencia } });
+      }
+      return enviarMensajeMasivoFn({
         data: {
           contenido,
           userIds: Array.from(seleccionadosUsr),
           grupoIds: Array.from(seleccionadosGrp),
         },
-      }),
+      });
+    },
     onSuccess: (r: any) => {
       toast.success(`Enviado a ${r.enviados} usuarios.`);
       onClose();
