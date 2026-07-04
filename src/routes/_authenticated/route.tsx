@@ -151,3 +151,48 @@ function MensajesLink() {
     </Link>
   );
 }
+
+function AvatarSelector() {
+  const qc = useQueryClient();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const q = useQuery({ queryKey: ["mi-avatar"], queryFn: () => miAvatarUrlFn(), staleTime: 60_000 });
+  const url = (q.data as any)?.url as string | null | undefined;
+  async function onPick(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    if (!/image\/(png|jpe?g|webp)/i.test(f.type)) return toast.error("Solo jpg, png o webp.");
+    if (f.size > 3 * 1024 * 1024) return toast.error("Máximo 3 MB.");
+    const b64 = await new Promise<string>((res, rej) => {
+      const r = new FileReader();
+      r.onload = () => res(r.result as string);
+      r.onerror = rej;
+      r.readAsDataURL(f);
+    });
+    try {
+      await subirAvatarFn({ data: { base64: b64, mime: f.type } });
+      toast.success("Foto actualizada.");
+      qc.invalidateQueries({ queryKey: ["mi-avatar"] });
+      qc.invalidateQueries({ queryKey: ["mensajes", "convs"] });
+    } catch (err: any) {
+      toast.error(err.message ?? "Error al subir.");
+    } finally {
+      if (inputRef.current) inputRef.current.value = "";
+    }
+  }
+  return (
+    <>
+      <button
+        onClick={() => inputRef.current?.click()}
+        title="Cambiar mi foto"
+        className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full bg-gradient-to-br from-fuchsia-400 to-cyan-400 text-white shadow-soft ring-2 ring-primary/20 transition hover:scale-105"
+      >
+        {url ? (
+          <img src={url} alt="Mi foto" className="h-full w-full object-cover" />
+        ) : (
+          <Camera className="h-4 w-4" />
+        )}
+      </button>
+      <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={onPick} />
+    </>
+  );
+}
