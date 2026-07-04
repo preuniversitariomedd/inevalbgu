@@ -565,6 +565,5 @@ export const enviarMensajeMasivoRolFn = createServerFn({ method: "POST" })
     }
     ids = ids.filter((id) => id !== context.userId);
     if (!ids.length) throw new Error("No hay destinatarios.");
-    // Reutiliza la lógica del masivo
-    return await enviarMensajeMasivoFn({ data: { contenido: data.contenido, userIds: ids, grupoIds: [] } });
+    return await masivoCore(supabaseAdmin, context.userId, data.contenido, ids, []);
   });
