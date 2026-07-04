@@ -437,3 +437,126 @@ export const presenciaUsuarioFn = createServerFn({ method: "POST" })
       iniciada_en: s.iniciada_en,
     };
   });
+
+// -------- Borrar mensaje (admin) --------
+export const borrarMensajeFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ data, context }) => {
+    if (!(await esAdmin(context))) throw new Error("Solo administradores.");
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    // Borra adjunto si existe
+    const { data: m } = await supabaseAdmin
+      .from("mensajes")
+      .select("attachment_path")
+      .eq("id", data.id)
+      .maybeSingle();
+    if (m?.attachment_path) {
+      await supabaseAdmin.storage.from("chat-attachments").remove([m.attachment_path]).catch(() => {});
+    }
+    const { error } = await supabaseAdmin.from("mensajes").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+// -------- Borrar conversación completa (admin) --------
+export const borrarConversacionFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ data, context }) => {
+    if (!(await esAdmin(context))) throw new Error("Solo administradores.");
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    // Borrar adjuntos
+    const { data: msgs } = await supabaseAdmin
+      .from("mensajes")
+      .select("attachment_path")
+      .eq("conversacion_id", data.id);
+    const paths = (msgs ?? []).map((m: any) => m.attachment_path).filter(Boolean);
+    if (paths.length) {
+      await supabaseAdmin.storage.from("chat-attachments").remove(paths).catch(() => {});
+    }
+    await supabaseAdmin.from("mensajes").delete().eq("conversacion_id", data.id);
+    await supabaseAdmin.from("conversacion_participantes").delete().eq("conversacion_id", data.id);
+    const { error } = await supabaseAdmin.from("conversaciones").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+// -------- Subir avatar (usuario o admin sobre otro) --------
+const avatarSchema = z.object({
+  userId: z.string().uuid().optional(),
+  base64: z.string().min(20).max(8_000_000),
+  mime: z.string().max(80),
+});
+export const subirAvatarFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => avatarSchema.parse(d))
+  .handler(async ({ data, context }) => {
+    const target = data.userId ?? context.userId;
+    if (target !== context.userId && !(await esAdmin(context))) {
+      throw new Error("No autorizado.");
+    }
+    if (!/^image\/(png|jpe?g|webp)$/i.test(data.mime)) {
+      throw new Error("Solo imágenes jpg, png o webp.");
+    }
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const ext = data.mime.split("/")[1].replace("jpeg", "jpg");
+    const b64 = data.base64.replace(/^data:[^;]+;base64,/, "");
+    const buf = Buffer.from(b64, "base64");
+    if (buf.length > 3 * 1024 * 1024) throw new Error("La imagen debe pesar menos de 3 MB.");
+    const path = `${target}/avatar.${ext}`;
+    const { error: ue } = await supabaseAdmin.storage
+      .from("avatars")
+      .upload(path, buf, { contentType: data.mime, upsert: true });
+    if (ue) throw new Error(ue.message);
+    const { error: pe } = await supabaseAdmin
+      .from("profiles")
+      .update({ avatar_url: path })
+      .eq("id", target);
+    if (pe) throw new Error(pe.message);
+    const { data: signed } = await supabaseAdmin.storage
+      .from("avatars")
+      .createSignedUrl(path, 60 * 60);
+    return { ok: true, url: signed?.signedUrl ?? null };
+  });
+
+// -------- URL firmada del avatar propio (para mostrar en la nav) --------
+export const miAvatarUrlFn = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: p } = await supabaseAdmin
+      .from("profiles")
+      .select("avatar_url")
+      .eq("id", context.userId)
+      .maybeSingle();
+    if (!p?.avatar_url) return { url: null };
+    const { data: signed } = await supabaseAdmin.storage
+      .from("avatars")
+      .createSignedUrl(p.avatar_url, 60 * 60);
+    return { url: signed?.signedUrl ?? null };
+  });
+
+// -------- Masivo por rol (staff): "all" | "estudiantes" | "docentes" | "administradores" --------
+const masivoRolSchema = z.object({
+  contenido: z.string().min(1).max(4000),
+  audiencia: z.enum(["todos", "estudiantes", "docentes", "administradores"]),
+});
+export const enviarMensajeMasivoRolFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => masivoRolSchema.parse(d))
+  .handler(async ({ data, context }) => {
+    if (!(await esStaff(context))) throw new Error("Solo docentes o administradores.");
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: roles } = await supabaseAdmin.from("user_roles").select("user_id, role");
+    let ids: string[];
+    if (data.audiencia === "todos") ids = Array.from(new Set((roles ?? []).map((r: any) => r.user_id)));
+    else {
+      const rol = data.audiencia === "estudiantes" ? "estudiante" : data.audiencia === "docentes" ? "docente" : "administrador";
+      ids = Array.from(new Set((roles ?? []).filter((r: any) => r.role === rol).map((r: any) => r.user_id)));
+    }
+    ids = ids.filter((id) => id !== context.userId);
+    if (!ids.length) throw new Error("No hay destinatarios.");
+    // Reutiliza la lógica del masivo
+    return await enviarMensajeMasivoFn({ data: { contenido: data.contenido, userIds: ids, grupoIds: [] } });
+  });
