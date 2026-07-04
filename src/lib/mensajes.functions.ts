@@ -212,14 +212,26 @@ export const listarMensajesFn = createServerFn({ method: "POST" })
       .limit(500);
     if (error) throw new Error(error.message);
 
+    // Última lectura del OTRO participante (para indicador ✓✓)
+    const { data: parts } = await supabaseAdmin
+      .from("conversacion_participantes")
+      .select("user_id, ultima_lectura_at")
+      .eq("conversacion_id", data.conversacionId);
+    const otro = (parts ?? []).find((p: any) => p.user_id !== context.userId);
+    const otroLeidoAt = otro?.ultima_lectura_at ?? null;
+
     // Firmar URLs de adjuntos
     const withUrl = await Promise.all(
       (msgs ?? []).map(async (m: any) => {
-        if (!m.attachment_path) return m;
-        const { data: signed } = await supabaseAdmin.storage
-          .from("chat-attachments")
-          .createSignedUrl(m.attachment_path, 60 * 60);
-        return { ...m, attachment_url: signed?.signedUrl ?? null };
+        let attachment_url: string | null = null;
+        if (m.attachment_path) {
+          const { data: signed } = await supabaseAdmin.storage
+            .from("chat-attachments")
+            .createSignedUrl(m.attachment_path, 60 * 60);
+          attachment_url = signed?.signedUrl ?? null;
+        }
+        const leido = otroLeidoAt && new Date(m.created_at).getTime() <= new Date(otroLeidoAt).getTime();
+        return { ...m, attachment_url, leido_por_otro: !!leido };
       }),
     );
     return withUrl;
