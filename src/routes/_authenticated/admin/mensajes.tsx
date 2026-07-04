@@ -102,7 +102,27 @@ function MasivoDialog({ onClose }: { onClose: () => void }) {
           <h2 className="inline-flex items-center gap-2 font-extrabold"><Megaphone className="h-5 w-5 text-rose-500" /> Mensaje masivo</h2>
           <button onClick={onClose} className="grid h-8 w-8 place-items-center rounded-full hover:bg-secondary"><X className="h-4 w-4" /></button>
         </div>
-        <div className="grid gap-4 p-4 md:grid-cols-2">
+        <div className="border-b bg-secondary/30 px-4 py-3">
+          <label className="text-xs font-semibold uppercase text-muted-foreground">Audiencia rápida</label>
+          <div className="mt-1 flex flex-wrap gap-1.5">
+            {([
+              ["", "Selección manual"],
+              ["todos", "Todos"],
+              ["estudiantes", "Todos los estudiantes"],
+              ["docentes", "Todos los docentes"],
+              ["administradores", "Todos los administradores"],
+            ] as const).map(([v, l]) => (
+              <button
+                key={v}
+                onClick={() => setAudiencia(v as any)}
+                className={`rounded-full px-3 py-1 text-xs font-semibold transition ${audiencia === v ? "bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white shadow-soft" : "border bg-background hover:bg-secondary"}`}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className={`grid gap-4 p-4 md:grid-cols-2 ${audiencia ? "pointer-events-none opacity-40" : ""}`}>
           <div>
             <label className="text-xs font-semibold uppercase text-muted-foreground">Grupos</label>
             <div className="mt-1 max-h-40 overflow-y-auto rounded-xl border p-2">
