@@ -340,73 +340,81 @@ const masivoSchema = z.object({
   userIds: z.array(z.string().uuid()).optional().default([]),
   grupoIds: z.array(z.string().uuid()).optional().default([]),
 });
+
+async function masivoCore(
+  supabaseAdmin: any,
+  senderId: string,
+  contenido: string,
+  userIds: string[],
+  grupoIds: string[],
+) {
+  const dest = new Set<string>(userIds);
+  if (grupoIds.length) {
+    const { data: rows } = await supabaseAdmin
+      .from("grupo_estudiantes")
+      .select("user_id")
+      .in("grupo_id", grupoIds);
+    (rows ?? []).forEach((r: any) => dest.add(r.user_id));
+  }
+  dest.delete(senderId);
+  if (!dest.size) throw new Error("No hay destinatarios.");
+
+  const { data: activos } = await supabaseAdmin
+    .from("profiles")
+    .select("id")
+    .in("id", Array.from(dest))
+    .eq("bloqueado", false);
+  const finales = (activos ?? []).map((a: any) => a.id as string);
+  if (!finales.length) throw new Error("Sin destinatarios activos.");
+
+  const { data: mias } = await supabaseAdmin
+    .from("conversacion_participantes")
+    .select("conversacion_id")
+    .eq("user_id", senderId);
+  const misIds = (mias ?? []).map((m: any) => m.conversacion_id);
+  const mapaConv = new Map<string, string>();
+  if (misIds.length) {
+    const { data: co } = await supabaseAdmin
+      .from("conversacion_participantes")
+      .select("conversacion_id, user_id")
+      .in("conversacion_id", misIds)
+      .in("user_id", finales);
+    (co ?? []).forEach((r: any) => mapaConv.set(r.user_id, r.conversacion_id));
+  }
+
+  let enviados = 0;
+  for (const uid of finales) {
+    let convId = mapaConv.get(uid);
+    if (!convId) {
+      const { data: c } = await supabaseAdmin
+        .from("conversaciones")
+        .insert({ created_by: senderId })
+        .select("id")
+        .single();
+      if (!c) continue;
+      convId = c.id as string;
+      await supabaseAdmin.from("conversacion_participantes").insert([
+        { conversacion_id: convId, user_id: senderId },
+        { conversacion_id: convId, user_id: uid },
+      ]);
+    }
+    await supabaseAdmin.from("mensajes").insert({
+      conversacion_id: convId,
+      sender_id: senderId,
+      contenido,
+    });
+    enviados++;
+  }
+  return { ok: true, enviados };
+}
+
 export const enviarMensajeMasivoFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => masivoSchema.parse(d))
   .handler(async ({ data, context }) => {
     if (!(await esStaff(context))) throw new Error("Solo docentes o administradores.");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-
-    const dest = new Set<string>(data.userIds);
-    if (data.grupoIds.length) {
-      const { data: rows } = await supabaseAdmin
-        .from("grupo_estudiantes")
-        .select("user_id")
-        .in("grupo_id", data.grupoIds);
-      (rows ?? []).forEach((r: any) => dest.add(r.user_id));
-    }
-    dest.delete(context.userId);
-    if (!dest.size) throw new Error("No hay destinatarios.");
-
-    // Filtra bloqueados
-    const { data: activos } = await supabaseAdmin
-      .from("profiles")
-      .select("id")
-      .in("id", Array.from(dest))
-      .eq("bloqueado", false);
-    const finales = (activos ?? []).map((a: any) => a.id as string);
-    if (!finales.length) throw new Error("Sin destinatarios activos.");
-
-    // Traer conversaciones existentes
-    const { data: mias } = await supabaseAdmin
-      .from("conversacion_participantes")
-      .select("conversacion_id")
-      .eq("user_id", context.userId);
-    const misIds = (mias ?? []).map((m) => m.conversacion_id);
-    let mapaConv = new Map<string, string>(); // otherUserId -> convId
-    if (misIds.length) {
-      const { data: co } = await supabaseAdmin
-        .from("conversacion_participantes")
-        .select("conversacion_id, user_id")
-        .in("conversacion_id", misIds)
-        .in("user_id", finales);
-      (co ?? []).forEach((r: any) => mapaConv.set(r.user_id, r.conversacion_id));
-    }
-
-    let enviados = 0;
-    for (const uid of finales) {
-      let convId = mapaConv.get(uid);
-      if (!convId) {
-        const { data: c } = await supabaseAdmin
-          .from("conversaciones")
-          .insert({ created_by: context.userId })
-          .select("id")
-          .single();
-        if (!c) continue;
-        convId = c.id as string;
-        await supabaseAdmin.from("conversacion_participantes").insert([
-          { conversacion_id: convId, user_id: context.userId },
-          { conversacion_id: convId, user_id: uid },
-        ]);
-      }
-      await supabaseAdmin.from("mensajes").insert({
-        conversacion_id: convId,
-        sender_id: context.userId,
-        contenido: data.contenido,
-      });
-      enviados++;
-    }
-    return { ok: true, enviados };
+    return await masivoCore(supabaseAdmin, context.userId, data.contenido, data.userIds, data.grupoIds);
   });
 
 // -------- Presencia de otro usuario (para badge verde admin) --------
