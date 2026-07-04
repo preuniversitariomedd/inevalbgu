@@ -82,7 +82,7 @@ export function ChatShell({
     refetchInterval: 30_000,
   });
 
-  // Realtime: cualquier mensaje nuevo → refetch lista y (si es la abierta) mensajes
+  // Realtime: cualquier mensaje nuevo o lectura → refetch lista y mensajes
   useEffect(() => {
     const ch = supabase
       .channel("mensajes-live-" + scope)
@@ -95,6 +95,25 @@ export function ChatShell({
           if (selectedId && payload.new?.conversacion_id === selectedId) {
             qc.invalidateQueries({ queryKey: ["mensajes", "msgs", selectedId] });
           }
+        },
+      )
+      .on(
+        "postgres_changes",
+        { event: "DELETE", schema: "public", table: "mensajes" },
+        () => {
+          qc.invalidateQueries({ queryKey: ["mensajes", "convs"] });
+          if (selectedId) qc.invalidateQueries({ queryKey: ["mensajes", "msgs", selectedId] });
+        },
+      )
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "conversacion_participantes" },
+        (payload: any) => {
+          // Se actualiza ultima_lectura_at → refrescar indicadores
+          if (selectedId && payload.new?.conversacion_id === selectedId) {
+            qc.invalidateQueries({ queryKey: ["mensajes", "msgs", selectedId] });
+          }
+          qc.invalidateQueries({ queryKey: ["mensajes", "convs"] });
         },
       )
       .subscribe();
