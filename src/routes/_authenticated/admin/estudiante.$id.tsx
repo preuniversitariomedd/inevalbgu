@@ -30,7 +30,7 @@ function VistaEstudiante() {
   if (isLoading) return <div className="p-10 text-center text-muted-foreground">Cargando…</div>;
   if (error || !data) return <div className="p-10 text-center text-destructive">{(error as Error)?.message ?? "Error"}</div>;
 
-  const { profile, respuestas, sesiones } = data;
+  const { profile, respuestas, sesiones, grupos } = data as any;
   const edad = calcularEdad(profile.fecha_nacimiento);
   const total = respuestas.length;
   const aciertos = respuestas.filter((r: any) => r.correcta).length;
@@ -65,6 +65,10 @@ function VistaEstudiante() {
           <div className="flex flex-wrap gap-1.5">
             {profile.bloqueado ? <Badge variant="destructive">Bloqueado</Badge> : <Badge variant="secondary">Activo</Badge>}
             {profile.primera_vez && <Badge variant="outline">Pwd temporal</Badge>}
+            {(grupos ?? []).map((g: any) => (
+              <Badge key={g.id} className="bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white">{g.nombre}</Badge>
+            ))}
+            {(!grupos || grupos.length === 0) && <Badge variant="outline">Sin grupo</Badge>}
           </div>
         </div>
 

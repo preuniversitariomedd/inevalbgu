@@ -286,10 +286,25 @@ export const obtenerProgresoAlumnoFn = createServerFn({ method: "POST" })
       .eq("user_id", data.userId)
       .order("iniciada_en", { ascending: false })
       .limit(500);
+    // Grupos a los que pertenece
+    const { data: vinc } = await context.supabase
+      .from("grupo_estudiantes")
+      .select("grupo_id")
+      .eq("user_id", data.userId);
+    const gids = (vinc ?? []).map((v: any) => v.grupo_id);
+    let grupos: { id: string; nombre: string }[] = [];
+    if (gids.length) {
+      const { data: gs } = await context.supabase
+        .from("grupos")
+        .select("id, nombre")
+        .in("id", gids);
+      grupos = (gs ?? []) as any;
+    }
     return {
       profile,
       respuestas: respuestas ?? [],
       sesiones: sesiones ?? [],
+      grupos,
     };
   });
 

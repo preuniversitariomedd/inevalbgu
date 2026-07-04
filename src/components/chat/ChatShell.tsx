@@ -10,6 +10,8 @@ import {
   listarUsuariosChatFn,
   marcarLeidoFn,
   presenciaUsuarioFn,
+  borrarConversacionFn,
+  borrarMensajeFn,
 } from "@/lib/mensajes.functions";
 import {
   ArrowLeft,
@@ -24,6 +26,9 @@ import {
   Monitor,
   Smartphone,
   Tablet,
+  Check,
+  CheckCheck,
+  Trash2,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -40,8 +45,9 @@ type Conversacion = {
   ultimo_mensaje_preview: string | null;
   no_leidos: number;
   soy_participante: boolean;
-  otro: { id: string; nombres: string; cedula: string } | null;
-  participantes: { id: string; nombres: string; cedula: string }[];
+  otro_ultima_lectura_at: string | null;
+  otro: { id: string; nombres: string; cedula: string; avatar_url?: string | null } | null;
+  participantes: { id: string; nombres: string; cedula: string; avatar_url?: string | null }[];
 };
 
 type Mensaje = {
@@ -52,6 +58,7 @@ type Mensaje = {
   attachment_tipo: string | null;
   attachment_url?: string | null;
   es_admin_intervencion: boolean;
+  leido_por_otro?: boolean;
   created_at: string;
 };
 
@@ -75,7 +82,7 @@ export function ChatShell({
     refetchInterval: 30_000,
   });
 
-  // Realtime: cualquier mensaje nuevo → refetch lista y (si es la abierta) mensajes
+  // Realtime: cualquier mensaje nuevo o lectura → refetch lista y mensajes
   useEffect(() => {
     const ch = supabase
       .channel("mensajes-live-" + scope)
@@ -88,6 +95,25 @@ export function ChatShell({
           if (selectedId && payload.new?.conversacion_id === selectedId) {
             qc.invalidateQueries({ queryKey: ["mensajes", "msgs", selectedId] });
           }
+        },
+      )
+      .on(
+        "postgres_changes",
+        { event: "DELETE", schema: "public", table: "mensajes" },
+        () => {
+          qc.invalidateQueries({ queryKey: ["mensajes", "convs"] });
+          if (selectedId) qc.invalidateQueries({ queryKey: ["mensajes", "msgs", selectedId] });
+        },
+      )
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "conversacion_participantes" },
+        (payload: any) => {
+          // Se actualiza ultima_lectura_at → refrescar indicadores
+          if (selectedId && payload.new?.conversacion_id === selectedId) {
+            qc.invalidateQueries({ queryKey: ["mensajes", "msgs", selectedId] });
+          }
+          qc.invalidateQueries({ queryKey: ["mensajes", "convs"] });
         },
       )
       .subscribe();
@@ -146,16 +172,21 @@ export function ChatShell({
             </li>
           )}
           {filtradas.map((c) => {
-            const nombre = c.otro?.nombres ?? c.participantes.filter((p) => p.id !== currentUserId).map((p) => p.nombres).join(", ") ?? "Sin nombre";
+            const otroPart = c.otro ?? c.participantes.find((p) => p.id !== currentUserId) ?? null;
+            const nombre = otroPart?.nombres ?? c.participantes.filter((p) => p.id !== currentUserId).map((p) => p.nombres).join(", ") ?? "Sin nombre";
             const activa = selectedId === c.id;
             return (
-              <li key={c.id}>
+              <li key={c.id} className="group/it relative">
                 <button
                   onClick={() => setSelectedId(c.id)}
-                  className={`group flex w-full items-center gap-3 border-b px-3 py-3 text-left transition hover:bg-secondary/40 ${activa ? "bg-gradient-to-r from-fuchsia-500/10 to-cyan-500/10" : ""}`}
+                  className={`flex w-full items-center gap-3 border-b px-3 py-3 text-left transition hover:bg-secondary/40 ${activa ? "bg-gradient-to-r from-fuchsia-500/10 to-cyan-500/10" : ""}`}
                 >
-                  <div className="relative grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gradient-to-br from-fuchsia-400 via-pink-400 to-cyan-400 text-sm font-bold text-white shadow-soft">
-                    {nombre?.[0]?.toUpperCase() ?? "?"}
+                  <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-fuchsia-400 via-pink-400 to-cyan-400 text-sm font-bold text-white shadow-soft">
+                    {otroPart?.avatar_url ? (
+                      <img src={otroPart.avatar_url} alt={nombre} className="h-full w-full object-cover" />
+                    ) : (
+                      <span className="grid h-full w-full place-items-center">{nombre?.[0]?.toUpperCase() ?? "?"}</span>
+                    )}
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
@@ -179,6 +210,26 @@ export function ChatShell({
                     )}
                   </div>
                 </button>
+                {esAdmin && (
+                  <button
+                    onClick={async (e) => {
+                      e.stopPropagation();
+                      if (!confirm(`¿Eliminar la conversación con ${nombre}? Se borrarán todos los mensajes.`)) return;
+                      try {
+                        await borrarConversacionFn({ data: { id: c.id } });
+                        if (selectedId === c.id) setSelectedId(null);
+                        qc.invalidateQueries({ queryKey: ["mensajes", "convs"] });
+                        toast.success("Conversación eliminada.");
+                      } catch (err: any) {
+                        toast.error(err.message ?? "No se pudo borrar.");
+                      }
+                    }}
+                    title="Eliminar conversación"
+                    className="absolute right-2 top-2 hidden h-7 w-7 place-items-center rounded-full bg-background/80 text-rose-500 shadow-soft ring-1 ring-border transition hover:bg-rose-500 hover:text-white group-hover/it:grid"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                )}
               </li>
             );
           })}
@@ -338,8 +389,12 @@ function ChatPanel({
         <button onClick={onBack} className="grid h-9 w-9 place-items-center rounded-full hover:bg-secondary md:hidden">
           <ArrowLeft className="h-4 w-4" />
         </button>
-        <div className="relative grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-fuchsia-400 to-cyan-400 text-white shadow-soft">
-          {otro?.nombres?.[0]?.toUpperCase() ?? "?"}
+        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-fuchsia-400 to-cyan-400 text-white shadow-soft">
+          {(otro as any)?.avatar_url ? (
+            <img src={(otro as any).avatar_url} alt={otro?.nombres ?? ""} className="h-full w-full object-cover" />
+          ) : (
+            <span className="grid h-full w-full place-items-center">{otro?.nombres?.[0]?.toUpperCase() ?? "?"}</span>
+          )}
           {esAdmin && presQ.data?.activo && (
             <span title="En línea" className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-background bg-emerald-500" />
           )}
@@ -375,7 +430,25 @@ function ChatPanel({
           {(msgsQ.data ?? []).map((m) => {
             const mine = m.sender_id === currentUserId;
             return (
-              <li key={m.id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>
+              <li key={m.id} className={`group/msg flex items-end gap-1 ${mine ? "justify-end" : "justify-start"}`}>
+                {esAdmin && mine && (
+                  <button
+                    onClick={async () => {
+                      if (!confirm("¿Borrar este mensaje?")) return;
+                      try {
+                        await borrarMensajeFn({ data: { id: m.id } });
+                        qc.invalidateQueries({ queryKey: ["mensajes", "msgs", conv.id] });
+                        qc.invalidateQueries({ queryKey: ["mensajes", "convs"] });
+                      } catch (e: any) {
+                        toast.error(e.message ?? "Error");
+                      }
+                    }}
+                    title="Borrar mensaje"
+                    className="grid h-6 w-6 place-items-center rounded-full text-rose-500 opacity-0 transition hover:bg-rose-500 hover:text-white group-hover/msg:opacity-100"
+                  >
+                    <Trash2 className="h-3 w-3" />
+                  </button>
+                )}
                 <div
                   className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm shadow-soft ${
                     mine
@@ -396,8 +469,15 @@ function ChatPanel({
                     />
                   )}
                   {m.contenido && <p className="whitespace-pre-wrap break-words">{m.contenido}</p>}
-                  <div className={`mt-0.5 text-right text-[10px] ${mine ? "text-white/80" : "text-slate-500"}`}>
-                    {new Date(m.created_at).toLocaleTimeString("es-EC", { hour: "2-digit", minute: "2-digit" })}
+                  <div className={`mt-0.5 flex items-center justify-end gap-1 text-[10px] ${mine ? "text-white/80" : "text-slate-500"}`}>
+                    <span>{new Date(m.created_at).toLocaleTimeString("es-EC", { hour: "2-digit", minute: "2-digit" })}</span>
+                    {mine && (
+                      m.leido_por_otro ? (
+                        <CheckCheck className="h-3.5 w-3.5 text-cyan-200" aria-label="Leído" />
+                      ) : (
+                        <Check className="h-3.5 w-3.5" aria-label="Entregado" />
+                      )
+                    )}
                   </div>
                 </div>
               </li>

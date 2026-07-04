@@ -92,9 +92,20 @@ export const listarConversacionesFn = createServerFn({ method: "POST" })
     const userIds = Array.from(new Set((allParts ?? []).map((p) => p.user_id)));
     const { data: profs } = await supabaseAdmin
       .from("profiles")
-      .select("id, nombres, cedula")
+      .select("id, nombres, cedula, avatar_url")
       .in("id", userIds);
     const profMap = new Map((profs ?? []).map((p: any) => [p.id, p]));
+
+    // Firmar avatares
+    const avatars = new Map<string, string>();
+    for (const p of profs ?? []) {
+      if ((p as any).avatar_url) {
+        const { data: signed } = await supabaseAdmin.storage
+          .from("avatars")
+          .createSignedUrl((p as any).avatar_url, 60 * 60);
+        if (signed?.signedUrl) avatars.set(p.id, signed.signedUrl);
+      }
+    }
 
     const partsByConv = new Map<string, any[]>();
     (allParts ?? []).forEach((p: any) => {
@@ -107,19 +118,30 @@ export const listarConversacionesFn = createServerFn({ method: "POST" })
       const ps = partsByConv.get(c.id) ?? [];
       const yo = ps.find((p) => p.user_id === context.userId);
       const otro = ps.find((p) => p.user_id !== context.userId) ?? ps[0];
-      const otroProf = otro ? profMap.get(otro.user_id) : null;
+      const otroProf: any = otro ? profMap.get(otro.user_id) : null;
       return {
         id: c.id,
         ultimo_mensaje_at: c.ultimo_mensaje_at,
         ultimo_mensaje_preview: c.ultimo_mensaje_preview,
         no_leidos: yo?.no_leidos ?? 0,
         soy_participante: !!yo,
+        otro_ultima_lectura_at: otro?.ultima_lectura_at ?? null,
         otro: otroProf
-          ? { id: otroProf.id, nombres: otroProf.nombres, cedula: otroProf.cedula }
+          ? {
+              id: otroProf.id,
+              nombres: otroProf.nombres,
+              cedula: otroProf.cedula,
+              avatar_url: avatars.get(otroProf.id) ?? null,
+            }
           : null,
         participantes: ps.map((p) => {
           const pr: any = profMap.get(p.user_id);
-          return { id: p.user_id, nombres: pr?.nombres ?? "?", cedula: pr?.cedula ?? "" };
+          return {
+            id: p.user_id,
+            nombres: pr?.nombres ?? "?",
+            cedula: pr?.cedula ?? "",
+            avatar_url: avatars.get(p.user_id) ?? null,
+          };
         }),
       };
     });
@@ -190,14 +212,26 @@ export const listarMensajesFn = createServerFn({ method: "POST" })
       .limit(500);
     if (error) throw new Error(error.message);
 
+    // Última lectura del OTRO participante (para indicador ✓✓)
+    const { data: parts } = await supabaseAdmin
+      .from("conversacion_participantes")
+      .select("user_id, ultima_lectura_at")
+      .eq("conversacion_id", data.conversacionId);
+    const otro = (parts ?? []).find((p: any) => p.user_id !== context.userId);
+    const otroLeidoAt = otro?.ultima_lectura_at ?? null;
+
     // Firmar URLs de adjuntos
     const withUrl = await Promise.all(
       (msgs ?? []).map(async (m: any) => {
-        if (!m.attachment_path) return m;
-        const { data: signed } = await supabaseAdmin.storage
-          .from("chat-attachments")
-          .createSignedUrl(m.attachment_path, 60 * 60);
-        return { ...m, attachment_url: signed?.signedUrl ?? null };
+        let attachment_url: string | null = null;
+        if (m.attachment_path) {
+          const { data: signed } = await supabaseAdmin.storage
+            .from("chat-attachments")
+            .createSignedUrl(m.attachment_path, 60 * 60);
+          attachment_url = signed?.signedUrl ?? null;
+        }
+        const leido = otroLeidoAt && new Date(m.created_at).getTime() <= new Date(otroLeidoAt).getTime();
+        return { ...m, attachment_url, leido_por_otro: !!leido };
       }),
     );
     return withUrl;
@@ -306,73 +340,81 @@ const masivoSchema = z.object({
   userIds: z.array(z.string().uuid()).optional().default([]),
   grupoIds: z.array(z.string().uuid()).optional().default([]),
 });
+
+async function masivoCore(
+  supabaseAdmin: any,
+  senderId: string,
+  contenido: string,
+  userIds: string[],
+  grupoIds: string[],
+) {
+  const dest = new Set<string>(userIds);
+  if (grupoIds.length) {
+    const { data: rows } = await supabaseAdmin
+      .from("grupo_estudiantes")
+      .select("user_id")
+      .in("grupo_id", grupoIds);
+    (rows ?? []).forEach((r: any) => dest.add(r.user_id));
+  }
+  dest.delete(senderId);
+  if (!dest.size) throw new Error("No hay destinatarios.");
+
+  const { data: activos } = await supabaseAdmin
+    .from("profiles")
+    .select("id")
+    .in("id", Array.from(dest))
+    .eq("bloqueado", false);
+  const finales = (activos ?? []).map((a: any) => a.id as string);
+  if (!finales.length) throw new Error("Sin destinatarios activos.");
+
+  const { data: mias } = await supabaseAdmin
+    .from("conversacion_participantes")
+    .select("conversacion_id")
+    .eq("user_id", senderId);
+  const misIds = (mias ?? []).map((m: any) => m.conversacion_id);
+  const mapaConv = new Map<string, string>();
+  if (misIds.length) {
+    const { data: co } = await supabaseAdmin
+      .from("conversacion_participantes")
+      .select("conversacion_id, user_id")
+      .in("conversacion_id", misIds)
+      .in("user_id", finales);
+    (co ?? []).forEach((r: any) => mapaConv.set(r.user_id, r.conversacion_id));
+  }
+
+  let enviados = 0;
+  for (const uid of finales) {
+    let convId = mapaConv.get(uid);
+    if (!convId) {
+      const { data: c } = await supabaseAdmin
+        .from("conversaciones")
+        .insert({ created_by: senderId })
+        .select("id")
+        .single();
+      if (!c) continue;
+      convId = c.id as string;
+      await supabaseAdmin.from("conversacion_participantes").insert([
+        { conversacion_id: convId, user_id: senderId },
+        { conversacion_id: convId, user_id: uid },
+      ]);
+    }
+    await supabaseAdmin.from("mensajes").insert({
+      conversacion_id: convId,
+      sender_id: senderId,
+      contenido,
+    });
+    enviados++;
+  }
+  return { ok: true, enviados };
+}
+
 export const enviarMensajeMasivoFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => masivoSchema.parse(d))
   .handler(async ({ data, context }) => {
     if (!(await esStaff(context))) throw new Error("Solo docentes o administradores.");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-
-    const dest = new Set<string>(data.userIds);
-    if (data.grupoIds.length) {
-      const { data: rows } = await supabaseAdmin
-        .from("grupo_estudiantes")
-        .select("user_id")
-        .in("grupo_id", data.grupoIds);
-      (rows ?? []).forEach((r: any) => dest.add(r.user_id));
-    }
-    dest.delete(context.userId);
-    if (!dest.size) throw new Error("No hay destinatarios.");
-
-    // Filtra bloqueados
-    const { data: activos } = await supabaseAdmin
-      .from("profiles")
-      .select("id")
-      .in("id", Array.from(dest))
-      .eq("bloqueado", false);
-    const finales = (activos ?? []).map((a: any) => a.id as string);
-    if (!finales.length) throw new Error("Sin destinatarios activos.");
-
-    // Traer conversaciones existentes
-    const { data: mias } = await supabaseAdmin
-      .from("conversacion_participantes")
-      .select("conversacion_id")
-      .eq("user_id", context.userId);
-    const misIds = (mias ?? []).map((m) => m.conversacion_id);
-    let mapaConv = new Map<string, string>(); // otherUserId -> convId
-    if (misIds.length) {
-      const { data: co } = await supabaseAdmin
-        .from("conversacion_participantes")
-        .select("conversacion_id, user_id")
-        .in("conversacion_id", misIds)
-        .in("user_id", finales);
-      (co ?? []).forEach((r: any) => mapaConv.set(r.user_id, r.conversacion_id));
-    }
-
-    let enviados = 0;
-    for (const uid of finales) {
-      let convId = mapaConv.get(uid);
-      if (!convId) {
-        const { data: c } = await supabaseAdmin
-          .from("conversaciones")
-          .insert({ created_by: context.userId })
-          .select("id")
-          .single();
-        if (!c) continue;
-        convId = c.id as string;
-        await supabaseAdmin.from("conversacion_participantes").insert([
-          { conversacion_id: convId, user_id: context.userId },
-          { conversacion_id: convId, user_id: uid },
-        ]);
-      }
-      await supabaseAdmin.from("mensajes").insert({
-        conversacion_id: convId,
-        sender_id: context.userId,
-        contenido: data.contenido,
-      });
-      enviados++;
-    }
-    return { ok: true, enviados };
+    return await masivoCore(supabaseAdmin, context.userId, data.contenido, data.userIds, data.grupoIds);
   });
 
 // -------- Presencia de otro usuario (para badge verde admin) --------
@@ -402,4 +444,126 @@ export const presenciaUsuarioFn = createServerFn({ method: "POST" })
       visible: s.visible,
       iniciada_en: s.iniciada_en,
     };
+  });
+
+// -------- Borrar mensaje (admin) --------
+export const borrarMensajeFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ data, context }) => {
+    if (!(await esAdmin(context))) throw new Error("Solo administradores.");
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    // Borra adjunto si existe
+    const { data: m } = await supabaseAdmin
+      .from("mensajes")
+      .select("attachment_path")
+      .eq("id", data.id)
+      .maybeSingle();
+    if (m?.attachment_path) {
+      await supabaseAdmin.storage.from("chat-attachments").remove([m.attachment_path]).catch(() => {});
+    }
+    const { error } = await supabaseAdmin.from("mensajes").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+// -------- Borrar conversación completa (admin) --------
+export const borrarConversacionFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ data, context }) => {
+    if (!(await esAdmin(context))) throw new Error("Solo administradores.");
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    // Borrar adjuntos
+    const { data: msgs } = await supabaseAdmin
+      .from("mensajes")
+      .select("attachment_path")
+      .eq("conversacion_id", data.id);
+    const paths = (msgs ?? []).map((m: any) => m.attachment_path).filter(Boolean);
+    if (paths.length) {
+      await supabaseAdmin.storage.from("chat-attachments").remove(paths).catch(() => {});
+    }
+    await supabaseAdmin.from("mensajes").delete().eq("conversacion_id", data.id);
+    await supabaseAdmin.from("conversacion_participantes").delete().eq("conversacion_id", data.id);
+    const { error } = await supabaseAdmin.from("conversaciones").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+// -------- Subir avatar (usuario o admin sobre otro) --------
+const avatarSchema = z.object({
+  userId: z.string().uuid().optional(),
+  base64: z.string().min(20).max(8_000_000),
+  mime: z.string().max(80),
+});
+export const subirAvatarFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => avatarSchema.parse(d))
+  .handler(async ({ data, context }) => {
+    const target = data.userId ?? context.userId;
+    if (target !== context.userId && !(await esAdmin(context))) {
+      throw new Error("No autorizado.");
+    }
+    if (!/^image\/(png|jpe?g|webp)$/i.test(data.mime)) {
+      throw new Error("Solo imágenes jpg, png o webp.");
+    }
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const ext = data.mime.split("/")[1].replace("jpeg", "jpg");
+    const b64 = data.base64.replace(/^data:[^;]+;base64,/, "");
+    const buf = Buffer.from(b64, "base64");
+    if (buf.length > 3 * 1024 * 1024) throw new Error("La imagen debe pesar menos de 3 MB.");
+    const path = `${target}/avatar.${ext}`;
+    const { error: ue } = await supabaseAdmin.storage
+      .from("avatars")
+      .upload(path, buf, { contentType: data.mime, upsert: true });
+    if (ue) throw new Error(ue.message);
+    const { error: pe } = await supabaseAdmin
+      .from("profiles")
+      .update({ avatar_url: path })
+      .eq("id", target);
+    if (pe) throw new Error(pe.message);
+    const { data: signed } = await supabaseAdmin.storage
+      .from("avatars")
+      .createSignedUrl(path, 60 * 60);
+    return { ok: true, url: signed?.signedUrl ?? null };
+  });
+
+// -------- URL firmada del avatar propio (para mostrar en la nav) --------
+export const miAvatarUrlFn = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: p } = await supabaseAdmin
+      .from("profiles")
+      .select("avatar_url")
+      .eq("id", context.userId)
+      .maybeSingle();
+    if (!p?.avatar_url) return { url: null };
+    const { data: signed } = await supabaseAdmin.storage
+      .from("avatars")
+      .createSignedUrl(p.avatar_url, 60 * 60);
+    return { url: signed?.signedUrl ?? null };
+  });
+
+// -------- Masivo por rol (staff): "all" | "estudiantes" | "docentes" | "administradores" --------
+const masivoRolSchema = z.object({
+  contenido: z.string().min(1).max(4000),
+  audiencia: z.enum(["todos", "estudiantes", "docentes", "administradores"]),
+});
+export const enviarMensajeMasivoRolFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => masivoRolSchema.parse(d))
+  .handler(async ({ data, context }) => {
+    if (!(await esStaff(context))) throw new Error("Solo docentes o administradores.");
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: roles } = await supabaseAdmin.from("user_roles").select("user_id, role");
+    let ids: string[];
+    if (data.audiencia === "todos") ids = Array.from(new Set((roles ?? []).map((r: any) => r.user_id)));
+    else {
+      const rol = data.audiencia === "estudiantes" ? "estudiante" : data.audiencia === "docentes" ? "docente" : "administrador";
+      ids = Array.from(new Set((roles ?? []).filter((r: any) => r.role === rol).map((r: any) => r.user_id)));
+    }
+    ids = ids.filter((id) => id !== context.userId);
+    if (!ids.length) throw new Error("No hay destinatarios.");
+    return await masivoCore(supabaseAdmin, context.userId, data.contenido, ids, []);
   });
