@@ -154,16 +154,21 @@ export function ChatShell({
             </li>
           )}
           {filtradas.map((c) => {
-            const nombre = c.otro?.nombres ?? c.participantes.filter((p) => p.id !== currentUserId).map((p) => p.nombres).join(", ") ?? "Sin nombre";
+            const otroPart = c.otro ?? c.participantes.find((p) => p.id !== currentUserId) ?? null;
+            const nombre = otroPart?.nombres ?? c.participantes.filter((p) => p.id !== currentUserId).map((p) => p.nombres).join(", ") ?? "Sin nombre";
             const activa = selectedId === c.id;
             return (
-              <li key={c.id}>
+              <li key={c.id} className="group/it relative">
                 <button
                   onClick={() => setSelectedId(c.id)}
-                  className={`group flex w-full items-center gap-3 border-b px-3 py-3 text-left transition hover:bg-secondary/40 ${activa ? "bg-gradient-to-r from-fuchsia-500/10 to-cyan-500/10" : ""}`}
+                  className={`flex w-full items-center gap-3 border-b px-3 py-3 text-left transition hover:bg-secondary/40 ${activa ? "bg-gradient-to-r from-fuchsia-500/10 to-cyan-500/10" : ""}`}
                 >
-                  <div className="relative grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gradient-to-br from-fuchsia-400 via-pink-400 to-cyan-400 text-sm font-bold text-white shadow-soft">
-                    {nombre?.[0]?.toUpperCase() ?? "?"}
+                  <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-fuchsia-400 via-pink-400 to-cyan-400 text-sm font-bold text-white shadow-soft">
+                    {otroPart?.avatar_url ? (
+                      <img src={otroPart.avatar_url} alt={nombre} className="h-full w-full object-cover" />
+                    ) : (
+                      <span className="grid h-full w-full place-items-center">{nombre?.[0]?.toUpperCase() ?? "?"}</span>
+                    )}
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
@@ -187,6 +192,26 @@ export function ChatShell({
                     )}
                   </div>
                 </button>
+                {esAdmin && (
+                  <button
+                    onClick={async (e) => {
+                      e.stopPropagation();
+                      if (!confirm(`¿Eliminar la conversación con ${nombre}? Se borrarán todos los mensajes.`)) return;
+                      try {
+                        await borrarConversacionFn({ data: { id: c.id } });
+                        if (selectedId === c.id) setSelectedId(null);
+                        qc.invalidateQueries({ queryKey: ["mensajes", "convs"] });
+                        toast.success("Conversación eliminada.");
+                      } catch (err: any) {
+                        toast.error(err.message ?? "No se pudo borrar.");
+                      }
+                    }}
+                    title="Eliminar conversación"
+                    className="absolute right-2 top-2 hidden h-7 w-7 place-items-center rounded-full bg-background/80 text-rose-500 shadow-soft ring-1 ring-border transition hover:bg-rose-500 hover:text-white group-hover/it:grid"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                )}
               </li>
             );
           })}
