@@ -92,9 +92,20 @@ export const listarConversacionesFn = createServerFn({ method: "POST" })
     const userIds = Array.from(new Set((allParts ?? []).map((p) => p.user_id)));
     const { data: profs } = await supabaseAdmin
       .from("profiles")
-      .select("id, nombres, cedula")
+      .select("id, nombres, cedula, avatar_url")
       .in("id", userIds);
     const profMap = new Map((profs ?? []).map((p: any) => [p.id, p]));
+
+    // Firmar avatares
+    const avatars = new Map<string, string>();
+    for (const p of profs ?? []) {
+      if ((p as any).avatar_url) {
+        const { data: signed } = await supabaseAdmin.storage
+          .from("avatars")
+          .createSignedUrl((p as any).avatar_url, 60 * 60);
+        if (signed?.signedUrl) avatars.set(p.id, signed.signedUrl);
+      }
+    }
 
     const partsByConv = new Map<string, any[]>();
     (allParts ?? []).forEach((p: any) => {
@@ -107,19 +118,30 @@ export const listarConversacionesFn = createServerFn({ method: "POST" })
       const ps = partsByConv.get(c.id) ?? [];
       const yo = ps.find((p) => p.user_id === context.userId);
       const otro = ps.find((p) => p.user_id !== context.userId) ?? ps[0];
-      const otroProf = otro ? profMap.get(otro.user_id) : null;
+      const otroProf: any = otro ? profMap.get(otro.user_id) : null;
       return {
         id: c.id,
         ultimo_mensaje_at: c.ultimo_mensaje_at,
         ultimo_mensaje_preview: c.ultimo_mensaje_preview,
         no_leidos: yo?.no_leidos ?? 0,
         soy_participante: !!yo,
+        otro_ultima_lectura_at: otro?.ultima_lectura_at ?? null,
         otro: otroProf
-          ? { id: otroProf.id, nombres: otroProf.nombres, cedula: otroProf.cedula }
+          ? {
+              id: otroProf.id,
+              nombres: otroProf.nombres,
+              cedula: otroProf.cedula,
+              avatar_url: avatars.get(otroProf.id) ?? null,
+            }
           : null,
         participantes: ps.map((p) => {
           const pr: any = profMap.get(p.user_id);
-          return { id: p.user_id, nombres: pr?.nombres ?? "?", cedula: pr?.cedula ?? "" };
+          return {
+            id: p.user_id,
+            nombres: pr?.nombres ?? "?",
+            cedula: pr?.cedula ?? "",
+            avatar_url: avatars.get(p.user_id) ?? null,
+          };
         }),
       };
     });
