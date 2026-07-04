@@ -371,8 +371,12 @@ function ChatPanel({
         <button onClick={onBack} className="grid h-9 w-9 place-items-center rounded-full hover:bg-secondary md:hidden">
           <ArrowLeft className="h-4 w-4" />
         </button>
-        <div className="relative grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-fuchsia-400 to-cyan-400 text-white shadow-soft">
-          {otro?.nombres?.[0]?.toUpperCase() ?? "?"}
+        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-fuchsia-400 to-cyan-400 text-white shadow-soft">
+          {(otro as any)?.avatar_url ? (
+            <img src={(otro as any).avatar_url} alt={otro?.nombres ?? ""} className="h-full w-full object-cover" />
+          ) : (
+            <span className="grid h-full w-full place-items-center">{otro?.nombres?.[0]?.toUpperCase() ?? "?"}</span>
+          )}
           {esAdmin && presQ.data?.activo && (
             <span title="En línea" className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-background bg-emerald-500" />
           )}
