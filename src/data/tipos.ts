@@ -18,6 +18,7 @@ export const AREAS = [
   "Geometría y Trigonometría",
   "Estadística y Probabilidad",
   "Sucesiones y Patrones",
+  "Triángulos y Ecuaciones",
 ] as const;
 
 export type Area = (typeof AREAS)[number];
