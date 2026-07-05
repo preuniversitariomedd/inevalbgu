@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 import { usePresencia } from "@/lib/usePresencia";
-import { LogOut, GraduationCap, Shield, PartyPopper, MessageCircle, Camera } from "lucide-react";
+import { LogOut, GraduationCap, Shield, PartyPopper, MessageCircle, Camera, Sparkles } from "lucide-react";
 import { useMensajesNoLeidos } from "@/components/chat/ChatShell";
 import { miAvatarUrlFn, subirAvatarFn } from "@/lib/mensajes.functions";
 import { toast } from "sonner";
