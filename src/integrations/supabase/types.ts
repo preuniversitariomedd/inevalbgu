@@ -452,6 +452,7 @@ export type Database = {
           iniciada_en: string
           nivel_logro: string | null
           puntaje_ineval: number | null
+          tiempo_segundos: number
           tipo: string
           total_preguntas: number
           user_id: string
@@ -464,6 +465,7 @@ export type Database = {
           iniciada_en?: string
           nivel_logro?: string | null
           puntaje_ineval?: number | null
+          tiempo_segundos?: number
           tipo: string
           total_preguntas?: number
           user_id: string
@@ -476,6 +478,7 @@ export type Database = {
           iniciada_en?: string
           nivel_logro?: string | null
           puntaje_ineval?: number | null
+          tiempo_segundos?: number
           tipo?: string
           total_preguntas?: number
           user_id?: string
