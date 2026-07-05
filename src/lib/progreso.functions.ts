@@ -52,6 +52,7 @@ const finalizarSchema = z.object({
   correctas: z.number().int().nonnegative(),
   puntajeIneval: z.number().int().nullable().optional(),
   nivelLogro: z.string().nullable().optional(),
+  tiempoSegundos: z.number().int().nonnegative().optional(),
 });
 
 export const finalizarSesionPracticaFn = createServerFn({ method: "POST" })
@@ -66,6 +67,7 @@ export const finalizarSesionPracticaFn = createServerFn({ method: "POST" })
         finalizada_en: new Date().toISOString(),
         puntaje_ineval: data.puntajeIneval ?? null,
         nivel_logro: data.nivelLogro ?? null,
+        tiempo_segundos: data.tiempoSegundos ?? 0,
       })
       .eq("id", data.sesionId)
       .eq("user_id", context.userId);

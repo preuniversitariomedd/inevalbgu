@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet, useMatchRoute } from "@tanstack/react-router";
-import { ArrowLeft, Sigma, FunctionSquare, Triangle, PieChart, ListOrdered } from "lucide-react";
+import { ArrowLeft, Sigma, FunctionSquare, Triangle, PieChart, ListOrdered, Ruler } from "lucide-react";
 import { AREAS } from "@/data/tipos";
 import { preguntasPorArea } from "@/data";
 
@@ -26,6 +26,7 @@ const ICONS: Record<string, React.ReactNode> = {
   "Geometría y Trigonometría": <Triangle className="h-7 w-7" />,
   "Estadística y Probabilidad": <PieChart className="h-7 w-7" />,
   "Sucesiones y Patrones": <ListOrdered className="h-7 w-7" />,
+  "Triángulos y Ecuaciones": <Ruler className="h-7 w-7" />,
 };
 
 function ListaAreas() {

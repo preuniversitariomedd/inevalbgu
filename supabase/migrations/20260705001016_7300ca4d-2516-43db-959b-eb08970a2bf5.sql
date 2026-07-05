@@ -1,0 +1,1 @@
+ALTER TABLE public.sesiones_practica ADD COLUMN IF NOT EXISTS tiempo_segundos integer NOT NULL DEFAULT 0;

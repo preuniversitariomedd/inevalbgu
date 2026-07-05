@@ -93,7 +93,8 @@ function PracticarArea() {
     const pct = Math.round((aciertos / sesion.length) * 100);
     if (!finalizada) {
       setFinalizada(true);
-      void finalizarSesion(sesionId, sesion.length, aciertos);
+      const tiempoSeg = Math.floor(((inicio ? ahora - inicio : 0)) / 1000);
+      void finalizarSesion(sesionId, sesion.length, aciertos, null, null, tiempoSeg);
     }
     return (
       <div className="min-h-screen bg-background">

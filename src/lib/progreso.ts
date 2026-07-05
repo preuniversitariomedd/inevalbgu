@@ -29,6 +29,7 @@ export async function finalizarSesion(
   correctas: number,
   puntajeIneval?: number | null,
   nivelLogro?: string | null,
+  tiempoSegundos?: number,
 ) {
   if (!sesionId) return;
   try {
@@ -39,6 +40,7 @@ export async function finalizarSesion(
         correctas,
         puntajeIneval: puntajeIneval ?? null,
         nivelLogro: nivelLogro ?? null,
+        tiempoSegundos: tiempoSegundos ?? 0,
       },
     });
   } catch (e) {
