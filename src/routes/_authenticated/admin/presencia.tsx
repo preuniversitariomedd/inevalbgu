@@ -84,6 +84,38 @@ function PresenciaPage() {
   const alertasActivas = (qa.data ?? []).filter((a: any) => !a.resuelta_en);
   const historial = (qa.data ?? []).filter((a: any) => a.resuelta_en);
 
+  // Toasts para estudiantes que ENTRAN o SALEN de "en vivo"
+  useEffect(() => {
+    if (!q.data) return;
+    const currentIds = new Set<string>(enVivo.map((r: any) => r.user_id));
+    if (firstLoadRef.current) {
+      enVivoPrevRef.current = currentIds;
+      firstLoadRef.current = false;
+      return;
+    }
+    const prev = enVivoPrevRef.current;
+    // Entrada
+    for (const r of enVivo) {
+      if (!prev.has(r.user_id)) {
+        toast.success(`🟢 ${r.profile?.nombres ?? "Estudiante"} está en vivo`, {
+          description: `${r.dispositivo ?? "dispositivo"} · IP ${r.ip || "—"}`,
+          icon: <Wifi className="h-4 w-4" />,
+        });
+      }
+    }
+    // Salida
+    for (const r of rows) {
+      if (prev.has(r.user_id) && !currentIds.has(r.user_id)) {
+        const conSeg = Math.floor((Date.now() - new Date(r.iniciada_en).getTime()) / 1000);
+        toast(`⚪ ${r.profile?.nombres ?? "Estudiante"} salió de línea`, {
+          description: `Duración: ${fmtDur(conSeg)} · ${r.dispositivo ?? "—"}`,
+        });
+      }
+    }
+    enVivoPrevRef.current = currentIds;
+  }, [enVivo, rows, q.data]);
+
+
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
