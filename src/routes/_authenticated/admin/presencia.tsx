@@ -35,6 +35,8 @@ function PresenciaPage() {
   const [tab, setTab] = useState<"vivo" | "alertas" | "historial">("vivo");
   const [now, setNow] = useState(Date.now());
   const notifiedRef = useRef<Set<string>>(new Set());
+  const enVivoPrevRef = useRef<Set<string>>(new Set());
+  const firstLoadRef = useRef(true);
 
   const q = useQuery({
     queryKey: ["presencia"],
