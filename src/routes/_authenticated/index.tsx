@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database, MessageCircle } from "lucide-react";
+import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database } from "lucide-react";
 import { BANCO_PREGUNTAS } from "@/data";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 
@@ -95,15 +95,8 @@ function Index() {
           />
         </div>
 
-        <div className="mt-4">
-          <ActionCard
-            to="/tutor"
-            icon={<MessageCircle className="h-7 w-7" />}
-            title="Mr. Victor · Tutor virtual"
-            desc="Conversa con Mr. Victor: tutor con metodología Piaget en Matemática, Física, Química y técnicas de estudio."
-            tone="accent"
-          />
-        </div>
+
+
 
 
         <section className="mt-12 rounded-2xl border bg-gradient-card p-6 shadow-soft">
