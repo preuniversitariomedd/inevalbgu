@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 import { usePresencia } from "@/lib/usePresencia";
-import { LogOut, GraduationCap, Shield, PartyPopper, MessageCircle, Camera, Sparkles } from "lucide-react";
+import { LogOut, GraduationCap, Shield, PartyPopper, MessageCircle, Camera, Sparkles, ClipboardList } from "lucide-react";
 import { useMensajesNoLeidos } from "@/components/chat/ChatShell";
 import { miAvatarUrlFn, subirAvatarFn } from "@/lib/mensajes.functions";
+import { contarTareasPendientesFn } from "@/lib/tareas.functions";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated")({
@@ -114,6 +115,7 @@ function AuthedLayout() {
               <Sparkles className="h-4 w-4" />
               <span className="hidden sm:inline">Mr. Victor</span>
             </Link>
+            <TareasLink esStaff={ctx.esStaff} />
             <MensajesLink />
             {ctx.esStaff && (
               <Link
@@ -151,6 +153,30 @@ function MensajesLink() {
     >
       <MessageCircle className="h-4 w-4" />
       <span className="hidden sm:inline">Mensajes</span>
+      {total > 0 && (
+        <span className="absolute -right-1 -top-1 grid min-w-5 place-items-center rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-1 text-[10px] font-bold text-white shadow">
+          {total > 99 ? "99+" : total}
+        </span>
+      )}
+    </Link>
+  );
+}
+
+function TareasLink({ esStaff }: { esStaff: boolean }) {
+  const q = useQuery({
+    queryKey: ["tareas", "pendientes"],
+    queryFn: () => contarTareasPendientesFn(),
+    staleTime: 30_000,
+  });
+  const total = esStaff ? 0 : ((q.data as any)?.total ?? 0);
+  return (
+    <Link
+      to="/tareas"
+      className="relative inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-medium hover:bg-secondary"
+      title="Tareas"
+    >
+      <ClipboardList className="h-4 w-4" />
+      <span className="hidden sm:inline">Tareas</span>
       {total > 0 && (
         <span className="absolute -right-1 -top-1 grid min-w-5 place-items-center rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-1 text-[10px] font-bold text-white shadow">
           {total > 99 ? "99+" : total}

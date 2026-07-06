@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
+import { Route as AuthenticatedTareasRouteImport } from './routes/_authenticated/tareas'
 import { Route as AuthenticatedSimulacroRouteImport } from './routes/_authenticated/simulacro'
 import { Route as AuthenticatedProgresoRouteImport } from './routes/_authenticated/progreso'
 import { Route as AuthenticatedPracticarRouteImport } from './routes/_authenticated/practicar'
@@ -25,8 +26,10 @@ import { Route as AuthenticatedTutorIndexRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedTutorThreadIdRouteImport } from './routes/_authenticated/tutor.$threadId'
 import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authenticated/practicar.$area'
+import { Route as AuthenticatedAdminTareasRouteImport } from './routes/_authenticated/admin/tareas'
 import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
 import { Route as AuthenticatedAdminPresenciaRouteImport } from './routes/_authenticated/admin/presencia'
+import { Route as AuthenticatedAdminPermisosDocentesRouteImport } from './routes/_authenticated/admin/permisos-docentes'
 import { Route as AuthenticatedAdminMensajesRouteImport } from './routes/_authenticated/admin/mensajes'
 import { Route as AuthenticatedAdminGruposRouteImport } from './routes/_authenticated/admin/grupos'
 import { Route as AuthenticatedAdminDocentesRouteImport } from './routes/_authenticated/admin/docentes'
@@ -56,6 +59,11 @@ const ApiChatRoute = ApiChatRouteImport.update({
 const AuthenticatedTutorRoute = AuthenticatedTutorRouteImport.update({
   id: '/tutor',
   path: '/tutor',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTareasRoute = AuthenticatedTareasRouteImport.update({
+  id: '/tareas',
+  path: '/tareas',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSimulacroRoute = AuthenticatedSimulacroRouteImport.update({
@@ -116,6 +124,12 @@ const AuthenticatedPracticarAreaRoute =
     path: '/$area',
     getParentRoute: () => AuthenticatedPracticarRoute,
   } as any)
+const AuthenticatedAdminTareasRoute =
+  AuthenticatedAdminTareasRouteImport.update({
+    id: '/tareas',
+    path: '/tareas',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminRolesRoute = AuthenticatedAdminRolesRouteImport.update({
   id: '/roles',
   path: '/roles',
@@ -125,6 +139,12 @@ const AuthenticatedAdminPresenciaRoute =
   AuthenticatedAdminPresenciaRouteImport.update({
     id: '/presencia',
     path: '/presencia',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPermisosDocentesRoute =
+  AuthenticatedAdminPermisosDocentesRouteImport.update({
+    id: '/permisos-docentes',
+    path: '/permisos-docentes',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminMensajesRoute =
@@ -174,6 +194,7 @@ export interface FileRoutesByFullPath {
   '/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/progreso': typeof AuthenticatedProgresoRoute
   '/simulacro': typeof AuthenticatedSimulacroRoute
+  '/tareas': typeof AuthenticatedTareasRoute
   '/tutor': typeof AuthenticatedTutorRouteWithChildren
   '/api/chat': typeof ApiChatRoute
   '/admin/branding': typeof AuthenticatedAdminBrandingRoute
@@ -181,8 +202,10 @@ export interface FileRoutesByFullPath {
   '/admin/docentes': typeof AuthenticatedAdminDocentesRoute
   '/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
+  '/admin/permisos-docentes': typeof AuthenticatedAdminPermisosDocentesRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
+  '/admin/tareas': typeof AuthenticatedAdminTareasRoute
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
@@ -197,6 +220,7 @@ export interface FileRoutesByTo {
   '/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/progreso': typeof AuthenticatedProgresoRoute
   '/simulacro': typeof AuthenticatedSimulacroRoute
+  '/tareas': typeof AuthenticatedTareasRoute
   '/api/chat': typeof ApiChatRoute
   '/': typeof AuthenticatedIndexRoute
   '/admin/branding': typeof AuthenticatedAdminBrandingRoute
@@ -204,8 +228,10 @@ export interface FileRoutesByTo {
   '/admin/docentes': typeof AuthenticatedAdminDocentesRoute
   '/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
+  '/admin/permisos-docentes': typeof AuthenticatedAdminPermisosDocentesRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
+  '/admin/tareas': typeof AuthenticatedAdminTareasRoute
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
@@ -223,6 +249,7 @@ export interface FileRoutesById {
   '/_authenticated/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/_authenticated/progreso': typeof AuthenticatedProgresoRoute
   '/_authenticated/simulacro': typeof AuthenticatedSimulacroRoute
+  '/_authenticated/tareas': typeof AuthenticatedTareasRoute
   '/_authenticated/tutor': typeof AuthenticatedTutorRouteWithChildren
   '/api/chat': typeof ApiChatRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
@@ -231,8 +258,10 @@ export interface FileRoutesById {
   '/_authenticated/admin/docentes': typeof AuthenticatedAdminDocentesRoute
   '/_authenticated/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/_authenticated/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
+  '/_authenticated/admin/permisos-docentes': typeof AuthenticatedAdminPermisosDocentesRoute
   '/_authenticated/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/_authenticated/admin/roles': typeof AuthenticatedAdminRolesRoute
+  '/_authenticated/admin/tareas': typeof AuthenticatedAdminTareasRoute
   '/_authenticated/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/_authenticated/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
@@ -251,6 +280,7 @@ export interface FileRouteTypes {
     | '/practicar'
     | '/progreso'
     | '/simulacro'
+    | '/tareas'
     | '/tutor'
     | '/api/chat'
     | '/admin/branding'
@@ -258,8 +288,10 @@ export interface FileRouteTypes {
     | '/admin/docentes'
     | '/admin/grupos'
     | '/admin/mensajes'
+    | '/admin/permisos-docentes'
     | '/admin/presencia'
     | '/admin/roles'
+    | '/admin/tareas'
     | '/practicar/$area'
     | '/tutor/$threadId'
     | '/admin/'
@@ -274,6 +306,7 @@ export interface FileRouteTypes {
     | '/practicar'
     | '/progreso'
     | '/simulacro'
+    | '/tareas'
     | '/api/chat'
     | '/'
     | '/admin/branding'
@@ -281,8 +314,10 @@ export interface FileRouteTypes {
     | '/admin/docentes'
     | '/admin/grupos'
     | '/admin/mensajes'
+    | '/admin/permisos-docentes'
     | '/admin/presencia'
     | '/admin/roles'
+    | '/admin/tareas'
     | '/practicar/$area'
     | '/tutor/$threadId'
     | '/admin'
@@ -299,6 +334,7 @@ export interface FileRouteTypes {
     | '/_authenticated/practicar'
     | '/_authenticated/progreso'
     | '/_authenticated/simulacro'
+    | '/_authenticated/tareas'
     | '/_authenticated/tutor'
     | '/api/chat'
     | '/_authenticated/'
@@ -307,8 +343,10 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/docentes'
     | '/_authenticated/admin/grupos'
     | '/_authenticated/admin/mensajes'
+    | '/_authenticated/admin/permisos-docentes'
     | '/_authenticated/admin/presencia'
     | '/_authenticated/admin/roles'
+    | '/_authenticated/admin/tareas'
     | '/_authenticated/practicar/$area'
     | '/_authenticated/tutor/$threadId'
     | '/_authenticated/admin/'
@@ -357,6 +395,13 @@ declare module '@tanstack/react-router' {
       path: '/tutor'
       fullPath: '/tutor'
       preLoaderRoute: typeof AuthenticatedTutorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tareas': {
+      id: '/_authenticated/tareas'
+      path: '/tareas'
+      fullPath: '/tareas'
+      preLoaderRoute: typeof AuthenticatedTareasRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/simulacro': {
@@ -436,6 +481,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPracticarAreaRouteImport
       parentRoute: typeof AuthenticatedPracticarRoute
     }
+    '/_authenticated/admin/tareas': {
+      id: '/_authenticated/admin/tareas'
+      path: '/tareas'
+      fullPath: '/admin/tareas'
+      preLoaderRoute: typeof AuthenticatedAdminTareasRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/roles': {
       id: '/_authenticated/admin/roles'
       path: '/roles'
@@ -448,6 +500,13 @@ declare module '@tanstack/react-router' {
       path: '/presencia'
       fullPath: '/admin/presencia'
       preLoaderRoute: typeof AuthenticatedAdminPresenciaRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/permisos-docentes': {
+      id: '/_authenticated/admin/permisos-docentes'
+      path: '/permisos-docentes'
+      fullPath: '/admin/permisos-docentes'
+      preLoaderRoute: typeof AuthenticatedAdminPermisosDocentesRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/mensajes': {
@@ -501,8 +560,10 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminDocentesRoute: typeof AuthenticatedAdminDocentesRoute
   AuthenticatedAdminGruposRoute: typeof AuthenticatedAdminGruposRoute
   AuthenticatedAdminMensajesRoute: typeof AuthenticatedAdminMensajesRoute
+  AuthenticatedAdminPermisosDocentesRoute: typeof AuthenticatedAdminPermisosDocentesRoute
   AuthenticatedAdminPresenciaRoute: typeof AuthenticatedAdminPresenciaRoute
   AuthenticatedAdminRolesRoute: typeof AuthenticatedAdminRolesRoute
+  AuthenticatedAdminTareasRoute: typeof AuthenticatedAdminTareasRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
   AuthenticatedAdminEstudianteIdRoute: typeof AuthenticatedAdminEstudianteIdRoute
 }
@@ -515,8 +576,11 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminDocentesRoute: AuthenticatedAdminDocentesRoute,
     AuthenticatedAdminGruposRoute: AuthenticatedAdminGruposRoute,
     AuthenticatedAdminMensajesRoute: AuthenticatedAdminMensajesRoute,
+    AuthenticatedAdminPermisosDocentesRoute:
+      AuthenticatedAdminPermisosDocentesRoute,
     AuthenticatedAdminPresenciaRoute: AuthenticatedAdminPresenciaRoute,
     AuthenticatedAdminRolesRoute: AuthenticatedAdminRolesRoute,
+    AuthenticatedAdminTareasRoute: AuthenticatedAdminTareasRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
     AuthenticatedAdminEstudianteIdRoute: AuthenticatedAdminEstudianteIdRoute,
   }
@@ -561,6 +625,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPracticarRoute: typeof AuthenticatedPracticarRouteWithChildren
   AuthenticatedProgresoRoute: typeof AuthenticatedProgresoRoute
   AuthenticatedSimulacroRoute: typeof AuthenticatedSimulacroRoute
+  AuthenticatedTareasRoute: typeof AuthenticatedTareasRoute
   AuthenticatedTutorRoute: typeof AuthenticatedTutorRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
@@ -573,6 +638,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPracticarRoute: AuthenticatedPracticarRouteWithChildren,
   AuthenticatedProgresoRoute: AuthenticatedProgresoRoute,
   AuthenticatedSimulacroRoute: AuthenticatedSimulacroRoute,
+  AuthenticatedTareasRoute: AuthenticatedTareasRoute,
   AuthenticatedTutorRoute: AuthenticatedTutorRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
