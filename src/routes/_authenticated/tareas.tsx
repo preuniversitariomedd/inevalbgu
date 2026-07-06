@@ -9,7 +9,7 @@ import {
 } from "@/lib/tareas.functions";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ClipboardList, FileText, Image as ImageIcon, Youtube, Download, ArrowLeft, Sparkles, Circle } from "lucide-react";
+import { ClipboardList, FileText, Image as ImageIcon, Play, Download, ArrowLeft, Sparkles, Circle } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/tareas")({
