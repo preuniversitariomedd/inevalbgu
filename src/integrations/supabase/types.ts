@@ -209,6 +209,32 @@ export type Database = {
         }
         Relationships: []
       }
+      docente_grupos_permitidos: {
+        Row: {
+          created_at: string
+          docente_id: string
+          grupo_id: string
+        }
+        Insert: {
+          created_at?: string
+          docente_id: string
+          grupo_id: string
+        }
+        Update: {
+          created_at?: string
+          docente_id?: string
+          grupo_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "docente_grupos_permitidos_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       grupo_estudiantes: {
         Row: {
           created_at: string
@@ -485,6 +511,133 @@ export type Database = {
         }
         Relationships: []
       }
+      tarea_adjuntos: {
+        Row: {
+          created_at: string
+          id: string
+          mime: string
+          nombre: string
+          path: string
+          tamano: number
+          tarea_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          mime: string
+          nombre: string
+          path: string
+          tamano?: number
+          tarea_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          mime?: string
+          nombre?: string
+          path?: string
+          tamano?: number
+          tarea_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tarea_adjuntos_tarea_id_fkey"
+            columns: ["tarea_id"]
+            isOneToOne: false
+            referencedRelation: "tareas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tarea_grupos: {
+        Row: {
+          grupo_id: string
+          tarea_id: string
+        }
+        Insert: {
+          grupo_id: string
+          tarea_id: string
+        }
+        Update: {
+          grupo_id?: string
+          tarea_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tarea_grupos_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tarea_grupos_tarea_id_fkey"
+            columns: ["tarea_id"]
+            isOneToOne: false
+            referencedRelation: "tareas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tarea_vistas: {
+        Row: {
+          tarea_id: string
+          user_id: string
+          visto_at: string
+        }
+        Insert: {
+          tarea_id: string
+          user_id: string
+          visto_at?: string
+        }
+        Update: {
+          tarea_id?: string
+          user_id?: string
+          visto_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tarea_vistas_tarea_id_fkey"
+            columns: ["tarea_id"]
+            isOneToOne: false
+            referencedRelation: "tareas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tareas: {
+        Row: {
+          creador_id: string
+          creador_rol: string
+          created_at: string
+          descripcion: string | null
+          id: string
+          titulo: string
+          updated_at: string
+          youtube_url: string | null
+        }
+        Insert: {
+          creador_id: string
+          creador_rol: string
+          created_at?: string
+          descripcion?: string | null
+          id?: string
+          titulo: string
+          updated_at?: string
+          youtube_url?: string | null
+        }
+        Update: {
+          creador_id?: string
+          creador_rol?: string
+          created_at?: string
+          descripcion?: string | null
+          id?: string
+          titulo?: string
+          updated_at?: string
+          youtube_url?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -523,6 +676,10 @@ export type Database = {
         Returns: boolean
       }
       is_staff: { Args: { _user_id: string }; Returns: boolean }
+      puede_ver_tarea: {
+        Args: { _tarea_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       app_role: "estudiante" | "administrador" | "docente"
