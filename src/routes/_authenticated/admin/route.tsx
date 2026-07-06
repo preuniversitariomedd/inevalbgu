@@ -32,6 +32,8 @@ function AdminLayout() {
     { to: "/admin/calificaciones", label: "Calificaciones", icon: FileSpreadsheet, show: true },
     { to: "/admin/grupos", label: "Grupos", icon: Layers, show: true },
     { to: "/admin/mensajes", label: "Mensajes", icon: Send, show: true },
+    { to: "/admin/tareas", label: "Tareas", icon: ClipboardList, show: true },
+    { to: "/admin/permisos-docentes", label: "Permisos docentes", icon: KeyRound, show: ctx.esAdmin },
     { to: "/admin/docentes", label: "Docentes", icon: GraduationCap, show: ctx.esAdmin },
     { to: "/admin/roles", label: "Roles", icon: Shield, show: ctx.esAdmin },
     { to: "/admin/branding", label: "Branding", icon: ImageIcon, show: ctx.esAdmin },
