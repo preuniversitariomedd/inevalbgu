@@ -29,6 +29,7 @@ import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authen
 import { Route as AuthenticatedAdminTareasRouteImport } from './routes/_authenticated/admin/tareas'
 import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
 import { Route as AuthenticatedAdminPresenciaRouteImport } from './routes/_authenticated/admin/presencia'
+import { Route as AuthenticatedAdminPermisosDocentesRouteImport } from './routes/_authenticated/admin/permisos-docentes'
 import { Route as AuthenticatedAdminMensajesRouteImport } from './routes/_authenticated/admin/mensajes'
 import { Route as AuthenticatedAdminGruposRouteImport } from './routes/_authenticated/admin/grupos'
 import { Route as AuthenticatedAdminDocentesRouteImport } from './routes/_authenticated/admin/docentes'
@@ -140,6 +141,12 @@ const AuthenticatedAdminPresenciaRoute =
     path: '/presencia',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminPermisosDocentesRoute =
+  AuthenticatedAdminPermisosDocentesRouteImport.update({
+    id: '/permisos-docentes',
+    path: '/permisos-docentes',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminMensajesRoute =
   AuthenticatedAdminMensajesRouteImport.update({
     id: '/mensajes',
@@ -195,6 +202,7 @@ export interface FileRoutesByFullPath {
   '/admin/docentes': typeof AuthenticatedAdminDocentesRoute
   '/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
+  '/admin/permisos-docentes': typeof AuthenticatedAdminPermisosDocentesRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/admin/tareas': typeof AuthenticatedAdminTareasRoute
@@ -220,6 +228,7 @@ export interface FileRoutesByTo {
   '/admin/docentes': typeof AuthenticatedAdminDocentesRoute
   '/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
+  '/admin/permisos-docentes': typeof AuthenticatedAdminPermisosDocentesRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/admin/tareas': typeof AuthenticatedAdminTareasRoute
@@ -249,6 +258,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/docentes': typeof AuthenticatedAdminDocentesRoute
   '/_authenticated/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/_authenticated/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
+  '/_authenticated/admin/permisos-docentes': typeof AuthenticatedAdminPermisosDocentesRoute
   '/_authenticated/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/_authenticated/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/_authenticated/admin/tareas': typeof AuthenticatedAdminTareasRoute
@@ -278,6 +288,7 @@ export interface FileRouteTypes {
     | '/admin/docentes'
     | '/admin/grupos'
     | '/admin/mensajes'
+    | '/admin/permisos-docentes'
     | '/admin/presencia'
     | '/admin/roles'
     | '/admin/tareas'
@@ -303,6 +314,7 @@ export interface FileRouteTypes {
     | '/admin/docentes'
     | '/admin/grupos'
     | '/admin/mensajes'
+    | '/admin/permisos-docentes'
     | '/admin/presencia'
     | '/admin/roles'
     | '/admin/tareas'
@@ -331,6 +343,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/docentes'
     | '/_authenticated/admin/grupos'
     | '/_authenticated/admin/mensajes'
+    | '/_authenticated/admin/permisos-docentes'
     | '/_authenticated/admin/presencia'
     | '/_authenticated/admin/roles'
     | '/_authenticated/admin/tareas'
@@ -489,6 +502,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPresenciaRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/permisos-docentes': {
+      id: '/_authenticated/admin/permisos-docentes'
+      path: '/permisos-docentes'
+      fullPath: '/admin/permisos-docentes'
+      preLoaderRoute: typeof AuthenticatedAdminPermisosDocentesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/mensajes': {
       id: '/_authenticated/admin/mensajes'
       path: '/mensajes'
@@ -540,6 +560,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminDocentesRoute: typeof AuthenticatedAdminDocentesRoute
   AuthenticatedAdminGruposRoute: typeof AuthenticatedAdminGruposRoute
   AuthenticatedAdminMensajesRoute: typeof AuthenticatedAdminMensajesRoute
+  AuthenticatedAdminPermisosDocentesRoute: typeof AuthenticatedAdminPermisosDocentesRoute
   AuthenticatedAdminPresenciaRoute: typeof AuthenticatedAdminPresenciaRoute
   AuthenticatedAdminRolesRoute: typeof AuthenticatedAdminRolesRoute
   AuthenticatedAdminTareasRoute: typeof AuthenticatedAdminTareasRoute
@@ -555,6 +576,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminDocentesRoute: AuthenticatedAdminDocentesRoute,
     AuthenticatedAdminGruposRoute: AuthenticatedAdminGruposRoute,
     AuthenticatedAdminMensajesRoute: AuthenticatedAdminMensajesRoute,
+    AuthenticatedAdminPermisosDocentesRoute:
+      AuthenticatedAdminPermisosDocentesRoute,
     AuthenticatedAdminPresenciaRoute: AuthenticatedAdminPresenciaRoute,
     AuthenticatedAdminRolesRoute: AuthenticatedAdminRolesRoute,
     AuthenticatedAdminTareasRoute: AuthenticatedAdminTareasRoute,
