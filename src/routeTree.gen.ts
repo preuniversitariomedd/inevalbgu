@@ -29,6 +29,7 @@ import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminPresenciaRouteImport } from './routes/_authenticated/admin/presencia'
 import { Route as AuthenticatedAdminMensajesRouteImport } from './routes/_authenticated/admin/mensajes'
 import { Route as AuthenticatedAdminGruposRouteImport } from './routes/_authenticated/admin/grupos'
+import { Route as AuthenticatedAdminDocentesRouteImport } from './routes/_authenticated/admin/docentes'
 import { Route as AuthenticatedAdminCalificacionesRouteImport } from './routes/_authenticated/admin/calificaciones'
 import { Route as AuthenticatedAdminBrandingRouteImport } from './routes/_authenticated/admin/branding'
 import { Route as AuthenticatedAdminEstudianteIdRouteImport } from './routes/_authenticated/admin/estudiante.$id'
@@ -138,6 +139,12 @@ const AuthenticatedAdminGruposRoute =
     path: '/grupos',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminDocentesRoute =
+  AuthenticatedAdminDocentesRouteImport.update({
+    id: '/docentes',
+    path: '/docentes',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminCalificacionesRoute =
   AuthenticatedAdminCalificacionesRouteImport.update({
     id: '/calificaciones',
@@ -171,6 +178,7 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/admin/branding': typeof AuthenticatedAdminBrandingRoute
   '/admin/calificaciones': typeof AuthenticatedAdminCalificacionesRoute
+  '/admin/docentes': typeof AuthenticatedAdminDocentesRoute
   '/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
@@ -193,6 +201,7 @@ export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
   '/admin/branding': typeof AuthenticatedAdminBrandingRoute
   '/admin/calificaciones': typeof AuthenticatedAdminCalificacionesRoute
+  '/admin/docentes': typeof AuthenticatedAdminDocentesRoute
   '/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
@@ -219,6 +228,7 @@ export interface FileRoutesById {
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/admin/branding': typeof AuthenticatedAdminBrandingRoute
   '/_authenticated/admin/calificaciones': typeof AuthenticatedAdminCalificacionesRoute
+  '/_authenticated/admin/docentes': typeof AuthenticatedAdminDocentesRoute
   '/_authenticated/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/_authenticated/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/_authenticated/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
@@ -245,6 +255,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/admin/branding'
     | '/admin/calificaciones'
+    | '/admin/docentes'
     | '/admin/grupos'
     | '/admin/mensajes'
     | '/admin/presencia'
@@ -267,6 +278,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin/branding'
     | '/admin/calificaciones'
+    | '/admin/docentes'
     | '/admin/grupos'
     | '/admin/mensajes'
     | '/admin/presencia'
@@ -292,6 +304,7 @@ export interface FileRouteTypes {
     | '/_authenticated/'
     | '/_authenticated/admin/branding'
     | '/_authenticated/admin/calificaciones'
+    | '/_authenticated/admin/docentes'
     | '/_authenticated/admin/grupos'
     | '/_authenticated/admin/mensajes'
     | '/_authenticated/admin/presencia'
@@ -451,6 +464,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminGruposRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/docentes': {
+      id: '/_authenticated/admin/docentes'
+      path: '/docentes'
+      fullPath: '/admin/docentes'
+      preLoaderRoute: typeof AuthenticatedAdminDocentesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/calificaciones': {
       id: '/_authenticated/admin/calificaciones'
       path: '/calificaciones'
@@ -478,6 +498,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBrandingRoute: typeof AuthenticatedAdminBrandingRoute
   AuthenticatedAdminCalificacionesRoute: typeof AuthenticatedAdminCalificacionesRoute
+  AuthenticatedAdminDocentesRoute: typeof AuthenticatedAdminDocentesRoute
   AuthenticatedAdminGruposRoute: typeof AuthenticatedAdminGruposRoute
   AuthenticatedAdminMensajesRoute: typeof AuthenticatedAdminMensajesRoute
   AuthenticatedAdminPresenciaRoute: typeof AuthenticatedAdminPresenciaRoute
@@ -491,6 +512,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminBrandingRoute: AuthenticatedAdminBrandingRoute,
     AuthenticatedAdminCalificacionesRoute:
       AuthenticatedAdminCalificacionesRoute,
+    AuthenticatedAdminDocentesRoute: AuthenticatedAdminDocentesRoute,
     AuthenticatedAdminGruposRoute: AuthenticatedAdminGruposRoute,
     AuthenticatedAdminMensajesRoute: AuthenticatedAdminMensajesRoute,
     AuthenticatedAdminPresenciaRoute: AuthenticatedAdminPresenciaRoute,
