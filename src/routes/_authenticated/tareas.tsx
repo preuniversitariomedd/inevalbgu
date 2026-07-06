@@ -153,7 +153,7 @@ function TareaCard({ t, onOpen, onSeen }: { t: any; onOpen: (id: string) => void
           rel="noreferrer"
           className="mt-3 inline-flex items-center gap-1 text-sm text-primary hover:underline"
         >
-          <Youtube className="h-4 w-4" /> {t.youtube_url}
+          <Play className="h-4 w-4" /> {t.youtube_url}
         </a>
       )}
       {t.adjuntos?.length > 0 && (
