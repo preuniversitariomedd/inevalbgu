@@ -26,6 +26,7 @@ import { Route as AuthenticatedTutorIndexRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedTutorThreadIdRouteImport } from './routes/_authenticated/tutor.$threadId'
 import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authenticated/practicar.$area'
+import { Route as AuthenticatedAdminTareasRouteImport } from './routes/_authenticated/admin/tareas'
 import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
 import { Route as AuthenticatedAdminPresenciaRouteImport } from './routes/_authenticated/admin/presencia'
 import { Route as AuthenticatedAdminMensajesRouteImport } from './routes/_authenticated/admin/mensajes'
@@ -122,6 +123,12 @@ const AuthenticatedPracticarAreaRoute =
     path: '/$area',
     getParentRoute: () => AuthenticatedPracticarRoute,
   } as any)
+const AuthenticatedAdminTareasRoute =
+  AuthenticatedAdminTareasRouteImport.update({
+    id: '/tareas',
+    path: '/tareas',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminRolesRoute = AuthenticatedAdminRolesRouteImport.update({
   id: '/roles',
   path: '/roles',
@@ -190,6 +197,7 @@ export interface FileRoutesByFullPath {
   '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
+  '/admin/tareas': typeof AuthenticatedAdminTareasRoute
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
@@ -214,6 +222,7 @@ export interface FileRoutesByTo {
   '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
+  '/admin/tareas': typeof AuthenticatedAdminTareasRoute
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
@@ -242,6 +251,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/_authenticated/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/_authenticated/admin/roles': typeof AuthenticatedAdminRolesRoute
+  '/_authenticated/admin/tareas': typeof AuthenticatedAdminTareasRoute
   '/_authenticated/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/_authenticated/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
@@ -270,6 +280,7 @@ export interface FileRouteTypes {
     | '/admin/mensajes'
     | '/admin/presencia'
     | '/admin/roles'
+    | '/admin/tareas'
     | '/practicar/$area'
     | '/tutor/$threadId'
     | '/admin/'
@@ -294,6 +305,7 @@ export interface FileRouteTypes {
     | '/admin/mensajes'
     | '/admin/presencia'
     | '/admin/roles'
+    | '/admin/tareas'
     | '/practicar/$area'
     | '/tutor/$threadId'
     | '/admin'
@@ -321,6 +333,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/mensajes'
     | '/_authenticated/admin/presencia'
     | '/_authenticated/admin/roles'
+    | '/_authenticated/admin/tareas'
     | '/_authenticated/practicar/$area'
     | '/_authenticated/tutor/$threadId'
     | '/_authenticated/admin/'
@@ -455,6 +468,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPracticarAreaRouteImport
       parentRoute: typeof AuthenticatedPracticarRoute
     }
+    '/_authenticated/admin/tareas': {
+      id: '/_authenticated/admin/tareas'
+      path: '/tareas'
+      fullPath: '/admin/tareas'
+      preLoaderRoute: typeof AuthenticatedAdminTareasRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/roles': {
       id: '/_authenticated/admin/roles'
       path: '/roles'
@@ -522,6 +542,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminMensajesRoute: typeof AuthenticatedAdminMensajesRoute
   AuthenticatedAdminPresenciaRoute: typeof AuthenticatedAdminPresenciaRoute
   AuthenticatedAdminRolesRoute: typeof AuthenticatedAdminRolesRoute
+  AuthenticatedAdminTareasRoute: typeof AuthenticatedAdminTareasRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
   AuthenticatedAdminEstudianteIdRoute: typeof AuthenticatedAdminEstudianteIdRoute
 }
@@ -536,6 +557,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminMensajesRoute: AuthenticatedAdminMensajesRoute,
     AuthenticatedAdminPresenciaRoute: AuthenticatedAdminPresenciaRoute,
     AuthenticatedAdminRolesRoute: AuthenticatedAdminRolesRoute,
+    AuthenticatedAdminTareasRoute: AuthenticatedAdminTareasRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
     AuthenticatedAdminEstudianteIdRoute: AuthenticatedAdminEstudianteIdRoute,
   }
