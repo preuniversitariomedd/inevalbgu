@@ -404,6 +404,82 @@ export const listarPersonalFn = createServerFn({ method: "GET" })
     return (profiles ?? []).map((p: any) => ({ ...p, roles: byUser.get(p.id) ?? [] }));
   });
 
+// Listar docentes con información detallada (solo admin)
+export const listarDocentesFn = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await ensureAdmin(context);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: roles } = await supabaseAdmin
+      .from("user_roles")
+      .select("user_id")
+      .eq("role", "docente");
+    const ids = Array.from(new Set((roles ?? []).map((r: any) => r.user_id)));
+    if (!ids.length) return [];
+    const { data: profs } = await supabaseAdmin
+      .from("profiles")
+      .select("id, cedula, nombres, institucion, fecha_nacimiento, genero, bloqueado, created_at, avatar_url")
+      .in("id", ids);
+    // Última sesión de conexión por docente
+    const { data: sesiones } = await supabaseAdmin
+      .from("sesiones_conexion")
+      .select("user_id, dispositivo, ip, ultimo_heartbeat, finalizada, iniciada_en")
+      .in("user_id", ids)
+      .order("ultimo_heartbeat", { ascending: false });
+    const ultimaPorUsuario = new Map<string, any>();
+    for (const s of sesiones ?? []) {
+      if (!ultimaPorUsuario.has(s.user_id)) ultimaPorUsuario.set(s.user_id, s);
+    }
+    // Email y último login desde Auth
+    const infoAuth = new Map<string, { email: string | null; last_sign_in_at: string | null }>();
+    for (const id of ids) {
+      try {
+        const { data: u } = await supabaseAdmin.auth.admin.getUserById(id);
+        infoAuth.set(id, {
+          email: u.user?.email ?? null,
+          last_sign_in_at: (u.user as any)?.last_sign_in_at ?? null,
+        });
+      } catch {
+        infoAuth.set(id, { email: null, last_sign_in_at: null });
+      }
+    }
+    // Firmar avatares
+    const out = [];
+    for (const p of profs ?? []) {
+      let avatar_url: string | null = null;
+      if ((p as any).avatar_url) {
+        const { data: signed } = await supabaseAdmin.storage
+          .from("avatars")
+          .createSignedUrl((p as any).avatar_url, 60 * 60);
+        avatar_url = signed?.signedUrl ?? null;
+      }
+      const s = ultimaPorUsuario.get(p.id);
+      const auth = infoAuth.get(p.id);
+      const activo = s && !s.finalizada
+        ? (Date.now() - new Date(s.ultimo_heartbeat).getTime()) / 1000 < 90
+        : false;
+      out.push({
+        id: p.id,
+        cedula: p.cedula,
+        nombres: p.nombres,
+        institucion: p.institucion,
+        fecha_nacimiento: p.fecha_nacimiento,
+        genero: p.genero,
+        bloqueado: p.bloqueado,
+        created_at: p.created_at,
+        avatar_url,
+        email: auth?.email ?? null,
+        last_sign_in_at: auth?.last_sign_in_at ?? null,
+        en_vivo: activo,
+        ultima_conexion: s?.ultimo_heartbeat ?? null,
+        ultimo_dispositivo: s?.dispositivo ?? null,
+        ultima_ip: s?.ip ?? null,
+      });
+    }
+    out.sort((a, b) => a.nombres.localeCompare(b.nombres));
+    return out;
+  });
+
 export const cambiarRolFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) =>
