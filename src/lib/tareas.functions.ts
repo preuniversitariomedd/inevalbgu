@@ -157,6 +157,9 @@ export const gruposDisponiblesFn = createServerFn({ method: "GET" })
 const crearSchema = z.object({
   titulo: z.string().min(2).max(150),
   descripcion: z.string().max(4000).optional().nullable(),
+  descripcion_html: z.string().max(20000).optional().nullable(),
+  categoria: z.string().max(80).optional().nullable(),
+  programada_para: z.string().datetime().optional().nullable(),
   youtube_url: z.string().max(500).optional().nullable(),
   grupoIds: z.array(z.string().uuid()).min(1, "Selecciona al menos un grupo."),
   adjuntos: z
@@ -177,9 +180,8 @@ export const crearTareaFn = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => crearSchema.parse(d))
   .handler(async ({ data, context }) => {
     const { supabase, userId } = context;
-    const { isAdmin, isDocente } = await ensureStaff(context);
+    const { isAdmin } = await ensureStaff(context);
 
-    // Validar grupos permitidos si es docente
     if (!isAdmin) {
       const { data: permit } = await supabase
         .from("docente_grupos_permitidos")
@@ -191,7 +193,6 @@ export const crearTareaFn = createServerFn({ method: "POST" })
       if (invalid.length) throw new Error("No tienes permiso sobre uno o más grupos seleccionados.");
     }
 
-    // Validar YouTube URL simple
     let ytUrl = data.youtube_url?.trim() || null;
     if (ytUrl && !/youtube\.com|youtu\.be/i.test(ytUrl)) throw new Error("Enlace de YouTube inválido.");
 
@@ -202,6 +203,9 @@ export const crearTareaFn = createServerFn({ method: "POST" })
         creador_rol: isAdmin ? "administrador" : "docente",
         titulo: data.titulo.trim(),
         descripcion: data.descripcion?.trim() || null,
+        descripcion_html: data.descripcion_html?.trim() || null,
+        categoria: data.categoria?.trim() || null,
+        programada_para: data.programada_para || null,
         youtube_url: ytUrl,
       })
       .select("id")
@@ -209,11 +213,9 @@ export const crearTareaFn = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
 
     const tareaId = nueva.id;
-    // Grupos
     const rows = data.grupoIds.map((gid) => ({ tarea_id: tareaId, grupo_id: gid }));
     if (rows.length) await supabase.from("tarea_grupos").insert(rows);
 
-    // Adjuntos
     if (data.adjuntos && data.adjuntos.length) {
       const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
       for (const f of data.adjuntos) {
@@ -234,6 +236,99 @@ export const crearTareaFn = createServerFn({ method: "POST" })
     }
     return { ok: true, id: tareaId };
   });
+
+// ============ Editar tarea ============
+const editarSchema = z.object({
+  tareaId: z.string().uuid(),
+  titulo: z.string().min(2).max(150),
+  descripcion: z.string().max(4000).optional().nullable(),
+  descripcion_html: z.string().max(20000).optional().nullable(),
+  categoria: z.string().max(80).optional().nullable(),
+  programada_para: z.string().datetime().optional().nullable(),
+  youtube_url: z.string().max(500).optional().nullable(),
+  grupoIds: z.array(z.string().uuid()).min(1),
+  adjuntosNuevos: z
+    .array(z.object({ nombre: z.string(), mime: z.string(), base64: z.string() }))
+    .max(10)
+    .optional()
+    .default([]),
+  adjuntosBorrar: z.array(z.string().uuid()).optional().default([]),
+});
+
+export const editarTareaFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => editarSchema.parse(d))
+  .handler(async ({ data, context }) => {
+    const { supabase, userId } = context;
+    const { isAdmin } = await ensureStaff(context);
+
+    const { data: t, error: tErr } = await supabase
+      .from("tareas").select("id, creador_id").eq("id", data.tareaId).single();
+    if (tErr || !t) throw new Error("Tarea no encontrada.");
+    if (!isAdmin && t.creador_id !== userId) throw new Error("No puedes editar esta tarea.");
+
+    if (!isAdmin) {
+      const { data: permit } = await supabase
+        .from("docente_grupos_permitidos")
+        .select("grupo_id")
+        .eq("docente_id", userId)
+        .in("grupo_id", data.grupoIds);
+      const allowed = new Set((permit ?? []).map((p: any) => p.grupo_id));
+      const invalid = data.grupoIds.filter((g) => !allowed.has(g));
+      if (invalid.length) throw new Error("No tienes permiso sobre uno o más grupos seleccionados.");
+    }
+
+    let ytUrl = data.youtube_url?.trim() || null;
+    if (ytUrl && !/youtube\.com|youtu\.be/i.test(ytUrl)) throw new Error("Enlace de YouTube inválido.");
+
+    const { error: uErr } = await supabase.from("tareas").update({
+      titulo: data.titulo.trim(),
+      descripcion: data.descripcion?.trim() || null,
+      descripcion_html: data.descripcion_html?.trim() || null,
+      categoria: data.categoria?.trim() || null,
+      programada_para: data.programada_para || null,
+      youtube_url: ytUrl,
+    }).eq("id", data.tareaId);
+    if (uErr) throw new Error(uErr.message);
+
+    // Regenerar grupos destinatarios
+    await supabase.from("tarea_grupos").delete().eq("tarea_id", data.tareaId);
+    const rows = data.grupoIds.map((gid) => ({ tarea_id: data.tareaId, grupo_id: gid }));
+    if (rows.length) await supabase.from("tarea_grupos").insert(rows);
+
+    // Borrar adjuntos seleccionados
+    if (data.adjuntosBorrar.length) {
+      const { data: aBorr } = await supabase.from("tarea_adjuntos")
+        .select("id, path").in("id", data.adjuntosBorrar);
+      if (aBorr && aBorr.length) {
+        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+        await supabaseAdmin.storage.from("tareas").remove(aBorr.map((a: any) => a.path));
+        await supabase.from("tarea_adjuntos").delete().in("id", data.adjuntosBorrar);
+      }
+    }
+
+    // Añadir nuevos adjuntos
+    if (data.adjuntosNuevos && data.adjuntosNuevos.length) {
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      for (const f of data.adjuntosNuevos) {
+        if (!ALLOWED_MIME.includes(f.mime)) throw new Error(`Tipo no permitido: ${f.mime}`);
+        const b64 = f.base64.includes(",") ? f.base64.split(",")[1] : f.base64;
+        const bytes = Buffer.from(b64, "base64");
+        if (bytes.length > 25 * 1024 * 1024) throw new Error(`"${f.nombre}" excede 25 MB.`);
+        const ext = f.nombre.includes(".") ? f.nombre.split(".").pop() : "bin";
+        const path = `${data.tareaId}/${crypto.randomUUID()}.${ext}`;
+        const { error: upErr } = await supabaseAdmin.storage
+          .from("tareas")
+          .upload(path, bytes, { contentType: f.mime, upsert: false });
+        if (upErr) throw new Error(upErr.message);
+        await supabase.from("tarea_adjuntos").insert({
+          tarea_id: data.tareaId, path, nombre: f.nombre, mime: f.mime, tamano: bytes.length,
+        });
+      }
+    }
+    return { ok: true };
+  });
+
 
 // ============ URL firmada para descargar adjunto ============
 export const urlAdjuntoFn = createServerFn({ method: "POST" })
