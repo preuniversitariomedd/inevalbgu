@@ -132,8 +132,16 @@ function TareaCard({ t, onOpen, onSeen }: { t: any; onOpen: (id: string) => void
           )}
         </div>
       </div>
-      {t.descripcion && (
+      {t.descripcion_html ? (
+        <div
+          className="prose prose-sm dark:prose-invert mt-3 max-w-none"
+          dangerouslySetInnerHTML={{ __html: t.descripcion_html }}
+        />
+      ) : t.descripcion ? (
         <p className="mt-3 whitespace-pre-wrap text-sm text-foreground/90">{t.descripcion}</p>
+      ) : null}
+      {t.categoria && (
+        <Badge variant="outline" className="mt-2 text-[10px]">📁 {t.categoria}</Badge>
       )}
       {embed && (
         <div className="mt-3 aspect-video overflow-hidden rounded-xl border">
