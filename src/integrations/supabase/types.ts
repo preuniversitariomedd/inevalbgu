@@ -607,31 +607,40 @@ export type Database = {
       }
       tareas: {
         Row: {
+          categoria: string | null
           creador_id: string
           creador_rol: string
           created_at: string
           descripcion: string | null
+          descripcion_html: string | null
           id: string
+          programada_para: string | null
           titulo: string
           updated_at: string
           youtube_url: string | null
         }
         Insert: {
+          categoria?: string | null
           creador_id: string
           creador_rol: string
           created_at?: string
           descripcion?: string | null
+          descripcion_html?: string | null
           id?: string
+          programada_para?: string | null
           titulo: string
           updated_at?: string
           youtube_url?: string | null
         }
         Update: {
+          categoria?: string | null
           creador_id?: string
           creador_rol?: string
           created_at?: string
           descripcion?: string | null
+          descripcion_html?: string | null
           id?: string
+          programada_para?: string | null
           titulo?: string
           updated_at?: string
           youtube_url?: string | null

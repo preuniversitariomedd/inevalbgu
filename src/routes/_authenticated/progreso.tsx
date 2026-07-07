@@ -1,6 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, BookOpen, TrendingDown, BarChart3, PieChart as PieIcon } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ArrowLeft, BookOpen, TrendingDown, BarChart3, PieChart as PieIcon, Search, Users } from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -15,6 +16,8 @@ import {
   Legend,
 } from "recharts";
 import { obtenerProgresoFn } from "@/lib/progreso.functions";
+import { listarEstudiantesFn } from "@/lib/admin.functions";
+import { getCurrentProfile } from "@/lib/auth-helpers";
 
 export const Route = createFileRoute("/_authenticated/progreso")({
   head: () => ({ meta: [{ title: "Mi progreso — INEVAL_UEDE" }] }),
@@ -25,11 +28,83 @@ export const Route = createFileRoute("/_authenticated/progreso")({
 });
 
 function ProgresoPage() {
+  const navigate = useNavigate();
   const { as } = Route.useSearch();
+  const { data: me } = useQuery({ queryKey: ["me"], queryFn: getCurrentProfile });
+  const esStaff = !!me?.esAdmin || (me?.roles ?? []).includes("administrador" as any);
+
+  const { data: estudiantes } = useQuery({
+    queryKey: ["admin", "estudiantes-lista"],
+    queryFn: () => listarEstudiantesFn(),
+    enabled: esStaff,
+  });
+
+  const [q, setQ] = useState("");
+  const filtrados = useMemo(() => {
+    const list = (estudiantes as any[] | undefined) ?? [];
+    if (!q.trim()) return list.slice(0, 30);
+    const s = q.toLowerCase();
+    return list.filter((e: any) =>
+      (e.nombres || "").toLowerCase().includes(s) || (e.cedula || "").includes(s),
+    ).slice(0, 30);
+  }, [estudiantes, q]);
+
   const { data, isLoading } = useQuery({
     queryKey: ["progreso", as ?? "me"],
     queryFn: () => obtenerProgresoFn({ data: as ? { targetUserId: as } : {} }),
+    enabled: !esStaff || !!as, // staff sin selección: no carga
   });
+
+  // Selector para staff cuando no hay estudiante elegido
+  if (esStaff && !as) {
+    return (
+      <div className="mx-auto max-w-3xl px-5 py-8">
+        <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="h-4 w-4" /> Inicio
+        </Link>
+        <h1 className="mt-4 text-2xl font-extrabold sm:text-3xl">Progreso de estudiantes</h1>
+        <p className="mt-1 text-sm text-muted-foreground">Elige un estudiante para ver su progreso, sin importar el grupo.</p>
+        <div className="mt-5 flex items-center gap-2 rounded-xl border bg-card px-3 py-2 shadow-soft">
+          <Search className="h-4 w-4 text-muted-foreground" />
+          <input
+            className="w-full bg-transparent text-sm outline-none"
+            placeholder="Buscar por nombre o cédula…"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+          />
+        </div>
+        <ul className="mt-3 divide-y rounded-xl border bg-card shadow-soft">
+          {filtrados.length === 0 ? (
+            <li className="p-4 text-sm text-muted-foreground">Sin resultados.</li>
+          ) : (
+            filtrados.map((e: any) => (
+              <li key={e.id}>
+                <button
+                  className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left hover:bg-muted/40"
+                  onClick={() => navigate({ to: "/progreso", search: { as: e.id } })}
+                >
+                  <div className="min-w-0">
+                    <div className="truncate font-semibold">{e.nombres}</div>
+                    <div className="text-xs text-muted-foreground">
+                      CI {e.cedula}
+                      {e.grupos?.length > 0 && (
+                        <span className="inline-flex items-center gap-1 ml-2">
+                          · <Users className="h-3 w-3" /> {e.grupos.map((g: any) => g.nombre).join(", ")}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <span className="text-xs font-semibold text-primary">Ver progreso →</span>
+                </button>
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
+    );
+  }
+
+
 
 
   if (isLoading) {
@@ -128,9 +203,16 @@ function ProgresoPage() {
       {as && (
         <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-accent/40 bg-accent/10 px-4 py-2 text-sm">
           <span>👁️ Estás viendo el progreso de otro estudiante (modo staff).</span>
-          <Link to="/admin/estudiante/$id" params={{ id: as }} className="font-semibold text-accent hover:underline">
-            Volver al perfil
-          </Link>
+          <div className="flex gap-3">
+            {esStaff && (
+              <Link to="/progreso" search={{ as: undefined }} className="font-semibold text-accent hover:underline">
+                Cambiar estudiante
+              </Link>
+            )}
+            <Link to="/admin/estudiante/$id" params={{ id: as }} className="font-semibold text-accent hover:underline">
+              Ver perfil
+            </Link>
+          </div>
         </div>
       )}
       <h1 className="mt-4 text-3xl font-extrabold sm:text-4xl">{as ? "Progreso del estudiante" : "Mi progreso"}</h1>
