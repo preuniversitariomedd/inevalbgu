@@ -110,8 +110,11 @@ export const contarTareasPendientesFn = createServerFn({ method: "GET" })
     const { data: isDocente } = await supabase.rpc("has_role", { _user_id: userId, _role: "docente" });
     if (isAdmin || isDocente) return { total: 0 };
 
-    const { data: tareas } = await supabase.from("tareas").select("id");
-    const ids = (tareas ?? []).map((t: any) => t.id);
+    const { data: tareas } = await supabase.from("tareas").select("id, programada_para");
+    const now = new Date();
+    const ids = (tareas ?? [])
+      .filter((t: any) => !t.programada_para || new Date(t.programada_para) <= now)
+      .map((t: any) => t.id);
     if (ids.length === 0) return { total: 0 };
     const { data: vistas } = await supabase
       .from("tarea_vistas")
