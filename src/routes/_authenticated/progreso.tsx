@@ -203,9 +203,16 @@ function ProgresoPage() {
       {as && (
         <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-accent/40 bg-accent/10 px-4 py-2 text-sm">
           <span>👁️ Estás viendo el progreso de otro estudiante (modo staff).</span>
-          <Link to="/admin/estudiante/$id" params={{ id: as }} className="font-semibold text-accent hover:underline">
-            Volver al perfil
-          </Link>
+          <div className="flex gap-3">
+            {esStaff && (
+              <Link to="/progreso" search={{ as: undefined }} className="font-semibold text-accent hover:underline">
+                Cambiar estudiante
+              </Link>
+            )}
+            <Link to="/admin/estudiante/$id" params={{ id: as }} className="font-semibold text-accent hover:underline">
+              Ver perfil
+            </Link>
+          </div>
         </div>
       )}
       <h1 className="mt-4 text-3xl font-extrabold sm:text-4xl">{as ? "Progreso del estudiante" : "Mi progreso"}</h1>
