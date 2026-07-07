@@ -40,31 +40,45 @@ export const listarTareasFn = createServerFn({ method: "GET" })
 
     let query = supabase
       .from("tareas")
-      .select("id, titulo, descripcion, youtube_url, creador_id, creador_rol, created_at")
+      .select("id, titulo, descripcion, descripcion_html, youtube_url, creador_id, creador_rol, created_at, programada_para, categoria")
       .order("created_at", { ascending: false });
 
-    // Staff: solo ven las suyas (no mezclar entre docentes/admins)
     if (isAdmin || isDocente) {
       query = query.eq("creador_id", userId);
     }
-    const { data: tareas, error } = await query;
+    const { data: tareasRaw, error } = await query;
     if (error) throw new Error(error.message);
-    const ids = (tareas ?? []).map((t: any) => t.id);
+
+    const now = new Date();
+    const tareas = (isAdmin || isDocente)
+      ? (tareasRaw ?? [])
+      : (tareasRaw ?? []).filter((t: any) => !t.programada_para || new Date(t.programada_para) <= now);
+
+    const ids = tareas.map((t: any) => t.id);
     if (ids.length === 0) return [];
 
     const [{ data: adjs }, { data: grs }, { data: vistas }, { data: creadores }] = await Promise.all([
       supabase.from("tarea_adjuntos").select("id, tarea_id, path, nombre, mime, tamano").in("tarea_id", ids),
       supabase.from("tarea_grupos").select("tarea_id, grupo_id, grupos(nombre)").in("tarea_id", ids),
-      supabase.from("tarea_vistas").select("tarea_id, user_id").in("tarea_id", ids),
+      supabase.from("tarea_vistas").select("tarea_id, user_id, created_at").in("tarea_id", ids),
       supabase
         .from("profiles")
         .select("id, nombres")
-        .in("id", Array.from(new Set((tareas ?? []).map((t: any) => t.creador_id)))),
+        .in("id", Array.from(new Set(tareas.map((t: any) => t.creador_id)))),
     ]);
+
+    let vistoresMap = new Map<string, string>();
+    if (isAdmin || isDocente) {
+      const vids = Array.from(new Set((vistas ?? []).map((v: any) => v.user_id)));
+      if (vids.length) {
+        const { data: perfs } = await supabase.from("profiles").select("id, nombres").in("id", vids);
+        vistoresMap = new Map((perfs ?? []).map((p: any) => [p.id, p.nombres]));
+      }
+    }
 
     const creadorMap = new Map((creadores ?? []).map((c: any) => [c.id, c.nombres]));
 
-    return (tareas ?? []).map((t: any) => {
+    return tareas.map((t: any) => {
       const misAdjs = (adjs ?? []).filter((a: any) => a.tarea_id === t.id);
       const misGrs = (grs ?? []).filter((g: any) => g.tarea_id === t.id);
       const misVis = (vistas ?? []).filter((v: any) => v.tarea_id === t.id);
@@ -76,6 +90,13 @@ export const listarTareasFn = createServerFn({ method: "GET" })
         grupos: misGrs.map((g: any) => ({ id: g.grupo_id, nombre: g.grupos?.nombre })),
         total_vistas: misVis.length,
         visto_por_mi: yoVi,
+        vistas_detalle: (isAdmin || isDocente)
+          ? misVis.map((v: any) => ({
+              user_id: v.user_id,
+              nombres: vistoresMap.get(v.user_id) ?? "—",
+              visto_at: v.created_at,
+            }))
+          : undefined,
       };
     });
   });
