@@ -493,7 +493,9 @@ function ChatPanel({
                   </div>
                 </div>
               </li>
+              </Fragment>
             );
+
           })}
         </ul>
       </div>
