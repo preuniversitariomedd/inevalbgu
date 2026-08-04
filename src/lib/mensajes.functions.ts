@@ -384,7 +384,14 @@ async function masivoCore(
     (co ?? []).forEach((r: any) => mapaConv.set(r.user_id, r.conversacion_id));
   }
 
+  const { data: envio } = await supabaseAdmin
+    .from("envios_masivos")
+    .insert({ sender_id: senderId, contenido, audiencia, total_destinatarios: finales.length })
+    .select("id")
+    .single();
+
   let enviados = 0;
+  const destinatarios: any[] = [];
   for (const uid of finales) {
     let convId = mapaConv.get(uid);
     if (!convId) {
@@ -400,15 +407,31 @@ async function masivoCore(
         { conversacion_id: convId, user_id: uid },
       ]);
     }
-    await supabaseAdmin.from("mensajes").insert({
-      conversacion_id: convId,
-      sender_id: senderId,
-      contenido,
-    });
+    const { data: msg } = await supabaseAdmin
+      .from("mensajes")
+      .insert({
+        conversacion_id: convId,
+        sender_id: senderId,
+        contenido,
+      })
+      .select("id")
+      .single();
+    if (envio?.id) {
+      destinatarios.push({
+        envio_id: envio.id,
+        user_id: uid,
+        conversacion_id: convId,
+        mensaje_id: msg?.id ?? null,
+      });
+    }
     enviados++;
   }
-  return { ok: true, enviados };
+  if (destinatarios.length) {
+    await supabaseAdmin.from("envio_masivo_destinatarios").insert(destinatarios);
+  }
+  return { ok: true, enviados, envioId: envio?.id ?? null };
 }
+
 
 export const enviarMensajeMasivoFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
