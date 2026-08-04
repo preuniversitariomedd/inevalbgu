@@ -612,7 +612,7 @@ function AdminEstudiantes() {
                 {(crearMut.isPending || editarMut.isPending) && (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 )}
-                {modoEdicion ? "Guardar cambios" : "Crear estudiante"}
+                {modoEdicion ? "Guardar cambios" : form.rol === "docente" ? "Crear docente" : "Crear estudiante"}
               </Button>
             </DialogFooter>
           </form>
