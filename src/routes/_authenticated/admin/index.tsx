@@ -89,6 +89,7 @@ type FormData = {
   institucion: string;
   fechaNacimiento: string;
   genero: Genero | "";
+  rol: "estudiante" | "docente";
 };
 
 const FORM_INICIAL: FormData = {
@@ -97,10 +98,15 @@ const FORM_INICIAL: FormData = {
   institucion: "",
   fechaNacimiento: "",
   genero: "",
+  rol: "estudiante",
 };
 
+
 function AdminEstudiantes() {
+  const rctx = Route.useRouteContext() as { esAdmin?: boolean };
+  const esAdminUI = !!rctx?.esAdmin;
   const qc = useQueryClient();
+
   const listar = useServerFn(listarEstudiantesFn);
   const listarGrupos = useServerFn(listarGruposFn);
   const crear = useServerFn(crearEstudianteFn);
@@ -195,11 +201,13 @@ function AdminEstudiantes() {
           institucion: d.institucion.trim(),
           fechaNacimiento: d.fechaNacimiento,
           genero: d.genero as Genero,
+          rol: d.rol,
         },
       }),
     onSuccess: (res) => {
-      toast.success("Estudiante creado.");
+      toast.success(res.rol === "docente" ? "Docente creado." : "Estudiante creado.");
       setCredencial({ cedula: res.cedula, password: res.passwordTemporal });
+
       setDialogoAbierto(false);
       setForm(FORM_INICIAL);
       invalidar();
@@ -287,7 +295,9 @@ function AdminEstudiantes() {
       institucion: e.institucion,
       fechaNacimiento: e.fecha_nacimiento,
       genero: (e.genero ?? "") as Genero | "",
+      rol: "estudiante",
     });
+
     setErrores({});
     setDialogoAbierto(true);
   }
@@ -559,6 +569,24 @@ function AdminEstudiantes() {
               </Select>
               {errores.genero && <p className="mt-1 text-xs text-destructive">{errores.genero}</p>}
             </div>
+            {!modoEdicion && esAdminUI && (
+              <div>
+                <Label htmlFor="rol">Tipo de cuenta</Label>
+                <Select
+                  value={form.rol}
+                  onValueChange={(v) => setForm({ ...form, rol: v as "estudiante" | "docente" })}
+                >
+                  <SelectTrigger id="rol">
+                    <SelectValue placeholder="Selecciona…" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="estudiante">Estudiante</SelectItem>
+                    <SelectItem value="docente">Docente</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+
             <div>
               <Label htmlFor="fecha">Fecha de nacimiento</Label>
               <Input
