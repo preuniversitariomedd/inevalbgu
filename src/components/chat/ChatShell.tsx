@@ -427,10 +427,22 @@ function ChatPanel({
       >
         {msgsQ.isLoading && <div className="py-8 text-center text-sm text-muted-foreground">Cargando…</div>}
         <ul className="space-y-2">
-          {(msgsQ.data ?? []).map((m) => {
+          {(msgsQ.data ?? []).map((m, idx, arr) => {
             const mine = m.sender_id === currentUserId;
+            const prev = idx > 0 ? arr[idx - 1] : null;
+            const nuevoDia =
+              !prev || new Date(prev.created_at).toDateString() !== new Date(m.created_at).toDateString();
             return (
+              <>
+              {nuevoDia && (
+                <li key={`sep-${m.id}`} className="flex justify-center py-1">
+                  <span className="rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold text-slate-600 shadow-soft backdrop-blur dark:bg-secondary dark:text-muted-foreground">
+                    {etiquetaFecha(m.created_at)}
+                  </span>
+                </li>
+              )}
               <li key={m.id} className={`group/msg flex items-end gap-1 ${mine ? "justify-end" : "justify-start"}`}>
+
                 {esAdmin && mine && (
                   <button
                     onClick={async () => {
