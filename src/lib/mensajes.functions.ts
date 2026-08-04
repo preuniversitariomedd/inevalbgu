@@ -590,7 +590,7 @@ export const enviarMensajeMasivoRolFn = createServerFn({ method: "POST" })
     }
     ids = ids.filter((id) => id !== context.userId);
     if (!ids.length) throw new Error("No hay destinatarios.");
-    return await masivoCore(supabaseAdmin, context.userId, data.contenido, ids, []);
+    return await masivoCore(supabaseAdmin, context.userId, data.contenido, ids, [], data.audiencia);
   });
 
 // -------- Historial de mensajes masivos con estado de lectura --------
