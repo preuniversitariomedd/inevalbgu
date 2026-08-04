@@ -223,3 +223,48 @@ function Stat({ label, value, accent }: { label: string; value: React.ReactNode;
     </div>
   );
 }
+
+function fmtDur(seg: number) {
+  const s = Math.max(0, Math.round(seg || 0));
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  if (h) return `${h} h ${m} min`;
+  return `${m} min`;
+}
+
+function UsoLista({
+  titulo,
+  items,
+  fmt,
+}: {
+  titulo: string;
+  items: { clave: string; segundos: number }[];
+  fmt: (k: string) => string;
+}) {
+  const max = Math.max(1, ...items.map((i) => i.segundos));
+  return (
+    <div>
+      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">{titulo}</p>
+      {items.length === 0 ? (
+        <p className="text-xs text-muted-foreground">Sin datos.</p>
+      ) : (
+        <ul className="space-y-1.5">
+          {items.slice(0, 8).map((i) => (
+            <li key={i.clave}>
+              <div className="flex items-center justify-between text-xs">
+                <span className="capitalize">{fmt(i.clave)}</span>
+                <span className="tabular-nums font-semibold">{fmtDur(i.segundos)}</span>
+              </div>
+              <div className="mt-0.5 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-500"
+                  style={{ width: `${Math.round((i.segundos / max) * 100)}%` }}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
