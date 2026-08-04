@@ -2,16 +2,20 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ChatShell } from "@/components/chat/ChatShell";
-import { enviarMensajeMasivoFn, enviarMensajeMasivoRolFn } from "@/lib/mensajes.functions";
+import {
+  enviarMensajeMasivoFn,
+  enviarMensajeMasivoRolFn,
+  listarEnviosMasivosFn,
+} from "@/lib/mensajes.functions";
 import { listarEstudiantesFn, listarGruposFn } from "@/lib/admin.functions";
-import { Megaphone, Loader2, Send, X, Users } from "lucide-react";
+import { Megaphone, Loader2, Send, X, Users, Check, CheckCheck } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/mensajes")({
   component: AdminMensajesPage,
 });
 
-type Tab = "mis" | "todos";
+type Tab = "mis" | "todos" | "envios";
 
 function AdminMensajesPage() {
   const ctx = Route.useRouteContext() as { esAdmin: boolean; esDocente: boolean };
@@ -37,6 +41,12 @@ function AdminMensajesPage() {
               Todos
             </button>
           )}
+          <button
+            onClick={() => setTab("envios")}
+            className={`rounded-full px-3 py-1.5 text-sm font-semibold ${tab === "envios" ? "bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white shadow-soft" : "text-muted-foreground"}`}
+          >
+            Envíos masivos
+          </button>
         </div>
         <button
           onClick={() => setMasivoOpen(true)}
@@ -45,11 +55,90 @@ function AdminMensajesPage() {
           <Megaphone className="h-4 w-4" /> Mensaje masivo
         </button>
       </div>
-      <ChatShell currentUserId={parentCtx.user.id} scope={scope} esAdmin={ctx.esAdmin} />
+      {tab === "envios" ? (
+        <EnviosMasivos />
+      ) : (
+        <ChatShell currentUserId={parentCtx.user.id} scope={scope} esAdmin={ctx.esAdmin} />
+      )}
       {masivoOpen && <MasivoDialog onClose={() => setMasivoOpen(false)} />}
     </div>
   );
 }
+
+function EnviosMasivos() {
+  const q = useQuery({
+    queryKey: ["admin", "envios-masivos"],
+    queryFn: () => listarEnviosMasivosFn(),
+    refetchInterval: 30_000,
+  });
+  const [abierto, setAbierto] = useState<string | null>(null);
+
+  if (q.isLoading) return <p className="p-8 text-center text-sm text-muted-foreground">Cargando…</p>;
+  const envios = (q.data ?? []) as any[];
+  if (!envios.length)
+    return (
+      <div className="rounded-2xl border bg-card p-10 text-center text-sm text-muted-foreground shadow-soft">
+        Aún no has enviado mensajes masivos.
+      </div>
+    );
+
+  return (
+    <div className="space-y-3">
+      {envios.map((e) => {
+        const pct = e.total_destinatarios ? Math.round((e.leidos / e.total_destinatarios) * 100) : 0;
+        const open = abierto === e.id;
+        return (
+          <div key={e.id} className="overflow-hidden rounded-2xl border bg-card shadow-soft">
+            <button
+              onClick={() => setAbierto(open ? null : e.id)}
+              className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-3 text-left hover:bg-secondary/40"
+            >
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-semibold">{e.contenido}</p>
+                <p className="text-xs text-muted-foreground">
+                  {new Date(e.created_at).toLocaleString("es-EC")} · por {e.sender_nombre} · audiencia:{" "}
+                  {e.audiencia}
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-semibold">
+                <CheckCheck className="h-4 w-4 text-cyan-500" />
+                {e.leidos}/{e.total_destinatarios} leídos ({pct}%)
+              </div>
+            </button>
+            <div className="h-1.5 w-full bg-secondary">
+              <div
+                className="h-full bg-gradient-to-r from-fuchsia-500 to-cyan-500"
+                style={{ width: `${pct}%` }}
+              />
+            </div>
+            {open && (
+              <ul className="max-h-72 divide-y overflow-y-auto">
+                {e.destinatarios.map((d: any) => (
+                  <li key={d.user_id} className="flex items-center justify-between px-4 py-2 text-sm">
+                    <span className="truncate">
+                      {d.nombres} <span className="font-mono text-[10px] text-muted-foreground">{d.cedula}</span>
+                    </span>
+                    {d.leido ? (
+                      <span className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-600">
+                        <CheckCheck className="h-4 w-4" />
+                        {d.leido_at ? new Date(d.leido_at).toLocaleString("es-EC") : "Leído"}
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                        <Check className="h-4 w-4" /> Entregado
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 
 function MasivoDialog({ onClose }: { onClose: () => void }) {
   const [contenido, setContenido] = useState("");
