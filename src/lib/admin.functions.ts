@@ -127,10 +127,11 @@ export const crearEstudianteFn = createServerFn({ method: "POST" })
     }
     const { error: re } = await supabaseAdmin
       .from("user_roles")
-      .insert({ user_id: userId, role: "estudiante" });
+      .insert({ user_id: userId, role: data.rol });
     if (re) throw new Error(re.message);
-    return { ok: true, userId, cedula: data.cedula, passwordTemporal: TEMP_PASSWORD };
+    return { ok: true, userId, cedula: data.cedula, passwordTemporal: TEMP_PASSWORD, rol: data.rol };
   });
+
 
 export const resetPasswordEstudianteFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
