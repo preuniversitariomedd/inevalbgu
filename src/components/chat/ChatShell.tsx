@@ -433,7 +433,8 @@ function ChatPanel({
             const nuevoDia =
               !prev || new Date(prev.created_at).toDateString() !== new Date(m.created_at).toDateString();
             return (
-              <>
+              <Fragment key={m.id}>
+
               {nuevoDia && (
                 <li key={`sep-${m.id}`} className="flex justify-center py-1">
                   <span className="rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold text-slate-600 shadow-soft backdrop-blur dark:bg-secondary dark:text-muted-foreground">
