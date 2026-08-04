@@ -97,8 +97,10 @@ export const crearEstudianteFn = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => crearEstudianteSchema.parse(d))
   .handler(async ({ data, context }) => {
     await ensureStaff(context);
+    if (data.rol === "docente") await ensureAdmin(context);
     const v = validarCedulaEcuatoriana(data.cedula);
     if (!v.valida) throw new Error(v.error!);
+
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: created, error } = await supabaseAdmin.auth.admin.createUser({
