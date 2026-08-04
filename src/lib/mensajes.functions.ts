@@ -592,3 +592,74 @@ export const enviarMensajeMasivoRolFn = createServerFn({ method: "POST" })
     if (!ids.length) throw new Error("No hay destinatarios.");
     return await masivoCore(supabaseAdmin, context.userId, data.contenido, ids, []);
   });
+
+// -------- Historial de mensajes masivos con estado de lectura --------
+export const listarEnviosMasivosFn = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    if (!(await esStaff(context))) throw new Error("Solo docentes o administradores.");
+    const admin = await esAdmin(context);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    let q = supabaseAdmin
+      .from("envios_masivos")
+      .select("id, sender_id, contenido, audiencia, total_destinatarios, created_at")
+      .order("created_at", { ascending: false })
+      .limit(50);
+    if (!admin) q = q.eq("sender_id", context.userId);
+    const { data: envios, error } = await q;
+    if (error) throw new Error(error.message);
+    if (!envios?.length) return [];
+
+    const envioIds = envios.map((e: any) => e.id);
+    const { data: dests } = await supabaseAdmin
+      .from("envio_masivo_destinatarios")
+      .select("envio_id, user_id, conversacion_id, created_at")
+      .in("envio_id", envioIds);
+
+    const userIds = Array.from(new Set((dests ?? []).map((d: any) => d.user_id)));
+    const senderIds = Array.from(new Set(envios.map((e: any) => e.sender_id)));
+    const { data: profs } = await supabaseAdmin
+      .from("profiles")
+      .select("id, nombres, cedula")
+      .in("id", Array.from(new Set([...userIds, ...senderIds])));
+    const profMap = new Map((profs ?? []).map((p: any) => [p.id, p]));
+
+    const convIds = Array.from(new Set((dests ?? []).map((d: any) => d.conversacion_id).filter(Boolean)));
+    const lecturas = new Map<string, string | null>();
+    if (convIds.length) {
+      const { data: parts } = await supabaseAdmin
+        .from("conversacion_participantes")
+        .select("conversacion_id, user_id, ultima_lectura_at")
+        .in("conversacion_id", convIds);
+      (parts ?? []).forEach((p: any) => {
+        lecturas.set(`${p.conversacion_id}:${p.user_id}`, p.ultima_lectura_at);
+      });
+    }
+
+    const byEnvio = new Map<string, any[]>();
+    (dests ?? []).forEach((d: any) => {
+      const leidoAt = lecturas.get(`${d.conversacion_id}:${d.user_id}`) ?? null;
+      const leido = !!leidoAt && new Date(leidoAt).getTime() >= new Date(d.created_at).getTime();
+      const pr: any = profMap.get(d.user_id);
+      const arr = byEnvio.get(d.envio_id) ?? [];
+      arr.push({
+        user_id: d.user_id,
+        nombres: pr?.nombres ?? "?",
+        cedula: pr?.cedula ?? "",
+        leido,
+        leido_at: leido ? leidoAt : null,
+      });
+      byEnvio.set(d.envio_id, arr);
+    });
+
+    return envios.map((e: any) => {
+      const ds = (byEnvio.get(e.id) ?? []).sort((a, b) => a.nombres.localeCompare(b.nombres));
+      return {
+        ...e,
+        sender_nombre: (profMap.get(e.sender_id) as any)?.nombres ?? "—",
+        destinatarios: ds,
+        leidos: ds.filter((d) => d.leido).length,
+      };
+    });
+  });
