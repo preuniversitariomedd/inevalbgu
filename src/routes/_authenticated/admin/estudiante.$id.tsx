@@ -19,6 +19,7 @@ function VistaEstudiante() {
   const navigate = useNavigate();
   const fn = useServerFn(obtenerProgresoAlumnoFn);
   const fnHist = useServerFn(historialConexionesFn);
+  const fnUso = useServerFn(usoPlataformaFn);
   const { data, isLoading, error } = useQuery({
     queryKey: ["admin", "progreso", id],
     queryFn: () => fn({ data: { userId: id } }),
@@ -27,6 +28,11 @@ function VistaEstudiante() {
     queryKey: ["admin", "conexiones", id],
     queryFn: () => fnHist({ data: { userId: id, limite: 50 } }),
   });
+  const { data: uso } = useQuery({
+    queryKey: ["admin", "uso", id],
+    queryFn: () => fnUso({ data: { userId: id } }),
+  });
+
 
   if (isLoading) return <div className="p-10 text-center text-muted-foreground">Cargando…</div>;
   if (error || !data) return <div className="p-10 text-center text-destructive">{(error as Error)?.message ?? "Error"}</div>;
@@ -187,7 +193,25 @@ function VistaEstudiante() {
           </div>
         )}
       </div>
+      {uso && (
+        <div className="rounded-2xl border bg-card shadow-soft">
+          <div className="flex items-center gap-2 border-b px-5 py-3 text-sm font-semibold">
+            <Clock className="h-4 w-4" /> Tiempo en la plataforma
+          </div>
+          <div className="grid gap-3 p-5 sm:grid-cols-3">
+            <Stat label="Tiempo total" value={fmtDur((uso as any).totalSegundos)} accent />
+            <Stat label="Interacción real" value={fmtDur((uso as any).totalInteraccion)} />
+            <Stat label="Conexiones" value={(uso as any).sesiones} />
+          </div>
+          <div className="grid gap-4 border-t p-5 md:grid-cols-3">
+            <UsoLista titulo="Por día" items={(uso as any).dias} fmt={(k: string) => new Date(k + "T00:00:00").toLocaleDateString("es-EC", { day: "2-digit", month: "short" })} />
+            <UsoLista titulo="Por semana" items={(uso as any).semanas} fmt={(k: string) => `Sem. del ${new Date(k + "T00:00:00").toLocaleDateString("es-EC", { day: "2-digit", month: "short" })}`} />
+            <UsoLista titulo="Por mes" items={(uso as any).meses} fmt={(k: string) => new Date(k + "-01T00:00:00").toLocaleDateString("es-EC", { month: "long", year: "numeric" })} />
+          </div>
+        </div>
+      )}
     </div>
+
   );
 }
 
