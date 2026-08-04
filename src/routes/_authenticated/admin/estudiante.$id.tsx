@@ -1,12 +1,13 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { obtenerProgresoAlumnoFn } from "@/lib/admin.functions";
+import { obtenerProgresoAlumnoFn, usoPlataformaFn } from "@/lib/admin.functions";
 import { historialConexionesFn } from "@/lib/presencia.functions";
 import { calcularEdad } from "@/lib/edad";
-import { ArrowLeft, Eye, Database, BarChart3, History, Smartphone, Tablet, Monitor, Wifi } from "lucide-react";
+import { ArrowLeft, Eye, Database, BarChart3, History, Smartphone, Tablet, Monitor, Wifi, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+
 
 export const Route = createFileRoute("/_authenticated/admin/estudiante/$id")({
   head: () => ({ meta: [{ title: "Vista estudiante — Admin" }] }),
@@ -18,6 +19,7 @@ function VistaEstudiante() {
   const navigate = useNavigate();
   const fn = useServerFn(obtenerProgresoAlumnoFn);
   const fnHist = useServerFn(historialConexionesFn);
+  const fnUso = useServerFn(usoPlataformaFn);
   const { data, isLoading, error } = useQuery({
     queryKey: ["admin", "progreso", id],
     queryFn: () => fn({ data: { userId: id } }),
@@ -26,6 +28,11 @@ function VistaEstudiante() {
     queryKey: ["admin", "conexiones", id],
     queryFn: () => fnHist({ data: { userId: id, limite: 50 } }),
   });
+  const { data: uso } = useQuery({
+    queryKey: ["admin", "uso", id],
+    queryFn: () => fnUso({ data: { userId: id } }),
+  });
+
 
   if (isLoading) return <div className="p-10 text-center text-muted-foreground">Cargando…</div>;
   if (error || !data) return <div className="p-10 text-center text-destructive">{(error as Error)?.message ?? "Error"}</div>;
@@ -186,7 +193,25 @@ function VistaEstudiante() {
           </div>
         )}
       </div>
+      {uso && (
+        <div className="rounded-2xl border bg-card shadow-soft">
+          <div className="flex items-center gap-2 border-b px-5 py-3 text-sm font-semibold">
+            <Clock className="h-4 w-4" /> Tiempo en la plataforma
+          </div>
+          <div className="grid gap-3 p-5 sm:grid-cols-3">
+            <Stat label="Tiempo total" value={fmtDur((uso as any).totalSegundos)} accent />
+            <Stat label="Interacción real" value={fmtDur((uso as any).totalInteraccion)} />
+            <Stat label="Conexiones" value={(uso as any).sesiones} />
+          </div>
+          <div className="grid gap-4 border-t p-5 md:grid-cols-3">
+            <UsoLista titulo="Por día" items={(uso as any).dias} fmt={(k: string) => new Date(k + "T00:00:00").toLocaleDateString("es-EC", { day: "2-digit", month: "short" })} />
+            <UsoLista titulo="Por semana" items={(uso as any).semanas} fmt={(k: string) => `Sem. del ${new Date(k + "T00:00:00").toLocaleDateString("es-EC", { day: "2-digit", month: "short" })}`} />
+            <UsoLista titulo="Por mes" items={(uso as any).meses} fmt={(k: string) => new Date(k + "-01T00:00:00").toLocaleDateString("es-EC", { month: "long", year: "numeric" })} />
+          </div>
+        </div>
+      )}
     </div>
+
   );
 }
 
@@ -195,6 +220,51 @@ function Stat({ label, value, accent }: { label: string; value: React.ReactNode;
     <div className={`rounded-xl border p-3 ${accent ? "bg-primary/5" : "bg-card"}`}>
       <p className="text-xs text-muted-foreground">{label}</p>
       <p className="text-xl font-extrabold">{value}</p>
+    </div>
+  );
+}
+
+function fmtDur(seg: number) {
+  const s = Math.max(0, Math.round(seg || 0));
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  if (h) return `${h} h ${m} min`;
+  return `${m} min`;
+}
+
+function UsoLista({
+  titulo,
+  items,
+  fmt,
+}: {
+  titulo: string;
+  items: { clave: string; segundos: number }[];
+  fmt: (k: string) => string;
+}) {
+  const max = Math.max(1, ...items.map((i) => i.segundos));
+  return (
+    <div>
+      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">{titulo}</p>
+      {items.length === 0 ? (
+        <p className="text-xs text-muted-foreground">Sin datos.</p>
+      ) : (
+        <ul className="space-y-1.5">
+          {items.slice(0, 8).map((i) => (
+            <li key={i.clave}>
+              <div className="flex items-center justify-between text-xs">
+                <span className="capitalize">{fmt(i.clave)}</span>
+                <span className="tabular-nums font-semibold">{fmtDur(i.segundos)}</span>
+              </div>
+              <div className="mt-0.5 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-fuchsia-500 to-cyan-500"
+                  style={{ width: `${Math.round((i.segundos / max) * 100)}%` }}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

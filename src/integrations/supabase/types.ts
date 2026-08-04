@@ -235,6 +235,65 @@ export type Database = {
           },
         ]
       }
+      envio_masivo_destinatarios: {
+        Row: {
+          conversacion_id: string | null
+          created_at: string
+          envio_id: string
+          mensaje_id: string | null
+          user_id: string
+        }
+        Insert: {
+          conversacion_id?: string | null
+          created_at?: string
+          envio_id: string
+          mensaje_id?: string | null
+          user_id: string
+        }
+        Update: {
+          conversacion_id?: string | null
+          created_at?: string
+          envio_id?: string
+          mensaje_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "envio_masivo_destinatarios_envio_id_fkey"
+            columns: ["envio_id"]
+            isOneToOne: false
+            referencedRelation: "envios_masivos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      envios_masivos: {
+        Row: {
+          audiencia: string
+          contenido: string
+          created_at: string
+          id: string
+          sender_id: string
+          total_destinatarios: number
+        }
+        Insert: {
+          audiencia?: string
+          contenido: string
+          created_at?: string
+          id?: string
+          sender_id: string
+          total_destinatarios?: number
+        }
+        Update: {
+          audiencia?: string
+          contenido?: string
+          created_at?: string
+          id?: string
+          sender_id?: string
+          total_destinatarios?: number
+        }
+        Relationships: []
+      }
       grupo_estudiantes: {
         Row: {
           created_at: string

@@ -88,15 +88,19 @@ const crearEstudianteSchema = z.object({
   institucion: z.string().min(1).max(160),
   fechaNacimiento: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   genero: GENERO,
+  rol: z.enum(["estudiante", "docente"]).optional().default("estudiante"),
 });
+
 
 export const crearEstudianteFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => crearEstudianteSchema.parse(d))
   .handler(async ({ data, context }) => {
     await ensureStaff(context);
+    if (data.rol === "docente") await ensureAdmin(context);
     const v = validarCedulaEcuatoriana(data.cedula);
     if (!v.valida) throw new Error(v.error!);
+
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: created, error } = await supabaseAdmin.auth.admin.createUser({
@@ -123,10 +127,11 @@ export const crearEstudianteFn = createServerFn({ method: "POST" })
     }
     const { error: re } = await supabaseAdmin
       .from("user_roles")
-      .insert({ user_id: userId, role: "estudiante" });
+      .insert({ user_id: userId, role: data.rol });
     if (re) throw new Error(re.message);
-    return { ok: true, userId, cedula: data.cedula, passwordTemporal: TEMP_PASSWORD };
+    return { ok: true, userId, cedula: data.cedula, passwordTemporal: TEMP_PASSWORD, rol: data.rol };
   });
+
 
 export const resetPasswordEstudianteFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -598,4 +603,53 @@ export const listarEstudiantesGrupoFn = createServerFn({ method: "POST" })
       .eq("grupo_id", data.grupoId);
     if (error) throw new Error(error.message);
     return (rows ?? []).map((r: any) => r.user_id as string);
+  });
+
+// ---------- Uso de la plataforma por día / semana / mes ----------
+export const usoPlataformaFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ userId: z.string().uuid() }).parse(d))
+  .handler(async ({ data, context }) => {
+    await ensureStaff(context);
+    const { data: ses } = await context.supabase
+      .from("sesiones_conexion")
+      .select("iniciada_en, segundos_visible, segundos_oculto, segundos_interaccion")
+      .eq("user_id", data.userId)
+      .order("iniciada_en", { ascending: false })
+      .limit(2000);
+
+    const dias = new Map<string, number>();
+    const semanas = new Map<string, number>();
+    const meses = new Map<string, number>();
+    let totalSeg = 0;
+    let totalInteraccion = 0;
+
+    for (const s of ses ?? []) {
+      const seg = (s.segundos_visible ?? 0) + (s.segundos_oculto ?? 0);
+      totalSeg += seg;
+      totalInteraccion += s.segundos_interaccion ?? 0;
+      const f = new Date(s.iniciada_en);
+      const dia = f.toISOString().slice(0, 10);
+      const mes = dia.slice(0, 7);
+      const lunes = new Date(f);
+      const dow = (lunes.getUTCDay() + 6) % 7;
+      lunes.setUTCDate(lunes.getUTCDate() - dow);
+      const sem = lunes.toISOString().slice(0, 10);
+      dias.set(dia, (dias.get(dia) ?? 0) + seg);
+      semanas.set(sem, (semanas.get(sem) ?? 0) + seg);
+      meses.set(mes, (meses.get(mes) ?? 0) + seg);
+    }
+    const orden = (m: Map<string, number>) =>
+      Array.from(m.entries())
+        .sort((a, b) => (a[0] < b[0] ? 1 : -1))
+        .map(([clave, segundos]) => ({ clave, segundos }));
+
+    return {
+      totalSegundos: totalSeg,
+      totalInteraccion,
+      sesiones: (ses ?? []).length,
+      dias: orden(dias).slice(0, 30),
+      semanas: orden(semanas).slice(0, 16),
+      meses: orden(meses).slice(0, 12),
+    };
   });

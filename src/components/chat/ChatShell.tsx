@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -38,6 +38,17 @@ const EMOJIS = [
   "🎉","💯","❤️","💙","💚","💛","🧡","💜","🖤","🤍",
   "📚","✏️","🧠","🎓","🚀","⭐","🌟","😅","😢","😭",
 ];
+
+function etiquetaFecha(iso: string) {
+  const d = new Date(iso);
+  const hoy = new Date();
+  const ayer = new Date();
+  ayer.setDate(hoy.getDate() - 1);
+  if (d.toDateString() === hoy.toDateString()) return "Hoy";
+  if (d.toDateString() === ayer.toDateString()) return "Ayer";
+  return d.toLocaleDateString("es-EC", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+}
+
 
 type Conversacion = {
   id: string;
@@ -427,10 +438,23 @@ function ChatPanel({
       >
         {msgsQ.isLoading && <div className="py-8 text-center text-sm text-muted-foreground">Cargando…</div>}
         <ul className="space-y-2">
-          {(msgsQ.data ?? []).map((m) => {
+          {(msgsQ.data ?? []).map((m, idx, arr) => {
             const mine = m.sender_id === currentUserId;
+            const prev = idx > 0 ? arr[idx - 1] : null;
+            const nuevoDia =
+              !prev || new Date(prev.created_at).toDateString() !== new Date(m.created_at).toDateString();
             return (
+              <Fragment key={m.id}>
+
+              {nuevoDia && (
+                <li key={`sep-${m.id}`} className="flex justify-center py-1">
+                  <span className="rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold text-slate-600 shadow-soft backdrop-blur dark:bg-secondary dark:text-muted-foreground">
+                    {etiquetaFecha(m.created_at)}
+                  </span>
+                </li>
+              )}
               <li key={m.id} className={`group/msg flex items-end gap-1 ${mine ? "justify-end" : "justify-start"}`}>
+
                 {esAdmin && mine && (
                   <button
                     onClick={async () => {
@@ -481,7 +505,9 @@ function ChatPanel({
                   </div>
                 </div>
               </li>
+              </Fragment>
             );
+
           })}
         </ul>
       </div>
