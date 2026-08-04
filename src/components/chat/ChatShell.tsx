@@ -39,6 +39,17 @@ const EMOJIS = [
   "📚","✏️","🧠","🎓","🚀","⭐","🌟","😅","😢","😭",
 ];
 
+function etiquetaFecha(iso: string) {
+  const d = new Date(iso);
+  const hoy = new Date();
+  const ayer = new Date();
+  ayer.setDate(hoy.getDate() - 1);
+  if (d.toDateString() === hoy.toDateString()) return "Hoy";
+  if (d.toDateString() === ayer.toDateString()) return "Ayer";
+  return d.toLocaleDateString("es-EC", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+}
+
+
 type Conversacion = {
   id: string;
   ultimo_mensaje_at: string;
