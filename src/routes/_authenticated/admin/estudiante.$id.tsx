@@ -1,12 +1,13 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { obtenerProgresoAlumnoFn } from "@/lib/admin.functions";
+import { obtenerProgresoAlumnoFn, usoPlataformaFn } from "@/lib/admin.functions";
 import { historialConexionesFn } from "@/lib/presencia.functions";
 import { calcularEdad } from "@/lib/edad";
-import { ArrowLeft, Eye, Database, BarChart3, History, Smartphone, Tablet, Monitor, Wifi } from "lucide-react";
+import { ArrowLeft, Eye, Database, BarChart3, History, Smartphone, Tablet, Monitor, Wifi, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+
 
 export const Route = createFileRoute("/_authenticated/admin/estudiante/$id")({
   head: () => ({ meta: [{ title: "Vista estudiante — Admin" }] }),
