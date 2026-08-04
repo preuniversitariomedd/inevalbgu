@@ -88,7 +88,9 @@ const crearEstudianteSchema = z.object({
   institucion: z.string().min(1).max(160),
   fechaNacimiento: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   genero: GENERO,
+  rol: z.enum(["estudiante", "docente"]).optional().default("estudiante"),
 });
+
 
 export const crearEstudianteFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
