@@ -347,7 +347,9 @@ async function masivoCore(
   contenido: string,
   userIds: string[],
   grupoIds: string[],
+  audiencia = "manual",
 ) {
+
   const dest = new Set<string>(userIds);
   if (grupoIds.length) {
     const { data: rows } = await supabaseAdmin
