@@ -235,6 +235,63 @@ export type Database = {
           },
         ]
       }
+      encuesta_progreso: {
+        Row: {
+          bloque: string
+          completado_en: string
+          created_at: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bloque: string
+          completado_en?: string
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bloque?: string
+          completado_en?: string
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      encuesta_respuestas: {
+        Row: {
+          bloque: string
+          created_at: string
+          id: string
+          pregunta_id: string
+          updated_at: string
+          user_id: string
+          valor: string
+        }
+        Insert: {
+          bloque: string
+          created_at?: string
+          id?: string
+          pregunta_id: string
+          updated_at?: string
+          user_id: string
+          valor: string
+        }
+        Update: {
+          bloque?: string
+          created_at?: string
+          id?: string
+          pregunta_id?: string
+          updated_at?: string
+          user_id?: string
+          valor?: string
+        }
+        Relationships: []
+      }
       envio_masivo_destinatarios: {
         Row: {
           conversacion_id: string | null

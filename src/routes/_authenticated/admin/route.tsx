@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet, redirect, Link, useLocation } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
-import { Users, ArrowLeft, Layers, Shield, Image as ImageIcon, MessageCircle, Wifi, FileSpreadsheet, Send, GraduationCap, ClipboardList, KeyRound } from "lucide-react";
+import { Users, ArrowLeft, Layers, Shield, Image as ImageIcon, MessageCircle, Wifi, FileSpreadsheet, Send, GraduationCap, ClipboardList, KeyRound, Trophy } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   ssr: false,
@@ -28,6 +28,7 @@ function AdminLayout() {
 
   const tabs = [
     { to: "/admin", label: "Estudiantes", icon: Users, show: true },
+    { to: "/admin/podio", label: "Podio", icon: Trophy, show: true },
     { to: "/admin/presencia", label: "Presencia", icon: Wifi, show: true },
     { to: "/admin/calificaciones", label: "Calificaciones", icon: FileSpreadsheet, show: true },
     { to: "/admin/grupos", label: "Grupos", icon: Layers, show: true },
