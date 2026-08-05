@@ -28,6 +28,7 @@ function AdminLayout() {
 
   const tabs = [
     { to: "/admin", label: "Estudiantes", icon: Users, show: true },
+    { to: "/admin/podio", label: "Podio", icon: Trophy, show: true },
     { to: "/admin/presencia", label: "Presencia", icon: Wifi, show: true },
     { to: "/admin/calificaciones", label: "Calificaciones", icon: FileSpreadsheet, show: true },
     { to: "/admin/grupos", label: "Grupos", icon: Layers, show: true },

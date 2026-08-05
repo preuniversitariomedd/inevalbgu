@@ -30,6 +30,7 @@ import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authen
 import { Route as AuthenticatedAdminTareasRouteImport } from './routes/_authenticated/admin/tareas'
 import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
 import { Route as AuthenticatedAdminPresenciaRouteImport } from './routes/_authenticated/admin/presencia'
+import { Route as AuthenticatedAdminPodioRouteImport } from './routes/_authenticated/admin/podio'
 import { Route as AuthenticatedAdminPermisosDocentesRouteImport } from './routes/_authenticated/admin/permisos-docentes'
 import { Route as AuthenticatedAdminMensajesRouteImport } from './routes/_authenticated/admin/mensajes'
 import { Route as AuthenticatedAdminGruposRouteImport } from './routes/_authenticated/admin/grupos'
@@ -147,6 +148,11 @@ const AuthenticatedAdminPresenciaRoute =
     path: '/presencia',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminPodioRoute = AuthenticatedAdminPodioRouteImport.update({
+  id: '/podio',
+  path: '/podio',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
 const AuthenticatedAdminPermisosDocentesRoute =
   AuthenticatedAdminPermisosDocentesRouteImport.update({
     id: '/permisos-docentes',
@@ -210,6 +216,7 @@ export interface FileRoutesByFullPath {
   '/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/admin/permisos-docentes': typeof AuthenticatedAdminPermisosDocentesRoute
+  '/admin/podio': typeof AuthenticatedAdminPodioRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/admin/tareas': typeof AuthenticatedAdminTareasRoute
@@ -237,6 +244,7 @@ export interface FileRoutesByTo {
   '/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/admin/permisos-docentes': typeof AuthenticatedAdminPermisosDocentesRoute
+  '/admin/podio': typeof AuthenticatedAdminPodioRoute
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/admin/tareas': typeof AuthenticatedAdminTareasRoute
@@ -268,6 +276,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/grupos': typeof AuthenticatedAdminGruposRoute
   '/_authenticated/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/_authenticated/admin/permisos-docentes': typeof AuthenticatedAdminPermisosDocentesRoute
+  '/_authenticated/admin/podio': typeof AuthenticatedAdminPodioRoute
   '/_authenticated/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/_authenticated/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/_authenticated/admin/tareas': typeof AuthenticatedAdminTareasRoute
@@ -299,6 +308,7 @@ export interface FileRouteTypes {
     | '/admin/grupos'
     | '/admin/mensajes'
     | '/admin/permisos-docentes'
+    | '/admin/podio'
     | '/admin/presencia'
     | '/admin/roles'
     | '/admin/tareas'
@@ -326,6 +336,7 @@ export interface FileRouteTypes {
     | '/admin/grupos'
     | '/admin/mensajes'
     | '/admin/permisos-docentes'
+    | '/admin/podio'
     | '/admin/presencia'
     | '/admin/roles'
     | '/admin/tareas'
@@ -356,6 +367,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/grupos'
     | '/_authenticated/admin/mensajes'
     | '/_authenticated/admin/permisos-docentes'
+    | '/_authenticated/admin/podio'
     | '/_authenticated/admin/presencia'
     | '/_authenticated/admin/roles'
     | '/_authenticated/admin/tareas'
@@ -521,6 +533,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPresenciaRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/podio': {
+      id: '/_authenticated/admin/podio'
+      path: '/podio'
+      fullPath: '/admin/podio'
+      preLoaderRoute: typeof AuthenticatedAdminPodioRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/permisos-docentes': {
       id: '/_authenticated/admin/permisos-docentes'
       path: '/permisos-docentes'
@@ -580,6 +599,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminGruposRoute: typeof AuthenticatedAdminGruposRoute
   AuthenticatedAdminMensajesRoute: typeof AuthenticatedAdminMensajesRoute
   AuthenticatedAdminPermisosDocentesRoute: typeof AuthenticatedAdminPermisosDocentesRoute
+  AuthenticatedAdminPodioRoute: typeof AuthenticatedAdminPodioRoute
   AuthenticatedAdminPresenciaRoute: typeof AuthenticatedAdminPresenciaRoute
   AuthenticatedAdminRolesRoute: typeof AuthenticatedAdminRolesRoute
   AuthenticatedAdminTareasRoute: typeof AuthenticatedAdminTareasRoute
@@ -597,6 +617,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminMensajesRoute: AuthenticatedAdminMensajesRoute,
     AuthenticatedAdminPermisosDocentesRoute:
       AuthenticatedAdminPermisosDocentesRoute,
+    AuthenticatedAdminPodioRoute: AuthenticatedAdminPodioRoute,
     AuthenticatedAdminPresenciaRoute: AuthenticatedAdminPresenciaRoute,
     AuthenticatedAdminRolesRoute: AuthenticatedAdminRolesRoute,
     AuthenticatedAdminTareasRoute: AuthenticatedAdminTareasRoute,
