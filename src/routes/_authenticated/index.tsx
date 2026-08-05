@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database } from "lucide-react";
+import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database, ClipboardCheck } from "lucide-react";
 import { BANCO_PREGUNTAS } from "@/data";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 
@@ -93,7 +93,15 @@ function Index() {
             desc="Aciertos por área, racha de días y tus temas débiles."
             tone="success"
           />
+          <ActionCard
+            to="/encuesta"
+            icon={<ClipboardCheck className="h-7 w-7" />}
+            title="Encuesta de factores"
+            desc="100 preguntas en 5 periodos cortos: contexto, familia, traslado, alimentación y bienestar."
+            tone="accent"
+          />
         </div>
+
 
 
 
