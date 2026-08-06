@@ -126,8 +126,9 @@ function Simulacro() {
     const errores = respuestas.filter((r) => !r.correcta);
     if (!guardadoFinal) {
       setGuardadoFinal(true);
-      void finalizarSesion(sesionId, total, aciertos, score, nivel.nombre);
+      void finalizarSesion(sesionId, total, aciertos, score, nivel.nombre, DURACION_MIN * 60 - restante);
     }
+
 
 
     if (revisando) {
