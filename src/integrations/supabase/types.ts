@@ -413,6 +413,7 @@ export type Database = {
           created_at: string
           es_admin_intervencion: boolean
           id: string
+          responde_a: string | null
           sender_id: string
         }
         Insert: {
@@ -423,6 +424,7 @@ export type Database = {
           created_at?: string
           es_admin_intervencion?: boolean
           id?: string
+          responde_a?: string | null
           sender_id: string
         }
         Update: {
@@ -433,6 +435,7 @@ export type Database = {
           created_at?: string
           es_admin_intervencion?: boolean
           id?: string
+          responde_a?: string | null
           sender_id?: string
         }
         Relationships: [
@@ -441,6 +444,13 @@ export type Database = {
             columns: ["conversacion_id"]
             isOneToOne: false
             referencedRelation: "conversaciones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mensajes_responde_a_fkey"
+            columns: ["responde_a"]
+            isOneToOne: false
+            referencedRelation: "mensajes"
             referencedColumns: ["id"]
           },
         ]
