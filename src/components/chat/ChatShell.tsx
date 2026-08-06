@@ -29,6 +29,7 @@ import {
   Check,
   CheckCheck,
   Trash2,
+  Reply,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -71,6 +72,8 @@ type Mensaje = {
   es_admin_intervencion: boolean;
   leido_por_otro?: boolean;
   created_at: string;
+  responde_a?: string | null;
+  cita?: { id: string; sender_id: string; contenido: string | null; attachment_tipo: string | null } | null;
 };
 
 export function ChatShell({
@@ -302,7 +305,19 @@ function ChatPanel({
   const [texto, setTexto] = useState("");
   const [emojisOpen, setEmojisOpen] = useState(false);
   const [file, setFile] = useState<{ base64: string; mime: string; nombre: string; preview: string } | null>(null);
+  const [respondiendo, setRespondiendo] = useState<Mensaje | null>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement | HTMLInputElement | null>(null);
+
+  useEffect(() => { setRespondiendo(null); }, [conv.id]);
+
+  function irAMensaje(id: string) {
+    const el = document.getElementById(`msg-${id}`);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    el.classList.add("ring-2", "ring-fuchsia-400");
+    setTimeout(() => el.classList.remove("ring-2", "ring-fuchsia-400"), 1200);
+  }
 
   const otro = conv.otro ?? conv.participantes.find((p) => p.id !== currentUserId) ?? null;
 
@@ -343,11 +358,13 @@ function ChatPanel({
           attachmentBase64: file?.base64 ?? null,
           attachmentMime: file?.mime ?? null,
           attachmentNombre: file?.nombre ?? null,
+          respondeA: respondiendo?.id ?? null,
         },
       }),
     onSuccess: () => {
       setTexto("");
       setFile(null);
+      setRespondiendo(null);
       qc.invalidateQueries({ queryKey: ["mensajes", "msgs", conv.id] });
       qc.invalidateQueries({ queryKey: ["mensajes", "convs"] });
     },
@@ -455,6 +472,13 @@ function ChatPanel({
               )}
               <li key={m.id} className={`group/msg flex items-end gap-1 ${mine ? "justify-end" : "justify-start"}`}>
 
+                <button
+                  onClick={() => { setRespondiendo(m); inputRef.current?.focus(); }}
+                  title="Responder"
+                  className={`grid h-6 w-6 place-items-center rounded-full text-muted-foreground opacity-0 transition hover:bg-secondary group-hover/msg:opacity-100 ${mine ? "order-first" : "order-last"}`}
+                >
+                  <Reply className="h-3.5 w-3.5" />
+                </button>
                 {esAdmin && mine && (
                   <button
                     onClick={async () => {
@@ -474,6 +498,7 @@ function ChatPanel({
                   </button>
                 )}
                 <div
+                  id={`msg-${m.id}`}
                   className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm shadow-soft ${
                     mine
                       ? "rounded-tr-sm bg-gradient-to-br from-fuchsia-500 to-pink-500 text-white"
@@ -484,6 +509,23 @@ function ChatPanel({
                 >
                   {m.es_admin_intervencion && !mine && (
                     <div className="mb-1 text-[10px] font-bold uppercase tracking-wide">👑 Admin</div>
+                  )}
+                  {m.cita && (
+                    <button
+                      onClick={() => irAMensaje(m.cita!.id)}
+                      className={`mb-1 block w-full rounded-lg border-l-4 px-2 py-1 text-left text-[11px] ${
+                        mine
+                          ? "border-white/70 bg-white/20 text-white/90"
+                          : "border-fuchsia-400 bg-black/5 text-slate-700"
+                      }`}
+                    >
+                      <span className="block font-bold">
+                        {m.cita.sender_id === currentUserId ? "Tú" : otro?.nombres ?? "Mensaje"}
+                      </span>
+                      <span className="line-clamp-2 break-words">
+                        {m.cita.contenido || (m.cita.attachment_tipo ? "📷 Imagen" : "Mensaje")}
+                      </span>
+                    </button>
                   )}
                   {m.attachment_url && (
                     <img
@@ -511,6 +553,22 @@ function ChatPanel({
           })}
         </ul>
       </div>
+
+      {respondiendo && (
+        <div className="flex items-center gap-2 border-t bg-background/70 px-3 py-2">
+          <div className="min-w-0 flex-1 rounded-lg border-l-4 border-fuchsia-500 bg-secondary/60 px-2 py-1">
+            <p className="text-[11px] font-bold text-fuchsia-600">
+              Respondiendo a {respondiendo.sender_id === currentUserId ? "ti mismo" : otro?.nombres ?? "mensaje"}
+            </p>
+            <p className="truncate text-xs text-muted-foreground">
+              {respondiendo.contenido || (respondiendo.attachment_tipo ? "📷 Imagen" : "Mensaje")}
+            </p>
+          </div>
+          <button onClick={() => setRespondiendo(null)} className="grid h-7 w-7 place-items-center rounded-full hover:bg-secondary">
+            <X className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      )}
 
       {file && (
         <div className="border-t bg-background/70 px-3 py-2">
