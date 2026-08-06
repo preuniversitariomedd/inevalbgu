@@ -615,6 +615,7 @@ function ChatPanel({
             <input type="file" accept="image/*" className="hidden" onChange={onPickFile} />
           </label>
           <textarea
+            ref={(el) => { inputRef.current = el; }}
             value={texto}
             onChange={(e) => setTexto(e.target.value)}
             onPaste={onPaste}
