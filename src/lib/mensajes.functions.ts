@@ -206,11 +206,22 @@ export const listarMensajesFn = createServerFn({ method: "POST" })
     }
     const { data: msgs, error } = await supabaseAdmin
       .from("mensajes")
-      .select("id, sender_id, contenido, attachment_path, attachment_tipo, es_admin_intervencion, created_at")
+      .select("id, sender_id, contenido, attachment_path, attachment_tipo, es_admin_intervencion, created_at, responde_a")
       .eq("conversacion_id", data.conversacionId)
       .order("created_at", { ascending: true })
       .limit(500);
     if (error) throw new Error(error.message);
+
+    // Mapa de mensajes citados
+    const citadosIds = Array.from(new Set((msgs ?? []).map((m: any) => m.responde_a).filter(Boolean)));
+    const citados: Record<string, { id: string; sender_id: string; contenido: string | null; attachment_tipo: string | null }> = {};
+    if (citadosIds.length) {
+      const { data: cs } = await supabaseAdmin
+        .from("mensajes")
+        .select("id, sender_id, contenido, attachment_tipo")
+        .in("id", citadosIds);
+      for (const c of cs ?? []) citados[(c as any).id] = c as any;
+    }
 
     // Última lectura del OTRO participante (para indicador ✓✓)
     const { data: parts } = await supabaseAdmin
@@ -231,7 +242,8 @@ export const listarMensajesFn = createServerFn({ method: "POST" })
           attachment_url = signed?.signedUrl ?? null;
         }
         const leido = otroLeidoAt && new Date(m.created_at).getTime() <= new Date(otroLeidoAt).getTime();
-        return { ...m, attachment_url, leido_por_otro: !!leido };
+        const cita = m.responde_a ? citados[m.responde_a] ?? null : null;
+        return { ...m, attachment_url, leido_por_otro: !!leido, cita };
       }),
     );
     return withUrl;
@@ -244,6 +256,7 @@ const enviarSchema = z.object({
   attachmentBase64: z.string().max(8_000_000).optional().nullable(),
   attachmentMime: z.string().max(80).optional().nullable(),
   attachmentNombre: z.string().max(120).optional().nullable(),
+  respondeA: z.string().uuid().optional().nullable(),
 });
 export const enviarMensajeFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -291,6 +304,7 @@ export const enviarMensajeFn = createServerFn({ method: "POST" })
         attachment_path,
         attachment_tipo,
         es_admin_intervencion: admin && !yo,
+        responde_a: data.respondeA ?? null,
       })
       .select("id, created_at")
       .single();
