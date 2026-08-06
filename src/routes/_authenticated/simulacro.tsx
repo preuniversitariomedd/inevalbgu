@@ -126,8 +126,9 @@ function Simulacro() {
     const errores = respuestas.filter((r) => !r.correcta);
     if (!guardadoFinal) {
       setGuardadoFinal(true);
-      void finalizarSesion(sesionId, total, aciertos, score, nivel.nombre);
+      void finalizarSesion(sesionId, total, aciertos, score, nivel.nombre, DURACION_MIN * 60 - restante);
     }
+
 
 
     if (revisando) {
@@ -211,6 +212,7 @@ function Simulacro() {
               <button onClick={reiniciar} className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-5 py-2.5 font-semibold text-primary-foreground hover:bg-primary/90">
                 <RotateCcw className="h-4 w-4" /> Otro simulacro
               </button>
+              <Link to="/resultados" search={{}} className="rounded-xl border-2 px-5 py-2.5 font-semibold hover:bg-secondary">Mis resultados</Link>
               <Link to="/" className="rounded-xl border-2 px-5 py-2.5 font-semibold hover:bg-secondary">Inicio</Link>
             </div>
           </div>

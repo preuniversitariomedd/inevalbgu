@@ -515,11 +515,11 @@ function ChatPanel({
                       onClick={() => irAMensaje(m.cita!.id)}
                       className={`mb-1 block w-full rounded-lg border-l-4 px-2 py-1 text-left text-[11px] ${
                         mine
-                          ? "border-white/70 bg-white/20 text-white/90"
-                          : "border-fuchsia-400 bg-black/5 text-slate-700"
+                          ? "border-yellow-300 bg-white text-slate-800"
+                          : "border-fuchsia-600 bg-white text-slate-800"
                       }`}
                     >
-                      <span className="block font-bold">
+                      <span className={`block font-bold ${mine ? "text-fuchsia-700" : "text-fuchsia-700"}`}>
                         {m.cita.sender_id === currentUserId ? "Tú" : otro?.nombres ?? "Mensaje"}
                       </span>
                       <span className="line-clamp-2 break-words">
