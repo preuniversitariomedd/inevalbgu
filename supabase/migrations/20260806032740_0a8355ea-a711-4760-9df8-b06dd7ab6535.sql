@@ -1,0 +1,2 @@
+ALTER TABLE public.mensajes ADD COLUMN IF NOT EXISTS responde_a uuid REFERENCES public.mensajes(id) ON DELETE SET NULL;
+CREATE INDEX IF NOT EXISTS idx_mensajes_responde_a ON public.mensajes(responde_a);
