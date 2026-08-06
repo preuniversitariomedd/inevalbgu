@@ -16,6 +16,7 @@ import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
 import { Route as AuthenticatedTareasRouteImport } from './routes/_authenticated/tareas'
 import { Route as AuthenticatedSimulacroRouteImport } from './routes/_authenticated/simulacro'
+import { Route as AuthenticatedResultadosRouteImport } from './routes/_authenticated/resultados'
 import { Route as AuthenticatedProgresoRouteImport } from './routes/_authenticated/progreso'
 import { Route as AuthenticatedPracticarRouteImport } from './routes/_authenticated/practicar'
 import { Route as AuthenticatedMensajesRouteImport } from './routes/_authenticated/mensajes'
@@ -71,6 +72,11 @@ const AuthenticatedTareasRoute = AuthenticatedTareasRouteImport.update({
 const AuthenticatedSimulacroRoute = AuthenticatedSimulacroRouteImport.update({
   id: '/simulacro',
   path: '/simulacro',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedResultadosRoute = AuthenticatedResultadosRouteImport.update({
+  id: '/resultados',
+  path: '/resultados',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedProgresoRoute = AuthenticatedProgresoRouteImport.update({
@@ -206,6 +212,7 @@ export interface FileRoutesByFullPath {
   '/mensajes': typeof AuthenticatedMensajesRoute
   '/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/progreso': typeof AuthenticatedProgresoRoute
+  '/resultados': typeof AuthenticatedResultadosRoute
   '/simulacro': typeof AuthenticatedSimulacroRoute
   '/tareas': typeof AuthenticatedTareasRoute
   '/tutor': typeof AuthenticatedTutorRouteWithChildren
@@ -234,6 +241,7 @@ export interface FileRoutesByTo {
   '/mensajes': typeof AuthenticatedMensajesRoute
   '/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/progreso': typeof AuthenticatedProgresoRoute
+  '/resultados': typeof AuthenticatedResultadosRoute
   '/simulacro': typeof AuthenticatedSimulacroRoute
   '/tareas': typeof AuthenticatedTareasRoute
   '/api/chat': typeof ApiChatRoute
@@ -265,6 +273,7 @@ export interface FileRoutesById {
   '/_authenticated/mensajes': typeof AuthenticatedMensajesRoute
   '/_authenticated/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/_authenticated/progreso': typeof AuthenticatedProgresoRoute
+  '/_authenticated/resultados': typeof AuthenticatedResultadosRoute
   '/_authenticated/simulacro': typeof AuthenticatedSimulacroRoute
   '/_authenticated/tareas': typeof AuthenticatedTareasRoute
   '/_authenticated/tutor': typeof AuthenticatedTutorRouteWithChildren
@@ -298,6 +307,7 @@ export interface FileRouteTypes {
     | '/mensajes'
     | '/practicar'
     | '/progreso'
+    | '/resultados'
     | '/simulacro'
     | '/tareas'
     | '/tutor'
@@ -326,6 +336,7 @@ export interface FileRouteTypes {
     | '/mensajes'
     | '/practicar'
     | '/progreso'
+    | '/resultados'
     | '/simulacro'
     | '/tareas'
     | '/api/chat'
@@ -356,6 +367,7 @@ export interface FileRouteTypes {
     | '/_authenticated/mensajes'
     | '/_authenticated/practicar'
     | '/_authenticated/progreso'
+    | '/_authenticated/resultados'
     | '/_authenticated/simulacro'
     | '/_authenticated/tareas'
     | '/_authenticated/tutor'
@@ -433,6 +445,13 @@ declare module '@tanstack/react-router' {
       path: '/simulacro'
       fullPath: '/simulacro'
       preLoaderRoute: typeof AuthenticatedSimulacroRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/resultados': {
+      id: '/_authenticated/resultados'
+      path: '/resultados'
+      fullPath: '/resultados'
+      preLoaderRoute: typeof AuthenticatedResultadosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/progreso': {
@@ -665,6 +684,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedMensajesRoute: typeof AuthenticatedMensajesRoute
   AuthenticatedPracticarRoute: typeof AuthenticatedPracticarRouteWithChildren
   AuthenticatedProgresoRoute: typeof AuthenticatedProgresoRoute
+  AuthenticatedResultadosRoute: typeof AuthenticatedResultadosRoute
   AuthenticatedSimulacroRoute: typeof AuthenticatedSimulacroRoute
   AuthenticatedTareasRoute: typeof AuthenticatedTareasRoute
   AuthenticatedTutorRoute: typeof AuthenticatedTutorRouteWithChildren
@@ -679,6 +699,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedMensajesRoute: AuthenticatedMensajesRoute,
   AuthenticatedPracticarRoute: AuthenticatedPracticarRouteWithChildren,
   AuthenticatedProgresoRoute: AuthenticatedProgresoRoute,
+  AuthenticatedResultadosRoute: AuthenticatedResultadosRoute,
   AuthenticatedSimulacroRoute: AuthenticatedSimulacroRoute,
   AuthenticatedTareasRoute: AuthenticatedTareasRoute,
   AuthenticatedTutorRoute: AuthenticatedTutorRouteWithChildren,

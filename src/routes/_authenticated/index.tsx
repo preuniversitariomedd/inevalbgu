@@ -94,12 +94,20 @@ function Index() {
             tone="success"
           />
           <ActionCard
+            to="/resultados"
+            icon={<Award className="h-7 w-7" />}
+            title="Resultados"
+            desc="Puntajes, tiempos, aciertos y fallas de cada simulacro realizado."
+            tone="primary"
+          />
+          <ActionCard
             to="/encuesta"
             icon={<ClipboardCheck className="h-7 w-7" />}
             title="Encuesta de factores"
             desc="100 preguntas en 5 periodos cortos: contexto, familia, traslado, alimentación y bienestar."
             tone="accent"
           />
+
         </div>
 
 
