@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database, ClipboardCheck, Award } from "lucide-react";
+import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database, ClipboardCheck, Award, Atom, Target } from "lucide-react";
 import { BANCO_PREGUNTAS } from "@/data";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 
