@@ -101,12 +101,27 @@ function Index() {
             tone="primary"
           />
           <ActionCard
+            to="/fisica"
+            icon={<Atom className="h-7 w-7" />}
+            title="Física"
+            desc="Cinemática, dinámica y energía con imágenes, 5 opciones, fórmulas y tutor IA."
+            tone="accent"
+          />
+          <ActionCard
+            to="/analisis"
+            icon={<Target className="h-7 w-7" />}
+            title="Análisis de errores"
+            desc="Tus fallas agrupadas por tema y subtema con recomendaciones."
+            tone="success"
+          />
+          <ActionCard
             to="/encuesta"
             icon={<ClipboardCheck className="h-7 w-7" />}
             title="Encuesta de factores"
             desc="100 preguntas en 5 periodos cortos: contexto, familia, traslado, alimentación y bienestar."
             tone="accent"
           />
+
 
         </div>
 
