@@ -109,7 +109,7 @@ function PracticarArea() {
               <button onClick={() => { setSesion(null); setNivel(null); setSesionId(null); }} className="rounded-xl bg-primary px-5 py-2.5 font-semibold text-primary-foreground hover:bg-primary/90">
                 Otra sesión
               </button>
-              <Link to="/progreso" search={{}} className="rounded-xl border-2 px-5 py-2.5 font-semibold hover:bg-secondary">
+              <Link to="/progreso" search={{ as: undefined }} className="rounded-xl border-2 px-5 py-2.5 font-semibold hover:bg-secondary">
                 Ver mi progreso
               </Link>
             </div>
