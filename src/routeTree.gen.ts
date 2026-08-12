@@ -26,6 +26,7 @@ import { Route as AuthenticatedCambiarPasswordRouteImport } from './routes/_auth
 import { Route as AuthenticatedBancoRouteImport } from './routes/_authenticated/banco'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as AuthenticatedTutorIndexRouteImport } from './routes/_authenticated/tutor.index'
+import { Route as AuthenticatedFisicaIndexRouteImport } from './routes/_authenticated/fisica.index'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedTutorThreadIdRouteImport } from './routes/_authenticated/tutor.$threadId'
 import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authenticated/practicar.$area'
@@ -126,6 +127,12 @@ const AuthenticatedTutorIndexRoute = AuthenticatedTutorIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedTutorRoute,
 } as any)
+const AuthenticatedFisicaIndexRoute =
+  AuthenticatedFisicaIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedFisicaRoute,
+  } as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -215,7 +222,7 @@ export interface FileRoutesByFullPath {
   '/banco': typeof AuthenticatedBancoRoute
   '/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
   '/encuesta': typeof AuthenticatedEncuestaRoute
-  '/fisica': typeof AuthenticatedFisicaRoute
+  '/fisica': typeof AuthenticatedFisicaRouteWithChildren
   '/mensajes': typeof AuthenticatedMensajesRoute
   '/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/progreso': typeof AuthenticatedProgresoRoute
@@ -237,6 +244,7 @@ export interface FileRoutesByFullPath {
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/fisica/': typeof AuthenticatedFisicaIndexRoute
   '/tutor/': typeof AuthenticatedTutorIndexRoute
   '/admin/estudiante/$id': typeof AuthenticatedAdminEstudianteIdRoute
 }
@@ -245,7 +253,6 @@ export interface FileRoutesByTo {
   '/banco': typeof AuthenticatedBancoRoute
   '/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
   '/encuesta': typeof AuthenticatedEncuestaRoute
-  '/fisica': typeof AuthenticatedFisicaRoute
   '/mensajes': typeof AuthenticatedMensajesRoute
   '/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/progreso': typeof AuthenticatedProgresoRoute
@@ -267,6 +274,7 @@ export interface FileRoutesByTo {
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/fisica': typeof AuthenticatedFisicaIndexRoute
   '/tutor': typeof AuthenticatedTutorIndexRoute
   '/admin/estudiante/$id': typeof AuthenticatedAdminEstudianteIdRoute
 }
@@ -278,7 +286,7 @@ export interface FileRoutesById {
   '/_authenticated/banco': typeof AuthenticatedBancoRoute
   '/_authenticated/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
   '/_authenticated/encuesta': typeof AuthenticatedEncuestaRoute
-  '/_authenticated/fisica': typeof AuthenticatedFisicaRoute
+  '/_authenticated/fisica': typeof AuthenticatedFisicaRouteWithChildren
   '/_authenticated/mensajes': typeof AuthenticatedMensajesRoute
   '/_authenticated/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/_authenticated/progreso': typeof AuthenticatedProgresoRoute
@@ -301,6 +309,7 @@ export interface FileRoutesById {
   '/_authenticated/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/_authenticated/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/fisica/': typeof AuthenticatedFisicaIndexRoute
   '/_authenticated/tutor/': typeof AuthenticatedTutorIndexRoute
   '/_authenticated/admin/estudiante/$id': typeof AuthenticatedAdminEstudianteIdRoute
 }
@@ -335,6 +344,7 @@ export interface FileRouteTypes {
     | '/practicar/$area'
     | '/tutor/$threadId'
     | '/admin/'
+    | '/fisica/'
     | '/tutor/'
     | '/admin/estudiante/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -343,7 +353,6 @@ export interface FileRouteTypes {
     | '/banco'
     | '/cambiar-password'
     | '/encuesta'
-    | '/fisica'
     | '/mensajes'
     | '/practicar'
     | '/progreso'
@@ -365,6 +374,7 @@ export interface FileRouteTypes {
     | '/practicar/$area'
     | '/tutor/$threadId'
     | '/admin'
+    | '/fisica'
     | '/tutor'
     | '/admin/estudiante/$id'
   id:
@@ -398,6 +408,7 @@ export interface FileRouteTypes {
     | '/_authenticated/practicar/$area'
     | '/_authenticated/tutor/$threadId'
     | '/_authenticated/admin/'
+    | '/_authenticated/fisica/'
     | '/_authenticated/tutor/'
     | '/_authenticated/admin/estudiante/$id'
   fileRoutesById: FileRoutesById
@@ -528,6 +539,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/tutor/'
       preLoaderRoute: typeof AuthenticatedTutorIndexRouteImport
       parentRoute: typeof AuthenticatedTutorRoute
+    }
+    '/_authenticated/fisica/': {
+      id: '/_authenticated/fisica/'
+      path: '/'
+      fullPath: '/fisica/'
+      preLoaderRoute: typeof AuthenticatedFisicaIndexRouteImport
+      parentRoute: typeof AuthenticatedFisicaRoute
     }
     '/_authenticated/admin/': {
       id: '/_authenticated/admin/'
@@ -668,6 +686,17 @@ const AuthenticatedAdminRouteRouteWithChildren =
     AuthenticatedAdminRouteRouteChildren,
   )
 
+interface AuthenticatedFisicaRouteChildren {
+  AuthenticatedFisicaIndexRoute: typeof AuthenticatedFisicaIndexRoute
+}
+
+const AuthenticatedFisicaRouteChildren: AuthenticatedFisicaRouteChildren = {
+  AuthenticatedFisicaIndexRoute: AuthenticatedFisicaIndexRoute,
+}
+
+const AuthenticatedFisicaRouteWithChildren =
+  AuthenticatedFisicaRoute._addFileChildren(AuthenticatedFisicaRouteChildren)
+
 interface AuthenticatedPracticarRouteChildren {
   AuthenticatedPracticarAreaRoute: typeof AuthenticatedPracticarAreaRoute
 }
@@ -700,7 +729,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedBancoRoute: typeof AuthenticatedBancoRoute
   AuthenticatedCambiarPasswordRoute: typeof AuthenticatedCambiarPasswordRoute
   AuthenticatedEncuestaRoute: typeof AuthenticatedEncuestaRoute
-  AuthenticatedFisicaRoute: typeof AuthenticatedFisicaRoute
+  AuthenticatedFisicaRoute: typeof AuthenticatedFisicaRouteWithChildren
   AuthenticatedMensajesRoute: typeof AuthenticatedMensajesRoute
   AuthenticatedPracticarRoute: typeof AuthenticatedPracticarRouteWithChildren
   AuthenticatedProgresoRoute: typeof AuthenticatedProgresoRoute
@@ -716,7 +745,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBancoRoute: AuthenticatedBancoRoute,
   AuthenticatedCambiarPasswordRoute: AuthenticatedCambiarPasswordRoute,
   AuthenticatedEncuestaRoute: AuthenticatedEncuestaRoute,
-  AuthenticatedFisicaRoute: AuthenticatedFisicaRoute,
+  AuthenticatedFisicaRoute: AuthenticatedFisicaRouteWithChildren,
   AuthenticatedMensajesRoute: AuthenticatedMensajesRoute,
   AuthenticatedPracticarRoute: AuthenticatedPracticarRouteWithChildren,
   AuthenticatedProgresoRoute: AuthenticatedProgresoRoute,
