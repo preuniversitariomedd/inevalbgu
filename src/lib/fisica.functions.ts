@@ -126,7 +126,7 @@ export const editarPreguntaFisicaFn = createServerFn({ method: "POST" })
     await ensureStaff(context);
     if (data.respuestaCorrecta >= data.opciones.length) throw new Error("La respuesta correcta no existe entre las opciones.");
 
-    const patch: Record<string, unknown> = {
+    const patch: any = {
       tema: data.tema,
       subtema: data.subtema,
       nivel: data.nivel,
