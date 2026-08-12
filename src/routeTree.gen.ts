@@ -30,6 +30,7 @@ import { Route as AuthenticatedFisicaIndexRouteImport } from './routes/_authenti
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedTutorThreadIdRouteImport } from './routes/_authenticated/tutor.$threadId'
 import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authenticated/practicar.$area'
+import { Route as AuthenticatedFisicaTutorRouteImport } from './routes/_authenticated/fisica.tutor'
 import { Route as AuthenticatedFisicaFormulasRouteImport } from './routes/_authenticated/fisica.formulas'
 import { Route as AuthenticatedAdminTareasRouteImport } from './routes/_authenticated/admin/tareas'
 import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
@@ -152,6 +153,12 @@ const AuthenticatedPracticarAreaRoute =
     path: '/$area',
     getParentRoute: () => AuthenticatedPracticarRoute,
   } as any)
+const AuthenticatedFisicaTutorRoute =
+  AuthenticatedFisicaTutorRouteImport.update({
+    id: '/tutor',
+    path: '/tutor',
+    getParentRoute: () => AuthenticatedFisicaRoute,
+  } as any)
 const AuthenticatedFisicaFormulasRoute =
   AuthenticatedFisicaFormulasRouteImport.update({
     id: '/formulas',
@@ -256,6 +263,7 @@ export interface FileRoutesByFullPath {
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/admin/tareas': typeof AuthenticatedAdminTareasRoute
   '/fisica/formulas': typeof AuthenticatedFisicaFormulasRoute
+  '/fisica/tutor': typeof AuthenticatedFisicaTutorRoute
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
@@ -288,6 +296,7 @@ export interface FileRoutesByTo {
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/admin/tareas': typeof AuthenticatedAdminTareasRoute
   '/fisica/formulas': typeof AuthenticatedFisicaFormulasRoute
+  '/fisica/tutor': typeof AuthenticatedFisicaTutorRoute
   '/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
@@ -325,6 +334,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/_authenticated/admin/tareas': typeof AuthenticatedAdminTareasRoute
   '/_authenticated/fisica/formulas': typeof AuthenticatedFisicaFormulasRoute
+  '/_authenticated/fisica/tutor': typeof AuthenticatedFisicaTutorRoute
   '/_authenticated/practicar/$area': typeof AuthenticatedPracticarAreaRoute
   '/_authenticated/tutor/$threadId': typeof AuthenticatedTutorThreadIdRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
@@ -362,6 +372,7 @@ export interface FileRouteTypes {
     | '/admin/roles'
     | '/admin/tareas'
     | '/fisica/formulas'
+    | '/fisica/tutor'
     | '/practicar/$area'
     | '/tutor/$threadId'
     | '/admin/'
@@ -394,6 +405,7 @@ export interface FileRouteTypes {
     | '/admin/roles'
     | '/admin/tareas'
     | '/fisica/formulas'
+    | '/fisica/tutor'
     | '/practicar/$area'
     | '/tutor/$threadId'
     | '/admin'
@@ -430,6 +442,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/roles'
     | '/_authenticated/admin/tareas'
     | '/_authenticated/fisica/formulas'
+    | '/_authenticated/fisica/tutor'
     | '/_authenticated/practicar/$area'
     | '/_authenticated/tutor/$threadId'
     | '/_authenticated/admin/'
@@ -594,6 +607,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPracticarAreaRouteImport
       parentRoute: typeof AuthenticatedPracticarRoute
     }
+    '/_authenticated/fisica/tutor': {
+      id: '/_authenticated/fisica/tutor'
+      path: '/tutor'
+      fullPath: '/fisica/tutor'
+      preLoaderRoute: typeof AuthenticatedFisicaTutorRouteImport
+      parentRoute: typeof AuthenticatedFisicaRoute
+    }
     '/_authenticated/fisica/formulas': {
       id: '/_authenticated/fisica/formulas'
       path: '/formulas'
@@ -728,12 +748,14 @@ const AuthenticatedAdminRouteRouteWithChildren =
 
 interface AuthenticatedFisicaRouteChildren {
   AuthenticatedFisicaFormulasRoute: typeof AuthenticatedFisicaFormulasRoute
+  AuthenticatedFisicaTutorRoute: typeof AuthenticatedFisicaTutorRoute
   AuthenticatedFisicaIndexRoute: typeof AuthenticatedFisicaIndexRoute
   AuthenticatedFisicaPracticarTemaRoute: typeof AuthenticatedFisicaPracticarTemaRoute
 }
 
 const AuthenticatedFisicaRouteChildren: AuthenticatedFisicaRouteChildren = {
   AuthenticatedFisicaFormulasRoute: AuthenticatedFisicaFormulasRoute,
+  AuthenticatedFisicaTutorRoute: AuthenticatedFisicaTutorRoute,
   AuthenticatedFisicaIndexRoute: AuthenticatedFisicaIndexRoute,
   AuthenticatedFisicaPracticarTemaRoute: AuthenticatedFisicaPracticarTemaRoute,
 }
