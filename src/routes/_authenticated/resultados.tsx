@@ -139,7 +139,7 @@ function ResultadosPage() {
         {esStaff && as && (
           <button
             className="text-sm font-semibold text-primary hover:underline"
-            onClick={() => navigate({ to: "/resultados", search: {} })}
+            onClick={() => navigate({ to: "/resultados", search: { as: undefined } })}
           >
             Cambiar estudiante
           </button>
