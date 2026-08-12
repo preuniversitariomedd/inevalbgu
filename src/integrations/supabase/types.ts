@@ -351,6 +351,54 @@ export type Database = {
         }
         Relationships: []
       }
+      fisica_preguntas: {
+        Row: {
+          activa: boolean
+          creador_id: string
+          created_at: string
+          enunciado: string
+          explicacion: string | null
+          id: string
+          imagen_path: string | null
+          nivel: string
+          opciones: Json
+          respuesta_correcta: number
+          subtema: string
+          tema: string
+          updated_at: string
+        }
+        Insert: {
+          activa?: boolean
+          creador_id: string
+          created_at?: string
+          enunciado: string
+          explicacion?: string | null
+          id?: string
+          imagen_path?: string | null
+          nivel?: string
+          opciones: Json
+          respuesta_correcta?: number
+          subtema?: string
+          tema: string
+          updated_at?: string
+        }
+        Update: {
+          activa?: boolean
+          creador_id?: string
+          created_at?: string
+          enunciado?: string
+          explicacion?: string | null
+          id?: string
+          imagen_path?: string | null
+          nivel?: string
+          opciones?: Json
+          respuesta_correcta?: number
+          subtema?: string
+          tema?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       grupo_estudiantes: {
         Row: {
           created_at: string
