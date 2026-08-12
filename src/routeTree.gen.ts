@@ -40,6 +40,7 @@ import { Route as AuthenticatedAdminGruposRouteImport } from './routes/_authenti
 import { Route as AuthenticatedAdminDocentesRouteImport } from './routes/_authenticated/admin/docentes'
 import { Route as AuthenticatedAdminCalificacionesRouteImport } from './routes/_authenticated/admin/calificaciones'
 import { Route as AuthenticatedAdminBrandingRouteImport } from './routes/_authenticated/admin/branding'
+import { Route as AuthenticatedFisicaPracticarTemaRouteImport } from './routes/_authenticated/fisica.practicar.$tema'
 import { Route as AuthenticatedAdminEstudianteIdRouteImport } from './routes/_authenticated/admin/estudiante.$id'
 
 const AuthRoute = AuthRouteImport.update({
@@ -208,6 +209,12 @@ const AuthenticatedAdminBrandingRoute =
     path: '/branding',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedFisicaPracticarTemaRoute =
+  AuthenticatedFisicaPracticarTemaRouteImport.update({
+    id: '/practicar/$tema',
+    path: '/practicar/$tema',
+    getParentRoute: () => AuthenticatedFisicaRoute,
+  } as any)
 const AuthenticatedAdminEstudianteIdRoute =
   AuthenticatedAdminEstudianteIdRouteImport.update({
     id: '/estudiante/$id',
@@ -247,6 +254,7 @@ export interface FileRoutesByFullPath {
   '/fisica/': typeof AuthenticatedFisicaIndexRoute
   '/tutor/': typeof AuthenticatedTutorIndexRoute
   '/admin/estudiante/$id': typeof AuthenticatedAdminEstudianteIdRoute
+  '/fisica/practicar/$tema': typeof AuthenticatedFisicaPracticarTemaRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -277,6 +285,7 @@ export interface FileRoutesByTo {
   '/fisica': typeof AuthenticatedFisicaIndexRoute
   '/tutor': typeof AuthenticatedTutorIndexRoute
   '/admin/estudiante/$id': typeof AuthenticatedAdminEstudianteIdRoute
+  '/fisica/practicar/$tema': typeof AuthenticatedFisicaPracticarTemaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -312,6 +321,7 @@ export interface FileRoutesById {
   '/_authenticated/fisica/': typeof AuthenticatedFisicaIndexRoute
   '/_authenticated/tutor/': typeof AuthenticatedTutorIndexRoute
   '/_authenticated/admin/estudiante/$id': typeof AuthenticatedAdminEstudianteIdRoute
+  '/_authenticated/fisica/practicar/$tema': typeof AuthenticatedFisicaPracticarTemaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -347,6 +357,7 @@ export interface FileRouteTypes {
     | '/fisica/'
     | '/tutor/'
     | '/admin/estudiante/$id'
+    | '/fisica/practicar/$tema'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -377,6 +388,7 @@ export interface FileRouteTypes {
     | '/fisica'
     | '/tutor'
     | '/admin/estudiante/$id'
+    | '/fisica/practicar/$tema'
   id:
     | '__root__'
     | '/_authenticated'
@@ -411,6 +423,7 @@ export interface FileRouteTypes {
     | '/_authenticated/fisica/'
     | '/_authenticated/tutor/'
     | '/_authenticated/admin/estudiante/$id'
+    | '/_authenticated/fisica/practicar/$tema'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -638,6 +651,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminBrandingRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/fisica/practicar/$tema': {
+      id: '/_authenticated/fisica/practicar/$tema'
+      path: '/practicar/$tema'
+      fullPath: '/fisica/practicar/$tema'
+      preLoaderRoute: typeof AuthenticatedFisicaPracticarTemaRouteImport
+      parentRoute: typeof AuthenticatedFisicaRoute
+    }
     '/_authenticated/admin/estudiante/$id': {
       id: '/_authenticated/admin/estudiante/$id'
       path: '/estudiante/$id'
@@ -688,10 +708,12 @@ const AuthenticatedAdminRouteRouteWithChildren =
 
 interface AuthenticatedFisicaRouteChildren {
   AuthenticatedFisicaIndexRoute: typeof AuthenticatedFisicaIndexRoute
+  AuthenticatedFisicaPracticarTemaRoute: typeof AuthenticatedFisicaPracticarTemaRoute
 }
 
 const AuthenticatedFisicaRouteChildren: AuthenticatedFisicaRouteChildren = {
   AuthenticatedFisicaIndexRoute: AuthenticatedFisicaIndexRoute,
+  AuthenticatedFisicaPracticarTemaRoute: AuthenticatedFisicaPracticarTemaRoute,
 }
 
 const AuthenticatedFisicaRouteWithChildren =
