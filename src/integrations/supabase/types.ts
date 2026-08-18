@@ -85,6 +85,200 @@ export type Database = {
         }
         Relationships: []
       }
+      biblioteca_archivos: {
+        Row: {
+          created_at: string
+          id: string
+          mime: string
+          nombre: string
+          path: string
+          recurso_id: string
+          tamano: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          mime: string
+          nombre: string
+          path: string
+          recurso_id: string
+          tamano?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          mime?: string
+          nombre?: string
+          path?: string
+          recurso_id?: string
+          tamano?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "biblioteca_archivos_recurso_id_fkey"
+            columns: ["recurso_id"]
+            isOneToOne: false
+            referencedRelation: "biblioteca_recursos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      biblioteca_categorias: {
+        Row: {
+          color: string
+          created_at: string
+          created_by: string | null
+          descripcion: string | null
+          icono: string
+          id: string
+          nombre: string
+          orden: number
+          updated_at: string
+        }
+        Insert: {
+          color?: string
+          created_at?: string
+          created_by?: string | null
+          descripcion?: string | null
+          icono?: string
+          id?: string
+          nombre: string
+          orden?: number
+          updated_at?: string
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          created_by?: string | null
+          descripcion?: string | null
+          icono?: string
+          id?: string
+          nombre?: string
+          orden?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      biblioteca_favoritos: {
+        Row: {
+          created_at: string
+          recurso_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          recurso_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          recurso_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "biblioteca_favoritos_recurso_id_fkey"
+            columns: ["recurso_id"]
+            isOneToOne: false
+            referencedRelation: "biblioteca_recursos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      biblioteca_recursos: {
+        Row: {
+          categoria_id: string | null
+          creador_id: string
+          creador_rol: string
+          created_at: string
+          descarga_url: string | null
+          descripcion: string | null
+          destacado: boolean
+          enlace_url: string | null
+          etiquetas: string[]
+          id: string
+          notas_html: string | null
+          portada_path: string | null
+          publicado: boolean
+          tipo: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          categoria_id?: string | null
+          creador_id: string
+          creador_rol?: string
+          created_at?: string
+          descarga_url?: string | null
+          descripcion?: string | null
+          destacado?: boolean
+          enlace_url?: string | null
+          etiquetas?: string[]
+          id?: string
+          notas_html?: string | null
+          portada_path?: string | null
+          publicado?: boolean
+          tipo?: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          categoria_id?: string | null
+          creador_id?: string
+          creador_rol?: string
+          created_at?: string
+          descarga_url?: string | null
+          descripcion?: string | null
+          destacado?: boolean
+          enlace_url?: string | null
+          etiquetas?: string[]
+          id?: string
+          notas_html?: string | null
+          portada_path?: string | null
+          publicado?: boolean
+          tipo?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "biblioteca_recursos_categoria_id_fkey"
+            columns: ["categoria_id"]
+            isOneToOne: false
+            referencedRelation: "biblioteca_categorias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      biblioteca_vistas: {
+        Row: {
+          id: string
+          recurso_id: string
+          user_id: string
+          visto_at: string
+        }
+        Insert: {
+          id?: string
+          recurso_id: string
+          user_id: string
+          visto_at?: string
+        }
+        Update: {
+          id?: string
+          recurso_id?: string
+          user_id?: string
+          visto_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "biblioteca_vistas_recurso_id_fkey"
+            columns: ["recurso_id"]
+            isOneToOne: false
+            referencedRelation: "biblioteca_recursos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       chat_messages: {
         Row: {
           created_at: string
