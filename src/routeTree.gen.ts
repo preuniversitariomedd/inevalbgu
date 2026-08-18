@@ -23,6 +23,7 @@ import { Route as AuthenticatedMensajesRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedFisicaRouteImport } from './routes/_authenticated/fisica'
 import { Route as AuthenticatedEncuestaRouteImport } from './routes/_authenticated/encuesta'
 import { Route as AuthenticatedCambiarPasswordRouteImport } from './routes/_authenticated/cambiar-password'
+import { Route as AuthenticatedBibliotecaRouteImport } from './routes/_authenticated/biblioteca'
 import { Route as AuthenticatedBancoRouteImport } from './routes/_authenticated/banco'
 import { Route as AuthenticatedAnalisisRouteImport } from './routes/_authenticated/analisis'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
@@ -117,6 +118,11 @@ const AuthenticatedCambiarPasswordRoute =
     path: '/cambiar-password',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedBibliotecaRoute = AuthenticatedBibliotecaRouteImport.update({
+  id: '/biblioteca',
+  path: '/biblioteca',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedBancoRoute = AuthenticatedBancoRouteImport.update({
   id: '/banco',
   path: '/banco',
@@ -255,6 +261,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/analisis': typeof AuthenticatedAnalisisRoute
   '/banco': typeof AuthenticatedBancoRoute
+  '/biblioteca': typeof AuthenticatedBibliotecaRoute
   '/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
   '/encuesta': typeof AuthenticatedEncuestaRoute
   '/fisica': typeof AuthenticatedFisicaRouteWithChildren
@@ -291,6 +298,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/analisis': typeof AuthenticatedAnalisisRoute
   '/banco': typeof AuthenticatedBancoRoute
+  '/biblioteca': typeof AuthenticatedBibliotecaRoute
   '/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
   '/encuesta': typeof AuthenticatedEncuestaRoute
   '/mensajes': typeof AuthenticatedMensajesRoute
@@ -329,6 +337,7 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/analisis': typeof AuthenticatedAnalisisRoute
   '/_authenticated/banco': typeof AuthenticatedBancoRoute
+  '/_authenticated/biblioteca': typeof AuthenticatedBibliotecaRoute
   '/_authenticated/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
   '/_authenticated/encuesta': typeof AuthenticatedEncuestaRoute
   '/_authenticated/fisica': typeof AuthenticatedFisicaRouteWithChildren
@@ -370,6 +379,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/analisis'
     | '/banco'
+    | '/biblioteca'
     | '/cambiar-password'
     | '/encuesta'
     | '/fisica'
@@ -406,6 +416,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/analisis'
     | '/banco'
+    | '/biblioteca'
     | '/cambiar-password'
     | '/encuesta'
     | '/mensajes'
@@ -443,6 +454,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/analisis'
     | '/_authenticated/banco'
+    | '/_authenticated/biblioteca'
     | '/_authenticated/cambiar-password'
     | '/_authenticated/encuesta'
     | '/_authenticated/fisica'
@@ -581,6 +593,13 @@ declare module '@tanstack/react-router' {
       path: '/cambiar-password'
       fullPath: '/cambiar-password'
       preLoaderRoute: typeof AuthenticatedCambiarPasswordRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/biblioteca': {
+      id: '/_authenticated/biblioteca'
+      path: '/biblioteca'
+      fullPath: '/biblioteca'
+      preLoaderRoute: typeof AuthenticatedBibliotecaRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/banco': {
@@ -835,6 +854,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
   AuthenticatedAnalisisRoute: typeof AuthenticatedAnalisisRoute
   AuthenticatedBancoRoute: typeof AuthenticatedBancoRoute
+  AuthenticatedBibliotecaRoute: typeof AuthenticatedBibliotecaRoute
   AuthenticatedCambiarPasswordRoute: typeof AuthenticatedCambiarPasswordRoute
   AuthenticatedEncuestaRoute: typeof AuthenticatedEncuestaRoute
   AuthenticatedFisicaRoute: typeof AuthenticatedFisicaRouteWithChildren
@@ -852,6 +872,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
   AuthenticatedAnalisisRoute: AuthenticatedAnalisisRoute,
   AuthenticatedBancoRoute: AuthenticatedBancoRoute,
+  AuthenticatedBibliotecaRoute: AuthenticatedBibliotecaRoute,
   AuthenticatedCambiarPasswordRoute: AuthenticatedCambiarPasswordRoute,
   AuthenticatedEncuestaRoute: AuthenticatedEncuestaRoute,
   AuthenticatedFisicaRoute: AuthenticatedFisicaRouteWithChildren,
