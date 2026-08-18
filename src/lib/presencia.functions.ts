@@ -326,3 +326,21 @@ export const calificacionesEstudiantesFn = createServerFn({ method: "GET" })
       };
     });
   });
+
+// ---------- Tiempo desde la última conexión previa (ventana de reencuentro) ----------
+export const ultimaAusenciaFn = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const corte = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+    const { data } = await context.supabase
+      .from("sesiones_conexion")
+      .select("ultimo_heartbeat")
+      .eq("user_id", context.userId)
+      .lt("ultimo_heartbeat", corte)
+      .order("ultimo_heartbeat", { ascending: false })
+      .limit(1);
+    const ultima = data?.[0]?.ultimo_heartbeat as string | undefined;
+    if (!ultima) return { ultima: null as string | null, horas: 0 };
+    const horas = (Date.now() - new Date(ultima).getTime()) / 36e5;
+    return { ultima, horas: Math.round(horas * 10) / 10 };
+  });
