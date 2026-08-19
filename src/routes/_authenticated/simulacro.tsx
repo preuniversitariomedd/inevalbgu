@@ -1,15 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Timer, RotateCcw } from "lucide-react";
+import { ArrowLeft, Timer, RotateCcw, Calculator, Atom } from "lucide-react";
 import { AREAS } from "@/data/tipos";
 import type { Pregunta } from "@/data/tipos";
 import { BANCO_SIMULACRO, preguntasAleatorias } from "@/data";
 import { preguntasRepaso } from "@/data";
+import { BANCO_FISICA } from "@/data/fisica";
 import { PreguntaCard } from "@/components/PreguntaCard";
 import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso";
 
 const DURACION_MIN = 40;
 const TOTAL_PREG = 30;
+const SUBTEMAS_CINEMATICA = ["Caída libre", "MRU", "MRUV"];
+
+type Asignatura = "mate" | "fisica";
+
 
 export const Route = createFileRoute("/_authenticated/simulacro")({
   head: () => ({ meta: [{ title: "Simulacro de examen — INEVAL_UEDE" }] }),
