@@ -148,6 +148,7 @@ function AuthedLayout() {
         </div>
       </nav>
       <Outlet />
+      <AusenciaDialog />
     </div>
   );
 }
