@@ -1,15 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Timer, RotateCcw } from "lucide-react";
+import { ArrowLeft, Timer, RotateCcw, Calculator, Atom } from "lucide-react";
 import { AREAS } from "@/data/tipos";
 import type { Pregunta } from "@/data/tipos";
 import { BANCO_SIMULACRO, preguntasAleatorias } from "@/data";
 import { preguntasRepaso } from "@/data";
+import { BANCO_FISICA } from "@/data/fisica";
 import { PreguntaCard } from "@/components/PreguntaCard";
 import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso";
 
 const DURACION_MIN = 40;
 const TOTAL_PREG = 30;
+const SUBTEMAS_CINEMATICA = ["Caída libre", "MRU", "MRUV"];
+
+type Asignatura = "mate" | "fisica";
+
 
 export const Route = createFileRoute("/_authenticated/simulacro")({
   head: () => ({ meta: [{ title: "Simulacro de examen — INEVAL_UEDE" }] }),
@@ -32,7 +37,23 @@ function nivelLogro(score: number) {
 
 interface Resp { pregunta: Pregunta; correcta: boolean; idx: number }
 
+function aPregunta(p: (typeof BANCO_FISICA)[number]): Pregunta {
+  return {
+    id: p.id,
+    area: "Física",
+    tema: String(p.tema),
+    subtema: p.subtema,
+    nivel: p.nivel,
+    enunciado: p.enunciado,
+    opciones: p.opciones,
+    respuestaCorrecta: p.respuestaCorrecta,
+    explicacion: p.explicacion,
+  };
+}
+
+
 function Simulacro() {
+  const [asignatura, setAsignatura] = useState<Asignatura>("mate");
   const [iniciado, setIniciado] = useState(false);
   const [terminado, setTerminado] = useState(false);
   const [revisando, setRevisando] = useState(false);
@@ -42,9 +63,31 @@ function Simulacro() {
   const [sesionId, setSesionId] = useState<string | null>(null);
   const [guardadoFinal, setGuardadoFinal] = useState(false);
 
-  // Build a non-repeating session proportional across the 6 sources.
+  const esFisica = asignatura === "fisica";
+
+  // Build a non-repeating session proportional across the sources.
   const sesion = useMemo<Pregunta[]>(() => {
     if (!iniciado) return [];
+
+    if (esFisica) {
+      const pool = BANCO_FISICA.filter(
+        (p) => p.tema === "Cinemática" && SUBTEMAS_CINEMATICA.includes(p.subtema),
+      );
+      const elegidas: Pregunta[] = [];
+      const ids = new Set<string>();
+      const perSub = Math.max(1, Math.floor(TOTAL_PREG / SUBTEMAS_CINEMATICA.length));
+      for (const s of SUBTEMAS_CINEMATICA) {
+        const pick = preguntasAleatorias(pool.filter((p) => p.subtema === s && !ids.has(p.id)), perSub);
+        pick.forEach((p) => ids.add(p.id));
+        elegidas.push(...pick.map(aPregunta));
+      }
+      if (elegidas.length < TOTAL_PREG) {
+        const extras = preguntasAleatorias(pool.filter((p) => !ids.has(p.id)), TOTAL_PREG - elegidas.length);
+        elegidas.push(...extras.map(aPregunta));
+      }
+      return preguntasAleatorias(elegidas, elegidas.length).slice(0, TOTAL_PREG);
+    }
+
     const elegidas: Pregunta[] = [];
     const ids = new Set<string>();
     // 5 áreas temáticas: ~ (TOTAL_PREG * 0.8)/5 c/u; repaso: ~20%
@@ -67,7 +110,7 @@ function Simulacro() {
       elegidas.push(...extras);
     }
     return preguntasAleatorias(elegidas, elegidas.length).slice(0, TOTAL_PREG);
-  }, [iniciado]);
+  }, [iniciado, esFisica]);
 
   useEffect(() => {
     if (!iniciado || terminado) return;
@@ -88,20 +131,49 @@ function Simulacro() {
 
   async function empezar() {
     setIniciado(true);
-    const id = await iniciarSesion("simulacro", null);
+    const id = await iniciarSesion("simulacro", esFisica ? "Física" : null);
     setSesionId(id);
   }
 
   if (!iniciado) {
     return (
       <div className="min-h-screen bg-background">
-        <div className="mx-auto max-w-2xl px-5 py-10">
+        <div className="mx-auto max-w-2xl px-4 py-8 sm:px-5 sm:py-10">
           <Link to="/" className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Inicio</Link>
-          <div className="mt-5 rounded-2xl border bg-gradient-card p-7 shadow-soft">
+          <div className="mt-5 rounded-2xl border bg-gradient-card p-5 shadow-soft sm:p-7">
             <Timer className="h-10 w-10 text-primary" />
-            <h1 className="mt-3 text-3xl font-extrabold">Simulacro de examen</h1>
-            <p className="mt-2 text-muted-foreground">
-              {TOTAL_PREG} preguntas mezcladas de las 5 áreas + preguntas integradoras de repaso, en <strong>{DURACION_MIN} minutos</strong>.
+            <h1 className="mt-3 text-2xl font-extrabold sm:text-3xl">Simulacro de examen</h1>
+
+            <p className="mt-4 text-sm font-semibold">Elige la asignatura</p>
+            <div className="mt-2 grid gap-3 sm:grid-cols-2">
+              <button
+                onClick={() => setAsignatura("mate")}
+                className={`flex items-center gap-3 rounded-xl border-2 p-4 text-left transition ${asignatura === "mate" ? "border-primary bg-primary/5" : "hover:bg-secondary"}`}
+              >
+                <Calculator className="h-6 w-6 text-primary" />
+                <span>
+                  <span className="block font-bold">Matemática</span>
+                  <span className="block text-xs text-muted-foreground">5 áreas + repaso</span>
+                </span>
+              </button>
+              <button
+                onClick={() => setAsignatura("fisica")}
+                className={`flex items-center gap-3 rounded-xl border-2 p-4 text-left transition ${asignatura === "fisica" ? "border-primary bg-primary/5" : "hover:bg-secondary"}`}
+              >
+                <Atom className="h-6 w-6 text-primary" />
+                <span>
+                  <span className="block font-bold">Física</span>
+                  <span className="block text-xs text-muted-foreground">Cinemática: caída libre, MRU y MRUA</span>
+                </span>
+              </button>
+            </div>
+
+            <p className="mt-4 text-sm text-muted-foreground">
+              {esFisica ? (
+                <>{TOTAL_PREG} preguntas de <strong>Cinemática</strong> (caída libre, MRU y MRUA), en <strong>{DURACION_MIN} minutos</strong>. Solo se evalúa Física.</>
+              ) : (
+                <>{TOTAL_PREG} preguntas mezcladas de las 5 áreas + preguntas integradoras de repaso, en <strong>{DURACION_MIN} minutos</strong>.</>
+              )}{" "}
               No verás las respuestas hasta finalizar. Al terminar, calcularemos tu <strong>nivel de logro</strong> según la escala oficial del INEVAL.
             </p>
             <ul className="mt-4 space-y-1 text-sm">
@@ -110,13 +182,14 @@ function Simulacro() {
               ))}
             </ul>
             <button onClick={empezar} className="mt-6 w-full rounded-xl bg-primary px-5 py-3 text-base font-bold text-primary-foreground shadow-soft hover:bg-primary/90">
-              Empezar simulacro
+              Empezar simulacro de {esFisica ? "Física" : "Matemática"}
             </button>
           </div>
         </div>
       </div>
     );
   }
+
 
   if (terminado || idx >= sesion.length) {
     const aciertos = respuestas.filter((r) => r.correcta).length;
@@ -134,7 +207,7 @@ function Simulacro() {
     if (revisando) {
       return (
         <div className="min-h-screen bg-background">
-          <div className="mx-auto max-w-3xl px-5 py-8">
+          <div className="mx-auto max-w-3xl px-4 py-8 sm:px-5">
             <button onClick={() => setRevisando(false)} className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground">
               <ArrowLeft className="h-4 w-4" /> Volver al resultado
             </button>
@@ -167,19 +240,22 @@ function Simulacro() {
       );
     }
 
-    // Por área (solo las 5 áreas temáticas)
+    // Desglose: por área en Matemática, por subtema de Cinemática en Física
     const porArea: Record<string, { ok: number; total: number }> = {};
-    for (const a of AREAS) porArea[a] = { ok: 0, total: 0 };
+    const claves = esFisica ? SUBTEMAS_CINEMATICA : [...AREAS];
+    for (const a of claves) porArea[a] = { ok: 0, total: 0 };
     for (const r of respuestas) {
-      if (porArea[r.pregunta.area]) {
-        porArea[r.pregunta.area].total++;
-        if (r.correcta) porArea[r.pregunta.area].ok++;
+      const k = esFisica ? r.pregunta.subtema : r.pregunta.area;
+      if (porArea[k]) {
+        porArea[k].total++;
+        if (r.correcta) porArea[k].ok++;
       }
     }
 
+
     return (
       <div className="min-h-screen bg-background">
-        <div className="mx-auto max-w-2xl px-5 py-10">
+        <div className="mx-auto max-w-2xl px-4 py-8 sm:px-5 sm:py-10">
           <div className="rounded-2xl border bg-gradient-card p-8 shadow-strong">
             <div className="text-center">
               <div className="text-sm font-semibold text-muted-foreground">Resultado del simulacro</div>
@@ -188,7 +264,7 @@ function Simulacro() {
               <p className="mt-1 text-sm text-muted-foreground">{aciertos} de {total} correctas</p>
               <p className="mx-auto mt-3 max-w-md text-sm">{nivel.desc}</p>
             </div>
-            <h3 className="mt-6 mb-2 font-bold">Desglose por área</h3>
+            <h3 className="mt-6 mb-2 font-bold">{esFisica ? "Desglose por subtema (Cinemática)" : "Desglose por área"}</h3>
             <div className="space-y-2">
               {Object.entries(porArea).map(([a, v]) => {
                 const pct = v.total > 0 ? Math.round((v.ok / v.total) * 100) : 0;
@@ -227,7 +303,7 @@ function Simulacro() {
   return (
     <div className="min-h-screen bg-background">
       <div className="sticky top-0 z-10 border-b bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-3">
+        <div className="mx-auto flex max-w-3xl items-center justify-between gap-2 px-4 py-3 sm:px-5">
           <span className="text-sm font-semibold">{idx + 1} / {sesion.length}</span>
           <div className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-bold ${restante < 60 ? "bg-destructive/15 text-destructive" : "bg-primary/10 text-primary"}`}>
             <Timer className="h-4 w-4" /> {min}:{seg}
@@ -235,7 +311,7 @@ function Simulacro() {
           <button onClick={() => setTerminado(true)} className="text-sm font-medium text-muted-foreground hover:text-destructive">Terminar</button>
         </div>
       </div>
-      <div className="mx-auto max-w-3xl px-5 py-6">
+      <div className="mx-auto max-w-3xl px-4 py-6 sm:px-5">
         <PreguntaCard
           key={p.id}
           pregunta={p}
