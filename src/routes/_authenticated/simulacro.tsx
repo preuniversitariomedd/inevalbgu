@@ -37,6 +37,21 @@ function nivelLogro(score: number) {
 
 interface Resp { pregunta: Pregunta; correcta: boolean; idx: number }
 
+function aPregunta(p: (typeof BANCO_FISICA)[number]): Pregunta {
+  return {
+    id: p.id,
+    area: "Física",
+    tema: String(p.tema),
+    subtema: p.subtema,
+    nivel: p.nivel,
+    enunciado: p.enunciado,
+    opciones: p.opciones,
+    respuestaCorrecta: p.respuestaCorrecta,
+    explicacion: p.explicacion,
+  };
+}
+
+
 function Simulacro() {
   const [asignatura, setAsignatura] = useState<Asignatura>("mate");
   const [iniciado, setIniciado] = useState(false);
