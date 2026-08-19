@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 import { usePresencia } from "@/lib/usePresencia";
-import { LogOut, GraduationCap, Shield, PartyPopper, MessageCircle, Camera, Sparkles, ClipboardList } from "lucide-react";
+import { LogOut, GraduationCap, Shield, PartyPopper, MessageCircle, Camera, Sparkles, ClipboardList, Library } from "lucide-react";
+import { AusenciaDialog } from "@/components/AusenciaDialog";
 import { useMensajesNoLeidos } from "@/components/chat/ChatShell";
 import { miAvatarUrlFn, subirAvatarFn } from "@/lib/mensajes.functions";
 import { contarTareasPendientesFn } from "@/lib/tareas.functions";
@@ -115,6 +116,14 @@ function AuthedLayout() {
               <Sparkles className="h-4 w-4" />
               <span className="hidden sm:inline">Mr. Victor</span>
             </Link>
+            <Link
+              to="/biblioteca"
+              className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-medium hover:bg-secondary"
+              title="Biblioteca"
+            >
+              <Library className="h-4 w-4" />
+              <span className="hidden sm:inline">Biblioteca</span>
+            </Link>
             <TareasLink esStaff={ctx.esStaff} />
             <MensajesLink />
             {ctx.esStaff && (
@@ -139,6 +148,7 @@ function AuthedLayout() {
         </div>
       </nav>
       <Outlet />
+      <AusenciaDialog />
     </div>
   );
 }

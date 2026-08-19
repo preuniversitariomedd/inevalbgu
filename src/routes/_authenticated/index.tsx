@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database, ClipboardCheck, Award, Atom, Target } from "lucide-react";
+import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database, ClipboardCheck, Award, Atom, Target, Library } from "lucide-react";
 import { BANCO_PREGUNTAS } from "@/data";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 
@@ -113,6 +113,13 @@ function Index() {
             title="Análisis de errores"
             desc="Tus fallas agrupadas por tema y subtema con recomendaciones."
             tone="success"
+          />
+          <ActionCard
+            to="/biblioteca"
+            icon={<Library className="h-7 w-7" />}
+            title="Biblioteca"
+            desc="Documentos, videos, infografías y apuntes organizados por categorías."
+            tone="primary"
           />
           <ActionCard
             to="/encuesta"
