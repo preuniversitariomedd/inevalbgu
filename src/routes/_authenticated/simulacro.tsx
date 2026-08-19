@@ -240,15 +240,18 @@ function Simulacro() {
       );
     }
 
-    // Por área (solo las 5 áreas temáticas)
+    // Desglose: por área en Matemática, por subtema de Cinemática en Física
     const porArea: Record<string, { ok: number; total: number }> = {};
-    for (const a of AREAS) porArea[a] = { ok: 0, total: 0 };
+    const claves = esFisica ? SUBTEMAS_CINEMATICA : [...AREAS];
+    for (const a of claves) porArea[a] = { ok: 0, total: 0 };
     for (const r of respuestas) {
-      if (porArea[r.pregunta.area]) {
-        porArea[r.pregunta.area].total++;
-        if (r.correcta) porArea[r.pregunta.area].ok++;
+      const k = esFisica ? r.pregunta.subtema : r.pregunta.area;
+      if (porArea[k]) {
+        porArea[k].total++;
+        if (r.correcta) porArea[k].ok++;
       }
     }
+
 
     return (
       <div className="min-h-screen bg-background">
