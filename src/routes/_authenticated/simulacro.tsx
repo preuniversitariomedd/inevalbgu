@@ -207,7 +207,7 @@ function Simulacro() {
     if (revisando) {
       return (
         <div className="min-h-screen bg-background">
-          <div className="mx-auto max-w-3xl px-5 py-8">
+          <div className="mx-auto max-w-3xl px-4 py-8 sm:px-5">
             <button onClick={() => setRevisando(false)} className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground">
               <ArrowLeft className="h-4 w-4" /> Volver al resultado
             </button>
@@ -255,7 +255,7 @@ function Simulacro() {
 
     return (
       <div className="min-h-screen bg-background">
-        <div className="mx-auto max-w-2xl px-5 py-10">
+        <div className="mx-auto max-w-2xl px-4 py-8 sm:px-5 sm:py-10">
           <div className="rounded-2xl border bg-gradient-card p-8 shadow-strong">
             <div className="text-center">
               <div className="text-sm font-semibold text-muted-foreground">Resultado del simulacro</div>
@@ -303,7 +303,7 @@ function Simulacro() {
   return (
     <div className="min-h-screen bg-background">
       <div className="sticky top-0 z-10 border-b bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-3">
+        <div className="mx-auto flex max-w-3xl items-center justify-between gap-2 px-4 py-3 sm:px-5">
           <span className="text-sm font-semibold">{idx + 1} / {sesion.length}</span>
           <div className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-bold ${restante < 60 ? "bg-destructive/15 text-destructive" : "bg-primary/10 text-primary"}`}>
             <Timer className="h-4 w-4" /> {min}:{seg}
@@ -311,7 +311,7 @@ function Simulacro() {
           <button onClick={() => setTerminado(true)} className="text-sm font-medium text-muted-foreground hover:text-destructive">Terminar</button>
         </div>
       </div>
-      <div className="mx-auto max-w-3xl px-5 py-6">
+      <div className="mx-auto max-w-3xl px-4 py-6 sm:px-5">
         <PreguntaCard
           key={p.id}
           pregunta={p}
