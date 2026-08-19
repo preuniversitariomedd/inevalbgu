@@ -116,6 +116,14 @@ function AuthedLayout() {
               <Sparkles className="h-4 w-4" />
               <span className="hidden sm:inline">Mr. Victor</span>
             </Link>
+            <Link
+              to="/biblioteca"
+              className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-medium hover:bg-secondary"
+              title="Biblioteca"
+            >
+              <Library className="h-4 w-4" />
+              <span className="hidden sm:inline">Biblioteca</span>
+            </Link>
             <TareasLink esStaff={ctx.esStaff} />
             <MensajesLink />
             {ctx.esStaff && (
