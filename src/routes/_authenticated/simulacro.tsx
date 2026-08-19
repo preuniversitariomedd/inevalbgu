@@ -264,7 +264,7 @@ function Simulacro() {
               <p className="mt-1 text-sm text-muted-foreground">{aciertos} de {total} correctas</p>
               <p className="mx-auto mt-3 max-w-md text-sm">{nivel.desc}</p>
             </div>
-            <h3 className="mt-6 mb-2 font-bold">Desglose por área</h3>
+            <h3 className="mt-6 mb-2 font-bold">{esFisica ? "Desglose por subtema (Cinemática)" : "Desglose por área"}</h3>
             <div className="space-y-2">
               {Object.entries(porArea).map(([a, v]) => {
                 const pct = v.total > 0 ? Math.round((v.ok / v.total) * 100) : 0;
