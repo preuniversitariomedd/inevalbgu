@@ -115,6 +115,13 @@ function Index() {
             tone="success"
           />
           <ActionCard
+            to="/biblioteca"
+            icon={<Library className="h-7 w-7" />}
+            title="Biblioteca"
+            desc="Documentos, videos, infografías y apuntes organizados por categorías."
+            tone="primary"
+          />
+          <ActionCard
             to="/encuesta"
             icon={<ClipboardCheck className="h-7 w-7" />}
             title="Encuesta de factores"
