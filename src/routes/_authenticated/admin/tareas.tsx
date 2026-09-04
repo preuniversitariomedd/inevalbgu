@@ -15,6 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { RichTextEditor } from "@/components/RichTextEditor";
+import { FileDropzone } from "@/components/FileDropzone";
+
 import {
   ClipboardList, Plus, Trash2, Loader2, Paperclip, Download, X, Pencil,
   CalendarClock, FolderTree, Eye, ChevronDown, ChevronRight,
