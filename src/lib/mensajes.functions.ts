@@ -235,17 +235,21 @@ export const listarMensajesFn = createServerFn({ method: "POST" })
     const withUrl = await Promise.all(
       (msgs ?? []).map(async (m: any) => {
         let attachment_url: string | null = null;
+        let attachment_nombre: string | null = null;
         if (m.attachment_path) {
           const { data: signed } = await supabaseAdmin.storage
             .from("chat-attachments")
             .createSignedUrl(m.attachment_path, 60 * 60);
           attachment_url = signed?.signedUrl ?? null;
+          const base = String(m.attachment_path).split("/").pop() ?? "";
+          attachment_nombre = base.includes("__") ? base.split("__").slice(1).join("__") : base;
         }
         const leido = otroLeidoAt && new Date(m.created_at).getTime() <= new Date(otroLeidoAt).getTime();
         const cita = m.responde_a ? citados[m.responde_a] ?? null : null;
-        return { ...m, attachment_url, leido_por_otro: !!leido, cita };
+        return { ...m, attachment_url, attachment_nombre, leido_por_otro: !!leido, cita };
       }),
     );
+
     return withUrl;
   });
 
