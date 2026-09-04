@@ -7,6 +7,7 @@ import {
   Image as ImageIcon, StickyNote, Download, ExternalLink, Filter, Tags, LayoutGrid, List, Folder,
 } from "lucide-react";
 import { RichTextEditor } from "@/components/RichTextEditor";
+import { FileDropzone } from "@/components/FileDropzone";
 import {
   listarRecursosFn, listarCategoriasBibliotecaFn, guardarRecursoFn, borrarRecursoFn,
   urlArchivoBibliotecaFn, marcarRecursoVistoFn, toggleFavoritoRecursoFn,
@@ -441,7 +442,6 @@ function EditorRecurso({
   const [nuevos, setNuevos] = useState<File[]>([]);
   const [borrar, setBorrar] = useState<string[]>([]);
   const [guardando, setGuardando] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   async function guardar() {
     if (titulo.trim().length < 2) return toast.error("Escribe un título.");
