@@ -552,15 +552,11 @@ function EditorRecurso({
               </button>
             </div>
           ))}
-          <input
-            ref={inputRef}
-            type="file"
-            multiple
-            className="mt-2 block w-full text-sm"
-            onChange={(e) => setNuevos(Array.from(e.target.files ?? []))}
-          />
-          {nuevos.length > 0 && <p className="mt-1 text-xs text-muted-foreground">{nuevos.length} archivo(s) por subir.</p>}
+          <div className="mt-2">
+            <FileDropzone value={nuevos} onChange={setNuevos} />
+          </div>
         </div>
+
 
         <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
           <label className="inline-flex items-center gap-2">
