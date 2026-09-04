@@ -15,8 +15,9 @@ import {
 } from "@/lib/mensajes.functions";
 import {
   ArrowLeft,
-  Image as ImageIcon,
+  FileText,
   MessageSquarePlus,
+  Paperclip,
   Search,
   Send,
   Smile,
@@ -32,6 +33,7 @@ import {
   Reply,
 } from "lucide-react";
 import { toast } from "sonner";
+import { VisorArchivo, esImagen, tamanoLegible } from "@/components/VisorArchivo";
 
 const EMOJIS = [
   "😀","😁","😂","🤣","😊","😍","😘","😎","🤩","🥳",
@@ -69,6 +71,7 @@ type Mensaje = {
   attachment_path: string | null;
   attachment_tipo: string | null;
   attachment_url?: string | null;
+  attachment_nombre?: string | null;
   es_admin_intervencion: boolean;
   leido_por_otro?: boolean;
   created_at: string;
@@ -304,7 +307,9 @@ function ChatPanel({
   const qc = useQueryClient();
   const [texto, setTexto] = useState("");
   const [emojisOpen, setEmojisOpen] = useState(false);
-  const [file, setFile] = useState<{ base64: string; mime: string; nombre: string; preview: string } | null>(null);
+  const [file, setFile] = useState<{ base64: string; mime: string; nombre: string; preview: string; tamano: number } | null>(null);
+  const [arrastrando, setArrastrando] = useState(false);
+  const [verArchivo, setVerArchivo] = useState<{ url: string; mime: string; nombre: string } | null>(null);
   const [respondiendo, setRespondiendo] = useState<Mensaje | null>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement | HTMLInputElement | null>(null);
@@ -371,21 +376,25 @@ function ChatPanel({
     onError: (e: any) => toast.error(e.message ?? "No se pudo enviar."),
   });
 
-  function onPickFile(e: React.ChangeEvent<HTMLInputElement>) {
-    const f = e.target.files?.[0];
+  function tomarArchivo(f: File | null | undefined) {
     if (!f) return;
-    if (!/image\/(png|jpe?g|webp|gif)/.test(f.type)) return toast.error("Solo imágenes.");
-    if (f.size > 5 * 1024 * 1024) return toast.error("Máximo 5 MB.");
+    if (f.size > 25 * 1024 * 1024) return toast.error("El archivo supera 25 MB.");
     const reader = new FileReader();
     reader.onload = () => {
       setFile({
         base64: reader.result as string,
-        mime: f.type,
+        mime: f.type || "application/octet-stream",
         nombre: f.name,
         preview: URL.createObjectURL(f),
+        tamano: f.size,
       });
     };
     reader.readAsDataURL(f);
+  }
+
+  function onPickFile(e: React.ChangeEvent<HTMLInputElement>) {
+    tomarArchivo(e.target.files?.[0]);
+    e.currentTarget.value = "";
   }
 
   function onPaste(e: React.ClipboardEvent) {
@@ -394,17 +403,7 @@ function ChatPanel({
       if (it.type.startsWith("image/")) {
         const blob = it.getAsFile();
         if (!blob) continue;
-        if (blob.size > 5 * 1024 * 1024) return toast.error("Máximo 5 MB.");
-        const reader = new FileReader();
-        reader.onload = () => {
-          setFile({
-            base64: reader.result as string,
-            mime: blob.type,
-            nombre: "pegado.png",
-            preview: URL.createObjectURL(blob),
-          });
-        };
-        reader.readAsDataURL(blob);
+        tomarArchivo(new File([blob], "pegado.png", { type: blob.type }));
       }
     }
   }
@@ -451,8 +450,16 @@ function ChatPanel({
 
       <div
         ref={scrollerRef}
-        className="flex-1 overflow-y-auto bg-[radial-gradient(ellipse_at_top,theme(colors.fuchsia.100)_0%,transparent_60%),radial-gradient(ellipse_at_bottom,theme(colors.cyan.100)_0%,transparent_60%)] px-3 py-4 dark:bg-none"
+        onDragOver={(e) => { e.preventDefault(); setArrastrando(true); }}
+        onDragLeave={() => setArrastrando(false)}
+        onDrop={(e) => { e.preventDefault(); setArrastrando(false); tomarArchivo(e.dataTransfer.files?.[0]); }}
+        className="relative flex-1 overflow-y-auto bg-[radial-gradient(ellipse_at_top,theme(colors.fuchsia.100)_0%,transparent_60%),radial-gradient(ellipse_at_bottom,theme(colors.cyan.100)_0%,transparent_60%)] px-3 py-4 dark:bg-none"
       >
+        {arrastrando && (
+          <div className="pointer-events-none absolute inset-2 z-10 grid place-items-center rounded-2xl border-2 border-dashed border-fuchsia-500 bg-fuchsia-500/10 text-sm font-semibold text-fuchsia-700">
+            Suelta el archivo para adjuntarlo (máx. 25 MB)
+          </div>
+        )}
         {msgsQ.isLoading && <div className="py-8 text-center text-sm text-muted-foreground">Cargando…</div>}
         <ul className="space-y-2">
           {(msgsQ.data ?? []).map((m, idx, arr) => {
@@ -528,11 +535,36 @@ function ChatPanel({
                     </button>
                   )}
                   {m.attachment_url && (
-                    <img
-                      src={m.attachment_url}
-                      alt="adjunto"
-                      className="mb-1 max-h-72 rounded-lg object-cover"
-                    />
+                    esImagen(m.attachment_tipo ?? "", m.attachment_nombre ?? "") || m.attachment_tipo === "image" ? (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setVerArchivo({
+                            url: m.attachment_url!,
+                            mime: m.attachment_tipo ?? "image/*",
+                            nombre: m.attachment_nombre ?? "imagen",
+                          })
+                        }
+                        className="mb-1 block"
+                      >
+                        <img src={m.attachment_url} alt="adjunto" className="max-h-72 rounded-lg object-cover" />
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setVerArchivo({
+                            url: m.attachment_url!,
+                            mime: m.attachment_tipo ?? "application/octet-stream",
+                            nombre: m.attachment_nombre ?? "archivo",
+                          })
+                        }
+                        className={`mb-1 flex w-full items-center gap-2 rounded-xl px-2 py-1.5 text-left ${mine ? "bg-white/20" : "bg-white/70"}`}
+                      >
+                        <FileText className="h-5 w-5 shrink-0" />
+                        <span className="truncate text-xs font-medium">{m.attachment_nombre ?? "Archivo"}</span>
+                      </button>
+                    )
                   )}
                   {m.contenido && <p className="whitespace-pre-wrap break-words">{m.contenido}</p>}
                   <div className={`mt-0.5 flex items-center justify-end gap-1 text-[10px] ${mine ? "text-white/80" : "text-slate-500"}`}>
@@ -573,8 +605,23 @@ function ChatPanel({
       {file && (
         <div className="border-t bg-background/70 px-3 py-2">
           <div className="inline-flex items-center gap-2 rounded-xl border bg-card p-2 shadow-soft">
-            <img src={file.preview} alt="preview" className="h-14 w-14 rounded object-cover" />
-            <span className="text-xs">{file.nombre}</span>
+            {esImagen(file.mime, file.nombre) ? (
+              <img src={file.preview} alt="preview" className="h-14 w-14 rounded object-cover" />
+            ) : (
+              <div className="grid h-14 w-14 place-items-center rounded bg-secondary">
+                <FileText className="h-6 w-6" />
+              </div>
+            )}
+            <div className="min-w-0">
+              <p className="max-w-[180px] truncate text-xs font-medium">{file.nombre}</p>
+              <p className="text-[11px] text-muted-foreground">{tamanoLegible(file.tamano)}</p>
+            </div>
+            <button
+              onClick={() => setVerArchivo({ url: file.preview, mime: file.mime, nombre: file.nombre })}
+              className="rounded-full border px-2 py-0.5 text-[11px] hover:bg-secondary"
+            >
+              Ver
+            </button>
             <button onClick={() => setFile(null)} className="grid h-6 w-6 place-items-center rounded-full hover:bg-secondary">
               <X className="h-3 w-3" />
             </button>
@@ -608,11 +655,16 @@ function ChatPanel({
             <Smile className="h-5 w-5" />
           </button>
           <label
-            title="Adjuntar imagen"
+            title="Adjuntar archivo (máx. 25 MB)"
             className="grid h-10 w-10 cursor-pointer place-items-center rounded-full text-muted-foreground hover:bg-secondary"
           >
-            <ImageIcon className="h-5 w-5" />
-            <input type="file" accept="image/*" className="hidden" onChange={onPickFile} />
+            <Paperclip className="h-5 w-5" />
+            <input
+              type="file"
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip,image/*,video/*,audio/*"
+              className="hidden"
+              onChange={onPickFile}
+            />
           </label>
           <textarea
             ref={(el) => { inputRef.current = el; }}
@@ -638,6 +690,8 @@ function ChatPanel({
           </button>
         </div>
       </div>
+
+      {verArchivo && <VisorArchivo {...verArchivo} onClose={() => setVerArchivo(null)} />}
     </>
   );
 }

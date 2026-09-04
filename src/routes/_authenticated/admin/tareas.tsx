@@ -15,6 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { RichTextEditor } from "@/components/RichTextEditor";
+import { FileDropzone } from "@/components/FileDropzone";
+
 import {
   ClipboardList, Plus, Trash2, Loader2, Paperclip, Download, X, Pencil,
   CalendarClock, FolderTree, Eye, ChevronDown, ChevronRight,
@@ -269,20 +271,9 @@ function AdminTareasPage() {
 
         <div>
           <Label>Adjuntos {editando ? "nuevos" : ""} (máx 25MB c/u)</Label>
-          <Input type="file" multiple
-            accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,image/*,.txt"
-            onChange={(e) => setDraft({ ...draft, files: Array.from(e.target.files ?? []) })}
-          />
-          {draft.files.length > 0 && (
-            <ul className="mt-2 flex flex-wrap gap-1 text-xs text-muted-foreground">
-              {draft.files.map((f, i) => (
-                <li key={i} className="inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-0.5">
-                  <Paperclip className="h-3 w-3" /> {f.name}
-                </li>
-              ))}
-            </ul>
-          )}
+          <FileDropzone value={draft.files} onChange={(files) => setDraft({ ...draft, files })} />
         </div>
+
 
         <Button type="submit" disabled={guardarMut.isPending}>
           {guardarMut.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}

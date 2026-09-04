@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
@@ -7,6 +7,7 @@ import {
   Image as ImageIcon, StickyNote, Download, ExternalLink, Filter, Tags, LayoutGrid, List, Folder,
 } from "lucide-react";
 import { RichTextEditor } from "@/components/RichTextEditor";
+import { FileDropzone } from "@/components/FileDropzone";
 import {
   listarRecursosFn, listarCategoriasBibliotecaFn, guardarRecursoFn, borrarRecursoFn,
   urlArchivoBibliotecaFn, marcarRecursoVistoFn, toggleFavoritoRecursoFn,
@@ -441,7 +442,6 @@ function EditorRecurso({
   const [nuevos, setNuevos] = useState<File[]>([]);
   const [borrar, setBorrar] = useState<string[]>([]);
   const [guardando, setGuardando] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   async function guardar() {
     if (titulo.trim().length < 2) return toast.error("Escribe un título.");
@@ -552,15 +552,11 @@ function EditorRecurso({
               </button>
             </div>
           ))}
-          <input
-            ref={inputRef}
-            type="file"
-            multiple
-            className="mt-2 block w-full text-sm"
-            onChange={(e) => setNuevos(Array.from(e.target.files ?? []))}
-          />
-          {nuevos.length > 0 && <p className="mt-1 text-xs text-muted-foreground">{nuevos.length} archivo(s) por subir.</p>}
+          <div className="mt-2">
+            <FileDropzone value={nuevos} onChange={setNuevos} />
+          </div>
         </div>
+
 
         <div className="mt-4 flex flex-wrap items-center gap-4 text-sm">
           <label className="inline-flex items-center gap-2">
