@@ -250,12 +250,15 @@ export const listarMensajesFn = createServerFn({ method: "POST" })
   });
 
 // -------- Enviar mensaje --------
+const MIMES_CHAT_OK =
+  /^(image\/(png|jpe?g|webp|gif|svg\+xml)|application\/pdf|application\/msword|application\/vnd\.ms-(excel|powerpoint)|application\/vnd\.openxmlformats-officedocument\..+|application\/zip|text\/(plain|csv)|video\/(mp4|webm|quicktime)|audio\/(mpeg|mp4|webm|ogg|wav))$/i;
+
 const enviarSchema = z.object({
   conversacionId: z.string().uuid(),
   contenido: z.string().max(4000).optional().nullable(),
-  attachmentBase64: z.string().max(8_000_000).optional().nullable(),
-  attachmentMime: z.string().max(80).optional().nullable(),
-  attachmentNombre: z.string().max(120).optional().nullable(),
+  attachmentBase64: z.string().max(36_000_000).optional().nullable(),
+  attachmentMime: z.string().max(150).optional().nullable(),
+  attachmentNombre: z.string().max(200).optional().nullable(),
   respondeA: z.string().uuid().optional().nullable(),
 });
 export const enviarMensajeFn = createServerFn({ method: "POST" })
@@ -279,21 +282,25 @@ export const enviarMensajeFn = createServerFn({ method: "POST" })
     let attachment_path: string | null = null;
     let attachment_tipo: string | null = null;
     if (data.attachmentBase64 && data.attachmentMime) {
-      if (!/^image\/(png|jpe?g|webp|gif)$/i.test(data.attachmentMime)) {
-        throw new Error("Solo se permiten imágenes (jpg, png, webp, gif).");
+      if (!MIMES_CHAT_OK.test(data.attachmentMime)) {
+        throw new Error("Tipo de archivo no permitido.");
       }
-      const ext = data.attachmentMime.split("/")[1].replace("jpeg", "jpg");
-      const nombre = `${data.conversacionId}/${context.userId}/${crypto.randomUUID()}.${ext}`;
+      const limpio = (data.attachmentNombre ?? "archivo")
+        .replace(/[^\w.\- ]+/g, "_")
+        .slice(-90)
+        .trim() || "archivo";
+      const nombre = `${data.conversacionId}/${context.userId}/${crypto.randomUUID()}__${limpio}`;
       const b64 = data.attachmentBase64.replace(/^data:[^;]+;base64,/, "");
       const buf = Buffer.from(b64, "base64");
-      if (buf.length > 5 * 1024 * 1024) throw new Error("Imagen mayor a 5 MB.");
+      if (buf.length > 25 * 1024 * 1024) throw new Error("El archivo supera 25 MB.");
       const { error: ue } = await supabaseAdmin.storage
         .from("chat-attachments")
         .upload(nombre, buf, { contentType: data.attachmentMime, upsert: false });
       if (ue) throw new Error(ue.message);
       attachment_path = nombre;
-      attachment_tipo = "image";
+      attachment_tipo = data.attachmentMime;
     }
+
 
     const { data: msg, error } = await supabaseAdmin
       .from("mensajes")
