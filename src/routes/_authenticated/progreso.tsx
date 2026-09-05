@@ -15,7 +15,7 @@ import {
   Cell,
   Legend,
 } from "recharts";
-import { obtenerProgresoFn } from "@/lib/progreso.functions";
+import { obtenerProgresoFn, calificacionAsignaturasFn } from "@/lib/progreso.functions";
 import { listarEstudiantesFn } from "@/lib/admin.functions";
 import { getCurrentProfile } from "@/lib/auth-helpers";
 
@@ -371,5 +371,79 @@ function Section({
       </h2>
       {children}
     </section>
+  );
+}
+
+function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
+  const { data } = useQuery({
+    queryKey: ["calificacion", targetUserId ?? "me"],
+    queryFn: () =>
+      calificacionAsignaturasFn({ data: targetUserId ? { targetUserId } : {} }),
+    refetchInterval: 15000,
+    refetchOnWindowFocus: true,
+  });
+  if (!data) return null;
+  const bloques = [
+    { titulo: "Matemática", icono: "📐", d: data.matematica, color: "hsl(265 70% 55%)" },
+    { titulo: "Física", icono: "⚛️", d: data.fisica, color: "hsl(200 80% 45%)" },
+  ];
+  return (
+    <section className="mt-6 rounded-2xl border bg-gradient-card p-5 shadow-soft">
+      <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
+        <h2 className="flex items-center gap-2 text-lg font-bold">🏅 Calificación</h2>
+        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
+          <span className="h-2 w-2 animate-pulse rounded-full bg-primary" /> En tiempo real
+        </span>
+      </div>
+      <p className="mb-4 text-xs text-muted-foreground">
+        40% tiempo en plataforma · 20% tiempo activo · 20% constancia · 20% simulacros
+      </p>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {bloques.map((b) => (
+          <div key={b.titulo} className="rounded-xl border bg-card p-4">
+            <div className="flex items-baseline justify-between">
+              <div className="font-bold">
+                {b.icono} {b.titulo}
+              </div>
+              <div className="text-2xl font-extrabold" style={{ color: b.color }}>
+                {b.d.nota.toFixed(1)}
+                <span className="text-sm font-semibold text-muted-foreground">/10</span>
+              </div>
+            </div>
+            <div className="mt-3 space-y-2">
+              <Barra label="Tiempo en plataforma" valor={b.d.componentes.plataforma} max={40} color={b.color} />
+              <Barra label="Tiempo activo" valor={b.d.componentes.activo} max={20} color={b.color} />
+              <Barra label="Constancia" valor={b.d.componentes.constancia} max={20} color={b.color} />
+              <Barra label="Simulacros" valor={b.d.componentes.simulacro} max={20} color={b.color} />
+            </div>
+            <div className="mt-3 text-[11px] text-muted-foreground">
+              {b.d.simulacros} simulacro(s) de {b.titulo.toLowerCase()} rendido(s)
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-4 grid gap-2 text-xs text-muted-foreground sm:grid-cols-3">
+        <div>⏱️ {data.horasPlataforma} h en plataforma</div>
+        <div>⚡ {data.horasActivas} h activas</div>
+        <div>📅 {data.diasConectado} días con conexión</div>
+      </div>
+    </section>
+  );
+}
+
+function Barra({ label, valor, max, color }: { label: string; valor: number; max: number; color: string }) {
+  const pct = Math.max(0, Math.min(100, (valor / max) * 100));
+  return (
+    <div>
+      <div className="flex items-center justify-between text-[11px] font-medium">
+        <span className="text-muted-foreground">{label}</span>
+        <span>
+          {valor.toFixed(1)}/{max}
+        </span>
+      </div>
+      <div className="mt-1 h-2 overflow-hidden rounded-full bg-muted">
+        <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: color }} />
+      </div>
+    </div>
   );
 }
