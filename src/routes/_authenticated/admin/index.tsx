@@ -8,6 +8,7 @@ import {
   eliminarEstudianteFn,
   listarEstudiantesFn,
   resetPasswordEstudianteFn,
+  resetPasswordMasivoFn,
   toggleBloqueoEstudianteFn,
   listarGruposFn,
   asignarEstudiantesAGrupoFn,
@@ -113,6 +114,7 @@ function AdminEstudiantes() {
   const editar = useServerFn(editarEstudianteFn);
   const eliminar = useServerFn(eliminarEstudianteFn);
   const resetear = useServerFn(resetPasswordEstudianteFn);
+  const resetearMasivo = useServerFn(resetPasswordMasivoFn);
   const toggleBloqueo = useServerFn(toggleBloqueoEstudianteFn);
   const asignarGrupo = useServerFn(asignarEstudiantesAGrupoFn);
 
@@ -137,6 +139,8 @@ function AdminEstudiantes() {
   const [confirmarEliminar, setConfirmarEliminar] = useState<Estudiante | null>(null);
   const [confirmarReset, setConfirmarReset] = useState<Estudiante | null>(null);
   const [asignarOpen, setAsignarOpen] = useState(false);
+  const [resetMasivoOpen, setResetMasivoOpen] = useState(false);
+  const [resetMasivoLoading, setResetMasivoLoading] = useState(false);
   const [grupoElegido, setGrupoElegido] = useState<string>("");
 
   const estudiantes = useMemo<Estudiante[]>(() => (data as Estudiante[] | undefined) ?? [], [data]);
@@ -377,6 +381,9 @@ function AdminEstudiantes() {
           <span className="text-sm font-semibold">{seleccion.size} seleccionados</span>
           <Button size="sm" variant="outline" onClick={() => setAsignarOpen(true)}>
             <Users className="h-4 w-4" /> Asignar a grupo
+          </Button>
+          <Button size="sm" variant="outline" onClick={() => setResetMasivoOpen(true)}>
+            <KeyRound className="h-4 w-4" /> Reiniciar contraseñas
           </Button>
           <Button size="sm" variant="ghost" onClick={() => setSeleccion(new Set())}>
             Limpiar selección
