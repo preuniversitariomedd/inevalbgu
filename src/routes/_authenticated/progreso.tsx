@@ -228,6 +228,9 @@ function ProgresoPage() {
         <StatCard label="Sesiones completadas" value={sesiones.length} />
       </div>
 
+      <CalificacionPanel targetUserId={as} />
+
+
       {dataSesiones.length > 0 && (
         <Section title="Correctas vs incorrectas por sesión" icon={<BarChart3 className="h-5 w-5" />}>
           <div className="h-64">
