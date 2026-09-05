@@ -662,6 +662,49 @@ function AdminEstudiantes() {
         </DialogContent>
       </Dialog>
 
+      {/* Reinicio masivo de contraseñas */}
+      <Dialog open={resetMasivoOpen} onOpenChange={setResetMasivoOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Reiniciar {seleccion.size} contraseña(s)</DialogTitle>
+            <DialogDescription>
+              Todos los estudiantes seleccionados recibirán la contraseña temporal{" "}
+              <b className="font-mono">123*789*h</b> y deberán cambiarla al ingresar.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setResetMasivoOpen(false)}>
+              Cancelar
+            </Button>
+            <Button
+              disabled={resetMasivoLoading || seleccion.size === 0}
+              onClick={async () => {
+                setResetMasivoLoading(true);
+                try {
+                  const r: any = await resetearMasivo({
+                    data: { userIds: Array.from(seleccion) },
+                  });
+                  toast.success(
+                    `Se reiniciaron ${r.ok} contraseña(s)` +
+                      (r.fallidos?.length ? ` · ${r.fallidos.length} con error` : ""),
+                  );
+                  setResetMasivoOpen(false);
+                  setSeleccion(new Set());
+                  invalidar();
+                } catch (err: any) {
+                  toast.error(err?.message ?? "No se pudo reiniciar.");
+                } finally {
+                  setResetMasivoLoading(false);
+                }
+              }}
+            >
+              {resetMasivoLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+              Reiniciar contraseñas
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       {/* Credencial generada */}
       <Dialog open={!!credencial} onOpenChange={(o) => !o && setCredencial(null)}>
         <DialogContent className="sm:max-w-md">
