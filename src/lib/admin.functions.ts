@@ -653,3 +653,30 @@ export const usoPlataformaFn = createServerFn({ method: "POST" })
       meses: orden(meses).slice(0, 12),
     };
   });
+
+// ---------- Reinicio masivo de contraseñas ----------
+export const resetPasswordMasivoFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) =>
+    z.object({ userIds: z.array(z.string().uuid()).min(1).max(300) }).parse(d),
+  )
+  .handler(async ({ data, context }) => {
+    await ensureStaff(context);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    let ok = 0;
+    const fallidos: string[] = [];
+    for (const id of data.userIds) {
+      const { error } = await supabaseAdmin.auth.admin.updateUserById(id, {
+        password: TEMP_PASSWORD,
+      });
+      if (error) fallidos.push(id);
+      else ok += 1;
+    }
+    if (ok > 0) {
+      await supabaseAdmin
+        .from("profiles")
+        .update({ primera_vez: true })
+        .in("id", data.userIds.filter((i) => !fallidos.includes(i)));
+    }
+    return { ok, fallidos, passwordTemporal: TEMP_PASSWORD };
+  });
