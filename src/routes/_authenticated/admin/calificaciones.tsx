@@ -138,9 +138,12 @@ async function exportarPdf(filas: Fila[]) {
 
 function CalificacionesPage() {
   const [grupoId, setGrupoId] = useState<string>("");
+  const [nivelFiltro, setNivelFiltro] = useState<Nivel | "">("");
   const q = useQuery({
     queryKey: ["calificaciones"],
     queryFn: () => calificacionesEstudiantesFn() as Promise<Fila[]>,
+    refetchInterval: 15000,
+    refetchOnWindowFocus: true,
   });
   const grpQ = useQuery({ queryKey: ["admin", "grupos"], queryFn: () => listarGruposFn() });
   const miembrosQ = useQuery({
@@ -149,14 +152,21 @@ function CalificacionesPage() {
     enabled: !!grupoId,
   });
   const todas = q.data ?? [];
-  const filas = useMemo(() => {
+  const delGrupo = useMemo(() => {
     if (!grupoId) return todas;
     const set = new Set(miembrosQ.data ?? []);
     return todas.filter((f) => set.has(f.id));
   }, [todas, grupoId, miembrosQ.data]);
-  const prom = filas.length ? filas.reduce((a, f) => a + f.nota, 0) / filas.length : 0;
-
-
+  const conteos = useMemo(() => {
+    const c: Record<Nivel, number> = { excelente: 0, bueno: 0, riesgo: 0, critico: 0 };
+    for (const f of delGrupo) c[nivelDe(f.nota)]++;
+    return c;
+  }, [delGrupo]);
+  const filas = useMemo(
+    () => (nivelFiltro ? delGrupo.filter((f) => nivelDe(f.nota) === nivelFiltro) : delGrupo),
+    [delGrupo, nivelFiltro],
+  );
+  const prom = delGrupo.length ? delGrupo.reduce((a, f) => a + f.nota, 0) / delGrupo.length : 0;
 
   return (
     <div>
@@ -172,11 +182,35 @@ function CalificacionesPage() {
             <option key={g.id} value={g.id}>{g.nombre} ({g.total})</option>
           ))}
         </select>
+        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
+          <span className="h-2 w-2 animate-pulse rounded-full bg-primary" /> Notas en vivo
+        </span>
         <div className="ml-auto text-sm">
           <span className="text-muted-foreground">Promedio del grupo:</span>{" "}
           <span className={`font-bold ${notaColor(prom)}`}>{prom.toFixed(2)} / 10</span>
-          <span className="ml-2 text-xs text-muted-foreground">({filas.length} estudiantes)</span>
+          <span className="ml-2 text-xs text-muted-foreground">({delGrupo.length} estudiantes)</span>
         </div>
+      </div>
+
+      <div className="mb-3 flex flex-wrap gap-2">
+        {(["excelente", "bueno", "riesgo", "critico"] as Nivel[]).map((n) => (
+          <button
+            key={n}
+            onClick={() => setNivelFiltro(nivelFiltro === n ? "" : n)}
+            className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${NIVEL_INFO[n].badge} ${
+              nivelFiltro === n ? "ring-2 ring-offset-1 ring-current" : "opacity-90 hover:opacity-100"
+            }`}
+          >
+            {NIVEL_INFO[n].label} · {conteos[n]}
+          </button>
+        ))}
+        {nivelFiltro && (
+          <button onClick={() => setNivelFiltro("")} className="rounded-full border px-3 py-1.5 text-xs font-semibold">
+            Ver todos
+          </button>
+        )}
+      </div>
+
       </div>
 
       <div className="mb-4 rounded-2xl border bg-gradient-to-br from-primary/5 to-accent/5 p-4 shadow-soft">
