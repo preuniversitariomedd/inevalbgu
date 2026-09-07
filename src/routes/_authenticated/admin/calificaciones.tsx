@@ -255,17 +255,21 @@ function CalificacionesPage() {
               <th className="px-3 py-2 text-right">Sesiones</th>
               <th className="px-3 py-2 text-right">Horas</th>
               <th className="px-3 py-2 text-right">Nota /10</th>
+              <th className="px-3 py-2 text-left">Estado</th>
+              <th className="px-3 py-2 text-left">Recomendación personalizada</th>
             </tr>
           </thead>
           <tbody>
             {q.isLoading && (
-              <tr><td colSpan={9} className="py-6 text-center text-muted-foreground">Cargando…</td></tr>
+              <tr><td colSpan={11} className="py-6 text-center text-muted-foreground">Cargando…</td></tr>
             )}
             {!q.isLoading && filas.length === 0 && (
-              <tr><td colSpan={9} className="py-6 text-center text-muted-foreground">Sin estudiantes.</td></tr>
+              <tr><td colSpan={11} className="py-6 text-center text-muted-foreground">Sin estudiantes.</td></tr>
             )}
-            {filas.map((f) => (
-              <tr key={f.id} className="border-t">
+            {filas.map((f) => {
+              const nv = nivelDe(f.nota);
+              return (
+              <tr key={f.id} className={`border-t ${NIVEL_INFO[nv].fila}`}>
                 <td className="px-3 py-2 font-mono text-xs">{f.cedula}</td>
                 <td className="px-3 py-2 font-medium">{f.nombres}</td>
                 <td className="px-3 py-2 text-muted-foreground">{f.institucion}</td>
@@ -275,8 +279,16 @@ function CalificacionesPage() {
                 <td className="px-3 py-2 text-right tabular-nums">{f.sesiones_practica}</td>
                 <td className="px-3 py-2 text-right tabular-nums">{f.horas_activas}</td>
                 <td className={`px-3 py-2 text-right font-bold tabular-nums ${notaColor(f.nota)}`}>{f.nota.toFixed(1)}</td>
+                <td className="px-3 py-2">
+                  <span className={`whitespace-nowrap rounded-full px-2 py-1 text-[11px] font-semibold ${NIVEL_INFO[nv].badge}`}>
+                    {NIVEL_INFO[nv].label}
+                  </span>
+                </td>
+                <td className="px-3 py-2 text-xs text-muted-foreground min-w-[260px]">{consejoDe(f)}</td>
               </tr>
-            ))}
+              );
+            })}
+
           </tbody>
         </table>
       </div>
