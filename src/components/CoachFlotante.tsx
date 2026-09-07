@@ -226,6 +226,7 @@ export function CoachFlotante() {
 
           <Link
             to="/progreso"
+            search={{ u: undefined } as any}
             onClick={() => setAbierto(false)}
             className="mt-3 block rounded-xl bg-secondary px-3 py-2 text-center text-xs font-semibold hover:bg-secondary/70"
           >
