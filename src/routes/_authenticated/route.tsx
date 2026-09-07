@@ -6,6 +6,7 @@ import { obtenerBrandingFn } from "@/lib/admin.functions";
 import { usePresencia } from "@/lib/usePresencia";
 import { LogOut, GraduationCap, Shield, PartyPopper, MessageCircle, Camera, Sparkles, ClipboardList, Library } from "lucide-react";
 import { AusenciaDialog } from "@/components/AusenciaDialog";
+import { CoachFlotante } from "@/components/CoachFlotante";
 import { useMensajesNoLeidos } from "@/components/chat/ChatShell";
 import { miAvatarUrlFn, subirAvatarFn } from "@/lib/mensajes.functions";
 import { contarTareasPendientesFn } from "@/lib/tareas.functions";
