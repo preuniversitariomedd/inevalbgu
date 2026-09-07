@@ -149,6 +149,7 @@ function AuthedLayout() {
       </nav>
       <Outlet />
       <AusenciaDialog />
+      {!ctx.esStaff && <CoachFlotante />}
     </div>
   );
 }
