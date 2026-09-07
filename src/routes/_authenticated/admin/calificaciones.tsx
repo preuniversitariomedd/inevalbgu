@@ -31,6 +31,59 @@ function notaColor(n: number) {
   return "text-rose-600";
 }
 
+type Nivel = "excelente" | "bueno" | "riesgo" | "critico";
+
+function nivelDe(n: number): Nivel {
+  if (n >= 9) return "excelente";
+  if (n >= 7) return "bueno";
+  if (n >= 5) return "riesgo";
+  return "critico";
+}
+
+const NIVEL_INFO: Record<Nivel, { label: string; badge: string; fila: string }> = {
+  excelente: {
+    label: "Excelente (9–10)",
+    badge: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400",
+    fila: "bg-emerald-500/5",
+  },
+  bueno: {
+    label: "Bueno (7–8.9)",
+    badge: "bg-primary/15 text-primary",
+    fila: "",
+  },
+  riesgo: {
+    label: "En riesgo (5–6.9)",
+    badge: "bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-400",
+    fila: "bg-amber-500/5",
+  },
+  critico: {
+    label: "Crítico (< 5)",
+    badge: "bg-rose-100 text-rose-700 dark:bg-rose-500/15 dark:text-rose-400",
+    fila: "bg-rose-500/10",
+  },
+};
+
+/** Mensaje personalizado según el punto más flojo del estudiante. */
+function consejoDe(f: Fila) {
+  const nivel = nivelDe(f.nota);
+  if (nivel === "excelente") {
+    return `Rendimiento sobresaliente (${f.precision_pct}% de precisión). Proponle simulacros completos y ejercicios de mayor dificultad.`;
+  }
+  const faltas: string[] = [];
+  if (f.precision_pct < 70) faltas.push(`precisión baja (${f.precision_pct}%): repasar los temas con más fallas`);
+  if (f.sesiones_practica < 10) faltas.push(`poca constancia (${f.sesiones_practica} sesiones): practicar al menos 3 veces por semana`);
+  if (f.horas_activas < 10) faltas.push(`poco tiempo activo (${f.horas_activas} h): sesiones de 25–30 min guiadas`);
+  if (f.total_respuestas < 30) faltas.push(`muy pocas preguntas resueltas (${f.total_respuestas})`);
+  if (faltas.length === 0) {
+    return nivel === "bueno"
+      ? "Muy cerca de la excelencia: sumar simulacros cronometrados para afinar velocidad."
+      : "Mantener el ritmo y reforzar los subtemas con menor porcentaje de aciertos.";
+  }
+  const prefijo = nivel === "critico" ? "Atención urgente — " : "Para subir la nota — ";
+  return prefijo + faltas.join("; ") + ".";
+}
+
+
 async function exportarExcel(filas: Fila[]) {
   const XLSX = await import("xlsx");
   const data = filas.map((f) => ({
@@ -85,9 +138,12 @@ async function exportarPdf(filas: Fila[]) {
 
 function CalificacionesPage() {
   const [grupoId, setGrupoId] = useState<string>("");
+  const [nivelFiltro, setNivelFiltro] = useState<Nivel | "">("");
   const q = useQuery({
     queryKey: ["calificaciones"],
     queryFn: () => calificacionesEstudiantesFn() as Promise<Fila[]>,
+    refetchInterval: 15000,
+    refetchOnWindowFocus: true,
   });
   const grpQ = useQuery({ queryKey: ["admin", "grupos"], queryFn: () => listarGruposFn() });
   const miembrosQ = useQuery({
@@ -96,14 +152,21 @@ function CalificacionesPage() {
     enabled: !!grupoId,
   });
   const todas = q.data ?? [];
-  const filas = useMemo(() => {
+  const delGrupo = useMemo(() => {
     if (!grupoId) return todas;
     const set = new Set(miembrosQ.data ?? []);
     return todas.filter((f) => set.has(f.id));
   }, [todas, grupoId, miembrosQ.data]);
-  const prom = filas.length ? filas.reduce((a, f) => a + f.nota, 0) / filas.length : 0;
-
-
+  const conteos = useMemo(() => {
+    const c: Record<Nivel, number> = { excelente: 0, bueno: 0, riesgo: 0, critico: 0 };
+    for (const f of delGrupo) c[nivelDe(f.nota)]++;
+    return c;
+  }, [delGrupo]);
+  const filas = useMemo(
+    () => (nivelFiltro ? delGrupo.filter((f) => nivelDe(f.nota) === nivelFiltro) : delGrupo),
+    [delGrupo, nivelFiltro],
+  );
+  const prom = delGrupo.length ? delGrupo.reduce((a, f) => a + f.nota, 0) / delGrupo.length : 0;
 
   return (
     <div>
@@ -119,11 +182,35 @@ function CalificacionesPage() {
             <option key={g.id} value={g.id}>{g.nombre} ({g.total})</option>
           ))}
         </select>
+        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
+          <span className="h-2 w-2 animate-pulse rounded-full bg-primary" /> Notas en vivo
+        </span>
         <div className="ml-auto text-sm">
           <span className="text-muted-foreground">Promedio del grupo:</span>{" "}
           <span className={`font-bold ${notaColor(prom)}`}>{prom.toFixed(2)} / 10</span>
-          <span className="ml-2 text-xs text-muted-foreground">({filas.length} estudiantes)</span>
+          <span className="ml-2 text-xs text-muted-foreground">({delGrupo.length} estudiantes)</span>
         </div>
+      </div>
+
+      <div className="mb-3 flex flex-wrap gap-2">
+        {(["excelente", "bueno", "riesgo", "critico"] as Nivel[]).map((n) => (
+          <button
+            key={n}
+            onClick={() => setNivelFiltro(nivelFiltro === n ? "" : n)}
+            className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${NIVEL_INFO[n].badge} ${
+              nivelFiltro === n ? "ring-2 ring-offset-1 ring-current" : "opacity-90 hover:opacity-100"
+            }`}
+          >
+            {NIVEL_INFO[n].label} · {conteos[n]}
+          </button>
+        ))}
+        {nivelFiltro && (
+          <button onClick={() => setNivelFiltro("")} className="rounded-full border px-3 py-1.5 text-xs font-semibold">
+            Ver todos
+          </button>
+        )}
+      </div>
+
       </div>
 
       <div className="mb-4 rounded-2xl border bg-gradient-to-br from-primary/5 to-accent/5 p-4 shadow-soft">
@@ -168,17 +255,21 @@ function CalificacionesPage() {
               <th className="px-3 py-2 text-right">Sesiones</th>
               <th className="px-3 py-2 text-right">Horas</th>
               <th className="px-3 py-2 text-right">Nota /10</th>
+              <th className="px-3 py-2 text-left">Estado</th>
+              <th className="px-3 py-2 text-left">Recomendación personalizada</th>
             </tr>
           </thead>
           <tbody>
             {q.isLoading && (
-              <tr><td colSpan={9} className="py-6 text-center text-muted-foreground">Cargando…</td></tr>
+              <tr><td colSpan={11} className="py-6 text-center text-muted-foreground">Cargando…</td></tr>
             )}
             {!q.isLoading && filas.length === 0 && (
-              <tr><td colSpan={9} className="py-6 text-center text-muted-foreground">Sin estudiantes.</td></tr>
+              <tr><td colSpan={11} className="py-6 text-center text-muted-foreground">Sin estudiantes.</td></tr>
             )}
-            {filas.map((f) => (
-              <tr key={f.id} className="border-t">
+            {filas.map((f) => {
+              const nv = nivelDe(f.nota);
+              return (
+              <tr key={f.id} className={`border-t ${NIVEL_INFO[nv].fila}`}>
                 <td className="px-3 py-2 font-mono text-xs">{f.cedula}</td>
                 <td className="px-3 py-2 font-medium">{f.nombres}</td>
                 <td className="px-3 py-2 text-muted-foreground">{f.institucion}</td>
@@ -188,8 +279,16 @@ function CalificacionesPage() {
                 <td className="px-3 py-2 text-right tabular-nums">{f.sesiones_practica}</td>
                 <td className="px-3 py-2 text-right tabular-nums">{f.horas_activas}</td>
                 <td className={`px-3 py-2 text-right font-bold tabular-nums ${notaColor(f.nota)}`}>{f.nota.toFixed(1)}</td>
+                <td className="px-3 py-2">
+                  <span className={`whitespace-nowrap rounded-full px-2 py-1 text-[11px] font-semibold ${NIVEL_INFO[nv].badge}`}>
+                    {NIVEL_INFO[nv].label}
+                  </span>
+                </td>
+                <td className="px-3 py-2 text-xs text-muted-foreground min-w-[260px]">{consejoDe(f)}</td>
               </tr>
-            ))}
+              );
+            })}
+
           </tbody>
         </table>
       </div>
