@@ -31,6 +31,59 @@ function notaColor(n: number) {
   return "text-rose-600";
 }
 
+type Nivel = "excelente" | "bueno" | "riesgo" | "critico";
+
+function nivelDe(n: number): Nivel {
+  if (n >= 9) return "excelente";
+  if (n >= 7) return "bueno";
+  if (n >= 5) return "riesgo";
+  return "critico";
+}
+
+const NIVEL_INFO: Record<Nivel, { label: string; badge: string; fila: string }> = {
+  excelente: {
+    label: "Excelente (9–10)",
+    badge: "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400",
+    fila: "bg-emerald-500/5",
+  },
+  bueno: {
+    label: "Bueno (7–8.9)",
+    badge: "bg-primary/15 text-primary",
+    fila: "",
+  },
+  riesgo: {
+    label: "En riesgo (5–6.9)",
+    badge: "bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-400",
+    fila: "bg-amber-500/5",
+  },
+  critico: {
+    label: "Crítico (< 5)",
+    badge: "bg-rose-100 text-rose-700 dark:bg-rose-500/15 dark:text-rose-400",
+    fila: "bg-rose-500/10",
+  },
+};
+
+/** Mensaje personalizado según el punto más flojo del estudiante. */
+function consejoDe(f: Fila) {
+  const nivel = nivelDe(f.nota);
+  if (nivel === "excelente") {
+    return `Rendimiento sobresaliente (${f.precision_pct}% de precisión). Proponle simulacros completos y ejercicios de mayor dificultad.`;
+  }
+  const faltas: string[] = [];
+  if (f.precision_pct < 70) faltas.push(`precisión baja (${f.precision_pct}%): repasar los temas con más fallas`);
+  if (f.sesiones_practica < 10) faltas.push(`poca constancia (${f.sesiones_practica} sesiones): practicar al menos 3 veces por semana`);
+  if (f.horas_activas < 10) faltas.push(`poco tiempo activo (${f.horas_activas} h): sesiones de 25–30 min guiadas`);
+  if (f.total_respuestas < 30) faltas.push(`muy pocas preguntas resueltas (${f.total_respuestas})`);
+  if (faltas.length === 0) {
+    return nivel === "bueno"
+      ? "Muy cerca de la excelencia: sumar simulacros cronometrados para afinar velocidad."
+      : "Mantener el ritmo y reforzar los subtemas con menor porcentaje de aciertos.";
+  }
+  const prefijo = nivel === "critico" ? "Atención urgente — " : "Para subir la nota — ";
+  return prefijo + faltas.join("; ") + ".";
+}
+
+
 async function exportarExcel(filas: Fila[]) {
   const XLSX = await import("xlsx");
   const data = filas.map((f) => ({
