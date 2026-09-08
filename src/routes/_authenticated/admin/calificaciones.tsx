@@ -211,7 +211,7 @@ function CalificacionesPage() {
         )}
       </div>
 
-      </div>
+
 
       <div className="mb-4 rounded-2xl border bg-gradient-to-br from-primary/5 to-accent/5 p-4 shadow-soft">
         <div className="flex flex-wrap items-start justify-between gap-3">
