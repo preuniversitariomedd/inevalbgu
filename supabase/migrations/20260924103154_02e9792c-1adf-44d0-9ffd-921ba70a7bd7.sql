@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.es_participante_comp(uuid, uuid) FROM PUBLIC, anon;
