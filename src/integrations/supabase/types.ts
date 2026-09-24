@@ -344,6 +344,275 @@ export type Database = {
         }
         Relationships: []
       }
+      competencia_alertas: {
+        Row: {
+          competencia_id: string
+          created_at: string
+          detalle: string | null
+          id: string
+          nombre: string | null
+          tipo: string
+          user_id: string
+        }
+        Insert: {
+          competencia_id: string
+          created_at?: string
+          detalle?: string | null
+          id?: string
+          nombre?: string | null
+          tipo: string
+          user_id: string
+        }
+        Update: {
+          competencia_id?: string
+          created_at?: string
+          detalle?: string | null
+          id?: string
+          nombre?: string | null
+          tipo?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competencia_alertas_competencia_id_fkey"
+            columns: ["competencia_id"]
+            isOneToOne: false
+            referencedRelation: "competencias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      competencia_participantes: {
+        Row: {
+          acepto_reglas: boolean
+          aciertos: number
+          alertas: number
+          cincuenta_idx: number
+          competencia_id: string
+          congelar_idx: number
+          doble_idx: number
+          escudo: boolean
+          joined_at: string
+          leves: number
+          mejor_racha: number
+          nombre: string
+          potenciadores_usados: string[]
+          puntaje: number
+          racha: number
+          user_id: string
+          virus_de: string | null
+          virus_hasta: number
+        }
+        Insert: {
+          acepto_reglas?: boolean
+          aciertos?: number
+          alertas?: number
+          cincuenta_idx?: number
+          competencia_id: string
+          congelar_idx?: number
+          doble_idx?: number
+          escudo?: boolean
+          joined_at?: string
+          leves?: number
+          mejor_racha?: number
+          nombre?: string
+          potenciadores_usados?: string[]
+          puntaje?: number
+          racha?: number
+          user_id: string
+          virus_de?: string | null
+          virus_hasta?: number
+        }
+        Update: {
+          acepto_reglas?: boolean
+          aciertos?: number
+          alertas?: number
+          cincuenta_idx?: number
+          competencia_id?: string
+          congelar_idx?: number
+          doble_idx?: number
+          escudo?: boolean
+          joined_at?: string
+          leves?: number
+          mejor_racha?: number
+          nombre?: string
+          potenciadores_usados?: string[]
+          puntaje?: number
+          racha?: number
+          user_id?: string
+          virus_de?: string | null
+          virus_hasta?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competencia_participantes_competencia_id_fkey"
+            columns: ["competencia_id"]
+            isOneToOne: false
+            referencedRelation: "competencias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      competencia_preguntas: {
+        Row: {
+          area: string | null
+          casi_correcta: number | null
+          competencia_id: string
+          correcta: number
+          created_at: string
+          enunciado: string
+          explicacion: string | null
+          id: string
+          imagen_url: string | null
+          nivel: string
+          opciones: Json
+          orden: number
+          tiempo_seg: number
+        }
+        Insert: {
+          area?: string | null
+          casi_correcta?: number | null
+          competencia_id: string
+          correcta: number
+          created_at?: string
+          enunciado: string
+          explicacion?: string | null
+          id?: string
+          imagen_url?: string | null
+          nivel?: string
+          opciones: Json
+          orden?: number
+          tiempo_seg?: number
+        }
+        Update: {
+          area?: string | null
+          casi_correcta?: number | null
+          competencia_id?: string
+          correcta?: number
+          created_at?: string
+          enunciado?: string
+          explicacion?: string | null
+          id?: string
+          imagen_url?: string | null
+          nivel?: string
+          opciones?: Json
+          orden?: number
+          tiempo_seg?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competencia_preguntas_competencia_id_fkey"
+            columns: ["competencia_id"]
+            isOneToOne: false
+            referencedRelation: "competencias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      competencia_respuestas: {
+        Row: {
+          competencia_id: string
+          created_at: string
+          fraccion: number
+          id: string
+          ms: number
+          opcion: number | null
+          pregunta_idx: number
+          puntos: number
+          user_id: string
+        }
+        Insert: {
+          competencia_id: string
+          created_at?: string
+          fraccion?: number
+          id?: string
+          ms?: number
+          opcion?: number | null
+          pregunta_idx: number
+          puntos?: number
+          user_id: string
+        }
+        Update: {
+          competencia_id?: string
+          created_at?: string
+          fraccion?: number
+          id?: string
+          ms?: number
+          opcion?: number | null
+          pregunta_idx?: number
+          puntos?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competencia_respuestas_competencia_id_fkey"
+            columns: ["competencia_id"]
+            isOneToOne: false
+            referencedRelation: "competencias"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      competencias: {
+        Row: {
+          admin_potenciadores_usados: string[]
+          codigo: string
+          creador_id: string
+          created_at: string
+          duracion_min: number
+          efectos: Json
+          estado: string
+          fin_at: string | null
+          grupo_ids: string[]
+          id: string
+          inicio_at: string | null
+          pausa_restante_ms: number | null
+          pregunta_actual: number
+          pregunta_duracion_ms: number
+          pregunta_inicio: string | null
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          admin_potenciadores_usados?: string[]
+          codigo: string
+          creador_id: string
+          created_at?: string
+          duracion_min?: number
+          efectos?: Json
+          estado?: string
+          fin_at?: string | null
+          grupo_ids?: string[]
+          id?: string
+          inicio_at?: string | null
+          pausa_restante_ms?: number | null
+          pregunta_actual?: number
+          pregunta_duracion_ms?: number
+          pregunta_inicio?: string | null
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          admin_potenciadores_usados?: string[]
+          codigo?: string
+          creador_id?: string
+          created_at?: string
+          duracion_min?: number
+          efectos?: Json
+          estado?: string
+          fin_at?: string | null
+          grupo_ids?: string[]
+          id?: string
+          inicio_at?: string | null
+          pausa_restante_ms?: number | null
+          pregunta_actual?: number
+          pregunta_duracion_ms?: number
+          pregunta_inicio?: string | null
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       conversacion_participantes: {
         Row: {
           conversacion_id: string
@@ -1043,6 +1312,10 @@ export type Database = {
     Functions: {
       es_participante: {
         Args: { _conv_id: string; _user_id: string }
+        Returns: boolean
+      }
+      es_participante_comp: {
+        Args: { _comp: string; _user: string }
         Returns: boolean
       }
       has_role: {
