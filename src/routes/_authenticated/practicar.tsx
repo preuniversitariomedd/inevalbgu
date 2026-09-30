@@ -39,6 +39,15 @@ function ListaAreas() {
         <h1 className="mt-4 text-3xl font-extrabold sm:text-4xl">Practicar por tema</h1>
         <p className="mt-2 text-muted-foreground">Elige el área que quieres trabajar.</p>
 
+        <Link to="/sistemas" className="mt-6 flex items-center gap-4 rounded-2xl border-2 border-primary bg-primary/5 p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-strong">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground"><Sigma className="h-7 w-7" /></div>
+          <div className="flex-1">
+            <h3 className="font-bold">Sistemas de ecuaciones 2x2 y 3x3 · 5 niveles</h3>
+            <p className="text-xs text-muted-foreground">Corrección en tiempo real · supera cada nivel con 3 ejercicios sin ayuda</p>
+          </div>
+          <span className="text-primary">→</span>
+        </Link>
+
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
           {AREAS.map((area) => {
             const n = preguntasPorArea(area).length;

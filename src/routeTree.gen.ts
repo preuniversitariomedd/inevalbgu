@@ -15,6 +15,7 @@ import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
 import { Route as AuthenticatedTareasRouteImport } from './routes/_authenticated/tareas'
+import { Route as AuthenticatedSistemasRouteImport } from './routes/_authenticated/sistemas'
 import { Route as AuthenticatedSimulacroRouteImport } from './routes/_authenticated/simulacro'
 import { Route as AuthenticatedResultadosRouteImport } from './routes/_authenticated/resultados'
 import { Route as AuthenticatedProgresoRouteImport } from './routes/_authenticated/progreso'
@@ -75,6 +76,11 @@ const AuthenticatedTutorRoute = AuthenticatedTutorRouteImport.update({
 const AuthenticatedTareasRoute = AuthenticatedTareasRouteImport.update({
   id: '/tareas',
   path: '/tareas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSistemasRoute = AuthenticatedSistemasRouteImport.update({
+  id: '/sistemas',
+  path: '/sistemas',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSimulacroRoute = AuthenticatedSimulacroRouteImport.update({
@@ -270,6 +276,7 @@ export interface FileRoutesByFullPath {
   '/progreso': typeof AuthenticatedProgresoRoute
   '/resultados': typeof AuthenticatedResultadosRoute
   '/simulacro': typeof AuthenticatedSimulacroRoute
+  '/sistemas': typeof AuthenticatedSistemasRoute
   '/tareas': typeof AuthenticatedTareasRoute
   '/tutor': typeof AuthenticatedTutorRouteWithChildren
   '/api/chat': typeof ApiChatRoute
@@ -306,6 +313,7 @@ export interface FileRoutesByTo {
   '/progreso': typeof AuthenticatedProgresoRoute
   '/resultados': typeof AuthenticatedResultadosRoute
   '/simulacro': typeof AuthenticatedSimulacroRoute
+  '/sistemas': typeof AuthenticatedSistemasRoute
   '/tareas': typeof AuthenticatedTareasRoute
   '/api/chat': typeof ApiChatRoute
   '/': typeof AuthenticatedIndexRoute
@@ -346,6 +354,7 @@ export interface FileRoutesById {
   '/_authenticated/progreso': typeof AuthenticatedProgresoRoute
   '/_authenticated/resultados': typeof AuthenticatedResultadosRoute
   '/_authenticated/simulacro': typeof AuthenticatedSimulacroRoute
+  '/_authenticated/sistemas': typeof AuthenticatedSistemasRoute
   '/_authenticated/tareas': typeof AuthenticatedTareasRoute
   '/_authenticated/tutor': typeof AuthenticatedTutorRouteWithChildren
   '/api/chat': typeof ApiChatRoute
@@ -388,6 +397,7 @@ export interface FileRouteTypes {
     | '/progreso'
     | '/resultados'
     | '/simulacro'
+    | '/sistemas'
     | '/tareas'
     | '/tutor'
     | '/api/chat'
@@ -424,6 +434,7 @@ export interface FileRouteTypes {
     | '/progreso'
     | '/resultados'
     | '/simulacro'
+    | '/sistemas'
     | '/tareas'
     | '/api/chat'
     | '/'
@@ -463,6 +474,7 @@ export interface FileRouteTypes {
     | '/_authenticated/progreso'
     | '/_authenticated/resultados'
     | '/_authenticated/simulacro'
+    | '/_authenticated/sistemas'
     | '/_authenticated/tareas'
     | '/_authenticated/tutor'
     | '/api/chat'
@@ -537,6 +549,13 @@ declare module '@tanstack/react-router' {
       path: '/tareas'
       fullPath: '/tareas'
       preLoaderRoute: typeof AuthenticatedTareasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sistemas': {
+      id: '/_authenticated/sistemas'
+      path: '/sistemas'
+      fullPath: '/sistemas'
+      preLoaderRoute: typeof AuthenticatedSistemasRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/simulacro': {
@@ -863,6 +882,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedProgresoRoute: typeof AuthenticatedProgresoRoute
   AuthenticatedResultadosRoute: typeof AuthenticatedResultadosRoute
   AuthenticatedSimulacroRoute: typeof AuthenticatedSimulacroRoute
+  AuthenticatedSistemasRoute: typeof AuthenticatedSistemasRoute
   AuthenticatedTareasRoute: typeof AuthenticatedTareasRoute
   AuthenticatedTutorRoute: typeof AuthenticatedTutorRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
@@ -881,6 +901,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedProgresoRoute: AuthenticatedProgresoRoute,
   AuthenticatedResultadosRoute: AuthenticatedResultadosRoute,
   AuthenticatedSimulacroRoute: AuthenticatedSimulacroRoute,
+  AuthenticatedSistemasRoute: AuthenticatedSistemasRoute,
   AuthenticatedTareasRoute: AuthenticatedTareasRoute,
   AuthenticatedTutorRoute: AuthenticatedTutorRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
