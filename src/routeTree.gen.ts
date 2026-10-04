@@ -18,6 +18,7 @@ import { Route as AuthenticatedTareasRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedSistemasRouteImport } from './routes/_authenticated/sistemas'
 import { Route as AuthenticatedSimulacroRouteImport } from './routes/_authenticated/simulacro'
 import { Route as AuthenticatedResultadosRouteImport } from './routes/_authenticated/resultados'
+import { Route as AuthenticatedRazonamientoRouteImport } from './routes/_authenticated/razonamiento'
 import { Route as AuthenticatedProgresoRouteImport } from './routes/_authenticated/progreso'
 import { Route as AuthenticatedPracticarRouteImport } from './routes/_authenticated/practicar'
 import { Route as AuthenticatedMensajesRouteImport } from './routes/_authenticated/mensajes'
@@ -36,6 +37,7 @@ import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authen
 import { Route as AuthenticatedFisicaTutorRouteImport } from './routes/_authenticated/fisica.tutor'
 import { Route as AuthenticatedFisicaGestionarRouteImport } from './routes/_authenticated/fisica.gestionar'
 import { Route as AuthenticatedFisicaFormulasRouteImport } from './routes/_authenticated/fisica.formulas'
+import { Route as AuthenticatedBasicaMateriaRouteImport } from './routes/_authenticated/basica.$materia'
 import { Route as AuthenticatedAdminTareasRouteImport } from './routes/_authenticated/admin/tareas'
 import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
 import { Route as AuthenticatedAdminPresenciaRouteImport } from './routes/_authenticated/admin/presencia'
@@ -93,6 +95,12 @@ const AuthenticatedResultadosRoute = AuthenticatedResultadosRouteImport.update({
   path: '/resultados',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRazonamientoRoute =
+  AuthenticatedRazonamientoRouteImport.update({
+    id: '/razonamiento',
+    path: '/razonamiento',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedProgresoRoute = AuthenticatedProgresoRouteImport.update({
   id: '/progreso',
   path: '/progreso',
@@ -190,6 +198,12 @@ const AuthenticatedFisicaFormulasRoute =
     path: '/formulas',
     getParentRoute: () => AuthenticatedFisicaRoute,
   } as any)
+const AuthenticatedBasicaMateriaRoute =
+  AuthenticatedBasicaMateriaRouteImport.update({
+    id: '/basica/$materia',
+    path: '/basica/$materia',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminTareasRoute =
   AuthenticatedAdminTareasRouteImport.update({
     id: '/tareas',
@@ -274,6 +288,7 @@ export interface FileRoutesByFullPath {
   '/mensajes': typeof AuthenticatedMensajesRoute
   '/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/progreso': typeof AuthenticatedProgresoRoute
+  '/razonamiento': typeof AuthenticatedRazonamientoRoute
   '/resultados': typeof AuthenticatedResultadosRoute
   '/simulacro': typeof AuthenticatedSimulacroRoute
   '/sistemas': typeof AuthenticatedSistemasRoute
@@ -290,6 +305,7 @@ export interface FileRoutesByFullPath {
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/admin/tareas': typeof AuthenticatedAdminTareasRoute
+  '/basica/$materia': typeof AuthenticatedBasicaMateriaRoute
   '/fisica/formulas': typeof AuthenticatedFisicaFormulasRoute
   '/fisica/gestionar': typeof AuthenticatedFisicaGestionarRoute
   '/fisica/tutor': typeof AuthenticatedFisicaTutorRoute
@@ -311,6 +327,7 @@ export interface FileRoutesByTo {
   '/mensajes': typeof AuthenticatedMensajesRoute
   '/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/progreso': typeof AuthenticatedProgresoRoute
+  '/razonamiento': typeof AuthenticatedRazonamientoRoute
   '/resultados': typeof AuthenticatedResultadosRoute
   '/simulacro': typeof AuthenticatedSimulacroRoute
   '/sistemas': typeof AuthenticatedSistemasRoute
@@ -327,6 +344,7 @@ export interface FileRoutesByTo {
   '/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/admin/tareas': typeof AuthenticatedAdminTareasRoute
+  '/basica/$materia': typeof AuthenticatedBasicaMateriaRoute
   '/fisica/formulas': typeof AuthenticatedFisicaFormulasRoute
   '/fisica/gestionar': typeof AuthenticatedFisicaGestionarRoute
   '/fisica/tutor': typeof AuthenticatedFisicaTutorRoute
@@ -352,6 +370,7 @@ export interface FileRoutesById {
   '/_authenticated/mensajes': typeof AuthenticatedMensajesRoute
   '/_authenticated/practicar': typeof AuthenticatedPracticarRouteWithChildren
   '/_authenticated/progreso': typeof AuthenticatedProgresoRoute
+  '/_authenticated/razonamiento': typeof AuthenticatedRazonamientoRoute
   '/_authenticated/resultados': typeof AuthenticatedResultadosRoute
   '/_authenticated/simulacro': typeof AuthenticatedSimulacroRoute
   '/_authenticated/sistemas': typeof AuthenticatedSistemasRoute
@@ -369,6 +388,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/presencia': typeof AuthenticatedAdminPresenciaRoute
   '/_authenticated/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/_authenticated/admin/tareas': typeof AuthenticatedAdminTareasRoute
+  '/_authenticated/basica/$materia': typeof AuthenticatedBasicaMateriaRoute
   '/_authenticated/fisica/formulas': typeof AuthenticatedFisicaFormulasRoute
   '/_authenticated/fisica/gestionar': typeof AuthenticatedFisicaGestionarRoute
   '/_authenticated/fisica/tutor': typeof AuthenticatedFisicaTutorRoute
@@ -395,6 +415,7 @@ export interface FileRouteTypes {
     | '/mensajes'
     | '/practicar'
     | '/progreso'
+    | '/razonamiento'
     | '/resultados'
     | '/simulacro'
     | '/sistemas'
@@ -411,6 +432,7 @@ export interface FileRouteTypes {
     | '/admin/presencia'
     | '/admin/roles'
     | '/admin/tareas'
+    | '/basica/$materia'
     | '/fisica/formulas'
     | '/fisica/gestionar'
     | '/fisica/tutor'
@@ -432,6 +454,7 @@ export interface FileRouteTypes {
     | '/mensajes'
     | '/practicar'
     | '/progreso'
+    | '/razonamiento'
     | '/resultados'
     | '/simulacro'
     | '/sistemas'
@@ -448,6 +471,7 @@ export interface FileRouteTypes {
     | '/admin/presencia'
     | '/admin/roles'
     | '/admin/tareas'
+    | '/basica/$materia'
     | '/fisica/formulas'
     | '/fisica/gestionar'
     | '/fisica/tutor'
@@ -472,6 +496,7 @@ export interface FileRouteTypes {
     | '/_authenticated/mensajes'
     | '/_authenticated/practicar'
     | '/_authenticated/progreso'
+    | '/_authenticated/razonamiento'
     | '/_authenticated/resultados'
     | '/_authenticated/simulacro'
     | '/_authenticated/sistemas'
@@ -489,6 +514,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/presencia'
     | '/_authenticated/admin/roles'
     | '/_authenticated/admin/tareas'
+    | '/_authenticated/basica/$materia'
     | '/_authenticated/fisica/formulas'
     | '/_authenticated/fisica/gestionar'
     | '/_authenticated/fisica/tutor'
@@ -570,6 +596,13 @@ declare module '@tanstack/react-router' {
       path: '/resultados'
       fullPath: '/resultados'
       preLoaderRoute: typeof AuthenticatedResultadosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/razonamiento': {
+      id: '/_authenticated/razonamiento'
+      path: '/razonamiento'
+      fullPath: '/razonamiento'
+      preLoaderRoute: typeof AuthenticatedRazonamientoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/progreso': {
@@ -697,6 +730,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/fisica/formulas'
       preLoaderRoute: typeof AuthenticatedFisicaFormulasRouteImport
       parentRoute: typeof AuthenticatedFisicaRoute
+    }
+    '/_authenticated/basica/$materia': {
+      id: '/_authenticated/basica/$materia'
+      path: '/basica/$materia'
+      fullPath: '/basica/$materia'
+      preLoaderRoute: typeof AuthenticatedBasicaMateriaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/tareas': {
       id: '/_authenticated/admin/tareas'
@@ -880,12 +920,14 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedMensajesRoute: typeof AuthenticatedMensajesRoute
   AuthenticatedPracticarRoute: typeof AuthenticatedPracticarRouteWithChildren
   AuthenticatedProgresoRoute: typeof AuthenticatedProgresoRoute
+  AuthenticatedRazonamientoRoute: typeof AuthenticatedRazonamientoRoute
   AuthenticatedResultadosRoute: typeof AuthenticatedResultadosRoute
   AuthenticatedSimulacroRoute: typeof AuthenticatedSimulacroRoute
   AuthenticatedSistemasRoute: typeof AuthenticatedSistemasRoute
   AuthenticatedTareasRoute: typeof AuthenticatedTareasRoute
   AuthenticatedTutorRoute: typeof AuthenticatedTutorRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedBasicaMateriaRoute: typeof AuthenticatedBasicaMateriaRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -899,12 +941,14 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedMensajesRoute: AuthenticatedMensajesRoute,
   AuthenticatedPracticarRoute: AuthenticatedPracticarRouteWithChildren,
   AuthenticatedProgresoRoute: AuthenticatedProgresoRoute,
+  AuthenticatedRazonamientoRoute: AuthenticatedRazonamientoRoute,
   AuthenticatedResultadosRoute: AuthenticatedResultadosRoute,
   AuthenticatedSimulacroRoute: AuthenticatedSimulacroRoute,
   AuthenticatedSistemasRoute: AuthenticatedSistemasRoute,
   AuthenticatedTareasRoute: AuthenticatedTareasRoute,
   AuthenticatedTutorRoute: AuthenticatedTutorRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedBasicaMateriaRoute: AuthenticatedBasicaMateriaRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

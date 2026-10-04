@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database, ClipboardCheck, Award, Atom, Target, Library } from "lucide-react";
+import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database, ClipboardCheck, Award, Atom, Target, Library, Leaf, Globe2, Brain } from "lucide-react";
 import { BANCO_PREGUNTAS } from "@/data";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 
@@ -128,6 +128,28 @@ function Index() {
             desc="100 preguntas en 5 periodos cortos: contexto, familia, traslado, alimentación y bienestar."
             tone="accent"
           />
+          <ActionCard
+            to="/basica/ciencias-naturales"
+            icon={<Leaf className="h-7 w-7" />}
+            title="Ciencias Naturales"
+            desc="500 preguntas de Básica Superior: seres vivos, cuerpo humano, materia y universo."
+            tone="success"
+          />
+          <ActionCard
+            to="/basica/estudios-sociales"
+            icon={<Globe2 className="h-7 w-7" />}
+            title="Estudios Sociales"
+            desc="500 preguntas de Básica Superior: historia, geografía y ciudadanía del Ecuador."
+            tone="primary"
+          />
+          <ActionCard
+            to="/razonamiento"
+            icon={<Brain className="h-7 w-7" />}
+            title="Razonamiento"
+            desc="3 niveles adaptativos: series, analogías, discriminantes, lectura y problemas."
+            tone="accent"
+          />
+
 
 
         </div>
