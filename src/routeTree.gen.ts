@@ -9,55 +9,55 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
-import { Route as ApiChatRouteImport } from './routes/api/chat'
-import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
-import { Route as AuthenticatedTareasRouteImport } from './routes/_authenticated/tareas'
-import { Route as AuthenticatedSistemasRouteImport } from './routes/_authenticated/sistemas'
-import { Route as AuthenticatedSimulacroRouteImport } from './routes/_authenticated/simulacro'
-import { Route as AuthenticatedResultadosRouteImport } from './routes/_authenticated/resultados'
-import { Route as AuthenticatedRazonamientoRouteImport } from './routes/_authenticated/razonamiento'
-import { Route as AuthenticatedProgresoRouteImport } from './routes/_authenticated/progreso'
-import { Route as AuthenticatedPracticarRouteImport } from './routes/_authenticated/practicar'
-import { Route as AuthenticatedMensajesRouteImport } from './routes/_authenticated/mensajes'
-import { Route as AuthenticatedFisicaRouteImport } from './routes/_authenticated/fisica'
-import { Route as AuthenticatedEncuestaRouteImport } from './routes/_authenticated/encuesta'
-import { Route as AuthenticatedCambiarPasswordRouteImport } from './routes/_authenticated/cambiar-password'
-import { Route as AuthenticatedBibliotecaRouteImport } from './routes/_authenticated/biblioteca'
-import { Route as AuthenticatedBancoRouteImport } from './routes/_authenticated/banco'
-import { Route as AuthenticatedAnalisisRouteImport } from './routes/_authenticated/analisis'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
-import { Route as AuthenticatedTutorIndexRouteImport } from './routes/_authenticated/tutor.index'
-import { Route as AuthenticatedFisicaIndexRouteImport } from './routes/_authenticated/fisica.index'
+import { Route as AuthenticatedAnalisisRouteImport } from './routes/_authenticated/analisis'
+import { Route as AuthenticatedBancoRouteImport } from './routes/_authenticated/banco'
+import { Route as AuthenticatedBibliotecaRouteImport } from './routes/_authenticated/biblioteca'
+import { Route as AuthenticatedCambiarPasswordRouteImport } from './routes/_authenticated/cambiar-password'
+import { Route as AuthenticatedEncuestaRouteImport } from './routes/_authenticated/encuesta'
+import { Route as AuthenticatedFisicaRouteImport } from './routes/_authenticated/fisica'
+import { Route as AuthenticatedMensajesRouteImport } from './routes/_authenticated/mensajes'
+import { Route as AuthenticatedPracticarRouteImport } from './routes/_authenticated/practicar'
+import { Route as AuthenticatedProgresoRouteImport } from './routes/_authenticated/progreso'
+import { Route as AuthenticatedRazonamientoRouteImport } from './routes/_authenticated/razonamiento'
+import { Route as AuthenticatedResultadosRouteImport } from './routes/_authenticated/resultados'
+import { Route as AuthenticatedSimulacroRouteImport } from './routes/_authenticated/simulacro'
+import { Route as AuthenticatedSistemasRouteImport } from './routes/_authenticated/sistemas'
+import { Route as AuthenticatedTareasRouteImport } from './routes/_authenticated/tareas'
+import { Route as AuthenticatedTutorRouteImport } from './routes/_authenticated/tutor'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
-import { Route as AuthenticatedTutorThreadIdRouteImport } from './routes/_authenticated/tutor.$threadId'
-import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authenticated/practicar.$area'
-import { Route as AuthenticatedFisicaTutorRouteImport } from './routes/_authenticated/fisica.tutor'
-import { Route as AuthenticatedFisicaGestionarRouteImport } from './routes/_authenticated/fisica.gestionar'
-import { Route as AuthenticatedFisicaFormulasRouteImport } from './routes/_authenticated/fisica.formulas'
-import { Route as AuthenticatedBasicaMateriaRouteImport } from './routes/_authenticated/basica.$materia'
-import { Route as AuthenticatedAdminTareasRouteImport } from './routes/_authenticated/admin/tareas'
-import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
-import { Route as AuthenticatedAdminPresenciaRouteImport } from './routes/_authenticated/admin/presencia'
-import { Route as AuthenticatedAdminPodioRouteImport } from './routes/_authenticated/admin/podio'
-import { Route as AuthenticatedAdminPermisosDocentesRouteImport } from './routes/_authenticated/admin/permisos-docentes'
-import { Route as AuthenticatedAdminMensajesRouteImport } from './routes/_authenticated/admin/mensajes'
-import { Route as AuthenticatedAdminGruposRouteImport } from './routes/_authenticated/admin/grupos'
-import { Route as AuthenticatedAdminDocentesRouteImport } from './routes/_authenticated/admin/docentes'
-import { Route as AuthenticatedAdminCalificacionesRouteImport } from './routes/_authenticated/admin/calificaciones'
 import { Route as AuthenticatedAdminBrandingRouteImport } from './routes/_authenticated/admin/branding'
-import { Route as AuthenticatedFisicaPracticarTemaRouteImport } from './routes/_authenticated/fisica.practicar.$tema'
+import { Route as AuthenticatedAdminCalificacionesRouteImport } from './routes/_authenticated/admin/calificaciones'
+import { Route as AuthenticatedAdminDocentesRouteImport } from './routes/_authenticated/admin/docentes'
+import { Route as AuthenticatedAdminGruposRouteImport } from './routes/_authenticated/admin/grupos'
+import { Route as AuthenticatedAdminMensajesRouteImport } from './routes/_authenticated/admin/mensajes'
+import { Route as AuthenticatedAdminPermisosDocentesRouteImport } from './routes/_authenticated/admin/permisos-docentes'
+import { Route as AuthenticatedAdminPodioRouteImport } from './routes/_authenticated/admin/podio'
+import { Route as AuthenticatedAdminPresenciaRouteImport } from './routes/_authenticated/admin/presencia'
+import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
+import { Route as AuthenticatedAdminTareasRouteImport } from './routes/_authenticated/admin/tareas'
+import { Route as AuthenticatedBasicaMateriaRouteImport } from './routes/_authenticated/basica.$materia'
+import { Route as AuthenticatedFisicaIndexRouteImport } from './routes/_authenticated/fisica.index'
+import { Route as AuthenticatedFisicaFormulasRouteImport } from './routes/_authenticated/fisica.formulas'
+import { Route as AuthenticatedFisicaGestionarRouteImport } from './routes/_authenticated/fisica.gestionar'
+import { Route as AuthenticatedFisicaTutorRouteImport } from './routes/_authenticated/fisica.tutor'
+import { Route as AuthenticatedPracticarAreaRouteImport } from './routes/_authenticated/practicar.$area'
+import { Route as AuthenticatedTutorIndexRouteImport } from './routes/_authenticated/tutor.index'
+import { Route as AuthenticatedTutorThreadIdRouteImport } from './routes/_authenticated/tutor.$threadId'
 import { Route as AuthenticatedAdminEstudianteIdRouteImport } from './routes/_authenticated/admin/estudiante.$id'
+import { Route as AuthenticatedFisicaPracticarTemaRouteImport } from './routes/_authenticated/fisica.practicar.$tema'
 
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
@@ -65,65 +65,24 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const ApiChatRoute = ApiChatRouteImport.update({
-  id: '/api/chat',
-  path: '/api/chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedTutorRoute = AuthenticatedTutorRouteImport.update({
-  id: '/tutor',
-  path: '/tutor',
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedTareasRoute = AuthenticatedTareasRouteImport.update({
-  id: '/tareas',
-  path: '/tareas',
+const AuthenticatedAnalisisRoute = AuthenticatedAnalisisRouteImport.update({
+  id: '/analisis',
+  path: '/analisis',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedSistemasRoute = AuthenticatedSistemasRouteImport.update({
-  id: '/sistemas',
-  path: '/sistemas',
+const AuthenticatedBancoRoute = AuthenticatedBancoRouteImport.update({
+  id: '/banco',
+  path: '/banco',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedSimulacroRoute = AuthenticatedSimulacroRouteImport.update({
-  id: '/simulacro',
-  path: '/simulacro',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedResultadosRoute = AuthenticatedResultadosRouteImport.update({
-  id: '/resultados',
-  path: '/resultados',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedRazonamientoRoute =
-  AuthenticatedRazonamientoRouteImport.update({
-    id: '/razonamiento',
-    path: '/razonamiento',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedProgresoRoute = AuthenticatedProgresoRouteImport.update({
-  id: '/progreso',
-  path: '/progreso',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedPracticarRoute = AuthenticatedPracticarRouteImport.update({
-  id: '/practicar',
-  path: '/practicar',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedMensajesRoute = AuthenticatedMensajesRouteImport.update({
-  id: '/mensajes',
-  path: '/mensajes',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedFisicaRoute = AuthenticatedFisicaRouteImport.update({
-  id: '/fisica',
-  path: '/fisica',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedEncuestaRoute = AuthenticatedEncuestaRouteImport.update({
-  id: '/encuesta',
-  path: '/encuesta',
+const AuthenticatedBibliotecaRoute = AuthenticatedBibliotecaRouteImport.update({
+  id: '/biblioteca',
+  path: '/biblioteca',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCambiarPasswordRoute =
@@ -132,122 +91,76 @@ const AuthenticatedCambiarPasswordRoute =
     path: '/cambiar-password',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedBibliotecaRoute = AuthenticatedBibliotecaRouteImport.update({
-  id: '/biblioteca',
-  path: '/biblioteca',
+const AuthenticatedEncuestaRoute = AuthenticatedEncuestaRouteImport.update({
+  id: '/encuesta',
+  path: '/encuesta',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedBancoRoute = AuthenticatedBancoRouteImport.update({
-  id: '/banco',
-  path: '/banco',
+const AuthenticatedFisicaRoute = AuthenticatedFisicaRouteImport.update({
+  id: '/fisica',
+  path: '/fisica',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedAnalisisRoute = AuthenticatedAnalisisRouteImport.update({
-  id: '/analisis',
-  path: '/analisis',
+const AuthenticatedMensajesRoute = AuthenticatedMensajesRouteImport.update({
+  id: '/mensajes',
+  path: '/mensajes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const AuthenticatedPracticarRoute = AuthenticatedPracticarRouteImport.update({
+  id: '/practicar',
+  path: '/practicar',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedTutorIndexRoute = AuthenticatedTutorIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AuthenticatedTutorRoute,
+const AuthenticatedProgresoRoute = AuthenticatedProgresoRouteImport.update({
+  id: '/progreso',
+  path: '/progreso',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedFisicaIndexRoute =
-  AuthenticatedFisicaIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => AuthenticatedFisicaRoute,
+const AuthenticatedRazonamientoRoute =
+  AuthenticatedRazonamientoRouteImport.update({
+    id: '/razonamiento',
+    path: '/razonamiento',
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedResultadosRoute = AuthenticatedResultadosRouteImport.update({
+  id: '/resultados',
+  path: '/resultados',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSimulacroRoute = AuthenticatedSimulacroRouteImport.update({
+  id: '/simulacro',
+  path: '/simulacro',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSistemasRoute = AuthenticatedSistemasRouteImport.update({
+  id: '/sistemas',
+  path: '/sistemas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTareasRoute = AuthenticatedTareasRouteImport.update({
+  id: '/tareas',
+  path: '/tareas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTutorRoute = AuthenticatedTutorRouteImport.update({
+  id: '/tutor',
+  path: '/tutor',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
-const AuthenticatedTutorThreadIdRoute =
-  AuthenticatedTutorThreadIdRouteImport.update({
-    id: '/$threadId',
-    path: '/$threadId',
-    getParentRoute: () => AuthenticatedTutorRoute,
-  } as any)
-const AuthenticatedPracticarAreaRoute =
-  AuthenticatedPracticarAreaRouteImport.update({
-    id: '/$area',
-    path: '/$area',
-    getParentRoute: () => AuthenticatedPracticarRoute,
-  } as any)
-const AuthenticatedFisicaTutorRoute =
-  AuthenticatedFisicaTutorRouteImport.update({
-    id: '/tutor',
-    path: '/tutor',
-    getParentRoute: () => AuthenticatedFisicaRoute,
-  } as any)
-const AuthenticatedFisicaGestionarRoute =
-  AuthenticatedFisicaGestionarRouteImport.update({
-    id: '/gestionar',
-    path: '/gestionar',
-    getParentRoute: () => AuthenticatedFisicaRoute,
-  } as any)
-const AuthenticatedFisicaFormulasRoute =
-  AuthenticatedFisicaFormulasRouteImport.update({
-    id: '/formulas',
-    path: '/formulas',
-    getParentRoute: () => AuthenticatedFisicaRoute,
-  } as any)
-const AuthenticatedBasicaMateriaRoute =
-  AuthenticatedBasicaMateriaRouteImport.update({
-    id: '/basica/$materia',
-    path: '/basica/$materia',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAdminTareasRoute =
-  AuthenticatedAdminTareasRouteImport.update({
-    id: '/tareas',
-    path: '/tareas',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
-  } as any)
-const AuthenticatedAdminRolesRoute = AuthenticatedAdminRolesRouteImport.update({
-  id: '/roles',
-  path: '/roles',
-  getParentRoute: () => AuthenticatedAdminRouteRoute,
-} as any)
-const AuthenticatedAdminPresenciaRoute =
-  AuthenticatedAdminPresenciaRouteImport.update({
-    id: '/presencia',
-    path: '/presencia',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
-  } as any)
-const AuthenticatedAdminPodioRoute = AuthenticatedAdminPodioRouteImport.update({
-  id: '/podio',
-  path: '/podio',
-  getParentRoute: () => AuthenticatedAdminRouteRoute,
-} as any)
-const AuthenticatedAdminPermisosDocentesRoute =
-  AuthenticatedAdminPermisosDocentesRouteImport.update({
-    id: '/permisos-docentes',
-    path: '/permisos-docentes',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
-  } as any)
-const AuthenticatedAdminMensajesRoute =
-  AuthenticatedAdminMensajesRouteImport.update({
-    id: '/mensajes',
-    path: '/mensajes',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
-  } as any)
-const AuthenticatedAdminGruposRoute =
-  AuthenticatedAdminGruposRouteImport.update({
-    id: '/grupos',
-    path: '/grupos',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
-  } as any)
-const AuthenticatedAdminDocentesRoute =
-  AuthenticatedAdminDocentesRouteImport.update({
-    id: '/docentes',
-    path: '/docentes',
+const AuthenticatedAdminBrandingRoute =
+  AuthenticatedAdminBrandingRouteImport.update({
+    id: '/branding',
+    path: '/branding',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminCalificacionesRoute =
@@ -256,10 +169,103 @@ const AuthenticatedAdminCalificacionesRoute =
     path: '/calificaciones',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
-const AuthenticatedAdminBrandingRoute =
-  AuthenticatedAdminBrandingRouteImport.update({
-    id: '/branding',
-    path: '/branding',
+const AuthenticatedAdminDocentesRoute =
+  AuthenticatedAdminDocentesRouteImport.update({
+    id: '/docentes',
+    path: '/docentes',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminGruposRoute =
+  AuthenticatedAdminGruposRouteImport.update({
+    id: '/grupos',
+    path: '/grupos',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMensajesRoute =
+  AuthenticatedAdminMensajesRouteImport.update({
+    id: '/mensajes',
+    path: '/mensajes',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPermisosDocentesRoute =
+  AuthenticatedAdminPermisosDocentesRouteImport.update({
+    id: '/permisos-docentes',
+    path: '/permisos-docentes',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPodioRoute = AuthenticatedAdminPodioRouteImport.update({
+  id: '/podio',
+  path: '/podio',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminPresenciaRoute =
+  AuthenticatedAdminPresenciaRouteImport.update({
+    id: '/presencia',
+    path: '/presencia',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminRolesRoute = AuthenticatedAdminRolesRouteImport.update({
+  id: '/roles',
+  path: '/roles',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminTareasRoute =
+  AuthenticatedAdminTareasRouteImport.update({
+    id: '/tareas',
+    path: '/tareas',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedBasicaMateriaRoute =
+  AuthenticatedBasicaMateriaRouteImport.update({
+    id: '/basica/$materia',
+    path: '/basica/$materia',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedFisicaIndexRoute =
+  AuthenticatedFisicaIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedFisicaRoute,
+  } as any)
+const AuthenticatedFisicaFormulasRoute =
+  AuthenticatedFisicaFormulasRouteImport.update({
+    id: '/formulas',
+    path: '/formulas',
+    getParentRoute: () => AuthenticatedFisicaRoute,
+  } as any)
+const AuthenticatedFisicaGestionarRoute =
+  AuthenticatedFisicaGestionarRouteImport.update({
+    id: '/gestionar',
+    path: '/gestionar',
+    getParentRoute: () => AuthenticatedFisicaRoute,
+  } as any)
+const AuthenticatedFisicaTutorRoute =
+  AuthenticatedFisicaTutorRouteImport.update({
+    id: '/tutor',
+    path: '/tutor',
+    getParentRoute: () => AuthenticatedFisicaRoute,
+  } as any)
+const AuthenticatedPracticarAreaRoute =
+  AuthenticatedPracticarAreaRouteImport.update({
+    id: '/$area',
+    path: '/$area',
+    getParentRoute: () => AuthenticatedPracticarRoute,
+  } as any)
+const AuthenticatedTutorIndexRoute = AuthenticatedTutorIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedTutorRoute,
+} as any)
+const AuthenticatedTutorThreadIdRoute =
+  AuthenticatedTutorThreadIdRouteImport.update({
+    id: '/$threadId',
+    path: '/$threadId',
+    getParentRoute: () => AuthenticatedTutorRoute,
+  } as any)
+const AuthenticatedAdminEstudianteIdRoute =
+  AuthenticatedAdminEstudianteIdRouteImport.update({
+    id: '/estudiante/$id',
+    path: '/estudiante/$id',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedFisicaPracticarTemaRoute =
@@ -267,12 +273,6 @@ const AuthenticatedFisicaPracticarTemaRoute =
     id: '/practicar/$tema',
     path: '/practicar/$tema',
     getParentRoute: () => AuthenticatedFisicaRoute,
-  } as any)
-const AuthenticatedAdminEstudianteIdRoute =
-  AuthenticatedAdminEstudianteIdRouteImport.update({
-    id: '/estudiante/$id',
-    path: '/estudiante/$id',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -535,18 +535,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/': {
@@ -556,109 +556,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/api/chat': {
-      id: '/api/chat'
-      path: '/api/chat'
-      fullPath: '/api/chat'
-      preLoaderRoute: typeof ApiChatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/tutor': {
-      id: '/_authenticated/tutor'
-      path: '/tutor'
-      fullPath: '/tutor'
-      preLoaderRoute: typeof AuthenticatedTutorRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/tareas': {
-      id: '/_authenticated/tareas'
-      path: '/tareas'
-      fullPath: '/tareas'
-      preLoaderRoute: typeof AuthenticatedTareasRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/sistemas': {
-      id: '/_authenticated/sistemas'
-      path: '/sistemas'
-      fullPath: '/sistemas'
-      preLoaderRoute: typeof AuthenticatedSistemasRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/simulacro': {
-      id: '/_authenticated/simulacro'
-      path: '/simulacro'
-      fullPath: '/simulacro'
-      preLoaderRoute: typeof AuthenticatedSimulacroRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/resultados': {
-      id: '/_authenticated/resultados'
-      path: '/resultados'
-      fullPath: '/resultados'
-      preLoaderRoute: typeof AuthenticatedResultadosRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/razonamiento': {
-      id: '/_authenticated/razonamiento'
-      path: '/razonamiento'
-      fullPath: '/razonamiento'
-      preLoaderRoute: typeof AuthenticatedRazonamientoRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/progreso': {
-      id: '/_authenticated/progreso'
-      path: '/progreso'
-      fullPath: '/progreso'
-      preLoaderRoute: typeof AuthenticatedProgresoRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/practicar': {
-      id: '/_authenticated/practicar'
-      path: '/practicar'
-      fullPath: '/practicar'
-      preLoaderRoute: typeof AuthenticatedPracticarRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/mensajes': {
-      id: '/_authenticated/mensajes'
-      path: '/mensajes'
-      fullPath: '/mensajes'
-      preLoaderRoute: typeof AuthenticatedMensajesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/fisica': {
-      id: '/_authenticated/fisica'
-      path: '/fisica'
-      fullPath: '/fisica'
-      preLoaderRoute: typeof AuthenticatedFisicaRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/encuesta': {
-      id: '/_authenticated/encuesta'
-      path: '/encuesta'
-      fullPath: '/encuesta'
-      preLoaderRoute: typeof AuthenticatedEncuestaRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/cambiar-password': {
-      id: '/_authenticated/cambiar-password'
-      path: '/cambiar-password'
-      fullPath: '/cambiar-password'
-      preLoaderRoute: typeof AuthenticatedCambiarPasswordRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/biblioteca': {
-      id: '/_authenticated/biblioteca'
-      path: '/biblioteca'
-      fullPath: '/biblioteca'
-      preLoaderRoute: typeof AuthenticatedBibliotecaRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/banco': {
-      id: '/_authenticated/banco'
-      path: '/banco'
-      fullPath: '/banco'
-      preLoaderRoute: typeof AuthenticatedBancoRouteImport
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/analisis': {
@@ -668,137 +570,116 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAnalisisRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin': {
-      id: '/_authenticated/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
+    '/_authenticated/banco': {
+      id: '/_authenticated/banco'
+      path: '/banco'
+      fullPath: '/banco'
+      preLoaderRoute: typeof AuthenticatedBancoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/tutor/': {
-      id: '/_authenticated/tutor/'
-      path: '/'
-      fullPath: '/tutor/'
-      preLoaderRoute: typeof AuthenticatedTutorIndexRouteImport
-      parentRoute: typeof AuthenticatedTutorRoute
+    '/_authenticated/biblioteca': {
+      id: '/_authenticated/biblioteca'
+      path: '/biblioteca'
+      fullPath: '/biblioteca'
+      preLoaderRoute: typeof AuthenticatedBibliotecaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/fisica/': {
-      id: '/_authenticated/fisica/'
-      path: '/'
-      fullPath: '/fisica/'
-      preLoaderRoute: typeof AuthenticatedFisicaIndexRouteImport
-      parentRoute: typeof AuthenticatedFisicaRoute
+    '/_authenticated/cambiar-password': {
+      id: '/_authenticated/cambiar-password'
+      path: '/cambiar-password'
+      fullPath: '/cambiar-password'
+      preLoaderRoute: typeof AuthenticatedCambiarPasswordRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/encuesta': {
+      id: '/_authenticated/encuesta'
+      path: '/encuesta'
+      fullPath: '/encuesta'
+      preLoaderRoute: typeof AuthenticatedEncuestaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/fisica': {
+      id: '/_authenticated/fisica'
+      path: '/fisica'
+      fullPath: '/fisica'
+      preLoaderRoute: typeof AuthenticatedFisicaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/mensajes': {
+      id: '/_authenticated/mensajes'
+      path: '/mensajes'
+      fullPath: '/mensajes'
+      preLoaderRoute: typeof AuthenticatedMensajesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/practicar': {
+      id: '/_authenticated/practicar'
+      path: '/practicar'
+      fullPath: '/practicar'
+      preLoaderRoute: typeof AuthenticatedPracticarRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/progreso': {
+      id: '/_authenticated/progreso'
+      path: '/progreso'
+      fullPath: '/progreso'
+      preLoaderRoute: typeof AuthenticatedProgresoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/razonamiento': {
+      id: '/_authenticated/razonamiento'
+      path: '/razonamiento'
+      fullPath: '/razonamiento'
+      preLoaderRoute: typeof AuthenticatedRazonamientoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/resultados': {
+      id: '/_authenticated/resultados'
+      path: '/resultados'
+      fullPath: '/resultados'
+      preLoaderRoute: typeof AuthenticatedResultadosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/simulacro': {
+      id: '/_authenticated/simulacro'
+      path: '/simulacro'
+      fullPath: '/simulacro'
+      preLoaderRoute: typeof AuthenticatedSimulacroRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sistemas': {
+      id: '/_authenticated/sistemas'
+      path: '/sistemas'
+      fullPath: '/sistemas'
+      preLoaderRoute: typeof AuthenticatedSistemasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tareas': {
+      id: '/_authenticated/tareas'
+      path: '/tareas'
+      fullPath: '/tareas'
+      preLoaderRoute: typeof AuthenticatedTareasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tutor': {
+      id: '/_authenticated/tutor'
+      path: '/tutor'
+      fullPath: '/tutor'
+      preLoaderRoute: typeof AuthenticatedTutorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/': {
       id: '/_authenticated/admin/'
       path: '/'
       fullPath: '/admin/'
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/tutor/$threadId': {
-      id: '/_authenticated/tutor/$threadId'
-      path: '/$threadId'
-      fullPath: '/tutor/$threadId'
-      preLoaderRoute: typeof AuthenticatedTutorThreadIdRouteImport
-      parentRoute: typeof AuthenticatedTutorRoute
-    }
-    '/_authenticated/practicar/$area': {
-      id: '/_authenticated/practicar/$area'
-      path: '/$area'
-      fullPath: '/practicar/$area'
-      preLoaderRoute: typeof AuthenticatedPracticarAreaRouteImport
-      parentRoute: typeof AuthenticatedPracticarRoute
-    }
-    '/_authenticated/fisica/tutor': {
-      id: '/_authenticated/fisica/tutor'
-      path: '/tutor'
-      fullPath: '/fisica/tutor'
-      preLoaderRoute: typeof AuthenticatedFisicaTutorRouteImport
-      parentRoute: typeof AuthenticatedFisicaRoute
-    }
-    '/_authenticated/fisica/gestionar': {
-      id: '/_authenticated/fisica/gestionar'
-      path: '/gestionar'
-      fullPath: '/fisica/gestionar'
-      preLoaderRoute: typeof AuthenticatedFisicaGestionarRouteImport
-      parentRoute: typeof AuthenticatedFisicaRoute
-    }
-    '/_authenticated/fisica/formulas': {
-      id: '/_authenticated/fisica/formulas'
-      path: '/formulas'
-      fullPath: '/fisica/formulas'
-      preLoaderRoute: typeof AuthenticatedFisicaFormulasRouteImport
-      parentRoute: typeof AuthenticatedFisicaRoute
-    }
-    '/_authenticated/basica/$materia': {
-      id: '/_authenticated/basica/$materia'
-      path: '/basica/$materia'
-      fullPath: '/basica/$materia'
-      preLoaderRoute: typeof AuthenticatedBasicaMateriaRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/admin/tareas': {
-      id: '/_authenticated/admin/tareas'
-      path: '/tareas'
-      fullPath: '/admin/tareas'
-      preLoaderRoute: typeof AuthenticatedAdminTareasRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/roles': {
-      id: '/_authenticated/admin/roles'
-      path: '/roles'
-      fullPath: '/admin/roles'
-      preLoaderRoute: typeof AuthenticatedAdminRolesRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/presencia': {
-      id: '/_authenticated/admin/presencia'
-      path: '/presencia'
-      fullPath: '/admin/presencia'
-      preLoaderRoute: typeof AuthenticatedAdminPresenciaRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/podio': {
-      id: '/_authenticated/admin/podio'
-      path: '/podio'
-      fullPath: '/admin/podio'
-      preLoaderRoute: typeof AuthenticatedAdminPodioRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/permisos-docentes': {
-      id: '/_authenticated/admin/permisos-docentes'
-      path: '/permisos-docentes'
-      fullPath: '/admin/permisos-docentes'
-      preLoaderRoute: typeof AuthenticatedAdminPermisosDocentesRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/mensajes': {
-      id: '/_authenticated/admin/mensajes'
-      path: '/mensajes'
-      fullPath: '/admin/mensajes'
-      preLoaderRoute: typeof AuthenticatedAdminMensajesRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/grupos': {
-      id: '/_authenticated/admin/grupos'
-      path: '/grupos'
-      fullPath: '/admin/grupos'
-      preLoaderRoute: typeof AuthenticatedAdminGruposRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/docentes': {
-      id: '/_authenticated/admin/docentes'
-      path: '/docentes'
-      fullPath: '/admin/docentes'
-      preLoaderRoute: typeof AuthenticatedAdminDocentesRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/calificaciones': {
-      id: '/_authenticated/admin/calificaciones'
-      path: '/calificaciones'
-      fullPath: '/admin/calificaciones'
-      preLoaderRoute: typeof AuthenticatedAdminCalificacionesRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/branding': {
@@ -808,12 +689,124 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminBrandingRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
-    '/_authenticated/fisica/practicar/$tema': {
-      id: '/_authenticated/fisica/practicar/$tema'
-      path: '/practicar/$tema'
-      fullPath: '/fisica/practicar/$tema'
-      preLoaderRoute: typeof AuthenticatedFisicaPracticarTemaRouteImport
+    '/_authenticated/admin/calificaciones': {
+      id: '/_authenticated/admin/calificaciones'
+      path: '/calificaciones'
+      fullPath: '/admin/calificaciones'
+      preLoaderRoute: typeof AuthenticatedAdminCalificacionesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/docentes': {
+      id: '/_authenticated/admin/docentes'
+      path: '/docentes'
+      fullPath: '/admin/docentes'
+      preLoaderRoute: typeof AuthenticatedAdminDocentesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/grupos': {
+      id: '/_authenticated/admin/grupos'
+      path: '/grupos'
+      fullPath: '/admin/grupos'
+      preLoaderRoute: typeof AuthenticatedAdminGruposRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/mensajes': {
+      id: '/_authenticated/admin/mensajes'
+      path: '/mensajes'
+      fullPath: '/admin/mensajes'
+      preLoaderRoute: typeof AuthenticatedAdminMensajesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/permisos-docentes': {
+      id: '/_authenticated/admin/permisos-docentes'
+      path: '/permisos-docentes'
+      fullPath: '/admin/permisos-docentes'
+      preLoaderRoute: typeof AuthenticatedAdminPermisosDocentesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/podio': {
+      id: '/_authenticated/admin/podio'
+      path: '/podio'
+      fullPath: '/admin/podio'
+      preLoaderRoute: typeof AuthenticatedAdminPodioRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/presencia': {
+      id: '/_authenticated/admin/presencia'
+      path: '/presencia'
+      fullPath: '/admin/presencia'
+      preLoaderRoute: typeof AuthenticatedAdminPresenciaRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/roles': {
+      id: '/_authenticated/admin/roles'
+      path: '/roles'
+      fullPath: '/admin/roles'
+      preLoaderRoute: typeof AuthenticatedAdminRolesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/tareas': {
+      id: '/_authenticated/admin/tareas'
+      path: '/tareas'
+      fullPath: '/admin/tareas'
+      preLoaderRoute: typeof AuthenticatedAdminTareasRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/basica/$materia': {
+      id: '/_authenticated/basica/$materia'
+      path: '/basica/$materia'
+      fullPath: '/basica/$materia'
+      preLoaderRoute: typeof AuthenticatedBasicaMateriaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/fisica/': {
+      id: '/_authenticated/fisica/'
+      path: '/'
+      fullPath: '/fisica/'
+      preLoaderRoute: typeof AuthenticatedFisicaIndexRouteImport
       parentRoute: typeof AuthenticatedFisicaRoute
+    }
+    '/_authenticated/fisica/formulas': {
+      id: '/_authenticated/fisica/formulas'
+      path: '/formulas'
+      fullPath: '/fisica/formulas'
+      preLoaderRoute: typeof AuthenticatedFisicaFormulasRouteImport
+      parentRoute: typeof AuthenticatedFisicaRoute
+    }
+    '/_authenticated/fisica/gestionar': {
+      id: '/_authenticated/fisica/gestionar'
+      path: '/gestionar'
+      fullPath: '/fisica/gestionar'
+      preLoaderRoute: typeof AuthenticatedFisicaGestionarRouteImport
+      parentRoute: typeof AuthenticatedFisicaRoute
+    }
+    '/_authenticated/fisica/tutor': {
+      id: '/_authenticated/fisica/tutor'
+      path: '/tutor'
+      fullPath: '/fisica/tutor'
+      preLoaderRoute: typeof AuthenticatedFisicaTutorRouteImport
+      parentRoute: typeof AuthenticatedFisicaRoute
+    }
+    '/_authenticated/practicar/$area': {
+      id: '/_authenticated/practicar/$area'
+      path: '/$area'
+      fullPath: '/practicar/$area'
+      preLoaderRoute: typeof AuthenticatedPracticarAreaRouteImport
+      parentRoute: typeof AuthenticatedPracticarRoute
+    }
+    '/_authenticated/tutor/': {
+      id: '/_authenticated/tutor/'
+      path: '/'
+      fullPath: '/tutor/'
+      preLoaderRoute: typeof AuthenticatedTutorIndexRouteImport
+      parentRoute: typeof AuthenticatedTutorRoute
+    }
+    '/_authenticated/tutor/$threadId': {
+      id: '/_authenticated/tutor/$threadId'
+      path: '/$threadId'
+      fullPath: '/tutor/$threadId'
+      preLoaderRoute: typeof AuthenticatedTutorThreadIdRouteImport
+      parentRoute: typeof AuthenticatedTutorRoute
     }
     '/_authenticated/admin/estudiante/$id': {
       id: '/_authenticated/admin/estudiante/$id'
@@ -821,6 +814,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/estudiante/$id'
       preLoaderRoute: typeof AuthenticatedAdminEstudianteIdRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/fisica/practicar/$tema': {
+      id: '/_authenticated/fisica/practicar/$tema'
+      path: '/practicar/$tema'
+      fullPath: '/fisica/practicar/$tema'
+      preLoaderRoute: typeof AuthenticatedFisicaPracticarTemaRouteImport
+      parentRoute: typeof AuthenticatedFisicaRoute
     }
   }
 }
