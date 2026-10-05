@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import { FileSpreadsheet } from "lucide-react";
+import { ImportarEstudiantes } from "@/components/ImportarEstudiantes";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import {
@@ -140,6 +142,7 @@ function AdminEstudiantes() {
   const [confirmarReset, setConfirmarReset] = useState<Estudiante | null>(null);
   const [asignarOpen, setAsignarOpen] = useState(false);
   const [resetMasivoOpen, setResetMasivoOpen] = useState(false);
+  const [importarOpen, setImportarOpen] = useState(false);
   const [resetMasivoLoading, setResetMasivoLoading] = useState(false);
   const [grupoElegido, setGrupoElegido] = useState<string>("");
 
@@ -370,9 +373,15 @@ function AdminEstudiantes() {
             )}
           </div>
         </div>
-        <Button onClick={abrirCrear}>
-          <UserPlus className="h-4 w-4" /> Nuevo estudiante
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={() => setImportarOpen(true)}>
+            <FileSpreadsheet className="h-4 w-4" /> Importar lista
+          </Button>
+          <Button onClick={abrirCrear}>
+            <UserPlus className="h-4 w-4" /> Nuevo estudiante
+          </Button>
+        </div>
+        <ImportarEstudiantes open={importarOpen} onOpenChange={setImportarOpen} />
       </div>
 
       {/* Barra de acciones masivas */}

@@ -1011,6 +1011,30 @@ export type Database = {
         }
         Relationships: []
       }
+      razonamiento_progreso: {
+        Row: {
+          aciertos: Json
+          created_at: string
+          fallos: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          aciertos?: Json
+          created_at?: string
+          fallos?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          aciertos?: Json
+          created_at?: string
+          fallos?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       respuestas: {
         Row: {
           area: string

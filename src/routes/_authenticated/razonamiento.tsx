@@ -29,7 +29,14 @@ function Razonamiento() {
       const { data } = await supabase.auth.getUser();
       const id = data.user?.id ?? "anon";
       setUid(id);
-      try { const s = localStorage.getItem(`razonamiento:${id}`); if (s) setEst(JSON.parse(s)); } catch { /* */ }
+      if (data.user) {
+        const { data: prog } = await (supabase as any).from("razonamiento_progreso").select("aciertos, fallos").eq("user_id", id).maybeSingle();
+        if (prog) setEst({ aciertos: { 1: [], 2: [], 3: [], ...prog.aciertos }, fallos: prog.fallos ?? {} });
+        else {
+          // Migrar avance anterior guardado en este aparato
+          try { const s = localStorage.getItem(`razonamiento:${id}`); if (s) { const e = JSON.parse(s); setEst(e); await (supabase as any).from("razonamiento_progreso").upsert({ user_id: id, aciertos: e.aciertos, fallos: e.fallos }); } } catch { /* */ }
+        }
+      }
       if (data.user) {
         const { data: perfil } = await supabase.from("profiles").select("fecha_nacimiento").eq("id", data.user.id).maybeSingle();
         if (perfil?.fecha_nacimiento) setEdad(calcularEdad(perfil.fecha_nacimiento).anios);
@@ -37,7 +44,10 @@ function Razonamiento() {
     })();
   }, []);
 
-  const guardar = (e: Estado) => { setEst(e); if (uid) localStorage.setItem(`razonamiento:${uid}`, JSON.stringify(e)); };
+  const guardar = (e: Estado) => {
+    setEst(e);
+    if (uid && uid !== "anon") void (supabase as any).from("razonamiento_progreso").upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos }).then(({ error }: any) => error && console.error(error));
+  };
   const bancos = useMemo(() => ({ 1: bancoRazonamiento(1, edad), 2: bancoRazonamiento(2, edad), 3: bancoRazonamiento(3, edad) }), [edad]);
   const aprobado = (n: NivelRaz) => (est.aciertos[n]?.length ?? 0) >= Math.ceil(CONFIG_RAZ[n].total * CONFIG_RAZ[n].meta);
   const desbloqueado = (n: NivelRaz) => n === 1 || aprobado((n - 1) as NivelRaz);
