@@ -47,7 +47,7 @@ export function CoachFlotante() {
       .slice(0, 3);
   }, [respuestas]);
 
-  const promedio = data ? data.asignaturas.reduce((a, x) => a + x.nota, 0) / data.asignaturas.length : 0;
+  const promedio = data ? data.asignaturas.reduce((a: number, x: { nota: number }) => a + x.nota, 0) / data.asignaturas.length : 0;
   const nivel = nivelTexto(promedio);
 
   const consejos = useMemo<Consejo[]>(() => {
