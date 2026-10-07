@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { generarCienciasNaturales, TEMAS_CN, AREA_CN } from "@/data/basica/ciencias-naturales";
 import { generarEstudiosSociales, TEMAS_ES, AREA_ES } from "@/data/basica/estudios-sociales";
+import { generarMatematicaBasica, TEMAS_MBS, AREA_MBS } from "@/data/basica/matematica-basica";
 import { preguntasAleatorias } from "@/data";
 import type { Pregunta } from "@/data/tipos";
 import { PreguntaCard } from "@/components/PreguntaCard";
@@ -10,13 +11,14 @@ import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso
 
 const MATERIAS = {
   "ciencias-naturales": { area: AREA_CN, temas: TEMAS_CN as readonly string[], gen: generarCienciasNaturales },
+  "matematica": { area: AREA_MBS, temas: TEMAS_MBS as readonly string[], gen: generarMatematicaBasica },
   "estudios-sociales": { area: AREA_ES, temas: TEMAS_ES as readonly string[], gen: generarEstudiosSociales },
 } as const;
 const cache: Record<string, Pregunta[]> = {};
 
 export const Route = createFileRoute("/_authenticated/basica/$materia")({
   head: ({ params }) => {
-    const t = params.materia === "estudios-sociales" ? "Estudios Sociales" : "Ciencias Naturales";
+    const t = params.materia === "estudios-sociales" ? "Estudios Sociales" : params.materia === "matematica" ? "Matemática" : "Ciencias Naturales";
     return { meta: [{ title: `${t} — Básica Superior` }, { name: "description", content: `500 preguntas de ${t} según el currículo ecuatoriano.` }] };
   },
   component: Materia,

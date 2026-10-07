@@ -48,7 +48,18 @@ function ListaAreas() {
           <span className="text-primary">→</span>
         </Link>
 
-        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        <h2 className="mt-8 text-lg font-bold">Básica Superior (8.º a 10.º EGB)</h2>
+        <div className="mt-3 grid gap-3 sm:grid-cols-3">
+          {([["matematica", "🔢 Matemática", "300 preguntas"], ["ciencias-naturales", "🌿 Ciencias Naturales", "500 preguntas"], ["estudios-sociales", "🌎 Estudios Sociales", "500 preguntas"]] as const).map(([m, t, d]) => (
+            <Link key={m} to="/basica/$materia" params={{ materia: m }} className="rounded-2xl border bg-gradient-card p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-strong">
+              <h3 className="font-bold">{t}</h3>
+              <p className="text-xs text-muted-foreground">{d}</p>
+            </Link>
+          ))}
+        </div>
+
+        <h2 className="mt-8 text-lg font-bold">1ro BGU</h2>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
           {AREAS.map((area) => {
             const n = preguntasPorArea(area).length;
             const disabled = n === 0;

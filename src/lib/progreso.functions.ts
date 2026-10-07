@@ -115,6 +115,17 @@ function esFisica(area?: string | null) {
   const a = (area ?? "").toLowerCase();
   return AREAS_FISICA.some((k) => a.includes(k));
 }
+export type ClaveAsignatura = "matematica" | "fisica" | "mbs" | "cn" | "es" | "bach";
+function asignaturaDe(area?: string | null): ClaveAsignatura {
+  const a = (area ?? "").toLowerCase();
+  if (a.includes("bachiller")) return "bach";
+  if (a.includes("ciencias naturales")) return "cn";
+  if (a.includes("estudios sociales")) return "es";
+  if (a.includes("sica superior")) return "mbs";
+  if (esFisica(area)) return "fisica";
+  return "matematica";
+}
+const NOMBRES_ASIG: Record<ClaveAsignatura, string> = { matematica: "Matemática", fisica: "Física", mbs: "Matemática Básica Superior", cn: "Ciencias Naturales", es: "Estudios Sociales", bach: "Bachillerato" };
 
 export const calificacionAsignaturasFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -154,9 +165,9 @@ export const calificacionAsignaturasFn = createServerFn({ method: "POST" })
     const cActivo = Math.min(1, segActivo / 3600 / 10);
     const cConstancia = Math.min(1, dias.size / 20);
 
-    function simulacroDe(fisica: boolean) {
+    function simulacroDe(clave: ClaveAsignatura) {
       const list = (ses ?? []).filter(
-        (s: any) => s.tipo === "simulacro" && s.finalizada_en && esFisica(s.area) === fisica && (s.total_preguntas ?? 0) > 0,
+        (s: any) => s.tipo === "simulacro" && s.finalizada_en && asignaturaDe(s.area) === clave && (s.total_preguntas ?? 0) > 0,
       );
       if (list.length === 0) return { pct: 0, n: 0 };
       const prom =
@@ -164,8 +175,8 @@ export const calificacionAsignaturasFn = createServerFn({ method: "POST" })
       return { pct: prom, n: list.length };
     }
 
-    function nota(fisica: boolean) {
-      const sim = simulacroDe(fisica);
+    function nota(clave: ClaveAsignatura) {
+      const sim = simulacroDe(clave);
       const total10 =
         (cPlataforma * 0.4 + cActivo * 0.2 + cConstancia * 0.2 + sim.pct * 0.2) * 10;
       return {
@@ -185,7 +196,8 @@ export const calificacionAsignaturasFn = createServerFn({ method: "POST" })
       horasPlataforma: Math.round((segPlataforma / 3600) * 10) / 10,
       horasActivas: Math.round((segActivo / 3600) * 10) / 10,
       diasConectado: dias.size,
-      matematica: nota(false),
-      fisica: nota(true),
+      matematica: nota("matematica"),
+      fisica: nota("fisica"),
+      asignaturas: (Object.keys(NOMBRES_ASIG) as ClaveAsignatura[]).map((k) => ({ clave: k, nombre: NOMBRES_ASIG[k], ...nota(k) })),
     };
   });
