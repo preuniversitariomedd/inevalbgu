@@ -6,6 +6,11 @@ import type { Pregunta } from "@/data/tipos";
 import { BANCO_SIMULACRO, preguntasAleatorias } from "@/data";
 import { preguntasRepaso } from "@/data";
 import { BANCO_FISICA } from "@/data/fisica";
+import { generarCienciasNaturales } from "@/data/basica/ciencias-naturales";
+import { generarEstudiosSociales } from "@/data/basica/estudios-sociales";
+import { generarMatematicaBasica } from "@/data/basica/matematica-basica";
+import { bancoRazonamiento } from "@/data/basica/razonamiento";
+import { preguntasLecturaCritica } from "@/data/basica/lectura-critica";
 import { PreguntaCard } from "@/components/PreguntaCard";
 import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso";
 
@@ -13,7 +18,22 @@ const DURACION_MIN = 40;
 const TOTAL_PREG = 30;
 const SUBTEMAS_CINEMATICA = ["Caída libre", "MRU", "MRUV"];
 
-type Asignatura = "mate" | "fisica";
+type Asignatura = "mate" | "fisica" | "cn" | "es" | "mbs" | "bach";
+const SIM: Record<Asignatura, { nombre: string; area: string | null; total: number; min: number; desc: string; icono: string }> = {
+  mate: { nombre: "Matemática", area: null, total: 30, min: 40, desc: "5 áreas + repaso (1ro BGU)", icono: "📐" },
+  fisica: { nombre: "Física", area: "Física", total: 30, min: 40, desc: "Cinemática: caída libre, MRU y MRUA", icono: "⚛️" },
+  mbs: { nombre: "Matemática Básica Superior", area: "Matemática Básica Superior", total: 30, min: 40, desc: "Números, álgebra, geometría y estadística", icono: "🔢" },
+  cn: { nombre: "Ciencias Naturales", area: "Ciencias Naturales", total: 30, min: 40, desc: "Seres vivos, cuerpo humano, materia y universo", icono: "🌿" },
+  es: { nombre: "Estudios Sociales", area: "Estudios Sociales", total: 30, min: 40, desc: "Historia, geografía y ciudadanía", icono: "🌎" },
+  bach: { nombre: "Bachillerato (completo)", area: "Bachillerato", total: 50, min: 75, desc: "Todas las áreas + razonamiento, lectura crítica y argumentos", icono: "🎓" },
+};
+function porTema(pool: Pregunta[], n: number, clave: (p: Pregunta) => string = (p) => p.tema): Pregunta[] {
+  const grupos = new Map<string, Pregunta[]>();
+  for (const p of pool) { const k = clave(p); if (!grupos.has(k)) grupos.set(k, []); grupos.get(k)!.push(p); }
+  const per = Math.ceil(n / grupos.size);
+  const out = [...grupos.values()].flatMap((g) => preguntasAleatorias(g, per));
+  return preguntasAleatorias(out, out.length).slice(0, n);
+}
 
 
 export const Route = createFileRoute("/_authenticated/simulacro")({
@@ -66,8 +86,26 @@ function Simulacro() {
   const esFisica = asignatura === "fisica";
 
   // Build a non-repeating session proportional across the sources.
+  const cfg = SIM[asignatura];
   const sesion = useMemo<Pregunta[]>(() => {
     if (!iniciado) return [];
+    if (asignatura === "cn") return porTema(generarCienciasNaturales(), 30);
+    if (asignatura === "es") return porTema(generarEstudiosSociales(), 30);
+    if (asignatura === "mbs") return porTema(generarMatematicaBasica(), 30);
+    if (asignatura === "bach") {
+      const lc = preguntasLecturaCritica();
+      const comp = [...bancoRazonamiento(2, 15), ...bancoRazonamiento(3, 15)];
+      const mix = [
+        ...preguntasAleatorias(BANCO_SIMULACRO, 10).map((p) => ({ ...p, tema: "Matemática" })),
+        ...preguntasAleatorias(generarCienciasNaturales(), 8).map((p) => ({ ...p, tema: "Ciencias Naturales" })),
+        ...preguntasAleatorias(generarEstudiosSociales(), 8).map((p) => ({ ...p, tema: "Estudios Sociales" })),
+        ...preguntasAleatorias(comp.filter((p) => p.subtema !== "Lectura comprensiva"), 8).map((p) => ({ ...p, tema: "Razonamiento" })),
+        ...preguntasAleatorias(comp.filter((p) => p.subtema === "Lectura comprensiva"), 4).map((p) => ({ ...p, tema: "Lectura comprensiva" })),
+        ...preguntasAleatorias(lc.filter((p) => p.subtema === "Lectura crítica"), 6).map((p) => ({ ...p, tema: "Lectura crítica" })),
+        ...preguntasAleatorias(lc.filter((p) => p.subtema === "Análisis de argumentos"), 6).map((p) => ({ ...p, tema: "Análisis de argumentos" })),
+      ];
+      return preguntasAleatorias(mix, mix.length).slice(0, 50);
+    }
 
     if (esFisica) {
       const pool = BANCO_FISICA.filter(
@@ -110,7 +148,7 @@ function Simulacro() {
       elegidas.push(...extras);
     }
     return preguntasAleatorias(elegidas, elegidas.length).slice(0, TOTAL_PREG);
-  }, [iniciado, esFisica]);
+  }, [iniciado, esFisica, asignatura]);
 
   useEffect(() => {
     if (!iniciado || terminado) return;
@@ -125,13 +163,14 @@ function Simulacro() {
 
   function reiniciar() {
     setIniciado(false); setTerminado(false); setRevisando(false);
-    setIdx(0); setRespuestas([]); setRestante(DURACION_MIN * 60);
+    setIdx(0); setRespuestas([]); setRestante(cfg.min * 60);
     setSesionId(null); setGuardadoFinal(false);
   }
 
   async function empezar() {
     setIniciado(true);
-    const id = await iniciarSesion("simulacro", esFisica ? "Física" : null);
+    setRestante(cfg.min * 60);
+    const id = await iniciarSesion("simulacro", cfg.area);
     setSesionId(id);
   }
 
@@ -146,34 +185,20 @@ function Simulacro() {
 
             <p className="mt-4 text-sm font-semibold">Elige la asignatura</p>
             <div className="mt-2 grid gap-3 sm:grid-cols-2">
-              <button
-                onClick={() => setAsignatura("mate")}
-                className={`flex items-center gap-3 rounded-xl border-2 p-4 text-left transition ${asignatura === "mate" ? "border-primary bg-primary/5" : "hover:bg-secondary"}`}
-              >
-                <Calculator className="h-6 w-6 text-primary" />
-                <span>
-                  <span className="block font-bold">Matemática</span>
-                  <span className="block text-xs text-muted-foreground">5 áreas + repaso</span>
-                </span>
-              </button>
-              <button
-                onClick={() => setAsignatura("fisica")}
-                className={`flex items-center gap-3 rounded-xl border-2 p-4 text-left transition ${asignatura === "fisica" ? "border-primary bg-primary/5" : "hover:bg-secondary"}`}
-              >
-                <Atom className="h-6 w-6 text-primary" />
-                <span>
-                  <span className="block font-bold">Física</span>
-                  <span className="block text-xs text-muted-foreground">Cinemática: caída libre, MRU y MRUA</span>
-                </span>
-              </button>
+              {(Object.keys(SIM) as Asignatura[]).map((k) => (
+                <button key={k} onClick={() => setAsignatura(k)}
+                  className={`flex items-center gap-3 rounded-xl border-2 p-4 text-left transition ${asignatura === k ? "border-primary bg-primary/5" : "hover:bg-secondary"} ${k === "bach" ? "sm:col-span-2" : ""}`}>
+                  <span className="text-2xl">{SIM[k].icono}</span>
+                  <span>
+                    <span className="block font-bold">{SIM[k].nombre}</span>
+                    <span className="block text-xs text-muted-foreground">{SIM[k].desc}</span>
+                  </span>
+                </button>
+              ))}
             </div>
 
             <p className="mt-4 text-sm text-muted-foreground">
-              {esFisica ? (
-                <>{TOTAL_PREG} preguntas de <strong>Cinemática</strong> (caída libre, MRU y MRUA), en <strong>{DURACION_MIN} minutos</strong>. Solo se evalúa Física.</>
-              ) : (
-                <>{TOTAL_PREG} preguntas mezcladas de las 5 áreas + preguntas integradoras de repaso, en <strong>{DURACION_MIN} minutos</strong>.</>
-              )}{" "}
+              <>{cfg.total} preguntas de <strong>{cfg.nombre}</strong> ({cfg.desc}), en <strong>{cfg.min} minutos</strong>.</>{" "}
               No verás las respuestas hasta finalizar. Al terminar, calcularemos tu <strong>nivel de logro</strong> según la escala oficial del INEVAL.
             </p>
             <ul className="mt-4 space-y-1 text-sm">
@@ -182,7 +207,7 @@ function Simulacro() {
               ))}
             </ul>
             <button onClick={empezar} className="mt-6 w-full rounded-xl bg-primary px-5 py-3 text-base font-bold text-primary-foreground shadow-soft hover:bg-primary/90">
-              Empezar simulacro de {esFisica ? "Física" : "Matemática"}
+              Empezar simulacro de {cfg.nombre}
             </button>
           </div>
         </div>
@@ -193,13 +218,13 @@ function Simulacro() {
 
   if (terminado || idx >= sesion.length) {
     const aciertos = respuestas.filter((r) => r.correcta).length;
-    const total = sesion.length || TOTAL_PREG;
+    const total = sesion.length || cfg.total;
     const score = Math.round((aciertos / total) * 1000);
     const nivel = nivelLogro(score);
     const errores = respuestas.filter((r) => !r.correcta);
     if (!guardadoFinal) {
       setGuardadoFinal(true);
-      void finalizarSesion(sesionId, total, aciertos, score, nivel.nombre, DURACION_MIN * 60 - restante);
+      void finalizarSesion(sesionId, total, aciertos, score, nivel.nombre, cfg.min * 60 - restante);
     }
 
 
@@ -242,10 +267,11 @@ function Simulacro() {
 
     // Desglose: por área en Matemática, por subtema de Cinemática en Física
     const porArea: Record<string, { ok: number; total: number }> = {};
-    const claves = esFisica ? SUBTEMAS_CINEMATICA : [...AREAS];
+    const generico = !["mate", "fisica"].includes(asignatura);
+    const claves = esFisica ? SUBTEMAS_CINEMATICA : generico ? [...new Set(sesion.map((p) => p.tema))] : [...AREAS];
     for (const a of claves) porArea[a] = { ok: 0, total: 0 };
     for (const r of respuestas) {
-      const k = esFisica ? r.pregunta.subtema : r.pregunta.area;
+      const k = esFisica ? r.pregunta.subtema : generico ? r.pregunta.tema : r.pregunta.area;
       if (porArea[k]) {
         porArea[k].total++;
         if (r.correcta) porArea[k].ok++;
