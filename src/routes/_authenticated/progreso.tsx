@@ -383,10 +383,8 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
     refetchOnWindowFocus: true,
   });
   if (!data) return null;
-  const bloques = [
-    { titulo: "Matemática", icono: "📐", d: data.matematica, color: "hsl(265 70% 55%)" },
-    { titulo: "Física", icono: "⚛️", d: data.fisica, color: "hsl(200 80% 45%)" },
-  ];
+  const ICONOS: Record<string, [string, string]> = { matematica: ["📐", "hsl(265 70% 55%)"], fisica: ["⚛️", "hsl(200 80% 45%)"], mbs: ["🔢", "hsl(30 85% 50%)"], cn: ["🌿", "hsl(145 60% 38%)"], es: ["🌎", "hsl(15 75% 50%)"], bach: ["🎓", "hsl(340 70% 50%)"] };
+  const bloques = data.asignaturas.map((a) => ({ titulo: a.nombre, icono: ICONOS[a.clave]![0], d: a, color: ICONOS[a.clave]![1] }));
   return (
     <section className="mt-6 rounded-2xl border bg-gradient-card p-5 shadow-soft">
       <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
