@@ -58,7 +58,7 @@ export type ResumenNotasAsignaturas = {
   diasConectado: number;
   matematica: NotaAsignatura;
   fisica: NotaAsignatura;
-  asignaturas: { clave: ClaveAsignatura; nombre: string } & NotaAsignatura;
+  asignaturas: Array<{ clave: ClaveAsignatura; nombre: string } & NotaAsignatura>;
 };
 
 export function calcularNotasAsignaturas(
