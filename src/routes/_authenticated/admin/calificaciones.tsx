@@ -154,6 +154,8 @@ async function exportarPdf(filas: Fila[]) {
 function CalificacionesPage() {
   const [grupoId, setGrupoId] = useState<string>("");
   const [nivelFiltro, setNivelFiltro] = useState<Nivel | "">("");
+  const [busqueda, setBusqueda] = useState<string>("");
+  const [generoFiltro, setGeneroFiltro] = useState<string>("");
   const q = useQuery({
     queryKey: ["calificaciones"],
     queryFn: () => calificacionesEstudiantesFn() as Promise<Fila[]>,
@@ -168,10 +170,24 @@ function CalificacionesPage() {
   });
   const todas = q.data ?? [];
   const delGrupo = useMemo(() => {
-    if (!grupoId) return todas;
-    const set = new Set(miembrosQ.data ?? []);
-    return todas.filter((f) => set.has(f.id));
-  }, [todas, grupoId, miembrosQ.data]);
+    let lista = todas;
+    if (grupoId) {
+      const set = new Set(miembrosQ.data ?? []);
+      lista = lista.filter((f) => set.has(f.id));
+    }
+    const texto = busqueda.trim().toLowerCase();
+    if (texto) {
+      lista = lista.filter(
+        (f) =>
+          f.nombres.toLowerCase().includes(texto) ||
+          f.cedula.toLowerCase().includes(texto),
+      );
+    }
+    if (generoFiltro) {
+      lista = lista.filter((f) => (f.genero ?? "sin") === generoFiltro);
+    }
+    return lista;
+  }, [todas, grupoId, miembrosQ.data, busqueda, generoFiltro]);
   const conteos = useMemo(() => {
     const c: Record<Nivel, number> = { excelente: 0, bueno: 0, riesgo: 0, critico: 0 };
     for (const f of delGrupo) c[nivelDe(f.nota)]++;
