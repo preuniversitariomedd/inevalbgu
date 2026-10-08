@@ -182,6 +182,14 @@ function CalificacionesPage() {
     [delGrupo, nivelFiltro],
   );
   const prom = delGrupo.length ? delGrupo.reduce((a, f) => a + f.nota, 0) / delGrupo.length : 0;
+  const promPorAsig = useMemo(() => {
+    const m: Partial<Record<ClaveAsignatura, number>> = {};
+    if (!delGrupo.length) return m;
+    for (const clave of CLAVES_ASIGNATURAS) {
+      m[clave] = delGrupo.reduce((a, f) => a + notaDe(f, clave), 0) / delGrupo.length;
+    }
+    return m;
+  }, [delGrupo]);
 
   return (
     <div>
@@ -231,12 +239,23 @@ function CalificacionesPage() {
       <div className="mb-4 rounded-2xl border bg-gradient-to-br from-primary/5 to-accent/5 p-4 shadow-soft">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="text-sm text-muted-foreground">
-            <div className="font-semibold text-foreground">Cálculo de la nota (0–10)</div>
+            <div className="font-semibold text-foreground">Cálculo de las notas (0–10)</div>
             <ul className="mt-1 list-inside list-disc">
-              <li><b>60%</b> precisión = (correctas / respuestas) × 6</li>
-              <li><b>25%</b> constancia = log₁₀(sesiones+1)/log₁₀(21) × 2.5 (techo 20 sesiones)</li>
-              <li><b>15%</b> tiempo activo = min(horas, 20)/20 × 1.5</li>
+              <li><b>Nota general:</b> 60% precisión + 25% constancia + 15% tiempo activo</li>
+              <li><b>Notas por asignatura:</b> 40% tiempo en plataforma + 20% tiempo activo + 20% constancia (días) + 20% simulacros de esa asignatura</li>
             </ul>
+            <div className="mt-2 flex flex-wrap items-center gap-1.5">
+              <span className="text-xs font-semibold">Promedio por asignatura:</span>
+              {CLAVES_ASIGNATURAS.map((clave) => (
+                <span
+                  key={clave}
+                  title={NOMBRES_ASIG[clave]}
+                  className={`rounded-full bg-background px-2 py-0.5 text-[11px] font-semibold ${notaColor(promPorAsig[clave] ?? 0)}`}
+                >
+                  {ABREVIATURAS_ASIG[clave]} {(promPorAsig[clave] ?? 0).toFixed(1)}
+                </span>
+              ))}
+            </div>
           </div>
           <div className="flex gap-2">
             <button
