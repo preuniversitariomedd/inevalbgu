@@ -289,16 +289,17 @@ function CalificacionesPage() {
               <th className="px-3 py-2 text-right">Sesiones</th>
               <th className="px-3 py-2 text-right">Horas</th>
               <th className="px-3 py-2 text-right">Nota /10</th>
+              <th className="px-3 py-2 text-left">Notas por asignatura</th>
               <th className="px-3 py-2 text-left">Estado</th>
               <th className="px-3 py-2 text-left">Recomendación personalizada</th>
             </tr>
           </thead>
           <tbody>
             {q.isLoading && (
-              <tr><td colSpan={11} className="py-6 text-center text-muted-foreground">Cargando…</td></tr>
+              <tr><td colSpan={12} className="py-6 text-center text-muted-foreground">Cargando…</td></tr>
             )}
             {!q.isLoading && filas.length === 0 && (
-              <tr><td colSpan={11} className="py-6 text-center text-muted-foreground">Sin estudiantes.</td></tr>
+              <tr><td colSpan={12} className="py-6 text-center text-muted-foreground">Sin estudiantes.</td></tr>
             )}
             {filas.map((f) => {
               const nv = nivelDe(f.nota);
@@ -313,6 +314,23 @@ function CalificacionesPage() {
                 <td className="px-3 py-2 text-right tabular-nums">{f.sesiones_practica}</td>
                 <td className="px-3 py-2 text-right tabular-nums">{f.horas_activas}</td>
                 <td className={`px-3 py-2 text-right font-bold tabular-nums ${notaColor(f.nota)}`}>{f.nota.toFixed(1)}</td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <div className="flex flex-wrap gap-1">
+                    {CLAVES_ASIGNATURAS.map((clave) => (
+                      <span
+                        key={clave}
+                        title={`${NOMBRES_ASIG[clave]}: ${notaDe(f, clave).toFixed(1)} / 10${
+                          f.notasDetalle?.find((d) => d.clave === clave)?.simulacros
+                            ? ` · ${f.notasDetalle.find((d) => d.clave === clave)!.simulacros} simulacro(s)`
+                            : " · sin simulacros"
+                        }`}
+                        className={`rounded-md border bg-background px-1.5 py-0.5 text-[10px] font-semibold tabular-nums ${notaColor(notaDe(f, clave))}`}
+                      >
+                        {ABREVIATURAS_ASIG[clave]} {notaDe(f, clave).toFixed(1)}
+                      </span>
+                    ))}
+                  </div>
+                </td>
                 <td className="px-3 py-2">
                   <span className={`whitespace-nowrap rounded-full px-2 py-1 text-[11px] font-semibold ${NIVEL_INFO[nv].badge}`}>
                     {NIVEL_INFO[nv].label}
