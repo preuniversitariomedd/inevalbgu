@@ -22,6 +22,8 @@ export const ABREVIATURAS_ASIG: Record<ClaveAsignatura, string> = {
   bach: "Bach",
 };
 
+export const CLAVES_ASIGNATURAS = Object.keys(NOMBRES_ASIG) as ClaveAsignatura[];
+
 const AREAS_FISICA = ["cinem", "dinam", "energ", "fisic", "físic"];
 
 export function esFisica(area?: string | null) {
@@ -56,7 +58,7 @@ export type ResumenNotasAsignaturas = {
   diasConectado: number;
   matematica: NotaAsignatura;
   fisica: NotaAsignatura;
-  asignaturas: { clave: ClaveAsignatura; nombre: string } & NotaAsignatura;
+  asignaturas: Array<{ clave: ClaveAsignatura; nombre: string } & NotaAsignatura>;
 };
 
 export function calcularNotasAsignaturas(

@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequestIP, getRequestHeader } from "@tanstack/react-start/server";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
+import { calcularNotasAsignaturas } from "./asignaturas";
 
 function detectarDispositivo(ua: string | null | undefined): "mobile" | "tablet" | "desktop" {
   const s = (ua ?? "").toLowerCase();
@@ -281,11 +282,11 @@ export const calificacionesEstudiantesFn = createServerFn({ method: "GET" })
       .in("user_id", ids);
     const { data: ses } = await context.supabase
       .from("sesiones_practica")
-      .select("user_id, total_preguntas, correctas")
+      .select("user_id, tipo, area, total_preguntas, correctas, iniciada_en, finalizada_en")
       .in("user_id", ids);
     const { data: con } = await context.supabase
       .from("sesiones_conexion")
-      .select("user_id, segundos_interaccion")
+      .select("user_id, iniciada_en, segundos_visible, segundos_oculto, segundos_interaccion")
       .in("user_id", ids);
 
     const aggResp = new Map<string, { tot: number; ok: number }>();
@@ -299,6 +300,18 @@ export const calificacionesEstudiantesFn = createServerFn({ method: "GET" })
     for (const s of ses ?? []) aggSes.set(s.user_id, (aggSes.get(s.user_id) ?? 0) + 1);
     const aggTime = new Map<string, number>();
     for (const c of con ?? []) aggTime.set(c.user_id, (aggTime.get(c.user_id) ?? 0) + (c.segundos_interaccion ?? 0));
+    const perUserSes = new Map<string, any[]>();
+    for (const s of ses ?? []) {
+      const arr = perUserSes.get(s.user_id) ?? [];
+      arr.push(s);
+      perUserSes.set(s.user_id, arr);
+    }
+    const perUserCon = new Map<string, any[]>();
+    for (const c of con ?? []) {
+      const arr = perUserCon.get(c.user_id) ?? [];
+      arr.push(c);
+      perUserCon.set(c.user_id, arr);
+    }
 
     return (profs ?? []).map((p: any) => {
       const r = aggResp.get(p.id) ?? { tot: 0, ok: 0 };
@@ -311,6 +324,7 @@ export const calificacionesEstudiantesFn = createServerFn({ method: "GET" })
       const constancia = Math.min(1, Math.log10(sesN + 1) / Math.log10(21));
       const tiempo = Math.min(1, tInt / 3600 / 20);
       const nota = (precision / 100) * 6 + constancia * 2.5 + tiempo * 1.5;
+      const resAsig = calcularNotasAsignaturas(perUserCon.get(p.id) ?? [], perUserSes.get(p.id) ?? []);
       return {
         id: p.id,
         cedula: p.cedula,
@@ -323,6 +337,12 @@ export const calificacionesEstudiantesFn = createServerFn({ method: "GET" })
         sesiones_practica: sesN,
         horas_activas: Math.round((tInt / 3600) * 10) / 10,
         nota: Math.round(nota * 10) / 10,
+        notas: Object.fromEntries(resAsig.asignaturas.map((a) => [a.clave, a.nota])),
+        notasDetalle: resAsig.asignaturas.map((a) => ({
+          clave: a.clave,
+          nota: a.nota,
+          simulacros: a.simulacros,
+        })),
       };
     });
   });

@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { calificacionesEstudiantesFn } from "@/lib/presencia.functions";
 import { listarGruposFn, listarEstudiantesGrupoFn } from "@/lib/admin.functions";
+import { ABREVIATURAS_ASIG, CLAVES_ASIGNATURAS, NOMBRES_ASIG, type ClaveAsignatura } from "@/lib/asignaturas";
 import { Download, FileSpreadsheet, FileText, Users } from "lucide-react";
 import { toast } from "sonner";
 
@@ -22,7 +23,13 @@ type Fila = {
   sesiones_practica: number;
   horas_activas: number;
   nota: number;
+  notas: Partial<Record<ClaveAsignatura, number>>;
+  notasDetalle?: { clave: ClaveAsignatura; nota: number; simulacros: number }[];
 };
+
+function notaDe(f: Fila, clave: ClaveAsignatura): number {
+  return f.notas?.[clave] ?? 0;
+}
 
 function notaColor(n: number) {
   if (n >= 9) return "text-emerald-600";
@@ -86,22 +93,29 @@ function consejoDe(f: Fila) {
 
 async function exportarExcel(filas: Fila[]) {
   const XLSX = await import("xlsx");
-  const data = filas.map((f) => ({
-    Cédula: f.cedula,
-    Nombres: f.nombres,
-    Institución: f.institucion,
-    Género: f.genero ?? "",
-    "Respuestas totales": f.total_respuestas,
-    Correctas: f.correctas,
-    "Precisión %": f.precision_pct,
-    "Sesiones de práctica": f.sesiones_practica,
-    "Horas activas": f.horas_activas,
-    "Nota /10": f.nota,
-  }));
+  const data = filas.map((f) => {
+    const base: Record<string, string | number> = {
+      Cédula: f.cedula,
+      Nombres: f.nombres,
+      Institución: f.institucion,
+      Género: f.genero ?? "",
+      "Respuestas totales": f.total_respuestas,
+      Correctas: f.correctas,
+      "Precisión %": f.precision_pct,
+      "Sesiones de práctica": f.sesiones_practica,
+      "Horas activas": f.horas_activas,
+      "Nota general /10": f.nota,
+    };
+    for (const clave of CLAVES_ASIGNATURAS) {
+      base[`${NOMBRES_ASIG[clave]} /10`] = notaDe(f, clave);
+    }
+    return base;
+  });
   const ws = XLSX.utils.json_to_sheet(data);
   ws["!cols"] = [
     { wch: 12 }, { wch: 30 }, { wch: 30 }, { wch: 10 },
-    { wch: 10 }, { wch: 10 }, { wch: 12 }, { wch: 18 }, { wch: 14 }, { wch: 10 },
+    { wch: 10 }, { wch: 10 }, { wch: 12 }, { wch: 18 }, { wch: 14 }, { wch: 14 },
+    { wch: 12 }, { wch: 10 }, { wch: 24 }, { wch: 18 }, { wch: 16 }, { wch: 14 },
   ];
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Calificaciones");
@@ -118,7 +132,7 @@ async function exportarPdf(filas: Fila[]) {
   doc.text(`Generado: ${new Date().toLocaleString("es-EC")}`, 14, 20);
   autoTable(doc, {
     startY: 25,
-    head: [["CI", "Nombres", "Institución", "Resp.", "Aciertos", "Precisión", "Sesiones", "Horas", "Nota /10"]],
+    head: [["CI", "Nombres", "Institución", "Resp.", "Aciertos", "Precisión", "Sesiones", "Horas", "Nota /10", "Mate", "Fís", "MBS", "C. Nat", "E. Soc", "Bach"]],
     body: filas.map((f) => [
       f.cedula,
       f.nombres,
@@ -129,9 +143,10 @@ async function exportarPdf(filas: Fila[]) {
       f.sesiones_practica,
       f.horas_activas,
       f.nota.toFixed(1),
+      ...CLAVES_ASIGNATURAS.map((clave) => notaDe(f, clave).toFixed(1)),
     ]),
-    styles: { fontSize: 8 },
-    headStyles: { fillColor: [33, 99, 232] },
+    styles: { fontSize: 7 },
+    headStyles: { fillColor: [33, 99, 232], fontSize: 7 },
   });
   doc.save(`calificaciones-${new Date().toISOString().slice(0, 10)}.pdf`);
 }
@@ -167,6 +182,14 @@ function CalificacionesPage() {
     [delGrupo, nivelFiltro],
   );
   const prom = delGrupo.length ? delGrupo.reduce((a, f) => a + f.nota, 0) / delGrupo.length : 0;
+  const promPorAsig = useMemo(() => {
+    const m: Partial<Record<ClaveAsignatura, number>> = {};
+    if (!delGrupo.length) return m;
+    for (const clave of CLAVES_ASIGNATURAS) {
+      m[clave] = delGrupo.reduce((a, f) => a + notaDe(f, clave), 0) / delGrupo.length;
+    }
+    return m;
+  }, [delGrupo]);
 
   return (
     <div>
@@ -216,12 +239,23 @@ function CalificacionesPage() {
       <div className="mb-4 rounded-2xl border bg-gradient-to-br from-primary/5 to-accent/5 p-4 shadow-soft">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="text-sm text-muted-foreground">
-            <div className="font-semibold text-foreground">Cálculo de la nota (0–10)</div>
+            <div className="font-semibold text-foreground">Cálculo de las notas (0–10)</div>
             <ul className="mt-1 list-inside list-disc">
-              <li><b>60%</b> precisión = (correctas / respuestas) × 6</li>
-              <li><b>25%</b> constancia = log₁₀(sesiones+1)/log₁₀(21) × 2.5 (techo 20 sesiones)</li>
-              <li><b>15%</b> tiempo activo = min(horas, 20)/20 × 1.5</li>
+              <li><b>Nota general:</b> 60% precisión + 25% constancia + 15% tiempo activo</li>
+              <li><b>Notas por asignatura:</b> 40% tiempo en plataforma + 20% tiempo activo + 20% constancia (días) + 20% simulacros de esa asignatura</li>
             </ul>
+            <div className="mt-2 flex flex-wrap items-center gap-1.5">
+              <span className="text-xs font-semibold">Promedio por asignatura:</span>
+              {CLAVES_ASIGNATURAS.map((clave) => (
+                <span
+                  key={clave}
+                  title={NOMBRES_ASIG[clave]}
+                  className={`rounded-full bg-background px-2 py-0.5 text-[11px] font-semibold ${notaColor(promPorAsig[clave] ?? 0)}`}
+                >
+                  {ABREVIATURAS_ASIG[clave]} {(promPorAsig[clave] ?? 0).toFixed(1)}
+                </span>
+              ))}
+            </div>
           </div>
           <div className="flex gap-2">
             <button
@@ -255,16 +289,17 @@ function CalificacionesPage() {
               <th className="px-3 py-2 text-right">Sesiones</th>
               <th className="px-3 py-2 text-right">Horas</th>
               <th className="px-3 py-2 text-right">Nota /10</th>
+              <th className="px-3 py-2 text-left">Notas por asignatura</th>
               <th className="px-3 py-2 text-left">Estado</th>
               <th className="px-3 py-2 text-left">Recomendación personalizada</th>
             </tr>
           </thead>
           <tbody>
             {q.isLoading && (
-              <tr><td colSpan={11} className="py-6 text-center text-muted-foreground">Cargando…</td></tr>
+              <tr><td colSpan={12} className="py-6 text-center text-muted-foreground">Cargando…</td></tr>
             )}
             {!q.isLoading && filas.length === 0 && (
-              <tr><td colSpan={11} className="py-6 text-center text-muted-foreground">Sin estudiantes.</td></tr>
+              <tr><td colSpan={12} className="py-6 text-center text-muted-foreground">Sin estudiantes.</td></tr>
             )}
             {filas.map((f) => {
               const nv = nivelDe(f.nota);
@@ -279,6 +314,23 @@ function CalificacionesPage() {
                 <td className="px-3 py-2 text-right tabular-nums">{f.sesiones_practica}</td>
                 <td className="px-3 py-2 text-right tabular-nums">{f.horas_activas}</td>
                 <td className={`px-3 py-2 text-right font-bold tabular-nums ${notaColor(f.nota)}`}>{f.nota.toFixed(1)}</td>
+                <td className="px-3 py-2 whitespace-nowrap">
+                  <div className="flex flex-wrap gap-1">
+                    {CLAVES_ASIGNATURAS.map((clave) => (
+                      <span
+                        key={clave}
+                        title={`${NOMBRES_ASIG[clave]}: ${notaDe(f, clave).toFixed(1)} / 10${
+                          f.notasDetalle?.find((d) => d.clave === clave)?.simulacros
+                            ? ` · ${f.notasDetalle.find((d) => d.clave === clave)!.simulacros} simulacro(s)`
+                            : " · sin simulacros"
+                        }`}
+                        className={`rounded-md border bg-background px-1.5 py-0.5 text-[10px] font-semibold tabular-nums ${notaColor(notaDe(f, clave))}`}
+                      >
+                        {ABREVIATURAS_ASIG[clave]} {notaDe(f, clave).toFixed(1)}
+                      </span>
+                    ))}
+                  </div>
+                </td>
                 <td className="px-3 py-2">
                   <span className={`whitespace-nowrap rounded-full px-2 py-1 text-[11px] font-semibold ${NIVEL_INFO[nv].badge}`}>
                     {NIVEL_INFO[nv].label}
