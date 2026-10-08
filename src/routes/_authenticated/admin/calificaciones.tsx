@@ -221,6 +221,24 @@ function CalificacionesPage() {
             <option key={g.id} value={g.id}>{g.nombre} ({g.total})</option>
           ))}
         </select>
+        <label className="inline-flex items-center gap-2 text-sm font-semibold">Género</label>
+        <select
+          value={generoFiltro}
+          onChange={(e) => setGeneroFiltro(e.target.value)}
+          className="rounded-lg border bg-background px-2 py-1.5 text-sm"
+        >
+          <option value="">Todos</option>
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+          <option value="otro">Otro</option>
+          <option value="sin">Sin dato</option>
+        </select>
+        <input
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          placeholder="Buscar por nombre o cédula…"
+          className="w-56 rounded-lg border bg-background px-3 py-1.5 text-sm"
+        />
         <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
           <span className="h-2 w-2 animate-pulse rounded-full bg-primary" /> Notas en vivo
         </span>
