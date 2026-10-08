@@ -23,7 +23,13 @@ type Fila = {
   sesiones_practica: number;
   horas_activas: number;
   nota: number;
+  notas: Partial<Record<ClaveAsignatura, number>>;
+  notasDetalle?: { clave: ClaveAsignatura; nota: number; simulacros: number }[];
 };
+
+function notaDe(f: Fila, clave: ClaveAsignatura): number {
+  return f.notas?.[clave] ?? 0;
+}
 
 function notaColor(n: number) {
   if (n >= 9) return "text-emerald-600";
