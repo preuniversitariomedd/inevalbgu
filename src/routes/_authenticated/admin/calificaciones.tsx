@@ -93,22 +93,29 @@ function consejoDe(f: Fila) {
 
 async function exportarExcel(filas: Fila[]) {
   const XLSX = await import("xlsx");
-  const data = filas.map((f) => ({
-    Cédula: f.cedula,
-    Nombres: f.nombres,
-    Institución: f.institucion,
-    Género: f.genero ?? "",
-    "Respuestas totales": f.total_respuestas,
-    Correctas: f.correctas,
-    "Precisión %": f.precision_pct,
-    "Sesiones de práctica": f.sesiones_practica,
-    "Horas activas": f.horas_activas,
-    "Nota /10": f.nota,
-  }));
+  const data = filas.map((f) => {
+    const base: Record<string, string | number> = {
+      Cédula: f.cedula,
+      Nombres: f.nombres,
+      Institución: f.institucion,
+      Género: f.genero ?? "",
+      "Respuestas totales": f.total_respuestas,
+      Correctas: f.correctas,
+      "Precisión %": f.precision_pct,
+      "Sesiones de práctica": f.sesiones_practica,
+      "Horas activas": f.horas_activas,
+      "Nota general /10": f.nota,
+    };
+    for (const clave of CLAVES_ASIGNATURAS) {
+      base[`${NOMBRES_ASIG[clave]} /10`] = notaDe(f, clave);
+    }
+    return base;
+  });
   const ws = XLSX.utils.json_to_sheet(data);
   ws["!cols"] = [
     { wch: 12 }, { wch: 30 }, { wch: 30 }, { wch: 10 },
-    { wch: 10 }, { wch: 10 }, { wch: 12 }, { wch: 18 }, { wch: 14 }, { wch: 10 },
+    { wch: 10 }, { wch: 10 }, { wch: 12 }, { wch: 18 }, { wch: 14 }, { wch: 14 },
+    { wch: 12 }, { wch: 10 }, { wch: 24 }, { wch: 18 }, { wch: 16 }, { wch: 14 },
   ];
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Calificaciones");
@@ -125,7 +132,7 @@ async function exportarPdf(filas: Fila[]) {
   doc.text(`Generado: ${new Date().toLocaleString("es-EC")}`, 14, 20);
   autoTable(doc, {
     startY: 25,
-    head: [["CI", "Nombres", "Institución", "Resp.", "Aciertos", "Precisión", "Sesiones", "Horas", "Nota /10"]],
+    head: [["CI", "Nombres", "Institución", "Resp.", "Aciertos", "Precisión", "Sesiones", "Horas", "Nota /10", "Mate", "Fís", "MBS", "C. Nat", "E. Soc", "Bach"]],
     body: filas.map((f) => [
       f.cedula,
       f.nombres,
@@ -136,9 +143,10 @@ async function exportarPdf(filas: Fila[]) {
       f.sesiones_practica,
       f.horas_activas,
       f.nota.toFixed(1),
+      ...CLAVES_ASIGNATURAS.map((clave) => notaDe(f, clave).toFixed(1)),
     ]),
-    styles: { fontSize: 8 },
-    headStyles: { fillColor: [33, 99, 232] },
+    styles: { fontSize: 7 },
+    headStyles: { fillColor: [33, 99, 232], fontSize: 7 },
   });
   doc.save(`calificaciones-${new Date().toISOString().slice(0, 10)}.pdf`);
 }
