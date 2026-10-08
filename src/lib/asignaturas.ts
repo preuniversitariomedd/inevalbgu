@@ -22,6 +22,8 @@ export const ABREVIATURAS_ASIG: Record<ClaveAsignatura, string> = {
   bach: "Bach",
 };
 
+export const CLAVES_ASIGNATURAS = Object.keys(NOMBRES_ASIG) as ClaveAsignatura[];
+
 const AREAS_FISICA = ["cinem", "dinam", "energ", "fisic", "físic"];
 
 export function esFisica(area?: string | null) {

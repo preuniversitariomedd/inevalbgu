@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { calificacionesEstudiantesFn } from "@/lib/presencia.functions";
 import { listarGruposFn, listarEstudiantesGrupoFn } from "@/lib/admin.functions";
+import { ABREVIATURAS_ASIG, CLAVES_ASIGNATURAS, NOMBRES_ASIG, type ClaveAsignatura } from "@/lib/asignaturas";
 import { Download, FileSpreadsheet, FileText, Users } from "lucide-react";
 import { toast } from "sonner";
 
