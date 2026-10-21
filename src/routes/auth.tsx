@@ -35,8 +35,20 @@ function AuthPage() {
       email: cedulaToEmail(cedula),
       password,
     });
+    if (error) {
+      const red = error.status === 0 || /fetch|network|connect/i.test(error.message);
+      const d = red ? { estado: "servicio" as const } : await diagnosticarLoginFn({ data: { cedula } }).catch(() => ({ estado: "servicio" as const }));
+      setLoading(false);
+      if (d.estado === "no_existe") return toast.error("La cédula no está registrada. Verifica los números o pide al administrador que te registre.");
+      if (d.estado === "bloqueado") return toast.error("Tu cuenta está desactivada. Contacta al administrador.");
+      if (d.estado === "servicio") return toast.error("El servicio se está reactivando. Espera unos segundos e intenta de nuevo.");
+      return toast.error(
+        "d" in d || ("tienePin" in d && d.tienePin)
+          ? "La contraseña es incorrecta. Puedes restablecerla con tu PIN de 4 dígitos."
+          : "La contraseña es incorrecta. Si no la recuerdas, pide al administrador que la reinicie.",
+      );
+    }
     setLoading(false);
-    if (error) return toast.error("Cédula o contraseña incorrecta.");
     router.navigate({ to: "/", replace: true });
   }
 
