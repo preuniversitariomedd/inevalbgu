@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { validarCedulaEcuatoriana, cedulaToEmail } from "@/lib/cedula";
 import { crearAdminInicialFn, existeAdminFn } from "@/lib/admin.functions";
 import { toast } from "sonner";
+import { diagnosticarLoginFn, resetConPinFn } from "@/lib/pin.functions";
 import { GraduationCap, ShieldPlus } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
@@ -35,8 +36,20 @@ function AuthPage() {
       email: cedulaToEmail(cedula),
       password,
     });
+    if (error) {
+      const red = error.status === 0 || /fetch|network|connect/i.test(error.message);
+      const d = red ? { estado: "servicio" as const } : await diagnosticarLoginFn({ data: { cedula } }).catch(() => ({ estado: "servicio" as const }));
+      setLoading(false);
+      if (d.estado === "no_existe") return toast.error("La cédula no está registrada. Verifica los números o pide al administrador que te registre.");
+      if (d.estado === "bloqueado") return toast.error("Tu cuenta está desactivada. Contacta al administrador.");
+      if (d.estado === "servicio") return toast.error("El servicio se está reactivando. Espera unos segundos e intenta de nuevo.");
+      return toast.error(
+        "tienePin" in d && d.tienePin
+          ? "La contraseña es incorrecta. Puedes restablecerla con tu PIN de 4 dígitos."
+          : "La contraseña es incorrecta. Si no la recuerdas, pide al administrador que la reinicie.",
+      );
+    }
     setLoading(false);
-    if (error) return toast.error("Cédula o contraseña incorrecta.");
     router.navigate({ to: "/", replace: true });
   }
 
@@ -81,6 +94,8 @@ function AuthPage() {
             {loading ? "Ingresando..." : "Entrar"}
           </button>
         </form>
+
+        <RecuperarConPin cedulaInicial={cedula} />
 
         {hayAdmin === false && (
           <div className="mt-5 rounded-2xl border bg-card/95 p-5 text-sm shadow-soft">
@@ -167,6 +182,67 @@ function SetupAdmin({ onDone }: { onDone: () => void }) {
       >
         {loading ? "Creando..." : "Crear administrador"}
       </button>
+    </form>
+  );
+}
+
+function RecuperarConPin({ cedulaInicial }: { cedulaInicial: string }) {
+  const [open, setOpen] = useState(false);
+  const [cedula, setCedula] = useState("");
+  const [pin, setPin] = useState("");
+  const [p1, setP1] = useState("");
+  const [p2, setP2] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!/^\d{4}$/.test(pin)) return toast.error("El PIN debe tener 4 dígitos.");
+    if (p1.length < 8) return toast.error("La nueva contraseña debe tener mínimo 8 caracteres.");
+    if (p1 !== p2) return toast.error("Las contraseñas no coinciden.");
+    setLoading(true);
+    try {
+      const r = await resetConPinFn({ data: { cedula, pin, nueva: p1 } });
+      if (!r.ok) return toast.error(r.error);
+      toast.success("Contraseña restablecida. Ya puedes ingresar con tu nueva contraseña.");
+      setOpen(false);
+      setPin(""); setP1(""); setP2("");
+    } catch (e: unknown) {
+      toast.error(e instanceof Error ? e.message : "No se pudo restablecer.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  if (!open)
+    return (
+      <button
+        type="button"
+        onClick={() => { setCedula(cedulaInicial); setOpen(true); }}
+        className="mt-4 w-full text-center text-sm font-semibold text-primary-foreground underline underline-offset-4"
+      >
+        ¿Olvidaste tu contraseña? Restablécela con tu PIN
+      </button>
+    );
+
+  return (
+    <form onSubmit={submit} className="mt-4 space-y-2 rounded-2xl bg-card p-5 shadow-soft">
+      <h3 className="font-extrabold">Restablecer con PIN de 4 dígitos</h3>
+      <input inputMode="numeric" maxLength={10} placeholder="Cédula" value={cedula}
+        onChange={(e) => setCedula(e.target.value.replace(/\D/g, ""))}
+        className="w-full rounded-md border px-3 py-2 text-sm" required />
+      <input type="password" inputMode="numeric" maxLength={4} placeholder="PIN (4 dígitos)" value={pin}
+        onChange={(e) => setPin(e.target.value.replace(/\D/g, ""))}
+        className="w-full rounded-md border px-3 py-2 text-sm tracking-widest" required />
+      <input type="password" autoComplete="new-password" placeholder="Nueva contraseña (mín. 8)" value={p1}
+        onChange={(e) => setP1(e.target.value)} className="w-full rounded-md border px-3 py-2 text-sm" required />
+      <input type="password" autoComplete="new-password" placeholder="Repite la nueva contraseña" value={p2}
+        onChange={(e) => setP2(e.target.value)} className="w-full rounded-md border px-3 py-2 text-sm" required />
+      <div className="flex gap-2">
+        <button type="button" onClick={() => setOpen(false)} className="flex-1 rounded-md border px-4 py-2 text-sm font-semibold">Cancelar</button>
+        <button disabled={loading} className="flex-1 rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground disabled:opacity-50">
+          {loading ? "Verificando..." : "Restablecer"}
+        </button>
+      </div>
     </form>
   );
 }

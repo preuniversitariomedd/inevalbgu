@@ -11,6 +11,7 @@ import { useMensajesNoLeidos } from "@/components/chat/ChatShell";
 import { miAvatarUrlFn, subirAvatarFn } from "@/lib/mensajes.functions";
 import { contarTareasPendientesFn } from "@/lib/tareas.functions";
 import { toast } from "sonner";
+import { PinSeguridad } from "@/components/PinSeguridad";
 
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
@@ -137,6 +138,7 @@ function AuthedLayout() {
               </Link>
             )}
             {cedula && <span className="hidden text-muted-foreground sm:inline">CI {cedula}</span>}
+            <PinSeguridad />
             <AvatarSelector />
             <button
               onClick={logout}
