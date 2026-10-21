@@ -1308,6 +1308,30 @@ export type Database = {
         }
         Relationships: []
       }
+      user_pins: {
+        Row: {
+          bloqueado_hasta: string | null
+          intentos: number
+          pin_hash: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bloqueado_hasta?: string | null
+          intentos?: number
+          pin_hash: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bloqueado_hasta?: string | null
+          intentos?: number
+          pin_hash?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
