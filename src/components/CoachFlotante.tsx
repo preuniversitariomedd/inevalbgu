@@ -47,7 +47,7 @@ export function CoachFlotante() {
       .slice(0, 3);
   }, [respuestas]);
 
-  const promedio = data ? data.asignaturas.reduce((a: number, x: { nota: number }) => a + x.nota, 0) / data.asignaturas.length : 0;
+  const promedio = data?.global?.nota ?? (data ? data.asignaturas.reduce((a: number, x: { nota: number }) => a + x.nota, 0) / data.asignaturas.length : 0);
   const nivel = nivelTexto(promedio);
 
   const consejos = useMemo<Consejo[]>(() => {
@@ -121,6 +121,21 @@ export function CoachFlotante() {
       .sort((a, b) => b.falta - a.falta)
       .slice(0, 3)
       .map((p) => p.c);
+
+    // Consejos según la nota global (10% plataforma · 30% simulacro · 30% conocimiento · 30% razonamiento)
+    const g = data.global;
+    if (g) {
+      const partes = [
+        { falta: 3 - g.componentes.simulacro, c: { titulo: `Simulacros: ${g.componentes.simulacro.toFixed(1)}/3 pts`, texto: g.detalle.pctSimulacro === 0 ? "Rinde tu primer simulacro completo: es la forma más rápida de subir tu nota." : `Tu promedio en simulacros es ${g.detalle.pctSimulacro} %. Repetir simulacros lo sube.`, to: "/simulacro", cta: "Ir al simulacro" } as Consejo },
+        { falta: 3 - g.componentes.conocimiento, c: { titulo: `Conocimiento: ${g.componentes.conocimiento.toFixed(1)}/3 pts`, texto: `Llevas ${g.detalle.pctConocimiento} % del avance. Supera las metas de cada nivel de lectura (90 %, 80 %, 75 %).`, to: "/conocimiento", cta: "Practicar lectura" } as Consejo },
+        { falta: 3 - g.componentes.razonamiento, c: { titulo: `Razonamiento: ${g.componentes.razonamiento.toFixed(1)}/3 pts`, texto: `Llevas ${g.detalle.pctRazonamiento} % del avance. Cada nivel aprobado suma un tercio de esta parte.`, to: "/razonamiento", cta: "Entrenar razonamiento" } as Consejo },
+        { falta: 1 - g.componentes.plataforma, c: { titulo: `Tiempo en plataforma: ${g.componentes.plataforma.toFixed(1)}/1 pt`, texto: `Llevas ${g.detalle.horasPlataforma} h de 20 h. Bloques diarios de 30–40 minutos completan este punto.`, to: "/practicar", cta: "Practicar ahora" } as Consejo },
+      ]
+        .filter((p) => p.falta > 0.2)
+        .sort((a, b) => b.falta - a.falta)
+        .slice(0, 2);
+      out.push(...partes.map((p) => p.c));
+    }
 
     out.push(...pendientes);
 
