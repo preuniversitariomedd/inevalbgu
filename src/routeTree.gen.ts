@@ -17,6 +17,7 @@ import { Route as AuthenticatedAnalisisRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedBancoRouteImport } from './routes/_authenticated/banco'
 import { Route as AuthenticatedBibliotecaRouteImport } from './routes/_authenticated/biblioteca'
 import { Route as AuthenticatedCambiarPasswordRouteImport } from './routes/_authenticated/cambiar-password'
+import { Route as AuthenticatedConocimientoRouteImport } from './routes/_authenticated/conocimiento'
 import { Route as AuthenticatedEncuestaRouteImport } from './routes/_authenticated/encuesta'
 import { Route as AuthenticatedFisicaRouteImport } from './routes/_authenticated/fisica'
 import { Route as AuthenticatedMensajesRouteImport } from './routes/_authenticated/mensajes'
@@ -89,6 +90,12 @@ const AuthenticatedCambiarPasswordRoute =
   AuthenticatedCambiarPasswordRouteImport.update({
     id: '/cambiar-password',
     path: '/cambiar-password',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedConocimientoRoute =
+  AuthenticatedConocimientoRouteImport.update({
+    id: '/conocimiento',
+    path: '/conocimiento',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedEncuestaRoute = AuthenticatedEncuestaRouteImport.update({
@@ -283,6 +290,7 @@ export interface FileRoutesByFullPath {
   '/banco': typeof AuthenticatedBancoRoute
   '/biblioteca': typeof AuthenticatedBibliotecaRoute
   '/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
+  '/conocimiento': typeof AuthenticatedConocimientoRoute
   '/encuesta': typeof AuthenticatedEncuestaRoute
   '/fisica': typeof AuthenticatedFisicaRouteWithChildren
   '/mensajes': typeof AuthenticatedMensajesRoute
@@ -323,6 +331,7 @@ export interface FileRoutesByTo {
   '/banco': typeof AuthenticatedBancoRoute
   '/biblioteca': typeof AuthenticatedBibliotecaRoute
   '/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
+  '/conocimiento': typeof AuthenticatedConocimientoRoute
   '/encuesta': typeof AuthenticatedEncuestaRoute
   '/mensajes': typeof AuthenticatedMensajesRoute
   '/practicar': typeof AuthenticatedPracticarRouteWithChildren
@@ -365,6 +374,7 @@ export interface FileRoutesById {
   '/_authenticated/banco': typeof AuthenticatedBancoRoute
   '/_authenticated/biblioteca': typeof AuthenticatedBibliotecaRoute
   '/_authenticated/cambiar-password': typeof AuthenticatedCambiarPasswordRoute
+  '/_authenticated/conocimiento': typeof AuthenticatedConocimientoRoute
   '/_authenticated/encuesta': typeof AuthenticatedEncuestaRoute
   '/_authenticated/fisica': typeof AuthenticatedFisicaRouteWithChildren
   '/_authenticated/mensajes': typeof AuthenticatedMensajesRoute
@@ -410,6 +420,7 @@ export interface FileRouteTypes {
     | '/banco'
     | '/biblioteca'
     | '/cambiar-password'
+    | '/conocimiento'
     | '/encuesta'
     | '/fisica'
     | '/mensajes'
@@ -450,6 +461,7 @@ export interface FileRouteTypes {
     | '/banco'
     | '/biblioteca'
     | '/cambiar-password'
+    | '/conocimiento'
     | '/encuesta'
     | '/mensajes'
     | '/practicar'
@@ -491,6 +503,7 @@ export interface FileRouteTypes {
     | '/_authenticated/banco'
     | '/_authenticated/biblioteca'
     | '/_authenticated/cambiar-password'
+    | '/_authenticated/conocimiento'
     | '/_authenticated/encuesta'
     | '/_authenticated/fisica'
     | '/_authenticated/mensajes'
@@ -589,6 +602,13 @@ declare module '@tanstack/react-router' {
       path: '/cambiar-password'
       fullPath: '/cambiar-password'
       preLoaderRoute: typeof AuthenticatedCambiarPasswordRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/conocimiento': {
+      id: '/_authenticated/conocimiento'
+      path: '/conocimiento'
+      fullPath: '/conocimiento'
+      preLoaderRoute: typeof AuthenticatedConocimientoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/encuesta': {
@@ -915,6 +935,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedBancoRoute: typeof AuthenticatedBancoRoute
   AuthenticatedBibliotecaRoute: typeof AuthenticatedBibliotecaRoute
   AuthenticatedCambiarPasswordRoute: typeof AuthenticatedCambiarPasswordRoute
+  AuthenticatedConocimientoRoute: typeof AuthenticatedConocimientoRoute
   AuthenticatedEncuestaRoute: typeof AuthenticatedEncuestaRoute
   AuthenticatedFisicaRoute: typeof AuthenticatedFisicaRouteWithChildren
   AuthenticatedMensajesRoute: typeof AuthenticatedMensajesRoute
@@ -936,6 +957,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBancoRoute: AuthenticatedBancoRoute,
   AuthenticatedBibliotecaRoute: AuthenticatedBibliotecaRoute,
   AuthenticatedCambiarPasswordRoute: AuthenticatedCambiarPasswordRoute,
+  AuthenticatedConocimientoRoute: AuthenticatedConocimientoRoute,
   AuthenticatedEncuestaRoute: AuthenticatedEncuestaRoute,
   AuthenticatedFisicaRoute: AuthenticatedFisicaRouteWithChildren,
   AuthenticatedMensajesRoute: AuthenticatedMensajesRoute,
