@@ -289,7 +289,11 @@ function CalificacionesPage() {
       </div>
 
       <div className="mb-4 flex flex-wrap items-center gap-3 border-b py-3">
-        <SelectorPeriodo periodos={periodos} value={periodoId} onChange={setPeriodoId} />
+        <SelectorPeriodo periodos={periodos} value={periodoId} onChange={id => {
+          setPeriodoId(id);
+          const p = periodos.find(p => p.id === id);
+          if (p) setGrupoId(p.grupo_id);
+        }} />
         {meQ.data?.esAdmin && <Button variant="outline" onClick={() => setCrear(v => !v)}>Nuevo período</Button>}
         {periodosQ.error && <p role="alert" className="text-sm text-destructive">No se pudieron cargar los períodos.</p>}
       </div>

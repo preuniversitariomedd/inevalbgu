@@ -1,4 +1,4 @@
 - [x] Reset admin password; specific login errors; 4-digit PIN recovery
 - [x] Crear almacenamiento protegido de períodos por grupo con fechas de inicio y fin.
-- [ ] Calcular notas dentro de las fechas usando respuestas registradas y tiempo del período.
-- [ ] Agregar selector y creación de períodos en Calificaciones; mostrarlos a estudiantes y exportaciones; verificar cálculo y flujo.
+- [x] Calcular notas dentro de las fechas usando respuestas registradas y tiempo del período.
+- [x] Agregar selector y creación de períodos en Calificaciones; mostrarlos a estudiantes y exportaciones; verificar cálculo y flujo.
