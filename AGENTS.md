@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Store group grading periods in `public.periodos_calificacion`; use timestamped answer events for period grades, not cumulative progress timestamps, to preserve lifetime learning progress.
