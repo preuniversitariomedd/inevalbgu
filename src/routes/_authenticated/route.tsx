@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 import { usePresencia } from "@/lib/usePresencia";
+import { useAntiCopia } from "@/lib/useAntiCopia";
 import { LogOut, GraduationCap, Shield, PartyPopper, MessageCircle, Camera, Sparkles, ClipboardList, Library } from "lucide-react";
 import { AusenciaDialog } from "@/components/AusenciaDialog";
 import { CoachFlotante } from "@/components/CoachFlotante";
@@ -64,6 +65,8 @@ function AuthedLayout() {
     staleTime: 60_000,
   });
   usePresencia(true);
+  // Anti-copia: bloquea Ctrl+C / Ctrl+V / menú contextual fuera de campos de texto.
+  useAntiCopia(true);
 
 
   useEffect(() => {
@@ -96,7 +99,7 @@ function AuthedLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/30">
+    <div className="min-h-screen select-none bg-gradient-to-b from-background via-background to-secondary/30">
       <nav className="sticky top-0 z-30 border-b bg-background/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
           <Link to="/" className="flex items-center gap-2.5 font-extrabold">

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { BookOpen, Timer, BarChart3, GraduationCap, Sparkles, Database, ClipboardCheck, Award, Atom, Target, Library, Leaf, Globe2, Brain } from "lucide-react";
+import { BookOpen, BookOpenCheck, Timer, BarChart3, GraduationCap, Sparkles, Database, ClipboardCheck, Award, Atom, Target, Library, Leaf, Globe2, Brain } from "lucide-react";
 import { BANCO_PREGUNTAS } from "@/data";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 
@@ -148,6 +148,13 @@ function Index() {
             title="Razonamiento"
             desc="3 niveles adaptativos: series, analogías, discriminantes, lectura y problemas."
             tone="accent"
+          />
+          <ActionCard
+            to="/conocimiento"
+            icon={<BookOpenCheck className="h-7 w-7" />}
+            title="Conocimiento"
+            desc="570 preguntas de lectura comprensiva en 3 niveles con metas de avance."
+            tone="success"
           />
 
 
