@@ -1370,6 +1370,47 @@ export type Database = {
         }
         Relationships: []
       }
+      tiempo_calificacion_eventos: {
+        Row: {
+          fin: string
+          id: string
+          inicio: string
+          segundos_interaccion: number
+          segundos_oculto: number
+          segundos_visible: number
+          sesion_id: string
+          user_id: string
+        }
+        Insert: {
+          fin: string
+          id?: string
+          inicio: string
+          segundos_interaccion?: number
+          segundos_oculto?: number
+          segundos_visible?: number
+          sesion_id: string
+          user_id: string
+        }
+        Update: {
+          fin?: string
+          id?: string
+          inicio?: string
+          segundos_interaccion?: number
+          segundos_oculto?: number
+          segundos_visible?: number
+          sesion_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tiempo_calificacion_eventos_sesion_id_fkey"
+            columns: ["sesion_id"]
+            isOneToOne: false
+            referencedRelation: "sesiones_conexion"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_pins: {
         Row: {
           bloqueado_hasta: string | null

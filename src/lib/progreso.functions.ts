@@ -110,13 +110,11 @@ export const obtenerProgresoFn = createServerFn({ method: "POST" })
 
 // ---------- Calificación por asignatura (Matemática / Física) ----------
 // Lógica compartida en src/lib/asignaturas.ts
-import { calcularNotasAsignaturas } from "./asignaturas";
-import { calcularNotaGlobal } from "./nota-global";
 
 export const calificacionAsignaturasFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) =>
-    z.object({ targetUserId: z.string().uuid().optional() }).optional().parse(d ?? {}),
+    z.object({ targetUserId: z.string().uuid().optional(), periodoId: z.string().uuid().optional() }).optional().parse(d ?? {}),
   )
   .handler(async ({ data, context }) => {
     let userId = context.userId;
@@ -126,36 +124,8 @@ export const calificacionAsignaturasFn = createServerFn({ method: "POST" })
       userId = data.targetUserId;
     }
 
-    const { data: con } = await context.supabase
-      .from("sesiones_conexion")
-      .select("iniciada_en, segundos_visible, segundos_oculto, segundos_interaccion")
-      .eq("user_id", userId)
-      .limit(2000);
-    const { data: ses } = await context.supabase
-      .from("sesiones_practica")
-      .select("tipo, area, total_preguntas, correctas, iniciada_en, finalizada_en")
-      .eq("user_id", userId)
-      .limit(1000);
-
-    const { data: conProg } = await context.supabase
-      .from("conocimiento_progreso")
-      .select("aciertos")
-      .eq("user_id", userId)
-      .maybeSingle();
-    const { data: razProg } = await context.supabase
-      .from("razonamiento_progreso")
-      .select("aciertos")
-      .eq("user_id", userId)
-      .maybeSingle();
-
-    return {
-      viewedUserId: userId,
-      ...calcularNotasAsignaturas(con, ses),
-      global: calcularNotaGlobal(
-        con,
-        ses,
-        conProg as { aciertos?: Record<string, string[]> } | null,
-        razProg as { aciertos?: Record<string, string[]> } | null,
-      ),
-    };
+    const { notasUsuario, obtenerPeriodo } = await import('./calificacion-periodo.server');
+    const periodo = await obtenerPeriodo(context.supabase, data?.periodoId, userId);
+    const resultado = await notasUsuario(context.supabase, userId, periodo);
+    return { viewedUserId: userId, ...resultado };
   });

@@ -1,5 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { SelectorPeriodo } from "@/components/SelectorPeriodo";
+import { Button } from "@/components/ui/button";
+import { listarPeriodosFn, crearPeriodoFn } from "@/lib/periodos.functions";
+import { etiquetaPeriodo, type Periodo } from "@/lib/periodos";
+import { getCurrentProfile } from "@/lib/auth-helpers";
+import type { NotaGlobal } from "@/lib/nota-global";
 import { useQuery } from "@tanstack/react-query";
 import { calificacionesEstudiantesFn } from "@/lib/presencia.functions";
 import { listarGruposFn, listarEstudiantesGrupoFn } from "@/lib/admin.functions";
@@ -8,6 +15,13 @@ import { Download, FileSpreadsheet, FileText, Users } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/calificaciones")({
+  head: () => ({ meta: [
+    { title: "Calificaciones por período — PreUniversitario MEDD" },
+    { name: "description", content: "Notas por grupo, asignatura y período de evaluación de PreUniversitario MEDD." },
+    { property: "og:title", content: "Calificaciones por período — PreUniversitario MEDD" },
+    { property: "og:description", content: "Consulta las notas de estudiantes dentro de las fechas de cada grupo." },
+    { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" },
+  ] }),
   component: CalificacionesPage,
 });
 
@@ -23,6 +37,8 @@ type Fila = {
   sesiones_practica: number;
   horas_activas: number;
   nota: number;
+  global?: NotaGlobal;
+  tiempoHistoricoIncompleto?: boolean;
   notas: Partial<Record<ClaveAsignatura, number>>;
   notasDetalle?: { clave: ClaveAsignatura; nota: number; simulacros: number }[];
 };
@@ -72,6 +88,16 @@ const NIVEL_INFO: Record<Nivel, { label: string; badge: string; fila: string }> 
 
 /** Mensaje personalizado según el punto más flojo del estudiante. */
 function consejoDe(f: Fila) {
+  if (f.global) {
+    const c = f.global.componentes;
+    const opciones = [
+      { valor: c.plataforma, texto: 'Tiempo: sumar sesiones regulares de estudio.' },
+      { valor: c.simulacro / 3, texto: 'Simulacros: revisar errores y rendir un examen completo.' },
+      { valor: c.conocimiento / 3, texto: 'Conocimiento: responder nuevas preguntas correctamente en cada nivel.' },
+      { valor: c.razonamiento / 3, texto: 'Razonamiento: reforzar estrategias y completar los niveles.' },
+    ];
+    return opciones.sort((a, b) => a.valor - b.valor)[0]?.texto ?? '';
+  }
   const nivel = nivelDe(f.nota);
   if (nivel === "excelente") {
     return `Rendimiento sobresaliente (${f.precision_pct}% de precisión). Proponle simulacros completos y ejercicios de mayor dificultad.`;
@@ -91,10 +117,11 @@ function consejoDe(f: Fila) {
 }
 
 
-async function exportarExcel(filas: Fila[]) {
+async function exportarExcel(filas: Fila[], periodo: string) {
   const XLSX = await import("xlsx");
   const data = filas.map((f) => {
     const base: Record<string, string | number> = {
+      Período: periodo,
       Cédula: f.cedula,
       Nombres: f.nombres,
       Institución: f.institucion,
@@ -122,14 +149,14 @@ async function exportarExcel(filas: Fila[]) {
   XLSX.writeFile(wb, `calificaciones-${new Date().toISOString().slice(0, 10)}.xlsx`);
 }
 
-async function exportarPdf(filas: Fila[]) {
+async function exportarPdf(filas: Fila[], periodo: string) {
   const { default: jsPDF } = await import("jspdf");
   const autoTable = (await import("jspdf-autotable")).default;
   const doc = new jsPDF({ orientation: "landscape" });
   doc.setFontSize(14);
   doc.text("INEVAL_UEDE — Calificaciones de estudiantes", 14, 14);
   doc.setFontSize(9);
-  doc.text(`Generado: ${new Date().toLocaleString("es-EC")}`, 14, 20);
+  doc.text(`${periodo} · Generado: ${new Date().toLocaleString("es-EC")}`, 14, 20);
   autoTable(doc, {
     startY: 25,
     head: [["CI", "Nombres", "Institución", "Resp.", "Aciertos", "Precisión", "Sesiones", "Horas", "Nota /10", "Mate", "Fís", "MBS", "C. Nat", "E. Soc", "Bach"]],
@@ -156,9 +183,21 @@ function CalificacionesPage() {
   const [nivelFiltro, setNivelFiltro] = useState<Nivel | "">("");
   const [busqueda, setBusqueda] = useState<string>("");
   const [generoFiltro, setGeneroFiltro] = useState<string>("");
+  const [periodoId, setPeriodoId] = useState('');
+  const [crear, setCrear] = useState(false);
+  const [guardando, setGuardando] = useState(false);
+  const [errorPeriodo, setErrorPeriodo] = useState('');
+  const fetchNotas = useServerFn(calificacionesEstudiantesFn);
+  const fetchPeriodos = useServerFn(listarPeriodosFn);
+  const guardarPeriodo = useServerFn(crearPeriodoFn);
+  const meQ = useQuery({ queryKey: ['me'], queryFn: getCurrentProfile });
+  const periodosQ = useQuery({ queryKey: ['periodos'], queryFn: () => fetchPeriodos({ data: {} }) });
+  const periodos = (periodosQ.data ?? []).filter(p => !grupoId || p.grupo_id === grupoId);
+  const seleccionado = periodos.find(p => p.id === periodoId);
+  const nombrePeriodo = seleccionado ? etiquetaPeriodo(seleccionado) : 'Todo el historial';
   const q = useQuery({
-    queryKey: ["calificaciones"],
-    queryFn: () => calificacionesEstudiantesFn() as Promise<Fila[]>,
+    queryKey: ["calificaciones", periodoId],
+    queryFn: () => fetchNotas({ data: { periodoId: periodoId || undefined } }) as Promise<Fila[]>,
     refetchInterval: 15000,
     refetchOnWindowFocus: true,
   });
@@ -213,7 +252,7 @@ function CalificacionesPage() {
         <label className="inline-flex items-center gap-2 text-sm font-semibold"><Users className="h-4 w-4" /> Grupo</label>
         <select
           value={grupoId}
-          onChange={(e) => setGrupoId(e.target.value)}
+          onChange={(e) => { setGrupoId(e.target.value); setPeriodoId(''); }}
           className="rounded-lg border bg-background px-2 py-1.5 text-sm"
         >
           <option value="">Todos los estudiantes</option>
@@ -249,9 +288,33 @@ function CalificacionesPage() {
         </div>
       </div>
 
+      <div className="mb-4 flex flex-wrap items-center gap-3 border-b py-3">
+        <SelectorPeriodo periodos={periodos} value={periodoId} onChange={setPeriodoId} />
+        {meQ.data?.esAdmin && <Button variant="outline" onClick={() => setCrear(v => !v)}>Nuevo período</Button>}
+        {periodosQ.error && <p role="alert" className="text-sm text-destructive">No se pudieron cargar los períodos.</p>}
+      </div>
+      {crear && <form className="mb-4 grid gap-3 border-b pb-4 sm:grid-cols-2" onSubmit={async e => {
+        e.preventDefault(); setErrorPeriodo(''); setGuardando(true);
+        const f = new FormData(e.currentTarget);
+        try {
+          const p = await guardarPeriodo({ data: { grupo_id: String(f.get('grupo')), nombre: String(f.get('nombre')), fecha_inicio: String(f.get('inicio')), fecha_fin: String(f.get('fin')) } });
+          await periodosQ.refetch(); setGrupoId(p.grupo_id); setPeriodoId(p.id); setCrear(false); toast.success('Período creado');
+        } catch (err) { setErrorPeriodo(err instanceof Error ? err.message : 'No se pudo guardar el período.'); }
+        finally { setGuardando(false); }
+      }}>
+        <label className="text-sm">Grupo<select required name="grupo" aria-label="Grupo del nuevo período" defaultValue={grupoId} className="mt-1 block w-full rounded-md border bg-background p-2"><option value="">Selecciona un grupo</option>{(grpQ.data ?? []).map(g => <option key={g.id} value={g.id}>{g.nombre}</option>)}</select></label>
+        <label className="text-sm">Nombre<input name="nombre" required maxLength={120} className="mt-1 block w-full rounded-md border bg-background p-2" /></label>
+        <label className="text-sm">Desde<input name="inicio" required type="date" className="mt-1 block w-full rounded-md border bg-background p-2" /></label>
+        <label className="text-sm">Hasta<input name="fin" required type="date" className="mt-1 block w-full rounded-md border bg-background p-2" /></label>
+        {errorPeriodo && <p role="alert" className="text-sm text-destructive sm:col-span-2">{errorPeriodo}</p>}
+        <Button type="submit" disabled={guardando}>{guardando ? 'Guardando…' : 'Guardar período'}</Button>
+        <Button variant="ghost" type="button" onClick={() => setCrear(false)}>Cancelar</Button>
+      </form>}
+      {q.error && <p role="alert" className="mb-3 text-destructive">No se pudieron cargar las notas. Intenta nuevamente.</p>}
+      {filas.some(f => f.tiempoHistoricoIncompleto) && <p className="mb-3 text-sm text-muted-foreground">El tiempo antiguo que cruza las fechas no tiene detalle suficiente y se excluye; los nuevos registros se dividen por período.</p>}
       <div className="mb-3 flex flex-wrap gap-2">
         {(["excelente", "bueno", "riesgo", "critico"] as Nivel[]).map((n) => (
-          <button
+          <Button
             key={n}
             onClick={() => setNivelFiltro(nivelFiltro === n ? "" : n)}
             className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${NIVEL_INFO[n].badge} ${
@@ -259,12 +322,12 @@ function CalificacionesPage() {
             }`}
           >
             {NIVEL_INFO[n].label} · {conteos[n]}
-          </button>
+          </Button>
         ))}
         {nivelFiltro && (
-          <button onClick={() => setNivelFiltro("")} className="rounded-full border px-3 py-1.5 text-xs font-semibold">
+          <Button onClick={() => setNivelFiltro("")} className="rounded-full border px-3 py-1.5 text-xs font-semibold">
             Ver todos
-          </button>
+          </Button>
         )}
       </div>
 
@@ -275,8 +338,8 @@ function CalificacionesPage() {
           <div className="text-sm text-muted-foreground">
             <div className="font-semibold text-foreground">Cálculo de las notas (0–10)</div>
             <ul className="mt-1 list-inside list-disc">
-              <li><b>Nota general:</b> 60% precisión + 25% constancia + 15% tiempo activo</li>
-              <li><b>Notas por asignatura:</b> 40% tiempo en plataforma + 20% tiempo activo + 20% constancia (días) + 20% simulacros de esa asignatura</li>
+              <li><b>Nota general:</b> 10% tiempo real en plataforma + 30% simulacros + 30% Conocimiento + 30% Razonamiento</li>
+              <li><b>Notas por asignatura:</b> misma ponderación, con los simulacros de esa asignatura</li>
             </ul>
             <div className="mt-2 flex flex-wrap items-center gap-1.5">
               <span className="text-xs font-semibold">Promedio por asignatura:</span>
@@ -292,20 +355,20 @@ function CalificacionesPage() {
             </div>
           </div>
           <div className="flex gap-2">
-            <button
-              onClick={() => exportarExcel(filas).catch((e) => toast.error(e.message))}
+            <Button
+              onClick={() => exportarExcel(filas, nombrePeriodo).catch((e) => toast.error(e.message))}
               disabled={!filas.length}
               className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 px-3 py-2 text-sm font-semibold text-white shadow-soft hover:bg-emerald-700 disabled:opacity-50"
             >
               <FileSpreadsheet className="h-4 w-4" /> Excel
-            </button>
-            <button
-              onClick={() => exportarPdf(filas).catch((e) => toast.error(e.message))}
+            </Button>
+            <Button
+              onClick={() => exportarPdf(filas, nombrePeriodo).catch((e) => toast.error(e.message))}
               disabled={!filas.length}
               className="inline-flex items-center gap-1.5 rounded-xl bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-soft hover:bg-rose-700 disabled:opacity-50"
             >
               <FileText className="h-4 w-4" /> PDF
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -355,7 +418,7 @@ function CalificacionesPage() {
                         key={clave}
                         title={`${NOMBRES_ASIG[clave]}: ${notaDe(f, clave).toFixed(1)} / 10${
                           f.notasDetalle?.find((d) => d.clave === clave)?.simulacros
-                            ? ` · ${f.notasDetalle.find((d) => d.clave === clave)!.simulacros} simulacro(s)`
+                            ? ` · ${f.notasDetalle?.find((d) => d.clave === clave)?.simulacros} simulacro(s)`
                             : " · sin simulacros"
                         }`}
                         className={`rounded-md border bg-background px-1.5 py-0.5 text-[10px] font-semibold tabular-nums ${notaColor(notaDe(f, clave))}`}
