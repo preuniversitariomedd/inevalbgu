@@ -990,6 +990,44 @@ export type Database = {
           },
         ]
       }
+      periodos_calificacion: {
+        Row: {
+          created_at: string
+          created_by: string
+          fecha_fin: string
+          fecha_inicio: string
+          grupo_id: string
+          id: string
+          nombre: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string
+          fecha_fin: string
+          fecha_inicio: string
+          grupo_id: string
+          id?: string
+          nombre: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          fecha_fin?: string
+          fecha_inicio?: string
+          grupo_id?: string
+          id?: string
+          nombre?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "periodos_calificacion_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: false
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
