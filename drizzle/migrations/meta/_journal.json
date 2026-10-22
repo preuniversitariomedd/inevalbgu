@@ -8,6 +8,13 @@
       "when": 1792626770863,
       "tag": "0000_user_pins",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792630841671,
+      "tag": "0001_create_conocimiento_progreso",
+      "breakpoints": true
     }
   ]
 }
