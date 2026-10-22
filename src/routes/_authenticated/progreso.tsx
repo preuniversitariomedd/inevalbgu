@@ -385,6 +385,48 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
   if (!data) return null;
   const ICONOS: Record<string, [string, string]> = { matematica: ["📐", "hsl(265 70% 55%)"], fisica: ["⚛️", "hsl(200 80% 45%)"], mbs: ["🔢", "hsl(30 85% 50%)"], cn: ["🌿", "hsl(145 60% 38%)"], es: ["🌎", "hsl(15 75% 50%)"], bach: ["🎓", "hsl(340 70% 50%)"] };
   const bloques = data.asignaturas.map((a) => ({ titulo: a.nombre, icono: ICONOS[a.clave]![0], d: a, color: ICONOS[a.clave]![1] }));
+  const g = (data as any).global as
+    | {
+        nota: number;
+        componentes: { plataforma: number; simulacro: number; conocimiento: number; razonamiento: number };
+        detalle: { horasPlataforma: number; pctSimulacro: number; pctConocimiento: number; pctRazonamiento: number };
+      }
+    | undefined;
+  const consejosGlobal: { titulo: string; texto: string; to: string }[] = [];
+  if (g) {
+    if (g.componentes.simulacro < 3)
+      consejosGlobal.push({
+        titulo: `Simulacros: ${g.componentes.simulacro.toFixed(1)}/3 pts`,
+        texto:
+          g.detalle.pctSimulacro === 0
+            ? "Aún no rindes ningún simulacro completo. Uno solo ya sube bastante esta parte."
+            : `Tu promedio de aciertos en simulacros es ${g.detalle.pctSimulacro} %. Repite simulacros para subirlo.`,
+        to: "/simulacro",
+      });
+    if (g.componentes.conocimiento < 3)
+      consejosGlobal.push({
+        titulo: `Conocimiento: ${g.componentes.conocimiento.toFixed(1)}/3 pts`,
+        texto: `Llevas ${g.detalle.pctConocimiento} % del avance total. Supera las metas de cada nivel (90 %, 80 % y 75 % de aciertos).`,
+        to: "/conocimiento",
+      });
+    if (g.componentes.razonamiento < 3)
+      consejosGlobal.push({
+        titulo: `Razonamiento: ${g.componentes.razonamiento.toFixed(1)}/3 pts`,
+        texto: `Llevas ${g.detalle.pctRazonamiento} % del avance total. Cada nivel aprobado suma un tercio de esta parte.`,
+        to: "/razonamiento",
+      });
+    if (g.componentes.plataforma < 1)
+      consejosGlobal.push({
+        titulo: `Tiempo en plataforma: ${g.componentes.plataforma.toFixed(1)}/1 pt`,
+        texto: `Llevas ${g.detalle.horasPlataforma} h de 20 h. Sesiones diarias de 30–40 minutos completan este punto.`,
+        to: "/practicar",
+      });
+    consejosGlobal.sort((a, b) => {
+      const va = parseFloat(a.titulo.match(/([\d.]+)\//)?.[1] ?? "0");
+      const vb = parseFloat(b.titulo.match(/([\d.]+)\//)?.[1] ?? "0");
+      return va - vb;
+    });
+  }
   return (
     <section className="mt-6 rounded-2xl border bg-gradient-card p-5 shadow-soft">
       <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
@@ -393,8 +435,46 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
           <span className="h-2 w-2 animate-pulse rounded-full bg-primary" /> En tiempo real
         </span>
       </div>
+
+      {g && (
+        <div className="mb-5 rounded-xl border-2 border-primary/40 bg-primary/5 p-4">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <div className="font-bold">🎯 Nota global</div>
+            <div className="text-3xl font-extrabold text-primary">
+              {g.nota.toFixed(1)}
+              <span className="text-sm font-semibold text-muted-foreground">/10</span>
+            </div>
+          </div>
+          <p className="mt-1 text-xs text-muted-foreground">
+            10% tiempo real en plataforma · 30% simulacro de examen · 30% conocimiento · 30% razonamiento
+          </p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            <Barra label="⏱️ Plataforma (10%)" valor={g.componentes.plataforma} max={1} color="hsl(265 70% 55%)" />
+            <Barra label="📝 Simulacro (30%)" valor={g.componentes.simulacro} max={3} color="hsl(200 80% 45%)" />
+            <Barra label="📚 Conocimiento (30%)" valor={g.componentes.conocimiento} max={3} color="hsl(145 60% 38%)" />
+            <Barra label="🧠 Razonamiento (30%)" valor={g.componentes.razonamiento} max={3} color="hsl(340 70% 50%)" />
+          </div>
+          {consejosGlobal.length > 0 && (
+            <div className="mt-4 space-y-2">
+              <p className="text-xs font-semibold">Cómo subir tu nota:</p>
+              {consejosGlobal.slice(0, 3).map((c) => (
+                <div key={c.titulo} className="flex items-start justify-between gap-3 rounded-lg border bg-card p-2.5 text-xs">
+                  <div>
+                    <div className="font-semibold">{c.titulo}</div>
+                    <p className="mt-0.5 text-muted-foreground">{c.texto}</p>
+                  </div>
+                  <Link to={c.to as any} className="shrink-0 rounded-md bg-primary px-2.5 py-1 font-semibold text-primary-foreground hover:bg-primary/90">
+                    Ir
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
       <p className="mb-4 text-xs text-muted-foreground">
-        40% tiempo en plataforma · 20% tiempo activo · 20% constancia · 20% simulacros
+        Por asignatura: 40% tiempo en plataforma · 20% tiempo activo · 20% constancia · 20% simulacros
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         {bloques.map((b) => (
