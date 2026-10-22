@@ -1,1 +1,3 @@
 - [x] Reset admin password; specific login errors; 4-digit PIN recovery
+- [ ] Guardar períodos por grupo y calcular notas únicamente dentro de sus fechas.
+- [ ] Mostrar períodos y notas a estudiantes; filtrar exportaciones; verificar cálculo y flujo.
