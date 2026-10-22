@@ -1,3 +1,4 @@
 - [x] Reset admin password; specific login errors; 4-digit PIN recovery
-- [ ] Guardar períodos por grupo y calcular notas únicamente dentro de sus fechas.
-- [ ] Mostrar períodos y notas a estudiantes; filtrar exportaciones; verificar cálculo y flujo.
+- [x] Crear almacenamiento protegido de períodos por grupo con fechas de inicio y fin.
+- [ ] Calcular notas dentro de las fechas usando respuestas registradas y tiempo del período. Pausado por solicitud del usuario para conservar créditos.
+- [ ] Agregar selector y creación de períodos en Calificaciones; mostrarlos a estudiantes y exportaciones; verificar cálculo y flujo. Pausado por solicitud del usuario para conservar créditos.
