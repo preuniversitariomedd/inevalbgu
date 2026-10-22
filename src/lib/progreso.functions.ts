@@ -111,6 +111,7 @@ export const obtenerProgresoFn = createServerFn({ method: "POST" })
 // ---------- Calificación por asignatura (Matemática / Física) ----------
 // Lógica compartida en src/lib/asignaturas.ts
 import { calcularNotasAsignaturas } from "./asignaturas";
+import { calcularNotaGlobal } from "./nota-global";
 
 export const calificacionAsignaturasFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -136,8 +137,25 @@ export const calificacionAsignaturasFn = createServerFn({ method: "POST" })
       .eq("user_id", userId)
       .limit(1000);
 
+    const { data: conProg } = await context.supabase
+      .from("conocimiento_progreso")
+      .select("aciertos")
+      .eq("user_id", userId)
+      .maybeSingle();
+    const { data: razProg } = await context.supabase
+      .from("razonamiento_progreso")
+      .select("aciertos")
+      .eq("user_id", userId)
+      .maybeSingle();
+
     return {
       viewedUserId: userId,
       ...calcularNotasAsignaturas(con, ses),
+      global: calcularNotaGlobal(
+        con,
+        ses,
+        conProg as { aciertos?: Record<string, string[]> } | null,
+        razProg as { aciertos?: Record<string, string[]> } | null,
+      ),
     };
   });
