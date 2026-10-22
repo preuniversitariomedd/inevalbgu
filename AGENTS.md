@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Store group grading periods in `public.periodos_calificacion`; use timestamped answer events for period grades, not cumulative progress timestamps, to preserve lifetime learning progress.
+- Centralize period grades in the server-only grading helper so student, staff and exports share the same calculation; use inclusive Guayaquil calendar dates and timestamped heartbeat intervals, excluding legacy boundary-crossing time that cannot be measured accurately.

@@ -9,6 +9,10 @@ export const Route = createFileRoute("/_authenticated/")({
     meta: [
       { title: "INEVAL_UEDE — Practica Matemática para 1ro BGU" },
       { name: "description", content: "Prepárate para la prueba Ser Estudiante del INEVAL con cientos de preguntas resueltas paso a paso." },
+      { property: "og:title", content: "INEVAL_UEDE — Preparación académica" },
+      { property: "og:description", content: "Práctica, simulacros, Conocimiento y Razonamiento con seguimiento académico personalizado." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Index,

@@ -2,7 +2,6 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequestIP, getRequestHeader } from "@tanstack/react-start/server";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
-import { calcularNotasAsignaturas } from "./asignaturas";
 
 function detectarDispositivo(ua: string | null | undefined): "mobile" | "tablet" | "desktop" {
   const s = (ua ?? "").toLowerCase();
@@ -263,88 +262,41 @@ export const historialConexionesFn = createServerFn({ method: "POST" })
   });
 
 // ---------- Calificaciones agregadas para export ----------
-export const calificacionesEstudiantesFn = createServerFn({ method: "GET" })
+export const calificacionesEstudiantesFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
+  .inputValidator((d: unknown) => z.object({ periodoId: z.string().uuid().optional() }).parse(d ?? {}))
+  .handler(async ({ context, data }) => {
     await ensureStaff(context);
-    const { data: roles } = await context.supabase.from("user_roles").select("user_id, role");
-    const estIds = new Set((roles ?? []).filter((r: any) => r.role === "estudiante").map((r: any) => r.user_id));
-    if (estIds.size === 0) return [];
-    const ids = Array.from(estIds);
-    const { data: profs } = await context.supabase
-      .from("profiles")
-      .select("id, cedula, nombres, institucion, genero")
-      .in("id", ids);
-
-    const { data: resp } = await context.supabase
-      .from("respuestas")
-      .select("user_id, correcta")
-      .in("user_id", ids);
-    const { data: ses } = await context.supabase
-      .from("sesiones_practica")
-      .select("user_id, tipo, area, total_preguntas, correctas, iniciada_en, finalizada_en")
-      .in("user_id", ids);
-    const { data: con } = await context.supabase
-      .from("sesiones_conexion")
-      .select("user_id, iniciada_en, segundos_visible, segundos_oculto, segundos_interaccion")
-      .in("user_id", ids);
-
-    const aggResp = new Map<string, { tot: number; ok: number }>();
-    for (const r of resp ?? []) {
-      const a = aggResp.get(r.user_id) ?? { tot: 0, ok: 0 };
-      a.tot += 1;
-      if (r.correcta) a.ok += 1;
-      aggResp.set(r.user_id, a);
+    const { notasUsuario, obtenerPeriodo, leerTodas } = await import('./calificacion-periodo.server');
+    const periodo = await obtenerPeriodo(context.supabase, data.periodoId);
+    const { data: roles, error: er } = await context.supabase.from('user_roles').select('user_id,role');
+    if (er) throw new Error(er.message);
+    let ids = (roles ?? []).filter(r => r.role === 'estudiante').map(r => r.user_id);
+    if (periodo) {
+      const { data: miembros, error } = await context.supabase.from('grupo_estudiantes').select('user_id').eq('grupo_id', periodo.grupo_id);
+      if (error) throw new Error(error.message);
+      const grupo = new Set((miembros ?? []).map(m => m.user_id));
+      ids = ids.filter(id => grupo.has(id));
     }
-    const aggSes = new Map<string, number>();
-    for (const s of ses ?? []) aggSes.set(s.user_id, (aggSes.get(s.user_id) ?? 0) + 1);
-    const aggTime = new Map<string, number>();
-    for (const c of con ?? []) aggTime.set(c.user_id, (aggTime.get(c.user_id) ?? 0) + (c.segundos_interaccion ?? 0));
-    const perUserSes = new Map<string, any[]>();
-    for (const s of ses ?? []) {
-      const arr = perUserSes.get(s.user_id) ?? [];
-      arr.push(s);
-      perUserSes.set(s.user_id, arr);
+    if (!ids.length) return [];
+    const profs = await leerTodas<{ id: string; cedula: string; nombres: string; institucion: string; genero: string | null }>(() => context.supabase.from('profiles').select('id,cedula,nombres,institucion,genero').in('id', ids).order('id'));
+    const filas = [];
+    // Bound concurrent requests for large groups.
+    for (let i = 0; i < profs.length; i += 8) {
+      const lote = await Promise.all(profs.slice(i, i + 8).map(async p => {
+        const n = await notasUsuario(context.supabase, p.id, periodo);
+        const ok = n.respuestas.filter(r => r.correcta).length;
+        return { ...p, total_respuestas: n.respuestas.length, correctas: ok,
+          precision_pct: n.respuestas.length ? Math.round(ok / n.respuestas.length * 1000) / 10 : 0,
+          sesiones_practica: n.sesiones.length, horas_activas: n.horasActivas,
+          nota: n.global.nota, global: n.global, periodo, tiempoHistoricoIncompleto: n.tiempoHistoricoIncompleto,
+          notas: Object.fromEntries(n.asignaturas.map(a => [a.clave, a.nota])),
+          notasDetalle: n.asignaturas.map(a => ({ clave: a.clave, nota: a.nota, simulacros: a.simulacros })),
+        };
+      }));
+      filas.push(...lote);
     }
-    const perUserCon = new Map<string, any[]>();
-    for (const c of con ?? []) {
-      const arr = perUserCon.get(c.user_id) ?? [];
-      arr.push(c);
-      perUserCon.set(c.user_id, arr);
-    }
-
-    return (profs ?? []).map((p: any) => {
-      const r = aggResp.get(p.id) ?? { tot: 0, ok: 0 };
-      const sesN = aggSes.get(p.id) ?? 0;
-      const tInt = aggTime.get(p.id) ?? 0;
-      const precision = r.tot ? (r.ok / r.tot) * 100 : 0;
-      // Calificación 0-10:
-      // 60% precisión, 25% constancia (log10(sesiones+1)/log10(21) → cap 20 sesiones=100%),
-      // 15% tiempo activo (min(horas,20)/20 → 100%)
-      const constancia = Math.min(1, Math.log10(sesN + 1) / Math.log10(21));
-      const tiempo = Math.min(1, tInt / 3600 / 20);
-      const nota = (precision / 100) * 6 + constancia * 2.5 + tiempo * 1.5;
-      const resAsig = calcularNotasAsignaturas(perUserCon.get(p.id) ?? [], perUserSes.get(p.id) ?? []);
-      return {
-        id: p.id,
-        cedula: p.cedula,
-        nombres: p.nombres,
-        institucion: p.institucion,
-        genero: p.genero,
-        total_respuestas: r.tot,
-        correctas: r.ok,
-        precision_pct: Math.round(precision * 10) / 10,
-        sesiones_practica: sesN,
-        horas_activas: Math.round((tInt / 3600) * 10) / 10,
-        nota: Math.round(nota * 10) / 10,
-        notas: Object.fromEntries(resAsig.asignaturas.map((a) => [a.clave, a.nota])),
-        notasDetalle: resAsig.asignaturas.map((a) => ({
-          clave: a.clave,
-          nota: a.nota,
-          simulacros: a.simulacros,
-        })),
-      };
-    });
+    return filas;
   });
 
 // ---------- Tiempo desde la última conexión previa (ventana de reencuentro) ----------

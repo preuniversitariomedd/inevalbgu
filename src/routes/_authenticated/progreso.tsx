@@ -1,4 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { SelectorPeriodo } from "@/components/SelectorPeriodo";
+import { listarPeriodosFn } from "@/lib/periodos.functions";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { ArrowLeft, BookOpen, TrendingDown, BarChart3, PieChart as PieIcon, Search, Users } from "lucide-react";
@@ -20,7 +23,13 @@ import { listarEstudiantesFn } from "@/lib/admin.functions";
 import { getCurrentProfile } from "@/lib/auth-helpers";
 
 export const Route = createFileRoute("/_authenticated/progreso")({
-  head: () => ({ meta: [{ title: "Mi progreso — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [
+    { title: "Mi progreso y notas — PreUniversitario MEDD" },
+    { name: "description", content: "Consulta tus notas y recomendaciones de estudio por período de evaluación." },
+    { property: "og:title", content: "Mi progreso y notas — PreUniversitario MEDD" },
+    { property: "og:description", content: "Tu avance histórico y calificaciones por fechas." },
+    { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" },
+  ] }),
   validateSearch: (s: Record<string, unknown>) => ({
     as: typeof s.as === "string" ? s.as : undefined,
   }),
@@ -133,6 +142,7 @@ function ProgresoPage() {
           <p className="mt-2 text-muted-foreground">
             Empieza una sesión para ver tu progreso y temas débiles.
           </p>
+          <CalificacionPanel targetUserId={as} />
           <Link
             to="/practicar"
             className="mt-5 inline-flex rounded-xl bg-primary px-5 py-2.5 font-semibold text-primary-foreground hover:bg-primary/90"
@@ -375,16 +385,19 @@ function Section({
 }
 
 function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
-  const { data } = useQuery({
-    queryKey: ["calificacion", targetUserId ?? "me"],
-    queryFn: () =>
-      calificacionAsignaturasFn({ data: targetUserId ? { targetUserId } : {} }),
+  const [periodoId, setPeriodoId] = useState('');
+  const fetchPeriodos = useServerFn(listarPeriodosFn);
+  const fetchNotas = useServerFn(calificacionAsignaturasFn);
+  const periodosQ = useQuery({ queryKey: ['periodos', targetUserId ?? 'me'], queryFn: () => fetchPeriodos({ data: { targetUserId } }) });
+  const { data, error } = useQuery({
+    queryKey: ["calificacion", targetUserId ?? "me", periodoId],
+    queryFn: () => fetchNotas({ data: { targetUserId, periodoId: periodoId || undefined } }),
     refetchInterval: 15000,
     refetchOnWindowFocus: true,
   });
-  if (!data) return null;
+  if (!data) return <p role="status" className="mt-6 text-sm text-muted-foreground">{error ? "No se pudieron cargar las notas." : "Cargando notas…"}</p>;
   const ICONOS: Record<string, [string, string]> = { matematica: ["📐", "hsl(265 70% 55%)"], fisica: ["⚛️", "hsl(200 80% 45%)"], mbs: ["🔢", "hsl(30 85% 50%)"], cn: ["🌿", "hsl(145 60% 38%)"], es: ["🌎", "hsl(15 75% 50%)"], bach: ["🎓", "hsl(340 70% 50%)"] };
-  const bloques = data.asignaturas.map((a) => ({ titulo: a.nombre, icono: ICONOS[a.clave]![0], d: a, color: ICONOS[a.clave]![1] }));
+  const bloques = data.asignaturas.map((a) => ({ titulo: a.nombre, icono: ICONOS[a.clave]?.[0] ?? "📚", d: a, color: ICONOS[a.clave]?.[1] ?? "var(--primary)" }));
   const g = (data as any).global as
     | {
         nota: number;
@@ -436,6 +449,8 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
         </span>
       </div>
 
+      <div className="my-3"><SelectorPeriodo periodos={periodosQ.data ?? []} value={periodoId} onChange={setPeriodoId} /></div>
+      {data.tiempoHistoricoIncompleto && <p className="mb-3 text-xs text-muted-foreground">El tiempo antiguo que cruza estas fechas no tiene detalle suficiente y se excluye de esta nota.</p>}
       {g && (
         <div className="mb-5 rounded-xl border-2 border-primary/40 bg-primary/5 p-4">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -474,7 +489,7 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
       )}
 
       <p className="mb-4 text-xs text-muted-foreground">
-        Por asignatura: 40% tiempo en plataforma · 20% tiempo activo · 20% constancia · 20% simulacros
+        Por asignatura: 10% plataforma · 30% simulacro de esa asignatura · 30% Conocimiento · 30% Razonamiento
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         {bloques.map((b) => (
@@ -489,10 +504,10 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
               </div>
             </div>
             <div className="mt-3 space-y-2">
-              <Barra label="Tiempo en plataforma" valor={b.d.componentes.plataforma} max={40} color={b.color} />
-              <Barra label="Tiempo activo" valor={b.d.componentes.activo} max={20} color={b.color} />
-              <Barra label="Constancia" valor={b.d.componentes.constancia} max={20} color={b.color} />
-              <Barra label="Simulacros" valor={b.d.componentes.simulacro} max={20} color={b.color} />
+              <Barra label="Tiempo en plataforma" valor={b.d.global.componentes.plataforma} max={1} color={b.color} />
+              <Barra label="Conocimiento" valor={b.d.global.componentes.conocimiento} max={3} color={b.color} />
+              <Barra label="Razonamiento" valor={b.d.global.componentes.razonamiento} max={3} color={b.color} />
+              <Barra label="Simulacros" valor={b.d.global.componentes.simulacro} max={3} color={b.color} />
             </div>
             <div className="mt-3 text-[11px] text-muted-foreground">
               {b.d.simulacros} simulacro(s) de {b.titulo.toLowerCase()} rendido(s)
