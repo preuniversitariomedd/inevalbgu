@@ -1,7 +1,8 @@
 import { createServerFn } from '@tanstack/react-start';
 import { requireSupabaseAuth } from '@/integrations/supabase/auth-middleware';
 import { z } from 'zod';
-export type InformeSeccion = { nombre: string; filas: Record<string, unknown>[] };
+type Valor = string | number | boolean | null | Valor[] | { [k: string]: Valor };
+export type InformeSeccion = { nombre: string; filas: Record<string, Valor>[] };
 export const informeCursoFn = createServerFn({ method: 'POST' }).middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ grupoId: z.string().uuid() }).parse(d))
   .handler(async ({ context, data }) => {
@@ -19,7 +20,7 @@ export const informeCursoFn = createServerFn({ method: 'POST' }).middleware([req
       for (let i=0;i<valores.length;i+=100) {
         filas.push(...await leerTodas<Record<string, unknown>>(() => (db as any).from(tabla).select('*').in(columna, valores.slice(i,i+100)).order(orden)));
       }
-      secciones.push({ nombre, filas }); return filas;
+      secciones.push({ nombre, filas: filas as Record<string, Valor>[] }); return filas;
     }
     await agregar('Configuración', 'grupo_configuracion', 'grupo_id', [grupo.id], 'grupo_id');
     const periodos = await agregar('Períodos', 'periodos_calificacion', 'grupo_id', [grupo.id]);
@@ -64,6 +65,6 @@ export const informeCursoFn = createServerFn({ method: 'POST' }).middleware([req
         return [historico,...evaluaciones];
       })); calificaciones.push(...lote.flat());
     }
-    secciones.splice(1,0,{ nombre:'Calificaciones',filas:calificaciones });
+    secciones.splice(1,0,{ nombre:'Calificaciones',filas:calificaciones as Record<string, Valor>[] });
     return { grupo: { id:grupo.id,nombre:grupo.nombre }, generadoEn:new Date().toISOString(), secciones, alcance:'Historial completo de los miembros actuales del curso. Incluye registros académicos, de conexión, encuestas, actividades y tutor personal. No incluye contraseñas, PIN, comunicaciones privadas entre usuarios ni el contenido binario de adjuntos; los archivos se describen mediante sus datos guardados.' };
   });

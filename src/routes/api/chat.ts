@@ -29,6 +29,8 @@ export const Route = createFileRoute("/api/chat")({
         const { data: userResp, error: userErr } = await supa.auth.getUser(token);
         if (userErr || !userResp.user) return new Response("Unauthorized", { status: 401 });
         const userId = userResp.user.id;
+        const { data: habilitado, error: accesoError } = await supa.rpc('modulo_habilitado', { _user_id: userId, _modulo: 'tutor' });
+        if (accesoError || !habilitado) return new Response('Tutor no habilitado para tu grupo', { status: 403 });
 
         let body: ChatBody;
         try { body = (await request.json()) as ChatBody; }

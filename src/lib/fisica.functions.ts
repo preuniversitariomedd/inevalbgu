@@ -195,6 +195,9 @@ export const tutorFisicaFn = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }) => {
     const apiKey = process.env["LOVABLE_API_KEY"];
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'fisica');
+    await exigirModulo(context.supabase, context.userId, 'tutor');
     if (!apiKey) throw new Error("Falta la configuración de IA.");
 
     const { data: rows } = await context.supabase
