@@ -5,6 +5,7 @@
 // y el panel del administrador.
 import { CONFIG_CON, preguntasConocimiento, type NivelCon } from "@/data/conocimiento";
 import { CONFIG_RAZ, type NivelRaz } from "@/data/basica/razonamiento";
+import { PESOS_DEFAULT, type Pesos } from './grupo-config';
 
 export interface AvanceNiveles {
   aciertos?: Record<string, string[]> | null;
@@ -17,12 +18,15 @@ export interface NotaGlobal {
     simulacro: number; // puntos sobre 3
     conocimiento: number; // puntos sobre 3
     razonamiento: number; // puntos sobre 3
+    practicas: number;
   };
+  ponderaciones: Pesos;
   detalle: {
     horasPlataforma: number;
     pctSimulacro: number; // 0–100
     pctConocimiento: number; // 0–100
     pctRazonamiento: number; // 0–100
+    pctPracticas: number;
   };
 }
 
@@ -68,6 +72,8 @@ export function calcularNotaGlobal(
   }> | null,
   conProg: AvanceNiveles | null | undefined,
   razProg: AvanceNiveles | null | undefined,
+  ponderaciones: Pesos = PESOS_DEFAULT,
+  respuestasPracticas: Array<{ correcta: boolean }> = [],
 ): NotaGlobal {
   let segPlataforma = 0;
   for (const c of con ?? []) {
@@ -87,21 +93,26 @@ export function calcularNotaGlobal(
   const cConocimiento = avanceConocimiento(conProg);
   const cRazonamiento = avanceRazonamiento(razProg);
 
-  const nota = (cPlataforma * 0.1 + cSimulacro * 0.3 + cConocimiento * 0.3 + cRazonamiento * 0.3) * 10;
+  const cPracticas = respuestasPracticas.length ? respuestasPracticas.filter(r => r.correcta).length / respuestasPracticas.length : 0;
+  const proporciones = { plataforma: cPlataforma, simulacro: cSimulacro, conocimiento: cConocimiento, razonamiento: cRazonamiento, practicas: cPracticas };
+  const nota = Object.entries(proporciones).reduce((sum, [k,v]) => sum + v * ponderaciones[k as keyof Pesos] / 10, 0);
 
   return {
     nota: Math.round(nota * 10) / 10,
+    ponderaciones,
     componentes: {
-      plataforma: Math.round(cPlataforma * 10) / 10, // sobre 1
-      simulacro: Math.round(cSimulacro * 30) / 10, // sobre 3
-      conocimiento: Math.round(cConocimiento * 30) / 10, // sobre 3
-      razonamiento: Math.round(cRazonamiento * 30) / 10, // sobre 3
+      plataforma: Math.round(cPlataforma * ponderaciones.plataforma) / 10,
+      simulacro: Math.round(cSimulacro * ponderaciones.simulacro) / 10,
+      conocimiento: Math.round(cConocimiento * ponderaciones.conocimiento) / 10,
+      razonamiento: Math.round(cRazonamiento * ponderaciones.razonamiento) / 10,
+      practicas: Math.round(cPracticas * ponderaciones.practicas) / 10,
     },
     detalle: {
       horasPlataforma: Math.round((segPlataforma / 3600) * 10) / 10,
       pctSimulacro: Math.round(cSimulacro * 100),
       pctConocimiento: Math.round(cConocimiento * 100),
       pctRazonamiento: Math.round(cRazonamiento * 100),
+      pctPracticas: Math.round(cPracticas * 100),
     },
   };
 }

@@ -13,6 +13,7 @@ import { miAvatarUrlFn, subirAvatarFn } from "@/lib/mensajes.functions";
 import { contarTareasPendientesFn } from "@/lib/tareas.functions";
 import { toast } from "sonner";
 import { PinSeguridad } from "@/components/PinSeguridad";
+import { AccesoModulo } from '@/components/AccesoModulo';
 
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
@@ -153,7 +154,7 @@ function AuthedLayout() {
           </div>
         </div>
       </nav>
-      <Outlet />
+      <AccesoModulo><Outlet /></AccesoModulo>
       <AusenciaDialog />
       {!ctx.esStaff && <CoachFlotante />}
     </div>

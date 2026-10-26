@@ -264,7 +264,7 @@ export const historialConexionesFn = createServerFn({ method: "POST" })
 // ---------- Calificaciones agregadas para export ----------
 export const calificacionesEstudiantesFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d: unknown) => z.object({ periodoId: z.string().uuid().optional() }).parse(d ?? {}))
+  .inputValidator((d: unknown) => z.object({ periodoId: z.string().uuid().optional(), grupoId: z.string().uuid().optional() }).parse(d ?? {}))
   .handler(async ({ context, data }) => {
     await ensureStaff(context);
     const { notasUsuario, obtenerPeriodo, leerTodas } = await import('./calificacion-periodo.server');
@@ -272,8 +272,8 @@ export const calificacionesEstudiantesFn = createServerFn({ method: "POST" })
     const { data: roles, error: er } = await context.supabase.from('user_roles').select('user_id,role');
     if (er) throw new Error(er.message);
     let ids = (roles ?? []).filter(r => r.role === 'estudiante').map(r => r.user_id);
-    if (periodo) {
-      const { data: miembros, error } = await context.supabase.from('grupo_estudiantes').select('user_id').eq('grupo_id', periodo.grupo_id);
+    if (periodo || data.grupoId) {
+      const { data: miembros, error } = await context.supabase.from('grupo_estudiantes').select('user_id').eq('grupo_id', periodo?.grupo_id ?? data.grupoId ?? '');
       if (error) throw new Error(error.message);
       const grupo = new Set((miembros ?? []).map(m => m.user_id));
       ids = ids.filter(id => grupo.has(id));
@@ -284,7 +284,7 @@ export const calificacionesEstudiantesFn = createServerFn({ method: "POST" })
     // Bound concurrent requests for large groups.
     for (let i = 0; i < profs.length; i += 8) {
       const lote = await Promise.all(profs.slice(i, i + 8).map(async p => {
-        const n = await notasUsuario(context.supabase, p.id, periodo);
+        const n = await notasUsuario(context.supabase, p.id, periodo, data.grupoId);
         const ok = n.respuestas.filter(r => r.correcta).length;
         return { ...p, total_respuestas: n.respuestas.length, correctas: ok,
           precision_pct: n.respuestas.length ? Math.round(ok / n.respuestas.length * 1000) / 10 : 0,

@@ -90,6 +90,11 @@ const NIVEL_INFO: Record<Nivel, { label: string; badge: string; fila: string }> 
 function consejoDe(f: Fila) {
   if (f.global) {
     const c = f.global.componentes;
+    if (f.global.ponderaciones) {
+      const pesos = f.global.ponderaciones;
+      const nombres = { plataforma:'Tiempo: sumar sesiones regulares de estudio.', practicas:'Prácticas: revisar errores y mejorar la precisión.', simulacro:'Simulacros: completar un examen y revisar sus errores.', conocimiento:'Conocimiento: alcanzar las metas de cada nivel.', razonamiento:'Razonamiento: reforzar estrategias y completar los niveles.' };
+      return (Object.keys(pesos) as (keyof typeof pesos)[]).filter(k => pesos[k] > 0).sort((a,b) => c[a]/pesos[a] - c[b]/pesos[b]).map(k => nombres[k])[0] ?? '';
+    }
     const opciones = [
       { valor: c.plataforma, texto: 'Tiempo: sumar sesiones regulares de estudio.' },
       { valor: c.simulacro / 3, texto: 'Simulacros: revisar errores y rendir un examen completo.' },
@@ -196,8 +201,8 @@ function CalificacionesPage() {
   const seleccionado = periodos.find(p => p.id === periodoId);
   const nombrePeriodo = seleccionado ? etiquetaPeriodo(seleccionado) : 'Todo el historial';
   const q = useQuery({
-    queryKey: ["calificaciones", periodoId],
-    queryFn: () => fetchNotas({ data: { periodoId: periodoId || undefined } }) as Promise<Fila[]>,
+    queryKey: ["calificaciones", periodoId, grupoId],
+    queryFn: () => fetchNotas({ data: { periodoId: periodoId || undefined, grupoId: grupoId || undefined } }) as Promise<Fila[]>,
     refetchInterval: 15000,
     refetchOnWindowFocus: true,
   });

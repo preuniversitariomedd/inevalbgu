@@ -36,6 +36,8 @@ const uuid = z.string().uuid();
 export const listarCompetenciasFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'competencias');
     const db = await admin();
     const { data: staff } = await context.supabase.rpc("is_staff", { _user_id: context.userId });
     if (staff) {
@@ -430,6 +432,8 @@ export const unirseCompetenciaFn = createServerFn({ method: "POST" })
     z.object({ codigo: z.string().trim().regex(/^\d{6}$/).optional(), id: uuid.optional() }).parse(d),
   )
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'competencias');
     const db = await admin();
     let q = db.from("competencias").select("id, estado, grupo_ids");
     q = data.id ? q.eq("id", data.id) : q.eq("codigo", data.codigo);
@@ -450,6 +454,8 @@ export const aceptarReglasFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ id: uuid }).parse(d))
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'competencias');
     const db = await admin();
     await db
       .from("competencia_participantes")
@@ -470,6 +476,8 @@ export const estadoJugadorFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ id: uuid }).parse(d))
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'competencias');
     const db = await admin();
     const [{ data: comp }, { data: yo }] = await Promise.all([
       db.from("competencias").select("*").eq("id", data.id).single(),
@@ -554,6 +562,8 @@ export const responderFn = createServerFn({ method: "POST" })
     z.object({ id: uuid, idx: z.number().int().min(0), opcion: z.number().int().min(0).max(4) }).parse(d),
   )
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'competencias');
     const db = await admin();
     const [{ data: comp }, { data: yo }] = await Promise.all([
       db.from("competencias").select("*").eq("id", data.id).single(),
@@ -617,6 +627,8 @@ export const usarPotenciadorFn = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'competencias');
     const db = await admin();
     const [{ data: comp }, { data: yo }] = await Promise.all([
       db.from("competencias").select("*").eq("id", data.id).single(),
@@ -678,6 +690,8 @@ export const reportarAlertaFn = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'competencias');
     const db = await admin();
     const { data: yo } = await db
       .from("competencia_participantes")

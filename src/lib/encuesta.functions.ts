@@ -47,6 +47,8 @@ export const guardarBloqueEncuestaFn = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'encuesta');
     if (data.respuestas.length) {
       const rows = data.respuestas.map((r) => ({
         user_id: context.userId,

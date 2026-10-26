@@ -5,6 +5,8 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 export const listarHilosFn = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'tutor');
     const { data, error } = await context.supabase
       .from("chat_threads")
       .select("id, titulo, resumen, created_at, updated_at, user_id")
@@ -17,6 +19,8 @@ export const crearHiloFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: { titulo?: string }) => input)
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'tutor');
     const { data: row, error } = await context.supabase
       .from("chat_threads")
       .insert({ user_id: context.userId, titulo: data.titulo?.trim() || "Nueva conversación" })
@@ -62,6 +66,8 @@ export const cargarMensajesFn = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: { threadId: string }) => input)
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'tutor');
     const { data: rows, error } = await context.supabase
       .from("chat_messages")
       .select("id, role, parts, message_id, created_at")

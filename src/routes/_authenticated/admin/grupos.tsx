@@ -15,13 +15,16 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Trash2, Users, Loader2, X } from "lucide-react";
 import { toast } from "sonner";
+import { ConfigurarGrupo } from '@/components/ConfigurarGrupo';
+import { ExportarCurso } from '@/components/ExportarCurso';
 
 export const Route = createFileRoute("/_authenticated/admin/grupos")({
-  head: () => ({ meta: [{ title: "Grupos — Admin" }] }),
+  head: () => ({ meta: [{ title: 'Cursos y accesos — PreUniversitario MEDD' }, { name: 'description', content: 'Configura los cursos, sus módulos y porcentajes de nota, y descarga sus informes completos.' }, { property: 'og:title', content: 'Cursos y accesos — PreUniversitario MEDD' }, { property: 'og:description', content: 'Administración de grupos e informes académicos completos.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary' }] }),
   component: GruposPage,
 });
 
 function GruposPage() {
+  const ctx = Route.useRouteContext() as { esAdmin: boolean };
   const qc = useQueryClient();
   const listar = useServerFn(listarGruposFn);
   const listarEst = useServerFn(listarEstudiantesFn);
@@ -120,7 +123,9 @@ function GruposPage() {
                     </div>
                     {g.descripcion && <p className="text-xs text-muted-foreground">{g.descripcion}</p>}
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
+                    {ctx.esAdmin && <ConfigurarGrupo grupoId={g.id} nombre={g.nombre}/>}
+                    {ctx.esAdmin && <ExportarCurso grupoId={g.id} nombre={g.nombre}/>}
                     <Button size="sm" variant="outline" onClick={() => setExpandido(open ? null : g.id)}>
                       {open ? "Ocultar miembros" : "Ver miembros"}
                     </Button>

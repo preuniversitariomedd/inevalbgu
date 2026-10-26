@@ -401,7 +401,8 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
   const g = (data as any).global as
     | {
         nota: number;
-        componentes: { plataforma: number; simulacro: number; conocimiento: number; razonamiento: number };
+        componentes: { plataforma: number; simulacro: number; conocimiento: number; razonamiento: number; practicas: number };
+        ponderaciones: import('@/lib/grupo-config').Pesos;
         detalle: { horasPlataforma: number; pctSimulacro: number; pctConocimiento: number; pctRazonamiento: number };
       }
     | undefined;
@@ -460,22 +461,17 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
               <span className="text-sm font-semibold text-muted-foreground">/10</span>
             </div>
           </div>
-          <p className="mt-1 text-xs text-muted-foreground">
-            10% tiempo real en plataforma · 30% simulacro de examen · 30% conocimiento · 30% razonamiento
-          </p>
+          <p className="mt-1 text-xs text-muted-foreground">{Object.entries(g.ponderaciones).filter(([,v]) => v > 0).map(([k,v]) => `${v}% ${k}`).join(' · ')}{data.configuracion.grupo ? ` · ${data.configuracion.grupo.nombre}` : ''}</p>
           <div className="mt-3 grid gap-2 sm:grid-cols-2">
-            <Barra label="⏱️ Plataforma (10%)" valor={g.componentes.plataforma} max={1} color="hsl(265 70% 55%)" />
-            <Barra label="📝 Simulacro (30%)" valor={g.componentes.simulacro} max={3} color="hsl(200 80% 45%)" />
-            <Barra label="📚 Conocimiento (30%)" valor={g.componentes.conocimiento} max={3} color="hsl(145 60% 38%)" />
-            <Barra label="🧠 Razonamiento (30%)" valor={g.componentes.razonamiento} max={3} color="hsl(340 70% 50%)" />
+            {Object.entries(g.ponderaciones).filter(([,v]) => v > 0).map(([k,v]) => <Barra key={k} label={`${k} (${v}%)`} valor={g.componentes[k as keyof typeof g.componentes]} max={v/10} color="var(--primary)"/>)}
           </div>
           {consejosGlobal.length > 0 && (
             <div className="mt-4 space-y-2">
               <p className="text-xs font-semibold">Cómo subir tu nota:</p>
-              {consejosGlobal.slice(0, 3).map((c) => (
+              {consejosGlobal.filter(c => { const key = c.to === '/simulacro' ? 'simulacro' : c.to === '/conocimiento' ? 'conocimiento' : c.to === '/razonamiento' ? 'razonamiento' : 'plataforma'; return g.ponderaciones[key] > 0; }).slice(0, 3).map((c) => (
                 <div key={c.titulo} className="flex items-start justify-between gap-3 rounded-lg border bg-card p-2.5 text-xs">
                   <div>
-                    <div className="font-semibold">{c.titulo}</div>
+                    <div className="font-semibold">{c.titulo.split(':')[0]}</div>
                     <p className="mt-0.5 text-muted-foreground">{c.texto}</p>
                   </div>
                   <Link to={c.to as any} className="shrink-0 rounded-md bg-primary px-2.5 py-1 font-semibold text-primary-foreground hover:bg-primary/90">
@@ -489,7 +485,7 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
       )}
 
       <p className="mb-4 text-xs text-muted-foreground">
-        Por asignatura: 10% plataforma · 30% simulacro de esa asignatura · 30% Conocimiento · 30% Razonamiento
+        Por asignatura: los porcentajes establecidos para tu grupo, con resultados propios de cada asignatura.
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         {bloques.map((b) => (
@@ -504,10 +500,7 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
               </div>
             </div>
             <div className="mt-3 space-y-2">
-              <Barra label="Tiempo en plataforma" valor={b.d.global.componentes.plataforma} max={1} color={b.color} />
-              <Barra label="Conocimiento" valor={b.d.global.componentes.conocimiento} max={3} color={b.color} />
-              <Barra label="Razonamiento" valor={b.d.global.componentes.razonamiento} max={3} color={b.color} />
-              <Barra label="Simulacros" valor={b.d.global.componentes.simulacro} max={3} color={b.color} />
+              {Object.entries(b.d.global.ponderaciones).filter(([,v]) => v > 0).map(([k,v]) => <Barra key={k} label={k} valor={b.d.global.componentes[k as keyof typeof b.d.global.componentes]} max={v/10} color={b.color}/>)}
             </div>
             <div className="mt-3 text-[11px] text-muted-foreground">
               {b.d.simulacros} simulacro(s) de {b.titulo.toLowerCase()} rendido(s)
