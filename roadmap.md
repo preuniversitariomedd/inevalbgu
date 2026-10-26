@@ -2,3 +2,5 @@
 - [x] Crear almacenamiento protegido de períodos por grupo con fechas de inicio y fin.
 - [x] Calcular notas dentro de las fechas usando respuestas registradas y tiempo del período.
 - [x] Agregar selector y creación de períodos en Calificaciones; mostrarlos a estudiantes y exportaciones; verificar cálculo y flujo.
+- [ ] Configurar accesos por grupo y ponderaciones de las partes activas; proteger acceso y verificar notas.
+- [ ] Descargar informes completos por curso en PDF y Excel, sin credenciales ni PIN; verificar descargas.
