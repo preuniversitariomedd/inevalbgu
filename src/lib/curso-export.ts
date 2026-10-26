@@ -20,7 +20,7 @@ export async function prepararInforme(informe: InformeCurso, formato: 'pdf'|'exc
     return new Blob([XLSX.write(wb,{ bookType:'xlsx',type:'array' })],{ type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
   }
   const [{ jsPDF }, { default:autoTable }] = await Promise.all([import('jspdf'),import('jspdf-autotable')]);
-  const doc = new jsPDF();
+  const doc = new jsPDF({ compress: true });
   doc.setFont('helvetica','bold'); doc.setFontSize(18); doc.text('PreUniversitario MEDD',14,20);
   doc.setFontSize(13); doc.text(doc.splitTextToSize(informe.grupo.nombre,180),14,30);
   doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.text(`Generado: ${informe.generadoEn}`,14,44);

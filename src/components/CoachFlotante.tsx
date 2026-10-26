@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Sparkles, X, ChevronRight } from "lucide-react";
 import { calificacionAsignaturasFn, obtenerProgresoFn } from "@/lib/progreso.functions";
+import { PARTES, type Parte } from '@/lib/grupo-config';
 
 type Consejo = { titulo: string; texto: string; to?: string; params?: any; cta?: string };
 
@@ -53,6 +54,14 @@ export function CoachFlotante() {
   const consejos = useMemo<Consejo[]>(() => {
     if (!data) return [];
     const out: Consejo[] = [];
+    if (data.global?.ponderaciones) {
+      const g = data.global;
+      const enlaces: Record<Parte,string> = { plataforma:'/progreso', practicas:'/practicar', simulacro:'/simulacro', conocimiento:'/conocimiento', razonamiento:'/razonamiento' };
+      return (Object.keys(PARTES) as Parte[]).filter(k => g.ponderaciones[k] > 0).map(k => ({
+        falta:g.ponderaciones[k]/10-g.componentes[k],
+        consejo:{ titulo:`${PARTES[k]}: ${g.componentes[k].toFixed(1)}/${g.ponderaciones[k]/10} pts`, texto:k === 'plataforma' ? `Llevas ${g.detalle.horasPlataforma} h de la meta de 20 h.` : k === 'practicas' ? 'Responde prácticas correctamente y revisa las explicaciones de tus errores.' : k === 'simulacro' ? 'Completa simulacros y mejora el porcentaje de aciertos.' : 'Responde nuevas preguntas correctamente y alcanza las metas de cada nivel.', to:enlaces[k], cta:'Ver' } as Consejo,
+      })).filter(x => x.falta > 0.05).sort((a,b) => b.falta-a.falta).slice(0,3).map(x => x.consejo);
+    }
     const c = data.matematica.componentes;
     const cf = data.fisica.componentes;
 
@@ -140,7 +149,8 @@ export function CoachFlotante() {
     out.push(...pendientes);
 
     if (debiles.length > 0) {
-      const d = debiles[0]!;
+      const d = debiles[0];
+      if (!d) return out;
       out.push({
         titulo: `Tu tema más flojo: ${d.subtema}`,
         texto: `Solo ${d.pct}% de aciertos en ${d.total} intentos de ${d.area}. Repasa la teoría y practica en nivel básico antes de subir de dificultad.`,
