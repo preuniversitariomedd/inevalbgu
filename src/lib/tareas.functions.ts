@@ -34,6 +34,8 @@ async function ensureStaff(context: { supabase: any; userId: string }) {
 export const listarTareasFn = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'tareas');
     const { supabase, userId } = context;
     const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: userId, _role: "administrador" });
     const { data: isDocente } = await supabase.rpc("has_role", { _user_id: userId, _role: "docente" });
@@ -130,6 +132,8 @@ export const marcarTareaVistaFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ tareaId: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'tareas');
     await context.supabase
       .from("tarea_vistas")
       .upsert({ tarea_id: data.tareaId, user_id: context.userId }, { onConflict: "tarea_id,user_id" });
@@ -338,6 +342,8 @@ export const urlAdjuntoFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ adjuntoId: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'tareas');
     const { data: adj, error } = await context.supabase
       .from("tarea_adjuntos")
       .select("path, mime, nombre")

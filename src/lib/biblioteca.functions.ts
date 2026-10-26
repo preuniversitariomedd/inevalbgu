@@ -37,6 +37,8 @@ async function ensureStaff(context: { supabase: any; userId: string }) {
 export const listarCategoriasBibliotecaFn = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'biblioteca');
     const { data, error } = await context.supabase
       .from("biblioteca_categorias")
       .select("id, nombre, descripcion, color, icono, orden")
@@ -100,6 +102,8 @@ export const borrarCategoriaBibliotecaFn = createServerFn({ method: "POST" })
 export const listarRecursosFn = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'biblioteca');
     const { supabase, userId } = context;
     const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: userId, _role: "administrador" });
     const { data: isDocente } = await supabase.rpc("has_role", { _user_id: userId, _role: "docente" });
@@ -260,6 +264,8 @@ export const urlArchivoBibliotecaFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ archivoId: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'biblioteca');
     const { data: a, error } = await context.supabase
       .from("biblioteca_archivos")
       .select("path, mime, nombre")
@@ -278,6 +284,8 @@ export const marcarRecursoVistoFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ recursoId: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'biblioteca');
     await context.supabase
       .from("biblioteca_vistas")
       .insert({ recurso_id: data.recursoId, user_id: context.userId });
@@ -288,6 +296,8 @@ export const toggleFavoritoRecursoFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ recursoId: z.string().uuid(), activo: z.boolean() }).parse(d))
   .handler(async ({ data, context }) => {
+    const { exigirModulo } = await import('./grupo-config.server');
+    await exigirModulo(context.supabase, context.userId, 'biblioteca');
     if (data.activo) {
       await context.supabase
         .from("biblioteca_favoritos")
