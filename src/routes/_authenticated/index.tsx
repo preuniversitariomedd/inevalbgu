@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { BookOpen, BookOpenCheck, Timer, BarChart3, GraduationCap, Sparkles, Database, ClipboardCheck, Award, Atom, Target, Library, Leaf, Globe2, Brain } from "lucide-react";
 import { BANCO_PREGUNTAS } from "@/data";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
+import { useAccesos } from '@/components/AccesoModulo';
+import { moduloDeRuta } from '@/lib/grupo-config';
 
 export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
@@ -191,6 +193,9 @@ function Index() {
 }
 
 function ActionCard({ to, icon, title, desc, tone }: { to: string; icon: React.ReactNode; title: string; desc: string; tone: "primary" | "accent" | "success" }) {
+  const accesos = useAccesos();
+  const modulo = moduloDeRuta(to);
+  if (modulo && !accesos[modulo]) return null;
   const toneClass = {
     primary: "bg-primary text-primary-foreground",
     accent: "bg-accent text-accent-foreground",

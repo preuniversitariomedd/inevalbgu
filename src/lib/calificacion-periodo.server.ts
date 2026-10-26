@@ -3,6 +3,7 @@ import type { Database } from '@/integrations/supabase/types';
 import { avanceDesdeEventos, dentroPeriodo, limitesPeriodo, recortarTiempo, type Periodo } from './periodos';
 import { calcularNotaGlobal, type AvanceNiveles } from './nota-global';
 import { calcularNotasAsignaturas, asignaturaDe } from './asignaturas';
+import { configuracionUsuario } from './grupo-config.server';
 
 type DB = SupabaseClient<Database>;
 export async function leerTodas<T>(crear: () => any): Promise<T[]> {
@@ -24,7 +25,8 @@ export async function obtenerPeriodo(db: DB, id: string | undefined, userId?: st
   }
   return data;
 }
-export async function notasUsuario(db: DB, userId: string, periodo: Periodo | null) {
+export async function notasUsuario(db: DB, userId: string, periodo: Periodo | null, grupoId?: string) {
+  const configuracion = await configuracionUsuario(db, userId, periodo?.grupo_id ?? grupoId);
   const [conexiones, sesiones, respuestas] = await Promise.all([
     leerTodas<Database['public']['Tables']['sesiones_conexion']['Row']>(() => db.from('sesiones_conexion').select('*').eq('user_id', userId).order('id')),
     leerTodas<Database['public']['Tables']['sesiones_practica']['Row']>(() => db.from('sesiones_practica').select('*').eq('user_id', userId).order('id')),
@@ -62,14 +64,16 @@ export async function notasUsuario(db: DB, userId: string, periodo: Periodo | nu
     if (c.error || r.error) throw new Error('No se pudo leer el avance.');
     conProg = c.data as AvanceNiveles | null; razProg = r.data as AvanceNiveles | null;
   }
-  const global = calcularNotaGlobal(con, ses, conProg, razProg);
+  const idsPracticas = new Set(ses.filter(s => s.tipo === 'practica').map(s => s.id));
+  const practicas = resp.filter(r => r.area !== 'Conocimiento' && r.area !== 'Razonamiento' && (!r.sesion_id || idsPracticas.has(r.sesion_id)));
+  const global = calcularNotaGlobal(con, ses, conProg, razProg, configuracion.ponderaciones, practicas);
   const resumen = calcularNotasAsignaturas(con, ses);
   // Same 10/30/30/30 weights for each subject, with its own exam results.
   const asignaturas = resumen.asignaturas.map(a => {
-    const g = calcularNotaGlobal(con, ses.filter(s => asignaturaDe(s.area) === a.clave), conProg, razProg);
+    const g = calcularNotaGlobal(con, ses.filter(s => asignaturaDe(s.area) === a.clave), conProg, razProg, configuracion.ponderaciones, practicas.filter(r => asignaturaDe(r.area) === a.clave));
     return { ...a, nota: g.nota, global: g };
   });
   const matematica = asignaturas.find(a => a.clave === 'matematica');
   const fisica = asignaturas.find(a => a.clave === 'fisica');
-  return { ...resumen, matematica: matematica ?? resumen.matematica, fisica: fisica ?? resumen.fisica, asignaturas, global, periodo, tiempoHistoricoIncompleto, respuestas: resp, sesiones: ses };
+  return { ...resumen, matematica: matematica ?? resumen.matematica, fisica: fisica ?? resumen.fisica, asignaturas, global, periodo, configuracion, tiempoHistoricoIncompleto, respuestas: resp, sesiones: ses };
 }
