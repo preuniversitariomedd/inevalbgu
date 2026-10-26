@@ -196,8 +196,8 @@ function CalificacionesPage() {
   const seleccionado = periodos.find(p => p.id === periodoId);
   const nombrePeriodo = seleccionado ? etiquetaPeriodo(seleccionado) : 'Todo el historial';
   const q = useQuery({
-    queryKey: ["calificaciones", periodoId],
-    queryFn: () => fetchNotas({ data: { periodoId: periodoId || undefined } }) as Promise<Fila[]>,
+    queryKey: ["calificaciones", periodoId, grupoId],
+    queryFn: () => fetchNotas({ data: { periodoId: periodoId || undefined, grupoId: grupoId || undefined } }) as Promise<Fila[]>,
     refetchInterval: 15000,
     refetchOnWindowFocus: true,
   });
