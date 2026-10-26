@@ -886,6 +886,38 @@ export type Database = {
         }
         Relationships: []
       }
+      grupo_configuracion: {
+        Row: {
+          grupo_id: string
+          modulos: Json
+          ponderaciones: Json
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          grupo_id: string
+          modulos?: Json
+          ponderaciones?: Json
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          grupo_id?: string
+          modulos?: Json
+          ponderaciones?: Json
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "grupo_configuracion_grupo_id_fkey"
+            columns: ["grupo_id"]
+            isOneToOne: true
+            referencedRelation: "grupos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       grupo_estudiantes: {
         Row: {
           created_at: string
@@ -1477,6 +1509,10 @@ export type Database = {
         Returns: boolean
       }
       is_staff: { Args: { _user_id: string }; Returns: boolean }
+      modulo_habilitado: {
+        Args: { _modulo: string; _user_id: string }
+        Returns: boolean
+      }
       puede_ver_tarea: {
         Args: { _tarea_id: string; _user_id: string }
         Returns: boolean

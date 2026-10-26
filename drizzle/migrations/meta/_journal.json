@@ -29,6 +29,13 @@
       "when": 1792632146594,
       "tag": "0003_registro_tiempo_periodos",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1792981498545,
+      "tag": "0004_accesos_ponderaciones_por_grupo",
+      "breakpoints": true
     }
   ]
 }
