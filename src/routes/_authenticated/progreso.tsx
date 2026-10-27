@@ -408,33 +408,34 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
     | undefined;
   const consejosGlobal: { titulo: string; texto: string; to: string }[] = [];
   if (g) {
-    if (g.componentes.simulacro < 3)
+    if (g.componentes.simulacro < g.ponderaciones.simulacro / 10)
       consejosGlobal.push({
-        titulo: `Simulacros: ${g.componentes.simulacro.toFixed(1)}/3 pts`,
+        titulo: `Simulacros: ${g.componentes.simulacro.toFixed(1)}/${g.ponderaciones.simulacro / 10} pts`,
         texto:
           g.detalle.pctSimulacro === 0
             ? "Aún no rindes ningún simulacro completo. Uno solo ya sube bastante esta parte."
             : `Tu promedio de aciertos en simulacros es ${g.detalle.pctSimulacro} %. Repite simulacros para subirlo.`,
         to: "/simulacro",
       });
-    if (g.componentes.conocimiento < 3)
+    if (g.componentes.conocimiento < g.ponderaciones.conocimiento / 10)
       consejosGlobal.push({
-        titulo: `Conocimiento: ${g.componentes.conocimiento.toFixed(1)}/3 pts`,
+        titulo: `Conocimiento: ${g.componentes.conocimiento.toFixed(1)}/${g.ponderaciones.conocimiento / 10} pts`,
         texto: `Llevas ${g.detalle.pctConocimiento} % del avance total. Supera las metas de cada nivel (90 %, 80 % y 75 % de aciertos).`,
         to: "/conocimiento",
       });
-    if (g.componentes.razonamiento < 3)
+    if (g.componentes.razonamiento < g.ponderaciones.razonamiento / 10)
       consejosGlobal.push({
-        titulo: `Razonamiento: ${g.componentes.razonamiento.toFixed(1)}/3 pts`,
+        titulo: `Razonamiento: ${g.componentes.razonamiento.toFixed(1)}/${g.ponderaciones.razonamiento / 10} pts`,
         texto: `Llevas ${g.detalle.pctRazonamiento} % del avance total. Cada nivel aprobado suma un tercio de esta parte.`,
         to: "/razonamiento",
       });
-    if (g.componentes.plataforma < 1)
+    if (g.componentes.plataforma < g.ponderaciones.plataforma / 10)
       consejosGlobal.push({
-        titulo: `Tiempo en plataforma: ${g.componentes.plataforma.toFixed(1)}/1 pt`,
+        titulo: `Tiempo en plataforma: ${g.componentes.plataforma.toFixed(1)}/${g.ponderaciones.plataforma / 10} pts`,
         texto: `Llevas ${g.detalle.horasPlataforma} h de 20 h. Sesiones diarias de 30–40 minutos completan este punto.`,
-        to: "/practicar",
+        to: "/progreso",
       });
+    if (g.componentes.practicas < g.ponderaciones.practicas / 10) consejosGlobal.push({ titulo: `Prácticas: ${g.componentes.practicas.toFixed(1)}/${g.ponderaciones.practicas / 10} pts`, texto:'Revisa las explicaciones de los errores y aumenta el porcentaje de respuestas correctas en tus prácticas.', to:'/practicar' });
     consejosGlobal.sort((a, b) => {
       const va = parseFloat(a.titulo.match(/([\d.]+)\//)?.[1] ?? "0");
       const vb = parseFloat(b.titulo.match(/([\d.]+)\//)?.[1] ?? "0");
@@ -468,7 +469,7 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
           {consejosGlobal.length > 0 && (
             <div className="mt-4 space-y-2">
               <p className="text-xs font-semibold">Cómo subir tu nota:</p>
-              {consejosGlobal.filter(c => { const key = c.to === '/simulacro' ? 'simulacro' : c.to === '/conocimiento' ? 'conocimiento' : c.to === '/razonamiento' ? 'razonamiento' : 'plataforma'; return g.ponderaciones[key] > 0; }).slice(0, 3).map((c) => (
+              {consejosGlobal.slice(0, 3).map((c) => (
                 <div key={c.titulo} className="flex items-start justify-between gap-3 rounded-lg border bg-card p-2.5 text-xs">
                   <div>
                     <div className="font-semibold">{c.titulo.split(':')[0]}</div>

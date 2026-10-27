@@ -18,7 +18,11 @@ export const informeCursoFn = createServerFn({ method: 'POST' }).middleware([req
     async function agregar(nombre: string, tabla: string, columna: string, valores: string[], orden = 'id') {
       const filas: Record<string, unknown>[] = [];
       for (let i=0;i<valores.length;i+=100) {
-        filas.push(...await leerTodas<Record<string, unknown>>(() => (db as any).from(tabla).select('*').in(columna, valores.slice(i,i+100)).order(orden)));
+        filas.push(...await leerTodas<Record<string, unknown>>(() => {
+          let q = (db as any).from(tabla).select('*').in(columna, valores.slice(i,i+100)).order(orden);
+          if (tabla === 'tarea_vistas' || tabla === 'biblioteca_favoritos' || tabla === 'competencia_participantes') q = q.order('user_id');
+          return q;
+        }));
       }
       secciones.push({ nombre, filas: filas as Record<string, Valor>[] }); return filas;
     }
