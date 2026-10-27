@@ -20,18 +20,25 @@ export async function prepararInforme(informe: InformeCurso, formato: 'pdf'|'exc
     return new Blob([XLSX.write(wb,{ bookType:'xlsx',type:'array' })],{ type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
   }
   const [{ jsPDF }, { default:autoTable }] = await Promise.all([import('jspdf'),import('jspdf-autotable')]);
-  const doc = new jsPDF({ compress: true });
+  const doc = new jsPDF({ compress: true, orientation:'landscape' });
   doc.setFont('helvetica','bold'); doc.setFontSize(18); doc.text('PreUniversitario MEDD',14,20);
   doc.setFontSize(13); doc.text(doc.splitTextToSize(informe.grupo.nombre,180),14,30);
   doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.text(`Generado: ${informe.generadoEn}`,14,44);
   doc.text(doc.splitTextToSize(informe.alcance,180),14,54);
   for (const s of informe.secciones) {
     doc.addPage(); doc.setFontSize(13); doc.text(`${s.nombre} (${s.filas.length} registros)`,14,18);
-    const body = s.filas.length ? s.filas.flatMap((r,i) => [ [{ content:`Registro ${i+1}`,colSpan:2 }], ...Object.entries(r).map(([k,v]) => [k,texto(v)]) ]) : [['Estado','Sin registros']];
-    autoTable(doc,{ startY:25,head:[['Campo','Dato guardado']],body:body as any,theme:'grid',styles:{ font:'helvetica',fontSize:8,cellPadding:2,overflow:'linebreak' },columnStyles:{ 0:{ cellWidth:45 },1:{ cellWidth:137 } },margin:{ top:20,bottom:18 },rowPageBreak:'avoid' });
+    const columnas = [...new Set(s.filas.flatMap(r => Object.keys(r)))];
+    if (!columnas.length) { doc.setFontSize(9); doc.text('Sin registros',14,30); continue; }
+    // Narrow column bands retain every field and full value without one vertical form per record.
+    for (let offset=0;offset<columnas.length;offset+=4) {
+      if (offset) { doc.addPage(); doc.setFontSize(13); doc.text(`${s.nombre} · campos ${offset+1}–${Math.min(offset+4,columnas.length)}`,14,18); }
+      const campos = columnas.slice(offset,offset+4);
+      const body = s.filas.map((r,i) => [String(i+1),...campos.map(k => texto(r[k]))]);
+      autoTable(doc,{ startY:25,head:[['Registro',...campos]],body,theme:'grid',styles:{ font:'helvetica',fontSize:7,cellPadding:1.2,overflow:'linebreak' },columnStyles:{ 0:{ cellWidth:14 } },margin:{ left:14,right:14,top:20,bottom:16 },rowPageBreak:'avoid' });
+    }
   }
   const total = doc.getNumberOfPages();
-  for (let n=1;n<=total;n++) { doc.setPage(n); doc.setFontSize(8); doc.text(`${n} / ${total}`,190,288,{ align:'right' }); }
+  for (let n=1;n<=total;n++) { doc.setPage(n); doc.setFontSize(8); doc.text(`${n} / ${total}`,283,202,{ align:'right' }); }
   return doc.output('blob');
 }
 function texto(v: unknown): string { return v == null ? '' : typeof v === 'object' ? JSON.stringify(v) : String(v); }
