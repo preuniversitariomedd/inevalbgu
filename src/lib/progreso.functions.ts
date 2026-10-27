@@ -114,7 +114,7 @@ export const obtenerProgresoFn = createServerFn({ method: "POST" })
 export const calificacionAsignaturasFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) =>
-    z.object({ targetUserId: z.string().uuid().optional(), periodoId: z.string().uuid().optional() }).optional().parse(d ?? {}),
+    z.object({ targetUserId: z.string().uuid().optional(), periodoId: z.string().uuid().optional(), grupoId: z.string().uuid().optional() }).optional().parse(d ?? {}),
   )
   .handler(async ({ data, context }) => {
     let userId = context.userId;
@@ -126,6 +126,6 @@ export const calificacionAsignaturasFn = createServerFn({ method: "POST" })
 
     const { notasUsuario, obtenerPeriodo } = await import('./calificacion-periodo.server');
     const periodo = await obtenerPeriodo(context.supabase, data?.periodoId, userId);
-    const resultado = await notasUsuario(context.supabase, userId, periodo);
+    const resultado = await notasUsuario(context.supabase, userId, periodo, data?.grupoId);
     return { viewedUserId: userId, ...resultado };
   });

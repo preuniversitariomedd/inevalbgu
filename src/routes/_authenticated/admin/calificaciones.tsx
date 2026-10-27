@@ -347,8 +347,8 @@ function CalificacionesPage() {
           <div className="text-sm text-muted-foreground">
             <div className="font-semibold text-foreground">Cálculo de las notas (0–10)</div>
             <ul className="mt-1 list-inside list-disc">
-              <li><b>Nota general:</b> 10% tiempo real en plataforma + 30% simulacros + 30% Conocimiento + 30% Razonamiento</li>
-              <li><b>Notas por asignatura:</b> misma ponderación, con los simulacros de esa asignatura</li>
+              <li><b>Nota general:</b> porcentajes elegidos por el administrador para el grupo; sin configuración, 10% tiempo y 30% por cada módulo evaluado.</li>
+              <li><b>Notas por asignatura:</b> mismos porcentajes, con prácticas y simulacros de esa asignatura.</li>
             </ul>
             <div className="mt-2 flex flex-wrap items-center gap-1.5">
               <span className="text-xs font-semibold">Promedio por asignatura:</span>
