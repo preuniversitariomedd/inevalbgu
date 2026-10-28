@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Timer, RotateCcw, Calculator, Atom } from "lucide-react";
@@ -37,7 +38,7 @@ function porTema(pool: Pregunta[], n: number, clave: (p: Pregunta) => string = (
 
 
 export const Route = createFileRoute("/_authenticated/simulacro")({
-  head: () => ({ meta: [{ title: "Simulacro de examen — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Simulacro de examen — INEVAL_UEDE","Simulacro de examen en la plataforma educativa INEVAL_UEDE."),{ title: "Simulacro de examen — INEVAL_UEDE" }] }),
   component: Simulacro,
 });
 

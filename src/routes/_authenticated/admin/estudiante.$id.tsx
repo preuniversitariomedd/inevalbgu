@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -10,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 
 
 export const Route = createFileRoute("/_authenticated/admin/estudiante/$id")({
-  head: () => ({ meta: [{ title: "Vista estudiante — Admin" }] }),
+  head: () => ({ meta: [...pageMeta("Vista estudiante — Admin — INEVAL_UEDE — INEVAL_UEDE","Vista estudiante en la plataforma educativa INEVAL_UEDE."),{ title: "Vista estudiante — Admin — INEVAL_UEDE" }] }),
   component: VistaEstudiante,
 });
 

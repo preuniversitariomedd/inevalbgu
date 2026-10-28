@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Lock, Lightbulb, Trophy } from "lucide-react";
@@ -8,7 +9,7 @@ import { PreguntaCard } from "@/components/PreguntaCard";
 import { guardarRespuesta } from "@/lib/progreso";
 
 export const Route = createFileRoute("/_authenticated/razonamiento")({
-  head: () => ({ meta: [{ title: "Razonamiento — 3 niveles adaptativos" }, { name: "description", content: "Preguntas de razonamiento y resolución de problemas de Básica Superior en tres niveles." }] }),
+  head: () => ({ meta: [...pageMeta("Razonamiento — 3 niveles adaptativos — INEVAL_UEDE — INEVAL_UEDE","Razonamiento en la plataforma educativa INEVAL_UEDE."),{ title: "Razonamiento — 3 niveles adaptativos — INEVAL_UEDE" }, { name: "description", content: "Preguntas de razonamiento y resolución de problemas de Básica Superior en tres niveles." }] }),
   component: Razonamiento,
 });
 

@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -6,7 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/permisos-docentes")({
-  head: () => ({ meta: [{ title: "Permisos docentes — Admin" }] }),
+  head: () => ({ meta: [...pageMeta("Permisos docentes — Admin — INEVAL_UEDE — INEVAL_UEDE","Permisos docentes en la plataforma educativa INEVAL_UEDE."),{ title: "Permisos docentes — Admin — INEVAL_UEDE" }] }),
   component: PermisosPage,
 });
 

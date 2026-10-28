@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Atom, Gauge, Zap, Weight, BookMarked, Sparkles, PlusCircle, ArrowLeft } from "lucide-react";
@@ -6,6 +7,7 @@ import { listarPreguntasFisicaFn, estadisticasFisicaFn } from "@/lib/fisica.func
 import { Route as FisicaRoute } from "./fisica";
 
 export const Route = createFileRoute("/_authenticated/fisica/")({
+  head: () => ({ meta: [{ title: "Física — INEVAL_UEDE" }, ...pageMeta("Física — INEVAL_UEDE","Física en la plataforma educativa INEVAL_UEDE.")] }),
   component: FisicaHub,
 });
 

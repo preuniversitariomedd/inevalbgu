@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link, Outlet, useMatchRoute } from "@tanstack/react-router";
 import { ArrowLeft, Sigma, FunctionSquare, Triangle, PieChart, ListOrdered, Ruler } from "lucide-react";
 import { AREAS } from "@/data/tipos";
@@ -5,7 +6,7 @@ import { preguntasPorArea } from "@/data";
 
 export const Route = createFileRoute("/_authenticated/practicar")({
   head: () => ({
-    meta: [
+    meta: [...pageMeta("Practicar por tema — INEVAL_UEDE","Practicar por tema en la plataforma educativa INEVAL_UEDE."),
       { title: "Practicar por tema — INEVAL_UEDE" },
       { name: "description", content: "Elige un área temática y practica con preguntas resueltas paso a paso." },
     ],

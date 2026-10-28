@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -7,6 +8,7 @@ import { tutorFisicaFn, estadisticasFisicaFn } from "@/lib/fisica.functions";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/fisica/tutor")({
+  head: () => ({ meta: [{ title: "Mr. Victor · Física — INEVAL_UEDE" }, ...pageMeta("Mr. Victor · Física — INEVAL_UEDE","Mr. Victor · Física en la plataforma educativa INEVAL_UEDE.")] }),
   component: TutorFisica,
 });
 

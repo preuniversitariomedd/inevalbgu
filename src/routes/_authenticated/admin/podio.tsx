@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -9,6 +10,7 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/admin/podio")({
+  head: () => ({ meta: [{ title: "Podio académico — INEVAL_UEDE" }, ...pageMeta("Podio académico — INEVAL_UEDE","Podio académico en la plataforma educativa INEVAL_UEDE.")] }),
   component: PodioPage,
 });
 

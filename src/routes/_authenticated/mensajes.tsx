@@ -1,8 +1,9 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { ChatShell } from "@/components/chat/ChatShell";
 
 export const Route = createFileRoute("/_authenticated/mensajes")({
-  head: () => ({ meta: [{ title: "Mensajes — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Mensajes — INEVAL_UEDE","Mensajes en la plataforma educativa INEVAL_UEDE."),{ title: "Mensajes — INEVAL_UEDE" }] }),
   component: MensajesPage,
 });
 

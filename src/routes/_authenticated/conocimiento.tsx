@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Lock, Trophy, BookOpenCheck, ShieldAlert } from "lucide-react";
@@ -8,8 +9,8 @@ import { guardarRespuesta } from "@/lib/progreso";
 
 export const Route = createFileRoute("/_authenticated/conocimiento")({
   head: () => ({
-    meta: [
-      { title: "Conocimiento — Lectura comprensiva por niveles" },
+    meta: [...pageMeta("Conocimiento — Lectura comprensiva por niveles — INEVAL_UEDE — INEVAL_UEDE","Conocimiento en la plataforma educativa INEVAL_UEDE."),
+      { title: "Conocimiento — Lectura comprensiva por niveles — INEVAL_UEDE" },
       { name: "description", content: "570 preguntas de lectura comprensiva y párrafos técnicos en tres niveles con metas de avance." },
     ],
   }),

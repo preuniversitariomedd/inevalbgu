@@ -1,7 +1,9 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { GraduationCap } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/tutor/")({
+  head: () => ({ meta: [{ title: "Mr. Victor · Tutor personal — INEVAL_UEDE" }, ...pageMeta("Mr. Victor · Tutor personal — INEVAL_UEDE","Mr. Victor · Tutor personal en la plataforma educativa INEVAL_UEDE.")] }),
   component: TutorEmpty,
 });
 

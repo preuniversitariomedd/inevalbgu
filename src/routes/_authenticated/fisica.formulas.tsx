@@ -1,9 +1,11 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, Search } from "lucide-react";
 import { GLOSARIO_FORMULAS } from "@/data/fisica-formulas";
 
 export const Route = createFileRoute("/_authenticated/fisica/formulas")({
+  head: () => ({ meta: [{ title: "Fórmulas de Física — INEVAL_UEDE" }, ...pageMeta("Fórmulas de Física — INEVAL_UEDE","Fórmulas de Física en la plataforma educativa INEVAL_UEDE.")] }),
   component: Formulas,
 });
 

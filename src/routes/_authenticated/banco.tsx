@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowLeft, Database, Search } from "lucide-react";
@@ -5,7 +6,7 @@ import { BANCO_PREGUNTAS } from "@/data";
 import { AREAS } from "@/data/tipos";
 
 export const Route = createFileRoute("/_authenticated/banco")({
-  head: () => ({ meta: [{ title: "Banco de preguntas — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Banco de preguntas — INEVAL_UEDE","Banco de preguntas en la plataforma educativa INEVAL_UEDE."),{ title: "Banco de preguntas — INEVAL_UEDE" }] }),
   component: Banco,
 });
 
