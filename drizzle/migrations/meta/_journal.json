@@ -43,6 +43,13 @@
       "when": 1792981863175,
       "tag": "0005_proteger_lectura_modulos_por_grupo",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793146060283,
+      "tag": "0006_proteger_actividad_complementaria_modulos",
+      "breakpoints": true
     }
   ]
 }
