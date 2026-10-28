@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -6,6 +7,7 @@ import { Smartphone, Tablet, Monitor, Eye, EyeOff, Wifi, AlertTriangle, RefreshC
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/presencia")({
+  head: () => ({ meta: [{ title: "Presencia en plataforma — INEVAL_UEDE" }, ...pageMeta("Presencia en plataforma — INEVAL_UEDE","Presencia en plataforma en la plataforma educativa INEVAL_UEDE.")] }),
   component: PresenciaPage,
 });
 

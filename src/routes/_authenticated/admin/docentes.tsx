@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -18,7 +19,7 @@ import { calcularEdad } from "@/lib/edad";
 import { Search, Loader2, Wifi, WifiOff, Smartphone, Laptop, Tablet } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/admin/docentes")({
-  head: () => ({ meta: [{ title: "Docentes — Admin" }] }),
+  head: () => ({ meta: [...pageMeta("Docentes — Admin — INEVAL_UEDE","Docentes en la plataforma educativa INEVAL_UEDE."),{ title: "Docentes — Admin — INEVAL_UEDE" }] }),
   component: DocentesPage,
 });
 

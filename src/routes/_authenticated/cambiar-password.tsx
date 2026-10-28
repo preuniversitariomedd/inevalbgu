@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -5,7 +6,7 @@ import { toast } from "sonner";
 import { KeyRound } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/cambiar-password")({
-  head: () => ({ meta: [{ title: "Cambia tu contraseña — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Cambia tu contraseña — INEVAL_UEDE","Cambia tu contraseña en la plataforma educativa INEVAL_UEDE."),{ title: "Cambia tu contraseña — INEVAL_UEDE" }] }),
   component: CambiarPassword,
 });
 

@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
@@ -23,6 +24,7 @@ import { GraduationCap } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/tutor/$threadId")({
+  head: () => ({ meta: [{ title: "Conversación con Mr. Victor — INEVAL_UEDE" }, ...pageMeta("Conversación con Mr. Victor — INEVAL_UEDE","Conversación con Mr. Victor en la plataforma educativa INEVAL_UEDE.")] }),
   component: TutorThread,
 });
 

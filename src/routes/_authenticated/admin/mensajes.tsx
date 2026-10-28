@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -12,6 +13,7 @@ import { Megaphone, Loader2, Send, X, Users, Check, CheckCheck } from "lucide-re
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/mensajes")({
+  head: () => ({ meta: [{ title: "Mensajes administrativos — INEVAL_UEDE" }, ...pageMeta("Mensajes administrativos — INEVAL_UEDE","Mensajes administrativos en la plataforma educativa INEVAL_UEDE.")] }),
   component: AdminMensajesPage,
 });
 

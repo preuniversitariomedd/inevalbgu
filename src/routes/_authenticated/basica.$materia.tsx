@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowLeft } from "lucide-react";
@@ -19,7 +20,7 @@ const cache: Record<string, Pregunta[]> = {};
 export const Route = createFileRoute("/_authenticated/basica/$materia")({
   head: ({ params }) => {
     const t = params.materia === "estudios-sociales" ? "Estudios Sociales" : params.materia === "matematica" ? "Matemática" : "Ciencias Naturales";
-    return { meta: [{ title: `${t} — Básica Superior` }, { name: "description", content: `500 preguntas de ${t} según el currículo ecuatoriano.` }] };
+    return { meta: [...pageMeta(`${t} — INEVAL_UEDE`, `Práctica de ${t} para Básica Superior según el currículo ecuatoriano.`),{ title: `${t} — Básica Superior` }, { name: "description", content: `500 preguntas de ${t} según el currículo ecuatoriano.` }] };
   },
   component: Materia,
 });

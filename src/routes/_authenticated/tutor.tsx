@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link, Outlet, useNavigate, useParams } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -8,7 +9,7 @@ import { toast } from "sonner";
 import { useEffect } from "react";
 
 export const Route = createFileRoute("/_authenticated/tutor")({
-  head: () => ({ meta: [{ title: "Mr. Victor — Tutor virtual" }] }),
+  head: () => ({ meta: [...pageMeta("Mr. Victor — Tutor virtual — INEVAL_UEDE","Mr. Victor en la plataforma educativa INEVAL_UEDE."),{ title: "Mr. Victor — Tutor virtual — INEVAL_UEDE" }] }),
   component: TutorLayout,
 });
 

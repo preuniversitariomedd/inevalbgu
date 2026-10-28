@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Timer } from "lucide-react";
@@ -8,6 +9,7 @@ import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/practicar/$area")({
+  head: () => ({ meta: [{ title: "Práctica de Matemática por área — INEVAL_UEDE" }, ...pageMeta("Práctica de Matemática por área — INEVAL_UEDE","Práctica de Matemática por área en la plataforma educativa INEVAL_UEDE.")] }),
   component: PracticarArea,
 });
 

@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { FileSpreadsheet } from "lucide-react";
@@ -66,7 +67,7 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/admin/")({
-  head: () => ({ meta: [{ title: "Estudiantes — Admin" }] }),
+  head: () => ({ meta: [...pageMeta("Estudiantes — Admin — INEVAL_UEDE","Estudiantes en la plataforma educativa INEVAL_UEDE."),{ title: "Estudiantes — Admin — INEVAL_UEDE" }] }),
   component: AdminEstudiantes,
 });
 

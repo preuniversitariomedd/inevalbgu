@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -11,7 +12,7 @@ import { Search, Shield, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/roles")({
-  head: () => ({ meta: [{ title: "Roles — Admin" }] }),
+  head: () => ({ meta: [...pageMeta("Roles — Admin — INEVAL_UEDE","Roles en la plataforma educativa INEVAL_UEDE."),{ title: "Roles — Admin — INEVAL_UEDE" }] }),
   component: RolesPage,
 });
 

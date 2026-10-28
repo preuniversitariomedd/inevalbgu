@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -10,7 +11,7 @@ import { Loader2, Upload, ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/branding")({
-  head: () => ({ meta: [{ title: "Branding — Admin" }] }),
+  head: () => ({ meta: [...pageMeta("Branding — Admin — INEVAL_UEDE","Branding en la plataforma educativa INEVAL_UEDE."),{ title: "Branding — Admin — INEVAL_UEDE" }] }),
   component: BrandingPage,
 });
 

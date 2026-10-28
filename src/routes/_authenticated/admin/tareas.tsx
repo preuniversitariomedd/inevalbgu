@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -24,7 +25,7 @@ import {
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/tareas")({
-  head: () => ({ meta: [{ title: "Tareas — Admin" }] }),
+  head: () => ({ meta: [...pageMeta("Tareas — Admin — INEVAL_UEDE","Tareas en la plataforma educativa INEVAL_UEDE."),{ title: "Tareas — Admin — INEVAL_UEDE" }] }),
   component: AdminTareasPage,
 });
 

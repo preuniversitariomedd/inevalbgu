@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -7,6 +8,7 @@ import { TEMAS_FISICA } from "@/data/fisica";
 import { listarPreguntasFisicaFn, crearPreguntaFisicaFn, eliminarPreguntaFisicaFn } from "@/lib/fisica.functions";
 
 export const Route = createFileRoute("/_authenticated/fisica/gestionar")({
+  head: () => ({ meta: [{ title: "Gestión de preguntas de Física — INEVAL_UEDE" }, ...pageMeta("Gestión de preguntas de Física — INEVAL_UEDE","Gestión de preguntas de Física en la plataforma educativa INEVAL_UEDE.")] }),
   component: Gestionar,
 });
 

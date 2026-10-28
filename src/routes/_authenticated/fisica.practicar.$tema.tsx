@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -9,6 +10,7 @@ import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/fisica/practicar/$tema")({
+  head: () => ({ meta: [{ title: "Práctica de Física por tema — INEVAL_UEDE" }, ...pageMeta("Práctica de Física por tema — INEVAL_UEDE","Práctica de Física por tema en la plataforma educativa INEVAL_UEDE.")] }),
   component: PracticarFisica,
 });
 

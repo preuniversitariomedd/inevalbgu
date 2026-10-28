@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,7 +9,7 @@ import { diagnosticarLoginFn, resetConPinFn } from "@/lib/pin.functions";
 import { GraduationCap, ShieldPlus } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Iniciar sesión — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Iniciar sesión — INEVAL_UEDE","Iniciar sesión en la plataforma educativa INEVAL_UEDE."),{ title: "Iniciar sesión — INEVAL_UEDE" }] }),
   component: AuthPage,
 });
 
