@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 
 
 export const Route = createFileRoute("/_authenticated/admin/estudiante/$id")({
-  head: () => ({ meta: [...pageMeta("Vista estudiante — Admin — INEVAL_UEDE — INEVAL_UEDE","Vista estudiante en la plataforma educativa INEVAL_UEDE."),{ title: "Vista estudiante — Admin — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Vista estudiante — Admin — INEVAL_UEDE","Vista estudiante en la plataforma educativa INEVAL_UEDE."),{ title: "Vista estudiante — Admin — INEVAL_UEDE" }] }),
   component: VistaEstudiante,
 });
 

@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { useEffect } from "react";
 
 export const Route = createFileRoute("/_authenticated/tutor")({
-  head: () => ({ meta: [...pageMeta("Mr. Victor — Tutor virtual — INEVAL_UEDE — INEVAL_UEDE","Mr. Victor en la plataforma educativa INEVAL_UEDE."),{ title: "Mr. Victor — Tutor virtual — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Mr. Victor — Tutor virtual — INEVAL_UEDE","Mr. Victor en la plataforma educativa INEVAL_UEDE."),{ title: "Mr. Victor — Tutor virtual — INEVAL_UEDE" }] }),
   component: TutorLayout,
 });
 

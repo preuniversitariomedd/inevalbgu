@@ -9,7 +9,7 @@ import { guardarRespuesta } from "@/lib/progreso";
 
 export const Route = createFileRoute("/_authenticated/conocimiento")({
   head: () => ({
-    meta: [...pageMeta("Conocimiento — Lectura comprensiva por niveles — INEVAL_UEDE — INEVAL_UEDE","Conocimiento en la plataforma educativa INEVAL_UEDE."),
+    meta: [...pageMeta("Conocimiento — Lectura comprensiva por niveles — INEVAL_UEDE","Conocimiento en la plataforma educativa INEVAL_UEDE."),
       { title: "Conocimiento — Lectura comprensiva por niveles — INEVAL_UEDE" },
       { name: "description", content: "570 preguntas de lectura comprensiva y párrafos técnicos en tres niveles con metas de avance." },
     ],

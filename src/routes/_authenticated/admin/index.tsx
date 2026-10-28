@@ -67,7 +67,7 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/admin/")({
-  head: () => ({ meta: [...pageMeta("Estudiantes — Admin — INEVAL_UEDE — INEVAL_UEDE","Estudiantes en la plataforma educativa INEVAL_UEDE."),{ title: "Estudiantes — Admin — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Estudiantes — Admin — INEVAL_UEDE","Estudiantes en la plataforma educativa INEVAL_UEDE."),{ title: "Estudiantes — Admin — INEVAL_UEDE" }] }),
   component: AdminEstudiantes,
 });
 

@@ -19,7 +19,7 @@ import { calcularEdad } from "@/lib/edad";
 import { Search, Loader2, Wifi, WifiOff, Smartphone, Laptop, Tablet } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/admin/docentes")({
-  head: () => ({ meta: [...pageMeta("Docentes — Admin — INEVAL_UEDE — INEVAL_UEDE","Docentes en la plataforma educativa INEVAL_UEDE."),{ title: "Docentes — Admin — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Docentes — Admin — INEVAL_UEDE","Docentes en la plataforma educativa INEVAL_UEDE."),{ title: "Docentes — Admin — INEVAL_UEDE" }] }),
   component: DocentesPage,
 });
 

@@ -12,7 +12,7 @@ import { Search, Shield, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/roles")({
-  head: () => ({ meta: [...pageMeta("Roles — Admin — INEVAL_UEDE — INEVAL_UEDE","Roles en la plataforma educativa INEVAL_UEDE."),{ title: "Roles — Admin — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Roles — Admin — INEVAL_UEDE","Roles en la plataforma educativa INEVAL_UEDE."),{ title: "Roles — Admin — INEVAL_UEDE" }] }),
   component: RolesPage,
 });
 

@@ -7,7 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/permisos-docentes")({
-  head: () => ({ meta: [...pageMeta("Permisos docentes — Admin — INEVAL_UEDE — INEVAL_UEDE","Permisos docentes en la plataforma educativa INEVAL_UEDE."),{ title: "Permisos docentes — Admin — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Permisos docentes — Admin — INEVAL_UEDE","Permisos docentes en la plataforma educativa INEVAL_UEDE."),{ title: "Permisos docentes — Admin — INEVAL_UEDE" }] }),
   component: PermisosPage,
 });
 

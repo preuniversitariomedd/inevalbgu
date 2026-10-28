@@ -11,7 +11,7 @@ import { Loader2, Upload, ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/branding")({
-  head: () => ({ meta: [...pageMeta("Branding — Admin — INEVAL_UEDE — INEVAL_UEDE","Branding en la plataforma educativa INEVAL_UEDE."),{ title: "Branding — Admin — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Branding — Admin — INEVAL_UEDE","Branding en la plataforma educativa INEVAL_UEDE."),{ title: "Branding — Admin — INEVAL_UEDE" }] }),
   component: BrandingPage,
 });
 

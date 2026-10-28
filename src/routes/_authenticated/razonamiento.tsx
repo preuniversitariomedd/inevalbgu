@@ -9,7 +9,7 @@ import { PreguntaCard } from "@/components/PreguntaCard";
 import { guardarRespuesta } from "@/lib/progreso";
 
 export const Route = createFileRoute("/_authenticated/razonamiento")({
-  head: () => ({ meta: [...pageMeta("Razonamiento — 3 niveles adaptativos — INEVAL_UEDE — INEVAL_UEDE","Razonamiento en la plataforma educativa INEVAL_UEDE."),{ title: "Razonamiento — 3 niveles adaptativos — INEVAL_UEDE" }, { name: "description", content: "Preguntas de razonamiento y resolución de problemas de Básica Superior en tres niveles." }] }),
+  head: () => ({ meta: [...pageMeta("Razonamiento — 3 niveles adaptativos — INEVAL_UEDE","Razonamiento en la plataforma educativa INEVAL_UEDE."),{ title: "Razonamiento — 3 niveles adaptativos — INEVAL_UEDE" }, { name: "description", content: "Preguntas de razonamiento y resolución de problemas de Básica Superior en tres niveles." }] }),
   component: Razonamiento,
 });
 

@@ -15,7 +15,7 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/tareas")({
   ssr: false,
-  head: () => ({ meta: [...pageMeta("Tareas — INEVAL_UEDE — INEVAL_UEDE","Tareas — INEVAL_UEDE en la plataforma educativa INEVAL_UEDE."),{ title: "Tareas — INEVAL_UEDE" }] }),
+  head: () => ({ meta: [...pageMeta("Tareas — INEVAL_UEDE","Tareas — INEVAL_UEDE en la plataforma educativa INEVAL_UEDE."),{ title: "Tareas — INEVAL_UEDE" }] }),
   component: TareasPage,
 });
 
