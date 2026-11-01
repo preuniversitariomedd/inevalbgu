@@ -5,6 +5,7 @@
 // Integra Lengua y Literatura, Matemática, Estudios Sociales y Ciencias Naturales.
 import type { Pregunta } from "../tipos";
 import { crear, elegir, entero, mezclar, rng, type R } from "./gen";
+import { ANALOGIAS_RAZ, MATEMATICAS_RAZ } from '../anexos';
 
 export type NivelRaz = 1 | 2 | 3;
 export interface PreguntaRaz extends Pregunta {
@@ -157,5 +158,5 @@ export function bancoRazonamiento(nivel: NivelRaz, edad: number): PreguntaRaz[] 
     else [() => serie(3), () => problema(3), silogismo, () => lectura(ciclo), letras, () => serie(3), () => problema(3), silogismo][ciclo % 8]!();
   }
   // Orden de abstracción: los más concretos primero para menores de 14 años.
-  return out.slice(0, cfg.total);
+  return [...out.slice(0, cfg.total), ...ANALOGIAS_RAZ.filter(p => p.nivel === NV[nivel]), ...MATEMATICAS_RAZ.filter(p => p.nivel === NV[nivel])];
 }

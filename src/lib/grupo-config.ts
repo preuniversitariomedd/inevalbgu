@@ -16,8 +16,14 @@ export function validarPesos(modulos: Modulos, pesos: Pesos) {
 export function accesoCombinado(configs: { modulos: Partial<Modulos> }[]): Modulos {
   return Object.fromEntries((Object.keys(MODULOS) as Modulo[]).map(k => [k, configs.every(c => c.modulos[k] !== false)])) as Modulos;
 }
+export function pesosActivos(modulos: Modulos, pesos: Pesos): Pesos {
+  const activos = Object.fromEntries((Object.keys(PARTES) as Parte[]).map(k => [k, k === 'plataforma' || modulos[k] ? pesos[k] : 0])) as Pesos;
+  const total = Object.values(activos).reduce((a,b) => a+b,0);
+  if (total === 0) return { plataforma: 100, practicas: 0, simulacro: 0, conocimiento: 0, razonamiento: 0 };
+  return Object.fromEntries((Object.keys(PARTES) as Parte[]).map(k => [k, activos[k] * 100 / total])) as Pesos;
+}
 export function moduloDeRuta(path: string): Modulo | null {
   const p = path.split('/')[1];
-  const map: Record<string, Modulo> = { practicar:'practicas', conocimiento:'conocimiento', razonamiento:'razonamiento', simulacro:'simulacro', sistemas:'sistemas', fisica:'fisica', basica:'basica', banco:'banco', biblioteca:'biblioteca', tareas:'tareas', tutor:'tutor', encuesta:'encuesta', competencias:'competencias', competencia:'competencias' };
+  const map: Record<string, Modulo> = { practicar:'practicas', conocimiento:'conocimiento', razonamiento:'razonamiento', simulacro:'simulacro', resultados:'simulacro', sistemas:'sistemas', fisica:'fisica', basica:'basica', banco:'banco', biblioteca:'biblioteca', tareas:'tareas', tutor:'tutor', encuesta:'encuesta', competencias:'competencias', competencia:'competencias' };
   return map[p ?? ''] ?? null;
 }

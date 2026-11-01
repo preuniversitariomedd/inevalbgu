@@ -159,7 +159,7 @@ function Index() {
             to="/conocimiento"
             icon={<BookOpenCheck className="h-7 w-7" />}
             title="Conocimiento"
-            desc="570 preguntas de lectura comprensiva en 3 niveles con metas de avance."
+            desc="840 preguntas de lectura comprensiva y razonamiento EGB en 3 niveles."
             tone="success"
           />
 

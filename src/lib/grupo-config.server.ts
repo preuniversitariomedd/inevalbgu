@@ -1,6 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/integrations/supabase/types';
-import { accesoCombinado, MODULOS_DEFAULT, PESOS_DEFAULT, type Modulos, type Pesos, type Modulo } from './grupo-config';
+import { accesoCombinado, pesosActivos, MODULOS_DEFAULT, PESOS_DEFAULT, type Modulos, type Pesos, type Modulo } from './grupo-config';
 type DB = SupabaseClient<Database>;
 export async function configuracionUsuario(db: DB, userId: string, grupoId?: string) {
   const { data: miembros, error } = await db.from('grupo_estudiantes').select('grupo_id,grupos(id,nombre)').eq('user_id', userId).order('grupo_id');
@@ -13,7 +13,8 @@ export async function configuracionUsuario(db: DB, userId: string, grupoId?: str
   const configsTyped = (configs ?? []).map(c => ({ ...c, modulos: c.modulos as Partial<Modulos>, ponderaciones: c.ponderaciones as Pesos }));
   const seleccionado = grupos.find(g => g.id === grupoId) ?? grupos[0] ?? null;
   const config = configsTyped.find(c => c.grupo_id === seleccionado?.id);
-  return { modulos: accesoCombinado(configsTyped), ponderaciones: config?.ponderaciones ?? PESOS_DEFAULT, grupos, grupo: seleccionado, modulosGrupo: { ...MODULOS_DEFAULT, ...config?.modulos } };
+  const modulos = accesoCombinado(configsTyped);
+  return { modulos, ponderaciones: pesosActivos(modulos, config?.ponderaciones ?? PESOS_DEFAULT), grupos, grupo: seleccionado, modulosGrupo: { ...MODULOS_DEFAULT, ...config?.modulos } };
 }
 export async function exigirModulo(db: DB, userId: string, modulo: Modulo) {
   const { data, error } = await db.rpc('modulo_habilitado', { _user_id: userId, _modulo: modulo });

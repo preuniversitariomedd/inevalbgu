@@ -3,6 +3,7 @@ import { createFileRoute, Link, Outlet, useMatchRoute } from "@tanstack/react-ro
 import { ArrowLeft, Sigma, FunctionSquare, Triangle, PieChart, ListOrdered, Ruler } from "lucide-react";
 import { AREAS } from "@/data/tipos";
 import { preguntasPorArea } from "@/data";
+import { useAccesos } from '@/components/AccesoModulo';
 
 export const Route = createFileRoute("/_authenticated/practicar")({
   head: () => ({
@@ -31,6 +32,7 @@ const ICONS: Record<string, React.ReactNode> = {
 };
 
 function ListaAreas() {
+  const accesos = useAccesos();
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-4xl px-5 py-8">
@@ -40,16 +42,16 @@ function ListaAreas() {
         <h1 className="mt-4 text-3xl font-extrabold sm:text-4xl">Practicar por tema</h1>
         <p className="mt-2 text-muted-foreground">Elige el área que quieres trabajar.</p>
 
-        <Link to="/sistemas" className="mt-6 flex items-center gap-4 rounded-2xl border-2 border-primary bg-primary/5 p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-strong">
+        {accesos.sistemas && <Link to="/sistemas" className="mt-6 flex items-center gap-4 rounded-2xl border-2 border-primary bg-primary/5 p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-strong">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground"><Sigma className="h-7 w-7" /></div>
           <div className="flex-1">
             <h3 className="font-bold">Sistemas de ecuaciones 2x2 y 3x3 · 5 niveles</h3>
             <p className="text-xs text-muted-foreground">Corrección en tiempo real · supera cada nivel con 3 ejercicios sin ayuda</p>
           </div>
           <span className="text-primary">→</span>
-        </Link>
+        </Link>}
 
-        <h2 className="mt-8 text-lg font-bold">Básica Superior (8.º a 10.º EGB)</h2>
+        {accesos.basica && <><h2 className="mt-8 text-lg font-bold">Básica Superior (8.º a 10.º EGB)</h2>
         <div className="mt-3 grid gap-3 sm:grid-cols-3">
           {([["matematica", "🔢 Matemática", "300 preguntas"], ["ciencias-naturales", "🌿 Ciencias Naturales", "500 preguntas"], ["estudios-sociales", "🌎 Estudios Sociales", "500 preguntas"]] as const).map(([m, t, d]) => (
             <Link key={m} to="/basica/$materia" params={{ materia: m }} className="rounded-2xl border bg-gradient-card p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-strong">
@@ -57,7 +59,7 @@ function ListaAreas() {
               <p className="text-xs text-muted-foreground">{d}</p>
             </Link>
           ))}
-        </div>
+        </div></>}
 
         <h2 className="mt-8 text-lg font-bold">1ro BGU</h2>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
