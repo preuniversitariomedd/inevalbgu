@@ -6,12 +6,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { BANCO_CONOCIMIENTO, CONFIG_CON, preguntasConocimiento, type NivelCon } from "@/data/conocimiento";
 import { PreguntaCard } from "@/components/PreguntaCard";
 import { guardarRespuesta } from "@/lib/progreso";
+import { useAccesos } from '@/components/AccesoModulo';
+import { useQuery } from '@tanstack/react-query';
+import { misAccesosFn } from '@/lib/grupo-config.functions';
+import { Button } from '@/components/ui/button';
 
 export const Route = createFileRoute("/_authenticated/conocimiento")({
   head: () => ({
     meta: [...pageMeta("Conocimiento — Lectura comprensiva por niveles — INEVAL_UEDE","Conocimiento en la plataforma educativa INEVAL_UEDE."),
       { title: "Conocimiento — Lectura comprensiva por niveles — INEVAL_UEDE" },
-      { name: "description", content: "570 preguntas de lectura comprensiva y párrafos técnicos en tres niveles con metas de avance." },
+      { name: "description", content: "840 preguntas de lectura comprensiva y razonamiento EGB en tres niveles con metas de avance." },
     ],
   }),
   component: Conocimiento,
@@ -31,6 +35,8 @@ function metaDe(n: NivelCon) {
 }
 
 function Conocimiento() {
+  const accesos = useAccesos();
+  const config = useQuery({ queryKey: ['mis-accesos'], queryFn: () => misAccesosFn() });
   const [uid, setUid] = useState<string | null>(null);
   const [est, setEst] = useState<Estado>(vacio);
   const [nivel, setNivel] = useState<NivelCon | null>(null);
@@ -89,12 +95,12 @@ function Conocimiento() {
     setNivel(n);
   }
 
-  if (nivel && idx < ronda.length) {
-    const p = ronda[idx]!;
+  const p = ronda[idx];
+  if (nivel && p && idx < ronda.length) {
     return (
       <div className="mx-auto max-w-3xl px-5 py-6">
         <div className="mb-3 flex justify-between text-sm">
-          <button onClick={() => setNivel(null)} className="text-muted-foreground hover:text-foreground">← Salir</button>
+          <Button variant="ghost" size="sm" onClick={() => setNivel(null)}>← Salir</Button>
           <span className="font-semibold">{CONFIG_CON[nivel].titulo} · {idx + 1}/{ronda.length}</span>
         </div>
         <div className="mb-3 flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[11px] font-medium text-accent-foreground">
@@ -106,7 +112,9 @@ function Conocimiento() {
           esUltima={idx === ronda.length - 1}
           onResponder={(ok) => {
             const e: Estado = JSON.parse(JSON.stringify(est));
-            if (ok && !e.aciertos[nivel]!.includes(p.id)) e.aciertos[nivel]!.push(p.id);
+            const aciertos = e.aciertos[nivel] ?? [];
+            if (ok && !aciertos.includes(p.id)) aciertos.push(p.id);
+            e.aciertos[nivel] = aciertos;
             if (!ok) e.fallos[p.subtema] = (e.fallos[p.subtema] ?? 0) + 1;
             guardar(e);
             guardarRespuesta({ preguntaId: p.id, area: "Conocimiento", subtema: p.subtema, nivel: p.nivel, correcta: ok });
@@ -150,13 +158,13 @@ function Conocimiento() {
                 <div className="h-full bg-primary" style={{ width: `${Math.min(100, (ok / meta) * 100)}%` }} />
               </div>
               <p className="mt-1 text-xs text-muted-foreground">{ok} / {meta} correctas</p>
-              <button
+              <Button
                 disabled={!libre || ok >= TOTALES[n]}
                 onClick={() => armarRonda(n)}
-                className="mt-4 w-full rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground disabled:opacity-40"
+                className="mt-4 w-full"
               >
                 {!libre ? `Aprueba el nivel ${n - 1}` : ok >= TOTALES[n] ? "Completado" : "Ronda de 10 preguntas"}
-              </button>
+              </Button>
             </div>
           );
         })}
@@ -164,7 +172,7 @@ function Conocimiento() {
       <div className="mt-6 flex items-start gap-2 rounded-2xl border bg-card p-4 text-sm text-muted-foreground">
         <BookOpenCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
         <p>
-          Tu avance se guarda en tu cuenta (asociada a tu cédula) y cuenta para el <strong>30 % de tu nota global</strong>.
+          Tu avance se guarda en tu cuenta (asociada a tu cédula){accesos.conocimiento && config.data ? <> y cuenta para el <strong>{config.data.ponderaciones.conocimiento} % de tu nota global</strong></> : '.'}.
           Lee cada texto con calma: la respuesta siempre se apoya en lo que dice o insinúa el párrafo.
         </p>
       </div>

@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Sparkles, X, ChevronRight } from "lucide-react";
 import { calificacionAsignaturasFn, obtenerProgresoFn } from "@/lib/progreso.functions";
 import { PARTES, type Parte } from '@/lib/grupo-config';
+import { useAccesos } from './AccesoModulo';
+import { moduloDeRuta } from '@/lib/grupo-config';
 
 type Consejo = { titulo: string; texto: string; to?: string; params?: any; cta?: string };
 
@@ -15,6 +17,7 @@ function nivelTexto(n: number) {
 }
 
 export function CoachFlotante() {
+  const accesos = useAccesos();
   const [abierto, setAbierto] = useState(false);
 
   const cal = useQuery({
@@ -175,6 +178,7 @@ export function CoachFlotante() {
     }
     return out;
   }, [data, debiles]);
+  const consejosVisibles = consejos.filter(c => { const m = c.to ? moduloDeRuta(c.to) : null; return !m || accesos[m]; });
 
   if (!data) return null;
 
@@ -224,15 +228,15 @@ export function CoachFlotante() {
               <div className="font-semibold">📐 Matemática</div>
               <div className="text-lg font-extrabold tabular-nums">{data.matematica.nota.toFixed(1)}</div>
             </div>
-            <div className="rounded-xl border bg-secondary/40 p-2">
+            {accesos.fisica && <div className="rounded-xl border bg-secondary/40 p-2">
               <div className="font-semibold">⚛️ Física</div>
               <div className="text-lg font-extrabold tabular-nums">{data.fisica.nota.toFixed(1)}</div>
-            </div>
+            </div>}
           </div>
 
           <p className="mt-3 text-xs font-semibold text-muted-foreground">Qué te falta para subir</p>
           <div className="mt-2 space-y-2">
-            {consejos.map((c, i) => (
+            {consejosVisibles.map((c, i) => (
               <div key={i} className="rounded-xl border p-3">
                 <div className="text-sm font-bold">{c.titulo}</div>
                 <p className="mt-1 text-xs text-muted-foreground">{c.texto}</p>
