@@ -50,6 +50,13 @@
       "when": 1793146060283,
       "tag": "0006_proteger_actividad_complementaria_modulos",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793502715893,
+      "tag": "0007_actualizacion_inmediata_accesos_grupos",
+      "breakpoints": true
     }
   ]
 }
