@@ -13,7 +13,8 @@ import { miAvatarUrlFn, subirAvatarFn } from "@/lib/mensajes.functions";
 import { contarTareasPendientesFn } from "@/lib/tareas.functions";
 import { toast } from "sonner";
 import { PinSeguridad } from "@/components/PinSeguridad";
-import { AccesoModulo } from '@/components/AccesoModulo';
+import { AccesoModulo, ContenidoModulo, useAccesos } from '@/components/AccesoModulo';
+import { ActualizacionesGrupo } from '@/components/ActualizacionesGrupo';
 
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
@@ -51,6 +52,11 @@ export const Route = createFileRoute("/_authenticated")({
 });
 
 function AuthedLayout() {
+  return <AccesoModulo soloContexto><ActualizacionesGrupo /><AuthedContent /></AccesoModulo>;
+}
+
+function AuthedContent() {
+  const accesos = useAccesos();
   const ctx = Route.useRouteContext() as {
     user: { id: string; email?: string };
     esAdmin: boolean;
@@ -114,23 +120,23 @@ function AuthedLayout() {
             <span className="hidden sm:inline">{branding?.titulo || "INEVAL_UEDE"}</span>
           </Link>
           <div className="flex items-center gap-2 text-sm">
-            <Link
+            {accesos.tutor && <Link
               to="/tutor"
               className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-500 px-3 py-1.5 font-semibold text-white shadow-soft hover:opacity-90"
               title="Mr. Victor · Tutor virtual"
             >
               <Sparkles className="h-4 w-4" />
               <span className="hidden sm:inline">Mr. Victor</span>
-            </Link>
-            <Link
+            </Link>}
+            {accesos.biblioteca && <Link
               to="/biblioteca"
               className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-medium hover:bg-secondary"
               title="Biblioteca"
             >
               <Library className="h-4 w-4" />
               <span className="hidden sm:inline">Biblioteca</span>
-            </Link>
-            <TareasLink esStaff={ctx.esStaff} />
+            </Link>}
+            {accesos.tareas && <TareasLink esStaff={ctx.esStaff} />}
             <MensajesLink />
             {ctx.esStaff && (
               <Link
@@ -154,7 +160,7 @@ function AuthedLayout() {
           </div>
         </div>
       </nav>
-      <AccesoModulo><Outlet /></AccesoModulo>
+      <ContenidoModulo><Outlet /></ContenidoModulo>
       <AusenciaDialog />
       {!ctx.esStaff && <CoachFlotante />}
     </div>

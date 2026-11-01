@@ -18,6 +18,6 @@ export function accesoCombinado(configs: { modulos: Partial<Modulos> }[]): Modul
 }
 export function moduloDeRuta(path: string): Modulo | null {
   const p = path.split('/')[1];
-  const map: Record<string, Modulo> = { practicar:'practicas', conocimiento:'conocimiento', razonamiento:'razonamiento', simulacro:'simulacro', sistemas:'sistemas', fisica:'fisica', basica:'basica', banco:'banco', biblioteca:'biblioteca', tareas:'tareas', tutor:'tutor', encuesta:'encuesta', competencias:'competencias', competencia:'competencias' };
+  const map: Record<string, Modulo> = { practicar:'practicas', conocimiento:'conocimiento', razonamiento:'razonamiento', simulacro:'simulacro', resultados:'simulacro', sistemas:'sistemas', fisica:'fisica', basica:'basica', banco:'banco', biblioteca:'biblioteca', tareas:'tareas', tutor:'tutor', encuesta:'encuesta', competencias:'competencias', competencia:'competencias' };
   return map[p ?? ''] ?? null;
 }

@@ -1,6 +1,7 @@
 // Banco del módulo Conocimiento: lectura comprensiva y párrafos técnicos
 // (570 preguntas generadas desde los bancos anexos del proyecto).
 import type { Pregunta } from "./tipos";
+import { CONOCIMIENTO_EGB } from './anexos';
 
 export const BANCO_CONOCIMIENTO: Pregunta[] = [
   {
@@ -6273,6 +6274,7 @@ export const BANCO_CONOCIMIENTO: Pregunta[] = [
     respuestaCorrecta: 0,
     explicacion: "Dos casos no bastan para afirmar algo sobre todo un grupo. Es una generalizaci\u00f3n apresurada.",
   },
+  ...CONOCIMIENTO_EGB,
 ];
 
 export type NivelCon = 1 | 2 | 3;

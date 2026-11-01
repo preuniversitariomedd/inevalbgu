@@ -1,0 +1,1 @@
+export const CLAVES_ACTUALIZACION_GRUPO = ['mis-accesos', 'config-grupo', 'calificacion', 'calificaciones', 'progreso', 'periodos'] as const;
