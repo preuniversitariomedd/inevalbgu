@@ -21,6 +21,7 @@ import {
 import { obtenerProgresoFn, calificacionAsignaturasFn } from "@/lib/progreso.functions";
 import { listarEstudiantesFn } from "@/lib/admin.functions";
 import { getCurrentProfile } from "@/lib/auth-helpers";
+import { moduloDeRuta, type Modulos } from '@/lib/grupo-config';
 
 export const Route = createFileRoute("/_authenticated/progreso")({
   head: () => ({ meta: [
@@ -397,7 +398,8 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
   });
   if (!data) return <p role="status" className="mt-6 text-sm text-muted-foreground">{error ? "No se pudieron cargar las notas." : "Cargando notas…"}</p>;
   const ICONOS: Record<string, [string, string]> = { matematica: ["📐", "hsl(265 70% 55%)"], fisica: ["⚛️", "hsl(200 80% 45%)"], mbs: ["🔢", "hsl(30 85% 50%)"], cn: ["🌿", "hsl(145 60% 38%)"], es: ["🌎", "hsl(15 75% 50%)"], bach: ["🎓", "hsl(340 70% 50%)"] };
-  const bloques = data.asignaturas.map((a) => ({ titulo: a.nombre, icono: ICONOS[a.clave]?.[0] ?? "📚", d: a, color: ICONOS[a.clave]?.[1] ?? "var(--primary)" }));
+  const accesos = data.configuracion.modulos as Modulos;
+  const bloques = data.asignaturas.filter(a => a.clave === 'fisica' ? accesos.fisica : ['mbs','cn','es'].includes(a.clave) ? accesos.basica : true).map((a) => ({ titulo: a.nombre, icono: ICONOS[a.clave]?.[0] ?? "📚", d: a, color: ICONOS[a.clave]?.[1] ?? "var(--primary)" }));
   const g = (data as any).global as
     | {
         nota: number;
@@ -469,7 +471,7 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
           {consejosGlobal.length > 0 && (
             <div className="mt-4 space-y-2">
               <p className="text-xs font-semibold">Cómo subir tu nota:</p>
-              {consejosGlobal.slice(0, 3).map((c) => (
+              {consejosGlobal.filter(c => { const m = moduloDeRuta(c.to); return !m || accesos[m]; }).slice(0, 3).map((c) => (
                 <div key={c.titulo} className="flex items-start justify-between gap-3 rounded-lg border bg-card p-2.5 text-xs">
                   <div>
                     <div className="font-semibold">{c.titulo.split(':')[0]}</div>

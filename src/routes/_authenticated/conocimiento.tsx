@@ -172,7 +172,7 @@ function Conocimiento() {
       <div className="mt-6 flex items-start gap-2 rounded-2xl border bg-card p-4 text-sm text-muted-foreground">
         <BookOpenCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
         <p>
-          Tu avance se guarda en tu cuenta (asociada a tu cédula){accesos.conocimiento && config.data ? <> y cuenta para el <strong>{config.data.ponderaciones.conocimiento} % de tu nota global</strong></> : '.'}.
+          Tu avance se guarda en tu cuenta (asociada a tu cédula){accesos.conocimiento && config.data ? <> y cuenta para el <strong>{config.data.ponderaciones.conocimiento.toLocaleString('es-EC', { maximumFractionDigits: 2 })} % de tu nota global</strong></> : null}.
           Lee cada texto con calma: la respuesta siempre se apoya en lo que dice o insinúa el párrafo.
         </p>
       </div>
