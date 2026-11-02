@@ -59,7 +59,7 @@ function AuthPage() {
       <div className="w-full max-w-md">
         <div className="mb-5 text-center text-primary-foreground">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium backdrop-blur">
-            <GraduationCap className="h-4 w-4" /> INEVAL · 1ro BGU · Matemática
+            <GraduationCap className="h-4 w-4" /> INEVAL · Básica Superior &amp; Bachillerato · Matemática
           </div>
           <h1 className="mt-4 text-4xl font-extrabold">INEVAL_UEDE</h1>
         </div>
