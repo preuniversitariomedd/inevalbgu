@@ -7,3 +7,6 @@
 - [x] Implementar actualización conjunta de accesos visibles y notas al guardar configuración de grupo.
 - [x] Integrar y probar 700 analogías y 300 preguntas matemáticas en Razonamiento, y 270 preguntas EGB en Conocimiento.
 - [ ] Verificar cambios simultáneos y guardado entre cuentas reales: Lovable Cloud pausado impide iniciar sesión y comprobar la publicación realtime aplicada.
+- [ ] Reducir consultas: administración manual, estudiante cada 24 h y ninguna consulta automática en segundo plano.
+- [ ] Fijar nota 40% Conocimiento, 30% Razonamiento, 30% Simulacro y mostrarla en cabecera, menú, progreso y Coach.
+- [ ] Agregar reinicio admin-only con respaldo histórico, descarga obligatoria y confirmación en dos pasos; probar sin borrar datos reales.
