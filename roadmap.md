@@ -4,5 +4,6 @@
 - [x] Agregar selector y creación de períodos en Calificaciones; mostrarlos a estudiantes y exportaciones; verificar cálculo y flujo.
 - [x] Configurar accesos por grupo y ponderaciones de las partes activas; proteger acceso y verificar notas.
 - [x] Descargar informes completos por curso en PDF y Excel, sin credenciales ni PIN; verificar descargas.
-- [ ] Actualizar accesos visibles y notas para todos al guardar configuración de grupo.
-- [ ] Integrar 700 analogías y 300 preguntas matemáticas en Razonamiento, y 270 preguntas EGB en Conocimiento; verificar niveles y guardado.
+- [x] Implementar actualización conjunta de accesos visibles y notas al guardar configuración de grupo.
+- [x] Integrar y probar 700 analogías y 300 preguntas matemáticas en Razonamiento, y 270 preguntas EGB en Conocimiento.
+- [ ] Verificar cambios simultáneos y guardado entre cuentas reales: Lovable Cloud pausado impide iniciar sesión y comprobar la publicación realtime aplicada.
