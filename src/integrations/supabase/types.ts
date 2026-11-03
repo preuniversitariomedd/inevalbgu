@@ -841,6 +841,42 @@ export type Database = {
         }
         Relationships: []
       }
+      evaluacion_intentos: {
+        Row: {
+          cerrado_en: string | null
+          estado: string
+          id: string
+          infracciones: number
+          iniciado_en: string
+          modulo: string
+          nota: number | null
+          ultima_infraccion_en: string | null
+          user_id: string
+        }
+        Insert: {
+          cerrado_en?: string | null
+          estado?: string
+          id?: string
+          infracciones?: number
+          iniciado_en?: string
+          modulo: string
+          nota?: number | null
+          ultima_infraccion_en?: string | null
+          user_id: string
+        }
+        Update: {
+          cerrado_en?: string | null
+          estado?: string
+          id?: string
+          infracciones?: number
+          iniciado_en?: string
+          modulo?: string
+          nota?: number | null
+          ultima_infraccion_en?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       fisica_preguntas: {
         Row: {
           activa: boolean
@@ -1521,6 +1557,44 @@ export type Database = {
         }
         Relationships: []
       }
+      violations: {
+        Row: {
+          created_at: string
+          id: string
+          intento_id: string
+          modulo: string
+          numero: number
+          tipo: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          intento_id: string
+          modulo: string
+          numero: number
+          tipo: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          intento_id?: string
+          modulo?: string
+          numero?: number
+          tipo?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "violations_intento_id_fkey"
+            columns: ["intento_id"]
+            isOneToOne: false
+            referencedRelation: "evaluacion_intentos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -1534,6 +1608,10 @@ export type Database = {
         Args: { _comp: string; _user: string }
         Returns: boolean
       }
+      finalizar_evaluacion: {
+        Args: { _intento: string; _nota: number }
+        Returns: undefined
+      }
       foto_academica: { Args: never; Returns: Json }
       has_role: {
         Args: {
@@ -1542,6 +1620,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      iniciar_evaluacion: { Args: { _modulo: string }; Returns: Json }
       is_staff: { Args: { _user_id: string }; Returns: boolean }
       modulo_habilitado: {
         Args: { _modulo: string; _user_id: string }
@@ -1551,6 +1630,10 @@ export type Database = {
       puede_ver_tarea: {
         Args: { _tarea_id: string; _user_id: string }
         Returns: boolean
+      }
+      registrar_infraccion: {
+        Args: { _intento: string; _tipo: string }
+        Returns: Json
       }
       reiniciar_avances_academicos: {
         Args: { _huella: string; _respaldo: string }
