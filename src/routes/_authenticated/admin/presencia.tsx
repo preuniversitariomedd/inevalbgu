@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { CONSULTA_MANUAL } from '@/lib/consulta-politicas';
 import { pageMeta } from "@/lib/page-meta";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { listarPresenciaFn, listarAlertasPresenciaFn, resolverAlertaFn } from "@/lib/presencia.functions";
