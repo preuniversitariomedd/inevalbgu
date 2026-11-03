@@ -56,11 +56,11 @@ export function AvisoExamen({ guard, resultado }: { guard: Guard; resultado?: st
           {a.cerrado ? "Prueba cerrada" : ultima ? "ÚLTIMA ADVERTENCIA" : `Infracción ${a.numero} de ${MAX_AVISOS}`}
         </h2>
         <p className="mt-2 text-sm">Detectamos: <strong>{NOMBRE_INFRACCION[a.tipo]}</strong>.</p>
-        {a.cerrado ? (
+        {a.cerrado ? (<>
           <p className="mt-2 text-sm">Cometiste 4 infracciones. Tu prueba se calificó con las respuestas registradas hasta ahora.{resultado ? <> Nota: <strong>{resultado}</strong>.</> : null}</p>
           <p className="mt-2 text-sm font-semibold text-destructive">No podrás volver a esta evaluación durante 24 horas.</p>
           <p className="mt-1 text-xs text-muted-foreground">En Conocimiento y Razonamiento la regla aplica por cada ronda de 10 preguntas; la nota del cierre es el porcentaje de aciertos de esa ronda, sobre 10.</p>
-        ) : ultima ? (
+        </>) : ultima ? (
           <p className="mt-2 text-sm font-semibold text-destructive">Infracción 3 de 3. La próxima infracción cerrará tu prueba.</p>
         ) : (
           <p className="mt-2 text-sm text-muted-foreground">Vuelve a la evaluación y mantén la pantalla completa.</p>
