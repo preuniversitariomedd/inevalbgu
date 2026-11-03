@@ -110,7 +110,7 @@ function Index() {
             to="/fisica"
             icon={<Atom className="h-7 w-7" />}
             title="Física"
-            desc="Cinemática, dinámica y energía con imágenes, 5 opciones, fórmulas y tutor IA."
+            desc="Cinemática, dinámica y energía con imágenes, 5 opciones y glosario de fórmulas."
             tone="accent"
           />
           <ActionCard

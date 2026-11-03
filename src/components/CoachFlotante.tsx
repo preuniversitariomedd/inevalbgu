@@ -161,12 +161,6 @@ export function CoachFlotante() {
         to: "/analisis",
         cta: "Ver mis errores",
       });
-      out.push({
-        titulo: "Pídele ayuda a Mr. Victor",
-        texto: `Escríbele: "explícame ${d.subtema} paso a paso con un ejemplo sencillo". Te guía según tu forma de aprender.`,
-        to: "/tutor",
-        cta: "Abrir Mr. Victor",
-      });
     }
 
     if (out.length === 0) {

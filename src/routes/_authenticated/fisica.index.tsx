@@ -99,18 +99,6 @@ function FisicaHub() {
               <p className="text-xs text-muted-foreground">Todas las fórmulas con variables y cuándo usarlas.</p>
             </div>
           </Link>
-          <Link
-            to="/fisica/tutor"
-            className="flex items-center gap-4 rounded-2xl border bg-gradient-card p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-strong"
-          >
-            <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-fuchsia-500 to-cyan-500 text-white">
-              <Sparkles className="h-6 w-6" />
-            </div>
-            <div>
-              <h3 className="font-bold">Agente IA de Física</h3>
-              <p className="text-xs text-muted-foreground">Explica un tema según tus estadísticas y errores.</p>
-            </div>
-          </Link>
         </div>
 
         {ctx?.esStaff && (
