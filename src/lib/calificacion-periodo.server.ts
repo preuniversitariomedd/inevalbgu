@@ -28,9 +28,9 @@ export async function obtenerPeriodo(db: DB, id: string | undefined, userId?: st
 export async function notasUsuario(db: DB, userId: string, periodo: Periodo | null, grupoId?: string) {
   const configuracion = await configuracionUsuario(db, userId, periodo?.grupo_id ?? grupoId);
   const [conexiones, sesiones, respuestas] = await Promise.all([
-    leerTodas<Database['public']['Tables']['sesiones_conexion']['Row']>(() => db.from('sesiones_conexion').select('*').eq('user_id', userId).order('id')),
-    leerTodas<Database['public']['Tables']['sesiones_practica']['Row']>(() => db.from('sesiones_practica').select('*').eq('user_id', userId).order('id')),
-    leerTodas<Database['public']['Tables']['respuestas']['Row']>(() => db.from('respuestas').select('*').eq('user_id', userId).order('id')),
+    leerTodas<Database['public']['Tables']['sesiones_conexion']['Row']>(() => (db as any).from('sesiones_conexion').select('id,iniciada_en,ultimo_heartbeat,segundos_visible,segundos_oculto,segundos_interaccion').eq('user_id', userId).order('id')),
+    leerTodas<Database['public']['Tables']['sesiones_practica']['Row']>(() => (db as any).from('sesiones_practica').select('id,tipo,area,total_preguntas,correctas,iniciada_en,finalizada_en,puntaje_ineval,nivel_logro,tiempo_segundos').eq('user_id', userId).order('id')),
+    leerTodas<Database['public']['Tables']['respuestas']['Row']>(() => (db as any).from('respuestas').select('id,sesion_id,pregunta_id,area,subtema,nivel,correcta,respondida_en').eq('user_id', userId).order('id')),
   ]);
   let con = conexiones.map(c => ({ iniciada_en: c.iniciada_en, segundos_visible: c.segundos_visible, segundos_oculto: c.segundos_oculto, segundos_interaccion: c.segundos_interaccion }));
   let ses = sesiones;
@@ -39,7 +39,7 @@ export async function notasUsuario(db: DB, userId: string, periodo: Periodo | nu
   let tiempoHistoricoIncompleto = false;
   if (periodo) {
     const { inicio, fin } = limitesPeriodo(periodo);
-    const eventos = await leerTodas<Database['public']['Tables']['tiempo_calificacion_eventos']['Row']>(() => db.from('tiempo_calificacion_eventos').select('*').eq('user_id', userId).lt('inicio', new Date(fin).toISOString()).gt('fin', new Date(inicio).toISOString()).order('id'));
+    const eventos = await leerTodas<Database['public']['Tables']['tiempo_calificacion_eventos']['Row']>(() => (db as any).from('tiempo_calificacion_eventos').select('id,inicio,fin,segundos_visible,segundos_oculto,segundos_interaccion').eq('user_id', userId).lt('inicio', new Date(fin).toISOString()).gt('fin', new Date(inicio).toISOString()).order('id'));
     con = eventos.map(e => recortarTiempo(e, periodo));
     // Legacy sessions may be used only when their entire measured interval is inside the period.
     const { data: primerEvento, error } = await db.from('tiempo_calificacion_eventos').select('inicio').eq('user_id', userId).order('inicio').limit(1);
