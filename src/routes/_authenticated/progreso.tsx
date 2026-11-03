@@ -1,3 +1,5 @@
+import { CONSULTA_NOTAS } from '@/lib/consulta-politicas';
+import { FormulaNota } from '@/components/FormulaNota';
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { SelectorPeriodo } from "@/components/SelectorPeriodo";
@@ -62,6 +64,7 @@ function ProgresoPage() {
   const { data, isLoading } = useQuery({
     queryKey: ["progreso", as ?? "me"],
     queryFn: () => obtenerProgresoFn({ data: as ? { targetUserId: as } : {} }),
+    ...CONSULTA_NOTAS,
     enabled: !esStaff || !!as, // staff sin selección: no carga
   });
 
@@ -389,12 +392,11 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
   const [periodoId, setPeriodoId] = useState('');
   const fetchPeriodos = useServerFn(listarPeriodosFn);
   const fetchNotas = useServerFn(calificacionAsignaturasFn);
-  const periodosQ = useQuery({ queryKey: ['periodos', targetUserId ?? 'me'], queryFn: () => fetchPeriodos({ data: { targetUserId } }) });
+  const periodosQ = useQuery({ queryKey: ['periodos', targetUserId ?? 'me'], queryFn: () => fetchPeriodos({ data: { targetUserId } }), ...CONSULTA_NOTAS });
   const { data, error } = useQuery({
     queryKey: ["calificacion", targetUserId ?? "me", periodoId],
     queryFn: () => fetchNotas({ data: { targetUserId, periodoId: periodoId || undefined } }),
-    refetchInterval: 15000,
-    refetchOnWindowFocus: true,
+    ...CONSULTA_NOTAS,
   });
   if (!data) return <p role="status" className="mt-6 text-sm text-muted-foreground">{error ? "No se pudieron cargar las notas." : "Cargando notas…"}</p>;
   const ICONOS: Record<string, [string, string]> = { matematica: ["📐", "hsl(265 70% 55%)"], fisica: ["⚛️", "hsl(200 80% 45%)"], mbs: ["🔢", "hsl(30 85% 50%)"], cn: ["🌿", "hsl(145 60% 38%)"], es: ["🌎", "hsl(15 75% 50%)"], bach: ["🎓", "hsl(340 70% 50%)"] };
@@ -449,10 +451,11 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
       <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
         <h2 className="flex items-center gap-2 text-lg font-bold">🏅 Calificación</h2>
         <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-primary" /> En tiempo real
+          Actualización cada 24 h o al completar un simulacro o nivel
         </span>
       </div>
 
+      <FormulaNota />
       <div className="my-3"><SelectorPeriodo periodos={periodosQ.data ?? []} value={periodoId} onChange={setPeriodoId} /></div>
       {data.tiempoHistoricoIncompleto && <p className="mb-3 text-xs text-muted-foreground">El tiempo antiguo que cruza estas fechas no tiene detalle suficiente y se excluye de esta nota.</p>}
       {g && (
@@ -488,7 +491,7 @@ function CalificacionPanel({ targetUserId }: { targetUserId?: string }) {
       )}
 
       <p className="mb-4 text-xs text-muted-foreground">
-        Por asignatura: los porcentajes establecidos para tu grupo, con resultados propios de cada asignatura.
+        Por asignatura: la fórmula oficial 40/30/30, con simulacros propios de cada asignatura.
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         {bloques.map((b) => (

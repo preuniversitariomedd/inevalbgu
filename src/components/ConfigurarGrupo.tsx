@@ -1,8 +1,9 @@
+import { FormulaNota } from './FormulaNota';
 import { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useServerFn } from '@tanstack/react-start';
 import { leerConfiguracionGrupoFn, guardarConfiguracionGrupoFn } from '@/lib/grupo-config.functions';
-import { MODULOS, PARTES, validarPesos, type Modulos, type Pesos, type Modulo, type Parte } from '@/lib/grupo-config';
+import { MODULOS, PESOS_DEFAULT, PARTES, validarPesos, type Modulos, type Pesos, type Modulo, type Parte } from '@/lib/grupo-config';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
@@ -21,16 +22,13 @@ function Editor({ grupoId, cerrar }: { grupoId: string; cerrar: () => void }) {
 }
 function Formulario({ grupoId, inicial, cerrar }: { grupoId: string; inicial: { modulos: Modulos; ponderaciones: Pesos }; cerrar: () => void }) {
   const [modulos, setModulos] = useState(inicial.modulos);
-  const [pesos, setPesos] = useState(inicial.ponderaciones);
-  const [paso, setPaso] = useState(1);
   const [saving, setSaving] = useState(false);
   const guardar = useServerFn(guardarConfiguracionGrupoFn);
   const qc = useQueryClient();
-  const activos = (Object.keys(PARTES) as Parte[]).filter(k => k === 'plataforma' || modulos[k]);
-  const total = Object.values(pesos).reduce((a,b) => a+b,0);
   async function save() {
-    try { validarPesos(modulos, pesos); setSaving(true); await guardar({ data: { grupoId, modulos, ponderaciones: pesos } }); await qc.invalidateQueries(); toast.success('Accesos y porcentajes guardados para todos los integrantes.'); cerrar(); }
+    setSaving(true);
+    try { await guardar({ data: { grupoId, modulos, ponderaciones: PESOS_DEFAULT } }); await qc.invalidateQueries({ queryKey: ['mis-accesos'] }); await qc.invalidateQueries({ queryKey: ['config-grupo', grupoId] }); toast.success('Accesos guardados; se mantiene la fórmula oficial 40/30/30.'); cerrar(); }
     catch(e) { toast.error(e instanceof Error ? e.message : 'No se pudo guardar.'); } finally { setSaving(false); }
   }
-  return <div className="space-y-4">{paso === 1 ? <><h3 className="font-semibold">Apartados activos</h3><div className="grid gap-3 sm:grid-cols-2">{(Object.entries(MODULOS) as [Modulo,string][]).map(([k,label]) => <label key={k} className="flex items-center gap-2"><Checkbox checked={modulos[k]} onCheckedChange={v => { const enabled = v === true; setModulos(m => ({ ...m, [k]: enabled })); if (k in PARTES && !enabled) setPesos(p => ({ ...p, [k]: 0 })); }}/>{label}</label>)}</div><p className="text-xs text-muted-foreground">Si un estudiante pertenece a varios grupos, un apartado desactivado en cualquiera de ellos permanece bloqueado.</p><Button onClick={() => setPaso(2)}>Continuar: calcular nota final</Button></> : <><h3 className="font-semibold">¿Cómo calcular la nota final sobre 10?</h3><div className="space-y-3">{activos.map(k => <label key={k} className="flex items-center justify-between gap-3"><span>{PARTES[k]}</span><span className="flex items-center gap-2"><Input aria-label={`Porcentaje ${PARTES[k]}`} className="w-24" type="number" min="0" max="100" step="1" value={pesos[k]} onChange={e => setPesos(p => ({ ...p, [k]: Number(e.target.value) }))}/>%</span></label>)}</div><p className={total === 100 ? 'font-semibold text-primary' : 'font-semibold text-destructive'}>Total: {total}% / 100%</p><p className="text-xs text-muted-foreground">Prácticas se califica por el porcentaje de respuestas correctas. Los apartados sin evaluación propia no añaden puntos; su uso cuenta como tiempo real en plataforma. Conocimiento y Razonamiento conservan sus metas por nivel.</p><div className="flex justify-between gap-2"><Button variant="outline" onClick={() => setPaso(1)}><ArrowLeft className="h-4 w-4"/>Accesos</Button><Button disabled={saving || total !== 100} onClick={save}><Save className="h-4 w-4"/>{saving ? 'Guardando…' : 'Guardar accesos y nota'}</Button></div></>}</div>;
+  return <div className="space-y-4"><h3 className="font-semibold">Apartados activos</h3><div className="grid gap-3 sm:grid-cols-2">{(Object.entries(MODULOS) as [Modulo,string][]).map(([k,label]) => <label key={k} className="flex items-center gap-2"><Checkbox checked={modulos[k]} onCheckedChange={v => setModulos(m => ({ ...m, [k]: v === true }))}/>{label}</label>)}</div><FormulaNota/><p className="text-xs text-muted-foreground">Un apartado desactivado en cualquiera de los grupos del estudiante permanece bloqueado.</p><Button disabled={saving} onClick={save}><Save className="h-4 w-4"/>{saving ? 'Guardando…' : 'Guardar accesos'}</Button></div>;
 }

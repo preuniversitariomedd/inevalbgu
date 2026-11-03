@@ -9,7 +9,7 @@ const AccesosContext = createContext<Modulos>(MODULOS_DEFAULT);
 export function useAccesos() { return useContext(AccesosContext); }
 export function AccesoModulo({ children, soloContexto = false }: { children: ReactNode; soloContexto?: boolean }) {
   const fetchAccesos = useServerFn(misAccesosFn);
-  const q = useQuery({ queryKey: ['mis-accesos'], queryFn: () => fetchAccesos(), refetchInterval: 15000, refetchOnWindowFocus: true });
+  const q = useQuery({ queryKey: ['mis-accesos'], queryFn: () => fetchAccesos(), staleTime: Infinity, refetchInterval: false, refetchIntervalInBackground: false, refetchOnWindowFocus: false });
   const { pathname } = useLocation();
   const modulo = moduloDeRuta(pathname);
   if (!q.data) return <p role="status" className="mx-auto max-w-5xl p-6">{q.error ? 'No se pudo verificar el acceso. Intenta nuevamente.' : 'Cargando accesos…'}</p>;

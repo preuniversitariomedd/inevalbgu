@@ -18,7 +18,7 @@ export const leerConfiguracionGrupoFn = createServerFn({ method: 'POST' }).middl
     if (!admin) throw new Error('Solo el administrador puede configurar accesos.');
     const { data: c, error } = await context.supabase.from('grupo_configuracion').select('*').eq('grupo_id', data.grupoId).maybeSingle();
     if (error) throw new Error(error.message);
-    return { modulos: { ...MODULOS_DEFAULT, ...(c?.modulos as Partial<Modulos>) }, ponderaciones: (c?.ponderaciones as Pesos | undefined) ?? PESOS_DEFAULT };
+    return { modulos: { ...MODULOS_DEFAULT, ...(c?.modulos as Partial<Modulos>) }, ponderaciones: PESOS_DEFAULT };
   });
 export const guardarConfiguracionGrupoFn = createServerFn({ method: 'POST' }).middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => {

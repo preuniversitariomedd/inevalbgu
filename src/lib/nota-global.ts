@@ -1,6 +1,5 @@
 // Nota global del estudiante (0–10):
-//   10 % tiempo real en plataforma · 30 % simulacros de examen ·
-//   30 % módulo Conocimiento · 30 % módulo Razonamiento.
+//   40 % Conocimiento · 30 % Razonamiento · 30 % Simulacro.
 // Lógica pura compartida entre el panel del estudiante, el coach flotante
 // y el panel del administrador.
 import { CONFIG_CON, preguntasConocimiento, type NivelCon } from "@/data/conocimiento";
@@ -14,9 +13,9 @@ export interface AvanceNiveles {
 export interface NotaGlobal {
   nota: number; // 0–10
   componentes: {
-    plataforma: number; // puntos sobre 1
+    plataforma: number; // no aporta puntos
     simulacro: number; // puntos sobre 3
-    conocimiento: number; // puntos sobre 3
+    conocimiento: number; // puntos sobre 4
     razonamiento: number; // puntos sobre 3
     practicas: number;
   };
