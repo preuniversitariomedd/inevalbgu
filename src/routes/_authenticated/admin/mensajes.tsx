@@ -1,3 +1,5 @@
+import { BotonRefrescar } from "@/components/BotonRefrescar";
+import { CONSULTA_MANUAL } from "@/lib/consulta-politicas";
 import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
@@ -71,7 +73,7 @@ function EnviosMasivos() {
   const q = useQuery({
     queryKey: ["admin", "envios-masivos"],
     queryFn: () => listarEnviosMasivosFn(),
-    refetchInterval: 30_000,
+    ...CONSULTA_MANUAL,
   });
   const [abierto, setAbierto] = useState<string | null>(null);
 
@@ -86,6 +88,7 @@ function EnviosMasivos() {
 
   return (
     <div className="space-y-3">
+      <div className="flex justify-end"><BotonRefrescar cargando={q.isFetching} onClick={() => void q.refetch()} /></div>
       {envios.map((e) => {
         const pct = e.total_destinatarios ? Math.round((e.leidos / e.total_destinatarios) * 100) : 0;
         const open = abierto === e.id;
