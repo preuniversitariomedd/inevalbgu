@@ -12,7 +12,7 @@ export function ReglasEvaluacion({ titulo, guard, onIniciar, onCancelar }: { tit
         <div className="rounded-2xl border border-destructive/40 bg-destructive/10 p-6 text-center">
           <Lock className="mx-auto h-10 w-10 text-destructive" />
           <h2 className="mt-3 text-xl font-extrabold">Evaluación bloqueada</h2>
-          <p className="mt-2 text-sm">Tu última evaluación se cerró por infracciones. Podrás volver a ingresar el {new Date(guard.bloqueadoHasta).toLocaleString("es-EC")}.</p>
+          <p className="mt-2 text-sm">Tu última evaluación se cerró por infracciones. No puedes volver a esta evaluación durante 24 horas. Podrás ingresar de nuevo el {new Date(guard.bloqueadoHasta).toLocaleString("es-EC")}.</p>
           <Button className="mt-5" variant="outline" onClick={onCancelar}>Volver</Button>
         </div>
       </div>
@@ -29,6 +29,8 @@ export function ReglasEvaluacion({ titulo, guard, onIniciar, onCancelar }: { tit
           <li>• Copiar, pegar y el clic derecho están prohibidos.</li>
           <li>• Recibirás {MAX_AVISOS} avisos. A la <strong>cuarta infracción</strong> la prueba se cierra, se califica con lo que respondiste y no podrás volver a entrar durante 24 horas.</li>
           <li>• Recargar la página no borra tus infracciones.</li>
+          <li>• Tras un cierre por infracciones, <strong>no podrás volver a esta evaluación durante 24 horas</strong>.</li>
+          <li>• En Conocimiento y Razonamiento la regla aplica por cada <strong>ronda de 10 preguntas</strong>. La nota del cierre es el porcentaje de aciertos de esa ronda, sobre 10.</li>
         </ul>
         <div className="mt-6 flex gap-2">
           <Button variant="outline" onClick={onCancelar}>Cancelar</Button>
@@ -56,6 +58,8 @@ export function AvisoExamen({ guard, resultado }: { guard: Guard; resultado?: st
         <p className="mt-2 text-sm">Detectamos: <strong>{NOMBRE_INFRACCION[a.tipo]}</strong>.</p>
         {a.cerrado ? (
           <p className="mt-2 text-sm">Cometiste 4 infracciones. Tu prueba se calificó con las respuestas registradas hasta ahora.{resultado ? <> Nota: <strong>{resultado}</strong>.</> : null}</p>
+          <p className="mt-2 text-sm font-semibold text-destructive">No podrás volver a esta evaluación durante 24 horas.</p>
+          <p className="mt-1 text-xs text-muted-foreground">En Conocimiento y Razonamiento la regla aplica por cada ronda de 10 preguntas; la nota del cierre es el porcentaje de aciertos de esa ronda, sobre 10.</p>
         ) : ultima ? (
           <p className="mt-2 text-sm font-semibold text-destructive">Infracción 3 de 3. La próxima infracción cerrará tu prueba.</p>
         ) : (
