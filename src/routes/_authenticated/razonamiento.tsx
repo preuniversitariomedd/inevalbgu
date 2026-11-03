@@ -19,6 +19,7 @@ interface Estado { aciertos: Record<number, string[]>; fallos: Record<string, nu
 const vacio = (): Estado => ({ aciertos: { 1: [], 2: [], 3: [] }, fallos: {} });
 
 function Razonamiento() {
+  const [generacion, setGeneracion] = useState<string | undefined>(undefined);
   const [uid, setUid] = useState<string | null>(null);
   const [edad, setEdad] = useState(14);
   const [est, setEst] = useState<Estado>(vacio);
@@ -33,8 +34,8 @@ function Razonamiento() {
       const id = data.user?.id ?? "anon";
       setUid(id);
       if (data.user) {
-        const { data: prog } = await (supabase as any).from("razonamiento_progreso").select("aciertos, fallos").eq("user_id", id).maybeSingle();
-        if (prog) setEst({ aciertos: { 1: [], 2: [], 3: [], ...prog.aciertos }, fallos: prog.fallos ?? {} });
+        const { data: prog } = await (supabase as any).from("razonamiento_progreso").select("*").eq("user_id", id).maybeSingle();
+        if (prog) { setGeneracion(prog.generacion); setEst({ aciertos: { 1: [], 2: [], 3: [], ...prog.aciertos }, fallos: prog.fallos ?? {} }); }
         else {
           // Migrar avance anterior guardado en este aparato
           try { const s = localStorage.getItem(`razonamiento:${id}`); if (s) { const e = JSON.parse(s); setEst(e); await (supabase as any).from("razonamiento_progreso").upsert({ user_id: id, aciertos: e.aciertos, fallos: e.fallos }); } } catch { /* */ }
@@ -49,7 +50,7 @@ function Razonamiento() {
 
   const guardar = (e: Estado, nivelCompletado: boolean) => {
     setEst(e);
-    if (uid && uid !== "anon") void (supabase as any).from("razonamiento_progreso").upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos }).then(({ error }: any) => { if (error) console.error(error); else if (nivelCompletado) avisarNotasActualizadas(); });
+    if (uid && uid !== "anon") void (supabase as any).from("razonamiento_progreso").upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos, ...(generacion ? { generacion } : {}) }).then(({ error }: any) => { if (error) console.error(error); else if (nivelCompletado) avisarNotasActualizadas(); });
   };
   const bancos = useMemo(() => ({ 1: bancoRazonamiento(1, edad), 2: bancoRazonamiento(2, edad), 3: bancoRazonamiento(3, edad) }), [edad]);
   const aprobado = (n: NivelRaz) => (est.aciertos[n]?.length ?? 0) >= Math.ceil(CONFIG_RAZ[n].total * CONFIG_RAZ[n].meta);

@@ -1,3 +1,4 @@
+import { ReiniciarEstudiantes } from '@/components/ReiniciarEstudiantes';
 import { CONSULTA_MANUAL } from '@/lib/consulta-politicas';
 import { FormulaNota } from '@/components/FormulaNota';
 import { createFileRoute } from "@tanstack/react-router";
@@ -298,7 +299,7 @@ function CalificacionesPage() {
           const p = periodos.find(p => p.id === id);
           if (p) setGrupoId(p.grupo_id);
         }} />
-        {meQ.data?.esAdmin && <Button variant="outline" onClick={() => setCrear(v => !v)}>Nuevo período</Button>}
+        {meQ.data?.esAdmin && <><Button variant="outline" onClick={() => setCrear(v => !v)}>Nuevo período</Button><ReiniciarEstudiantes /></>}
         {periodosQ.error && <p role="alert" className="text-sm text-destructive">No se pudieron cargar los períodos.</p>}
       </div>
       {crear && <form className="mb-4 grid gap-3 border-b pb-4 sm:grid-cols-2" onSubmit={async e => {

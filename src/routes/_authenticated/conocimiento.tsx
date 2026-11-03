@@ -38,6 +38,7 @@ function metaDe(n: NivelCon) {
 function Conocimiento() {
   const accesos = useAccesos();
   const config = useQuery({ queryKey: ['mis-accesos'], queryFn: () => misAccesosFn(), staleTime: Infinity, refetchIntervalInBackground: false });
+  const [generacion, setGeneracion] = useState<string | undefined>(undefined);
   const [uid, setUid] = useState<string | null>(null);
   const [est, setEst] = useState<Estado>(vacio);
   const [nivel, setNivel] = useState<NivelCon | null>(null);
@@ -52,10 +53,11 @@ function Conocimiento() {
       if (data.user) {
         const { data: prog } = await supabase
           .from("conocimiento_progreso")
-          .select("aciertos, fallos")
+          .select("*")
           .eq("user_id", id)
           .maybeSingle();
         if (prog) {
+          setGeneracion((prog as any).generacion);
           setEst({ aciertos: { 1: [], 2: [], 3: [], ...(prog.aciertos as Record<number, string[]>) }, fallos: (prog.fallos as Record<string, number>) ?? {} });
         } else {
           // Migrar avance anterior guardado en este aparato
@@ -75,10 +77,10 @@ function Conocimiento() {
   const guardar = (e: Estado, nivelCompletado: boolean) => {
     setEst(e);
     if (uid && uid !== "anon") {
-      void supabase
+      void (supabase as any)
         .from("conocimiento_progreso")
-        .upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos })
-        .then(({ error }) => { if (error) console.error(error); else if (nivelCompletado) avisarNotasActualizadas(); });
+        .upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos, ...(generacion ? { generacion } : {}) })
+        .then(({ error }: any) => { if (error) console.error(error); else if (nivelCompletado) avisarNotasActualizadas(); });
     }
   };
 

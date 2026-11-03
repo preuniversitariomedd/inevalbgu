@@ -57,7 +57,7 @@ REVOKE ALL ON FUNCTION public.foto_academica() FROM PUBLIC, anon, authenticated;
 CREATE OR REPLACE FUNCTION public.preparar_respaldo_academico() RETURNS uuid LANGUAGE plpgsql SECURITY DEFINER SET search_path = public AS $$
 DECLARE foto jsonb; nuevo uuid;
 BEGIN
- IF NOT public.has_role(auth.uid(),'administrador') THEN RAISE EXCEPTION 'Solo administradores'; END IF;
+ IF public.has_role(auth.uid(),'administrador') IS NOT TRUE THEN RAISE EXCEPTION 'Solo administradores'; END IF;
  LOCK TABLE public.respuestas,public.sesiones_practica,public.sesiones_conexion,public.tiempo_calificacion_eventos,public.alertas_presencia,public.conocimiento_progreso,public.razonamiento_progreso,public.encuesta_respuestas,public.encuesta_progreso,public.tarea_vistas,public.biblioteca_vistas,public.biblioteca_favoritos,public.competencia_respuestas,public.competencia_alertas,public.competencia_participantes,public.profiles,public.user_roles,public.grupo_estudiantes,public.periodos_calificacion,public.grupo_configuracion IN SHARE ROW EXCLUSIVE MODE;
  foto := public.foto_academica();
  INSERT INTO public.respaldos_academicos(creado_por,datos,huella) VALUES(auth.uid(),foto,md5(foto::text)) RETURNING id INTO nuevo;
@@ -69,7 +69,7 @@ GRANT EXECUTE ON FUNCTION public.preparar_respaldo_academico() TO authenticated;
 CREATE OR REPLACE FUNCTION public.reiniciar_avances_academicos(_respaldo uuid,_huella text) RETURNS boolean LANGUAGE plpgsql SECURITY DEFINER SET search_path = public AS $$
 DECLARE b public.respaldos_academicos; foto jsonb; ids uuid[];
 BEGIN
- IF NOT public.has_role(auth.uid(),'administrador') THEN RAISE EXCEPTION 'Solo administradores'; END IF;
+ IF public.has_role(auth.uid(),'administrador') IS NOT TRUE THEN RAISE EXCEPTION 'Solo administradores'; END IF;
  SELECT * INTO b FROM public.respaldos_academicos WHERE id=_respaldo AND creado_por=auth.uid() FOR UPDATE;
  IF NOT FOUND OR b.huella<>_huella THEN RAISE EXCEPTION 'Respaldo no válido'; END IF;
  IF b.reiniciado_en IS NOT NULL THEN RETURN true; END IF;
