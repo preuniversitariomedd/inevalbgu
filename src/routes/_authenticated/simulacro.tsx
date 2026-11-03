@@ -2,7 +2,7 @@ import { useExamGuard } from "@/hooks/use-exam-guard";
 import { ReglasEvaluacion, AvisoExamen } from "@/components/ExamGuard";
 import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Timer, RotateCcw, Calculator, Atom } from "lucide-react";
 import { AREAS } from "@/data/tipos";
 import type { Pregunta } from "@/data/tipos";
