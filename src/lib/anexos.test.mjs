@@ -1,7 +1,7 @@
 import { expect, test } from 'bun:test';
 import { ANALOGIAS_RAZ, MATEMATICAS_RAZ, CONOCIMIENTO_EGB, opcionesAnexo } from '@/data/anexos';
 import { bancoRazonamiento, CONFIG_RAZ } from '@/data/basica/razonamiento';
-import { BANCO_CONOCIMIENTO } from '@/data/conocimiento';
+import { BANCO_CONOCIMIENTO, CONFIG_CON } from '@/data/conocimiento';
 import { avanceDesdeEventos } from './periodos';
 import { CLAVES_ACTUALIZACION_GRUPO } from './grupo-actualizaciones';
 
@@ -41,4 +41,7 @@ test('Un cambio de grupo actualiza conjuntamente accesos y notas estudiantiles y
   expect(CLAVES_ACTUALIZACION_GRUPO).toContain('mis-accesos');
   expect(CLAVES_ACTUALIZACION_GRUPO).toContain('calificacion');
   expect(CLAVES_ACTUALIZACION_GRUPO).toContain('calificaciones');
+});
+test('Metas de Conocimiento: 100 %, 95 % y 90 %', () => {
+  expect([1,2,3].map(n => CONFIG_CON[n].meta)).toEqual([1, 0.95, 0.9]);
 });
