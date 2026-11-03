@@ -6280,9 +6280,9 @@ export const BANCO_CONOCIMIENTO: Pregunta[] = [
 export type NivelCon = 1 | 2 | 3;
 export const NIVEL_CON: Record<NivelCon, "Básico" | "Intermedio" | "Avanzado"> = { 1: "Básico", 2: "Intermedio", 3: "Avanzado" };
 export const CONFIG_CON: Record<NivelCon, { meta: number; titulo: string; descripcion: string }> = {
-  1: { meta: 0.9, titulo: "Nivel 1 · Básico", descripcion: "Lecturas literales, vocabulario y cálculos directos. Meta: 90 % de aciertos." },
-  2: { meta: 0.8, titulo: "Nivel 2 · Intermedio", descripcion: "Inferencias, causa-consecuencia e idea principal. Meta: 80 % de aciertos." },
-  3: { meta: 0.75, titulo: "Nivel 3 · Avanzado", descripcion: "Deducción, negación e intención del autor. Meta: 75 % de aciertos." },
+  1: { meta: 1, titulo: "Nivel 1 · Básico", descripcion: "Lecturas literales, vocabulario y cálculos directos. Meta: 100 % de aciertos." },
+  2: { meta: 0.95, titulo: "Nivel 2 · Intermedio", descripcion: "Inferencias, causa-consecuencia e idea principal. Meta: 95 % de aciertos." },
+  3: { meta: 0.9, titulo: "Nivel 3 · Avanzado", descripcion: "Deducción, negación e intención del autor. Meta: 90 % de aciertos." },
 };
 
 export function preguntasConocimiento(nivel: NivelCon): Pregunta[] {

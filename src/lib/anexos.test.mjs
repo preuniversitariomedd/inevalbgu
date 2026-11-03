@@ -30,8 +30,8 @@ test('Respuestas A–E conservan cinco opciones y la clave original', () => {
   }
   expect(() => opcionesAnexo({A:'uno'}, 'Z')).toThrow();
 });
-test('Las metas anteriores de Razonamiento se mantienen al ampliar el banco', () => {
-  expect([1,2,3].map(n => Math.ceil(CONFIG_RAZ[n].total * CONFIG_RAZ[n].meta))).toEqual([90,80,38]);
+test("Metas de Razonamiento: 100 %, 95 % y 90 %", () => {
+  expect([1,2,3].map(n => Math.ceil(CONFIG_RAZ[n].total * CONFIG_RAZ[n].meta))).toEqual([100,95,45]);
 });
 test('Las nuevas respuestas aportan a la nota del período en su nivel', () => {
   expect(avanceDesdeEventos([{ pregunta_id:'raz-analogia-1', area:'Razonamiento', correcta:true }], 'Razonamiento').aciertos['1']).toEqual(['raz-analogia-1']);

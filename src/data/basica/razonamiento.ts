@@ -12,9 +12,9 @@ export interface PreguntaRaz extends Pregunta {
   estrategia: string;
 }
 export const CONFIG_RAZ: Record<NivelRaz, { total: number; meta: number; titulo: string; mezcla: string }> = {
-  1: { total: 100, meta: 0.9, titulo: "Nivel 1 · Conocimiento", mezcla: "75 % conocimiento · 25 % habilidad" },
-  2: { total: 100, meta: 0.8, titulo: "Nivel 2 · Equilibrio", mezcla: "50 % conocimiento · 50 % habilidad" },
-  3: { total: 50, meta: 0.75, titulo: "Nivel 3 · Habilidad", mezcla: "25 % conocimiento · 75 % habilidad" },
+  1: { total: 100, meta: 1, titulo: "Nivel 1 · Conocimiento", mezcla: "75 % conocimiento · 25 % habilidad" },
+  2: { total: 100, meta: 0.95, titulo: "Nivel 2 · Equilibrio", mezcla: "50 % conocimiento · 50 % habilidad" },
+  3: { total: 50, meta: 0.9, titulo: "Nivel 3 · Habilidad", mezcla: "25 % conocimiento · 75 % habilidad" },
 };
 const NV = { 1: "Básico", 2: "Intermedio", 3: "Avanzado" } as const;
 
