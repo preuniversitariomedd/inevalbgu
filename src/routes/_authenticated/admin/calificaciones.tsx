@@ -1,3 +1,4 @@
+import { InfraccionesPanel } from "@/components/InfraccionesPanel";
 import { ReiniciarEstudiantes } from '@/components/ReiniciarEstudiantes';
 import { CONSULTA_MANUAL } from '@/lib/consulta-politicas';
 import { FormulaNota } from '@/components/FormulaNota';
@@ -451,6 +452,7 @@ function CalificacionesPage() {
         </table>
       </div>
       <p className="mt-2 text-xs text-muted-foreground inline-flex items-center gap-1"><Download className="h-3 w-3" /> Excel / PDF se descargan al navegador.</p>
+      <InfraccionesPanel />
     </div>
   );
 }
