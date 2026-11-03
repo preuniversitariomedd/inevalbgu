@@ -1,3 +1,5 @@
+import { BotonRefrescar } from "@/components/BotonRefrescar";
+import { CONSULTA_MANUAL } from "@/lib/consulta-politicas";
 import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
@@ -61,10 +63,10 @@ function fmtFecha(v: string | null) {
 
 function DocentesPage() {
   const listar = useServerFn(listarDocentesFn);
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isFetching, refetch } = useQuery({
     queryKey: ["admin", "docentes"],
     queryFn: () => listar(),
-    refetchInterval: 30_000,
+    ...CONSULTA_MANUAL,
   });
   const [q, setQ] = useState("");
 
@@ -85,6 +87,7 @@ function DocentesPage() {
 
   return (
     <div className="space-y-4">
+      <div className="flex justify-end"><BotonRefrescar cargando={isFetching} onClick={() => void refetch()} /></div>
       <div className="flex flex-col gap-3 rounded-2xl border bg-card p-4 shadow-soft sm:flex-row sm:items-center sm:justify-between">
         <div className="relative w-full sm:max-w-sm">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />

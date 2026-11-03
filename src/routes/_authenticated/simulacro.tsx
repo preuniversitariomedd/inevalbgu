@@ -1,6 +1,8 @@
+import { useExamGuard } from "@/hooks/use-exam-guard";
+import { ReglasEvaluacion, AvisoExamen } from "@/components/ExamGuard";
 import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Timer, RotateCcw, Calculator, Atom } from "lucide-react";
 import { AREAS } from "@/data/tipos";
 import type { Pregunta } from "@/data/tipos";
@@ -74,6 +76,13 @@ function aPregunta(p: (typeof BANCO_FISICA)[number]): Pregunta {
 
 
 function Simulacro() {
+  const cerrarRef = useRef<() => void>(() => {});
+  const guard = useExamGuard("simulacro", () => cerrarRef.current());
+  return (<><SimulacroVista guard={guard} cerrarRef={cerrarRef} /><AvisoExamen guard={guard} /></>);
+}
+
+function SimulacroVista({ guard, cerrarRef }: { guard: ReturnType<typeof useExamGuard>; cerrarRef: { current: () => void } }) {
+  const [reglas, setReglas] = useState(false);
   const [asignatura, setAsignatura] = useState<Asignatura>("mate");
   const [iniciado, setIniciado] = useState(false);
   const [terminado, setTerminado] = useState(false);
@@ -162,7 +171,10 @@ function Simulacro() {
     return () => clearInterval(t);
   }, [iniciado, terminado]);
 
+  cerrarRef.current = () => setTerminado(true);
+
   function reiniciar() {
+    setReglas(false);
     setIniciado(false); setTerminado(false); setRevisando(false);
     setIdx(0); setRespuestas([]); setRestante(cfg.min * 60);
     setSesionId(null); setGuardadoFinal(false);
@@ -173,6 +185,10 @@ function Simulacro() {
     setRestante(cfg.min * 60);
     const id = await iniciarSesion("simulacro", cfg.area);
     setSesionId(id);
+  }
+
+  if (!iniciado && reglas) {
+    return <ReglasEvaluacion titulo={`Simulacro de ${cfg.nombre}`} guard={guard} onIniciar={() => void empezar()} onCancelar={() => setReglas(false)} />;
   }
 
   if (!iniciado) {
@@ -207,7 +223,7 @@ function Simulacro() {
                 <li key={n.nombre}>• {n.rango} → <span className={`font-semibold ${n.color}`}>{n.nombre}</span></li>
               ))}
             </ul>
-            <button onClick={empezar} className="mt-6 w-full rounded-xl bg-primary px-5 py-3 text-base font-bold text-primary-foreground shadow-soft hover:bg-primary/90">
+            <button onClick={() => setReglas(true)} className="mt-6 w-full rounded-xl bg-primary px-5 py-3 text-base font-bold text-primary-foreground shadow-soft hover:bg-primary/90">
               Empezar simulacro de {cfg.nombre}
             </button>
           </div>
@@ -226,6 +242,7 @@ function Simulacro() {
     if (!guardadoFinal) {
       setGuardadoFinal(true);
       void finalizarSesion(sesionId, total, aciertos, score, nivel.nombre, cfg.min * 60 - restante);
+      guard.finalizar(score / 100);
     }
 
 

@@ -96,7 +96,7 @@ export function ChatShell({
   const convsQ = useQuery({
     queryKey: ["mensajes", "convs", scope],
     queryFn: () => listarConversacionesFn({ data: { scope } }) as Promise<Conversacion[]>,
-    refetchInterval: 30_000,
+    refetchOnWindowFocus: false,
   });
 
   // Realtime: cualquier mensaje nuevo o lectura → refetch lista y mensajes
@@ -335,7 +335,7 @@ function ChatPanel({
     queryKey: ["mensajes", "presencia", otro?.id],
     queryFn: () => (otro ? presenciaUsuarioFn({ data: { userId: otro.id } }) : Promise.resolve(null as any)),
     enabled: !!otro && esAdmin,
-    refetchInterval: 15_000,
+    staleTime: Infinity,
   });
 
   useEffect(() => {
@@ -767,6 +767,8 @@ export function useMensajesNoLeidos(enabled: boolean) {
     queryKey: ["mensajes", "unread"],
     queryFn: () => contarNoLeidosFn(),
     enabled,
-    refetchInterval: 20_000,
+    staleTime: Infinity,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
   });
 }

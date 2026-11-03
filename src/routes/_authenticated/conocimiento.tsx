@@ -1,6 +1,8 @@
+import { useExamGuard } from "@/hooks/use-exam-guard";
+import { ReglasEvaluacion, AvisoExamen } from "@/components/ExamGuard";
 import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Lock, Trophy, BookOpenCheck, ShieldAlert } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { BANCO_CONOCIMIENTO, CONFIG_CON, preguntasConocimiento, type NivelCon } from "@/data/conocimiento";
@@ -44,6 +46,17 @@ function Conocimiento() {
   const [nivel, setNivel] = useState<NivelCon | null>(null);
   const [ronda, setRonda] = useState<typeof BANCO_CONOCIMIENTO>([]);
   const [idx, setIdx] = useState(0);
+  const [pendiente, setPendiente] = useState<NivelCon | null>(null);
+  const [notaCierre, setNotaCierre] = useState<string | null>(null);
+  const rondaRef = useRef({ ok: 0, resp: 0 });
+  const notaRonda = () => rondaRef.current.resp ? (rondaRef.current.ok / rondaRef.current.resp) * 10 : 0;
+  const guard = useExamGuard("conocimiento", () => {
+    const n = notaRonda();
+    setNotaCierre(`${n.toFixed(2)} / 10 (${rondaRef.current.ok} de ${rondaRef.current.resp} correctas)`);
+    void guard.finalizar(n);
+    setNivel(null);
+  });
+  const terminarRonda = () => guard.finalizar(notaRonda());
 
   useEffect(() => {
     (async () => {
@@ -90,6 +103,7 @@ function Conocimiento() {
 
   // Adaptativo: prioriza preguntas no acertadas de los subtemas con más fallos.
   function armarRonda(n: NivelCon) {
+    rondaRef.current = { ok: 0, resp: 0 }; setNotaCierre(null);
     const hechas = new Set(est.aciertos[n] ?? []);
     const pend = bancos[n].filter((p) => !hechas.has(p.id));
     pend.sort((a, b) => (est.fallos[b.subtema] ?? 0) - (est.fallos[a.subtema] ?? 0) + (Math.random() - 0.5) * 2);
@@ -98,12 +112,17 @@ function Conocimiento() {
     setNivel(n);
   }
 
+  if (pendiente) {
+    return <ReglasEvaluacion titulo="Conocimiento" guard={guard} onIniciar={() => { armarRonda(pendiente); setPendiente(null); }} onCancelar={() => setPendiente(null)} />;
+  }
+
   const p = ronda[idx];
   if (nivel && p && idx < ronda.length) {
     return (
       <div className="mx-auto max-w-3xl px-5 py-6">
+        <AvisoExamen guard={guard} />
         <div className="mb-3 flex justify-between text-sm">
-          <Button variant="ghost" size="sm" onClick={() => setNivel(null)}>← Salir</Button>
+          <Button variant="ghost" size="sm" onClick={() => { terminarRonda(); setNivel(null); }}>← Salir</Button>
           <span className="font-semibold">{CONFIG_CON[nivel].titulo} · {idx + 1}/{ronda.length}</span>
         </div>
         <div className="mb-3 flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[11px] font-medium text-accent-foreground">
@@ -114,6 +133,7 @@ function Conocimiento() {
           pregunta={p}
           esUltima={idx === ronda.length - 1}
           onResponder={(ok) => {
+            rondaRef.current.resp++; if (ok) rondaRef.current.ok++;
             const e: Estado = JSON.parse(JSON.stringify(est));
             const aciertos = e.aciertos[nivel] ?? [];
             if (ok && !aciertos.includes(p.id)) aciertos.push(p.id);
@@ -122,7 +142,7 @@ function Conocimiento() {
             guardar(e, (est.aciertos[nivel]?.length ?? 0) < metaDe(nivel) && aciertos.length >= metaDe(nivel));
             guardarRespuesta({ preguntaId: p.id, area: "Conocimiento", subtema: p.subtema, nivel: p.nivel, correcta: ok });
           }}
-          onSiguiente={() => setIdx((i) => i + 1)}
+          onSiguiente={() => { if (idx >= ronda.length - 1) terminarRonda(); setIdx((i) => i + 1); }}
         />
       </div>
     );
@@ -138,6 +158,8 @@ function Conocimiento() {
         {BANCO_CONOCIMIENTO.length} preguntas de lectura comprensiva en situaciones reales y párrafos técnicos.
         Supera cada nivel para desbloquear el siguiente.
       </p>
+      <AvisoExamen guard={guard} resultado={notaCierre ?? undefined} />
+      {notaCierre && <div className="mt-4 rounded-xl border border-destructive/40 bg-destructive/10 p-3 text-sm font-medium">Ronda cerrada por infracciones. Nota de la ronda: {notaCierre}</div>}
       {nivel && (
         <div className="mt-4 rounded-xl border bg-success/10 p-3 text-sm font-medium">
           Ronda terminada. ¡Sigue practicando para llegar a la meta!
@@ -163,7 +185,7 @@ function Conocimiento() {
               <p className="mt-1 text-xs text-muted-foreground">{ok} / {meta} correctas</p>
               <Button
                 disabled={!libre || ok >= TOTALES[n]}
-                onClick={() => armarRonda(n)}
+                onClick={() => setPendiente(n)}
                 className="mt-4 w-full"
               >
                 {!libre ? `Aprueba el nivel ${n - 1}` : ok >= TOTALES[n] ? "Completado" : "Ronda de 10 preguntas"}

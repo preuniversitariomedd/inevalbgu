@@ -1,3 +1,5 @@
+import { CONSULTA_MANUAL } from "@/lib/consulta-politicas";
+import { BotonRefrescar } from "@/components/BotonRefrescar";
 import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
@@ -49,10 +51,10 @@ function PodioPage() {
   const [seleccion, setSeleccion] = useState<number | null>(null);
   const [vista, setVista] = useState<"ranking" | "encuesta">("ranking");
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isFetching, refetch } = useQuery({
     queryKey: ["podio", grupoId],
     queryFn: () => podioFn({ data: { grupoId: grupoId || null } }),
-    refetchInterval: 60_000,
+    ...CONSULTA_MANUAL,
   });
 
   const grupos = ((data as any)?.grupos ?? []) as { id: string; nombre: string }[];
@@ -90,6 +92,7 @@ function PodioPage() {
 
   return (
     <div>
+      <div className="mb-2 flex justify-end"><BotonRefrescar cargando={isFetching} onClick={() => void refetch()} /></div>
       <div className="flex flex-wrap items-center gap-2">
         <div className="inline-flex rounded-xl border p-1">
           {(["ranking", "encuesta"] as const).map((v) => (
