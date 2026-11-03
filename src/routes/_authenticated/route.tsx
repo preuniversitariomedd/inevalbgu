@@ -1,3 +1,4 @@
+import { FormulaNota } from '@/components/FormulaNota';
 import { createFileRoute, Outlet, redirect, Link, useRouter } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
@@ -159,6 +160,7 @@ function AuthedContent() {
             </button>
           </div>
         </div>
+        {!ctx.esStaff && <div className="mx-auto max-w-6xl border-t px-5 py-2"><FormulaNota compacta /></div>}
       </nav>
       <ContenidoModulo><Outlet /></ContenidoModulo>
       <AusenciaDialog />

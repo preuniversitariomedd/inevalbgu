@@ -1,3 +1,6 @@
+import { ReiniciarEstudiantes } from '@/components/ReiniciarEstudiantes';
+import { CONSULTA_MANUAL } from '@/lib/consulta-politicas';
+import { FormulaNota } from '@/components/FormulaNota';
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
@@ -11,7 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import { calificacionesEstudiantesFn } from "@/lib/presencia.functions";
 import { listarGruposFn, listarEstudiantesGrupoFn } from "@/lib/admin.functions";
 import { ABREVIATURAS_ASIG, CLAVES_ASIGNATURAS, NOMBRES_ASIG, type ClaveAsignatura } from "@/lib/asignaturas";
-import { Download, FileSpreadsheet, FileText, Users } from "lucide-react";
+import { Download, FileSpreadsheet, FileText, Users, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/calificaciones")({
@@ -203,8 +206,7 @@ function CalificacionesPage() {
   const q = useQuery({
     queryKey: ["calificaciones", periodoId, grupoId],
     queryFn: () => fetchNotas({ data: { periodoId: periodoId || undefined, grupoId: grupoId || undefined } }) as Promise<Fila[]>,
-    refetchInterval: 15000,
-    refetchOnWindowFocus: true,
+    ...CONSULTA_MANUAL,
   });
   const grpQ = useQuery({ queryKey: ["admin", "grupos"], queryFn: () => listarGruposFn() });
   const miembrosQ = useQuery({
@@ -283,9 +285,7 @@ function CalificacionesPage() {
           placeholder="Buscar por nombre o cédula…"
           className="w-56 rounded-lg border bg-background px-3 py-1.5 text-sm"
         />
-        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold text-primary">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-primary" /> Notas en vivo
-        </span>
+        <Button variant="outline" disabled={q.isFetching} onClick={() => void q.refetch()}><RefreshCw className={`h-4 w-4 ${q.isFetching ? "animate-spin motion-reduce:animate-none" : ""}`}/>{q.isFetching ? "Actualizando…" : "Actualizar notas"}</Button>
         <div className="ml-auto text-sm">
           <span className="text-muted-foreground">Promedio del grupo:</span>{" "}
           <span className={`font-bold ${notaColor(prom)}`}>{prom.toFixed(2)} / 10</span>
@@ -299,7 +299,7 @@ function CalificacionesPage() {
           const p = periodos.find(p => p.id === id);
           if (p) setGrupoId(p.grupo_id);
         }} />
-        {meQ.data?.esAdmin && <Button variant="outline" onClick={() => setCrear(v => !v)}>Nuevo período</Button>}
+        {meQ.data?.esAdmin && <><Button variant="outline" onClick={() => setCrear(v => !v)}>Nuevo período</Button><ReiniciarEstudiantes /></>}
         {periodosQ.error && <p role="alert" className="text-sm text-destructive">No se pudieron cargar los períodos.</p>}
       </div>
       {crear && <form className="mb-4 grid gap-3 border-b pb-4 sm:grid-cols-2" onSubmit={async e => {
@@ -345,9 +345,9 @@ function CalificacionesPage() {
       <div className="mb-4 rounded-2xl border bg-gradient-to-br from-primary/5 to-accent/5 p-4 shadow-soft">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="text-sm text-muted-foreground">
-            <div className="font-semibold text-foreground">Cálculo de las notas (0–10)</div>
+            <div className="font-semibold text-foreground">Cálculo de las notas (0–10)</div><FormulaNota compacta/>
             <ul className="mt-1 list-inside list-disc">
-              <li><b>Nota general:</b> porcentajes elegidos por el administrador para el grupo; sin configuración, 10% tiempo y 30% por cada módulo evaluado.</li>
+              <li><b>Nota general:</b> 40% Conocimiento, 30% Razonamiento y 30% Simulacro.</li>
               <li><b>Notas por asignatura:</b> mismos porcentajes, con prácticas y simulacros de esa asignatura.</li>
             </ul>
             <div className="mt-2 flex flex-wrap items-center gap-1.5">

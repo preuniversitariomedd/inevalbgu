@@ -1,3 +1,5 @@
+import { CONSULTA_NOTAS } from '@/lib/consulta-politicas';
+import { FormulaNota } from './FormulaNota';
 import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -21,15 +23,14 @@ export function CoachFlotante() {
   const [abierto, setAbierto] = useState(false);
 
   const cal = useQuery({
-    queryKey: ["calificacion", "me"],
+    queryKey: ["calificacion", "me", ""],
     queryFn: () => calificacionAsignaturasFn({ data: {} }),
-    refetchInterval: 20000,
-    refetchOnWindowFocus: true,
+    ...CONSULTA_NOTAS,
   });
   const prog = useQuery({
-    queryKey: ["progreso", "coach"],
+    queryKey: ["progreso", "me"],
     queryFn: () => obtenerProgresoFn({ data: {} }),
-    refetchInterval: 60000,
+    ...CONSULTA_NOTAS,
   });
 
   const data = cal.data as any;
@@ -223,6 +224,7 @@ export function CoachFlotante() {
             </button>
           </div>
 
+          <FormulaNota />
           <div className="mt-3 grid grid-cols-2 gap-2 text-center text-xs">
             <div className="rounded-xl border bg-secondary/40 p-2">
               <div className="font-semibold">📐 Matemática</div>

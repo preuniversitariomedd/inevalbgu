@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, CheckCircle2, XCircle, Lightbulb, Lock, Trophy, RefreshCw, Eye } from "lucide-react";
 import { guardarRespuesta } from "@/lib/progreso";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/sistemas")({
   head: () => ({
@@ -87,12 +88,24 @@ type Estado = { nivelMax: number; racha: Record<number, number> };
 const KEY = "sistemas_progreso_v1";
 
 function Sistemas() {
+  const [clave, setClave] = useState<string | null>(null);
   const [st, setSt] = useState<Estado>({ nivelMax: 1, racha: {} });
   const [nivel, setNivel] = useState<number | null>(null);
   useEffect(() => {
-    try { const s = localStorage.getItem(KEY); if (s) setSt(JSON.parse(s)); } catch { /* */ }
+    let cancelled = false;
+    void (async () => {
+      const { data } = await supabase.auth.getUser();
+      if (!data.user || cancelled) return;
+      const { data: avance, error } = await supabase.from('conocimiento_progreso').select('*').eq('user_id', data.user.id).maybeSingle();
+      if (error || cancelled) return;
+      const generacion = (avance as any)?.generacion ?? 'inicial';
+      const key = `${KEY}:${data.user.id}:${generacion}`;
+      setClave(key);
+      try { const s = localStorage.getItem(key); if (s) setSt(JSON.parse(s)); } catch { /* */ }
+    })();
+    return () => { cancelled = true; };
   }, []);
-  function guardar(n: Estado) { setSt(n); localStorage.setItem(KEY, JSON.stringify(n)); }
+  function guardar(n: Estado) { setSt(n); if (clave) localStorage.setItem(clave, JSON.stringify(n)); }
 
   if (nivel) {
     return <Jugar nivel={nivel} estado={st} guardar={guardar} salir={() => setNivel(null)} />;

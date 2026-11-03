@@ -1,3 +1,5 @@
+import { Button } from '@/components/ui/button';
+import { CONSULTA_MANUAL } from '@/lib/consulta-politicas';
 import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -43,12 +45,12 @@ function PresenciaPage() {
   const q = useQuery({
     queryKey: ["presencia"],
     queryFn: () => listarPresenciaFn(),
-    refetchInterval: 10_000,
+    ...CONSULTA_MANUAL,
   });
   const qa = useQuery({
     queryKey: ["alertas-presencia"],
     queryFn: () => listarAlertasPresenciaFn(),
-    refetchInterval: 15_000,
+    ...CONSULTA_MANUAL,
   });
   const resolver = useMutation({
     mutationFn: (id: string) => resolverAlertaFn({ data: { id } }),
@@ -120,7 +122,7 @@ function PresenciaPage() {
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div className="flex gap-1 rounded-xl bg-secondary p-1">
           <button className={`rounded-lg px-3 py-1.5 text-sm font-semibold ${tab === "vivo" ? "bg-background shadow-soft" : ""}`} onClick={() => setTab("vivo")}>
             <Wifi className="mr-1 inline h-4 w-4" /> En vivo ({enVivo.length})
@@ -132,9 +134,7 @@ function PresenciaPage() {
             Historial ({historial.length})
           </button>
         </div>
-        <button onClick={() => { q.refetch(); qa.refetch(); }} className="inline-flex items-center gap-1 rounded-lg border px-3 py-1.5 text-sm font-semibold hover:bg-secondary">
-          <RefreshCw className="h-3.5 w-3.5" /> Actualizar
-        </button>
+        <Button variant="outline" disabled={q.isFetching || qa.isFetching} onClick={() => { void q.refetch(); void qa.refetch(); }}><RefreshCw className={`h-4 w-4 ${q.isFetching || qa.isFetching ? "animate-spin motion-reduce:animate-none" : ""}`} />{q.isFetching || qa.isFetching ? "Actualizando…" : "Refrescar"}</Button>
       </div>
 
       {tab === "vivo" && (

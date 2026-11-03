@@ -10,6 +10,7 @@ import { useAccesos } from '@/components/AccesoModulo';
 import { useQuery } from '@tanstack/react-query';
 import { misAccesosFn } from '@/lib/grupo-config.functions';
 import { Button } from '@/components/ui/button';
+import { avisarNotasActualizadas } from '@/lib/actualizar-notas';
 
 export const Route = createFileRoute("/_authenticated/conocimiento")({
   head: () => ({
@@ -36,7 +37,8 @@ function metaDe(n: NivelCon) {
 
 function Conocimiento() {
   const accesos = useAccesos();
-  const config = useQuery({ queryKey: ['mis-accesos'], queryFn: () => misAccesosFn() });
+  const config = useQuery({ queryKey: ['mis-accesos'], queryFn: () => misAccesosFn(), staleTime: Infinity, refetchIntervalInBackground: false });
+  const [generacion, setGeneracion] = useState<string | undefined>(undefined);
   const [uid, setUid] = useState<string | null>(null);
   const [est, setEst] = useState<Estado>(vacio);
   const [nivel, setNivel] = useState<NivelCon | null>(null);
@@ -51,10 +53,11 @@ function Conocimiento() {
       if (data.user) {
         const { data: prog } = await supabase
           .from("conocimiento_progreso")
-          .select("aciertos, fallos")
+          .select("*")
           .eq("user_id", id)
           .maybeSingle();
         if (prog) {
+          setGeneracion((prog as any).generacion);
           setEst({ aciertos: { 1: [], 2: [], 3: [], ...(prog.aciertos as Record<number, string[]>) }, fallos: (prog.fallos as Record<string, number>) ?? {} });
         } else {
           // Migrar avance anterior guardado en este aparato
@@ -71,13 +74,13 @@ function Conocimiento() {
     })();
   }, []);
 
-  const guardar = (e: Estado) => {
+  const guardar = (e: Estado, nivelCompletado: boolean) => {
     setEst(e);
     if (uid && uid !== "anon") {
-      void supabase
+      void (supabase as any)
         .from("conocimiento_progreso")
-        .upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos })
-        .then(({ error }) => error && console.error(error));
+        .upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos, ...(generacion ? { generacion } : {}) })
+        .then(({ error }: any) => { if (error) console.error(error); else if (nivelCompletado) avisarNotasActualizadas(); });
     }
   };
 
@@ -116,7 +119,7 @@ function Conocimiento() {
             if (ok && !aciertos.includes(p.id)) aciertos.push(p.id);
             e.aciertos[nivel] = aciertos;
             if (!ok) e.fallos[p.subtema] = (e.fallos[p.subtema] ?? 0) + 1;
-            guardar(e);
+            guardar(e, (est.aciertos[nivel]?.length ?? 0) < metaDe(nivel) && aciertos.length >= metaDe(nivel));
             guardarRespuesta({ preguntaId: p.id, area: "Conocimiento", subtema: p.subtema, nivel: p.nivel, correcta: ok });
           }}
           onSiguiente={() => setIdx((i) => i + 1)}

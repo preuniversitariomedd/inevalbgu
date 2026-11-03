@@ -5,22 +5,17 @@ export type Parte = keyof typeof PARTES;
 export type Modulos = Record<Modulo, boolean>;
 export type Pesos = Record<Parte, number>;
 export const MODULOS_DEFAULT = Object.fromEntries(Object.keys(MODULOS).map(k => [k, true])) as Modulos;
-export const PESOS_DEFAULT: Pesos = { plataforma: 10, practicas: 0, simulacro: 30, conocimiento: 30, razonamiento: 30 };
-export function validarPesos(modulos: Modulos, pesos: Pesos) {
+export const PESOS_DEFAULT: Pesos = { plataforma: 0, practicas: 0, simulacro: 30, conocimiento: 40, razonamiento: 30 };
+export function validarPesos(_modulos: Modulos, pesos: Pesos) {
   for (const k of Object.keys(PARTES) as Parte[]) {
-    if (!Number.isFinite(pesos[k]) || pesos[k] < 0 || pesos[k] > 100) throw new Error('Cada porcentaje debe estar entre 0 y 100.');
-    if (k !== 'plataforma' && !modulos[k] && pesos[k] !== 0) throw new Error('Una parte desactivada debe tener 0%.');
+    if (pesos[k] !== PESOS_DEFAULT[k]) throw new Error('La fórmula oficial es fija: 40% Conocimiento, 30% Razonamiento y 30% Simulacro (100%).');
   }
-  if (Math.abs(Object.values(pesos).reduce((a,b) => a+b,0) - 100) > 0.000001) throw new Error('Los porcentajes deben sumar 100%.');
 }
 export function accesoCombinado(configs: { modulos: Partial<Modulos> }[]): Modulos {
   return Object.fromEntries((Object.keys(MODULOS) as Modulo[]).map(k => [k, configs.every(c => c.modulos[k] !== false)])) as Modulos;
 }
-export function pesosActivos(modulos: Modulos, pesos: Pesos): Pesos {
-  const activos = Object.fromEntries((Object.keys(PARTES) as Parte[]).map(k => [k, k === 'plataforma' || modulos[k] ? pesos[k] : 0])) as Pesos;
-  const total = Object.values(activos).reduce((a,b) => a+b,0);
-  if (total === 0) return { plataforma: 100, practicas: 0, simulacro: 0, conocimiento: 0, razonamiento: 0 };
-  return Object.fromEntries((Object.keys(PARTES) as Parte[]).map(k => [k, activos[k] * 100 / total])) as Pesos;
+export function pesosActivos(modulos: Modulos, _pesos: Pesos): Pesos {
+  return Object.fromEntries((Object.keys(PARTES) as Parte[]).map(k => [k, k !== 'plataforma' && modulos[k] ? PESOS_DEFAULT[k] : 0])) as Pesos;
 }
 export function moduloDeRuta(path: string): Modulo | null {
   const p = path.split('/')[1];
