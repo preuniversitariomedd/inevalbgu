@@ -4,7 +4,6 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
-import { usePresencia } from "@/lib/usePresencia";
 import { useAntiCopia } from "@/lib/useAntiCopia";
 import { LogOut, GraduationCap, Shield, PartyPopper, MessageCircle, Camera, Sparkles, ClipboardList, Library } from "lucide-react";
 import { AusenciaDialog } from "@/components/AusenciaDialog";
@@ -66,13 +65,14 @@ function AuthedContent() {
   };
   const router = useRouter();
   const [cedula, setCedula] = useState<string>("");
+  const [nombre, setNombre] = useState<string>("");
   const bienvenidaShown = useRef(false);
   const { data: branding } = useQuery({
     queryKey: ["branding"],
     queryFn: () => obtenerBrandingFn(),
     staleTime: 60_000,
   });
-  usePresencia(true);
+
   // Anti-copia: bloquea Ctrl+C / Ctrl+V / menú contextual fuera de campos de texto.
   useAntiCopia(true);
 
@@ -85,6 +85,7 @@ function AuthedContent() {
       .maybeSingle()
       .then(({ data }) => {
         setCedula(data?.cedula ?? "");
+        setNombre(data?.nombres ?? "");
         if (data?.nombres && !bienvenidaShown.current) {
           const key = `welcome:${ctx.user.id}`;
           if (typeof sessionStorage !== "undefined" && !sessionStorage.getItem(key)) {
@@ -121,14 +122,6 @@ function AuthedContent() {
             <span className="hidden sm:inline">{branding?.titulo || "INEVAL_UEDE"}</span>
           </Link>
           <div className="flex items-center gap-2 text-sm">
-            {accesos.tutor && <Link
-              to="/tutor"
-              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-500 px-3 py-1.5 font-semibold text-white shadow-soft hover:opacity-90"
-              title="Mr. Victor · Tutor virtual"
-            >
-              <Sparkles className="h-4 w-4" />
-              <span className="hidden sm:inline">Mr. Victor</span>
-            </Link>}
             {accesos.biblioteca && <Link
               to="/biblioteca"
               className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-medium hover:bg-secondary"
@@ -148,7 +141,7 @@ function AuthedContent() {
                 <span className="hidden sm:inline">{ctx.esAdmin ? "Admin" : "Docente"}</span>
               </Link>
             )}
-            {cedula && <span className="hidden text-muted-foreground sm:inline">CI {cedula}</span>}
+            {cedula && <span className="hidden flex-col leading-tight sm:flex"><span className="text-xs text-muted-foreground">CI {cedula}</span>{nombre && <span className="max-w-[12rem] truncate text-sm font-semibold">{nombre}</span>}</span>}
             <PinSeguridad />
             <AvatarSelector />
             <button
