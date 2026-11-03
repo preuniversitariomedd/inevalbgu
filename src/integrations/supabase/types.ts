@@ -618,6 +618,7 @@ export type Database = {
           aciertos: Json
           created_at: string
           fallos: Json
+          generacion: string
           updated_at: string
           user_id: string
         }
@@ -625,6 +626,7 @@ export type Database = {
           aciertos?: Json
           created_at?: string
           fallos?: Json
+          generacion?: string
           updated_at?: string
           user_id: string
         }
@@ -632,6 +634,7 @@ export type Database = {
           aciertos?: Json
           created_at?: string
           fallos?: Json
+          generacion?: string
           updated_at?: string
           user_id?: string
         }
@@ -1110,6 +1113,7 @@ export type Database = {
           aciertos: Json
           created_at: string
           fallos: Json
+          generacion: string
           updated_at: string
           user_id: string
         }
@@ -1117,6 +1121,7 @@ export type Database = {
           aciertos?: Json
           created_at?: string
           fallos?: Json
+          generacion?: string
           updated_at?: string
           user_id: string
         }
@@ -1124,8 +1129,36 @@ export type Database = {
           aciertos?: Json
           created_at?: string
           fallos?: Json
+          generacion?: string
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      respaldos_academicos: {
+        Row: {
+          creado_en: string
+          creado_por: string
+          datos: Json
+          huella: string
+          id: string
+          reiniciado_en: string | null
+        }
+        Insert: {
+          creado_en?: string
+          creado_por: string
+          datos: Json
+          huella: string
+          id?: string
+          reiniciado_en?: string | null
+        }
+        Update: {
+          creado_en?: string
+          creado_por?: string
+          datos?: Json
+          huella?: string
+          id?: string
+          reiniciado_en?: string | null
         }
         Relationships: []
       }
@@ -1501,6 +1534,7 @@ export type Database = {
         Args: { _comp: string; _user: string }
         Returns: boolean
       }
+      foto_academica: { Args: never; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1513,8 +1547,13 @@ export type Database = {
         Args: { _modulo: string; _user_id: string }
         Returns: boolean
       }
+      preparar_respaldo_academico: { Args: never; Returns: string }
       puede_ver_tarea: {
         Args: { _tarea_id: string; _user_id: string }
+        Returns: boolean
+      }
+      reiniciar_avances_academicos: {
+        Args: { _huella: string; _respaldo: string }
         Returns: boolean
       }
     }
