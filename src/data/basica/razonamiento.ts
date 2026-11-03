@@ -1,7 +1,7 @@
 // Razonamiento — Básica Superior. Tres niveles según proporción conocimiento/habilidad:
-// N1: 75 % conocimiento / 25 % habilidad (100 preguntas, aprobar 90 %)
-// N2: 50 % / 50 % (100 preguntas, aprobar 80 %)
-// N3: 25 % / 75 % (50 preguntas, aprobar 75 %)
+// N1: 75 % conocimiento / 25 % habilidad, aprobar 100 % del banco completo.
+// N2: 50 % / 50 %, aprobar 95 % del banco completo.
+// N3: 25 % / 75 %, aprobar 90 % del banco completo.
 // Integra Lengua y Literatura, Matemática, Estudios Sociales y Ciencias Naturales.
 import type { Pregunta } from "../tipos";
 import { crear, elegir, entero, mezclar, rng, type R } from "./gen";
@@ -11,12 +11,15 @@ export type NivelRaz = 1 | 2 | 3;
 export interface PreguntaRaz extends Pregunta {
   estrategia: string;
 }
-export const CONFIG_RAZ: Record<NivelRaz, { total: number; meta: number; titulo: string; mezcla: string }> = {
-  1: { total: 100, meta: 1, titulo: "Nivel 1 · Conocimiento", mezcla: "75 % conocimiento · 25 % habilidad" },
-  2: { total: 100, meta: 0.95, titulo: "Nivel 2 · Equilibrio", mezcla: "50 % conocimiento · 50 % habilidad" },
-  3: { total: 50, meta: 0.9, titulo: "Nivel 3 · Habilidad", mezcla: "25 % conocimiento · 75 % habilidad" },
-};
 const NV = { 1: "Básico", 2: "Intermedio", 3: "Avanzado" } as const;
+// Preserve the original generated questions and IDs when annexes grow.
+const TOTALES_BASE: Record<NivelRaz, number> = { 1: 100, 2: 100, 3: 50 };
+const totalNivel = (n: NivelRaz) => TOTALES_BASE[n] + new Set([...ANALOGIAS_RAZ, ...MATEMATICAS_RAZ].filter(p => p.nivel === NV[n]).map(p => p.id)).size;
+export const CONFIG_RAZ: Record<NivelRaz, { total: number; meta: number; titulo: string; mezcla: string }> = {
+  1: { total: totalNivel(1), meta: 1, titulo: "Nivel 1 · Conocimiento", mezcla: "75 % conocimiento · 25 % habilidad" },
+  2: { total: totalNivel(2), meta: 0.95, titulo: "Nivel 2 · Equilibrio", mezcla: "50 % conocimiento · 50 % habilidad" },
+  3: { total: totalNivel(3), meta: 0.9, titulo: "Nivel 3 · Habilidad", mezcla: "25 % conocimiento · 75 % habilidad" },
+};
 
 const GRUPOS: [string, string[], string, string][] = [
   ["Ciudades de la Sierra", ["Quito", "Ambato", "Riobamba", "Cuenca"], "Machala", "Machala está en la Costa; las demás en la Sierra."],
@@ -149,14 +152,22 @@ export function bancoRazonamiento(nivel: NivelRaz, edad: number): PreguntaRaz[] 
     add("Patrones", "Interdisciplinario", `¿Qué letra continúa? ${s.join(" – ")} – ?`, sig, [L[ini + 4 * k + 1]!, L[ini + 4 * k - 1]!, L[ini + 3 * k + 1]!], `Se avanza ${k} letras cada vez → ${sig}.`, "Convierte las letras en posiciones del alfabeto y busca la diferencia.");
   };
 
-  const cfg = CONFIG_RAZ[nivel];
+  const totalBase = TOTALES_BASE[nivel];
   let i = 0;
-  while (out.length < cfg.total) {
+  while (out.length < totalBase) {
     const ciclo = i++;
     if (nivel === 1) [discriminante, analogia, sinonimo, () => serie(1), () => problema(1), discriminante, analogia, sinonimo][ciclo % 8]!();
     else if (nivel === 2) [() => serie(2), () => problema(2), () => lectura(ciclo), analogia, discriminante, () => lectura(ciclo + 1), sinonimo, () => problema(2)][ciclo % 8]!();
     else [() => serie(3), () => problema(3), silogismo, () => lectura(ciclo), letras, () => serie(3), () => problema(3), silogismo][ciclo % 8]!();
   }
   // Orden de abstracción: los más concretos primero para menores de 14 años.
-  return [...out.slice(0, cfg.total), ...ANALOGIAS_RAZ.filter(p => p.nivel === NV[nivel]), ...MATEMATICAS_RAZ.filter(p => p.nivel === NV[nivel])];
+  return [...out.slice(0, totalBase), ...ANALOGIAS_RAZ.filter(p => p.nivel === NV[nivel]), ...MATEMATICAS_RAZ.filter(p => p.nivel === NV[nivel])];
+}
+
+const IDS_NIVEL = Object.fromEntries(([1, 2, 3] as const).map(n => [n, new Set(bancoRazonamiento(n, 14).map(p => p.id))])) as Record<NivelRaz, Set<string>>;
+export function progresoRazonamiento(nivel: NivelRaz, aciertos: readonly string[] = []) {
+  const total = IDS_NIVEL[nivel].size;
+  const meta = Math.ceil(total * CONFIG_RAZ[nivel].meta);
+  const correctas = [...new Set(aciertos)].filter(id => IDS_NIVEL[nivel].has(id)).length;
+  return { total, meta, correctas, aprobado: total > 0 && correctas >= meta };
 }

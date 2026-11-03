@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Lock, Lightbulb, Trophy } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { calcularEdad } from "@/lib/edad";
-import { bancoRazonamiento, CONFIG_RAZ, type NivelRaz, type PreguntaRaz } from "@/data/basica/razonamiento";
+import { bancoRazonamiento, CONFIG_RAZ, progresoRazonamiento, type NivelRaz, type PreguntaRaz } from "@/data/basica/razonamiento";
 import { PreguntaCard } from "@/components/PreguntaCard";
 import { guardarRespuesta } from "@/lib/progreso";
 import { Button } from '@/components/ui/button';
@@ -66,7 +66,7 @@ function Razonamiento() {
     if (uid && uid !== "anon") void (supabase as any).from("razonamiento_progreso").upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos, ...(generacion ? { generacion } : {}) }).then(({ error }: any) => { if (error) console.error(error); else if (nivelCompletado) avisarNotasActualizadas(); });
   };
   const bancos = useMemo(() => ({ 1: bancoRazonamiento(1, edad), 2: bancoRazonamiento(2, edad), 3: bancoRazonamiento(3, edad) }), [edad]);
-  const aprobado = (n: NivelRaz) => (est.aciertos[n]?.length ?? 0) >= Math.ceil(CONFIG_RAZ[n].total * CONFIG_RAZ[n].meta);
+  const aprobado = (n: NivelRaz) => progresoRazonamiento(n, est.aciertos[n]).aprobado;
   const desbloqueado = (n: NivelRaz) => n === 1 || aprobado((n - 1) as NivelRaz);
 
   // Adaptativo: prioriza preguntas no acertadas de los subtemas con más fallos.
@@ -103,7 +103,7 @@ function Razonamiento() {
             if (ok && !aciertos.includes(p.id)) aciertos.push(p.id);
             e.aciertos[nivel] = aciertos;
             if (!ok) e.fallos[p.subtema] = (e.fallos[p.subtema] ?? 0) + 1;
-            guardar(e, !aprobado(nivel) && aciertos.length >= Math.ceil(CONFIG_RAZ[nivel].total * CONFIG_RAZ[nivel].meta));
+            guardar(e, !aprobado(nivel) && progresoRazonamiento(nivel, aciertos).aprobado);
             guardarRespuesta({ preguntaId: p.id, area: "Razonamiento", subtema: p.subtema, nivel: p.nivel, correcta: ok });
           }}
           onSiguiente={() => { if (idx >= ronda.length - 1) terminarRonda(); setIdx((i) => i + 1); setPista(false); }} />
@@ -121,12 +121,12 @@ function Razonamiento() {
       {nivel && <div className="mt-4 rounded-xl border bg-success/10 p-3 text-sm font-medium">Ronda terminada. ¡Sigue practicando para llegar a la meta!</div>}
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {([1, 2, 3] as NivelRaz[]).map((n) => {
-          const c = CONFIG_RAZ[n], ok = est.aciertos[n]?.length ?? 0, meta = Math.ceil(c.total * c.meta), libre = desbloqueado(n);
+          const c = CONFIG_RAZ[n], { correctas: ok, meta, total } = progresoRazonamiento(n, est.aciertos[n]), libre = desbloqueado(n);
           return (
             <div key={n} className={`rounded-2xl border bg-gradient-card p-5 shadow-soft ${libre ? "" : "opacity-60"}`}>
               <div className="flex items-center justify-between"><h3 className="font-bold">{c.titulo}</h3>{aprobado(n) ? <Trophy className="h-5 w-5 text-success" /> : !libre && <Lock className="h-5 w-5" />}</div>
               <p className="text-xs text-muted-foreground">{c.mezcla}</p>
-              <p className="mt-3 text-sm">{bancos[n].length} preguntas disponibles · meta: {meta} correctas</p>
+              <p className="mt-3 text-sm">{total} preguntas disponibles · meta: {Math.round(c.meta * 100)} % ({meta} correctas)</p>
               <div className="mt-2 h-2 overflow-hidden rounded-full bg-muted"><div className="h-full bg-primary" style={{ width: `${Math.min(100, (ok / meta) * 100)}%` }} /></div>
               <p className="mt-1 text-xs text-muted-foreground">{ok} / {meta} correctas</p>
               <Button disabled={!libre || ok >= bancos[n].length} onClick={() => setPendiente(n)} className="mt-4 w-full">
