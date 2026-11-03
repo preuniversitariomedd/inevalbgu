@@ -25,7 +25,8 @@ function AuthPage() {
     void supabase.auth.getSession().then(({ data }) => {
       if (data.session) router.navigate({ to: "/", replace: true });
     });
-    void existeAdminFn().then((r) => setHayAdmin(r.existe));
+    // A paused service is not evidence that no administrator exists.
+    void existeAdminFn().then((r) => setHayAdmin(r.existe)).catch(() => setHayAdmin(null));
   }, [router]);
 
   async function login(e: React.FormEvent) {

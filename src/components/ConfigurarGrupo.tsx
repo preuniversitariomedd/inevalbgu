@@ -3,12 +3,11 @@ import { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useServerFn } from '@tanstack/react-start';
 import { leerConfiguracionGrupoFn, guardarConfiguracionGrupoFn } from '@/lib/grupo-config.functions';
-import { MODULOS, PESOS_DEFAULT, PARTES, validarPesos, type Modulos, type Pesos, type Modulo, type Parte } from '@/lib/grupo-config';
+import { MODULOS, PESOS_DEFAULT, type Modulos, type Pesos, type Modulo } from '@/lib/grupo-config';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Settings2, ArrowLeft, Save } from 'lucide-react';
+import { Settings2, Save } from 'lucide-react';
 import { toast } from 'sonner';
 export function ConfigurarGrupo({ grupoId, nombre }: { grupoId: string; nombre: string }) {
   const [open, setOpen] = useState(false);
