@@ -10,6 +10,7 @@ import { useAccesos } from '@/components/AccesoModulo';
 import { useQuery } from '@tanstack/react-query';
 import { misAccesosFn } from '@/lib/grupo-config.functions';
 import { Button } from '@/components/ui/button';
+import { avisarNotasActualizadas } from '@/lib/actualizar-notas';
 
 export const Route = createFileRoute("/_authenticated/conocimiento")({
   head: () => ({
@@ -36,7 +37,7 @@ function metaDe(n: NivelCon) {
 
 function Conocimiento() {
   const accesos = useAccesos();
-  const config = useQuery({ queryKey: ['mis-accesos'], queryFn: () => misAccesosFn() });
+  const config = useQuery({ queryKey: ['mis-accesos'], queryFn: () => misAccesosFn(), staleTime: Infinity, refetchIntervalInBackground: false });
   const [uid, setUid] = useState<string | null>(null);
   const [est, setEst] = useState<Estado>(vacio);
   const [nivel, setNivel] = useState<NivelCon | null>(null);
@@ -71,13 +72,13 @@ function Conocimiento() {
     })();
   }, []);
 
-  const guardar = (e: Estado) => {
+  const guardar = (e: Estado, nivelCompletado: boolean) => {
     setEst(e);
     if (uid && uid !== "anon") {
       void supabase
         .from("conocimiento_progreso")
         .upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos })
-        .then(({ error }) => error && console.error(error));
+        .then(({ error }) => { if (error) console.error(error); else if (nivelCompletado) avisarNotasActualizadas(); });
     }
   };
 
@@ -116,7 +117,7 @@ function Conocimiento() {
             if (ok && !aciertos.includes(p.id)) aciertos.push(p.id);
             e.aciertos[nivel] = aciertos;
             if (!ok) e.fallos[p.subtema] = (e.fallos[p.subtema] ?? 0) + 1;
-            guardar(e);
+            guardar(e, (est.aciertos[nivel]?.length ?? 0) < metaDe(nivel) && aciertos.length >= metaDe(nivel));
             guardarRespuesta({ preguntaId: p.id, area: "Conocimiento", subtema: p.subtema, nivel: p.nivel, correcta: ok });
           }}
           onSiguiente={() => setIdx((i) => i + 1)}

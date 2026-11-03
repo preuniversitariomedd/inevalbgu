@@ -5,6 +5,7 @@ import {
   iniciarSesionPracticaFn,
   finalizarSesionPracticaFn,
 } from "./progreso.functions";
+import { avisarNotasActualizadas } from './actualizar-notas';
 
 let _sesionActualId: string | null = null;
 
@@ -43,6 +44,7 @@ export async function finalizarSesion(
         tiempoSegundos: tiempoSegundos ?? 0,
       },
     });
+    avisarNotasActualizadas();
   } catch (e) {
     console.error("finalizarSesion fallo", e);
   } finally {

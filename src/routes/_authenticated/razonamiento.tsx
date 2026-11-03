@@ -8,6 +8,7 @@ import { bancoRazonamiento, CONFIG_RAZ, type NivelRaz, type PreguntaRaz } from "
 import { PreguntaCard } from "@/components/PreguntaCard";
 import { guardarRespuesta } from "@/lib/progreso";
 import { Button } from '@/components/ui/button';
+import { avisarNotasActualizadas } from '@/lib/actualizar-notas';
 
 export const Route = createFileRoute("/_authenticated/razonamiento")({
   head: () => ({ meta: [...pageMeta("Razonamiento — 3 niveles adaptativos — INEVAL_UEDE","Razonamiento en la plataforma educativa INEVAL_UEDE."),{ title: "Razonamiento — 3 niveles adaptativos — INEVAL_UEDE" }, { name: "description", content: "Preguntas de razonamiento y resolución de problemas de Básica Superior en tres niveles." }] }),
@@ -46,9 +47,9 @@ function Razonamiento() {
     })();
   }, []);
 
-  const guardar = (e: Estado) => {
+  const guardar = (e: Estado, nivelCompletado: boolean) => {
     setEst(e);
-    if (uid && uid !== "anon") void (supabase as any).from("razonamiento_progreso").upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos }).then(({ error }: any) => error && console.error(error));
+    if (uid && uid !== "anon") void (supabase as any).from("razonamiento_progreso").upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos }).then(({ error }: any) => { if (error) console.error(error); else if (nivelCompletado) avisarNotasActualizadas(); });
   };
   const bancos = useMemo(() => ({ 1: bancoRazonamiento(1, edad), 2: bancoRazonamiento(2, edad), 3: bancoRazonamiento(3, edad) }), [edad]);
   const aprobado = (n: NivelRaz) => (est.aciertos[n]?.length ?? 0) >= Math.ceil(CONFIG_RAZ[n].total * CONFIG_RAZ[n].meta);
@@ -81,7 +82,7 @@ function Razonamiento() {
             if (ok && !aciertos.includes(p.id)) aciertos.push(p.id);
             e.aciertos[nivel] = aciertos;
             if (!ok) e.fallos[p.subtema] = (e.fallos[p.subtema] ?? 0) + 1;
-            guardar(e);
+            guardar(e, !aprobado(nivel) && aciertos.length >= Math.ceil(CONFIG_RAZ[nivel].total * CONFIG_RAZ[nivel].meta));
             guardarRespuesta({ preguntaId: p.id, area: "Razonamiento", subtema: p.subtema, nivel: p.nivel, correcta: ok });
           }}
           onSiguiente={() => { setIdx((i) => i + 1); setPista(false); }} />
