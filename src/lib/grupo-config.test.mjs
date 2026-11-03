@@ -9,4 +9,5 @@ test('Sin configuración se mantienen los accesos', () => { expect(accesoCombina
 test('Los módulos bloqueados no aportan ni redistribuyen puntos', () => { expect(pesosActivos({...MODULOS_DEFAULT,conocimiento:false}, PESOS_DEFAULT)).toEqual({plataforma:0,practicas:0,conocimiento:0,razonamiento:30,simulacro:30}); });
 test('Los porcentajes antiguos del grupo no sustituyen la fórmula oficial', () => { expect(pesosActivos(MODULOS_DEFAULT, {...PESOS_DEFAULT,plataforma:100,conocimiento:0})).toEqual(PESOS_DEFAULT); });
 test('Tiempo y prácticas no suman a la nota', () => { expect(calcularNotaGlobal([{segundos_visible:72000}],[],null,null,PESOS_DEFAULT,[{correcta:true}]).nota).toBe(0); });
+test('El cálculo no acepta pesos antiguos para tiempo o prácticas', () => { expect(calcularNotaGlobal([{segundos_visible:72000}],[],null,null,{plataforma:100,practicas:0,conocimiento:0,razonamiento:0,simulacro:0}).nota).toBe(0); });
 test('Identifica rutas protegidas', () => { expect(moduloDeRuta('/practicar/Algebra')).toBe('practicas'); expect(moduloDeRuta('/resultados')).toBe('simulacro'); });
