@@ -17,7 +17,7 @@ export function InfraccionesPanel() {
   const q = useQuery({ queryKey: ["admin", "infracciones"], queryFn: () => listar(), enabled: abierto, ...CONSULTA_MANUAL });
   const filas = useMemo(() => {
     const t = filtro.trim().toLowerCase();
-    return (q.data ?? []).filter((f) => !t || f.nombres.toLowerCase().includes(t) || f.cedula.includes(t));
+    return ((q.data ?? []) as Array<{ id: string; nombres: string; cedula: string; modulo: string; tipo: string; numero: number; created_at: string }>).filter((f) => !t || f.nombres.toLowerCase().includes(t) || f.cedula.includes(t));
   }, [q.data, filtro]);
 
   return (
