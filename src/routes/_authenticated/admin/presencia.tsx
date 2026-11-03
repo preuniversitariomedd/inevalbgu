@@ -10,6 +10,8 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin/presencia")({
   head: () => ({ meta: [{ title: "Presencia en plataforma — INEVAL_UEDE" }, ...pageMeta("Presencia en plataforma — INEVAL_UEDE","Presencia en plataforma en la plataforma educativa INEVAL_UEDE.")] }),
+  // La vista de presencia en vivo fue retirada.
+  beforeLoad: () => { throw redirect({ to: "/admin" }); },
   component: PresenciaPage,
 });
 

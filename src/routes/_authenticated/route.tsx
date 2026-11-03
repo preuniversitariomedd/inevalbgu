@@ -122,14 +122,6 @@ function AuthedContent() {
             <span className="hidden sm:inline">{branding?.titulo || "INEVAL_UEDE"}</span>
           </Link>
           <div className="flex items-center gap-2 text-sm">
-            {false && <Link
-              to="/tutor"
-              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-500 px-3 py-1.5 font-semibold text-white shadow-soft hover:opacity-90"
-              title="Mr. Victor · Tutor virtual"
-            >
-              <Sparkles className="h-4 w-4" />
-              <span className="hidden sm:inline">Mr. Victor</span>
-            </Link>}
             {accesos.biblioteca && <Link
               to="/biblioteca"
               className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-medium hover:bg-secondary"
