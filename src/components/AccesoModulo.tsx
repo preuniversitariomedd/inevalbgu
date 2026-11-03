@@ -11,10 +11,12 @@ export function AccesoModulo({ children, soloContexto = false }: { children: Rea
   const fetchAccesos = useServerFn(misAccesosFn);
   const q = useQuery({ queryKey: ['mis-accesos'], queryFn: () => fetchAccesos(), staleTime: Infinity, refetchInterval: false, refetchIntervalInBackground: false, refetchOnWindowFocus: false });
   const { pathname } = useLocation();
-  const modulo = moduloDeRuta(pathname);
+  // Mr. Victor (IA) está retirado de la plataforma para todos los usuarios.
+  const modulo = pathname.split('/').includes('tutor') ? 'tutor' : moduloDeRuta(pathname);
   if (!q.data) return <p role="status" className="mx-auto max-w-5xl p-6">{q.error ? 'No se pudo verificar el acceso. Intenta nuevamente.' : 'Cargando accesos…'}</p>;
-  const bloqueado = !soloContexto && modulo && !q.data.modulos[modulo];
-  return <AccesosContext.Provider value={q.data.modulos}>{bloqueado ? <main className="mx-auto max-w-5xl space-y-3 px-5 py-12"><LockKeyhole className="h-8 w-8 text-muted-foreground"/><h1 className="text-2xl font-bold">{MODULOS[modulo]} no está habilitado</h1><p className="text-muted-foreground">Consulta con tu administrador los apartados asignados a tu grupo.</p><Link to="/" className="text-primary underline">Volver al inicio</Link></main> : children}</AccesosContext.Provider>;
+  const modulos = { ...q.data.modulos, tutor: false };
+  const bloqueado = !soloContexto && modulo && !modulos[modulo];
+  return <AccesosContext.Provider value={modulos}>{bloqueado ? <main className="mx-auto max-w-5xl space-y-3 px-5 py-12"><LockKeyhole className="h-8 w-8 text-muted-foreground"/><h1 className="text-2xl font-bold">{MODULOS[modulo]} no está habilitado</h1><p className="text-muted-foreground">Consulta con tu administrador los apartados asignados a tu grupo.</p><Link to="/" className="text-primary underline">Volver al inicio</Link></main> : children}</AccesosContext.Provider>;
 }
 export function ContenidoModulo({ children }: { children: ReactNode }) {
   const modulos = useAccesos();
