@@ -71,14 +71,16 @@ export function calcularNotaGlobal(
   }> | null,
   conProg: AvanceNiveles | null | undefined,
   razProg: AvanceNiveles | null | undefined,
-  ponderaciones: Pesos = PESOS_DEFAULT,
+  pesosActivos: Pesos = PESOS_DEFAULT,
   respuestasPracticas: Array<{ correcta: boolean }> = [],
 ): NotaGlobal {
+  // Callers can disable a component, never substitute legacy/custom percentages.
+  const ponderaciones = Object.fromEntries(Object.entries(PESOS_DEFAULT).map(([k,v]) => [k, pesosActivos[k as keyof Pesos] === 0 ? 0 : v])) as Pesos;
   let segPlataforma = 0;
   for (const c of con ?? []) {
     segPlataforma += (c.segundos_visible ?? 0) + (c.segundos_oculto ?? 0);
   }
-  // Tope: 20 h reales en plataforma completan el 10 %.
+  // Retain time statistics for historical reports, without adding grade points.
   const cPlataforma = Math.min(1, segPlataforma / 3600 / 20);
 
   const simulacros = (ses ?? []).filter(
