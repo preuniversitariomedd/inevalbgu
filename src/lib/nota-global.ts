@@ -3,7 +3,7 @@
 // Lógica pura compartida entre el panel del estudiante, el coach flotante
 // y el panel del administrador.
 import { CONFIG_CON, preguntasConocimiento, type NivelCon } from "@/data/conocimiento";
-import { CONFIG_RAZ, type NivelRaz } from "@/data/basica/razonamiento";
+import { progresoRazonamiento } from "@/data/basica/razonamiento";
 import { PESOS_DEFAULT, type Pesos } from './grupo-config';
 
 export interface AvanceNiveles {
@@ -56,9 +56,10 @@ export function avanceConocimiento(prog: AvanceNiveles | null | undefined): numb
 }
 
 export function avanceRazonamiento(prog: AvanceNiveles | null | undefined): number {
-  const totales: Record<number, number> = { 1: CONFIG_RAZ[1 as NivelRaz].total, 2: CONFIG_RAZ[2].total, 3: CONFIG_RAZ[3].total };
-  const metas: Record<number, number> = { 1: CONFIG_RAZ[1].meta, 2: CONFIG_RAZ[2].meta, 3: CONFIG_RAZ[3].meta };
-  return avanceNiveles(prog, totales, metas);
+  return ([1, 2, 3] as const).reduce((suma, n) => {
+    const { correctas, meta } = progresoRazonamiento(n, prog?.aciertos?.[String(n)] ?? []);
+    return suma + (meta > 0 ? Math.min(1, correctas / meta) : 0);
+  }, 0) / 3;
 }
 
 export function calcularNotaGlobal(
