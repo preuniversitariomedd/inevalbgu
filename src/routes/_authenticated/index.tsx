@@ -56,8 +56,7 @@ function Index() {
               <span className="block text-2xl font-semibold opacity-90 sm:text-3xl">{subtitulo}</span>
             </h1>
             <p className="mt-4 max-w-2xl text-base opacity-90 sm:text-lg">
-              La prueba <strong>Ser Estudiante</strong> del INEVAL evalúa lo que aprendiste en
-              1ro BGU. Practica con más de <strong>{total} preguntas</strong> de opción múltiple,
+              La prueba <strong>Ser Estudiante</strong> del INEVAL evalúa lo que aprendiste. Practica con más de <strong>{total} preguntas</strong> de opción múltiple,
               con explicaciones paso a paso y simulacros cronometrados.
             </p>
             <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm backdrop-blur">
