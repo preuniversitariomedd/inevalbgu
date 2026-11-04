@@ -11,6 +11,7 @@ export function ActualizacionesGrupo() {
     };
     const channel = supabase.channel(`grupo-config-${crypto.randomUUID()}`)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'grupo_configuracion' }, actualizar)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'apartados_visibilidad' }, () => { actualizar(); void qc.invalidateQueries({ queryKey: ['visibilidad-global'], refetchType: document.hidden ? 'none' : 'active' }); })
       .subscribe();
     const notas = () => {
       for (const key of ['calificacion', 'progreso']) void qc.invalidateQueries({ queryKey: [key], refetchType: document.hidden ? 'none' : 'active' });

@@ -2,7 +2,7 @@ export const MODULOS = { practicas: 'Prácticas por tema', conocimiento: 'Conoci
 export type Modulo = keyof typeof MODULOS;
 export const PARTES = { plataforma: 'Tiempo real en plataforma', practicas: 'Prácticas por tema', simulacro: 'Simulacros', conocimiento: 'Conocimiento', razonamiento: 'Razonamiento' };
 export type Parte = keyof typeof PARTES;
-export type Modulos = Record<Modulo, boolean>;
+export type Modulos = Record<Modulo, boolean> & { ciencias?: boolean; sociales?: boolean };
 export type Pesos = Record<Parte, number>;
 export const MODULOS_DEFAULT = Object.fromEntries(Object.keys(MODULOS).map(k => [k, true])) as Modulos;
 export const PESOS_DEFAULT: Pesos = { plataforma: 0, practicas: 0, simulacro: 30, conocimiento: 40, razonamiento: 30 };

@@ -17,6 +17,7 @@ import { Plus, Trash2, Users, Loader2, X } from "lucide-react";
 import { toast } from "sonner";
 import { ConfigurarGrupo } from '@/components/ConfigurarGrupo';
 import { ExportarCurso } from '@/components/ExportarCurso';
+import { VisibilidadApartados } from '@/components/VisibilidadApartados';
 
 export const Route = createFileRoute("/_authenticated/admin/grupos")({
   head: () => ({ meta: [{ title: 'Cursos y accesos — PreUniversitario MEDD' }, { name: 'description', content: 'Configura los cursos, sus módulos y porcentajes de nota, y descarga sus informes completos.' }, { property: 'og:title', content: 'Cursos y accesos — PreUniversitario MEDD' }, { property: 'og:description', content: 'Administración de grupos e informes académicos completos.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary' }] }),
@@ -70,6 +71,7 @@ function GruposPage() {
 
   return (
     <div className="space-y-5">
+      {ctx.esAdmin && <VisibilidadApartados />}
       <form
         onSubmit={(e) => {
           e.preventDefault();

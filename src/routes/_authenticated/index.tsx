@@ -5,6 +5,7 @@ import { BANCO_PREGUNTAS } from "@/data";
 import { obtenerBrandingFn } from "@/lib/admin.functions";
 import { useAccesos } from '@/components/AccesoModulo';
 import { moduloDeRuta } from '@/lib/grupo-config';
+import { materiaVisible } from '@/lib/visibilidad';
 
 export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
@@ -194,7 +195,7 @@ function Index() {
 function ActionCard({ to, icon, title, desc, tone }: { to: string; icon: React.ReactNode; title: string; desc: string; tone: "primary" | "accent" | "success" }) {
   const accesos = useAccesos();
   const modulo = moduloDeRuta(to);
-  if (modulo && !accesos[modulo]) return null;
+  if ((modulo && !accesos[modulo]) || !materiaVisible(accesos, to)) return null;
   const toneClass = {
     primary: "bg-primary text-primary-foreground",
     accent: "bg-accent text-accent-foreground",
