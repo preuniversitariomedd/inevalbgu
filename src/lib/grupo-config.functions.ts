@@ -2,6 +2,7 @@ import { createServerFn } from '@tanstack/react-start';
 import { requireSupabaseAuth } from '@/integrations/supabase/auth-middleware';
 import { z } from 'zod';
 import { MODULOS, PARTES, MODULOS_DEFAULT, PESOS_DEFAULT, validarPesos, type Modulos, type Pesos } from './grupo-config';
+import { aplicarVisibilidad, type Visibilidad } from './visibilidad';
 const modulosSchema = z.object(Object.fromEntries(Object.keys(MODULOS).map(k => [k, z.boolean()]))).strict();
 const pesosSchema = z.object(Object.fromEntries(Object.keys(PARTES).map(k => [k, z.number().min(0).max(100)]))).strict();
 export const misAccesosFn = createServerFn({ method: 'POST' }).middleware([requireSupabaseAuth]).handler(async ({ context }) => {
@@ -9,7 +10,10 @@ export const misAccesosFn = createServerFn({ method: 'POST' }).middleware([requi
   if (error) throw new Error(error.message);
   const { configuracionUsuario } = await import('./grupo-config.server');
   const c = await configuracionUsuario(context.supabase, context.userId);
-  return { ...c, modulos: staff ? MODULOS_DEFAULT : c.modulos, staff: !!staff };
+  const { data: visibilidad, error: ve } = await context.supabase.from('apartados_visibilidad').select('apartado,visible');
+  if (ve) throw new Error(ve.message);
+  const global = Object.fromEntries((visibilidad ?? []).map(r => [r.apartado, r.visible])) as Visibilidad;
+  return { ...c, modulos: aplicarVisibilidad(staff ? MODULOS_DEFAULT : c.modulos, global), staff: !!staff };
 });
 export const leerConfiguracionGrupoFn = createServerFn({ method: 'POST' }).middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ grupoId: z.string().uuid() }).parse(d))
