@@ -55,6 +55,27 @@ export type Database = {
           },
         ]
       }
+      apartados_visibilidad: {
+        Row: {
+          apartado: string
+          updated_at: string
+          updated_by: string
+          visible: boolean
+        }
+        Insert: {
+          apartado: string
+          updated_at?: string
+          updated_by?: string
+          visible?: boolean
+        }
+        Update: {
+          apartado?: string
+          updated_at?: string
+          updated_by?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
       app_branding: {
         Row: {
           hero_url: string | null

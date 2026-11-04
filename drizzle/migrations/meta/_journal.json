@@ -71,6 +71,13 @@
       "when": 1793673517151,
       "tag": "0009_antifraude_evaluaciones",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1793836523307,
+      "tag": "0010_visibilidad_global_apartados",
+      "breakpoints": true
     }
   ]
 }
