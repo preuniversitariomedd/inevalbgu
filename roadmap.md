@@ -1,4 +1,5 @@
 - [x] Corregir metas y notas de Razonamiento usando el banco completo por nivel; 27 pruebas aprobadas y metas verificadas en pantalla con sesión autenticada.
+- [ ] Añadir visibilidad global administrada con ojos para los cinco apartados solicitados y verificar persistencia y acceso de estudiantes.
 - [x] Reset admin password; specific login errors; 4-digit PIN recovery
 - [x] Crear almacenamiento protegido de períodos por grupo con fechas de inicio y fin.
 - [x] Calcular notas dentro de las fechas usando respuestas registradas y tiempo del período.
