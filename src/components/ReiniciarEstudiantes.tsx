@@ -30,7 +30,7 @@ export function ReiniciarEstudiantes() {
   const reset = useMutation({ mutationFn:()=> {
     if (!prep.data) throw new Error('Prepara el respaldo primero.');
     return reiniciar({data:{respaldoId:prep.data.id,huella:prep.data.huella,confirmacion:texto,descargado:descargado && guardado}});
-  }, onSuccess:async()=>{ setOpen(false); toast.success('Notas y avances reiniciados; respaldo histórico conservado.'); for(const k of ['calificaciones','calificacion','progreso','respaldos-academicos']) await qc.invalidateQueries({queryKey:[k]}); } });
+  }, onSuccess:async()=>{ setOpen(false); toast.success('Notas y avances reiniciados; respaldo histórico conservado.'); for(const k of ['calificaciones','calificacion','progreso','respaldos-academicos','periodos']) await qc.invalidateQueries({queryKey:[k]}); } });
   const busy = prep.isPending || reset.isPending;
   function abrir(){setPaso(1);setTexto('');setGuardado(false);setDescargado(false);setBlob(null);prep.reset();reset.reset();setOpen(true);}
   return <>
@@ -40,7 +40,7 @@ export function ReiniciarEstudiantes() {
     </div>
     <Dialog open={open} onOpenChange={v=>{if(!busy)setOpen(v);}}><DialogContent className="max-h-[85vh] overflow-y-auto"><DialogHeader><DialogTitle>{paso===1?'1 de 2 · Respaldo antes del reinicio':'2 de 2 · Confirmar reinicio'}</DialogTitle></DialogHeader>
       <p className="text-sm">Afecta a todos los estudiantes, no solo al grupo o período seleccionado. Las cuentas, grupos, archivos compartidos y conversaciones se conservan. El respaldo anterior queda disponible solo para administradores.</p>
-      <p className="text-sm text-muted-foreground">Pide que los estudiantes cierren sesión. Si hay actividad nueva, el reinicio se cancela sin borrar nada y tendrás que preparar otro respaldo.</p>
+      <p className="text-sm text-muted-foreground">Se borran notas, avances y todos los períodos de calificación. Si algún estudiante está conectado, verá un aviso de "Reinicio de notas" y su avance también se borra; su actividad más reciente queda guardada en una copia final automática dentro de Respaldos anteriores.</p>
       {paso===1 ? <><p className="text-sm">Se respaldan respuestas, simulacros, avances, conexiones, encuestas y actividad en tareas, biblioteca y competencias. Los avances antiguos de Sistemas guardados únicamente en un dispositivo no se pueden incluir.</p>
         {!blob ? <Button disabled={busy} onClick={()=>prep.mutate()}>{prep.isPending?<Loader2 className="h-4 w-4 animate-spin"/>:<Archive className="h-4 w-4"/>}Preparar respaldo JSON</Button> : <><p className="text-sm font-semibold">{prep.data?.total} estudiantes · Respaldo preparado</p><Button onClick={()=>{if(!blob || !prep.data)return;descargarRespaldo(blob,`respaldo-academico-${prep.data.id}.json`);setDescargado(true);setPaso(2);}}><Download className="h-4 w-4"/>Descargar respaldo y continuar</Button></>}
       </> : <><label className="flex items-start gap-2 text-sm"><Checkbox checked={guardado} onCheckedChange={v=>setGuardado(v===true)}/>Confirmo que guardé el archivo de respaldo en mi dispositivo.</label><label className="space-y-2 text-sm"><span>Escribe <strong>{CONFIRMACION_REINICIO}</strong></span><Input aria-label="Confirmación de reinicio" value={texto} onChange={e=>setTexto(e.target.value)}/></label><Button variant="destructive" disabled={busy || !guardado || texto!==CONFIRMACION_REINICIO} onClick={()=>reset.mutate()}>{reset.isPending?<Loader2 className="h-4 w-4 animate-spin"/>:<RotateCcw className="h-4 w-4"/>}Confirmar reinicio de todos los estudiantes</Button></>}

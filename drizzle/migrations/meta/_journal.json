@@ -78,6 +78,13 @@
       "when": 1793836523307,
       "tag": "0010_visibilidad_global_apartados",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1793899791235,
+      "tag": "0011_reinicio_total_con_activos",
+      "breakpoints": true
     }
   ]
 }
