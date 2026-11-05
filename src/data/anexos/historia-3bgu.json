@@ -1,0 +1,5286 @@
+{
+  "materia": "Historia",
+  "curso": "3ro BGU",
+  "anio_lectivo": "2026-2027",
+  "institucion": "U.E. Diecinueve de Enero",
+  "lineamientos": "Currículo MinEduc 2016 (destrezas con criterios de desempeño) y pautas de construcción de ítems de opción múltiple tipo INEVAL: base con contexto, enunciado, una sola respuesta correcta y distractores plausibles basados en errores comunes.",
+  "total_preguntas": 126,
+  "lecturas": [
+    {
+      "id": "HIS-3BGU-L1",
+      "unidad": 1,
+      "titulo": "El quipu: memoria en cuerdas",
+      "texto": "Los incas no usaron una escritura alfabética, pero desarrollaron el quipu, un conjunto de cuerdas de algodón o lana con nudos. Cada cuerda colgaba de una cuerda principal; la posición de los nudos indicaba unidades, decenas, centenas y millares, en un sistema decimal. Los colores y la forma de los nudos ayudaban a distinguir lo que se registraba: habitantes de un ayllu, tributos, productos guardados en las collcas o turnos de trabajo. Los especialistas que elaboraban y leían los quipus se llamaban quipucamayoc. Gracias a ellos, el Estado inca podía administrar un territorio que iba desde el sur de Colombia hasta Chile. Hoy los investigadores entienden bien la parte numérica de los quipus, pero todavía discuten si también guardaban relatos o información no numérica."
+    },
+    {
+      "id": "HIS-3BGU-L2",
+      "unidad": 1,
+      "titulo": "Ayllu, ayni y minga",
+      "texto": "La base de la sociedad andina era el ayllu, un grupo de familias unidas por parentesco que compartía tierras y obligaciones. Dentro del ayllu funcionaban formas de trabajo basadas en la reciprocidad. El ayni era la ayuda mutua entre familias: hoy yo te ayudo a sembrar y mañana tú me ayudas a cosechar. La minga era el trabajo colectivo de toda la comunidad para una obra común, como un canal de riego o un camino. Además, el Estado inca organizaba la mita, turnos de trabajo que cada ayllu cumplía para el Estado; a cambio, el Estado redistribuía alimentos de sus depósitos en épocas de escasez. Muchas comunidades indígenas del Ecuador todavía practican la minga."
+    },
+    {
+      "id": "HIS-3BGU-L3",
+      "unidad": 1,
+      "titulo": "La serpiente de luz de Chichén Itzá",
+      "texto": "En la ciudad maya de Chichén Itzá, en Yucatán, se levanta la pirámide de Kukulcán, conocida como El Castillo. Tiene cuatro escalinatas de 91 escalones cada una; sumadas a la plataforma superior dan 365, el número de días del año solar. Durante los equinoccios de primavera y otoño, al atardecer, el sol proyecta sobre una escalinata una serie de triángulos de luz y sombra que parecen el cuerpo de una serpiente que desciende hasta la cabeza esculpida en la base. Para los mayas, Kukulcán era la serpiente emplumada. El edificio combinaba la función religiosa con un calendario de piedra que marcaba momentos clave para la agricultura."
+    },
+    {
+      "id": "HIS-3BGU-L4",
+      "unidad": 2,
+      "titulo": "De la mita incaica a la mita colonial",
+      "texto": "Tras la conquista, la Corona española entregó grupos de indígenas a conquistadores mediante la encomienda: el encomendero cobraba tributo a los indígenas y, a cambio, debía protegerlos y evangelizarlos. Los españoles también conservaron el nombre de la mita, pero cambiaron su sentido. En el Tahuantinsuyo, la mita era un turno de trabajo para el Estado a cambio de redistribución. En la Colonia se convirtió en un trabajo forzado y rotativo, sobre todo en las minas de plata de Potosí y de mercurio de Huancavelica. Los mitayos recibían un pago muy bajo, debían viajar lejos de sus comunidades y muchos morían por las condiciones de trabajo. Las comunidades perdieron población y, con ella, capacidad para cultivar sus tierras."
+    },
+    {
+      "id": "HIS-3BGU-L5",
+      "unidad": 2,
+      "titulo": "El intercambio de dos mundos",
+      "texto": "La llegada de los europeos puso en contacto ecosistemas que habían estado separados por milenios. A América llegaron caballos, vacas, ovejas, cerdos, trigo, cebada y caña de azúcar. De América salieron hacia el resto del mundo el maíz, la papa, el cacao, el tomate y el ají. Las ovejas y las vacas ocuparon pastos y páramos andinos, y muchas tierras comunales se convirtieron en zonas de pastoreo para las haciendas. También llegaron enfermedades como la viruela y el sarampión, contra las que la población indígena no tenía defensas: provocaron la mayor caída demográfica de la historia del continente."
+    },
+    {
+      "id": "HIS-3BGU-L6",
+      "unidad": 2,
+      "titulo": "La extirpación de idolatrías",
+      "texto": "En el siglo XVII, la Iglesia organizó en el virreinato del Perú campañas de “extirpación de idolatrías”. Los visitadores recorrían los pueblos, interrogaban a los indígenas, destruían huacas, quemaban objetos sagrados y castigaban a quienes mantenían sus antiguos cultos. Gran parte de lo que sabemos de esas campañas proviene de los informes escritos por los propios clérigos. A pesar de la persecución, muchas comunidades siguieron venerando a sus antepasados y a los cerros de forma oculta, o mezclaron sus creencias con las fiestas cristianas. Ese proceso de mezcla se conoce como sincretismo."
+    },
+    {
+      "id": "HIS-3BGU-L7",
+      "unidad": 3,
+      "titulo": "Del palo brasil al azúcar",
+      "texto": "Los portugueses llegaron a Brasil en 1500. Durante las primeras décadas, su principal interés fue el palo brasil, un árbol del que se extraía un tinte rojo muy valorado en Europa, y que dio nombre al territorio. Desde 1530, Portugal organizó la colonización dividiendo la costa en capitanías hereditarias. En el nordeste se instalaron ingenios de caña de azúcar: grandes propiedades donde se cultivaba la caña y se elaboraba el azúcar para exportarlo a Europa. Como la población indígena disminuía y resistía, los dueños de los ingenios compraron africanos esclavizados en enormes cantidades. En el siglo XVIII, el descubrimiento de oro en Minas Gerais desplazó el centro económico hacia el interior."
+    },
+    {
+      "id": "HIS-3BGU-L8",
+      "unidad": 3,
+      "titulo": "Los cimarrones de Esmeraldas",
+      "texto": "En 1553, un barco que llevaba personas africanas esclavizadas desde Panamá hacia el Perú encalló cerca de la costa de Esmeraldas. Un grupo de africanos logró escapar y se internó en la selva. Primero los dirigió Antón y luego Alonso de Illescas, quien estableció alianzas con pueblos indígenas de la zona mediante matrimonios y acuerdos. Durante décadas, esta comunidad libre resistió a las autoridades coloniales y controló buena parte del territorio. A estas personas que huían de la esclavitud y formaban comunidades libres se les llamaba cimarrones. Su historia es parte de la identidad del pueblo afroecuatoriano."
+    },
+    {
+      "id": "HIS-3BGU-L9",
+      "unidad": 3,
+      "titulo": "La hacienda colonial",
+      "texto": "En la Real Audiencia de Quito, la hacienda se convirtió en la principal unidad económica. Eran grandes extensiones de tierra que pertenecían a españoles, criollos u órdenes religiosas. En la Sierra producían alimentos, ganado y lana para los obrajes; en valles cálidos como el del Chota cultivaban caña de azúcar con trabajo de africanos esclavizados. Muchos trabajadores indígenas quedaban atados a la hacienda por deudas que nunca terminaban de pagar. El dueño, además, ejercía autoridad sobre la vida de las personas que vivían en sus tierras. Este modelo concentró la tierra en pocas manos y dejó una huella que se mantuvo por siglos."
+    },
+    {
+      "id": "HIS-3BGU-L10",
+      "unidad": 4,
+      "titulo": "La Escuela Quiteña",
+      "texto": "Entre los siglos XVI y XVIII, Quito fue uno de los centros artísticos más importantes de América. Talleres de pintores y escultores, muchos de ellos indígenas y mestizos, produjeron obras para iglesias de todo el continente. Entre sus figuras están Miguel de Santiago, Bernardo de Legarda y Manuel Chili, conocido como Caspicara. Las obras seguían modelos europeos, pero incorporaban elementos locales: rostros mestizos, frutas y flores de la región, soles y lunas que recordaban creencias andinas. Su principal finalidad era enseñar la fe cristiana a una población que, en gran parte, no sabía leer."
+    },
+    {
+      "id": "HIS-3BGU-L11",
+      "unidad": 4,
+      "titulo": "La sociedad de castas",
+      "texto": "La sociedad colonial se organizó en grupos jerárquicos. En la cima estaban los peninsulares, nacidos en España, que ocupaban los altos cargos de gobierno y de la Iglesia. Luego venían los criollos, descendientes de españoles nacidos en América, con riqueza y tierras, pero con acceso limitado a los cargos más altos. Más abajo estaban los mestizos, los indígenas, que pagaban tributo, y los africanos esclavizados y sus descendientes. Las mezclas entre grupos dieron origen a las llamadas castas, con nombres y derechos distintos. El origen determinaba en gran medida el acceso a la educación, a los oficios y a la justicia."
+    },
+    {
+      "id": "HIS-3BGU-L12",
+      "unidad": 4,
+      "titulo": "Rebeliones del siglo XVIII",
+      "texto": "En el siglo XVIII, las reformas de la Corona aumentaron los impuestos y el control sobre las colonias. En 1765, en Quito, la población de los barrios se levantó contra el estanco del aguardiente y la aduana: fue la Rebelión de los Barrios. En el sur andino, en 1780, José Gabriel Condorcanqui, un curaca que tomó el nombre de Túpac Amaru II, encabezó un levantamiento contra los abusos de los corregidores y el reparto forzoso de mercancías. Miles de indígenas, mestizos y algunos criollos se unieron. La rebelión fue derrotada y Túpac Amaru II fue ejecutado en 1781, pero obligó a la Corona a eliminar algunos abusos."
+    },
+    {
+      "id": "HIS-3BGU-L13",
+      "unidad": 5,
+      "titulo": "Libres, pero dependientes",
+      "texto": "Hacia 1830, la mayoría de los países de América Latina ya eran independientes de España. Sin embargo, su economía siguió dependiendo de vender materias primas a las potencias industriales, sobre todo a Gran Bretaña, y de comprarles productos manufacturados. En el Ecuador, a fines del siglo XIX y comienzos del XX, el cacao de la Costa se convirtió en el principal producto de exportación: generó grandes fortunas para los propietarios de las plantaciones y para los bancos de Guayaquil. Cuando a partir de 1920 cayeron los precios y las plagas destruyeron los cultivos, la crisis golpeó a toda la economía. La situación de los trabajadores empeoró y, el 15 de noviembre de 1922, una huelga en Guayaquil terminó en una masacre."
+    },
+    {
+      "id": "HIS-3BGU-L14",
+      "unidad": 5,
+      "titulo": "La Revolución Liberal",
+      "texto": "El 5 de junio de 1895, un levantamiento en Guayaquil llevó al poder a Eloy Alfaro. Los gobiernos liberales separaron la Iglesia del Estado, establecieron la educación laica y pública, el matrimonio civil y el divorcio, y fundaron colegios normales para formar maestros, varios de ellos para mujeres. En 1908 llegó a Quito el ferrocarril que la unía con Guayaquil, lo que integró la Costa y la Sierra. Sin embargo, el proyecto liberal tuvo límites: muchos indígenas siguieron atados a las haciendas por el concertaje, una forma de trabajo por deudas que recién se suprimió en 1918. En 1912, Alfaro fue asesinado en Quito."
+    },
+    {
+      "id": "HIS-3BGU-L15",
+      "unidad": 5,
+      "titulo": "Del auge petrolero a la migración",
+      "texto": "En 1972, el Ecuador comenzó a exportar petróleo de la Amazonía. Los ingresos crecieron como nunca y el Estado invirtió en carreteras, electricidad y educación, pero también aumentó la deuda externa. En los años ochenta, la caída del precio del petróleo y la crisis de la deuda afectaron al país. A fines de los noventa coincidieron el fenómeno de El Niño, la caída del petróleo y la quiebra de varios bancos. En marzo de 1999 se congelaron los depósitos (el “feriado bancario”) y en enero de 2000 el país adoptó el dólar como moneda. Cientos de miles de ecuatorianos emigraron a España, Estados Unidos e Italia. Entre 2007 y 2017 gobernó la Revolución Ciudadana. Sus defensores destacan la inversión en carreteras, hidroeléctricas y servicios sociales, y la reducción de la pobreza registrada por el INEC; sus críticos señalan la concentración del poder, los conflictos con la prensa y el aumento de la deuda en los últimos años de su gestión."
+    },
+    {
+      "id": "HIS-3BGU-L16",
+      "unidad": 6,
+      "titulo": "Cinco escuelas económicas",
+      "texto": "En el siglo XVIII, los fisiócratas franceses, como François Quesnay, sostuvieron que la verdadera riqueza provenía de la tierra y se opusieron al mercantilismo, que la medía por el oro acumulado. Poco después, Adam Smith y David Ricardo fundaron la escuela clásica: defendieron la división del trabajo, el libre mercado y la ventaja comparativa en el comercio. En el siglo XIX, Karl Marx criticó a los clásicos: según él, la ganancia del capitalista proviene de la plusvalía, el valor que crea el trabajador y que no recibe en su salario. Los neoclásicos explicaron los precios mediante la utilidad marginal, es decir, la satisfacción que da una unidad adicional de un bien. En el siglo XX, la escuela de Chicago, con Milton Friedman, defendió reducir la intervención del Estado y controlar la cantidad de dinero para frenar la inflación."
+    },
+    {
+      "id": "HIS-3BGU-L17",
+      "unidad": 6,
+      "titulo": "La década perdida",
+      "texto": "En los años setenta, muchos países latinoamericanos se endeudaron con bancos extranjeros. A comienzos de los ochenta, EE. UU. subió sus tasas de interés y los precios de las materias primas cayeron. En 1982 México anunció que no podía pagar su deuda y la crisis se extendió por la región: la inflación se disparó, el crecimiento se detuvo y la pobreza aumentó. Por eso se habla de la “década perdida”. Para obtener nuevos créditos, los gobiernos aplicaron programas de ajuste promovidos por el FMI y el Banco Mundial, resumidos en 1989 en el llamado Consenso de Washington: disciplina fiscal, privatización de empresas públicas, apertura comercial y desregulación. Sus defensores sostienen que estas medidas redujeron la inflación y modernizaron la economía; sus críticos, que aumentaron el desempleo y la desigualdad."
+    },
+    {
+      "id": "HIS-3BGU-L18",
+      "unidad": 6,
+      "titulo": "Globalización e identidades",
+      "texto": "Desde los años noventa, internet, el comercio mundial y las empresas transnacionales conectaron como nunca a los países. Los estudiantes de una ciudad del Ecuador escuchan la misma música, ven las mismas series y usan las mismas aplicaciones que jóvenes de otros continentes. Algunos ven en esto oportunidades de aprendizaje, empleo y comunicación; otros advierten que la cultura global puede desplazar las lenguas, las fiestas y los saberes locales. América Latina también buscó integrarse: surgieron o se fortalecieron la Comunidad Andina, el Mercosur y otros organismos regionales. Sin embargo, no todos acceden por igual a la tecnología: la brecha digital entre la ciudad y el campo, y entre familias con y sin recursos, sigue siendo grande."
+    }
+  ],
+  "preguntas": [
+    {
+      "id": "HIS-3BGU-U1-001",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Producción intelectual inca",
+      "destreza": "CS.H.5.3.1",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L1",
+      "enunciado": "Según la lectura, ¿cuál era la función principal del quipu?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Decorar la ropa de la nobleza.",
+          "error": "Confunde un sistema de registro con un adorno textil."
+        },
+        {
+          "letra": "B",
+          "texto": "Medir el tiempo como un reloj.",
+          "error": "No hay referencia a la medición del tiempo."
+        },
+        {
+          "letra": "C",
+          "texto": "Comerciar con los españoles.",
+          "error": "El quipu es anterior a la llegada de los españoles."
+        },
+        {
+          "letra": "D",
+          "texto": "Escribir poemas y leyendas con un alfabeto.",
+          "error": "La lectura dice que los incas no usaron escritura alfabética."
+        },
+        {
+          "letra": "E",
+          "texto": "Registrar información numérica para la administración del Estado inca.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La lectura describe el quipu como una herramienta para contar habitantes, tributos, productos y turnos de trabajo: era un sistema de registro administrativo."
+    },
+    {
+      "id": "HIS-3BGU-U1-002",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Producción intelectual inca",
+      "destreza": "CS.H.5.3.1",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L1",
+      "enunciado": "¿Qué conocimiento matemático muestra el uso del quipu?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La ausencia total de cálculo.",
+          "error": "La lectura demuestra lo contrario."
+        },
+        {
+          "letra": "B",
+          "texto": "Un sistema decimal posicional: el lugar del nudo indicaba unidades, decenas, centenas y millares.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Un sistema vigesimal con el cero, como el de los mayas.",
+          "error": "Atribuye a los incas el sistema maya."
+        },
+        {
+          "letra": "D",
+          "texto": "Un sistema basado solo en colores, sin números.",
+          "error": "Los colores complementaban, pero la cantidad dependía de los nudos."
+        },
+        {
+          "letra": "E",
+          "texto": "El uso de números romanos.",
+          "error": "Los números romanos llegaron con los europeos."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "La posición de los nudos en cada cuerda representaba órdenes decimales, igual que en nuestro sistema de numeración."
+    },
+    {
+      "id": "HIS-3BGU-U1-003",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Organización política inca",
+      "destreza": "CS.H.5.3.2",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L1",
+      "enunciado": "De acuerdo con la lectura, ¿qué papel cumplían los quipucamayoc?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Eran los soldados que cuidaban los caminos.",
+          "error": "No corresponde a lo descrito en la lectura."
+        },
+        {
+          "letra": "B",
+          "texto": "Eran comerciantes que vendían cuerdas.",
+          "error": "Reduce su papel a un oficio comercial."
+        },
+        {
+          "letra": "C",
+          "texto": "Eran los sacerdotes que adoraban al Sol.",
+          "error": "Confunde la función administrativa con la religiosa."
+        },
+        {
+          "letra": "D",
+          "texto": "Eran especialistas que elaboraban y leían los quipus para el Estado.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Eran los gobernantes supremos del imperio.",
+          "error": "El gobernante supremo era el Sapa Inca."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "La lectura los presenta como los especialistas del registro, indispensables para administrar un territorio tan extenso."
+    },
+    {
+      "id": "HIS-3BGU-U1-004",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Producción intelectual inca",
+      "destreza": "CS.H.5.3.1",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L1",
+      "enunciado": "En el proyecto “del quipu a la pantalla”, se compara el quipu con una pantalla digital del aula. ¿Qué tienen en común ambos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ambos funcionan con electricidad.",
+          "error": "El quipu era un objeto textil."
+        },
+        {
+          "letra": "B",
+          "texto": "Ambos son tecnologías para guardar y comunicar información.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Ambos fueron inventados por los incas.",
+          "error": "Las pantallas digitales son tecnología moderna."
+        },
+        {
+          "letra": "D",
+          "texto": "Ambos usan el alfabeto latino.",
+          "error": "El quipu no usaba alfabeto."
+        },
+        {
+          "letra": "E",
+          "texto": "Ninguna relación: el quipu solo era decorativo.",
+          "error": "Contradice la función de registro descrita en la lectura."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Aunque usan materiales muy distintos, el quipu y la pantalla cumplen una función parecida: registrar, organizar y transmitir información."
+    },
+    {
+      "id": "HIS-3BGU-U1-005",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Organización social andina",
+      "destreza": "CS.H.5.3.2",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L2",
+      "enunciado": "Según la lectura, ¿qué diferencia hay entre el ayni y la minga?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El ayni es trabajo para el Estado; la minga es ayuda entre familias.",
+          "error": "Confunde el ayni con la mita."
+        },
+        {
+          "letra": "B",
+          "texto": "No hay diferencia: son sinónimos.",
+          "error": "La lectura las describe como prácticas distintas."
+        },
+        {
+          "letra": "C",
+          "texto": "La minga solo existía en la Colonia.",
+          "error": "La lectura dice que se practica desde antes y hasta hoy."
+        },
+        {
+          "letra": "D",
+          "texto": "El ayni es ayuda mutua entre familias; la minga es trabajo colectivo de la comunidad para una obra común.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Ambos son pagos en dinero por el trabajo.",
+          "error": "Son formas de reciprocidad, no de trabajo asalariado."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "El ayni une a familias en un intercambio de ayuda; la minga moviliza a toda la comunidad para un beneficio colectivo."
+    },
+    {
+      "id": "HIS-3BGU-U1-006",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Organización social andina",
+      "destreza": "CS.H.5.3.2",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L2",
+      "enunciado": "¿Qué principio organizaba el trabajo en el mundo andino, según la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El salario.",
+          "error": "No existía el pago en dinero."
+        },
+        {
+          "letra": "B",
+          "texto": "El comercio con Europa.",
+          "error": "Es anterior al contacto con Europa."
+        },
+        {
+          "letra": "C",
+          "texto": "La competencia individual.",
+          "error": "El trabajo era colectivo."
+        },
+        {
+          "letra": "D",
+          "texto": "La reciprocidad.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "La esclavitud.",
+          "error": "La reciprocidad suponía obligaciones mutuas, no propiedad sobre las personas."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Tanto el ayni como la minga y la relación entre ayllus y Estado se basaban en dar y recibir: la reciprocidad."
+    },
+    {
+      "id": "HIS-3BGU-U1-007",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Organización social andina",
+      "destreza": "CS.H.5.3.2",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L2",
+      "enunciado": "El proyecto escolar de pantallas digitales propone organizarse “como en una minga”. ¿Qué rasgo de la minga se toma como modelo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La obligación de trabajar para el Estado.",
+          "error": "Esa es la mita, no la minga."
+        },
+        {
+          "letra": "B",
+          "texto": "El trabajo individual sin ayuda de nadie.",
+          "error": "La minga es colectiva por definición."
+        },
+        {
+          "letra": "C",
+          "texto": "La colaboración voluntaria de la comunidad para lograr un beneficio común.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "El pago de un tributo al Sapa Inca.",
+          "error": "No corresponde a la minga."
+        },
+        {
+          "letra": "E",
+          "texto": "La competencia entre familias.",
+          "error": "La minga se basa en la cooperación."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La minga reúne a la comunidad para una obra que beneficia a todos; esa es la idea que inspira la colaboración voluntaria del proyecto."
+    },
+    {
+      "id": "HIS-3BGU-U1-008",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Arquitectura y astronomía",
+      "destreza": "CS.H.5.3.4",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L3",
+      "enunciado": "¿Qué relación entre arquitectura y astronomía muestra la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La pirámide se construyó solo como vivienda del rey.",
+          "error": "La lectura habla de función religiosa y calendario."
+        },
+        {
+          "letra": "B",
+          "texto": "Los mayas construyeron la pirámide para observar otros planetas con telescopios.",
+          "error": "Los mayas no tenían telescopios."
+        },
+        {
+          "letra": "C",
+          "texto": "No hay ninguna relación; la sombra es casual.",
+          "error": "Los datos de orientación y escalones muestran intención."
+        },
+        {
+          "letra": "D",
+          "texto": "El edificio está orientado para que el sol forme una figura en fechas astronómicas precisas.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "La sombra se forma todos los días del año.",
+          "error": "Ocurre en los equinoccios."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "La orientación y la forma de la pirámide producen el efecto de la serpiente en los equinoccios: arquitectura al servicio de la observación astronómica."
+    },
+    {
+      "id": "HIS-3BGU-U1-009",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Arquitectura y astronomía",
+      "destreza": "CS.H.5.3.4",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L3",
+      "enunciado": "Según la lectura, ¿por qué es significativo el número total de escalones?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque es el número de reyes mayas.",
+          "error": "No hay referencia a reyes."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque suma 91, los días de una estación exacta.",
+          "error": "Esa es la cifra de una sola escalinata."
+        },
+        {
+          "letra": "C",
+          "texto": "Porque suma 260, el calendario ritual.",
+          "error": "La lectura indica 365."
+        },
+        {
+          "letra": "D",
+          "texto": "Porque suma 365, los días del año solar.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Porque cada escalón representa un dios.",
+          "error": "No se menciona."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "4 × 91 = 364, más la plataforma superior, da 365: el año solar."
+    },
+    {
+      "id": "HIS-3BGU-U1-010",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Arquitectura y astronomía",
+      "destreza": "CS.H.5.3.5",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L3",
+      "enunciado": "¿Qué construcción andina cumple una función astronómica comparable a la pirámide de Kukulcán?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El templo del Sol de Ingapirca, en Cañar.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Las chinampas de Tenochtitlan.",
+          "error": "Eran campos de cultivo, no observatorios."
+        },
+        {
+          "letra": "C",
+          "texto": "Las collcas o depósitos incas.",
+          "error": "Servían para almacenar productos."
+        },
+        {
+          "letra": "D",
+          "texto": "La plaza de Cajamarca.",
+          "error": "Es conocida por la captura de Atahualpa, no por su función astronómica."
+        },
+        {
+          "letra": "E",
+          "texto": "El Qhapaq Ñan.",
+          "error": "Era una red de caminos."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Ingapirca, sitio cañari-inca, tiene una construcción elíptica orientada al Sol, usada para observar sus movimientos y organizar el calendario."
+    },
+    {
+      "id": "HIS-3BGU-U1-011",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Producción intelectual maya",
+      "destreza": "CS.H.5.3.1",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué aporte matemático se reconoce a la cultura maya?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La invención del ábaco chino.",
+          "error": "Confunde culturas de otros continentes."
+        },
+        {
+          "letra": "B",
+          "texto": "El quipu de cuerdas y nudos.",
+          "error": "El quipu es andino."
+        },
+        {
+          "letra": "C",
+          "texto": "Un sistema de numeración vigesimal que incluía el cero.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Un sistema decimal sin cero.",
+          "error": "Los mayas usaban base 20 y tenían el cero."
+        },
+        {
+          "letra": "E",
+          "texto": "El uso de los números arábigos.",
+          "error": "Esos números llegaron con los europeos."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Los mayas contaban en base 20 y usaban un símbolo para el cero, un concepto que en Europa se generalizó mucho después."
+    },
+    {
+      "id": "HIS-3BGU-U1-012",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Organización de los aztecas",
+      "destreza": "CS.H.5.3.3",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Tenochtitlan, la capital azteca, se construyó sobre el lago de Texcoco. ¿Qué técnica agrícola permitió alimentar a su población?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El riego por aspersión.",
+          "error": "Es una técnica moderna."
+        },
+        {
+          "letra": "B",
+          "texto": "Las chinampas, islas artificiales de cultivo sobre el lago.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Los andenes en las montañas.",
+          "error": "Es una técnica andina."
+        },
+        {
+          "letra": "D",
+          "texto": "La importación de alimentos desde Europa.",
+          "error": "No había contacto con Europa."
+        },
+        {
+          "letra": "E",
+          "texto": "La agricultura de tala y quema en la selva.",
+          "error": "No corresponde a una ciudad lacustre."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Con lodo y plantas acuáticas, los aztecas formaron chinampas muy fértiles, adaptadas al medio lacustre."
+    },
+    {
+      "id": "HIS-3BGU-U1-013",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Organización política inca",
+      "destreza": "CS.H.5.3.2",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué obra permitió al Estado inca comunicar y controlar su extenso territorio?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El Qhapaq Ñan, la red de caminos con tambos y chasquis.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Las chinampas.",
+          "error": "Eran campos de cultivo aztecas."
+        },
+        {
+          "letra": "C",
+          "texto": "Las carabelas.",
+          "error": "Son embarcaciones europeas."
+        },
+        {
+          "letra": "D",
+          "texto": "Las pirámides escalonadas.",
+          "error": "No eran vías de comunicación."
+        },
+        {
+          "letra": "E",
+          "texto": "Los canales de navegación de Tenochtitlan.",
+          "error": "Corresponden a los aztecas."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "El Qhapaq Ñan unía el Tahuantinsuyo; los chasquis transmitían mensajes por relevos y los tambos servían de depósitos y alojamiento."
+    },
+    {
+      "id": "HIS-3BGU-U1-014",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Organización política",
+      "destreza": "CS.H.5.3.2",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Qué diferencia había en la organización política de mayas e incas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ambos eran imperios centralizados con una sola capital.",
+          "error": "Los mayas no tuvieron un gobierno único."
+        },
+        {
+          "letra": "B",
+          "texto": "Los incas formaban ciudades-estado y los mayas un imperio.",
+          "error": "Invierte la organización de ambos."
+        },
+        {
+          "letra": "C",
+          "texto": "Ninguno tenía gobierno.",
+          "error": "Ambos tenían estructuras de poder complejas."
+        },
+        {
+          "letra": "D",
+          "texto": "Ambos dependían del rey de España.",
+          "error": "Es anterior a la conquista."
+        },
+        {
+          "letra": "E",
+          "texto": "Los mayas formaban ciudades-estado independientes; los incas, un imperio centralizado en el Cusco.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Ciudades como Tikal o Chichén Itzá tenían sus propios gobernantes; en cambio, el Sapa Inca gobernaba todo el Tahuantinsuyo desde el Cusco."
+    },
+    {
+      "id": "HIS-3BGU-U1-015",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Edificaciones y medio geográfico",
+      "destreza": "CS.H.5.3.3",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Por qué los pueblos andinos construyeron andenes en las laderas de las montañas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque no había valles en los Andes.",
+          "error": "Sí había valles; los andenes ampliaban el área cultivable."
+        },
+        {
+          "letra": "B",
+          "texto": "Para cultivar arroz como en Asia.",
+          "error": "Atribuye cultivos y modelos ajenos."
+        },
+        {
+          "letra": "C",
+          "texto": "Para decorar los templos.",
+          "error": "Tenían una función agrícola."
+        },
+        {
+          "letra": "D",
+          "texto": "Para ganar tierra cultivable, controlar el agua y evitar la erosión en terrenos inclinados.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Para defenderse de los ataques españoles.",
+          "error": "Los andenes son muy anteriores a la conquista."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Los andenes son una adaptación al relieve andino: convierten laderas en terrazas planas y aprovechan el agua."
+    },
+    {
+      "id": "HIS-3BGU-U1-016",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Comparación arquitectónica",
+      "destreza": "CS.H.5.3.5",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Qué característica distingue la arquitectura inca de la maya y la azteca?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Uso del hierro y del concreto.",
+          "error": "No usaban hierro ni concreto."
+        },
+        {
+          "letra": "B",
+          "texto": "Muros de piedras talladas que encajan sin argamasa y resisten los sismos.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Construcciones de madera sobre el agua.",
+          "error": "No describe la arquitectura inca."
+        },
+        {
+          "letra": "D",
+          "texto": "Edificios de ladrillo cocido de estilo europeo.",
+          "error": "Es un estilo posterior a la conquista."
+        },
+        {
+          "letra": "E",
+          "texto": "Pirámides escalonadas con templos en la cima.",
+          "error": "Es una característica maya y azteca."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Los incas ajustaban bloques de piedra con gran precisión; la ausencia de argamasa permitía que los muros se acomodaran durante los terremotos."
+    },
+    {
+      "id": "HIS-3BGU-U1-017",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Producción intelectual",
+      "destreza": "CS.H.5.3.1",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué cultura precolombina desarrolló una escritura glífica, con signos que representaban palabras y sílabas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ninguna cultura americana escribió.",
+          "error": "Los mayas tenían escritura."
+        },
+        {
+          "letra": "B",
+          "texto": "La inca.",
+          "error": "Los incas registraban con quipus, sin escritura glífica."
+        },
+        {
+          "letra": "C",
+          "texto": "La maya.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "La valdivia.",
+          "error": "Es conocida por su cerámica, no por una escritura."
+        },
+        {
+          "letra": "E",
+          "texto": "La cañari.",
+          "error": "No desarrolló una escritura glífica conocida."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Los mayas registraron historia, calendarios y rituales en estelas, cerámica y códices mediante glifos."
+    },
+    {
+      "id": "HIS-3BGU-U1-018",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Calendarios mesoamericanos",
+      "destreza": "CS.H.5.3.4",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Los mayas usaban dos calendarios a la vez. ¿Cuáles eran?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Uno lunar de 30 días y uno solar de 360 días.",
+          "error": "Confunde los ciclos mayas."
+        },
+        {
+          "letra": "B",
+          "texto": "Uno de 365 días para la guerra y otro de 260 para el comercio.",
+          "error": "Asigna funciones incorrectas a los calendarios."
+        },
+        {
+          "letra": "C",
+          "texto": "Uno de 7 días y otro de 12 meses.",
+          "error": "Corresponde a la semana y al año europeos."
+        },
+        {
+          "letra": "D",
+          "texto": "Solo el calendario gregoriano.",
+          "error": "Es europeo y posterior."
+        },
+        {
+          "letra": "E",
+          "texto": "Uno ritual de 260 días (Tzolkin) y uno solar de 365 días (Haab).",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "El Tzolkin (260 días) regía la vida ritual y el Haab (365 días), el ciclo solar y agrícola; combinados formaban la Rueda Calendárica de 52 años."
+    },
+    {
+      "id": "HIS-3BGU-U1-019",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Organización social inca",
+      "destreza": "CS.H.5.3.2",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Quién ocupaba la cúspide de la sociedad inca?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El virrey.",
+          "error": "Es una autoridad colonial española."
+        },
+        {
+          "letra": "B",
+          "texto": "El jefe del ayllu (curaca).",
+          "error": "Gobernaba a nivel local, debajo del Inca."
+        },
+        {
+          "letra": "C",
+          "texto": "El Sapa Inca, considerado hijo del Sol.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "El quipucamayoc.",
+          "error": "Era un especialista del registro."
+        },
+        {
+          "letra": "E",
+          "texto": "Los mitimaes.",
+          "error": "Eran grupos trasladados por el Estado."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "El Sapa Inca tenía poder político y religioso; debajo estaban la nobleza, los curacas y los ayllus."
+    },
+    {
+      "id": "HIS-3BGU-U1-020",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Cronología precolombina",
+      "destreza": "CS.H.5.3.1",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Cuál es el orden cronológico correcto del apogeo de estas culturas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Todas son posteriores a la llegada de Colón.",
+          "error": "Las tres alcanzaron su apogeo antes de 1492."
+        },
+        {
+          "letra": "B",
+          "texto": "Incas, luego aztecas y al final mayas clásicos.",
+          "error": "Invierte el orden."
+        },
+        {
+          "letra": "C",
+          "texto": "Las tres tuvieron su apogeo al mismo tiempo.",
+          "error": "El periodo clásico maya terminó siglos antes."
+        },
+        {
+          "letra": "D",
+          "texto": "Mayas del periodo clásico, luego aztecas e incas en el siglo XV.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Aztecas, mayas clásicos e incas.",
+          "error": "Los aztecas son posteriores al periodo clásico maya."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "El periodo clásico maya fue aproximadamente entre los años 250 y 900; aztecas e incas alcanzaron su mayor extensión en el siglo XV."
+    },
+    {
+      "id": "HIS-3BGU-U1-021",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Valoración de las culturas americanas",
+      "destreza": "CS.H.5.3.2",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué conclusión se apoya mejor en lo estudiado sobre mayas, aztecas e incas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Eran idénticas entre sí.",
+          "error": "Tenían diferencias políticas, técnicas y culturales."
+        },
+        {
+          "letra": "B",
+          "texto": "Desarrollaron conocimientos técnicos, científicos y formas de organización complejas antes del contacto europeo.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Eran pueblos sin conocimientos hasta la llegada de los europeos.",
+          "error": "Desconoce la evidencia de sus logros."
+        },
+        {
+          "letra": "D",
+          "texto": "Todas sus obras fueron hechas por extranjeros.",
+          "error": "No tiene sustento histórico."
+        },
+        {
+          "letra": "E",
+          "texto": "Solo se dedicaban a la guerra.",
+          "error": "Reduce culturas complejas a un solo aspecto."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Calendarios, numeración, caminos, agricultura en terrazas y ciudades planificadas muestran la creatividad de estas culturas."
+    },
+    {
+      "id": "HIS-3BGU-U2-001",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "La mita en la economía colonial",
+      "destreza": "CS.H.5.3.14",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L4",
+      "enunciado": "Según la lectura, ¿cómo cambió el sentido de la mita con la conquista?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Pasó de un turno de trabajo recíproco para el Estado inca a un trabajo forzado en beneficio de la economía colonial.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Desapareció con la llegada de los españoles.",
+          "error": "Los españoles conservaron la institución."
+        },
+        {
+          "letra": "C",
+          "texto": "Pasó a ser una fiesta religiosa.",
+          "error": "No tiene relación con lo descrito."
+        },
+        {
+          "letra": "D",
+          "texto": "Se mantuvo igual que en tiempos incas.",
+          "error": "La lectura explica que cambió su sentido."
+        },
+        {
+          "letra": "E",
+          "texto": "Se convirtió en un trabajo bien pagado y voluntario.",
+          "error": "Contradice el pago bajo y el carácter forzado."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Se conservó el nombre, pero se eliminó la reciprocidad: los españoles usaron la mita para obtener mano de obra barata en minas y obrajes."
+    },
+    {
+      "id": "HIS-3BGU-U2-002",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "La mita en la economía colonial",
+      "destreza": "CS.H.5.3.14",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L4",
+      "enunciado": "¿A qué actividad económica se destinó principalmente la mita colonial, según la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "A la minería de plata y mercurio.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "A la construcción de ferrocarriles.",
+          "error": "Los ferrocarriles son del siglo XIX."
+        },
+        {
+          "letra": "C",
+          "texto": "A la pesca en el Pacífico.",
+          "error": "No corresponde a lo descrito."
+        },
+        {
+          "letra": "D",
+          "texto": "Al comercio marítimo con Asia.",
+          "error": "No se menciona en la lectura."
+        },
+        {
+          "letra": "E",
+          "texto": "A la ganadería en la Amazonía.",
+          "error": "La lectura habla de Potosí y Huancavelica."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Potosí (plata) y Huancavelica (mercurio, necesario para refinar la plata) concentraban a los mitayos."
+    },
+    {
+      "id": "HIS-3BGU-U2-003",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Impacto de la conquista",
+      "destreza": "CS.H.5.3.10",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L4",
+      "enunciado": "¿Qué consecuencia social de la mita colonial menciona la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El crecimiento acelerado de las comunidades indígenas.",
+          "error": "La lectura señala lo contrario."
+        },
+        {
+          "letra": "B",
+          "texto": "La pérdida de población de las comunidades y su menor capacidad para cultivar sus tierras.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "El fin de la evangelización.",
+          "error": "No se relaciona con la mita."
+        },
+        {
+          "letra": "D",
+          "texto": "La riqueza de los mitayos.",
+          "error": "Recibían un pago muy bajo."
+        },
+        {
+          "letra": "E",
+          "texto": "La independencia de las colonias.",
+          "error": "Ocurrió mucho después."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Al morir o quedarse lejos los mitayos, las comunidades se debilitaron demográfica y económicamente."
+    },
+    {
+      "id": "HIS-3BGU-U2-004",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "La encomienda",
+      "destreza": "CS.H.5.3.10",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L4",
+      "enunciado": "Según la lectura, ¿con qué argumento oficial se justificaba la encomienda?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Con la obligación de proteger y evangelizar a los indígenas a cambio del tributo.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Con la necesidad de pagar salarios justos.",
+          "error": "No había salarios en la encomienda."
+        },
+        {
+          "letra": "C",
+          "texto": "Con la abolición de los tributos.",
+          "error": "La encomienda cobraba tributos."
+        },
+        {
+          "letra": "D",
+          "texto": "Con el derecho de los indígenas a gobernarse solos.",
+          "error": "La encomienda los sometía a un encomendero."
+        },
+        {
+          "letra": "E",
+          "texto": "Con la defensa de las religiones andinas.",
+          "error": "Su objetivo declarado era cristianizar."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La Corona presentó la encomienda como un deber de cuidado y evangelización, pero en la práctica fue un sistema de explotación."
+    },
+    {
+      "id": "HIS-3BGU-U2-005",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Impacto ecológico y social",
+      "destreza": "CS.H.5.3.11",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L5",
+      "enunciado": "Según la lectura, ¿cuál fue la principal causa de la caída de la población indígena?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Las enfermedades traídas por los europeos, como la viruela.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Los terremotos del siglo XVI.",
+          "error": "No se mencionan en la lectura."
+        },
+        {
+          "letra": "C",
+          "texto": "Las guerras entre incas y aztecas.",
+          "error": "Nunca se enfrentaron entre sí."
+        },
+        {
+          "letra": "D",
+          "texto": "La falta de alimentos americanos.",
+          "error": "La lectura muestra abundancia de cultivos nativos."
+        },
+        {
+          "letra": "E",
+          "texto": "La migración de los indígenas a Europa.",
+          "error": "No ocurrió una migración de ese tipo."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La población indígena no tenía inmunidad frente a enfermedades europeas; las epidemias causaron un colapso demográfico."
+    },
+    {
+      "id": "HIS-3BGU-U2-006",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Impacto ecológico y social",
+      "destreza": "CS.H.5.3.11",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L5",
+      "enunciado": "¿Cuál de estos productos viajó de América al resto del mundo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La cebada.",
+          "error": "Es de origen euroasiático."
+        },
+        {
+          "letra": "B",
+          "texto": "La caña de azúcar.",
+          "error": "Fue traída a América por los europeos."
+        },
+        {
+          "letra": "C",
+          "texto": "La papa.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "El trigo.",
+          "error": "Llegó a América desde Europa."
+        },
+        {
+          "letra": "E",
+          "texto": "El caballo.",
+          "error": "Fue introducido en América por los europeos."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La papa, domesticada en los Andes, se convirtió en un alimento básico en Europa y en otros continentes."
+    },
+    {
+      "id": "HIS-3BGU-U2-007",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Impacto ecológico y social",
+      "destreza": "CS.H.5.3.11",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L5",
+      "enunciado": "De acuerdo con la lectura, ¿qué impacto ecológico y social tuvo la llegada del ganado europeo a los Andes?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Mejoró la alimentación de todas las comunidades por igual.",
+          "error": "La lectura muestra que las tierras pasaron a las haciendas."
+        },
+        {
+          "letra": "B",
+          "texto": "Ocupó páramos y pastos, y muchas tierras comunales pasaron a ser zonas de pastoreo de las haciendas.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "No tuvo ningún efecto en el paisaje.",
+          "error": "La lectura describe cambios en páramos y pastos."
+        },
+        {
+          "letra": "D",
+          "texto": "Terminó con la agricultura en América.",
+          "error": "La agricultura continuó."
+        },
+        {
+          "letra": "E",
+          "texto": "Provocó la desaparición de las haciendas.",
+          "error": "Las haciendas se fortalecieron."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "El ganado transformó el paisaje andino y facilitó la apropiación de tierras comunales por parte de los hacendados."
+    },
+    {
+      "id": "HIS-3BGU-U2-008",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Evangelización",
+      "destreza": "CS.H.5.3.12",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L6",
+      "enunciado": "¿Cuál era el objetivo de las campañas descritas en la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Enseñar a los indígenas a leer quipus.",
+          "error": "No tiene relación con las campañas."
+        },
+        {
+          "letra": "B",
+          "texto": "Proteger las huacas como patrimonio.",
+          "error": "La lectura indica que se destruían."
+        },
+        {
+          "letra": "C",
+          "texto": "Recolectar tributos para la Corona.",
+          "error": "El objetivo era religioso."
+        },
+        {
+          "letra": "D",
+          "texto": "Organizar elecciones en los pueblos.",
+          "error": "No había elecciones en ese contexto."
+        },
+        {
+          "letra": "E",
+          "texto": "Eliminar las creencias y prácticas religiosas indígenas.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Las campañas buscaban erradicar los cultos andinos para imponer el cristianismo."
+    },
+    {
+      "id": "HIS-3BGU-U2-009",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Evangelización",
+      "destreza": "CS.H.5.3.12",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L6",
+      "enunciado": "Según la lectura, ¿qué respuesta tuvieron muchas comunidades frente a la persecución?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Mantuvieron sus cultos de forma oculta o los mezclaron con las fiestas cristianas.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Destruyeron las iglesias cristianas.",
+          "error": "No es lo que describe la lectura."
+        },
+        {
+          "letra": "C",
+          "texto": "Se trasladaron a Europa.",
+          "error": "No ocurrió."
+        },
+        {
+          "letra": "D",
+          "texto": "Abandonaron por completo sus creencias.",
+          "error": "La lectura muestra que las conservaron de varias formas."
+        },
+        {
+          "letra": "E",
+          "texto": "Aceptaron el cristianismo sin ningún cambio.",
+          "error": "Omite el sincretismo descrito."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La resistencia cultural tomó formas discretas: culto oculto y sincretismo entre creencias andinas y cristianas."
+    },
+    {
+      "id": "HIS-3BGU-U2-010",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Análisis de fuentes",
+      "destreza": "CS.H.5.3.12",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L6",
+      "enunciado": "La lectura señala que muchos datos provienen de informes escritos por los clérigos. ¿Qué cuidado debe tener un historiador al usarlos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Considerar que reflejan el punto de vista de quienes perseguían esos cultos y contrastarlos con otras fuentes.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Aceptarlos como totalmente objetivos.",
+          "error": "Ignora la perspectiva del autor."
+        },
+        {
+          "letra": "C",
+          "texto": "Creer que muestran la visión de los indígenas.",
+          "error": "Fueron escritos por los extirpadores, no por los indígenas."
+        },
+        {
+          "letra": "D",
+          "texto": "Usarlos solo si están escritos en latín.",
+          "error": "El idioma no garantiza la objetividad."
+        },
+        {
+          "letra": "E",
+          "texto": "Descartarlos porque no sirven para nada.",
+          "error": "Son útiles si se analizan críticamente."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Toda fuente tiene un autor y una intención. Leer críticamente significa preguntarse quién escribe, para qué, y buscar otras voces."
+    },
+    {
+      "id": "HIS-3BGU-U2-011",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "La conquista del Tahuantinsuyo",
+      "destreza": "CS.H.5.3.10",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Dónde y en qué año fue capturado Atahualpa por Francisco Pizarro?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En Cajamarca, en 1532.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "En Guayaquil, en 1547.",
+          "error": "No corresponde a la captura de Atahualpa."
+        },
+        {
+          "letra": "C",
+          "texto": "En el Cusco, en 1492.",
+          "error": "1492 es el año del primer viaje de Colón."
+        },
+        {
+          "letra": "D",
+          "texto": "En Tenochtitlan, en 1521.",
+          "error": "Corresponde a la caída de la capital azteca."
+        },
+        {
+          "letra": "E",
+          "texto": "En Quito, en 1534.",
+          "error": "Confunde la captura con la fundación española de Quito."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Atahualpa fue capturado en Cajamarca en noviembre de 1532 y ejecutado en 1533."
+    },
+    {
+      "id": "HIS-3BGU-U2-012",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "La conquista del Tahuantinsuyo",
+      "destreza": "CS.H.5.3.10",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué situación interna del Tahuantinsuyo facilitó la conquista española?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La llegada de los portugueses al Cusco.",
+          "error": "Los portugueses no intervinieron en el Perú."
+        },
+        {
+          "letra": "B",
+          "texto": "La rendición voluntaria de todos los curacas.",
+          "error": "Hubo resistencias y alianzas variadas."
+        },
+        {
+          "letra": "C",
+          "texto": "La ausencia de ejércitos incas.",
+          "error": "Los incas tenían ejércitos numerosos."
+        },
+        {
+          "letra": "D",
+          "texto": "La guerra civil entre Huáscar y Atahualpa por el poder.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "La alianza entre incas y aztecas contra España.",
+          "error": "Nunca existió esa alianza."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "El imperio estaba dividido tras la guerra entre los hermanos; los españoles aprovecharon esa división."
+    },
+    {
+      "id": "HIS-3BGU-U2-013",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Factores de la conquista",
+      "destreza": "CS.H.5.3.10",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un grupo pequeño de españoles venció a imperios de millones de personas. ¿Qué explicación es más completa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Que los indígenas pensaban que los españoles eran dioses y no se defendieron.",
+          "error": "Simplifica y exagera una versión discutida."
+        },
+        {
+          "letra": "B",
+          "texto": "La falta de valentía de los indígenas.",
+          "error": "Es un prejuicio sin sustento."
+        },
+        {
+          "letra": "C",
+          "texto": "Que los españoles eran más numerosos.",
+          "error": "Eran muchos menos."
+        },
+        {
+          "letra": "D",
+          "texto": "Solo la superioridad de las armas de fuego.",
+          "error": "Es un factor, pero no explica todo."
+        },
+        {
+          "letra": "E",
+          "texto": "La combinación de epidemias, alianzas con pueblos indígenas enemigos de los imperios, armas y caballos, y divisiones internas.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La conquista fue posible por varios factores a la vez; por ejemplo, Cortés contó con miles de aliados tlaxcaltecas."
+    },
+    {
+      "id": "HIS-3BGU-U2-014",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Defensa de los indígenas",
+      "destreza": "CS.H.5.3.10",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Quién fue fray Bartolomé de las Casas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Un líder de la resistencia inca.",
+          "error": "Era un religioso español."
+        },
+        {
+          "letra": "B",
+          "texto": "El primer virrey de Nueva España.",
+          "error": "Fue Antonio de Mendoza."
+        },
+        {
+          "letra": "C",
+          "texto": "Un fraile que denunció los abusos contra los indígenas y defendió sus derechos ante la Corona.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "El navegante que llegó a Brasil.",
+          "error": "Fue Pedro Álvares Cabral."
+        },
+        {
+          "letra": "E",
+          "texto": "El conquistador del Perú.",
+          "error": "Ese fue Francisco Pizarro."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Las Casas escribió la Brevísima relación de la destrucción de las Indias y su denuncia influyó en las Leyes Nuevas de 1542."
+    },
+    {
+      "id": "HIS-3BGU-U2-015",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Legislación colonial",
+      "destreza": "CS.H.5.3.10",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué buscaban las Leyes Nuevas de 1542?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Autorizar la esclavitud indígena.",
+          "error": "Hicieron lo contrario."
+        },
+        {
+          "letra": "B",
+          "texto": "Expulsar a los jesuitas.",
+          "error": "Ocurrió en 1767."
+        },
+        {
+          "letra": "C",
+          "texto": "Declarar la independencia de América.",
+          "error": "Es un hecho del siglo XIX."
+        },
+        {
+          "letra": "D",
+          "texto": "Limitar la encomienda y prohibir la esclavitud de los indígenas.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Crear la mita en Potosí.",
+          "error": "La mita minera se organizó después y no era su objetivo."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Las Leyes Nuevas intentaron frenar los abusos de los encomenderos; su aplicación provocó rebeliones de conquistadores en el Perú."
+    },
+    {
+      "id": "HIS-3BGU-U2-016",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Fundación de ciudades",
+      "destreza": "CS.H.5.3.10",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Quién fundó la villa española de San Francisco de Quito en 1534?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cristóbal Colón.",
+          "error": "Nunca llegó al territorio del actual Ecuador."
+        },
+        {
+          "letra": "B",
+          "texto": "Hernán Cortés.",
+          "error": "Conquistó México."
+        },
+        {
+          "letra": "C",
+          "texto": "Francisco de Orellana.",
+          "error": "Se le conoce por la expedición al Amazonas."
+        },
+        {
+          "letra": "D",
+          "texto": "Rumiñahui.",
+          "error": "Fue un líder de la resistencia indígena."
+        },
+        {
+          "letra": "E",
+          "texto": "Sebastián de Benalcázar.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Benalcázar fundó San Francisco de Quito el 6 de diciembre de 1534, tras vencer la resistencia de Rumiñahui."
+    },
+    {
+      "id": "HIS-3BGU-U2-017",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Resistencia indígena",
+      "destreza": "CS.H.5.3.10",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué papel tuvo Rumiñahui durante la conquista del territorio del actual Ecuador?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Fue el último emperador azteca.",
+          "error": "Confunde con Cuauhtémoc."
+        },
+        {
+          "letra": "B",
+          "texto": "Fue el aliado principal de Pizarro.",
+          "error": "Se enfrentó a los españoles."
+        },
+        {
+          "letra": "C",
+          "texto": "Organizó la resistencia contra los españoles en la región de Quito.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Escribió crónicas sobre la conquista.",
+          "error": "No hay registro de ello."
+        },
+        {
+          "letra": "E",
+          "texto": "Fundó la ciudad de Guayaquil.",
+          "error": "No corresponde."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Tras la muerte de Atahualpa, Rumiñahui lideró la resistencia en el norte del Tahuantinsuyo hasta ser capturado."
+    },
+    {
+      "id": "HIS-3BGU-U2-018",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Manufactura colonial",
+      "destreza": "CS.H.5.3.14",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "En la Audiencia de Quito se desarrollaron los obrajes. ¿Qué eran?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Talleres textiles donde trabajaban indígenas, muchas veces de forma forzada, para abastecer a las minas y ciudades.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Iglesias dedicadas a la evangelización.",
+          "error": "Eran talleres productivos."
+        },
+        {
+          "letra": "C",
+          "texto": "Minas de oro en la Costa.",
+          "error": "Producían tejidos, no oro."
+        },
+        {
+          "letra": "D",
+          "texto": "Puertos de comercio con Asia.",
+          "error": "No eran puertos."
+        },
+        {
+          "letra": "E",
+          "texto": "Escuelas para la élite criolla.",
+          "error": "No eran instituciones educativas."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Los obrajes producían paños y tejidos que se vendían en Potosí y Lima; fueron el eje de la economía quiteña colonial."
+    },
+    {
+      "id": "HIS-3BGU-U2-019",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "El choque cultural",
+      "destreza": "CS.H.5.3.10",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Por qué los historiadores prefieren hablar de “choque cultural” y no solo de “descubrimiento” de América?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque no hubo cambios culturales.",
+          "error": "Los cambios fueron profundos."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque el encuentro supuso imposición, violencia y transformación de las sociedades que ya vivían en el continente.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Porque América estaba deshabitada.",
+          "error": "Vivían millones de personas."
+        },
+        {
+          "letra": "D",
+          "texto": "Porque fue un intercambio entre iguales.",
+          "error": "Hubo dominación y desigualdad."
+        },
+        {
+          "letra": "E",
+          "texto": "Porque los indígenas descubrieron Europa.",
+          "error": "Invierte el proceso."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "“Descubrimiento” refleja solo la mirada europea; “choque cultural” reconoce a los pueblos americanos y el carácter violento del proceso."
+    },
+    {
+      "id": "HIS-3BGU-U2-020",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "El Requerimiento",
+      "destreza": "CS.H.5.3.12",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Los conquistadores leían el Requerimiento, un texto en castellano que exigía a los indígenas aceptar al rey y a la Iglesia. ¿Qué problema evidente tenía?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Prohibía la conquista.",
+          "error": "La legitimaba."
+        },
+        {
+          "letra": "B",
+          "texto": "Lo aprobaban los incas.",
+          "error": "No participaban en su redacción."
+        },
+        {
+          "letra": "C",
+          "texto": "Era demasiado favorable a los indígenas.",
+          "error": "Servía para justificar la guerra."
+        },
+        {
+          "letra": "D",
+          "texto": "Estaba escrito en quechua.",
+          "error": "Se leía en castellano."
+        },
+        {
+          "letra": "E",
+          "texto": "Los indígenas no entendían el idioma ni tenían opción real de rechazarlo sin ser atacados.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "El Requerimiento daba una apariencia legal a la conquista: si los indígenas no se sometían, se declaraba la guerra “justa”."
+    },
+    {
+      "id": "HIS-3BGU-U3-001",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Colonización portuguesa",
+      "destreza": "CS.H.5.3.19",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L7",
+      "enunciado": "Según la lectura, ¿de dónde proviene el nombre de Brasil?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Del azúcar que se producía en la costa.",
+          "error": "El azúcar llegó después."
+        },
+        {
+          "letra": "B",
+          "texto": "Del palo brasil, un árbol del que se extraía un tinte rojo.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Del río más grande de la región.",
+          "error": "No se menciona en la lectura."
+        },
+        {
+          "letra": "D",
+          "texto": "De un rey portugués llamado Brasil.",
+          "error": "No existe tal rey."
+        },
+        {
+          "letra": "E",
+          "texto": "De una palabra indígena que significa oro.",
+          "error": "La lectura indica otro origen."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "El tinte del palo brasil fue el primer producto que interesó a los portugueses y dio nombre al territorio."
+    },
+    {
+      "id": "HIS-3BGU-U3-002",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Ciclos económicos",
+      "destreza": "CS.H.5.3.20",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L7",
+      "enunciado": "¿Cuál es el orden de los ciclos económicos de Brasil descritos en la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Palo brasil, azúcar y oro.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Oro, azúcar y palo brasil.",
+          "error": "Invierte el orden."
+        },
+        {
+          "letra": "C",
+          "texto": "Plata, azúcar y oro.",
+          "error": "La plata no fue un ciclo de Brasil."
+        },
+        {
+          "letra": "D",
+          "texto": "Café, oro y azúcar.",
+          "error": "El café no aparece en la lectura."
+        },
+        {
+          "letra": "E",
+          "texto": "Azúcar, palo brasil y caucho.",
+          "error": "El caucho no se menciona y el orden es incorrecto."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Primero el palo brasil (desde 1500), luego el azúcar en el nordeste (desde 1530) y finalmente el oro en Minas Gerais (siglo XVIII)."
+    },
+    {
+      "id": "HIS-3BGU-U3-003",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Latifundio y esclavitud",
+      "destreza": "CS.H.5.3.21",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L7",
+      "enunciado": "Según la lectura, ¿por qué los dueños de ingenios recurrieron a africanos esclavizados?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque los africanos llegaron voluntariamente a buscar trabajo.",
+          "error": "Fueron llevados por la fuerza."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque los indígenas eran más numerosos que nunca.",
+          "error": "La lectura dice que disminuían."
+        },
+        {
+          "letra": "C",
+          "texto": "Porque la Corona prohibió el cultivo de caña.",
+          "error": "La Corona promovía el azúcar."
+        },
+        {
+          "letra": "D",
+          "texto": "Porque en África no había trabajo.",
+          "error": "Justifica la esclavitud con un argumento falso."
+        },
+        {
+          "letra": "E",
+          "texto": "Porque la población indígena disminuía y resistía, y necesitaban mucha mano de obra.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "El ingenio necesitaba mucha mano de obra; ante la caída indígena, se impuso la trata de africanos esclavizados."
+    },
+    {
+      "id": "HIS-3BGU-U3-004",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Latifundio y esclavitud",
+      "destreza": "CS.H.5.3.21",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L7",
+      "enunciado": "¿Qué rasgo del ingenio azucarero descrito en la lectura muestra la relación entre latifundio y esclavitud?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Fábricas modernas con trabajadores asalariados.",
+          "error": "No corresponde al siglo XVI."
+        },
+        {
+          "letra": "B",
+          "texto": "Una gran propiedad dedicada a un cultivo de exportación que dependía del trabajo de personas esclavizadas.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Comunidades indígenas que vendían su cosecha libremente.",
+          "error": "No es lo que describe la lectura."
+        },
+        {
+          "letra": "D",
+          "texto": "Talleres textiles de la Sierra.",
+          "error": "Confunde con los obrajes."
+        },
+        {
+          "letra": "E",
+          "texto": "Pequeñas parcelas trabajadas por familias libres.",
+          "error": "Describe lo contrario a un latifundio."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "El latifundio de monocultivo para exportar se sostenía con mano de obra esclavizada: era su base económica."
+    },
+    {
+      "id": "HIS-3BGU-U3-005",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Comunidades afrodescendientes",
+      "destreza": "CS.H.5.3.21",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L8",
+      "enunciado": "Según la lectura, ¿qué significa ser cimarrón en el contexto colonial?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ser un funcionario de la Corona.",
+          "error": "Los cimarrones resistían a la Corona."
+        },
+        {
+          "letra": "B",
+          "texto": "Haber huido de la esclavitud para vivir en una comunidad libre.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Ser un marinero del barco.",
+          "error": "No corresponde a lo descrito."
+        },
+        {
+          "letra": "D",
+          "texto": "Ser un comerciante de esclavos.",
+          "error": "Es lo opuesto."
+        },
+        {
+          "letra": "E",
+          "texto": "Ser un indígena encomendado.",
+          "error": "Confunde con la encomienda."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Los cimarrones escapaban de la esclavitud y formaban comunidades autónomas, a menudo en lugares de difícil acceso."
+    },
+    {
+      "id": "HIS-3BGU-U3-006",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Comunidades afrodescendientes",
+      "destreza": "CS.H.5.3.21",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L8",
+      "enunciado": "¿Qué estrategia usó Alonso de Illescas para consolidar la comunidad, según la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Alianzas con pueblos indígenas mediante matrimonios y acuerdos.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Regresar a África en otro barco.",
+          "error": "No ocurrió."
+        },
+        {
+          "letra": "C",
+          "texto": "Vender a otros africanos.",
+          "error": "Contradice la lucha por la libertad."
+        },
+        {
+          "letra": "D",
+          "texto": "Pedir protección al rey de España.",
+          "error": "La comunidad resistía a las autoridades coloniales."
+        },
+        {
+          "letra": "E",
+          "texto": "Construir una gran ciudad amurallada.",
+          "error": "No se menciona."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Illescas tejió alianzas con los pueblos indígenas de la región, lo que fortaleció a la comunidad frente a las autoridades coloniales."
+    },
+    {
+      "id": "HIS-3BGU-U3-007",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Comunidades afrodescendientes",
+      "destreza": "CS.H.5.3.21",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L8",
+      "enunciado": "¿Por qué la historia de Illescas es importante para la identidad afroecuatoriana?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque los afroecuatorianos llegaron como conquistadores.",
+          "error": "Llegaron esclavizados."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque explica el origen del cultivo de cacao en la Sierra.",
+          "error": "No se relaciona con la lectura."
+        },
+        {
+          "letra": "C",
+          "texto": "Porque demuestra que la esclavitud no existió en el Ecuador.",
+          "error": "La lectura parte de la esclavitud."
+        },
+        {
+          "letra": "D",
+          "texto": "Porque Illescas fue nombrado virrey del Perú.",
+          "error": "No es un hecho histórico."
+        },
+        {
+          "letra": "E",
+          "texto": "Porque muestra la resistencia y la capacidad de organización de los africanos esclavizados para conquistar su libertad.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La comunidad de Esmeraldas es un símbolo de libertad y autonomía; su memoria forma parte del orgullo afroecuatoriano."
+    },
+    {
+      "id": "HIS-3BGU-U3-008",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Economía de latifundio",
+      "destreza": "CS.H.5.3.21",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L9",
+      "enunciado": "Según la lectura, ¿qué tipo de trabajadores había en las haciendas del valle del Chota?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Mitayos de Potosí.",
+          "error": "Potosí estaba en el Alto Perú."
+        },
+        {
+          "letra": "B",
+          "texto": "Inmigrantes europeos asalariados.",
+          "error": "No corresponde a lo descrito."
+        },
+        {
+          "letra": "C",
+          "texto": "Indígenas amazónicos libres.",
+          "error": "La lectura menciona africanos esclavizados."
+        },
+        {
+          "letra": "D",
+          "texto": "Comerciantes chinos.",
+          "error": "Llegaron mucho después."
+        },
+        {
+          "letra": "E",
+          "texto": "Africanos esclavizados que cultivaban caña de azúcar.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "El valle cálido del Chota se dedicó a la caña con trabajo esclavizado; por eso hoy es uno de los territorios afroecuatorianos más importantes."
+    },
+    {
+      "id": "HIS-3BGU-U3-009",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Economía de latifundio",
+      "destreza": "CS.H.5.3.21",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L9",
+      "enunciado": "¿Cómo quedaban atados muchos trabajadores indígenas a la hacienda, según la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Por contratos de trabajo con salario justo.",
+          "error": "La lectura describe una relación de dependencia."
+        },
+        {
+          "letra": "B",
+          "texto": "Por ser propietarios de la hacienda.",
+          "error": "No eran propietarios."
+        },
+        {
+          "letra": "C",
+          "texto": "Por haber ganado elecciones locales.",
+          "error": "No había elecciones en la hacienda."
+        },
+        {
+          "letra": "D",
+          "texto": "Por deudas que nunca terminaban de pagar.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Por su voluntad de servir al rey.",
+          "error": "No se menciona."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Las deudas permanentes impedían a los trabajadores abandonar la hacienda; era una forma de servidumbre."
+    },
+    {
+      "id": "HIS-3BGU-U3-010",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Economía de latifundio",
+      "destreza": "CS.H.5.3.21",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L9",
+      "enunciado": "¿Qué huella de largo plazo dejó el modelo de hacienda, según la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El reparto equitativo de la tierra.",
+          "error": "Es lo opuesto."
+        },
+        {
+          "letra": "B",
+          "texto": "El fin de las órdenes religiosas.",
+          "error": "Las órdenes eran dueñas de haciendas."
+        },
+        {
+          "letra": "C",
+          "texto": "La industrialización inmediata del país.",
+          "error": "No se deriva de la lectura."
+        },
+        {
+          "letra": "D",
+          "texto": "La concentración de la tierra en pocas manos.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "La desaparición de la agricultura en la Sierra.",
+          "error": "La agricultura continuó."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "La concentración de la tierra se prolongó durante la República; recién en el siglo XX se aplicaron reformas agrarias."
+    },
+    {
+      "id": "HIS-3BGU-U3-011",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Reparto colonial del mundo",
+      "destreza": "CS.H.5.3.19",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué tratado de 1494 dividió entre España y Portugal las tierras por descubrir?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El Tratado de Guayaquil.",
+          "error": "No existe con ese contenido."
+        },
+        {
+          "letra": "B",
+          "texto": "El Tratado de Versalles.",
+          "error": "Es de 1919."
+        },
+        {
+          "letra": "C",
+          "texto": "Las Leyes Nuevas.",
+          "error": "Son leyes de 1542 sobre los indígenas."
+        },
+        {
+          "letra": "D",
+          "texto": "El Tratado de Tordesillas.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "La Bula de la Cruzada.",
+          "error": "No dividió territorios."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Tordesillas trazó una línea al oeste de Cabo Verde; por eso parte de Sudamérica, el actual Brasil, quedó para Portugal."
+    },
+    {
+      "id": "HIS-3BGU-U3-012",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Colonización portuguesa",
+      "destreza": "CS.H.5.3.19",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Qué navegante llegó a las costas de Brasil en 1500?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cristóbal Colón.",
+          "error": "Navegó para España y no llegó a Brasil."
+        },
+        {
+          "letra": "B",
+          "texto": "Francisco Pizarro.",
+          "error": "Conquistó el Perú."
+        },
+        {
+          "letra": "C",
+          "texto": "Pedro Álvares Cabral.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Fernando de Magallanes.",
+          "error": "Su viaje fue posterior y dio la vuelta al mundo."
+        },
+        {
+          "letra": "E",
+          "texto": "Vasco da Gama.",
+          "error": "Llegó a la India en 1498."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Cabral llegó a Brasil en 1500 cuando se dirigía a la India, y tomó posesión del territorio para Portugal."
+    },
+    {
+      "id": "HIS-3BGU-U3-013",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Comercio triangular",
+      "destreza": "CS.H.5.3.21",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué rutas formaban el comercio triangular atlántico?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Productos de Asia a América por el Atlántico.",
+          "error": "La ruta asiática era por el Pacífico."
+        },
+        {
+          "letra": "B",
+          "texto": "Manufacturas de Europa a África, personas esclavizadas de África a América y materias primas de América a Europa.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Solo comercio entre España y Portugal.",
+          "error": "Omite África y América."
+        },
+        {
+          "letra": "D",
+          "texto": "Esclavos de América a África y azúcar de África a Europa.",
+          "error": "Invierte las rutas."
+        },
+        {
+          "letra": "E",
+          "texto": "Oro de África a Asia y especias de Asia a América.",
+          "error": "No describe el comercio atlántico."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "El comercio triangular unió tres continentes y convirtió a millones de africanos en mercancía."
+    },
+    {
+      "id": "HIS-3BGU-U3-014",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Organización territorial",
+      "destreza": "CS.H.5.3.20",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿En qué año se creó la Real Audiencia de Quito?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1809",
+          "error": "Es el año del Primer Grito de Independencia."
+        },
+        {
+          "letra": "B",
+          "texto": "1534",
+          "error": "Es el año de la fundación española de Quito."
+        },
+        {
+          "letra": "C",
+          "texto": "1563",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "1492",
+          "error": "Es el año del primer viaje de Colón."
+        },
+        {
+          "letra": "E",
+          "texto": "1822",
+          "error": "Es el año de la batalla de Pichincha."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Felipe II creó la Real Audiencia de Quito en 1563; dependía del virreinato del Perú."
+    },
+    {
+      "id": "HIS-3BGU-U3-015",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Monopolio comercial",
+      "destreza": "CS.H.5.3.20",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Qué función cumplía la Casa de Contratación de Sevilla?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Evangelizar a los indígenas.",
+          "error": "No era una institución religiosa."
+        },
+        {
+          "letra": "B",
+          "texto": "Gobernar Brasil.",
+          "error": "Brasil era portugués."
+        },
+        {
+          "letra": "C",
+          "texto": "Controlar el monopolio del comercio entre España y sus colonias.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Permitir el libre comercio de las colonias con cualquier país.",
+          "error": "Era lo contrario: un monopolio."
+        },
+        {
+          "letra": "E",
+          "texto": "Administrar las universidades de América.",
+          "error": "No era una institución educativa."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Todo el comercio con América debía pasar por Sevilla, bajo control de la Corona: así funcionaba el monopolio."
+    },
+    {
+      "id": "HIS-3BGU-U3-016",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Minería y economía regional",
+      "destreza": "CS.H.5.3.20",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Qué relación económica había entre las minas de Potosí y los obrajes de Quito?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Los obrajes extraían plata para Potosí.",
+          "error": "Los obrajes eran textiles."
+        },
+        {
+          "letra": "B",
+          "texto": "Potosí enviaba plata para pagar los salarios de los obrajes de Guayaquil.",
+          "error": "Los obrajes estaban en la Sierra."
+        },
+        {
+          "letra": "C",
+          "texto": "Ninguna: eran economías aisladas.",
+          "error": "Estaban conectadas por el comercio."
+        },
+        {
+          "letra": "D",
+          "texto": "Los obrajes quiteños producían tejidos que se vendían en el mercado minero de Potosí.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Quito compraba tejidos a Potosí.",
+          "error": "Invierte la relación."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "La minería de Potosí creó un gran mercado que demandaba textiles; los obrajes de la Audiencia de Quito lo abastecían."
+    },
+    {
+      "id": "HIS-3BGU-U3-017",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Comunidades afrodescendientes",
+      "destreza": "CS.H.5.3.21",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿En qué zonas del Ecuador se concentra históricamente la población afroecuatoriana?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En ningún lugar del Ecuador.",
+          "error": "Hay comunidades afroecuatorianas históricas."
+        },
+        {
+          "letra": "B",
+          "texto": "En las ciudades de Cuenca y Loja exclusivamente.",
+          "error": "No son las zonas de mayor concentración."
+        },
+        {
+          "letra": "C",
+          "texto": "Solo en la Amazonía.",
+          "error": "No corresponde a la historia colonial."
+        },
+        {
+          "letra": "D",
+          "texto": "Solo en Galápagos.",
+          "error": "No es una zona histórica de población afro."
+        },
+        {
+          "letra": "E",
+          "texto": "En Esmeraldas y en el valle del Chota-Mira, además de ciudades como Guayaquil.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Esmeraldas (por los cimarrones) y el Chota-Mira (por las haciendas cañeras) son los territorios afroecuatorianos más reconocidos."
+    },
+    {
+      "id": "HIS-3BGU-U3-018",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Organización territorial",
+      "destreza": "CS.H.5.3.20",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Cuáles fueron los dos primeros virreinatos de la América española?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Quito y Lima.",
+          "error": "Quito fue una Audiencia, no un virreinato."
+        },
+        {
+          "letra": "B",
+          "texto": "Nueva Granada y Río de la Plata.",
+          "error": "Se crearon en el siglo XVIII."
+        },
+        {
+          "letra": "C",
+          "texto": "Nueva España y Perú.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Brasil y Perú.",
+          "error": "Brasil era portugués."
+        },
+        {
+          "letra": "E",
+          "texto": "Nueva España y Cuba.",
+          "error": "Cuba no fue virreinato."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Nueva España (1535) y Perú (1542) fueron los primeros virreinatos; los de Nueva Granada y Río de la Plata surgieron en el siglo XVIII."
+    },
+    {
+      "id": "HIS-3BGU-U3-019",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Plantación colonial",
+      "destreza": "CS.H.5.3.20",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué rasgo define a una economía colonial de plantación?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Trabajo exclusivamente asalariado.",
+          "error": "Se basaba en trabajo forzado."
+        },
+        {
+          "letra": "B",
+          "texto": "Industria pesada en las ciudades.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "C",
+          "texto": "Monocultivo de un producto para exportar a la metrópoli.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Producción variada para el consumo local.",
+          "error": "Es lo opuesto al monocultivo exportador."
+        },
+        {
+          "letra": "E",
+          "texto": "Comercio libre con todos los países.",
+          "error": "Las colonias tenían monopolio."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La plantación producía un solo bien, como azúcar, para Europa; la colonia dependía de ese mercado."
+    },
+    {
+      "id": "HIS-3BGU-U3-020",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Comparación de colonizaciones",
+      "destreza": "CS.H.5.3.19",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Qué diferencia inicial hubo entre la colonización portuguesa de Brasil y la española en los Andes?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Portugal llegó antes a los Andes.",
+          "error": "No colonizó los Andes."
+        },
+        {
+          "letra": "B",
+          "texto": "Portugal se concentró al inicio en la costa y en productos como el palo brasil, mientras España se apoyó en sociedades indígenas densas y en la minería.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "España nunca explotó minas.",
+          "error": "Potosí era española."
+        },
+        {
+          "letra": "D",
+          "texto": "Ambas fueron idénticas en todo.",
+          "error": "Hubo diferencias importantes."
+        },
+        {
+          "letra": "E",
+          "texto": "Portugal no usó mano de obra esclava.",
+          "error": "Brasil fue uno de los mayores receptores de esclavizados."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "En los Andes, España aprovechó la organización indígena y la plata; en Brasil, Portugal partió de la costa y luego desarrolló el azúcar."
+    },
+    {
+      "id": "HIS-3BGU-U4-001",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Mestizaje y sincretismo en el arte",
+      "destreza": "CS.H.5.3.24",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L10",
+      "enunciado": "Según la lectura, ¿qué muestra la presencia de soles, lunas y frutas de la región en las obras de la Escuela Quiteña?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Que eran obras paganas sin contenido cristiano.",
+          "error": "Su finalidad era cristiana."
+        },
+        {
+          "letra": "B",
+          "texto": "Que las obras eran copias exactas de Europa.",
+          "error": "Incorporaban elementos propios."
+        },
+        {
+          "letra": "C",
+          "texto": "El sincretismo: la mezcla de modelos europeos con elementos andinos y locales.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Que los artistas rechazaban por completo el arte europeo.",
+          "error": "Seguían modelos europeos."
+        },
+        {
+          "letra": "E",
+          "texto": "Que fueron pintadas antes de la conquista.",
+          "error": "Son obras coloniales."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "El arte quiteño combinó la iconografía cristiana con símbolos y paisajes locales: es una muestra de mestizaje cultural."
+    },
+    {
+      "id": "HIS-3BGU-U4-002",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Función evangelizadora del arte",
+      "destreza": "CS.H.5.3.25",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L10",
+      "enunciado": "¿Cuál era la finalidad principal de estas obras, según la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Venderlas en museos europeos.",
+          "error": "No existía ese mercado."
+        },
+        {
+          "letra": "B",
+          "texto": "Enseñar la fe cristiana a una población que en gran parte no sabía leer.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Decorar las casas de los indígenas.",
+          "error": "Se hacían para iglesias."
+        },
+        {
+          "letra": "D",
+          "texto": "Criticar a la Iglesia.",
+          "error": "Servían a la evangelización."
+        },
+        {
+          "letra": "E",
+          "texto": "Registrar datos administrativos.",
+          "error": "Esa era la función del quipu."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Pinturas y esculturas funcionaban como un catecismo visual en iglesias y conventos."
+    },
+    {
+      "id": "HIS-3BGU-U4-003",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Escuela Quiteña",
+      "destreza": "CS.H.5.3.24",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L10",
+      "enunciado": "¿Quién fue Caspicara?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El fundador de Guayaquil.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "B",
+          "texto": "Un líder de la Revolución Liberal.",
+          "error": "Es de otra época."
+        },
+        {
+          "letra": "C",
+          "texto": "Un cronista inca.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "D",
+          "texto": "Un conquistador español.",
+          "error": "Fue un artista quiteño."
+        },
+        {
+          "letra": "E",
+          "texto": "Manuel Chili, escultor indígena de la Escuela Quiteña.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Caspicara, de origen indígena, es uno de los escultores más destacados del arte colonial quiteño."
+    },
+    {
+      "id": "HIS-3BGU-U4-004",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Mestizaje en el arte",
+      "destreza": "CS.H.5.3.24",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L10",
+      "enunciado": "¿Qué dato de la lectura muestra que el arte colonial quiteño fue también obra de los pueblos locales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Que se prohibía usar colores locales.",
+          "error": "No se menciona."
+        },
+        {
+          "letra": "B",
+          "texto": "Que todas las obras se importaban de España.",
+          "error": "La lectura dice que se producían en Quito."
+        },
+        {
+          "letra": "C",
+          "texto": "Que las obras no salían de Quito.",
+          "error": "Se enviaban a iglesias de todo el continente."
+        },
+        {
+          "letra": "D",
+          "texto": "Que solo los peninsulares podían pintar.",
+          "error": "Contradice la lectura."
+        },
+        {
+          "letra": "E",
+          "texto": "Que muchos pintores y escultores de los talleres eran indígenas y mestizos.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La participación de artistas indígenas y mestizos explica la incorporación de rasgos y símbolos locales."
+    },
+    {
+      "id": "HIS-3BGU-U4-005",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Estratificación social",
+      "destreza": "CS.H.5.3.33",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L11",
+      "enunciado": "Según la lectura, ¿qué grupo ocupaba los altos cargos del gobierno colonial?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Los peninsulares.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Los indígenas.",
+          "error": "Pagaban tributo y no accedían a esos cargos."
+        },
+        {
+          "letra": "C",
+          "texto": "Los mestizos.",
+          "error": "Estaban en un estrato inferior."
+        },
+        {
+          "letra": "D",
+          "texto": "Los criollos.",
+          "error": "Tenían acceso limitado a esos cargos."
+        },
+        {
+          "letra": "E",
+          "texto": "Los africanos esclavizados.",
+          "error": "Estaban en la base de la jerarquía."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Los nacidos en España monopolizaban los puestos de mayor poder político y religioso."
+    },
+    {
+      "id": "HIS-3BGU-U4-006",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Estratificación social",
+      "destreza": "CS.H.5.3.33",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L11",
+      "enunciado": "De acuerdo con la lectura, ¿qué tensión existía entre criollos y peninsulares?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ambos grupos tenían los mismos derechos.",
+          "error": "La lectura muestra desigualdad."
+        },
+        {
+          "letra": "B",
+          "texto": "Los criollos tenían riqueza, pero se les limitaba el acceso a los cargos más altos.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Los criollos eran esclavizados.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "D",
+          "texto": "Los peninsulares no tenían poder.",
+          "error": "Tenían el mayor poder."
+        },
+        {
+          "letra": "E",
+          "texto": "Los criollos pagaban tributo como los indígenas.",
+          "error": "El tributo lo pagaban los indígenas."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "La exclusión de los criollos de los altos cargos fue una de las causas del descontento que llevó a la independencia."
+    },
+    {
+      "id": "HIS-3BGU-U4-007",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Estratificación social",
+      "destreza": "CS.H.5.3.33",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L11",
+      "enunciado": "¿Qué determinaba, según la lectura, el acceso a la educación y a los oficios en la Colonia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El sorteo anual de cargos.",
+          "error": "No existía ese mecanismo."
+        },
+        {
+          "letra": "B",
+          "texto": "La votación de los ciudadanos.",
+          "error": "No había elecciones generales."
+        },
+        {
+          "letra": "C",
+          "texto": "El mérito académico de cada persona.",
+          "error": "La lectura indica que pesaba el origen."
+        },
+        {
+          "letra": "D",
+          "texto": "La edad de las personas.",
+          "error": "No se menciona."
+        },
+        {
+          "letra": "E",
+          "texto": "El origen de las personas dentro de la jerarquía de castas.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La sociedad colonial era estamental: el nacimiento definía derechos y oportunidades."
+    },
+    {
+      "id": "HIS-3BGU-U4-008",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Levantamientos indígenas",
+      "destreza": "CS.H.5.3.34",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L12",
+      "enunciado": "Según la lectura, ¿contra qué se rebeló Túpac Amaru II?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Contra la independencia del Perú.",
+          "error": "La independencia es posterior."
+        },
+        {
+          "letra": "B",
+          "texto": "Contra la llegada de inmigrantes europeos del siglo XIX.",
+          "error": "Es de otra época."
+        },
+        {
+          "letra": "C",
+          "texto": "Contra los incas.",
+          "error": "Reivindicaba la herencia inca."
+        },
+        {
+          "letra": "D",
+          "texto": "Contra los abusos de los corregidores y el reparto forzoso de mercancías.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Contra la abolición de la mita.",
+          "error": "Protestaba contra los abusos coloniales."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "El reparto obligaba a los indígenas a comprar mercancías a precios abusivos; los corregidores se enriquecían con ese sistema."
+    },
+    {
+      "id": "HIS-3BGU-U4-009",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Levantamientos del siglo XVIII",
+      "destreza": "CS.H.5.3.34",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L12",
+      "enunciado": "¿Qué motivó la Rebelión de los Barrios de Quito en 1765?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El estanco del aguardiente y la aduana, es decir, nuevos impuestos y controles.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "La llegada del ferrocarril.",
+          "error": "Es del siglo XX."
+        },
+        {
+          "letra": "C",
+          "texto": "La captura de Atahualpa.",
+          "error": "Ocurrió en 1532."
+        },
+        {
+          "letra": "D",
+          "texto": "La fundación de la universidad.",
+          "error": "No fue una causa de la rebelión."
+        },
+        {
+          "letra": "E",
+          "texto": "El fin de la esclavitud.",
+          "error": "No corresponde."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Los habitantes de los barrios quiteños se levantaron contra las medidas fiscales de la Corona."
+    },
+    {
+      "id": "HIS-3BGU-U4-010",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Levantamientos indígenas",
+      "destreza": "CS.H.5.3.34",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L12",
+      "enunciado": "¿Qué efecto tuvo la rebelión de Túpac Amaru II, aunque fue derrotada?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Terminó con la Iglesia en América.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "B",
+          "texto": "Logró la independencia inmediata del Perú.",
+          "error": "La lectura dice que fue derrotada."
+        },
+        {
+          "letra": "C",
+          "texto": "Obligó a la Corona a eliminar algunos abusos, como parte del sistema de corregidores y repartos.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Restableció el Tahuantinsuyo.",
+          "error": "No ocurrió."
+        },
+        {
+          "letra": "E",
+          "texto": "No tuvo ninguna consecuencia.",
+          "error": "La lectura menciona cambios."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La magnitud del levantamiento llevó a la Corona a reformar instituciones abusivas, aunque la represión fue dura."
+    },
+    {
+      "id": "HIS-3BGU-U4-011",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Barroco y mudéjar",
+      "destreza": "CS.H.5.3.26",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Qué diferencia al arte mudéjar del barroco en las iglesias coloniales?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Son exactamente el mismo estilo.",
+          "error": "Tienen orígenes y rasgos distintos."
+        },
+        {
+          "letra": "B",
+          "texto": "El mudéjar tiene raíz hispano-musulmana, con techos de madera tallada (artesonados) y motivos geométricos; el barroco busca impresionar con abundante ornamento y movimiento.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "El mudéjar es de origen inca y el barroco es azteca.",
+          "error": "Ambos estilos tienen origen europeo."
+        },
+        {
+          "letra": "D",
+          "texto": "El barroco usa solo líneas rectas y sin adornos.",
+          "error": "El barroco es muy ornamentado."
+        },
+        {
+          "letra": "E",
+          "texto": "El mudéjar es un estilo del siglo XX.",
+          "error": "Es un estilo medieval llevado a América."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Los artesonados mudéjares de iglesias como San Francisco de Quito conviven con retablos barrocos dorados, de gran riqueza decorativa."
+    },
+    {
+      "id": "HIS-3BGU-U4-012",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Barroco",
+      "destreza": "CS.H.5.3.26",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "La iglesia de la Compañía de Jesús de Quito, con su interior cubierto de pan de oro, es un ejemplo de arte barroco. ¿Qué función social cumplía ese estilo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Impresionar y conmover a los fieles para fortalecer la fe y el poder de la Iglesia.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Rechazar la influencia europea.",
+          "error": "Era un estilo europeo."
+        },
+        {
+          "letra": "C",
+          "texto": "Servir de mercado para el comercio.",
+          "error": "No era su función."
+        },
+        {
+          "letra": "D",
+          "texto": "Ocultar los templos de la población.",
+          "error": "Buscaba lo contrario."
+        },
+        {
+          "letra": "E",
+          "texto": "Ahorrar recursos en la construcción.",
+          "error": "El barroco era costoso."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "El barroco usaba el esplendor y el dramatismo para provocar emoción religiosa y mostrar el poder de la Iglesia."
+    },
+    {
+      "id": "HIS-3BGU-U4-013",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Instituciones educativas",
+      "destreza": "CS.H.5.3.29",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Quiénes accedían principalmente a colegios y universidades como la de San Gregorio Magno de Quito, dirigida por los jesuitas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Los hijos varones de las élites peninsulares y criollas.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Toda la población por igual.",
+          "error": "El acceso estaba limitado por la clase social."
+        },
+        {
+          "letra": "C",
+          "texto": "Los africanos esclavizados.",
+          "error": "No tenían acceso."
+        },
+        {
+          "letra": "D",
+          "texto": "Las mujeres de todas las castas.",
+          "error": "Las mujeres tenían acceso muy restringido."
+        },
+        {
+          "letra": "E",
+          "texto": "Solo los indígenas.",
+          "error": "No era el grupo con mayor acceso."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La educación superior colonial estaba ligada a las órdenes religiosas y reservada a varones de las élites."
+    },
+    {
+      "id": "HIS-3BGU-U4-014",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Conventos y misiones",
+      "destreza": "CS.H.5.3.27",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué papel tuvieron las misiones religiosas, como las de los jesuitas en Maynas, en la Amazonía?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Expandir la religión y el control colonial hacia territorios lejanos.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Construir puertos comerciales en el Atlántico.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "C",
+          "texto": "Explotar petróleo.",
+          "error": "Es una actividad del siglo XX."
+        },
+        {
+          "letra": "D",
+          "texto": "Organizar la independencia.",
+          "error": "Es posterior."
+        },
+        {
+          "letra": "E",
+          "texto": "Proteger las religiones amazónicas sin cambios.",
+          "error": "Su objetivo era evangelizar."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Las misiones evangelizaban, agrupaban a la población y ampliaban la presencia colonial en zonas de frontera."
+    },
+    {
+      "id": "HIS-3BGU-U4-015",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "La mujer en la Colonia",
+      "destreza": "CS.H.5.3.28",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Qué afirmación describe mejor la situación de las mujeres en la Colonia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Las mujeres indígenas tenían más privilegios que las criollas.",
+          "error": "Invierte la jerarquía."
+        },
+        {
+          "letra": "B",
+          "texto": "Todas las mujeres tenían los mismos derechos.",
+          "error": "Desconoce las diferencias sociales."
+        },
+        {
+          "letra": "C",
+          "texto": "Las mujeres gobernaban las Audiencias.",
+          "error": "Los cargos de gobierno eran masculinos."
+        },
+        {
+          "letra": "D",
+          "texto": "Sus derechos y opciones variaban según su estrato: las de élite podían ingresar a conventos o administrar bienes; las indígenas y esclavizadas soportaban trabajo y tributo.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Las mujeres no tenían ningún papel en la sociedad.",
+          "error": "Tenían papeles diversos."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "La condición femenina dependía de la casta: el convento ofrecía educación a algunas mujeres de élite, mientras las indígenas y afrodescendientes sufrían doble subordinación."
+    },
+    {
+      "id": "HIS-3BGU-U4-016",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Misiones científicas europeas",
+      "destreza": "CS.H.5.3.29",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué impacto tuvo la misión geodésica francesa del siglo XVIII en la Audiencia de Quito?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Difundió ideas científicas de la Ilustración y vinculó a sabios locales, como Pedro Vicente Maldonado, con la ciencia europea.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Impuso la religión musulmana.",
+          "error": "No tuvo ese propósito."
+        },
+        {
+          "letra": "C",
+          "texto": "Fundó la ciudad de Guayaquil.",
+          "error": "Guayaquil existía desde el siglo XVI."
+        },
+        {
+          "letra": "D",
+          "texto": "Provocó la independencia en 1740.",
+          "error": "La independencia es posterior."
+        },
+        {
+          "letra": "E",
+          "texto": "Prohibió el estudio de las ciencias.",
+          "error": "Hizo lo contrario."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La misión midió un arco de meridiano y su contacto con criollos ilustrados ayudó a difundir el pensamiento científico."
+    },
+    {
+      "id": "HIS-3BGU-U4-017",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Ilustración quiteña",
+      "destreza": "CS.H.5.3.29",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué hizo Eugenio Espejo en la Quito de finales del siglo XVIII?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Fue el primer virrey de la Audiencia.",
+          "error": "No fue virrey."
+        },
+        {
+          "letra": "B",
+          "texto": "Publicó el periódico Primicias de la Cultura de Quito y criticó la educación y la sociedad colonial.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Firmó el Tratado de Tordesillas.",
+          "error": "Es de 1494."
+        },
+        {
+          "letra": "D",
+          "texto": "Encabezó la conquista del Perú.",
+          "error": "Es de otra época."
+        },
+        {
+          "letra": "E",
+          "texto": "Fundó la Escuela Quiteña de pintura.",
+          "error": "No corresponde."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Espejo, médico y escritor mestizo, publicó en 1792 el primer periódico quiteño y difundió ideas ilustradas."
+    },
+    {
+      "id": "HIS-3BGU-U4-018",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Sincretismo religioso",
+      "destreza": "CS.H.5.3.24",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En varias comunidades andinas, la fiesta del Inti Raymi coincide con la celebración de San Juan y San Pedro. ¿Qué proceso cultural refleja?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La separación absoluta entre ambas religiones.",
+          "error": "Las fiestas se mezclaron."
+        },
+        {
+          "letra": "B",
+          "texto": "La desaparición total de la cultura andina.",
+          "error": "La tradición andina sigue presente."
+        },
+        {
+          "letra": "C",
+          "texto": "La invención reciente de ambas fiestas.",
+          "error": "Tienen raíces antiguas."
+        },
+        {
+          "letra": "D",
+          "texto": "El sincretismo entre tradiciones andinas y cristianas.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "La imposición del Islam.",
+          "error": "No corresponde."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "La celebración del solsticio andino se superpuso con fiestas cristianas de junio; ambas tradiciones conviven en una misma celebración."
+    },
+    {
+      "id": "HIS-3BGU-U4-019",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Arquitectura evangelizadora",
+      "destreza": "CS.H.5.3.25",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "En los primeros templos coloniales se construyeron capillas abiertas y grandes atrios. ¿Para qué servían?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Para observar los astros.",
+          "error": "No tenían función astronómica."
+        },
+        {
+          "letra": "B",
+          "texto": "Para evangelizar a numerosos indígenas al aire libre, una práctica cercana a sus ceremonias tradicionales.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Para guardar mercancías de exportación.",
+          "error": "No era su función."
+        },
+        {
+          "letra": "D",
+          "texto": "Para celebrar reuniones del cabildo.",
+          "error": "No era su función principal."
+        },
+        {
+          "letra": "E",
+          "texto": "Para separar a los indígenas de la religión.",
+          "error": "Servían para integrarlos al culto cristiano."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Los indígenas estaban acostumbrados a ceremonias en espacios abiertos; los atrios permitían reunir a muchas personas para la catequesis."
+    },
+    {
+      "id": "HIS-3BGU-U4-020",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Ilustración y mujeres",
+      "destreza": "CS.H.5.3.28",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Qué hizo Manuela Espejo, hermana de Eugenio Espejo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Encabezó la rebelión de Túpac Amaru.",
+          "error": "La encabezó José Gabriel Condorcanqui."
+        },
+        {
+          "letra": "B",
+          "texto": "Pintó obras de la Escuela Quiteña.",
+          "error": "No se le conoce como pintora."
+        },
+        {
+          "letra": "C",
+          "texto": "Escribió en el periódico Primicias de la Cultura de Quito con el seudónimo Erophilia.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Fundó la Real Audiencia de Quito.",
+          "error": "La creó Felipe II."
+        },
+        {
+          "letra": "E",
+          "texto": "Fue la primera presidenta del Ecuador.",
+          "error": "No corresponde a la historia."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Manuela Espejo es considerada una de las primeras periodistas de la región; escribió sobre la situación de las mujeres."
+    },
+    {
+      "id": "HIS-3BGU-U5-001",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Independencia y dependencia",
+      "destreza": "CS.H.5.3.36",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L13",
+      "enunciado": "Según la lectura, ¿qué contradicción tuvieron los nuevos países latinoamericanos después de la independencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Dependían económicamente de los países vecinos.",
+          "error": "La lectura menciona a Gran Bretaña."
+        },
+        {
+          "letra": "B",
+          "texto": "Eran políticamente independientes, pero económicamente dependientes de vender materias primas a las potencias.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Eran potencias industriales.",
+          "error": "Compraban manufacturas."
+        },
+        {
+          "letra": "D",
+          "texto": "No tenían ningún comercio exterior.",
+          "error": "Exportaban materias primas."
+        },
+        {
+          "letra": "E",
+          "texto": "Seguían siendo colonias españolas.",
+          "error": "La lectura dice que ya eran independientes."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "La independencia política no cambió el papel de América Latina como proveedora de materias primas."
+    },
+    {
+      "id": "HIS-3BGU-U5-002",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Independencia y dependencia",
+      "destreza": "CS.H.5.3.36",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L13",
+      "enunciado": "¿Qué producto sostuvo la economía ecuatoriana a fines del siglo XIX, según la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El banano.",
+          "error": "Su auge fue a mediados del siglo XX."
+        },
+        {
+          "letra": "B",
+          "texto": "Los textiles de los obrajes.",
+          "error": "Eran la base colonial de la Sierra."
+        },
+        {
+          "letra": "C",
+          "texto": "El cacao.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "El petróleo.",
+          "error": "El auge petrolero comenzó en 1972."
+        },
+        {
+          "letra": "E",
+          "texto": "El oro.",
+          "error": "No se menciona en la lectura."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "El “boom cacaotero” concentró la riqueza en la Costa y en los bancos de Guayaquil."
+    },
+    {
+      "id": "HIS-3BGU-U5-003",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Independencia y dependencia",
+      "destreza": "CS.H.5.3.36",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L13",
+      "enunciado": "¿Qué riesgo de una economía basada en un solo producto muestra la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Que no existe ninguna relación con el mercado mundial.",
+          "error": "Depende del mercado mundial."
+        },
+        {
+          "letra": "B",
+          "texto": "Que los trabajadores mejoran siempre su situación.",
+          "error": "La lectura dice que empeoró."
+        },
+        {
+          "letra": "C",
+          "texto": "Que se elimina la desigualdad.",
+          "error": "Concentró la riqueza."
+        },
+        {
+          "letra": "D",
+          "texto": "Que el país se vuelve más diversificado.",
+          "error": "Es lo contrario."
+        },
+        {
+          "letra": "E",
+          "texto": "Que una caída de precios o una plaga provoca una crisis en toda la economía.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Depender de una sola exportación hace a la economía vulnerable; la crisis cacaotera lo demostró."
+    },
+    {
+      "id": "HIS-3BGU-U5-004",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Independencia y dependencia",
+      "destreza": "CS.H.5.3.36",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L13",
+      "enunciado": "¿Qué hecho de 1922 menciona la lectura como consecuencia de la crisis?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La dolarización.",
+          "error": "Fue en el año 2000."
+        },
+        {
+          "letra": "B",
+          "texto": "La llegada del ferrocarril a Quito.",
+          "error": "Fue en 1908."
+        },
+        {
+          "letra": "C",
+          "texto": "La masacre de trabajadores en Guayaquil el 15 de noviembre.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "La independencia de Guayaquil.",
+          "error": "Fue en 1820."
+        },
+        {
+          "letra": "E",
+          "texto": "La Revolución Liberal de Eloy Alfaro.",
+          "error": "Fue en 1895."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La huelga general de Guayaquil fue reprimida con violencia; es un hito del movimiento obrero ecuatoriano."
+    },
+    {
+      "id": "HIS-3BGU-U5-005",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Revoluciones liberales",
+      "destreza": "CS.H.5.3.39",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L14",
+      "enunciado": "¿Qué obra de infraestructura integró la Costa y la Sierra durante el liberalismo, según la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La carretera Panamericana.",
+          "error": "Es posterior."
+        },
+        {
+          "letra": "B",
+          "texto": "El oleoducto transecuatoriano.",
+          "error": "Es de los años setenta."
+        },
+        {
+          "letra": "C",
+          "texto": "El aeropuerto de Quito.",
+          "error": "No existía en esa época."
+        },
+        {
+          "letra": "D",
+          "texto": "El puerto de Manta.",
+          "error": "No se menciona."
+        },
+        {
+          "letra": "E",
+          "texto": "El ferrocarril Guayaquil–Quito.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "El ferrocarril llegó a Quito en 1908 y redujo el viaje entre las dos ciudades de semanas a días."
+    },
+    {
+      "id": "HIS-3BGU-U5-006",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Revoluciones liberales",
+      "destreza": "CS.H.5.3.39",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L14",
+      "enunciado": "¿Cuál de estas medidas fue parte del proyecto liberal descrito en la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La unión entre la Iglesia y el Estado.",
+          "error": "El liberalismo los separó."
+        },
+        {
+          "letra": "B",
+          "texto": "La prohibición del matrimonio civil.",
+          "error": "El liberalismo lo estableció."
+        },
+        {
+          "letra": "C",
+          "texto": "La educación laica y pública.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "El cierre de los colegios normales.",
+          "error": "El liberalismo los creó."
+        },
+        {
+          "letra": "E",
+          "texto": "El restablecimiento de la mita.",
+          "error": "Era una institución colonial."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "El laicismo fue uno de los ejes del liberalismo: la educación dejó de estar bajo control de la Iglesia."
+    },
+    {
+      "id": "HIS-3BGU-U5-007",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Revoluciones liberales",
+      "destreza": "CS.H.5.3.39",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L14",
+      "enunciado": "Según la lectura, ¿qué límite tuvo el proyecto nacional liberal?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Devolvió el poder a la Corona española.",
+          "error": "No tiene relación."
+        },
+        {
+          "letra": "B",
+          "texto": "Prohibió la educación de las mujeres.",
+          "error": "Creó colegios para mujeres."
+        },
+        {
+          "letra": "C",
+          "texto": "No eliminó de inmediato el concertaje, que mantenía a muchos indígenas atados a las haciendas por deudas.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "No construyó ninguna obra pública.",
+          "error": "La lectura menciona el ferrocarril."
+        },
+        {
+          "letra": "E",
+          "texto": "No separó la Iglesia del Estado.",
+          "error": "Sí lo hizo."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "El liberalismo modernizó el Estado, pero la situación de los indígenas en las haciendas cambió lentamente: el concertaje se suprimió en 1918."
+    },
+    {
+      "id": "HIS-3BGU-U5-008",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Ecuador: del petróleo a la migración",
+      "destreza": "CS.H.5.3.36",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L15",
+      "enunciado": "Según la lectura, ¿qué causó la gran ola de migración ecuatoriana alrededor del año 2000?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La Revolución Liberal.",
+          "error": "Ocurrió en 1895."
+        },
+        {
+          "letra": "B",
+          "texto": "La independencia del país.",
+          "error": "Es del siglo XIX."
+        },
+        {
+          "letra": "C",
+          "texto": "El inicio de las exportaciones de petróleo en 1972.",
+          "error": "Ese fue un periodo de auge, no de crisis."
+        },
+        {
+          "letra": "D",
+          "texto": "Un aumento de los salarios en el Ecuador.",
+          "error": "Contradice la crisis descrita."
+        },
+        {
+          "letra": "E",
+          "texto": "Una crisis económica y bancaria que incluyó el congelamiento de depósitos y la dolarización.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La quiebra bancaria, el feriado bancario y la pérdida de ahorros empujaron a cientos de miles de personas a emigrar."
+    },
+    {
+      "id": "HIS-3BGU-U5-009",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Ecuador: del petróleo a la migración",
+      "destreza": "CS.H.5.3.36",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L15",
+      "enunciado": "Según la lectura, ¿en qué año el Ecuador adoptó el dólar como moneda?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1895",
+          "error": "Es el año de la Revolución Liberal."
+        },
+        {
+          "letra": "B",
+          "texto": "2000",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "1999",
+          "error": "Es el año del feriado bancario."
+        },
+        {
+          "letra": "D",
+          "texto": "1972",
+          "error": "Es el año del inicio de las exportaciones petroleras."
+        },
+        {
+          "letra": "E",
+          "texto": "2007",
+          "error": "Es el año del inicio de la Revolución Ciudadana."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "La dolarización se anunció en enero de 2000, meses después del feriado bancario."
+    },
+    {
+      "id": "HIS-3BGU-U5-010",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Análisis de periodos recientes",
+      "destreza": "CS.H.5.3.36",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L15",
+      "enunciado": "¿Qué afirmación presenta de forma equilibrada el periodo de la Revolución Ciudadana, tal como lo hace la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "No se puede decir nada de un periodo reciente.",
+          "error": "Sí se puede analizar con fuentes de distintas posturas."
+        },
+        {
+          "letra": "B",
+          "texto": "Fue un gobierno sin ninguna crítica válida.",
+          "error": "Omite las críticas que la lectura menciona."
+        },
+        {
+          "letra": "C",
+          "texto": "Sus defensores resaltan la inversión pública y la reducción de la pobreza; sus críticos, la concentración del poder, los conflictos con la prensa y la deuda.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Solo importa la opinión de sus defensores.",
+          "error": "Un análisis histórico considera varias posturas."
+        },
+        {
+          "letra": "E",
+          "texto": "Fue un gobierno sin ningún logro.",
+          "error": "Omite los logros que señalan sus defensores."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Analizar historia reciente exige presentar las distintas posturas con sus argumentos y datos, y dejar que el lector evalúe."
+    },
+    {
+      "id": "HIS-3BGU-U5-011",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Proteccionismo y librecambismo",
+      "destreza": "CS.H.5.4.19",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué diferencia hay entre el proteccionismo y el librecambismo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El proteccionismo elimina todos los impuestos.",
+          "error": "Aplica aranceles a las importaciones."
+        },
+        {
+          "letra": "B",
+          "texto": "Solo el librecambismo usa aranceles.",
+          "error": "Invierte las posturas."
+        },
+        {
+          "letra": "C",
+          "texto": "El proteccionismo usa aranceles para defender la producción nacional; el librecambismo propone comerciar con pocas restricciones.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "El librecambismo prohíbe importar.",
+          "error": "Promueve el comercio sin barreras."
+        },
+        {
+          "letra": "E",
+          "texto": "Son sinónimos.",
+          "error": "Son posturas opuestas."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "El proteccionismo protege a los productores locales de la competencia extranjera; el librecambismo confía en el comercio abierto."
+    },
+    {
+      "id": "HIS-3BGU-U5-012",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Proteccionismo y librecambismo",
+      "destreza": "CS.H.5.4.20",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "En el siglo XIX, ¿qué grupos latinoamericanos tendían a apoyar el libre comercio y cuáles la protección?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Los exportadores de materias primas apoyaban el libre comercio; los artesanos y productores locales pedían protección.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Nadie discutía la política comercial.",
+          "error": "Fue un debate central."
+        },
+        {
+          "letra": "C",
+          "texto": "Los exportadores pedían prohibir las exportaciones.",
+          "error": "Contradice sus intereses."
+        },
+        {
+          "letra": "D",
+          "texto": "Los artesanos apoyaban el libre comercio para competir con la industria británica.",
+          "error": "La competencia británica perjudicaba a los artesanos."
+        },
+        {
+          "letra": "E",
+          "texto": "Todos los grupos apoyaban la protección.",
+          "error": "Había intereses enfrentados."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Quienes vendían cacao, café o carne querían mercados abiertos; los artesanos, golpeados por las manufacturas importadas, exigían aranceles."
+    },
+    {
+      "id": "HIS-3BGU-U5-013",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Proyecto criollo excluyente",
+      "destreza": "CS.H.5.3.37",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En el Ecuador, el tributo indígena colonial siguió cobrándose hasta 1857 y el voto estaba reservado a hombres alfabetizados y con propiedades. ¿Qué muestra esto sobre el proyecto republicano criollo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Que la república fue igualitaria desde el inicio.",
+          "error": "Los datos muestran exclusión."
+        },
+        {
+          "letra": "B",
+          "texto": "Que los indígenas gobernaban la república.",
+          "error": "No tenían acceso al poder."
+        },
+        {
+          "letra": "C",
+          "texto": "Que la independencia eliminó todas las instituciones coloniales.",
+          "error": "El tributo continuó."
+        },
+        {
+          "letra": "D",
+          "texto": "Que la república excluyó a indígenas, afrodescendientes y pobres de la plena ciudadanía.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Que el voto era universal.",
+          "error": "Era censitario."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Los criollos construyeron una república a su medida; la ciudadanía plena era un privilegio de una minoría."
+    },
+    {
+      "id": "HIS-3BGU-U5-014",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Revolución mexicana",
+      "destreza": "CS.H.5.3.40",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué reclamaba Emiliano Zapata con el lema “Tierra y libertad” en la Revolución mexicana?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La devolución de tierras a los campesinos y comunidades frente al latifundio.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "La industrialización de las ciudades.",
+          "error": "No era su reclamo principal."
+        },
+        {
+          "letra": "C",
+          "texto": "El fin de la educación pública.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "D",
+          "texto": "La venta de tierras a empresas extranjeras.",
+          "error": "Era lo contrario."
+        },
+        {
+          "letra": "E",
+          "texto": "El regreso de México a España.",
+          "error": "No corresponde."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La Revolución mexicana (desde 1910) fue en gran parte una lucha agraria; la Constitución de 1917 recogió la reforma agraria."
+    },
+    {
+      "id": "HIS-3BGU-U5-015",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "La Gran Depresión",
+      "destreza": "CS.H.5.3.43",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Cómo afectó la Gran Depresión de 1929 a las economías latinoamericanas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cayeron los precios y la demanda de sus exportaciones; varios países impulsaron luego la industrialización por sustitución de importaciones.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Aumentaron sus exportaciones como nunca.",
+          "error": "La demanda mundial se desplomó."
+        },
+        {
+          "letra": "C",
+          "texto": "Provocó la independencia de América Latina.",
+          "error": "Ya eran independientes."
+        },
+        {
+          "letra": "D",
+          "texto": "No tuvo ningún efecto en la región.",
+          "error": "La región dependía del comercio exterior."
+        },
+        {
+          "letra": "E",
+          "texto": "Hizo que todos adoptaran el dólar.",
+          "error": "No ocurrió en esa época."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Al caer el comercio mundial, los países que dependían de exportar materias primas sufrieron; muchos optaron por producir lo que antes importaban."
+    },
+    {
+      "id": "HIS-3BGU-U5-016",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Revolución cubana",
+      "destreza": "CS.H.5.3.46",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Qué balance de la Revolución cubana (1959) recoge logros y límites a la vez?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Se reconocen avances en alfabetización y salud, junto con el régimen de partido único, restricciones a las libertades y dificultades económicas agravadas por el embargo de EE. UU.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Solo tuvo problemas, sin ningún logro.",
+          "error": "Omite los logros en educación y salud."
+        },
+        {
+          "letra": "C",
+          "texto": "Fue un proceso sin relación con EE. UU.",
+          "error": "El embargo marcó su historia."
+        },
+        {
+          "letra": "D",
+          "texto": "Convirtió a Cuba en una potencia industrial.",
+          "error": "No corresponde a la realidad."
+        },
+        {
+          "letra": "E",
+          "texto": "Solo tuvo logros, sin ningún problema.",
+          "error": "Omite los límites ampliamente documentados."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Un análisis histórico equilibrado reconoce la campaña de alfabetización de 1961 y el sistema de salud, y también la falta de pluralismo y la crisis económica."
+    },
+    {
+      "id": "HIS-3BGU-U5-017",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Migraciones de los siglos XIX y XX",
+      "destreza": "CS.H.5.3.38",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué aporte hicieron los inmigrantes libaneses y chinos que llegaron al Ecuador a fines del siglo XIX y en el XX?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Llegaron como conquistadores en el siglo XVI.",
+          "error": "Son migraciones posteriores."
+        },
+        {
+          "letra": "B",
+          "texto": "Introdujeron el cultivo de la papa.",
+          "error": "La papa es andina."
+        },
+        {
+          "letra": "C",
+          "texto": "Fundaron la Real Audiencia de Quito.",
+          "error": "Es de 1563."
+        },
+        {
+          "letra": "D",
+          "texto": "Se integraron al comercio y a la vida social, sobre todo en Guayaquil, y enriquecieron la cultura del país.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "No tuvieron ningún aporte.",
+          "error": "Desconoce su papel en el comercio y la cultura."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Las migraciones hacia América Latina diversificaron la población y la economía; en el Ecuador destacan las comunidades libanesa y china."
+    },
+    {
+      "id": "HIS-3BGU-U5-018",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Derechos políticos de las mujeres",
+      "destreza": "CS.H.5.3.39",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué hizo Matilde Hidalgo de Prócel en 1924?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Firmó la dolarización.",
+          "error": "Es un hecho del año 2000."
+        },
+        {
+          "letra": "B",
+          "texto": "Lideró la Revolución Liberal.",
+          "error": "La lideró Eloy Alfaro."
+        },
+        {
+          "letra": "C",
+          "texto": "Fue la primera presidenta del Ecuador.",
+          "error": "No ocupó la presidencia."
+        },
+        {
+          "letra": "D",
+          "texto": "Fue la primera mujer en votar en el Ecuador y en América Latina.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Fundó el periódico Primicias de la Cultura de Quito.",
+          "error": "Lo fundó Eugenio Espejo en 1792."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Su voto en 1924 abrió el camino para que la Constitución de 1929 reconociera el sufragio femenino."
+    },
+    {
+      "id": "HIS-3BGU-U5-019",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Dependencia económica",
+      "destreza": "CS.H.5.3.36",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un estudiante afirma: “Desde la independencia, América Latina cambió de metrópoli, pero no de papel en la economía mundial”. ¿Qué evidencia apoya esta afirmación?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Que siguió exportando materias primas e importando manufacturas, primero a Gran Bretaña y luego a EE. UU.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Que dejó de comerciar con otros continentes.",
+          "error": "El comercio exterior siguió siendo central."
+        },
+        {
+          "letra": "C",
+          "texto": "Que se convirtió en la principal región industrial del mundo.",
+          "error": "No corresponde a la historia."
+        },
+        {
+          "letra": "D",
+          "texto": "Que volvió a ser colonia de España.",
+          "error": "No ocurrió."
+        },
+        {
+          "letra": "E",
+          "texto": "Que exportaba solo maquinaria.",
+          "error": "Exportaba materias primas."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "El patrón exportador de materias primas se mantuvo y la región dependió de los centros industriales."
+    },
+    {
+      "id": "HIS-3BGU-U6-001",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Escuelas económicas",
+      "destreza": "CS.H.5.4.33",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L16",
+      "enunciado": "Según la lectura, ¿qué consideraban los fisiócratas como fuente de la riqueza?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La utilidad marginal.",
+          "error": "Es un concepto neoclásico."
+        },
+        {
+          "letra": "B",
+          "texto": "El oro acumulado.",
+          "error": "Esa era la idea mercantilista que criticaban."
+        },
+        {
+          "letra": "C",
+          "texto": "La cantidad de dinero en circulación.",
+          "error": "Es una preocupación de la escuela de Chicago."
+        },
+        {
+          "letra": "D",
+          "texto": "La plusvalía.",
+          "error": "Es un concepto de Marx."
+        },
+        {
+          "letra": "E",
+          "texto": "La tierra.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Para la fisiocracia, solo la agricultura producía un excedente real; por eso la tierra era la fuente de la riqueza."
+    },
+    {
+      "id": "HIS-3BGU-U6-002",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Escuelas económicas",
+      "destreza": "CS.H.5.4.35",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L16",
+      "enunciado": "¿Qué es la plusvalía según la escuela marxista descrita en la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El aumento general de precios.",
+          "error": "Eso es la inflación."
+        },
+        {
+          "letra": "B",
+          "texto": "La ventaja de un país al especializarse.",
+          "error": "Es la ventaja comparativa de Ricardo."
+        },
+        {
+          "letra": "C",
+          "texto": "La satisfacción de consumir una unidad más.",
+          "error": "Es la utilidad marginal."
+        },
+        {
+          "letra": "D",
+          "texto": "El valor creado por el trabajador que no recibe en su salario y que se convierte en ganancia del capitalista.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "La riqueza que produce la tierra.",
+          "error": "Es la idea fisiócrata."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Marx sostuvo que el trabajo genera más valor del que se paga en salarios; esa diferencia es la plusvalía."
+    },
+    {
+      "id": "HIS-3BGU-U6-003",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Escuelas económicas",
+      "destreza": "CS.H.5.4.34",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L16",
+      "enunciado": "¿Qué ideas defendió la escuela clásica de Adam Smith y David Ricardo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La abolición de la propiedad privada.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "B",
+          "texto": "El control de la cantidad de dinero para frenar la inflación.",
+          "error": "Es la escuela de Chicago."
+        },
+        {
+          "letra": "C",
+          "texto": "La planificación estatal de toda la economía.",
+          "error": "No corresponde a los clásicos."
+        },
+        {
+          "letra": "D",
+          "texto": "La división del trabajo, el libre mercado y la ventaja comparativa.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "La acumulación de oro como riqueza.",
+          "error": "Es mercantilismo."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Smith explicó la productividad de la división del trabajo y Ricardo, las ganancias de especializarse en el comercio."
+    },
+    {
+      "id": "HIS-3BGU-U6-004",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Escuelas económicas",
+      "destreza": "CS.H.5.4.37",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L16",
+      "enunciado": "Según la lectura, ¿qué proponía la escuela de Chicago?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Volver al mercantilismo.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "B",
+          "texto": "Medir la riqueza por la tierra.",
+          "error": "Es fisiocracia."
+        },
+        {
+          "letra": "C",
+          "texto": "Aumentar el gasto público sin límite.",
+          "error": "Es lo contrario."
+        },
+        {
+          "letra": "D",
+          "texto": "Reducir la intervención del Estado y controlar la cantidad de dinero para frenar la inflación.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Sustituir el mercado por la planificación central.",
+          "error": "Es lo contrario."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Friedman y la escuela de Chicago criticaron la intervención estatal amplia; sus ideas influyeron en las reformas neoliberales."
+    },
+    {
+      "id": "HIS-3BGU-U6-005",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Crisis de los ochenta",
+      "destreza": "CS.H.5.4.29",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L17",
+      "enunciado": "Según la lectura, ¿qué factores desencadenaron la crisis de la deuda en América Latina?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El Consenso de Washington.",
+          "error": "Fue una respuesta posterior a la crisis."
+        },
+        {
+          "letra": "B",
+          "texto": "La independencia de los países latinoamericanos.",
+          "error": "Ocurrió en el siglo XIX."
+        },
+        {
+          "letra": "C",
+          "texto": "El descubrimiento de petróleo en México.",
+          "error": "No es la causa que menciona la lectura."
+        },
+        {
+          "letra": "D",
+          "texto": "La Revolución mexicana.",
+          "error": "Es de 1910."
+        },
+        {
+          "letra": "E",
+          "texto": "El aumento de las tasas de interés en EE. UU. y la caída de los precios de las materias primas.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Con tasas más altas, la deuda se volvió más cara; con materias primas más baratas, los países tenían menos ingresos para pagarla."
+    },
+    {
+      "id": "HIS-3BGU-U6-006",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Crisis de los ochenta",
+      "destreza": "CS.H.5.4.29",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L17",
+      "enunciado": "¿Por qué se llama “década perdida” a los años ochenta en América Latina?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque fue la década de mayor crecimiento.",
+          "error": "Es lo contrario."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque los países volvieron a ser colonias.",
+          "error": "No ocurrió."
+        },
+        {
+          "letra": "C",
+          "texto": "Porque no hubo elecciones en ningún país.",
+          "error": "No es el sentido de la expresión."
+        },
+        {
+          "letra": "D",
+          "texto": "Porque se detuvo el crecimiento, se disparó la inflación y aumentó la pobreza.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Porque se perdieron los registros históricos.",
+          "error": "No tiene relación."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "La expresión resume el retroceso económico y social de la región durante la crisis de la deuda."
+    },
+    {
+      "id": "HIS-3BGU-U6-007",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Neoliberalismo en América Latina",
+      "destreza": "CS.H.5.4.27",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "HIS-3BGU-L17",
+      "enunciado": "¿Qué afirmación resume de forma equilibrada el debate sobre el Consenso de Washington, según la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Solo produjo beneficios.",
+          "error": "Omite las críticas."
+        },
+        {
+          "letra": "B",
+          "texto": "Sus defensores destacan la reducción de la inflación y la modernización; sus críticos, el aumento del desempleo y la desigualdad.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Fue aceptado por todos sin críticas.",
+          "error": "La lectura presenta críticas."
+        },
+        {
+          "letra": "D",
+          "texto": "No tuvo ningún efecto en la economía.",
+          "error": "La lectura describe efectos."
+        },
+        {
+          "letra": "E",
+          "texto": "Solo produjo perjuicios.",
+          "error": "Omite los argumentos de sus defensores."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "La evaluación de las reformas neoliberales sigue en debate; un análisis histórico presenta ambas posturas."
+    },
+    {
+      "id": "HIS-3BGU-U6-008",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Globalización",
+      "destreza": "CS.H.5.4.30",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L18",
+      "enunciado": "Según la lectura, ¿qué tensión plantea la globalización?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "No plantea ninguna tensión.",
+          "error": "La lectura presenta opiniones distintas."
+        },
+        {
+          "letra": "B",
+          "texto": "Entre la homogeneización cultural y la defensa de las identidades locales.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Entre la monarquía y la república.",
+          "error": "Es un debate del siglo XIX."
+        },
+        {
+          "letra": "D",
+          "texto": "Entre la mita y la encomienda.",
+          "error": "Son instituciones coloniales."
+        },
+        {
+          "letra": "E",
+          "texto": "Entre la fisiocracia y el mercantilismo.",
+          "error": "Es un debate del siglo XVIII."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "La globalización conecta culturas, pero puede desplazar expresiones locales; de ahí la tensión entre lo global y lo propio."
+    },
+    {
+      "id": "HIS-3BGU-U6-009",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Globalización y brecha digital",
+      "destreza": "CS.H.5.4.30",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "HIS-3BGU-L18",
+      "enunciado": "¿Qué es la brecha digital, de acuerdo con la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La distancia física entre dos computadoras.",
+          "error": "No es el sentido de la expresión."
+        },
+        {
+          "letra": "B",
+          "texto": "Un error en las aplicaciones.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "C",
+          "texto": "Un tipo de virus informático.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "D",
+          "texto": "Una frontera entre dos países.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "E",
+          "texto": "La desigualdad en el acceso a la tecnología entre zonas y grupos sociales.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La brecha digital separa a quienes tienen acceso a internet y dispositivos de quienes no lo tienen; el proyecto de pantallas busca reducirla en el aula."
+    },
+    {
+      "id": "HIS-3BGU-U6-010",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Integración latinoamericana",
+      "destreza": "CS.H.5.4.30",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "HIS-3BGU-L18",
+      "enunciado": "¿Qué organismos de integración regional menciona la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La Casa de Contratación y el Consejo de Indias.",
+          "error": "Son instituciones coloniales."
+        },
+        {
+          "letra": "B",
+          "texto": "La OTAN y la Unión Europea.",
+          "error": "No son latinoamericanos."
+        },
+        {
+          "letra": "C",
+          "texto": "El FMI y el Banco Mundial.",
+          "error": "Son organismos financieros internacionales."
+        },
+        {
+          "letra": "D",
+          "texto": "La Real Audiencia y el virreinato.",
+          "error": "Son instituciones coloniales."
+        },
+        {
+          "letra": "E",
+          "texto": "La Comunidad Andina y el Mercosur.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La Comunidad Andina y el Mercosur buscan integrar comercialmente y políticamente a los países de la región."
+    },
+    {
+      "id": "HIS-3BGU-U6-011",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Escuelas económicas",
+      "destreza": "CS.H.5.4.36",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un estudiante paga con gusto por el primer vaso de agua tras correr, pero ofrece mucho menos por el quinto. ¿Qué concepto de la escuela neoclásica explica esto?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El monopolio comercial.",
+          "error": "No tiene relación."
+        },
+        {
+          "letra": "B",
+          "texto": "La ventaja comparativa.",
+          "error": "Explica el comercio entre países."
+        },
+        {
+          "letra": "C",
+          "texto": "La utilidad marginal decreciente.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "La riqueza de la tierra.",
+          "error": "Es una idea fisiócrata."
+        },
+        {
+          "letra": "E",
+          "texto": "La plusvalía.",
+          "error": "Es un concepto marxista sobre el trabajo."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Cada unidad adicional da menos satisfacción que la anterior; por eso se está dispuesto a pagar menos por ella."
+    },
+    {
+      "id": "HIS-3BGU-U6-012",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Escuelas económicas",
+      "destreza": "CS.H.5.4.34",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Según David Ricardo, si el Ecuador produce cacao con mayor eficiencia relativa y otro país produce maquinaria con mayor eficiencia relativa, ¿qué conviene?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Que ambos produzcan solo cacao.",
+          "error": "No aprovecha las ventajas de cada uno."
+        },
+        {
+          "letra": "B",
+          "texto": "Que cada país se especialice en lo que produce con mayor ventaja relativa y comercien.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Que ninguno comercie.",
+          "error": "Ricardo defendía el comercio."
+        },
+        {
+          "letra": "D",
+          "texto": "Que el país más grande imponga lo que el otro produce.",
+          "error": "No es el argumento de Ricardo."
+        },
+        {
+          "letra": "E",
+          "texto": "Que cada país produzca todo por su cuenta.",
+          "error": "Contradice la ventaja comparativa."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "La ventaja comparativa sostiene que la especialización y el comercio benefician a ambos países. Sus críticos señalan que puede perpetuar la dependencia de materias primas."
+    },
+    {
+      "id": "HIS-3BGU-U6-013",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Origen del neoliberalismo",
+      "destreza": "CS.H.5.4.27",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿En qué país latinoamericano se aplicaron primero, desde mediados de los años setenta, reformas inspiradas en la escuela de Chicago?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Chile, durante la dictadura de Augusto Pinochet.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Ecuador, durante la Revolución Liberal.",
+          "error": "Es de 1895."
+        },
+        {
+          "letra": "C",
+          "texto": "México, durante la Revolución mexicana.",
+          "error": "Es de 1910."
+        },
+        {
+          "letra": "D",
+          "texto": "Brasil, durante la colonia portuguesa.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "E",
+          "texto": "Cuba, durante la Revolución.",
+          "error": "Aplicó un modelo socialista."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Economistas formados en Chicago, los “Chicago boys”, aplicaron en Chile privatizaciones y apertura comercial bajo un gobierno militar."
+    },
+    {
+      "id": "HIS-3BGU-U6-014",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Neoliberalismo",
+      "destreza": "CS.H.5.4.27",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Qué significa privatizar una empresa pública?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cerrar una empresa sin venderla.",
+          "error": "No es privatizar."
+        },
+        {
+          "letra": "B",
+          "texto": "Que el Estado compra una empresa privada.",
+          "error": "Eso es estatizar o nacionalizar."
+        },
+        {
+          "letra": "C",
+          "texto": "Transferir su propiedad o su gestión del Estado a capitales privados.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Aumentar los impuestos de una empresa.",
+          "error": "No tiene relación."
+        },
+        {
+          "letra": "E",
+          "texto": "Convertir una empresa en cooperativa estatal.",
+          "error": "No corresponde."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La privatización fue una de las medidas centrales de las reformas neoliberales de los ochenta y noventa."
+    },
+    {
+      "id": "HIS-3BGU-U6-015",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Socialismo del siglo XXI",
+      "destreza": "CS.H.5.4.32",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Qué diferencia se suele señalar entre el socialismo del siglo XXI y el socialismo clásico del siglo XX?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Propone abolir las elecciones desde el inicio.",
+          "error": "Se presenta como electoral."
+        },
+        {
+          "letra": "B",
+          "texto": "Es idéntico al socialismo soviético.",
+          "error": "Sus promotores plantean diferencias."
+        },
+        {
+          "letra": "C",
+          "texto": "Defiende el mercantilismo del siglo XVII.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "D",
+          "texto": "Plantea llegar al poder por elecciones y combinar propiedad estatal, privada y comunitaria, en lugar de un partido único y la estatización total.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Rechaza toda intervención del Estado en la economía.",
+          "error": "Promueve un Estado activo."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Sus defensores destacan la participación y la redistribución; sus críticos señalan casos de concentración de poder y debilitamiento de la independencia institucional."
+    },
+    {
+      "id": "HIS-3BGU-U6-016",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Escuelas económicas",
+      "destreza": "CS.H.5.4.33",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Contra qué doctrina reaccionaron los fisiócratas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Contra la utilidad marginal.",
+          "error": "Es un concepto neoclásico posterior."
+        },
+        {
+          "letra": "B",
+          "texto": "Contra la escuela de Chicago.",
+          "error": "Es del siglo XX."
+        },
+        {
+          "letra": "C",
+          "texto": "Contra el marxismo.",
+          "error": "El marxismo es posterior."
+        },
+        {
+          "letra": "D",
+          "texto": "Contra el socialismo del siglo XXI.",
+          "error": "Es mucho posterior."
+        },
+        {
+          "letra": "E",
+          "texto": "Contra el mercantilismo, que medía la riqueza por los metales preciosos acumulados.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "En el siglo XVIII, los fisiócratas criticaron la idea mercantilista de acumular oro y defendieron la libertad económica (laissez faire)."
+    },
+    {
+      "id": "HIS-3BGU-U6-017",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Escuelas económicas",
+      "destreza": "CS.H.5.4.37",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Después de la Gran Depresión, John Maynard Keynes propuso que el Estado aumentara el gasto para reactivar la economía. ¿Qué escuela cuestionó después esa visión?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La escuela clásica de Smith.",
+          "error": "Es anterior a Keynes."
+        },
+        {
+          "letra": "B",
+          "texto": "El mercantilismo.",
+          "error": "Es del siglo XVI al XVIII."
+        },
+        {
+          "letra": "C",
+          "texto": "La fisiocracia.",
+          "error": "Es anterior a Keynes."
+        },
+        {
+          "letra": "D",
+          "texto": "La escuela marxista.",
+          "error": "Su crítica se dirigía al capitalismo clásico, no a Keynes en particular."
+        },
+        {
+          "letra": "E",
+          "texto": "La escuela de Chicago, con Milton Friedman.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Chicago cuestionó la síntesis keynesiana: defendió reducir el papel del Estado y controlar la oferta monetaria."
+    },
+    {
+      "id": "HIS-3BGU-U6-018",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Integración latinoamericana",
+      "destreza": "CS.H.5.4.30",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué países integran actualmente la Comunidad Andina?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Bolivia, Colombia, Ecuador y Perú.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Brasil, Argentina, Paraguay y Uruguay.",
+          "error": "Son los fundadores del Mercosur."
+        },
+        {
+          "letra": "C",
+          "texto": "Ecuador, Argentina, Chile y Uruguay.",
+          "error": "Mezcla países del Mercosur y asociados."
+        },
+        {
+          "letra": "D",
+          "texto": "Venezuela, Colombia, Ecuador y Perú.",
+          "error": "Venezuela se retiró en 2006."
+        },
+        {
+          "letra": "E",
+          "texto": "México, Cuba, Ecuador y Perú.",
+          "error": "México y Cuba no son miembros."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La Comunidad Andina está formada por Bolivia, Colombia, Ecuador y Perú."
+    },
+    {
+      "id": "HIS-3BGU-U6-019",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Origen del neoliberalismo",
+      "destreza": "CS.H.5.4.27",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Las ideas neoliberales se organizaron en 1947, cuando Friedrich Hayek reunió a economistas en la Sociedad Mont Pelerin. ¿Qué defendían?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La economía de las haciendas coloniales.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "B",
+          "texto": "La planificación central de la economía.",
+          "error": "Era lo que criticaban."
+        },
+        {
+          "letra": "C",
+          "texto": "La libertad de mercado y la limitación del poder económico del Estado.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "La abolición de la propiedad privada.",
+          "error": "Defendían la propiedad privada."
+        },
+        {
+          "letra": "E",
+          "texto": "El regreso del mercantilismo.",
+          "error": "No corresponde."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "El neoliberalismo surgió como crítica al Estado interventor; sus ideas se aplicaron en América Latina desde los años setenta y ochenta."
+    },
+    {
+      "id": "HIS-3BGU-U6-020",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Neoliberalismo en el Ecuador",
+      "destreza": "CS.H.5.4.27",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En el Ecuador de los noventa se discutió la privatización de empresas públicas y la apertura comercial. ¿Qué actitud corresponde a un análisis histórico de esas reformas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Contrastar los datos y argumentos de quienes las apoyaron con los de quienes las criticaron.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Juzgar sin revisar fuentes.",
+          "error": "Contradice el método histórico."
+        },
+        {
+          "letra": "C",
+          "texto": "Rechazar cualquier dato económico.",
+          "error": "Los datos son evidencia necesaria."
+        },
+        {
+          "letra": "D",
+          "texto": "Considerar que la historia económica no se puede estudiar.",
+          "error": "Sí se puede estudiar con fuentes."
+        },
+        {
+          "letra": "E",
+          "texto": "Aceptar solo la versión del gobierno de la época.",
+          "error": "Es una visión parcial."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "El análisis histórico contrasta fuentes y posturas para comprender las causas y efectos de las decisiones económicas."
+    },
+    {
+      "id": "HIS-3BGU-U2-021",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Conquista de México",
+      "destreza": "CS.H.5.3.10",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿En qué año cayó Tenochtitlan, la capital azteca, ante las tropas de Hernán Cortés y sus aliados indígenas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1563",
+          "error": "Es el año de creación de la Real Audiencia de Quito."
+        },
+        {
+          "letra": "B",
+          "texto": "1521",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "1810",
+          "error": "Es el año del inicio de la independencia mexicana."
+        },
+        {
+          "letra": "D",
+          "texto": "1492",
+          "error": "Es el año del primer viaje de Colón."
+        },
+        {
+          "letra": "E",
+          "texto": "1532",
+          "error": "Es el año de la captura de Atahualpa."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Tenochtitlan cayó en agosto de 1521, tras un largo asedio en el que fueron decisivos los aliados tlaxcaltecas y una epidemia de viruela."
+    },
+    {
+      "id": "HIS-3BGU-U3-021",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Esclavitud y resistencia",
+      "destreza": "CS.H.5.3.21",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué formas de resistencia usaron los africanos esclavizados en las colonias americanas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Solo la compra legal de su libertad, que era fácil.",
+          "error": "Era difícil y excepcional."
+        },
+        {
+          "letra": "B",
+          "texto": "Ninguna: aceptaron la esclavitud sin oponerse.",
+          "error": "Desconoce la resistencia documentada."
+        },
+        {
+          "letra": "C",
+          "texto": "Pedir ayuda a los encomenderos.",
+          "error": "No corresponde."
+        },
+        {
+          "letra": "D",
+          "texto": "Regresar en masa a África por su cuenta.",
+          "error": "No era posible."
+        },
+        {
+          "letra": "E",
+          "texto": "La fuga y la formación de comunidades libres, el trabajo lento, las rebeliones y la conservación de su cultura.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Los palenques y quilombos, como la comunidad de Illescas en Esmeraldas o Palmares en Brasil, muestran la lucha por la libertad."
+    },
+    {
+      "id": "HIS-3BGU-U4-021",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Sociedad colonial",
+      "destreza": "CS.H.5.3.33",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En la jerarquía colonial, ¿cómo se llamaba a los hijos de españoles nacidos en América?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Mulatos.",
+          "error": "Eran hijos de europeos y africanos."
+        },
+        {
+          "letra": "B",
+          "texto": "Peninsulares.",
+          "error": "Eran los nacidos en España."
+        },
+        {
+          "letra": "C",
+          "texto": "Criollos.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Mestizos.",
+          "error": "Eran hijos de españoles e indígenas."
+        },
+        {
+          "letra": "E",
+          "texto": "Zambos.",
+          "error": "Eran hijos de indígenas y africanos."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Los criollos compartían origen europeo con los peninsulares, pero por nacer en América tenían menos acceso a los altos cargos."
+    },
+    {
+      "id": "HIS-3BGU-U5-020",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Independencia",
+      "destreza": "CS.H.5.3.36",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué batalla de 1822 selló la independencia del territorio de la actual capital del Ecuador?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La batalla de Ayacucho.",
+          "error": "Fue en 1824 en el Perú."
+        },
+        {
+          "letra": "B",
+          "texto": "La batalla de Pichincha.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "La batalla de Boyacá.",
+          "error": "Fue en 1819 en la actual Colombia."
+        },
+        {
+          "letra": "D",
+          "texto": "La batalla de Junín.",
+          "error": "Fue en 1824 en el Perú."
+        },
+        {
+          "letra": "E",
+          "texto": "La batalla de Tarqui.",
+          "error": "Fue en 1829, contra el Perú."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "El 24 de mayo de 1822, las tropas dirigidas por Antonio José de Sucre vencieron en las faldas del Pichincha; Quito se incorporó luego a la Gran Colombia."
+    },
+    {
+      "id": "HIS-3BGU-U5-021",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Nacimiento de la República",
+      "destreza": "CS.H.5.3.37",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "En 1830, el Ecuador se separó de la Gran Colombia y se convirtió en república. ¿Quiénes tuvieron el poder político en sus primeras décadas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Las comunidades indígenas organizadas.",
+          "error": "Estaban excluidas de la ciudadanía."
+        },
+        {
+          "letra": "B",
+          "texto": "Toda la población por voto universal.",
+          "error": "El voto era censitario."
+        },
+        {
+          "letra": "C",
+          "texto": "Los representantes de la Corona española.",
+          "error": "La independencia ya se había consumado."
+        },
+        {
+          "letra": "D",
+          "texto": "Los trabajadores obreros sindicalizados.",
+          "error": "El movimiento obrero surgió después."
+        },
+        {
+          "letra": "E",
+          "texto": "Las élites criollas terratenientes y comerciales, y los jefes militares de la independencia.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La primera Constitución restringía la ciudadanía a una minoría; gobernaron élites regionales y militares como Juan José Flores."
+    },
+    {
+      "id": "HIS-3BGU-U6-021",
+      "materia": "Historia",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Inflación y política monetaria",
+      "destreza": "CS.H.5.4.37",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Según la escuela de Chicago, ¿qué ocurre si un banco central imprime dinero mucho más rápido de lo que crece la producción?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Bajan todos los precios.",
+          "error": "Es lo contrario."
+        },
+        {
+          "letra": "B",
+          "texto": "Desaparece el desempleo de forma permanente.",
+          "error": "No es lo que sostiene esta escuela."
+        },
+        {
+          "letra": "C",
+          "texto": "Aumenta la riqueza de la tierra.",
+          "error": "Es una idea fisiócrata, sin relación."
+        },
+        {
+          "letra": "D",
+          "texto": "Sube la inflación, porque hay más dinero para la misma cantidad de bienes.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Mejora siempre el poder adquisitivo.",
+          "error": "La inflación lo reduce."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "El monetarismo sostiene que la inflación se origina en un crecimiento excesivo de la cantidad de dinero."
+    }
+  ]
+}
