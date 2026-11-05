@@ -8,7 +8,7 @@ import { AREAS } from "@/data/tipos";
 import type { Pregunta } from "@/data/tipos";
 import { BANCO_SIMULACRO, preguntasAleatorias } from "@/data";
 import { preguntasRepaso } from "@/data";
-import { BANCO_FISICA } from "@/data/fisica";
+import { seleccionarFisicaSimulacro, seleccionarSocialesSimulacro } from "@/data/simulacro-bgu";
 import { generarCienciasNaturales } from "@/data/basica/ciencias-naturales";
 import { generarEstudiosSociales } from "@/data/basica/estudios-sociales";
 import { generarMatematicaBasica } from "@/data/basica/matematica-basica";
@@ -19,15 +19,14 @@ import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso
 
 const DURACION_MIN = 40;
 const TOTAL_PREG = 30;
-const SUBTEMAS_CINEMATICA = ["Caída libre", "MRU", "MRUV"];
 
 type Asignatura = "mate" | "fisica" | "cn" | "es" | "mbs" | "bach";
 const SIM: Record<Asignatura, { nombre: string; area: string | null; total: number; min: number; desc: string; icono: string }> = {
   mate: { nombre: "Matemática", area: null, total: 30, min: 40, desc: "5 áreas + repaso (1ro BGU)", icono: "📐" },
-  fisica: { nombre: "Física", area: "Física", total: 30, min: 40, desc: "Cinemática: caída libre, MRU y MRUA", icono: "⚛️" },
+  fisica: { nombre: "Física", area: "Física", total: 30, min: 40, desc: "Cinemática y contenidos de 2do y 3ro BGU", icono: "⚛️" },
   mbs: { nombre: "Matemática Básica Superior", area: "Matemática Básica Superior", total: 30, min: 40, desc: "Números, álgebra, geometría y estadística", icono: "🔢" },
   cn: { nombre: "Ciencias Naturales", area: "Ciencias Naturales", total: 30, min: 40, desc: "Seres vivos, cuerpo humano, materia y universo", icono: "🌿" },
-  es: { nombre: "Estudios Sociales", area: "Estudios Sociales", total: 30, min: 40, desc: "Historia, geografía y ciudadanía", icono: "🌎" },
+  es: { nombre: "Estudios Sociales", area: "Estudios Sociales", total: 30, min: 40, desc: "Historia, geografía y ciudadanía; incluye Historia de 3ro BGU", icono: "🌎" },
   bach: { nombre: "Bachillerato (completo)", area: "Bachillerato", total: 50, min: 75, desc: "Todas las áreas + razonamiento, lectura crítica y argumentos", icono: "🎓" },
 };
 function porTema(pool: Pregunta[], n: number, clave: (p: Pregunta) => string = (p) => p.tema): Pregunta[] {
@@ -60,20 +59,6 @@ function nivelLogro(score: number) {
 
 interface Resp { pregunta: Pregunta; correcta: boolean; idx: number }
 
-function aPregunta(p: (typeof BANCO_FISICA)[number]): Pregunta {
-  return {
-    id: p.id,
-    area: "Física",
-    tema: String(p.tema),
-    subtema: p.subtema,
-    nivel: p.nivel,
-    enunciado: p.enunciado,
-    opciones: p.opciones,
-    respuestaCorrecta: p.respuestaCorrecta,
-    explicacion: p.explicacion,
-  };
-}
-
 
 function Simulacro() {
   const cerrarRef = useRef<() => void>(() => {});
@@ -100,7 +85,7 @@ function SimulacroVista({ guard, cerrarRef }: { guard: ReturnType<typeof useExam
   const sesion = useMemo<Pregunta[]>(() => {
     if (!iniciado) return [];
     if (asignatura === "cn") return porTema(generarCienciasNaturales(), 30);
-    if (asignatura === "es") return porTema(generarEstudiosSociales(), 30);
+    if (asignatura === "es") return seleccionarSocialesSimulacro(cfg.total);
     if (asignatura === "mbs") return porTema(generarMatematicaBasica(), 30);
     if (asignatura === "bach") {
       const lc = preguntasLecturaCritica();
@@ -117,24 +102,7 @@ function SimulacroVista({ guard, cerrarRef }: { guard: ReturnType<typeof useExam
       return preguntasAleatorias(mix, mix.length).slice(0, 50);
     }
 
-    if (esFisica) {
-      const pool = BANCO_FISICA.filter(
-        (p) => p.tema === "Cinemática" && SUBTEMAS_CINEMATICA.includes(p.subtema),
-      );
-      const elegidas: Pregunta[] = [];
-      const ids = new Set<string>();
-      const perSub = Math.max(1, Math.floor(TOTAL_PREG / SUBTEMAS_CINEMATICA.length));
-      for (const s of SUBTEMAS_CINEMATICA) {
-        const pick = preguntasAleatorias(pool.filter((p) => p.subtema === s && !ids.has(p.id)), perSub);
-        pick.forEach((p) => ids.add(p.id));
-        elegidas.push(...pick.map(aPregunta));
-      }
-      if (elegidas.length < TOTAL_PREG) {
-        const extras = preguntasAleatorias(pool.filter((p) => !ids.has(p.id)), TOTAL_PREG - elegidas.length);
-        elegidas.push(...extras.map(aPregunta));
-      }
-      return preguntasAleatorias(elegidas, elegidas.length).slice(0, TOTAL_PREG);
-    }
+    if (esFisica) return seleccionarFisicaSimulacro(cfg.total);
 
     const elegidas: Pregunta[] = [];
     const ids = new Set<string>();
@@ -283,10 +251,10 @@ function SimulacroVista({ guard, cerrarRef }: { guard: ReturnType<typeof useExam
       );
     }
 
-    // Desglose: por área en Matemática, por subtema de Cinemática en Física
+    // Desglose: por área en Matemática y por subtema en Física.
     const porArea: Record<string, { ok: number; total: number }> = {};
     const generico = !["mate", "fisica"].includes(asignatura);
-    const claves = esFisica ? SUBTEMAS_CINEMATICA : generico ? [...new Set(sesion.map((p) => p.tema))] : [...AREAS];
+    const claves = esFisica ? [...new Set(sesion.map((p) => p.subtema))] : generico ? [...new Set(sesion.map((p) => p.tema))] : [...AREAS];
     for (const a of claves) porArea[a] = { ok: 0, total: 0 };
     for (const r of respuestas) {
       const k = esFisica ? r.pregunta.subtema : generico ? r.pregunta.tema : r.pregunta.area;
@@ -308,7 +276,7 @@ function SimulacroVista({ guard, cerrarRef }: { guard: ReturnType<typeof useExam
               <p className="mt-1 text-sm text-muted-foreground">{aciertos} de {total} correctas</p>
               <p className="mx-auto mt-3 max-w-md text-sm">{nivel.desc}</p>
             </div>
-            <h3 className="mt-6 mb-2 font-bold">{esFisica ? "Desglose por subtema (Cinemática)" : "Desglose por área"}</h3>
+            <h3 className="mt-6 mb-2 font-bold">{esFisica ? "Desglose por subtema" : "Desglose por área"}</h3>
             <div className="space-y-2">
               {Object.entries(porArea).map(([a, v]) => {
                 const pct = v.total > 0 ? Math.round((v.ok / v.total) * 100) : 0;
