@@ -1197,6 +1197,7 @@ export type Database = {
           creado_en: string
           creado_por: string
           datos: Json
+          datos_json: Json | null
           huella: string
           id: string
           reiniciado_en: string | null
@@ -1205,6 +1206,7 @@ export type Database = {
           creado_en?: string
           creado_por: string
           datos: Json
+          datos_json?: Json | null
           huella: string
           id?: string
           reiniciado_en?: string | null
@@ -1213,6 +1215,7 @@ export type Database = {
           creado_en?: string
           creado_por?: string
           datos?: Json
+          datos_json?: Json | null
           huella?: string
           id?: string
           reiniciado_en?: string | null
@@ -1634,6 +1637,7 @@ export type Database = {
         Returns: undefined
       }
       foto_academica: { Args: never; Returns: Json }
+      foto_academica_json: { Args: never; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

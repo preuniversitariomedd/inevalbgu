@@ -85,6 +85,13 @@
       "when": 1793899791235,
       "tag": "0011_reinicio_total_con_activos",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1793900096607,
+      "tag": "0012_respaldo_rapido_json",
+      "breakpoints": true
     }
   ]
 }
