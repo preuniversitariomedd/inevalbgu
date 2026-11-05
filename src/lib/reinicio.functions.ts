@@ -54,4 +54,11 @@ export const descargarRespaldoFn = createServerFn({ method: 'POST' }).middleware
     const { data: b, error } = await (context.supabase as any).from('respaldos_academicos').select('*').eq('id',data.id).single();
     if (error || !b) throw new Error('Respaldo no disponible.');
     return { ...b, datos: b.datos_json ?? b.datos, datos_json: undefined };
+  });export const reiniciarSinRespaldoFn = createServerFn({ method: 'POST' }).middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ confirmacion: z.literal('BORRAR SIN RESPALDO') }).parse(d))
+  .handler(async ({ context }) => {
+    await administrador(context);
+    const { error } = await (context.supabase as any).rpc('reiniciar_sin_respaldo');
+    if (error) throw new Error(mensajeError(error));
+    return { ok: true };
   });

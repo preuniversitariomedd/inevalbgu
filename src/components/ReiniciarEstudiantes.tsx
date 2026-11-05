@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useServerFn } from '@tanstack/react-start';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { prepararReinicioFn, reiniciarEstudiantesFn, listarRespaldosFn, descargarRespaldoFn } from '@/lib/reinicio.functions';
+import { prepararReinicioFn, reiniciarEstudiantesFn, reiniciarSinRespaldoFn, listarRespaldosFn, descargarRespaldoFn } from '@/lib/reinicio.functions';
 import { CONFIRMACION_REINICIO } from '@/lib/reinicio-reglas';
 import { descargarRespaldo } from '@/lib/descargar-respaldo';
 import { CONSULTA_MANUAL } from '@/lib/consulta-politicas';
@@ -31,8 +31,11 @@ export function ReiniciarEstudiantes() {
     if (!prep.data) throw new Error('Prepara el respaldo primero.');
     return reiniciar({data:{respaldoId:prep.data.id,huella:prep.data.huella,confirmacion:texto,descargado:descargado && guardado}});
   }, onSuccess:async()=>{ setOpen(false); toast.success('Notas y avances reiniciados; respaldo histórico conservado.'); for(const k of ['calificaciones','calificacion','progreso','respaldos-academicos','periodos']) await qc.invalidateQueries({queryKey:[k]}); } });
-  const busy = prep.isPending || reset.isPending;
-  function abrir(){setPaso(1);setTexto('');setGuardado(false);setDescargado(false);setBlob(null);prep.reset();reset.reset();setOpen(true);}
+  const sinResp = useServerFn(reiniciarSinRespaldoFn);
+  const [textoSin,setTextoSin] = useState('');
+  const borrar = useMutation({ mutationFn:()=>sinResp({data:{confirmacion:'BORRAR SIN RESPALDO' as const}}), onSuccess:async()=>{ setOpen(false); toast.success('Notas, avances y períodos borrados.'); await qc.invalidateQueries(); } });
+  const busy = prep.isPending || reset.isPending || borrar.isPending;
+  function abrir(){setPaso(1);setTexto('');setGuardado(false);setDescargado(false);setBlob(null);setTextoSin('');borrar.reset();prep.reset();reset.reset();setOpen(true);}
   return <>
     <div className="flex flex-wrap gap-2">
       <Button variant="destructive" onClick={abrir}><RotateCcw className="h-4 w-4"/>Reiniciar notas y avances de estudiantes</Button>
@@ -43,6 +46,7 @@ export function ReiniciarEstudiantes() {
       <p className="text-sm text-muted-foreground">Se borran notas, avances y todos los períodos de calificación. Si algún estudiante está conectado, verá un aviso de "Reinicio de notas" y su avance también se borra; su actividad más reciente queda guardada en una copia final automática dentro de Respaldos anteriores.</p>
       {paso===1 ? <><p className="text-sm">Se respaldan respuestas, simulacros, avances, conexiones, encuestas y actividad en tareas, biblioteca y competencias. Los avances antiguos de Sistemas guardados únicamente en un dispositivo no se pueden incluir.</p>
         {!blob ? <Button disabled={busy} onClick={()=>prep.mutate()}>{prep.isPending?<Loader2 className="h-4 w-4 animate-spin"/>:<Archive className="h-4 w-4"/>}Preparar respaldo JSON</Button> : <><p className="text-sm font-semibold">{prep.data?.total} estudiantes · Respaldo preparado</p><Button onClick={()=>{if(!blob || !prep.data)return;descargarRespaldo(blob,`respaldo-academico-${prep.data.id}.json`);setDescargado(true);setPaso(2);}}><Download className="h-4 w-4"/>Descargar respaldo y continuar</Button></>}
+        <div className="mt-2 space-y-2 rounded-md border border-destructive p-3"><p className="text-sm font-semibold text-destructive">Borrar sin respaldo (no se podrá recuperar)</p><Input aria-label="Confirmar borrado sin respaldo" placeholder="Escribe BORRAR SIN RESPALDO" value={textoSin} onChange={e=>setTextoSin(e.target.value)}/><Button variant="destructive" disabled={busy || textoSin!=='BORRAR SIN RESPALDO'} onClick={()=>borrar.mutate()}>{borrar.isPending?<Loader2 className="h-4 w-4 animate-spin"/>:<RotateCcw className="h-4 w-4"/>}Borrar todo sin respaldo</Button>{borrar.error && <p role="alert" className="text-sm text-destructive">{borrar.error.message}</p>}</div>
       </> : <><label className="flex items-start gap-2 text-sm"><Checkbox checked={guardado} onCheckedChange={v=>setGuardado(v===true)}/>Confirmo que guardé el archivo de respaldo en mi dispositivo.</label><label className="space-y-2 text-sm"><span>Escribe <strong>{CONFIRMACION_REINICIO}</strong></span><Input aria-label="Confirmación de reinicio" value={texto} onChange={e=>setTexto(e.target.value)}/></label><Button variant="destructive" disabled={busy || !guardado || texto!==CONFIRMACION_REINICIO} onClick={()=>reset.mutate()}>{reset.isPending?<Loader2 className="h-4 w-4 animate-spin"/>:<RotateCcw className="h-4 w-4"/>}Confirmar reinicio de todos los estudiantes</Button></>}
       {(prep.error || reset.error) && <p role="alert" className="text-sm text-destructive">{(prep.error || reset.error)?.message}</p>}
       <Button variant="ghost" disabled={busy} onClick={()=>setOpen(false)}>Cancelar</Button>
