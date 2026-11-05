@@ -70,5 +70,59 @@ export const informeCursoFn = createServerFn({ method: 'POST' }).middleware([req
       })); calificaciones.push(...lote.flat());
     }
     secciones.splice(1,0,{ nombre:'Calificaciones',filas:calificaciones as Record<string, Valor>[] });
+    // Summary sheet: one row per student, sorted by surname.
+    const { separarNombre, compararApellidos, puntajePodio, notaSugerida } = await import('./resumen-curso');
+    const sec = (n: string) => secciones.find(s => s.nombre === n)?.filas ?? [];
+    const accesos = new Map<string, string | null>();
+    for (let page = 1; page < 50; page++) {
+      const { data: lu, error: le } = await db.auth.admin.listUsers({ page, perPage: 1000 });
+      if (le) break;
+      for (const u of lu.users) accesos.set(u.id, u.last_sign_in_at ?? null);
+      if (lu.users.length < 1000) break;
+    }
+    const fmt = (iso: string | null) => iso ? new Date(iso).toLocaleString('es-EC', { timeZone: 'America/Guayaquil', dateStyle: 'short', timeStyle: 'short' }) : '';
+    const maxIso = (...v: (string | null | undefined)[]) => v.filter(Boolean).sort().pop() ?? null;
+    const resumen = sec('Estudiantes').map((p: any) => {
+      const uid = String(p.id);
+      const resp = sec('Respuestas').filter((r: any) => r.user_id === uid);
+      const ses = sec('Sesiones y simulacros').filter((r: any) => r.user_id === uid);
+      const con = sec('Conexiones').filter((r: any) => r.user_id === uid);
+      const segundos = con.reduce((s, c: any) => s + (c.segundos_visible ?? 0) + (c.segundos_oculto ?? 0), 0);
+      const mejor = ses.reduce((m, s: any) => Math.max(m, s.puntaje_ineval ?? (s.total_preguntas ? s.correctas / s.total_preguntas * 100 : 0)), 0);
+      const correctas = resp.filter((r: any) => r.correcta).length;
+      const ultima = maxIso(accesos.get(uid), ...con.map((c: any) => c.ultimo_heartbeat), ...resp.map((r: any) => r.respondida_en), ...ses.map((s: any) => s.iniciada_en));
+      const ingreso = !!ultima;
+      const notas = calificaciones.filter(c => c.user_id === uid);
+      const historica = Number(notas.find(c => c.periodo === 'Todo el historial')?.nota ?? 0);
+      const perNotas = notas.filter(c => c.periodo !== 'Todo el historial');
+      const podio = puntajePodio(resp.length, correctas, segundos / 3600, mejor);
+      const dias = ultima ? Math.floor((Date.now() - new Date(ultima).getTime()) / 86400000) : null;
+      const sug = notaSugerida({ ingreso, historica, periodos: perNotas.map(c => Number(c.nota ?? 0)), podio, diasSinConexion: dias });
+      const matricula = miembros.find(m => m.user_id === uid)?.created_at ?? p.created_at;
+      return { ...separarNombre(String(p.nombres ?? '')), uid, cedula: String(p.cedula ?? ''), ingreso, podio, historica, perNotas, matricula, ultima, resp: resp.length, correctas, sug };
+    }).sort(compararApellidos);
+    const puestos = [...resumen].filter(r => r.ingreso).sort((a, b) => b.podio - a.podio);
+    const filasResumen = resumen.map((r, i) => {
+      const fila: Record<string, Valor> = { 'N.º': i + 1, 'Cédula': r.cedula, 'Apellidos': r.apellidos, 'Nombres': r.nombres };
+      for (const p of periodos) fila[`Nota ${p.nombre} (${p.fecha_inicio} a ${p.fecha_fin})`] = Number(r.perNotas.find(c => c.periodo === p.nombre)?.nota ?? 0);
+      Object.assign(fila, {
+        'Nota histórica': r.historica,
+        'Ingresó a la plataforma': r.ingreso ? 'Sí' : 'NUNCA INGRESÓ',
+        'Puesto podio': r.ingreso ? puestos.indexOf(r) + 1 : '—',
+        'Puntaje podio (/100)': r.podio,
+        'Preguntas resueltas': r.resp, 'Correctas': r.correctas,
+        'Fecha de inscripción': fmt(String(r.matricula ?? '')||null),
+        'Última conexión': r.ultima ? fmt(r.ultima) : 'Nunca',
+        'Nota sugerida (/10)': r.sug.nota,
+        'Observación': r.sug.observacion,
+      });
+      return fila;
+    });
+    const nunca = resumen.filter(r => !r.ingreso).map((r, i) => ({ 'N.º': i + 1, 'Cédula': r.cedula, 'Apellidos': r.apellidos, 'Nombres': r.nombres, 'Fecha de inscripción': fmt(String(r.matricula ?? '')||null) }));
+    const podioFilas = puestos.map((r, i) => ({ 'Puesto': i + 1, 'Cédula': r.cedula, 'Apellidos': r.apellidos, 'Nombres': r.nombres, 'Puntaje podio (/100)': r.podio, 'Preguntas resueltas': r.resp, 'Correctas': r.correctas }));
+    secciones.splice(0, 0,
+      { nombre: 'Resumen por estudiante', filas: filasResumen },
+      { nombre: 'Nunca ingresaron', filas: nunca },
+      { nombre: 'Podio', filas: podioFilas });
     return { grupo: { id:grupo.id,nombre:grupo.nombre }, generadoEn:new Date().toISOString(), secciones, alcance:'Historial completo de los miembros actuales del curso. Incluye registros académicos, de conexión, encuestas, actividades y tutor personal. No incluye contraseñas, PIN, comunicaciones privadas entre usuarios ni el contenido binario de adjuntos; los archivos se describen mediante sus datos guardados.' };
   });
