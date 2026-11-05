@@ -1,3 +1,4 @@
+- [ ] Incorporar los tres bancos adjuntos a los simulacros de Física y Estudios Sociales, conservando lecturas, claves y preguntas anteriores; verificar selección y guardado.
 - [x] Corregir metas y notas de Razonamiento usando el banco completo por nivel; 27 pruebas aprobadas y metas verificadas en pantalla con sesión autenticada.
 - [x] Añadir ojos para visibilidad global de los cinco apartados; 17 pruebas aprobadas, guardado tras recarga y bloqueo de enlace verificados con sesión administrativa, controles revisados en computadora y móvil.
 - [x] Reset admin password; specific login errors; 4-digit PIN recovery
