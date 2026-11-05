@@ -1664,6 +1664,7 @@ export type Database = {
         Args: { _huella: string; _respaldo: string }
         Returns: boolean
       }
+      reiniciar_sin_respaldo: { Args: never; Returns: boolean }
     }
     Enums: {
       app_role: "estudiante" | "administrador" | "docente"

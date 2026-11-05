@@ -92,6 +92,13 @@
       "when": 1793900096607,
       "tag": "0012_respaldo_rapido_json",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1793900217940,
+      "tag": "0013_reinicio_sin_respaldo",
+      "breakpoints": true
     }
   ]
 }
