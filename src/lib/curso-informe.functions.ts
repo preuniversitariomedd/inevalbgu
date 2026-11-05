@@ -2,7 +2,7 @@ import { createServerFn } from '@tanstack/react-start';
 import { requireSupabaseAuth } from '@/integrations/supabase/auth-middleware';
 import { z } from 'zod';
 type Valor = string | number | boolean | null | Valor[] | { [k: string]: Valor };
-export type InformeSeccion = { nombre: string; filas: Record<string, Valor>[] };
+export type InformeSeccion = { nombre: string; filas: Record<string, Valor>[]; simple?: boolean };
 export const informeCursoFn = createServerFn({ method: 'POST' }).middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ grupoId: z.string().uuid() }).parse(d))
   .handler(async ({ context, data }) => {
@@ -121,8 +121,8 @@ export const informeCursoFn = createServerFn({ method: 'POST' }).middleware([req
     const nunca = resumen.filter(r => !r.ingreso).map((r, i) => ({ 'N.º': i + 1, 'Cédula': r.cedula, 'Apellidos': r.apellidos, 'Nombres': r.nombres, 'Fecha de inscripción': fmt(String(r.matricula ?? '')||null) }));
     const podioFilas = puestos.map((r, i) => ({ 'Puesto': i + 1, 'Cédula': r.cedula, 'Apellidos': r.apellidos, 'Nombres': r.nombres, 'Puntaje podio (/100)': r.podio, 'Preguntas resueltas': r.resp, 'Correctas': r.correctas }));
     secciones.splice(0, 0,
-      { nombre: 'Resumen por estudiante', filas: filasResumen },
-      { nombre: 'Nunca ingresaron', filas: nunca },
-      { nombre: 'Podio', filas: podioFilas });
+      { nombre: 'Resumen por estudiante', filas: filasResumen, simple: true },
+      { nombre: 'Nunca ingresaron', filas: nunca, simple: true },
+      { nombre: 'Podio', filas: podioFilas, simple: true });
     return { grupo: { id:grupo.id,nombre:grupo.nombre }, generadoEn:new Date().toISOString(), secciones, alcance:'Historial completo de los miembros actuales del curso. Incluye registros académicos, de conexión, encuestas, actividades y tutor personal. No incluye contraseñas, PIN, comunicaciones privadas entre usuarios ni el contenido binario de adjuntos; los archivos se describen mediante sus datos guardados.' };
   });

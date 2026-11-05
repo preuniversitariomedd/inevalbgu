@@ -7,6 +7,13 @@ export async function prepararInforme(informe: InformeCurso, formato: 'pdf'|'exc
     const ficha = XLSX.utils.aoa_to_sheet([['PreUniversitario MEDD', informe.grupo.nombre], ['Generado',informe.generadoEn], ['Alcance',informe.alcance]]);
     ficha['!cols'] = [{ wch:24 },{ wch:100 }]; XLSX.utils.book_append_sheet(wb,ficha,'Informe');
     for (const s of informe.secciones) {
+      if (s.simple) {
+        const ws = s.filas.length ? XLSX.utils.json_to_sheet(s.filas) : XLSX.utils.aoa_to_sheet([['Sin registros']]);
+        const cols = Object.keys(s.filas[0] ?? { a: 1 });
+        ws['!cols'] = cols.map(k => ({ wch: k === 'Observación' ? 70 : Math.max(10, Math.min(40, k.length + 2)) }));
+        ws['!autofilter'] = s.filas.length ? { ref: ws['!ref'] as string } : undefined;
+        XLSX.utils.book_append_sheet(wb, ws, s.nombre.slice(0,31)); continue;
+      }
       const filas = s.filas.flatMap((r, index) => {
         const columnas = Object.keys(r);
         // Long text and JSON are split into continuation records without losing data.
