@@ -1,0 +1,5214 @@
+{
+  "materia": "Física",
+  "curso": "3ro BGU",
+  "anio_lectivo": "2026-2027",
+  "institucion": "U.E. Diecinueve de Enero",
+  "lineamientos": "Currículo MinEduc 2016 (destrezas con criterios de desempeño) y pautas de construcción de ítems de opción múltiple tipo INEVAL: base con contexto, enunciado, una sola respuesta correcta y distractores plausibles basados en errores comunes.",
+  "total_preguntas": 126,
+  "lecturas": [
+    {
+      "id": "FIS-3BGU-L1",
+      "unidad": 1,
+      "titulo": "Satélites geoestacionarios",
+      "texto": "Muchas señales de televisión y de internet rural en el Ecuador llegan desde satélites geoestacionarios. Estos satélites orbitan sobre la línea ecuatorial a unos 35 800 km de altura sobre la superficie y tardan lo mismo que la Tierra en dar una vuelta sobre su eje, unas 24 horas. Por eso, desde el suelo parecen quietos en el cielo y las antenas parabólicas pueden quedarse fijas apuntando hacia ellos. El radio terrestre mide aproximadamente 6 370 km. El Ecuador tiene una posición privilegiada: la órbita geoestacionaria pasa justo sobre su territorio."
+    },
+    {
+      "id": "FIS-3BGU-L2",
+      "unidad": 2,
+      "titulo": "El sonar de la flota pesquera",
+      "texto": "En el Golfo de Guayaquil, muchas embarcaciones pesqueras usan un sonar para ubicar cardúmenes y medir la profundidad. El equipo emite pulsos de ultrasonido de 50 kHz, inaudibles para las personas, que viajan por el agua de mar a unos 1 500 m/s. Cuando el pulso choca con el fondo o con un cardumen, se refleja y regresa al barco. Una computadora mide el tiempo entre la emisión y la llegada del eco y calcula la distancia. En una de las mediciones, el eco del fondo regresó 0,08 s después de emitido el pulso."
+    },
+    {
+      "id": "FIS-3BGU-L3",
+      "unidad": 3,
+      "titulo": "Cómo funciona un parlante",
+      "texto": "Dentro de un parlante hay un imán permanente y una bobina de alambre unida a una membrana de cartón. Cuando la señal eléctrica de la música pasa por la bobina, el campo magnético del imán ejerce una fuerza sobre el alambre. Como la corriente de la señal cambia de sentido cientos o miles de veces por segundo, la fuerza también cambia de sentido: la bobina y la membrana van y vienen, empujan el aire y producen sonido. En un parlante pequeño, el campo del imán es de 1,2 T, la bobina tiene 5 m de alambre dentro del campo, perpendicular a él, y en un instante circula 0,5 A."
+    },
+    {
+      "id": "FIS-3BGU-L4",
+      "unidad": 4,
+      "titulo": "La radio comunitaria",
+      "texto": "En una parroquia rural de Manabí funciona una radio comunitaria que transmite en FM a 98,5 MHz. Los técnicos explican a los estudiantes que la señal es una onda electromagnética que viaja a 3 × 10⁸ m/s, igual que la luz. Para recibirla bien, una antena sencilla de varilla debe medir aproximadamente un cuarto de la longitud de onda de la señal. Los estudiantes quieren construir su propia antena para el aula como parte de un proyecto de ciencias."
+    },
+    {
+      "id": "FIS-3BGU-L5",
+      "unidad": 5,
+      "titulo": "Celdas solares en la escuela",
+      "texto": "Un grupo de estudiantes instaló un pequeño panel solar para cargar los equipos del laboratorio. El docente les explicó que la luz llega al panel como fotones y que cada fotón puede liberar a lo sumo un electrón en el semiconductor, siempre que tenga energía suficiente. Para estimar cuántos fotones llegan al panel, usaron una luz de prueba de 600 nm que entrega 0,5 W de potencia, es decir, 0,5 J de energía por segundo. También observaron que con una lámpara infrarroja muy potente, pero de fotones con poca energía, el panel casi no producía corriente."
+    },
+    {
+      "id": "FIS-3BGU-L6",
+      "unidad": 6,
+      "titulo": "Medicina nuclear",
+      "texto": "En el servicio de medicina nuclear de un hospital de Guayaquil se usa tecnecio-99m para obtener imágenes de órganos como el corazón o los huesos. Se inyecta al paciente una pequeña cantidad de esta sustancia, que emite rayos gamma; una cámara especial los detecta desde fuera del cuerpo y forma la imagen. El tecnecio-99m tiene una vida media de 6 horas, por lo que su actividad disminuye rápido y el paciente elimina la radiación en poco tiempo. En un estudio se aplicó una dosis inicial de 800 MBq."
+    }
+  ],
+  "preguntas": [
+    {
+      "id": "FIS-3BGU-U1-001",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Velocidad orbital",
+      "destreza": "CN.F.5.4.2",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un satélite gira en órbita circular a 400 km sobre la superficie terrestre. Con G = 6,67 × 10⁻¹¹ N·m²/kg² y M_Tierra = 5,97 × 10²⁴ kg (R_Tierra = 6,37 × 10⁶ m), ¿cuál es su rapidez orbital?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "10 846 m/s",
+          "error": "Usó la fórmula de la velocidad de escape, √(2GM/r)."
+        },
+        {
+          "letra": "B",
+          "texto": "3 m/s",
+          "error": "Extrajo la raíz solo del numerador."
+        },
+        {
+          "letra": "C",
+          "texto": "8 145 m/s",
+          "error": "Usó g = 9,8 m/s² de la superficie, que no vale a esa distancia."
+        },
+        {
+          "letra": "D",
+          "texto": "6 × 10⁷ m/s",
+          "error": "No extrajo la raíz cuadrada de GM/r."
+        },
+        {
+          "letra": "E",
+          "texto": "7 669 m/s",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La gravedad es la fuerza centrípeta: G·M·m/r² = m·v²/r ⇒ v = √(G·M/r), con R + h = 6,77 × 10⁶ m. v ≈ 7 669 m/s."
+    },
+    {
+      "id": "FIS-3BGU-U1-002",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Velocidad orbital",
+      "destreza": "CN.F.5.4.2",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "La Luna gira alrededor de la Tierra a una distancia media de 3,84 × 10⁸ m entre centros. Con G = 6,67 × 10⁻¹¹ N·m²/kg² y M_Tierra = 5,97 × 10²⁴ kg (R_Tierra = 6,37 × 10⁶ m), ¿cuál es su rapidez orbital?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1 440 m/s",
+          "error": "Usó la fórmula de la velocidad de escape, √(2GM/r)."
+        },
+        {
+          "letra": "B",
+          "texto": "1 018 m/s",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "1 036 977 m/s",
+          "error": "No extrajo la raíz cuadrada de GM/r."
+        },
+        {
+          "letra": "D",
+          "texto": "5 × 10⁻² m/s",
+          "error": "Extrajo la raíz solo del numerador."
+        },
+        {
+          "letra": "E",
+          "texto": "61 345 m/s",
+          "error": "Usó g = 9,8 m/s² de la superficie, que no vale a esa distancia."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "La gravedad es la fuerza centrípeta: G·M·m/r² = m·v²/r ⇒ v = √(G·M/r), con r = 3,84 × 10⁸ m. v ≈ 1 018 m/s."
+    },
+    {
+      "id": "FIS-3BGU-U1-003",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Periodo orbital",
+      "destreza": "CN.F.5.4.2",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un satélite meteorológico orbita a 400 km de altura. Con G = 6,67 × 10⁻¹¹ N·m²/kg², M_Tierra = 5,97 × 10²⁴ kg y R_Tierra = 6,37 × 10⁶ m, ¿cuál es su periodo en horas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "5 546,42 h",
+          "error": "Calculó segundos y no convirtió a horas."
+        },
+        {
+          "letra": "B",
+          "texto": "92,44 h",
+          "error": "Dividió para 60 (obtuvo minutos) y lo rotuló como horas."
+        },
+        {
+          "letra": "C",
+          "texto": "0,77 h",
+          "error": "Usó π en lugar de 2π."
+        },
+        {
+          "letra": "D",
+          "texto": "1,54 h",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "0,25 h",
+          "error": "Olvidó el factor 2π."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "T = 2π·√(r³/(G·M)) ≈ 5 546 s ≈ 1,54 h."
+    },
+    {
+      "id": "FIS-3BGU-U1-004",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Periodo orbital",
+      "destreza": "CN.F.5.4.2",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un satélite de comunicaciones orbita a 4,22 × 10⁷ m del centro de la Tierra. Con G = 6,67 × 10⁻¹¹ N·m²/kg², M_Tierra = 5,97 × 10²⁴ kg y R_Tierra = 6,37 × 10⁶ m, ¿cuál es su periodo en horas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1 438,62 h",
+          "error": "Dividió para 60 (obtuvo minutos) y lo rotuló como horas."
+        },
+        {
+          "letra": "B",
+          "texto": "3,82 h",
+          "error": "Olvidó el factor 2π."
+        },
+        {
+          "letra": "C",
+          "texto": "23,98 h",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "86 317,42 h",
+          "error": "Calculó segundos y no convirtió a horas."
+        },
+        {
+          "letra": "E",
+          "texto": "11,99 h",
+          "error": "Usó π en lugar de 2π."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "T = 2π·√(r³/(G·M)) ≈ 86 317 s ≈ 23,98 h."
+    },
+    {
+      "id": "FIS-3BGU-U1-005",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Tercera ley de Kepler",
+      "destreza": "CN.F.5.4.1",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un asteroide gira alrededor del Sol con un semieje mayor de 4 UA. Si para la Tierra a = 1 UA y T = 1 año, ¿cuál es el periodo del asteroide?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "4,00 años",
+          "error": "Supuso que el periodo es proporcional a la distancia."
+        },
+        {
+          "letra": "B",
+          "texto": "64,00 años",
+          "error": "Olvidó extraer la raíz: T² = a³ no es T = a³."
+        },
+        {
+          "letra": "C",
+          "texto": "16,00 años",
+          "error": "Elevó la distancia al cuadrado."
+        },
+        {
+          "letra": "D",
+          "texto": "8,00 años",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "2,52 años",
+          "error": "Invirtió los exponentes: usó T = a^(2/3)."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Tercera ley de Kepler: T² = a³ (en años y UA). T = √(4³) = 8,00 años."
+    },
+    {
+      "id": "FIS-3BGU-U1-006",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Tercera ley de Kepler",
+      "destreza": "CN.F.5.4.1",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un asteroide gira alrededor del Sol con un semieje mayor de 9 UA. Si para la Tierra a = 1 UA y T = 1 año, ¿cuál es el periodo del asteroide?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "81,00 años",
+          "error": "Elevó la distancia al cuadrado."
+        },
+        {
+          "letra": "B",
+          "texto": "4,33 años",
+          "error": "Invirtió los exponentes: usó T = a^(2/3)."
+        },
+        {
+          "letra": "C",
+          "texto": "729,00 años",
+          "error": "Olvidó extraer la raíz: T² = a³ no es T = a³."
+        },
+        {
+          "letra": "D",
+          "texto": "9,00 años",
+          "error": "Supuso que el periodo es proporcional a la distancia."
+        },
+        {
+          "letra": "E",
+          "texto": "27,00 años",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Tercera ley de Kepler: T² = a³ (en años y UA). T = √(9³) = 27,00 años."
+    },
+    {
+      "id": "FIS-3BGU-U1-007",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Tercera ley de Kepler",
+      "destreza": "CN.F.5.4.1",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Dos satélites giran alrededor de la Tierra. El periodo del segundo es el doble del periodo del primero. ¿Cuántas veces mayor es el radio de su órbita?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "2,83 veces",
+          "error": "Invirtió la relación: calculó T a partir de r."
+        },
+        {
+          "letra": "B",
+          "texto": "2,00 veces",
+          "error": "Supuso proporcionalidad directa entre periodo y radio."
+        },
+        {
+          "letra": "C",
+          "texto": "1,41 veces",
+          "error": "Extrajo la raíz cuadrada en lugar de la cúbica."
+        },
+        {
+          "letra": "D",
+          "texto": "1,59 veces",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "4,00 veces",
+          "error": "Elevó la razón de periodos al cuadrado sin extraer la raíz cúbica."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "r³ ∝ T². Si T se duplica, r³ se multiplica por 4 y r por ∛4 ≈ 1,59."
+    },
+    {
+      "id": "FIS-3BGU-U1-008",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Campo gravitacional de un planeta",
+      "destreza": "CN.F.5.1.25",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Marte tiene una masa de 6,42 × 10²³ kg y un radio de 3,39 × 10⁶ m. Con G = 6,67 × 10⁻¹¹ N·m²/kg², ¿cuánto vale la gravedad en su superficie?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,05 m/s²",
+          "error": "Escaló g terrestre solo con la masa e ignoró el radio."
+        },
+        {
+          "letra": "B",
+          "texto": "4,28 × 10¹³ m/s²",
+          "error": "Olvidó dividir para el radio al cuadrado."
+        },
+        {
+          "letra": "C",
+          "texto": "0,93 m/s²",
+          "error": "Usó el diámetro en lugar del radio."
+        },
+        {
+          "letra": "D",
+          "texto": "1,26 × 10⁷ m/s²",
+          "error": "No elevó el radio al cuadrado."
+        },
+        {
+          "letra": "E",
+          "texto": "3,73 m/s²",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "g = G·M/R² = 6,67 × 10⁻¹¹·6,42 × 10²³/(3 390 000,00)² ≈ 3,73 m/s² en Marte. El peso cambia; la masa no."
+    },
+    {
+      "id": "FIS-3BGU-U1-009",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Campo gravitacional de un planeta",
+      "destreza": "CN.F.5.1.25",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "La Luna tiene una masa de 7,35 × 10²² kg y un radio de 1,74 × 10⁶ m. Con G = 6,67 × 10⁻¹¹ N·m²/kg², ¿cuánto vale la gravedad en su superficie?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "2 817 500,00 m/s²",
+          "error": "No elevó el radio al cuadrado."
+        },
+        {
+          "letra": "B",
+          "texto": "1,62 m/s²",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "4,90 × 10¹² m/s²",
+          "error": "Olvidó dividir para el radio al cuadrado."
+        },
+        {
+          "letra": "D",
+          "texto": "0,12 m/s²",
+          "error": "Escaló g terrestre solo con la masa e ignoró el radio."
+        },
+        {
+          "letra": "E",
+          "texto": "0,40 m/s²",
+          "error": "Usó el diámetro en lugar del radio."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "g = G·M/R² = 6,67 × 10⁻¹¹·7,35 × 10²²/(1 740 000,00)² ≈ 1,62 m/s² en la Luna. El peso cambia; la masa no."
+    },
+    {
+      "id": "FIS-3BGU-U1-010",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Gravitación universal",
+      "destreza": "CN.F.5.4.2",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "La masa de la Tierra es 5,97 × 10²⁴ kg, la de la Luna 7,35 × 10²² kg y su distancia media es 3,84 × 10⁵ km. ¿Con qué fuerza se atraen? (G = 6,67 × 10⁻¹¹ N·m²/kg²)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "7,62 × 10²⁸ N",
+          "error": "No elevó la distancia al cuadrado."
+        },
+        {
+          "letra": "B",
+          "texto": "1,98 × 10²⁰ N",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "2,73 × 10⁻³ N",
+          "error": "Sumó las masas en lugar de multiplicarlas."
+        },
+        {
+          "letra": "D",
+          "texto": "2,98 × 10³⁰ N",
+          "error": "Olvidó la constante G."
+        },
+        {
+          "letra": "E",
+          "texto": "1,98 × 10²⁶ N",
+          "error": "Dejó la distancia en kilómetros."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "F = G·M·m/d² con d = 3,84 × 10⁸ m: F ≈ 1,98 × 10²⁰ N. La Tierra atrae a la Luna con la misma fuerza con que la Luna atrae a la Tierra."
+    },
+    {
+      "id": "FIS-3BGU-U1-011",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Límites de la mecánica de Newton",
+      "destreza": "CN.F.5.1.21",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿En cuál de estas situaciones las leyes de Newton dejan de dar buenas predicciones?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Un balón pateado en un partido.",
+          "error": "Es un caso típico de aplicación de las leyes de Newton."
+        },
+        {
+          "letra": "B",
+          "texto": "Una partícula que viaja al 90 % de la rapidez de la luz.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Un bus que frena en la avenida.",
+          "error": "Es un objeto grande y lento: la mecánica newtoniana funciona muy bien."
+        },
+        {
+          "letra": "D",
+          "texto": "Un ascensor que sube con aceleración constante.",
+          "error": "Las leyes de Newton describen correctamente este caso."
+        },
+        {
+          "letra": "E",
+          "texto": "Un satélite en órbita a 400 km de altura.",
+          "error": "Aunque va rápido, su velocidad es pequeña frente a la de la luz."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Las leyes de Newton son aproximaciones excelentes para objetos grandes y lentos. Fallan cerca de la rapidez de la luz (relatividad) y a escala atómica (cuántica)."
+    },
+    {
+      "id": "FIS-3BGU-U1-012",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Límites de la mecánica de Newton",
+      "destreza": "CN.F.5.1.21",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un estudiante intenta describir el electrón de un átomo de hidrógeno como una pequeña bola que gira en una órbita fija, usando solo las leyes de Newton. ¿Por qué falla ese modelo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque el electrón viaja más rápido que la luz.",
+          "error": "Ninguna partícula con masa supera la rapidez de la luz."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque el electrón no tiene masa.",
+          "error": "El electrón sí tiene masa, aunque muy pequeña."
+        },
+        {
+          "letra": "C",
+          "texto": "Porque a escala atómica dominan los efectos cuánticos.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Porque la gravedad del núcleo es demasiado grande.",
+          "error": "A esa escala la gravedad es despreciable frente a la fuerza eléctrica."
+        },
+        {
+          "letra": "E",
+          "texto": "Porque la fuerza eléctrica no actúa a distancias pequeñas.",
+          "error": "La fuerza eléctrica sí actúa y es la que une el electrón al núcleo."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Para objetos del tamaño de un átomo, la mecánica clásica no basta: el comportamiento del electrón se describe con la mecánica cuántica."
+    },
+    {
+      "id": "FIS-3BGU-U1-013",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Primera ley de Kepler",
+      "destreza": "CN.F.5.4.1",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Kepler analizó los datos de Tycho Brahe sobre la posición de Marte. ¿Qué forma tienen las órbitas de los planetas según su primera ley?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Círculos con la Tierra en el centro.",
+          "error": "Corresponde al modelo geocéntrico."
+        },
+        {
+          "letra": "B",
+          "texto": "Circunferencias perfectas con el Sol en el centro.",
+          "error": "Repite el modelo anterior a Kepler, que no coincidía con los datos de Marte."
+        },
+        {
+          "letra": "C",
+          "texto": "Elipses, con el Sol en uno de sus focos.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Parábolas abiertas alrededor del Sol.",
+          "error": "Una órbita parabólica no es cerrada; los planetas regresan."
+        },
+        {
+          "letra": "E",
+          "texto": "Elipses, con el Sol en el centro.",
+          "error": "El Sol está en un foco, no en el centro de la elipse."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La primera ley de Kepler establece que los planetas describen elipses y el Sol ocupa uno de los focos."
+    },
+    {
+      "id": "FIS-3BGU-U1-014",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Segunda ley de Kepler",
+      "destreza": "CN.F.5.4.1",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Según la segunda ley de Kepler, ¿qué ocurre con la rapidez de la Tierra a lo largo de su órbita?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Depende de la estación del año en el Ecuador.",
+          "error": "Confunde las estaciones con la rapidez orbital."
+        },
+        {
+          "letra": "B",
+          "texto": "Es mayor cerca del Sol (perihelio) y menor lejos de él (afelio).",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Es constante en toda la órbita.",
+          "error": "Eso solo ocurriría en una órbita circular."
+        },
+        {
+          "letra": "D",
+          "texto": "Es cero en el afelio.",
+          "error": "La Tierra nunca se detiene en su órbita."
+        },
+        {
+          "letra": "E",
+          "texto": "Es mayor lejos del Sol, donde la órbita es más amplia.",
+          "error": "Invierte la relación."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "La línea Sol-planeta barre áreas iguales en tiempos iguales. Cerca del Sol, para barrer la misma área, el planeta debe moverse más rápido."
+    },
+    {
+      "id": "FIS-3BGU-U1-015",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Gravitación y la misión geodésica",
+      "destreza": "CN.F.5.4.2",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En el siglo XVIII, la misión geodésica francesa, con el apoyo de Pedro Vicente Maldonado, midió un arco de meridiano en territorio de la actual República del Ecuador. ¿Qué confirmó esa medición?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Que la gravedad es igual en todo el planeta.",
+          "error": "La forma achatada implica pequeñas diferencias de gravedad."
+        },
+        {
+          "letra": "B",
+          "texto": "Que la Tierra está achatada en los polos, como predecía la teoría de Newton.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Que la Tierra es una esfera perfecta.",
+          "error": "La medición mostró lo contrario: la Tierra no es perfectamente esférica."
+        },
+        {
+          "letra": "D",
+          "texto": "Que la Tierra está alargada en los polos.",
+          "error": "Esa era la hipótesis rival que la medición descartó."
+        },
+        {
+          "letra": "E",
+          "texto": "Que el Sol gira alrededor de la Tierra.",
+          "error": "La misión no estudió el movimiento del Sol."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Al comparar el arco medido cerca del ecuador con otro medido cerca del polo, se comprobó el achatamiento polar que se deducía de la gravitación de Newton."
+    },
+    {
+      "id": "FIS-3BGU-U1-016",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "La Luna y los satélites artificiales",
+      "destreza": "CN.F.5.6.3",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿En qué se parecen el movimiento de la Luna y el de un satélite artificial alrededor de la Tierra?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ambos están en caída libre continua hacia la Tierra mientras avanzan, y la gravedad es su fuerza centrípeta.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Ambos tienen el mismo periodo orbital.",
+          "error": "El periodo depende del radio de la órbita."
+        },
+        {
+          "letra": "C",
+          "texto": "Ambos flotan porque en el espacio no hay gravedad.",
+          "error": "La gravedad terrestre sí actúa y es la que los mantiene en órbita."
+        },
+        {
+          "letra": "D",
+          "texto": "Ambos necesitan motores encendidos para no caer.",
+          "error": "En órbita no se necesita propulsión continua."
+        },
+        {
+          "letra": "E",
+          "texto": "Ambos se mueven en línea recta a velocidad constante.",
+          "error": "Una órbita es curva: hay aceleración centrípeta."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La Luna y los satélites obedecen la misma ley de gravitación. Su velocidad tangencial hace que, aunque caen hacia la Tierra, nunca la alcancen."
+    },
+    {
+      "id": "FIS-3BGU-U1-017",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Sistema Solar: cinturón de Kuiper y nube de Oort",
+      "destreza": "CN.F.5.4.3",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Qué se encuentra en el cinturón de Kuiper y en la nube de Oort?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Solo polvo sin cuerpos sólidos.",
+          "error": "Contiene cuerpos sólidos helados de distintos tamaños."
+        },
+        {
+          "letra": "B",
+          "texto": "Las estrellas más cercanas al Sol.",
+          "error": "Están fuera del Sistema Solar."
+        },
+        {
+          "letra": "C",
+          "texto": "Los satélites artificiales en órbita.",
+          "error": "Los satélites artificiales están cerca de la Tierra."
+        },
+        {
+          "letra": "D",
+          "texto": "Los planetas gaseosos gigantes.",
+          "error": "Júpiter, Saturno, Urano y Neptuno están más cerca del Sol."
+        },
+        {
+          "letra": "E",
+          "texto": "Cuerpos helados como cometas y planetas enanos, en los límites del Sistema Solar.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Más allá de Neptuno está el cinturón de Kuiper, con planetas enanos como Plutón; mucho más lejos, la nube de Oort, de donde provienen muchos cometas."
+    },
+    {
+      "id": "FIS-3BGU-U1-018",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "La Vía Láctea",
+      "destreza": "CN.F.5.4.4",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Qué describe mejor la galaxia en la que se encuentra el Sistema Solar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Una galaxia esférica con el Sol en su centro.",
+          "error": "El Sol no está en el centro de la galaxia."
+        },
+        {
+          "letra": "B",
+          "texto": "El conjunto formado por el Sol y sus planetas.",
+          "error": "Confunde galaxia con Sistema Solar."
+        },
+        {
+          "letra": "C",
+          "texto": "Una galaxia espiral barrada en forma de disco, de unos 100 000 años luz de diámetro.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Una galaxia elíptica de 100 años luz.",
+          "error": "Confunde el tipo y subestima mucho su tamaño."
+        },
+        {
+          "letra": "E",
+          "texto": "Una nube de gas sin estrellas.",
+          "error": "La Vía Láctea contiene miles de millones de estrellas."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La Vía Láctea es una galaxia espiral barrada; el Sistema Solar está en uno de sus brazos, lejos del centro."
+    },
+    {
+      "id": "FIS-3BGU-U1-019",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Campo gravitacional",
+      "destreza": "CN.F.5.4.2",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "La ley de Newton plantea que la Tierra atrae a la Luna sin tocarla. ¿Qué concepto se usa para explicar esa acción a distancia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El aire que hay entre la Tierra y la Luna.",
+          "error": "Entre ambas hay casi vacío; el aire no transmite la gravedad."
+        },
+        {
+          "letra": "B",
+          "texto": "La luz del Sol que empuja a la Luna.",
+          "error": "La presión de la luz es despreciable y no explica la órbita."
+        },
+        {
+          "letra": "C",
+          "texto": "El magnetismo terrestre.",
+          "error": "El campo magnético no explica la atracción entre masas."
+        },
+        {
+          "letra": "D",
+          "texto": "El campo gravitacional que cada masa crea en el espacio que la rodea.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "La fuerza centrífuga de la Luna.",
+          "error": "Es una fuerza ficticia y no explica la atracción."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Cada masa modifica el espacio a su alrededor creando un campo gravitacional; otra masa en ese campo siente una fuerza."
+    },
+    {
+      "id": "FIS-3BGU-U1-020",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Satélites y velocidad orbital",
+      "destreza": "CN.F.5.6.3",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "FIS-3BGU-L1",
+      "enunciado": "Con los datos de la lectura, ¿cuál es la rapidez orbital aproximada de un satélite geoestacionario?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "3 067 m/s",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "488 m/s",
+          "error": "Dividió el radio para el periodo, sin multiplicar por 2π."
+        },
+        {
+          "letra": "C",
+          "texto": "2 603 m/s",
+          "error": "Usó la altura como radio de la órbita, sin sumar el radio terrestre."
+        },
+        {
+          "letra": "D",
+          "texto": "463 m/s",
+          "error": "Usó solo el radio terrestre: esa es la rapidez de un punto del ecuador."
+        },
+        {
+          "letra": "E",
+          "texto": "1 × 10⁷ m/s",
+          "error": "Dejó el periodo en horas."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "r = 6,37 × 10⁶ + 3,58 × 10⁷ ≈ 4,22 × 10⁷ m. v = 2π·r/T = 2π·4,22 × 10⁷/86 400 ≈ 3 067 m/s."
+    },
+    {
+      "id": "FIS-3BGU-U1-021",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 1,
+      "tema": "Satélites y velocidad orbital",
+      "destreza": "CN.F.5.6.3",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-3BGU-L1",
+      "enunciado": "Según la lectura, ¿por qué un satélite geoestacionario parece quieto en el cielo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque a esa altura no hay gravedad.",
+          "error": "La gravedad terrestre sí actúa y lo mantiene en órbita."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque su periodo orbital es igual al periodo de rotación de la Tierra y gira en el mismo sentido.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Porque gira más rápido que la Tierra.",
+          "error": "Si girara más rápido, se vería avanzar en el cielo."
+        },
+        {
+          "letra": "D",
+          "texto": "Porque está sobre el polo norte.",
+          "error": "La lectura dice que orbita sobre la línea ecuatorial."
+        },
+        {
+          "letra": "E",
+          "texto": "Porque está detenido en el espacio.",
+          "error": "Si estuviera quieto, caería hacia la Tierra."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Al dar una vuelta cada 24 horas sobre el ecuador, el satélite acompaña la rotación terrestre y mantiene su posición respecto al suelo."
+    },
+    {
+      "id": "FIS-3BGU-U2-001",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Velocidad de propagación de una onda",
+      "destreza": "CN.F.5.3.2",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Una onda sonora de 440 Hz tiene una longitud de onda de 0,78 m en el aire. ¿Con qué rapidez se propaga?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "564,10 m/s",
+          "error": "Dividió la frecuencia para la longitud de onda."
+        },
+        {
+          "letra": "B",
+          "texto": "0,0018 m/s",
+          "error": "Dividió la longitud de onda para la frecuencia."
+        },
+        {
+          "letra": "C",
+          "texto": "343,20 m/s",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "54,62 m/s",
+          "error": "Dividió para 2π, confundiendo f con ω."
+        },
+        {
+          "letra": "E",
+          "texto": "440,78 m/s",
+          "error": "Sumó las magnitudes en lugar de multiplicarlas."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "v = λ·f = 0,78·440 = 343,20 m/s."
+    },
+    {
+      "id": "FIS-3BGU-U2-002",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Velocidad de propagación de una onda",
+      "destreza": "CN.F.5.3.2",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "En una cuerda, una onda tiene longitud de onda de 0,5 m y frecuencia de 60 Hz. ¿Con qué rapidez se propaga?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "120,00 m/s",
+          "error": "Dividió la frecuencia para la longitud de onda."
+        },
+        {
+          "letra": "B",
+          "texto": "60,50 m/s",
+          "error": "Sumó las magnitudes en lugar de multiplicarlas."
+        },
+        {
+          "letra": "C",
+          "texto": "30,00 m/s",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "0,0083 m/s",
+          "error": "Dividió la longitud de onda para la frecuencia."
+        },
+        {
+          "letra": "E",
+          "texto": "4,77 m/s",
+          "error": "Dividió para 2π, confundiendo f con ω."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "v = λ·f = 0,50·60 = 30,00 m/s."
+    },
+    {
+      "id": "FIS-3BGU-U2-003",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Longitud de onda",
+      "destreza": "CN.F.5.3.2",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una radio FM transmite a 100 MHz. Las ondas electromagnéticas viajan a 3 × 10⁸ m/s. ¿Cuál es la longitud de onda?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "3 000 000,00 m",
+          "error": "No convirtió los MHz a Hz."
+        },
+        {
+          "letra": "B",
+          "texto": "0,33 m",
+          "error": "Dividió la frecuencia para la rapidez."
+        },
+        {
+          "letra": "C",
+          "texto": "3,00 m",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "1,50 m",
+          "error": "Dividió para el doble de la frecuencia."
+        },
+        {
+          "letra": "E",
+          "texto": "3,00 × 10¹⁶ m",
+          "error": "Multiplicó la rapidez por la frecuencia."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La frecuencia debe estar en Hz: λ = v/f = 3 × 10⁸/1 × 10⁸ = 3,00 m."
+    },
+    {
+      "id": "FIS-3BGU-U2-004",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Longitud de onda",
+      "destreza": "CN.F.5.3.2",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un parlante emite un sonido de 1,7 kHz en un aire donde el sonido viaja a 340 m/s. ¿Cuál es la longitud de onda?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "200,00 m",
+          "error": "No convirtió los kHz a Hz."
+        },
+        {
+          "letra": "B",
+          "texto": "578 000,00 m",
+          "error": "Multiplicó la rapidez por la frecuencia."
+        },
+        {
+          "letra": "C",
+          "texto": "0,20 m",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "5,00 m",
+          "error": "Dividió la frecuencia para la rapidez."
+        },
+        {
+          "letra": "E",
+          "texto": "0,10 m",
+          "error": "Dividió para el doble de la frecuencia."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La frecuencia debe estar en Hz: λ = v/f = 340/1 700 = 0,20 m."
+    },
+    {
+      "id": "FIS-3BGU-U2-005",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Elementos de una onda",
+      "destreza": "CN.F.5.3.1",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Una boya en el mar sube y baja 30 veces en 6 minutos por el paso de las olas. ¿Cuál es el periodo de las olas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "12 s",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "0,08 s",
+          "error": "Calculó la frecuencia en oscilaciones por segundo."
+        },
+        {
+          "letra": "C",
+          "texto": "0,20 s",
+          "error": "Dividió 6 para 30 sin convertir los minutos."
+        },
+        {
+          "letra": "D",
+          "texto": "180 s",
+          "error": "Multiplicó el número de oscilaciones por el tiempo."
+        },
+        {
+          "letra": "E",
+          "texto": "5 s",
+          "error": "Dividió 30 para 6 y lo tomó como periodo en segundos."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "t = 6 min = 360 s. T = t/n = 360/30 = 12 s. La frecuencia es f = 1/T ≈ 0,083 Hz."
+    },
+    {
+      "id": "FIS-3BGU-U2-006",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Efecto Doppler",
+      "destreza": "CN.F.5.3.5",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Una ambulancia con sirena de 700 Hz se acerca a un peatón a 72 km/h. Si el sonido viaja a 340 m/s y el observador está quieto, ¿qué frecuencia percibe?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "720,00 Hz",
+          "error": "Sumó o restó la velocidad directamente a la frecuencia."
+        },
+        {
+          "letra": "B",
+          "texto": "661,11 Hz",
+          "error": "Usó el signo contrario: confundió acercamiento con alejamiento."
+        },
+        {
+          "letra": "C",
+          "texto": "700,00 Hz",
+          "error": "Supuso que la frecuencia percibida no cambia."
+        },
+        {
+          "letra": "D",
+          "texto": "743,75 Hz",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "888,06 Hz",
+          "error": "No convirtió la velocidad de la fuente de km/h a m/s."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "v_f = 72/3,6 = 20 m/s. f' = f·v/(v − v_f) = 700·340/320 ≈ 743,75 Hz. Al acercarse, el sonido se percibe más agudo."
+    },
+    {
+      "id": "FIS-3BGU-U2-007",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Efecto Doppler",
+      "destreza": "CN.F.5.3.5",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un tren con una bocina de 500 Hz se aleja de una estación a 108 km/h. Si el sonido viaja a 340 m/s y el observador está quieto, ¿qué frecuencia percibe?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "379,46 Hz",
+          "error": "No convirtió la velocidad de la fuente de km/h a m/s."
+        },
+        {
+          "letra": "B",
+          "texto": "470,00 Hz",
+          "error": "Sumó o restó la velocidad directamente a la frecuencia."
+        },
+        {
+          "letra": "C",
+          "texto": "459,46 Hz",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "500,00 Hz",
+          "error": "Supuso que la frecuencia percibida no cambia."
+        },
+        {
+          "letra": "E",
+          "texto": "548,39 Hz",
+          "error": "Usó el signo contrario: confundió acercamiento con alejamiento."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "v_f = 108/3,6 = 30 m/s. f' = f·v/(v + v_f) = 500·340/370 ≈ 459,46 Hz. Al alejarse, el sonido se percibe más grave."
+    },
+    {
+      "id": "FIS-3BGU-U2-008",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Refracción: ley de Snell",
+      "destreza": "CN.F.5.3.4",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un rayo de luz pasa del aire (n = 1,00) al agua (n = 1,33) con un ángulo de incidencia de 45°. ¿Cuál es el ángulo de refracción medido desde la normal?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "70,13 °",
+          "error": "Intercambió los índices de refracción."
+        },
+        {
+          "letra": "B",
+          "texto": "45,00 °",
+          "error": "Supuso que la luz no se desvía."
+        },
+        {
+          "letra": "C",
+          "texto": "32,12 °",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "57,88 °",
+          "error": "Midió el ángulo desde la superficie y no desde la normal."
+        },
+        {
+          "letra": "E",
+          "texto": "33,83 °",
+          "error": "Dividió el ángulo para el índice de refracción, en lugar de su seno."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "n1·sen θ1 = n2·sen θ2 ⇒ sen θ2 = 1,00·sen 45°/1,33 ≈ 0,532. θ2 ≈ 32,12°."
+    },
+    {
+      "id": "FIS-3BGU-U2-009",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Refracción: ley de Snell",
+      "destreza": "CN.F.5.3.4",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un rayo de luz sale del agua (n = 1,33) al aire (n = 1,00) con un ángulo de incidencia de 30°. ¿Cuál es el ángulo de refracción medido desde la normal?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "22,08 °",
+          "error": "Intercambió los índices de refracción."
+        },
+        {
+          "letra": "B",
+          "texto": "48,32 °",
+          "error": "Midió el ángulo desde la superficie y no desde la normal."
+        },
+        {
+          "letra": "C",
+          "texto": "39,90 °",
+          "error": "Multiplicó el ángulo por el índice de refracción, en lugar de su seno."
+        },
+        {
+          "letra": "D",
+          "texto": "30,00 °",
+          "error": "Supuso que la luz no se desvía."
+        },
+        {
+          "letra": "E",
+          "texto": "41,68 °",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "n1·sen θ1 = n2·sen θ2 ⇒ sen θ2 = 1,33·sen 30°/1,00 ≈ 0,665. θ2 ≈ 41,68°."
+    },
+    {
+      "id": "FIS-3BGU-U2-010",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "MAS: velocidad en función de la posición",
+      "destreza": "CN.F.5.1.34",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un oscilador en MAS tiene amplitud de 10 cm y frecuencia angular de 4 rad/s. ¿Qué rapidez tiene cuando está a 6 cm de la posición de equilibrio?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,40 m/s",
+          "error": "Calculó la rapidez máxima, que solo ocurre en el equilibrio."
+        },
+        {
+          "letra": "B",
+          "texto": "0,32 m/s",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "0,16 m/s",
+          "error": "Restó las posiciones sin usar la raíz de la diferencia de cuadrados."
+        },
+        {
+          "letra": "D",
+          "texto": "0,24 m/s",
+          "error": "Multiplicó ω por la posición."
+        },
+        {
+          "letra": "E",
+          "texto": "0,47 m/s",
+          "error": "Sumó los cuadrados en lugar de restarlos."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "v = ω·√(A² − x²) = 4·√(0,10² − 0,06²) = 4·0,08 = 0,32 m/s."
+    },
+    {
+      "id": "FIS-3BGU-U2-011",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Reflexión: eco",
+      "destreza": "CN.F.5.3.4",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "El sonar de un barco pesquero emite un pulso en el mar, donde el sonido viaja a 1 500 m/s, y recibe el eco 2 s después. ¿A qué profundidad está el fondo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "750 m",
+          "error": "Dividió para 2 dos veces."
+        },
+        {
+          "letra": "B",
+          "texto": "680 m",
+          "error": "Usó la rapidez del sonido en el aire (340 m/s)."
+        },
+        {
+          "letra": "C",
+          "texto": "0,75 m",
+          "error": "Dividió el tiempo para la rapidez."
+        },
+        {
+          "letra": "D",
+          "texto": "3 000 m",
+          "error": "No dividió para 2: el sonido recorre ida y vuelta."
+        },
+        {
+          "letra": "E",
+          "texto": "1 500 m",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "El pulso va y regresa: d = v·t/2 = 1 500·2/2 = 1 500 m."
+    },
+    {
+      "id": "FIS-3BGU-U2-012",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Tipos de ondas",
+      "destreza": "CN.F.5.3.3",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Por qué los astronautas no pueden escuchar una explosión en el espacio, pero sí ver su luz?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En el espacio hace demasiado frío para el sonido.",
+          "error": "La temperatura no es la causa; falta el medio."
+        },
+        {
+          "letra": "B",
+          "texto": "El sonido viaja más rápido que la luz en el espacio.",
+          "error": "El sonido no viaja en el vacío."
+        },
+        {
+          "letra": "C",
+          "texto": "La luz es una onda mecánica y el sonido no.",
+          "error": "Invierte la clasificación."
+        },
+        {
+          "letra": "D",
+          "texto": "Los cascos bloquean todas las ondas.",
+          "error": "Los cascos no impiden ver la luz."
+        },
+        {
+          "letra": "E",
+          "texto": "El sonido es una onda mecánica y necesita un medio; la luz es electromagnética y viaja en el vacío.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Las ondas mecánicas (como el sonido) necesitan un medio elástico. La única onda no mecánica conocida es la electromagnética."
+    },
+    {
+      "id": "FIS-3BGU-U2-013",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Ondas longitudinales y transversales",
+      "destreza": "CN.F.5.3.3",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En una onda sonora, las moléculas del aire oscilan en la misma dirección en que avanza la onda. ¿Qué tipo de onda es?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Electromagnética.",
+          "error": "El sonido es una onda mecánica."
+        },
+        {
+          "letra": "B",
+          "texto": "Superficial.",
+          "error": "Las ondas superficiales combinan movimientos; no es el caso del sonido en el aire."
+        },
+        {
+          "letra": "C",
+          "texto": "Longitudinal.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Transversal.",
+          "error": "En una transversal la oscilación es perpendicular a la propagación."
+        },
+        {
+          "letra": "E",
+          "texto": "Estacionaria.",
+          "error": "Describe un patrón de interferencia, no la dirección de oscilación."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Cuando la oscilación es paralela a la dirección de propagación, la onda es longitudinal, como el sonido."
+    },
+    {
+      "id": "FIS-3BGU-U2-014",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Refracción y frecuencia",
+      "destreza": "CN.F.5.3.2",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Cuando la luz pasa del aire al vidrio, ¿qué magnitud permanece constante?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El índice de refracción.",
+          "error": "Es una propiedad de cada medio y cambia de uno a otro."
+        },
+        {
+          "letra": "B",
+          "texto": "La frecuencia.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "La dirección de propagación.",
+          "error": "Si incide oblicuamente, la luz se desvía."
+        },
+        {
+          "letra": "D",
+          "texto": "La longitud de onda.",
+          "error": "La longitud de onda cambia junto con la rapidez."
+        },
+        {
+          "letra": "E",
+          "texto": "La rapidez.",
+          "error": "La rapidez disminuye en el vidrio."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "La frecuencia la fija la fuente. Al cambiar de medio cambian la rapidez y la longitud de onda, de modo que v = λ·f."
+    },
+    {
+      "id": "FIS-3BGU-U2-015",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Efecto Doppler",
+      "destreza": "CN.F.5.3.5",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Mientras un patrullero con la sirena encendida pasa junto a ti, escuchas que el tono cambia. ¿Cómo cambia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Solo aumenta el volumen; el tono no cambia.",
+          "error": "Confunde intensidad con frecuencia."
+        },
+        {
+          "letra": "B",
+          "texto": "Se vuelve más agudo en ambos casos.",
+          "error": "No distingue acercamiento de alejamiento."
+        },
+        {
+          "letra": "C",
+          "texto": "Más agudo mientras se acerca y más grave cuando se aleja.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "El tono cambia porque la sirena cambia su frecuencia.",
+          "error": "La fuente emite siempre la misma frecuencia."
+        },
+        {
+          "letra": "E",
+          "texto": "Más grave mientras se acerca y más agudo cuando se aleja.",
+          "error": "Invierte el efecto Doppler."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Al acercarse, los frentes de onda se comprimen y la frecuencia percibida aumenta; al alejarse, se separan y disminuye."
+    },
+    {
+      "id": "FIS-3BGU-U2-016",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Rapidez del sonido en distintos medios",
+      "destreza": "CN.F.5.3.2",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En una película antigua, alguien pega el oído a los rieles del tren para saber si se acerca. ¿Qué principio lo justifica?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El sonido viaja más rápido en los sólidos que en el aire.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "En los sólidos el sonido es una onda electromagnética.",
+          "error": "El sonido es siempre una onda mecánica."
+        },
+        {
+          "letra": "C",
+          "texto": "El sonido viaja más rápido en el aire que en los sólidos.",
+          "error": "Invierte la relación."
+        },
+        {
+          "letra": "D",
+          "texto": "Los rieles amplifican la frecuencia del sonido.",
+          "error": "El medio no cambia la frecuencia."
+        },
+        {
+          "letra": "E",
+          "texto": "El metal produce su propio sonido.",
+          "error": "El riel transmite el sonido del tren, no lo genera."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La rapidez de las ondas depende del medio. En el acero el sonido viaja varias veces más rápido que en el aire."
+    },
+    {
+      "id": "FIS-3BGU-U2-017",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Espejos y formación de imágenes",
+      "destreza": "CN.F.5.3.4",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Al mirarte en un espejo plano de la casa, ¿cómo es tu imagen?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Real e invertida verticalmente.",
+          "error": "Un espejo plano no invierte de arriba abajo."
+        },
+        {
+          "letra": "B",
+          "texto": "Virtual y del doble de tamaño.",
+          "error": "Un espejo plano no aumenta la imagen."
+        },
+        {
+          "letra": "C",
+          "texto": "Virtual, del mismo tamaño y a la misma distancia detrás del espejo.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Real y proyectable en una pantalla.",
+          "error": "Una imagen virtual no puede proyectarse."
+        },
+        {
+          "letra": "E",
+          "texto": "Virtual y en la superficie del espejo.",
+          "error": "La imagen parece estar detrás del espejo."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Con el modelo de rayos, los rayos reflejados parecen venir de un punto detrás del espejo: la imagen es virtual, derecha y del mismo tamaño."
+    },
+    {
+      "id": "FIS-3BGU-U2-018",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Energía de una onda",
+      "destreza": "CN.F.5.3.1",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Dos olas tienen la misma frecuencia, pero una tiene el doble de amplitud que la otra. ¿Cuál transporta más energía?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La de mayor amplitud.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Depende solo de la longitud de onda.",
+          "error": "Ignora el papel de la amplitud."
+        },
+        {
+          "letra": "C",
+          "texto": "La de menor amplitud, porque viaja más rápido.",
+          "error": "La rapidez depende del medio, no de la amplitud."
+        },
+        {
+          "letra": "D",
+          "texto": "La de menor amplitud, porque es más estable.",
+          "error": "Invierte la relación."
+        },
+        {
+          "letra": "E",
+          "texto": "Ambas transportan la misma energía.",
+          "error": "La energía depende también de la amplitud."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La energía que transporta una onda aumenta con su amplitud (es proporcional al cuadrado de la amplitud)."
+    },
+    {
+      "id": "FIS-3BGU-U2-019",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Velocidad de propagación de una onda",
+      "destreza": "CN.F.5.3.2",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Desde el muelle se observa que las olas tienen una longitud de onda de 12 m y que pasa una cresta cada 4 s. ¿Con qué rapidez avanzan las olas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "12,00 m/s",
+          "error": "Dio la longitud de onda como rapidez."
+        },
+        {
+          "letra": "B",
+          "texto": "3,00 m/s",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "48,00 m/s",
+          "error": "Multiplicó la longitud de onda por el periodo."
+        },
+        {
+          "letra": "D",
+          "texto": "0,33 m/s",
+          "error": "Dividió el periodo para la longitud de onda."
+        },
+        {
+          "letra": "E",
+          "texto": "0,75 m/s",
+          "error": "Dividió para el cuadrado del periodo."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "El periodo es T = 4 s, así que f = 1/T = 0,25 Hz. v = λ/T = λ·f = 12/4 = 3 m/s."
+    },
+    {
+      "id": "FIS-3BGU-U2-020",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Reflexión: eco",
+      "destreza": "CN.F.5.3.4",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-3BGU-L2",
+      "enunciado": "Según la lectura, ¿a qué profundidad está el fondo en la medición descrita?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "13,6 m",
+          "error": "Usó la rapidez del sonido en el aire."
+        },
+        {
+          "letra": "B",
+          "texto": "30 m",
+          "error": "Dividió para 4 en lugar de 2."
+        },
+        {
+          "letra": "C",
+          "texto": "4 000 m",
+          "error": "Multiplicó la frecuencia por el tiempo."
+        },
+        {
+          "letra": "D",
+          "texto": "60 m",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "120 m",
+          "error": "No dividió para 2: el pulso recorre ida y vuelta."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "d = v·t/2 = 1 500·0,08/2 = 60 m."
+    },
+    {
+      "id": "FIS-3BGU-U2-021",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 2,
+      "tema": "Longitud de onda",
+      "destreza": "CN.F.5.3.2",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-3BGU-L2",
+      "enunciado": "¿Cuál es la longitud de onda del ultrasonido del sonar descrito en la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,03 m",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "33,33 m",
+          "error": "Dividió la frecuencia para la rapidez."
+        },
+        {
+          "letra": "C",
+          "texto": "0,0068 m",
+          "error": "Usó la rapidez del sonido en el aire."
+        },
+        {
+          "letra": "D",
+          "texto": "75 000 000 m",
+          "error": "Multiplicó la rapidez por la frecuencia."
+        },
+        {
+          "letra": "E",
+          "texto": "30 m",
+          "error": "No convirtió los kHz a Hz."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "f = 50 kHz = 50 000 Hz. λ = v/f = 1 500/50 000 = 0,03 m = 3 cm."
+    },
+    {
+      "id": "FIS-3BGU-U3-001",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Campo eléctrico de una carga puntual",
+      "destreza": "CN.F.5.1.45",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una carga puntual de 4 μC está en el aire. Con k = 9 × 10⁹ N·m²/C², ¿cuál es la intensidad del campo eléctrico a 20 cm de ella?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "180 000,00 N/C",
+          "error": "No elevó la distancia al cuadrado."
+        },
+        {
+          "letra": "B",
+          "texto": "1,00 × 10⁻⁴ N/C",
+          "error": "Olvidó la constante k."
+        },
+        {
+          "letra": "C",
+          "texto": "900 000,00 N/C",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "90,00 N/C",
+          "error": "No convirtió la distancia a metros."
+        },
+        {
+          "letra": "E",
+          "texto": "9,00 × 10⁸ N/C",
+          "error": "Usó un prefijo mil veces mayor que μC."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "E = k·q/r² = 9 × 10⁹·4 × 10⁻⁶/(0,20)² ≈ 900 000,00 N/C."
+    },
+    {
+      "id": "FIS-3BGU-U3-002",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Campo eléctrico de una carga puntual",
+      "destreza": "CN.F.5.1.45",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una carga puntual de 2 nC está en el aire. Con k = 9 × 10⁹ N·m²/C², ¿cuál es la intensidad del campo eléctrico a 3 cm de ella?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "2,00 × 10⁷ N/C",
+          "error": "Usó un prefijo mil veces mayor que nC."
+        },
+        {
+          "letra": "B",
+          "texto": "20 000,00 N/C",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "600,00 N/C",
+          "error": "No elevó la distancia al cuadrado."
+        },
+        {
+          "letra": "D",
+          "texto": "2,00 N/C",
+          "error": "No convirtió la distancia a metros."
+        },
+        {
+          "letra": "E",
+          "texto": "2,22 × 10⁻⁶ N/C",
+          "error": "Olvidó la constante k."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "E = k·q/r² = 9 × 10⁹·2 × 10⁻⁹/(0,03)² ≈ 20 000,00 N/C."
+    },
+    {
+      "id": "FIS-3BGU-U3-003",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Fuerza sobre una carga en un campo eléctrico",
+      "destreza": "CN.F.5.1.45",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un electrón (q = 1,6 × 10⁻¹⁹ C) está en un campo eléctrico uniforme de 500 N/C. ¿Qué fuerza eléctrica actúa sobre ella?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "8,00 × 10⁻¹⁷ N",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "4,00 × 10⁻¹⁴ N",
+          "error": "Elevó el campo al cuadrado."
+        },
+        {
+          "letra": "C",
+          "texto": "500,00 N",
+          "error": "Olvidó multiplicar por la carga."
+        },
+        {
+          "letra": "D",
+          "texto": "3,20 × 10⁻²² N",
+          "error": "Dividió la carga para el campo."
+        },
+        {
+          "letra": "E",
+          "texto": "3,13 × 10²¹ N",
+          "error": "Dividió el campo para la carga."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "F = q·E = 1,60 × 10⁻¹⁹ C·500 N/C = 8,00 × 10⁻¹⁷ N."
+    },
+    {
+      "id": "FIS-3BGU-U3-004",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Fuerza sobre una carga en un campo eléctrico",
+      "destreza": "CN.F.5.1.45",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Una carga de 3 μC se coloca en un campo eléctrico de 2 000 N/C. ¿Qué fuerza eléctrica actúa sobre ella?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,50 × 10⁻⁹ N",
+          "error": "Dividió la carga para el campo."
+        },
+        {
+          "letra": "B",
+          "texto": "12,00 N",
+          "error": "Elevó el campo al cuadrado."
+        },
+        {
+          "letra": "C",
+          "texto": "6,67 × 10⁸ N",
+          "error": "Dividió el campo para la carga."
+        },
+        {
+          "letra": "D",
+          "texto": "6,00 × 10⁻³ N",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "2 000,00 N",
+          "error": "Olvidó multiplicar por la carga."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "F = q·E = 3,00 × 10⁻⁶ C·2000 N/C = 6,00 × 10⁻³ N."
+    },
+    {
+      "id": "FIS-3BGU-U3-005",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Potencial eléctrico y trabajo",
+      "destreza": "CN.F.5.1.46",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Se traslada una carga de 2 μC entre dos puntos con una diferencia de potencial de 12 V. ¿Cuánto trabajo eléctrico interviene?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "2,40 × 10⁻⁵ J",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "12,00 J",
+          "error": "Olvidó multiplicar por la carga."
+        },
+        {
+          "letra": "C",
+          "texto": "2,88 × 10⁻⁴ J",
+          "error": "Elevó el voltaje al cuadrado."
+        },
+        {
+          "letra": "D",
+          "texto": "1,67 × 10⁻⁷ J",
+          "error": "Dividió la carga para el voltaje."
+        },
+        {
+          "letra": "E",
+          "texto": "6 000 000,00 J",
+          "error": "Dividió el voltaje para la carga."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "W = q·ΔV = 2,00 × 10⁻⁶ C·12 V = 2,40 × 10⁻⁵ J. El voltio es joule por coulomb."
+    },
+    {
+      "id": "FIS-3BGU-U3-006",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Potencial eléctrico y trabajo",
+      "destreza": "CN.F.5.1.46",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un electrón (q = 1,6 × 10⁻¹⁹ C) se acelera a través de una diferencia de potencial de 100 V. ¿Cuánto trabajo eléctrico interviene?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "100,00 J",
+          "error": "Olvidó multiplicar por la carga."
+        },
+        {
+          "letra": "B",
+          "texto": "1,60 × 10⁻²¹ J",
+          "error": "Dividió la carga para el voltaje."
+        },
+        {
+          "letra": "C",
+          "texto": "6,25 × 10²⁰ J",
+          "error": "Dividió el voltaje para la carga."
+        },
+        {
+          "letra": "D",
+          "texto": "1,60 × 10⁻¹⁷ J",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "1,60 × 10⁻¹⁵ J",
+          "error": "Elevó el voltaje al cuadrado."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "W = q·ΔV = 1,60 × 10⁻¹⁹ C·100 V = 1,60 × 10⁻¹⁷ J. El voltio es joule por coulomb."
+    },
+    {
+      "id": "FIS-3BGU-U3-007",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Campo magnético de un conductor rectilíneo",
+      "destreza": "CN.F.5.1.56",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un cable largo y recto lleva una corriente de 10 A. Con μ0 = 4π × 10⁻⁷ T·m/A, ¿cuál es el campo magnético a 5 cm del cable?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "4,00 × 10⁻⁵ T",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "4,00 × 10⁻⁷ T",
+          "error": "No convirtió la distancia a metros."
+        },
+        {
+          "letra": "C",
+          "texto": "3,95 × 10⁻⁶ T",
+          "error": "Multiplicó por 2πr en lugar de dividir."
+        },
+        {
+          "letra": "D",
+          "texto": "2,51 × 10⁻⁴ T",
+          "error": "Olvidó el factor 2π del denominador."
+        },
+        {
+          "letra": "E",
+          "texto": "1,26 × 10⁻⁴ T",
+          "error": "Olvidó π en el denominador."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "B = μ0·I/(2π·r) = 4π × 10⁻⁷·10/(2π·0,05) = 4,00 × 10⁻⁵ T."
+    },
+    {
+      "id": "FIS-3BGU-U3-008",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Campo magnético de un conductor rectilíneo",
+      "destreza": "CN.F.5.1.56",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un conductor rectilíneo largo transporta 3 A. Con μ0 = 4π × 10⁻⁷ T·m/A, ¿cuál es el campo magnético a 2 cm del cable?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,88 × 10⁻⁴ T",
+          "error": "Olvidó el factor 2π del denominador."
+        },
+        {
+          "letra": "B",
+          "texto": "9,42 × 10⁻⁵ T",
+          "error": "Olvidó π en el denominador."
+        },
+        {
+          "letra": "C",
+          "texto": "4,74 × 10⁻⁷ T",
+          "error": "Multiplicó por 2πr en lugar de dividir."
+        },
+        {
+          "letra": "D",
+          "texto": "3,00 × 10⁻⁷ T",
+          "error": "No convirtió la distancia a metros."
+        },
+        {
+          "letra": "E",
+          "texto": "3,00 × 10⁻⁵ T",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "B = μ0·I/(2π·r) = 4π × 10⁻⁷·3/(2π·0,02) = 3,00 × 10⁻⁵ T."
+    },
+    {
+      "id": "FIS-3BGU-U3-009",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Fuerza magnética sobre una carga",
+      "destreza": "CN.F.5.1.54",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un protón (q = 1,6 × 10⁻¹⁹ C) entra con 2 × 10⁶ m/s perpendicular a un campo magnético de 0,5 T. ¿Qué fuerza magnética actúa sobre la partícula?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "6,40 × 10⁻¹³ N",
+          "error": "Dividió para el campo en lugar de multiplicar."
+        },
+        {
+          "letra": "B",
+          "texto": "1,60 × 10⁻¹³ N",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "8,00 × 10⁻¹⁴ N",
+          "error": "Elevó el campo al cuadrado."
+        },
+        {
+          "letra": "D",
+          "texto": "9,80 × 10⁻³⁰ N",
+          "error": "Usó coseno en lugar de seno del ángulo."
+        },
+        {
+          "letra": "E",
+          "texto": "1 000 000,00 N",
+          "error": "Olvidó multiplicar por la carga."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "F = |q|·v·B·sen θ = 1,6 × 10⁻¹⁹·2 000 000·0,50·sen 90° = 1,60 × 10⁻¹³ N."
+    },
+    {
+      "id": "FIS-3BGU-U3-010",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Fuerza magnética sobre una carga",
+      "destreza": "CN.F.5.1.54",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un electrón (|q| = 1,6 × 10⁻¹⁹ C) se mueve a 3 × 10⁶ m/s formando 30° con un campo magnético de 0,02 T. ¿Qué fuerza magnética actúa sobre la partícula?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "8,31 × 10⁻¹⁵ N",
+          "error": "Usó coseno en lugar de seno del ángulo."
+        },
+        {
+          "letra": "B",
+          "texto": "9,60 × 10⁻¹⁵ N",
+          "error": "Ignoró el ángulo entre la velocidad y el campo."
+        },
+        {
+          "letra": "C",
+          "texto": "2,40 × 10⁻¹¹ N",
+          "error": "Dividió para el campo en lugar de multiplicar."
+        },
+        {
+          "letra": "D",
+          "texto": "30 000,00 N",
+          "error": "Olvidó multiplicar por la carga."
+        },
+        {
+          "letra": "E",
+          "texto": "4,80 × 10⁻¹⁵ N",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "F = |q|·v·B·sen θ = 1,6 × 10⁻¹⁹·3 000 000·0,02·sen 30° = 4,80 × 10⁻¹⁵ N."
+    },
+    {
+      "id": "FIS-3BGU-U3-011",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Fuerza sobre un conductor: motor eléctrico",
+      "destreza": "CN.F.5.1.55",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Dentro de un motor, un tramo de alambre de 20 cm lleva 5 A perpendicular a un campo magnético de 0,4 T. ¿Qué fuerza actúa sobre el alambre?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "10,00 N",
+          "error": "Dividió para la longitud en lugar de multiplicar."
+        },
+        {
+          "letra": "B",
+          "texto": "40,00 N",
+          "error": "No convirtió la longitud a metros."
+        },
+        {
+          "letra": "C",
+          "texto": "1,00 N",
+          "error": "Olvidó multiplicar por el campo magnético."
+        },
+        {
+          "letra": "D",
+          "texto": "0,02 N",
+          "error": "Dividió la longitud para la corriente."
+        },
+        {
+          "letra": "E",
+          "texto": "0,40 N",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "F = B·I·L = 0,4·5·0,20 = 0,40 N. Esta fuerza es la que hace girar la bobina del motor."
+    },
+    {
+      "id": "FIS-3BGU-U3-012",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Líneas de campo eléctrico",
+      "destreza": "CN.F.5.1.45",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Cómo se dibujan las líneas de campo eléctrico entre una carga positiva y una negativa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Son paralelas y nunca tocan las cargas.",
+          "error": "Las líneas nacen y terminan en las cargas."
+        },
+        {
+          "letra": "B",
+          "texto": "Se cruzan en el punto medio entre las cargas.",
+          "error": "Las líneas de campo nunca se cruzan."
+        },
+        {
+          "letra": "C",
+          "texto": "Salen de la carga negativa y entran en la positiva.",
+          "error": "Invierte la convención."
+        },
+        {
+          "letra": "D",
+          "texto": "Salen de la carga positiva y entran en la negativa.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Forman círculos cerrados alrededor de cada carga.",
+          "error": "Confunde con las líneas de campo magnético de un cable."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Por convención, el campo apunta hacia donde se movería una carga positiva de prueba: sale de las positivas y llega a las negativas."
+    },
+    {
+      "id": "FIS-3BGU-U3-013",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Conductores, semiconductores y aislantes",
+      "destreza": "CN.F.5.1.39",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "El silicio de los chips de un celular conduce la corriente mejor que el vidrio, pero mucho peor que el cobre. ¿Cómo se clasifica?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Conductor.",
+          "error": "Un conductor, como el cobre, conduce con mucha facilidad."
+        },
+        {
+          "letra": "B",
+          "texto": "Semiconductor.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Imán permanente.",
+          "error": "Confunde propiedades eléctricas con magnéticas."
+        },
+        {
+          "letra": "D",
+          "texto": "Superconductor.",
+          "error": "Un superconductor no tiene resistencia eléctrica."
+        },
+        {
+          "letra": "E",
+          "texto": "Aislante.",
+          "error": "Un aislante casi no conduce, como el vidrio."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Los semiconductores tienen una conductividad intermedia que puede controlarse; por eso son la base de la electrónica."
+    },
+    {
+      "id": "FIS-3BGU-U3-014",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Polos magnéticos",
+      "destreza": "CN.F.5.1.53",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Si un imán de barra se parte por la mitad, ¿qué se obtiene?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Un imán y un trozo sin magnetismo.",
+          "error": "Ambos trozos quedan magnetizados."
+        },
+        {
+          "letra": "B",
+          "texto": "Dos polos norte.",
+          "error": "Cada trozo forma sus dos polos."
+        },
+        {
+          "letra": "C",
+          "texto": "Un polo norte aislado y un polo sur aislado.",
+          "error": "No se han observado monopolos magnéticos."
+        },
+        {
+          "letra": "D",
+          "texto": "Dos trozos de metal sin magnetismo.",
+          "error": "Cada mitad conserva el magnetismo."
+        },
+        {
+          "letra": "E",
+          "texto": "Dos imanes, cada uno con su polo norte y su polo sur.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Al dividir un imán se forman nuevos polos en los bordes del corte: cada trozo es un imán completo."
+    },
+    {
+      "id": "FIS-3BGU-U3-015",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Campo magnético terrestre",
+      "destreza": "CN.F.5.1.52",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "El polo norte de la aguja de una brújula apunta hacia el norte geográfico. ¿Qué polo magnético hay cerca del norte geográfico?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Un polo eléctrico positivo.",
+          "error": "Confunde magnetismo con electricidad."
+        },
+        {
+          "letra": "B",
+          "texto": "Un polo sur magnético.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Un polo norte magnético.",
+          "error": "Polos iguales se repelen; la aguja no apuntaría hacia él."
+        },
+        {
+          "letra": "D",
+          "texto": "Ningún polo: la brújula sigue al Sol.",
+          "error": "La brújula responde al campo magnético terrestre."
+        },
+        {
+          "letra": "E",
+          "texto": "Depende de la hora del día.",
+          "error": "El campo terrestre no cambia con la hora."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Polos opuestos se atraen. Si el polo norte de la aguja apunta al norte geográfico, allí hay un polo sur magnético."
+    },
+    {
+      "id": "FIS-3BGU-U3-016",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Dirección del campo magnético de un cable",
+      "destreza": "CN.F.5.1.56",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Por un cable vertical sube una corriente. Según la regla de la mano derecha, ¿cómo son las líneas del campo magnético?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Rectas que salen del cable hacia afuera.",
+          "error": "Confunde con las líneas de campo eléctrico de una carga."
+        },
+        {
+          "letra": "B",
+          "texto": "No hay campo: el cable no es un imán.",
+          "error": "Toda corriente eléctrica genera un campo magnético."
+        },
+        {
+          "letra": "C",
+          "texto": "Círculos en sentido horario visto desde arriba.",
+          "error": "Aplica la regla con la mano izquierda."
+        },
+        {
+          "letra": "D",
+          "texto": "Rectas paralelas al cable, hacia arriba.",
+          "error": "El campo de un cable rodea al conductor."
+        },
+        {
+          "letra": "E",
+          "texto": "Círculos concéntricos alrededor del cable, en sentido antihorario visto desde arriba.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Con el pulgar en el sentido de la corriente, los dedos indican el sentido del campo: círculos antihorarios vistos desde arriba."
+    },
+    {
+      "id": "FIS-3BGU-U3-017",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Ley de Ampère",
+      "destreza": "CN.F.5.1.57",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Según la ley de Ampère, ¿de qué depende la circulación del campo magnético a lo largo de un camino cerrado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "De la corriente eléctrica total encerrada por ese camino.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "De la temperatura del conductor.",
+          "error": "La temperatura no interviene en la ley."
+        },
+        {
+          "letra": "C",
+          "texto": "De la forma del imán más cercano.",
+          "error": "La ley relaciona el campo con corrientes, no con imanes externos."
+        },
+        {
+          "letra": "D",
+          "texto": "De las cargas en reposo dentro del camino.",
+          "error": "Las cargas en reposo no generan campo magnético."
+        },
+        {
+          "letra": "E",
+          "texto": "Del área del camino cerrado.",
+          "error": "El área no aparece en la ley de Ampère."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La ley de Ampère dice que la circulación de B en un camino cerrado es proporcional a la corriente encerrada: ∮B·dl = μ0·I."
+    },
+    {
+      "id": "FIS-3BGU-U3-018",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Polarización electrostática",
+      "destreza": "CN.F.5.1.38",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Después de frotar un globo en el cabello, el globo se pega a la pared, aunque la pared es neutra. ¿Por qué?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El globo pierde todos sus electrones.",
+          "error": "El globo gana o pierde solo algunos electrones al frotarse."
+        },
+        {
+          "letra": "B",
+          "texto": "El globo se vuelve un imán.",
+          "error": "Confunde fenómenos eléctricos y magnéticos."
+        },
+        {
+          "letra": "C",
+          "texto": "El globo cargado polariza la pared y atrae las cargas de signo opuesto que quedan más cerca.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "La pared tiene carga opuesta desde antes.",
+          "error": "La pared es neutra."
+        },
+        {
+          "letra": "E",
+          "texto": "El aire empuja el globo contra la pared.",
+          "error": "No explica por qué el efecto aparece solo al frotarlo."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La carga del globo reacomoda las cargas de la pared: las de signo opuesto quedan más cerca y la atracción vence a la repulsión."
+    },
+    {
+      "id": "FIS-3BGU-U3-019",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Motor eléctrico",
+      "destreza": "CN.F.5.1.55",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué principio físico hace girar el motor de una licuadora?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La corriente calienta la bobina y la dilata.",
+          "error": "Confunde efecto Joule con fuerza magnética."
+        },
+        {
+          "letra": "B",
+          "texto": "La electricidad estática empuja las aspas.",
+          "error": "El motor usa corriente, no carga estática."
+        },
+        {
+          "letra": "C",
+          "texto": "Un imán se mueve y genera corriente.",
+          "error": "Describe un generador, no un motor."
+        },
+        {
+          "letra": "D",
+          "texto": "La presión del aire mueve el eje.",
+          "error": "No hay un mecanismo de aire en el motor."
+        },
+        {
+          "letra": "E",
+          "texto": "Una bobina con corriente dentro de un campo magnético recibe fuerzas que la hacen girar.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Sobre un conductor con corriente en un campo magnético actúa F = B·I·L. En una bobina, las fuerzas sobre lados opuestos producen un par de giro."
+    },
+    {
+      "id": "FIS-3BGU-U3-020",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Fuerza sobre un conductor",
+      "destreza": "CN.F.5.1.55",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-3BGU-L3",
+      "enunciado": "Según la lectura, ¿qué fuerza actúa sobre la bobina en ese instante?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "12,00 N",
+          "error": "Dividió para la corriente en lugar de multiplicar."
+        },
+        {
+          "letra": "B",
+          "texto": "0,12 N",
+          "error": "Dividió la corriente para la longitud y el campo."
+        },
+        {
+          "letra": "C",
+          "texto": "0,60 N",
+          "error": "Olvidó multiplicar por la longitud del alambre."
+        },
+        {
+          "letra": "D",
+          "texto": "2,50 N",
+          "error": "Olvidó multiplicar por el campo magnético."
+        },
+        {
+          "letra": "E",
+          "texto": "3,00 N",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "El alambre es perpendicular al campo: F = B·I·L = 1,2·0,5·5 = 3 N."
+    },
+    {
+      "id": "FIS-3BGU-U3-021",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 3,
+      "tema": "Fuerza sobre un conductor",
+      "destreza": "CN.F.5.1.55",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-3BGU-L3",
+      "enunciado": "De acuerdo con la lectura, ¿por qué vibra la membrana del parlante?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque la bobina se calienta y se enfría.",
+          "error": "Confunde efecto Joule con fuerza magnética."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque la corriente es siempre la misma.",
+          "error": "La lectura indica que la corriente cambia de sentido."
+        },
+        {
+          "letra": "C",
+          "texto": "Porque el imán se enciende y se apaga.",
+          "error": "El imán es permanente: su campo no se apaga."
+        },
+        {
+          "letra": "D",
+          "texto": "Porque la corriente cambia de sentido y la fuerza magnética sobre la bobina también cambia de sentido.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Porque el aire empuja la membrana hacia el imán.",
+          "error": "Invierte la causa: la membrana empuja el aire."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "La fuerza F = B·I·L tiene el sentido que marca la corriente. Si la corriente alterna, la fuerza alterna y la membrana oscila."
+    },
+    {
+      "id": "FIS-3BGU-U4-001",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Inducción electromagnética: ley de Faraday",
+      "destreza": "CN.F.5.3.7",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Una bobina de 100 espiras y 100 cm² de área está perpendicular a un campo magnético que pasa de 0 a 0,5 T en 0,1 s. ¿Qué fuerza electromotriz media se induce?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "5,00 V",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "0,50 V",
+          "error": "No dividió para el tiempo."
+        },
+        {
+          "letra": "C",
+          "texto": "0,05 V",
+          "error": "Olvidó multiplicar por el número de espiras."
+        },
+        {
+          "letra": "D",
+          "texto": "500,00 V",
+          "error": "Olvidó multiplicar por el área."
+        },
+        {
+          "letra": "E",
+          "texto": "50 000,00 V",
+          "error": "No convirtió el área de cm² a m²."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "A = 100 cm² = 0,010 m². ε = N·ΔΦ/Δt = N·A·ΔB/Δt = 100·0,010·0,5/0,1 = 5,00 V."
+    },
+    {
+      "id": "FIS-3BGU-U4-002",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Inducción electromagnética: ley de Faraday",
+      "destreza": "CN.F.5.3.7",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Una bobina de 200 espiras y 50 cm² de área está perpendicular a un campo que baja de 0,8 T a 0,2 T en 0,3 s. ¿Qué fuerza electromotriz media se induce?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,01 V",
+          "error": "Olvidó multiplicar por el número de espiras."
+        },
+        {
+          "letra": "B",
+          "texto": "0,60 V",
+          "error": "No dividió para el tiempo."
+        },
+        {
+          "letra": "C",
+          "texto": "2,00 V",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "0,67 V",
+          "error": "Usó el campo final en lugar de la variación del campo."
+        },
+        {
+          "letra": "E",
+          "texto": "20 000,00 V",
+          "error": "No convirtió el área de cm² a m²."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "A = 50 cm² = 0,005 m². ε = N·ΔΦ/Δt = N·A·ΔB/Δt = 200·0,005·0,6/0,3 = 2,00 V."
+    },
+    {
+      "id": "FIS-3BGU-U4-003",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Espectro electromagnético",
+      "destreza": "CN.F.5.3.6",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "La luz verde tiene una frecuencia de 5,5 × 10¹⁴ Hz. Con c = 3 × 10⁸ m/s, ¿cuál es su longitud de onda?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1 833 333 nm",
+          "error": "Dividió la frecuencia para c."
+        },
+        {
+          "letra": "B",
+          "texto": "2 × 10²³ nm",
+          "error": "Multiplicó c por la frecuencia."
+        },
+        {
+          "letra": "C",
+          "texto": "5 × 10⁻⁷ nm",
+          "error": "Calculó la longitud en metros y la rotuló como nanómetros."
+        },
+        {
+          "letra": "D",
+          "texto": "273 nm",
+          "error": "Dividió para el doble de la frecuencia."
+        },
+        {
+          "letra": "E",
+          "texto": "545 nm",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "λ = c/f = 3 × 10⁸/5,5 × 10¹⁴ ≈ 5,45 × 10⁻⁷ m ≈ 545 nm."
+    },
+    {
+      "id": "FIS-3BGU-U4-004",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Espectro electromagnético",
+      "destreza": "CN.F.5.3.6",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un horno de microondas funciona a 2,45 GHz. ¿Cuál es la longitud de onda de su radiación? (c = 3 × 10⁸ m/s)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,224 × 10⁸ m",
+          "error": "No convirtió los GHz a Hz."
+        },
+        {
+          "letra": "B",
+          "texto": "8,167 m",
+          "error": "Dividió la frecuencia para c."
+        },
+        {
+          "letra": "C",
+          "texto": "0,122 m",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "122,449 m",
+          "error": "Interpretó GHz como MHz."
+        },
+        {
+          "letra": "E",
+          "texto": "7,350 × 10¹⁷ m",
+          "error": "Multiplicó c por la frecuencia."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "λ = c/f = 3 × 10⁸/2,45 × 10⁹ ≈ 0,122 m (unos 12 cm)."
+    },
+    {
+      "id": "FIS-3BGU-U4-005",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Espectro electromagnético",
+      "destreza": "CN.F.5.3.6",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Una radio de onda media emite ondas de 300 m de longitud. ¿Cuál es su frecuencia? (c = 3 × 10⁸ m/s)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,00 MHz",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "9,00 × 10¹⁰ MHz",
+          "error": "Multiplicó c por la longitud de onda."
+        },
+        {
+          "letra": "C",
+          "texto": "1,00 × 10⁻⁶ MHz",
+          "error": "Dividió la longitud de onda para c."
+        },
+        {
+          "letra": "D",
+          "texto": "1 000,00 MHz",
+          "error": "Confundió kHz con MHz al convertir."
+        },
+        {
+          "letra": "E",
+          "texto": "0,001 MHz",
+          "error": "Dividió para un millón dos veces."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "f = c/λ = 3 × 10⁸/300 = 1 × 10⁶ Hz = 1 MHz."
+    },
+    {
+      "id": "FIS-3BGU-U4-006",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Rapidez de la luz en un medio",
+      "destreza": "CN.F.5.3.6",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "La luz entra en el agua, cuyo índice de refracción es 1,33. ¿Con qué rapidez viaja la luz en ese medio? (c = 3 × 10⁸ m/s)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "3,00 × 10⁸ m/s",
+          "error": "Supuso que la luz no cambia de rapidez."
+        },
+        {
+          "letra": "B",
+          "texto": "9,09 × 10⁸ m/s",
+          "error": "Restó 1 al índice."
+        },
+        {
+          "letra": "C",
+          "texto": "3,99 × 10⁸ m/s",
+          "error": "Multiplicó por el índice: la luz no puede ir más rápido que en el vacío."
+        },
+        {
+          "letra": "D",
+          "texto": "2,26 × 10⁸ m/s",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "4,43 × 10⁻⁹ m/s",
+          "error": "Dividió el índice para c."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "n = c/v ⇒ v = c/n = 3 × 10⁸/1,33 ≈ 2,26 × 10⁸ m/s."
+    },
+    {
+      "id": "FIS-3BGU-U4-007",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Rapidez de la luz en un medio",
+      "destreza": "CN.F.5.3.6",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "La luz atraviesa un diamante, cuyo índice de refracción es 2,42. ¿Con qué rapidez viaja la luz en ese medio? (c = 3 × 10⁸ m/s)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,24 × 10⁸ m/s",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "2,11 × 10⁸ m/s",
+          "error": "Restó 1 al índice."
+        },
+        {
+          "letra": "C",
+          "texto": "3,00 × 10⁸ m/s",
+          "error": "Supuso que la luz no cambia de rapidez."
+        },
+        {
+          "letra": "D",
+          "texto": "8,07 × 10⁻⁹ m/s",
+          "error": "Dividió el índice para c."
+        },
+        {
+          "letra": "E",
+          "texto": "7,26 × 10⁸ m/s",
+          "error": "Multiplicó por el índice: la luz no puede ir más rápido que en el vacío."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "n = c/v ⇒ v = c/n = 3 × 10⁸/2,42 ≈ 1,24 × 10⁸ m/s."
+    },
+    {
+      "id": "FIS-3BGU-U4-008",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Transformadores e inducción",
+      "destreza": "CN.F.5.3.7",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un transformador tiene 500 espiras en el primario y 50 en el secundario, y se conecta a 120 V. ¿Qué voltaje entrega el secundario?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "12,00 V",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "120,00 V",
+          "error": "Supuso que el voltaje no cambia."
+        },
+        {
+          "letra": "C",
+          "texto": "0,10 V",
+          "error": "Calculó solo la razón de espiras y olvidó el voltaje."
+        },
+        {
+          "letra": "D",
+          "texto": "1 200,00 V",
+          "error": "Invirtió la razón de espiras."
+        },
+        {
+          "letra": "E",
+          "texto": "0,24 V",
+          "error": "Calculó el voltaje por espira del primario."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "V2/V1 = N2/N1 ⇒ V2 = 120·50/500 = 12,00 V."
+    },
+    {
+      "id": "FIS-3BGU-U4-009",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Transformadores e inducción",
+      "destreza": "CN.F.5.3.7",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un transformador elevador tiene 200 espiras en el primario y 3 000 en el secundario; el primario recibe 120 V. ¿Qué voltaje entrega el secundario?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "8,00 V",
+          "error": "Invirtió la razón de espiras."
+        },
+        {
+          "letra": "B",
+          "texto": "0,60 V",
+          "error": "Calculó el voltaje por espira del primario."
+        },
+        {
+          "letra": "C",
+          "texto": "15,00 V",
+          "error": "Calculó solo la razón de espiras y olvidó el voltaje."
+        },
+        {
+          "letra": "D",
+          "texto": "1 800,00 V",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "120,00 V",
+          "error": "Supuso que el voltaje no cambia."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "V2/V1 = N2/N1 ⇒ V2 = 120·3000/200 = 1 800,00 V."
+    },
+    {
+      "id": "FIS-3BGU-U4-010",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Rapidez de la luz",
+      "destreza": "CN.F.5.3.6",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "La distancia media entre el Sol y la Tierra es 1,5 × 10¹¹ m. ¿Cuánto tarda la luz del Sol en llegar a la Tierra? (c = 3 × 10⁸ m/s)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "4,17 min",
+          "error": "Dividió para 2 como si la luz fuera y regresara."
+        },
+        {
+          "letra": "B",
+          "texto": "500,00 min",
+          "error": "Calculó los segundos y los rotuló como minutos."
+        },
+        {
+          "letra": "C",
+          "texto": "8,33 min",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "4,50 × 10¹⁹ min",
+          "error": "Multiplicó la distancia por la rapidez."
+        },
+        {
+          "letra": "E",
+          "texto": "0,14 min",
+          "error": "Dividió para 3 600 al convertir."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "t = d/c = 1,5 × 10¹¹/3 × 10⁸ = 500 s ≈ 8,33 min."
+    },
+    {
+      "id": "FIS-3BGU-U4-011",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Espectro electromagnético",
+      "destreza": "CN.F.5.3.6",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Cuál de estas radiaciones tiene mayor frecuencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Microondas.",
+          "error": "Tienen frecuencia menor que la luz visible."
+        },
+        {
+          "letra": "B",
+          "texto": "Ondas de radio.",
+          "error": "Están en el extremo de menor frecuencia del espectro."
+        },
+        {
+          "letra": "C",
+          "texto": "Infrarrojo.",
+          "error": "Tiene menor frecuencia que la luz visible."
+        },
+        {
+          "letra": "D",
+          "texto": "Luz roja.",
+          "error": "Es la luz visible de menor frecuencia."
+        },
+        {
+          "letra": "E",
+          "texto": "Rayos X.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "De menor a mayor frecuencia: radio, microondas, infrarrojo, visible, ultravioleta, rayos X y rayos gamma."
+    },
+    {
+      "id": "FIS-3BGU-U4-012",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Inducción electromagnética",
+      "destreza": "CN.F.5.3.7",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un imán está quieto dentro de una bobina conectada a un amperímetro. ¿Cuándo marca corriente el amperímetro?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Solo si el imán es muy grande.",
+          "error": "El tamaño no importa si el flujo no cambia."
+        },
+        {
+          "letra": "B",
+          "texto": "Solo mientras el imán se mueve, porque cambia el flujo magnético.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Solo si la bobina está caliente.",
+          "error": "La temperatura no causa la inducción."
+        },
+        {
+          "letra": "D",
+          "texto": "Todo el tiempo, porque el imán está dentro.",
+          "error": "Un flujo constante no induce corriente."
+        },
+        {
+          "letra": "E",
+          "texto": "Nunca, porque los imanes no producen corriente.",
+          "error": "Un flujo variable sí induce corriente."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Según Faraday, la corriente se induce cuando el flujo magnético varía. Con el imán quieto, el flujo es constante y no hay corriente."
+    },
+    {
+      "id": "FIS-3BGU-U4-013",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Generadores",
+      "destreza": "CN.F.5.3.7",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "En una central hidroeléctrica como las del río Paute, ¿qué transformación de energía ocurre en el generador?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Energía mecánica de giro en energía eléctrica, por inducción electromagnética.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Energía química en energía eléctrica.",
+          "error": "Describe una pila o batería."
+        },
+        {
+          "letra": "C",
+          "texto": "Energía eléctrica en energía mecánica.",
+          "error": "Describe un motor, no un generador."
+        },
+        {
+          "letra": "D",
+          "texto": "Energía luminosa en energía eléctrica.",
+          "error": "Describe una celda solar."
+        },
+        {
+          "letra": "E",
+          "texto": "Energía térmica en energía eléctrica, sin movimiento.",
+          "error": "El generador necesita movimiento relativo entre bobina e imanes."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "El agua mueve la turbina; esta hace girar bobinas en un campo magnético y la variación de flujo induce una corriente eléctrica."
+    },
+    {
+      "id": "FIS-3BGU-U4-014",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Aplicaciones de las ondas electromagnéticas",
+      "destreza": "CN.F.5.6.1",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Qué tipo de radiación electromagnética se usa para obtener radiografías de huesos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Rayos X.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Microondas.",
+          "error": "Se usan para calentar alimentos y en comunicaciones."
+        },
+        {
+          "letra": "C",
+          "texto": "Ondas de radio.",
+          "error": "Su longitud de onda es muy grande para formar esa imagen."
+        },
+        {
+          "letra": "D",
+          "texto": "Luz infrarroja.",
+          "error": "Se usa en controles remotos y cámaras térmicas."
+        },
+        {
+          "letra": "E",
+          "texto": "Ultrasonido.",
+          "error": "El ultrasonido es una onda mecánica, no electromagnética."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Los rayos X atraviesan los tejidos blandos y son absorbidos por los huesos, lo que permite formar la imagen."
+    },
+    {
+      "id": "FIS-3BGU-U4-015",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Radiación electromagnética",
+      "destreza": "CN.F.5.3.8",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "¿Qué produce la radiación electromagnética en la antena de un celular?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El calor de la batería.",
+          "error": "El calor no explica la emisión de la señal."
+        },
+        {
+          "letra": "B",
+          "texto": "Cargas eléctricas que oscilan, es decir, que se aceleran.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Ondas de sonido amplificadas.",
+          "error": "Las ondas sonoras son mecánicas."
+        },
+        {
+          "letra": "D",
+          "texto": "Un imán permanente quieto.",
+          "error": "Un campo magnético constante no se propaga como onda."
+        },
+        {
+          "letra": "E",
+          "texto": "Cargas eléctricas en reposo.",
+          "error": "Una carga quieta no emite ondas."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Las cargas aceleradas generan campos eléctricos y magnéticos variables que se propagan como ondas electromagnéticas."
+    },
+    {
+      "id": "FIS-3BGU-U4-016",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Dualidad de la luz",
+      "destreza": "CN.F.5.3.6",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Por qué la luz no puede describirse como una onda mecánica?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque viaja más lento que el sonido.",
+          "error": "La luz es muchísimo más rápida que el sonido."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque viaja a través del vacío, sin necesitar un medio material.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Porque no transporta energía.",
+          "error": "La luz transporta energía, por ejemplo la del Sol."
+        },
+        {
+          "letra": "D",
+          "texto": "Porque solo se propaga en el agua.",
+          "error": "La luz se propaga en el vacío y en muchos medios."
+        },
+        {
+          "letra": "E",
+          "texto": "Porque no tiene frecuencia.",
+          "error": "La luz sí tiene frecuencia."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Una onda mecánica necesita un medio elástico. La luz llega del Sol a través del espacio vacío a unos 3 × 10⁸ m/s."
+    },
+    {
+      "id": "FIS-3BGU-U4-017",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Radiación ultravioleta",
+      "destreza": "CN.F.5.6.1",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En la Sierra ecuatoriana, el índice de radiación ultravioleta suele ser muy alto. ¿Por qué la radiación UV puede dañar la piel más que la luz visible?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque calienta más el aire.",
+          "error": "El daño se debe a la energía de los fotones, no al calor del aire."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque tiene menor frecuencia que la luz visible.",
+          "error": "La UV tiene mayor frecuencia."
+        },
+        {
+          "letra": "C",
+          "texto": "Porque es una onda mecánica.",
+          "error": "La UV es electromagnética."
+        },
+        {
+          "letra": "D",
+          "texto": "Porque viaja más rápido que la luz visible.",
+          "error": "En el vacío todas viajan a la misma rapidez."
+        },
+        {
+          "letra": "E",
+          "texto": "Porque tiene mayor frecuencia y sus fotones llevan más energía.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La energía de un fotón es E = h·f. La UV, con mayor frecuencia, lleva fotones capaces de dañar moléculas de la piel."
+    },
+    {
+      "id": "FIS-3BGU-U4-018",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Inducción electromagnética: conductor en movimiento",
+      "destreza": "CN.F.5.3.7",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una varilla metálica de 40 cm se desplaza a 3 m/s, perpendicular a un campo magnético de 0,5 T. ¿Qué fuerza electromotriz se induce entre sus extremos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,07 V",
+          "error": "Dividió para la velocidad en lugar de multiplicar."
+        },
+        {
+          "letra": "B",
+          "texto": "3,75 V",
+          "error": "Dividió para la longitud en lugar de multiplicar."
+        },
+        {
+          "letra": "C",
+          "texto": "1,20 V",
+          "error": "Olvidó multiplicar por el campo magnético."
+        },
+        {
+          "letra": "D",
+          "texto": "0,60 V",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "1,80 V",
+          "error": "Elevó la velocidad al cuadrado."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Al moverse, la varilla barre área y cambia el flujo: ε = B·L·v = 0,5·0,40·3 = 0,60 V."
+    },
+    {
+      "id": "FIS-3BGU-U4-019",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Campos eléctricos y magnéticos variables",
+      "destreza": "CN.F.5.3.7",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Según la teoría de Maxwell, ¿qué se genera en las proximidades de un campo eléctrico que varía en el tiempo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Un campo gravitacional.",
+          "error": "Los campos gravitacionales los generan las masas."
+        },
+        {
+          "letra": "B",
+          "texto": "Un campo magnético.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Solo calor.",
+          "error": "La variación del campo eléctrico genera un campo magnético, no solo calor."
+        },
+        {
+          "letra": "D",
+          "texto": "Una carga eléctrica nueva.",
+          "error": "La carga se conserva; no se crea por variar un campo."
+        },
+        {
+          "letra": "E",
+          "texto": "Nada, si no hay un imán cerca.",
+          "error": "No hace falta un imán: el campo variable basta."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Un flujo eléctrico variable genera un campo magnético y un flujo magnético variable genera un campo eléctrico. Así se propagan las ondas electromagnéticas."
+    },
+    {
+      "id": "FIS-3BGU-U4-020",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Ondas de radio",
+      "destreza": "CN.F.5.3.6",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-3BGU-L4",
+      "enunciado": "Según la lectura, ¿cuál es la longitud de onda de la señal de la radio comunitaria?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "3,05 m",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "0,76 m",
+          "error": "Calculó el largo de la antena, no la longitud de onda."
+        },
+        {
+          "letra": "C",
+          "texto": "3 045,69 m",
+          "error": "Interpretó MHz como kHz."
+        },
+        {
+          "letra": "D",
+          "texto": "2,96 × 10¹⁶ m",
+          "error": "Multiplicó c por la frecuencia."
+        },
+        {
+          "letra": "E",
+          "texto": "3 045 685,28 m",
+          "error": "No convirtió los MHz a Hz."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "f = 98,5 MHz = 98,5 × 10⁶ Hz. λ = c/f = 3 × 10⁸/98,5 × 10⁶ ≈ 3,05 m."
+    },
+    {
+      "id": "FIS-3BGU-U4-021",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 4,
+      "tema": "Ondas de radio",
+      "destreza": "CN.F.5.3.6",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-3BGU-L4",
+      "enunciado": "¿Qué largo aproximado debe tener la antena de varilla descrita en la lectura?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "12,18 m",
+          "error": "Multiplicó por 4 en lugar de dividir."
+        },
+        {
+          "letra": "B",
+          "texto": "24,62 m",
+          "error": "Dividió la frecuencia en MHz para 4."
+        },
+        {
+          "letra": "C",
+          "texto": "3,05 m",
+          "error": "Dio la longitud de onda completa."
+        },
+        {
+          "letra": "D",
+          "texto": "1,52 m",
+          "error": "Usó la mitad de la longitud de onda."
+        },
+        {
+          "letra": "E",
+          "texto": "0,76 m",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La antena mide un cuarto de la longitud de onda: L ≈ λ/4 = 3,05/4 ≈ 0,76 m."
+    },
+    {
+      "id": "FIS-3BGU-U5-001",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Energía del fotón",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un fotón de luz azul tiene una frecuencia de 6 × 10¹⁴ Hz. Con h = 6,63 × 10⁻³⁴ J·s, ¿cuál es su energía?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "6,33 × 10⁻²⁰ J",
+          "error": "Usó ħ = h/2π en lugar de h."
+        },
+        {
+          "letra": "B",
+          "texto": "2,39 × 10⁻⁴ J",
+          "error": "Elevó la frecuencia al cuadrado."
+        },
+        {
+          "letra": "C",
+          "texto": "9,05 × 10⁴⁷ J",
+          "error": "Dividió la frecuencia para h."
+        },
+        {
+          "letra": "D",
+          "texto": "1,11 × 10⁻⁴⁸ J",
+          "error": "Dividió h para la frecuencia."
+        },
+        {
+          "letra": "E",
+          "texto": "3,98 × 10⁻¹⁹ J",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "E = h·f = 6,63 × 10⁻³⁴·6 × 10¹⁴ = 3,98 × 10⁻¹⁹ J."
+    },
+    {
+      "id": "FIS-3BGU-U5-002",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Energía del fotón",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un fotón de rayos X tiene una frecuencia de 3 × 10¹⁸ Hz. Con h = 6,63 × 10⁻³⁴ J·s, ¿cuál es su energía?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "4,52 × 10⁵¹ J",
+          "error": "Dividió la frecuencia para h."
+        },
+        {
+          "letra": "B",
+          "texto": "2,21 × 10⁻⁵² J",
+          "error": "Dividió h para la frecuencia."
+        },
+        {
+          "letra": "C",
+          "texto": "1,99 × 10⁻¹⁵ J",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "3,17 × 10⁻¹⁶ J",
+          "error": "Usó ħ = h/2π en lugar de h."
+        },
+        {
+          "letra": "E",
+          "texto": "5 967,00 J",
+          "error": "Elevó la frecuencia al cuadrado."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "E = h·f = 6,63 × 10⁻³⁴·3 × 10¹⁸ = 1,99 × 10⁻¹⁵ J."
+    },
+    {
+      "id": "FIS-3BGU-U5-003",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Energía del fotón",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Cuál es la energía, en electronvoltios, de un fotón de 500 nm? (h = 6,63 × 10⁻³⁴ J·s, c = 3 × 10⁸ m/s, 1 eV = 1,6 × 10⁻¹⁹ J)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "3,98 × 10⁻¹⁹ eV",
+          "error": "Calculó la energía en joules y no la convirtió a eV."
+        },
+        {
+          "letra": "B",
+          "texto": "2,49 × 10⁻⁹ eV",
+          "error": "No convirtió los nanómetros a metros."
+        },
+        {
+          "letra": "C",
+          "texto": "6,22 × 10⁻¹³ eV",
+          "error": "Multiplicó por la longitud de onda en lugar de dividir."
+        },
+        {
+          "letra": "D",
+          "texto": "2,49 eV",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "6,91 × 10⁻³⁰ eV",
+          "error": "Usó E = h·λ/c en lugar de h·c/λ."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "E = h·c/λ = 6,63 × 10⁻³⁴·3 × 10⁸/500 × 10⁻⁹ ≈ 3,98 × 10⁻¹⁹ J ≈ 2,49 eV."
+    },
+    {
+      "id": "FIS-3BGU-U5-004",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Energía del fotón",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Cuál es la energía, en electronvoltios, de un fotón de 250 nm? (h = 6,63 × 10⁻³⁴ J·s, c = 3 × 10⁸ m/s, 1 eV = 1,6 × 10⁻¹⁹ J)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "3,11 × 10⁻¹³ eV",
+          "error": "Multiplicó por la longitud de onda en lugar de dividir."
+        },
+        {
+          "letra": "B",
+          "texto": "3,45 × 10⁻³⁰ eV",
+          "error": "Usó E = h·λ/c en lugar de h·c/λ."
+        },
+        {
+          "letra": "C",
+          "texto": "4,97 eV",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "7,96 × 10⁻¹⁹ eV",
+          "error": "Calculó la energía en joules y no la convirtió a eV."
+        },
+        {
+          "letra": "E",
+          "texto": "4,97 × 10⁻⁹ eV",
+          "error": "No convirtió los nanómetros a metros."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "E = h·c/λ = 6,63 × 10⁻³⁴·3 × 10⁸/250 × 10⁻⁹ ≈ 7,96 × 10⁻¹⁹ J ≈ 4,97 eV."
+    },
+    {
+      "id": "FIS-3BGU-U5-005",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Efecto fotoeléctrico",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Fotones de 4,5 eV inciden sobre sodio, cuya función de trabajo es 2,3 eV. ¿Cuál es la energía cinética máxima de los electrones emitidos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "6,80 eV",
+          "error": "Sumó la función de trabajo en lugar de restarla."
+        },
+        {
+          "letra": "B",
+          "texto": "2,20 eV",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "4,50 eV",
+          "error": "Ignoró la función de trabajo."
+        },
+        {
+          "letra": "D",
+          "texto": "−2,20 eV",
+          "error": "Restó en orden inverso."
+        },
+        {
+          "letra": "E",
+          "texto": "2,30 eV",
+          "error": "Dio la función de trabajo como energía cinética."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Ecuación de Einstein: K_máx = h·f − φ = 4,5 − 2,3 = 2,2 eV."
+    },
+    {
+      "id": "FIS-3BGU-U5-006",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Efecto fotoeléctrico",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Luz ultravioleta de 1,5 × 10¹⁵ Hz incide sobre zinc, con función de trabajo de 4,3 eV. ¿Cuál es la energía cinética máxima de los fotoelectrones? (h = 6,63 × 10⁻³⁴ J·s, 1 eV = 1,6 × 10⁻¹⁹ J)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "6,22 eV",
+          "error": "Ignoró la función de trabajo."
+        },
+        {
+          "letra": "B",
+          "texto": "-4,30 eV",
+          "error": "Restó eV de un valor en joules sin convertir."
+        },
+        {
+          "letra": "C",
+          "texto": "-1,92 eV",
+          "error": "Restó en orden inverso."
+        },
+        {
+          "letra": "D",
+          "texto": "10,52 eV",
+          "error": "Sumó la función de trabajo."
+        },
+        {
+          "letra": "E",
+          "texto": "1,92 eV",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "h·f = 6,63 × 10⁻³⁴·1,5 × 10¹⁵ ≈ 9,94 × 10⁻¹⁹ J ≈ 6,22 eV. K_máx = 6,22 − 4,3 ≈ 1,92 eV."
+    },
+    {
+      "id": "FIS-3BGU-U5-007",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Frecuencia umbral",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "La función de trabajo del sodio es 2,3 eV. ¿Cuál es la frecuencia mínima de la luz que puede arrancarle electrones? (h = 6,63 × 10⁻³⁴ J·s, 1 eV = 1,6 × 10⁻¹⁹ J)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "5,55 × 10¹⁴ Hz",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "2,44 × 10⁻⁵² Hz",
+          "error": "Multiplicó por h en lugar de dividir."
+        },
+        {
+          "letra": "C",
+          "texto": "1,80 × 10⁻¹⁵ Hz",
+          "error": "Invirtió la división."
+        },
+        {
+          "letra": "D",
+          "texto": "3,47 × 10³³ Hz",
+          "error": "No convirtió los eV a joules."
+        },
+        {
+          "letra": "E",
+          "texto": "8,15 × 10²⁶ Hz",
+          "error": "Dividió la rapidez de la luz para la energía."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "φ = h·f0 ⇒ f0 = φ/h = 2,3·1,6 × 10⁻¹⁹/6,63 × 10⁻³⁴ ≈ 5,55 × 10¹⁴ Hz."
+    },
+    {
+      "id": "FIS-3BGU-U5-008",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Longitud de onda de De Broglie",
+      "destreza": "CN.F.5.5.2",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un electrón (m = 9,11 × 10⁻³¹ kg) se mueve a 2 × 10⁶ m/s. Con h = 6,63 × 10⁻³⁴ J·s, ¿cuál es su longitud de onda de De Broglie?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "2,75 × 10⁹ m",
+          "error": "Invirtió la fórmula."
+        },
+        {
+          "letra": "B",
+          "texto": "1,21 × 10⁻⁵⁷ m",
+          "error": "Multiplicó h por la cantidad de movimiento."
+        },
+        {
+          "letra": "C",
+          "texto": "1,82 × 10⁻¹⁶ m",
+          "error": "Elevó la velocidad al cuadrado."
+        },
+        {
+          "letra": "D",
+          "texto": "3,64 × 10⁻¹⁰ m",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "7,28 × 10⁻⁴ m",
+          "error": "Olvidó la velocidad."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "λ = h/(m·v) = 6,63 × 10⁻³⁴/(9,11 × 10⁻³¹·2 000 000) ≈ 3,64 × 10⁻¹⁰ m."
+    },
+    {
+      "id": "FIS-3BGU-U5-009",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Longitud de onda de De Broglie",
+      "destreza": "CN.F.5.5.2",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una pelota de béisbol de 0,15 kg se mueve a 30 m/s. Con h = 6,63 × 10⁻³⁴ J·s, ¿cuál es su longitud de onda de De Broglie?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "4,42 × 10⁻³³ m",
+          "error": "Olvidó la velocidad."
+        },
+        {
+          "letra": "B",
+          "texto": "6,79 × 10³³ m",
+          "error": "Invirtió la fórmula."
+        },
+        {
+          "letra": "C",
+          "texto": "2,98 × 10⁻³³ m",
+          "error": "Multiplicó h por la cantidad de movimiento."
+        },
+        {
+          "letra": "D",
+          "texto": "1,47 × 10⁻³⁴ m",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "4,91 × 10⁻³⁶ m",
+          "error": "Elevó la velocidad al cuadrado."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "λ = h/(m·v) = 6,63 × 10⁻³⁴/(0,15·30) ≈ 1,47 × 10⁻³⁴ m."
+    },
+    {
+      "id": "FIS-3BGU-U5-010",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Principio de incertidumbre",
+      "destreza": "CN.F.5.5.4",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un electrón está confinado en una región de 1 × 10⁻¹⁰ m (el tamaño de un átomo). Según Heisenberg (Δx·Δp ≥ h/4π), ¿cuál es la incertidumbre mínima de su cantidad de movimiento?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "6,63 × 10⁻⁴⁴ kg·m/s",
+          "error": "Multiplicó por Δx en lugar de dividir."
+        },
+        {
+          "letra": "B",
+          "texto": "6,63 × 10⁻²⁴ kg·m/s",
+          "error": "Olvidó dividir para 4π."
+        },
+        {
+          "letra": "C",
+          "texto": "1,06 × 10⁻²⁴ kg·m/s",
+          "error": "Usó 2π en lugar de 4π."
+        },
+        {
+          "letra": "D",
+          "texto": "5,28 × 10⁻²⁵ kg·m/s",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "1,51 × 10²³ kg·m/s",
+          "error": "Invirtió la relación."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Δp ≥ h/(4π·Δx) = 6,63 × 10⁻³⁴/(4π·10⁻¹⁰) ≈ 5,28 × 10⁻²⁵ kg·m/s."
+    },
+    {
+      "id": "FIS-3BGU-U5-011",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Efecto fotoeléctrico",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Una luz roja muy intensa no arranca electrones de un metal, pero una luz violeta débil sí lo hace. ¿Qué explica este resultado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La luz roja es demasiado intensa y se refleja.",
+          "error": "La intensidad no impide la emisión."
+        },
+        {
+          "letra": "B",
+          "texto": "La intensidad determina la energía de cada electrón emitido.",
+          "error": "La intensidad determina el número de fotones, no su energía."
+        },
+        {
+          "letra": "C",
+          "texto": "El metal solo absorbe colores oscuros.",
+          "error": "No es un efecto de absorción de color."
+        },
+        {
+          "letra": "D",
+          "texto": "La luz violeta viaja más rápido que la roja.",
+          "error": "En el vacío ambas viajan a la misma rapidez."
+        },
+        {
+          "letra": "E",
+          "texto": "La energía de cada fotón depende de la frecuencia, no de la intensidad de la luz.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Cada electrón absorbe un fotón. Si E = h·f es menor que la función de trabajo, no sale, aunque lleguen muchos fotones."
+    },
+    {
+      "id": "FIS-3BGU-U5-012",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Radiación de cuerpo negro",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Para explicar la radiación del cuerpo negro, Max Planck propuso que la energía se emite en paquetes. ¿Cómo se llaman esos paquetes de luz?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Fotones, con energía proporcional a su frecuencia.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Electrones, con energía proporcional a su masa.",
+          "error": "Los electrones son partículas de materia, no de luz."
+        },
+        {
+          "letra": "C",
+          "texto": "Neutrones, sin carga.",
+          "error": "Los neutrones son partículas del núcleo."
+        },
+        {
+          "letra": "D",
+          "texto": "Ondas continuas de cualquier energía.",
+          "error": "Es la idea clásica que Planck reemplazó."
+        },
+        {
+          "letra": "E",
+          "texto": "Protones, con carga positiva.",
+          "error": "Los protones son partículas del núcleo."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Planck propuso que la energía se intercambia en cuantos discretos, E = h·f. Einstein los interpretó como partículas de luz: los fotones."
+    },
+    {
+      "id": "FIS-3BGU-U5-013",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Comportamiento ondulatorio de las partículas",
+      "destreza": "CN.F.5.5.2",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Al lanzar un haz de electrones contra un cristal, se observa un patrón de difracción. ¿Qué demuestra este experimento?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Que los electrones son ondas sonoras.",
+          "error": "Las ondas sonoras son mecánicas."
+        },
+        {
+          "letra": "B",
+          "texto": "Que los electrones tienen comportamiento ondulatorio.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Que los electrones no tienen masa.",
+          "error": "El experimento no dice eso."
+        },
+        {
+          "letra": "D",
+          "texto": "Que los electrones se comportan solo como partículas.",
+          "error": "La difracción es un fenómeno ondulatorio."
+        },
+        {
+          "letra": "E",
+          "texto": "Que el cristal emite luz.",
+          "error": "El patrón proviene de los electrones, no de luz del cristal."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "La difracción solo se explica con ondas. Que los electrones la produzcan confirma la hipótesis de De Broglie."
+    },
+    {
+      "id": "FIS-3BGU-U5-014",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Experimento de la doble rendija",
+      "destreza": "CN.F.5.5.5",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "En el experimento de la doble rendija con electrones enviados de uno en uno, después de muchos electrones aparece en la pantalla un patrón de franjas. ¿Qué concluye la física?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ni el modelo clásico de partícula ni el de onda explican por sí solos el comportamiento del electrón.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Las franjas se deben a polvo en la pantalla.",
+          "error": "Es un resultado reproducible, no un defecto."
+        },
+        {
+          "letra": "C",
+          "texto": "Los electrones se comportan como balas.",
+          "error": "Las balas no producen franjas de interferencia."
+        },
+        {
+          "letra": "D",
+          "texto": "Los electrones son ondas de agua.",
+          "error": "Confunde la analogía con la naturaleza del electrón."
+        },
+        {
+          "letra": "E",
+          "texto": "Los electrones chocan entre sí en las rendijas.",
+          "error": "Se envían de uno en uno, así que no chocan entre sí."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Cada electrón llega a un punto, como partícula, pero el conjunto forma un patrón de interferencia, como onda. Por eso se habla de partículas cuánticas."
+    },
+    {
+      "id": "FIS-3BGU-U5-015",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Dualidad onda-partícula",
+      "destreza": "CN.F.5.5.3",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Por qué no observamos el comportamiento ondulatorio de una pelota de fútbol?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque la pelota no tiene cantidad de movimiento.",
+          "error": "Toda pelota en movimiento tiene cantidad de movimiento."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque su longitud de onda de De Broglie es muchísimo menor que cualquier objeto con el que interactúa.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Porque solo los objetos cargados tienen ondas.",
+          "error": "La dualidad no depende de la carga."
+        },
+        {
+          "letra": "D",
+          "texto": "Porque la pelota está hecha de aire.",
+          "error": "Su composición no anula el efecto."
+        },
+        {
+          "letra": "E",
+          "texto": "Porque la pelota viaja más rápido que la luz.",
+          "error": "Ningún objeto con masa supera la rapidez de la luz."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "λ = h/(m·v). Con masas grandes, λ resulta tan pequeña que los efectos ondulatorios son imposibles de detectar."
+    },
+    {
+      "id": "FIS-3BGU-U5-016",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Principio de incertidumbre",
+      "destreza": "CN.F.5.5.4",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué afirma el principio de incertidumbre de Heisenberg?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Las partículas no tienen posición.",
+          "error": "Tienen posición, pero con incertidumbre ligada a la de su momento."
+        },
+        {
+          "letra": "B",
+          "texto": "Los instrumentos actuales son imprecisos, pero se mejorarán.",
+          "error": "Es un límite de la naturaleza, no de los instrumentos."
+        },
+        {
+          "letra": "C",
+          "texto": "Solo se aplica a objetos grandes.",
+          "error": "Sus efectos son notables a escala atómica."
+        },
+        {
+          "letra": "D",
+          "texto": "No se pueden conocer con precisión arbitraria, a la vez, la posición y la cantidad de movimiento de una partícula cuántica.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "La energía de un fotón es incierta.",
+          "error": "La energía del fotón es E = h·f."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Δx·Δp ≥ h/4π. Cuanto mejor se conoce la posición, peor se conoce la cantidad de movimiento, y viceversa."
+    },
+    {
+      "id": "FIS-3BGU-U5-017",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Energía del fotón y color",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Qué fotón tiene más energía: uno de luz roja o uno de luz violeta?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Depende de la intensidad de la luz.",
+          "error": "La intensidad no cambia la energía de cada fotón."
+        },
+        {
+          "letra": "B",
+          "texto": "Ambos tienen la misma energía.",
+          "error": "La energía depende de la frecuencia."
+        },
+        {
+          "letra": "C",
+          "texto": "El de luz roja, porque calienta más.",
+          "error": "Confunde la sensación térmica con la energía del fotón."
+        },
+        {
+          "letra": "D",
+          "texto": "El de luz violeta, porque tiene mayor frecuencia.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "El de luz roja, porque tiene mayor longitud de onda.",
+          "error": "Mayor longitud de onda implica menor energía."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "E = h·f. La luz violeta tiene mayor frecuencia que la roja, así que cada fotón violeta lleva más energía."
+    },
+    {
+      "id": "FIS-3BGU-U5-018",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Aplicaciones de la cuántica",
+      "destreza": "CN.F.5.6.4",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué fenómeno cuántico aprovechan los paneles solares para producir electricidad?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La reflexión de la luz en el vidrio.",
+          "error": "La luz reflejada no produce corriente."
+        },
+        {
+          "letra": "B",
+          "texto": "La absorción de fotones que liberan electrones en un semiconductor (efecto fotovoltaico).",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "La radiactividad del silicio.",
+          "error": "El silicio de los paneles no es radiactivo."
+        },
+        {
+          "letra": "D",
+          "texto": "La inducción electromagnética de un imán.",
+          "error": "Describe un generador."
+        },
+        {
+          "letra": "E",
+          "texto": "El calentamiento del panel por el Sol.",
+          "error": "El panel fotovoltaico no funciona por calor."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Cada fotón con energía suficiente libera un electrón en el semiconductor; el campo interno de la celda los conduce y genera corriente."
+    },
+    {
+      "id": "FIS-3BGU-U5-019",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Historia de la física cuántica",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Quién explicó el efecto fotoeléctrico proponiendo que la luz está formada por cuantos de energía?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Max Planck.",
+          "error": "Planck cuantizó la energía para explicar el cuerpo negro."
+        },
+        {
+          "letra": "B",
+          "texto": "Isaac Newton.",
+          "error": "Newton propuso un modelo corpuscular, pero sin cuantos de energía."
+        },
+        {
+          "letra": "C",
+          "texto": "Niels Bohr.",
+          "error": "Bohr aplicó la cuantización al modelo del átomo."
+        },
+        {
+          "letra": "D",
+          "texto": "Albert Einstein.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Louis de Broglie.",
+          "error": "De Broglie propuso el comportamiento ondulatorio de la materia."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "En 1905, Einstein explicó el efecto fotoeléctrico con fotones de energía E = h·f; por ese trabajo recibió el Premio Nobel de Física de 1921."
+    },
+    {
+      "id": "FIS-3BGU-U5-020",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Energía del fotón",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "FIS-3BGU-L5",
+      "enunciado": "Según la lectura, ¿cuántos fotones por segundo entrega la luz de prueba? (h = 6,63 × 10⁻³⁴ J·s, c = 3 × 10⁸ m/s)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "3,02 × 10¹⁸ fotones/s",
+          "error": "Olvidó multiplicar por la potencia de 0,5 W."
+        },
+        {
+          "letra": "B",
+          "texto": "1,51 × 10²⁷ fotones/s",
+          "error": "No convirtió los nanómetros a metros."
+        },
+        {
+          "letra": "C",
+          "texto": "3,31 × 10⁻¹⁹ fotones/s",
+          "error": "Calculó la energía de un fotón, no el número de fotones."
+        },
+        {
+          "letra": "D",
+          "texto": "1,51 × 10¹⁸ fotones/s",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "1,66 × 10⁻¹⁹ fotones/s",
+          "error": "Multiplicó la potencia por la energía del fotón."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "E_fotón = h·c/λ ≈ 3,31 × 10⁻¹⁹ J. n = P/E = 0,5/3,31 × 10⁻¹⁹ ≈ 1,51 × 10¹⁸ fotones/s."
+    },
+    {
+      "id": "FIS-3BGU-U5-021",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 5,
+      "tema": "Efecto fotoeléctrico",
+      "destreza": "CN.F.5.5.1",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-3BGU-L5",
+      "enunciado": "De acuerdo con la lectura, ¿por qué la lámpara infrarroja muy potente casi no produce corriente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque el panel solo funciona con luz del Sol.",
+          "error": "Funciona con cualquier luz cuyos fotones tengan energía suficiente."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque sus fotones no tienen energía suficiente para liberar electrones, aunque sean muchos.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Porque tiene demasiada intensidad.",
+          "error": "La intensidad no impide el efecto."
+        },
+        {
+          "letra": "D",
+          "texto": "Porque los fotones infrarrojos tienen mucha energía y queman el panel.",
+          "error": "Invierte la relación entre frecuencia y energía."
+        },
+        {
+          "letra": "E",
+          "texto": "Porque la luz infrarroja no llega al panel.",
+          "error": "Sí llega; el problema es la energía de cada fotón."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "La energía de cada fotón depende de su frecuencia. El infrarrojo tiene baja frecuencia: sus fotones no superan la energía necesaria."
+    },
+    {
+      "id": "FIS-3BGU-U6-001",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Desintegración radiactiva: vida media",
+      "destreza": "CN.F.5.5.7",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una muestra contiene 80 g de un isótopo con vida media de 5 años. ¿Cuánto queda sin desintegrarse después de 15 años?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "13,33 g",
+          "error": "Dividió para 2·n en lugar de para 2ⁿ."
+        },
+        {
+          "letra": "B",
+          "texto": "26,67 g",
+          "error": "Dividió para el número de vidas medias."
+        },
+        {
+          "letra": "C",
+          "texto": "10,00 g",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "40,00 g",
+          "error": "Consideró una sola vida media."
+        },
+        {
+          "letra": "E",
+          "texto": "5,00 g",
+          "error": "Contó una vida media de más."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Pasan n = 15/5 = 3 vidas medias. N = N0·(½)ⁿ = 80·(½)^3 = 10,00 g."
+    },
+    {
+      "id": "FIS-3BGU-U6-002",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Desintegración radiactiva: vida media",
+      "destreza": "CN.F.5.5.7",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un hospital recibe 200 mg de yodo-131, cuya vida media es de 8 días. ¿Cuánto queda sin desintegrarse después de 24 días?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "33,33 mg",
+          "error": "Dividió para 2·n en lugar de para 2ⁿ."
+        },
+        {
+          "letra": "B",
+          "texto": "66,67 mg",
+          "error": "Dividió para el número de vidas medias."
+        },
+        {
+          "letra": "C",
+          "texto": "12,50 mg",
+          "error": "Contó una vida media de más."
+        },
+        {
+          "letra": "D",
+          "texto": "25,00 mg",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "100,00 mg",
+          "error": "Consideró una sola vida media."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Pasan n = 24/8 = 3 vidas medias. N = N0·(½)ⁿ = 200·(½)^3 = 25,00 mg."
+    },
+    {
+      "id": "FIS-3BGU-U6-003",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Desintegración radiactiva: datación",
+      "destreza": "CN.F.5.5.7",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un fósil conserva el 25 % del carbono-14 que tenía al morir. La vida media del carbono-14 es 5 730 años. ¿Cuánto tiempo ha pasado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "22 920,00 años",
+          "error": "Creyó que un 25 % equivale a cuatro vidas medias."
+        },
+        {
+          "letra": "B",
+          "texto": "11 460,00 años",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "1 432,50 años",
+          "error": "Dividió la vida media para 4."
+        },
+        {
+          "letra": "D",
+          "texto": "17 190,00 años",
+          "error": "Contó tres vidas medias en lugar de dos."
+        },
+        {
+          "letra": "E",
+          "texto": "4 297,50 años",
+          "error": "Multiplicó la vida media por la fracción desintegrada (75 %)."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Queda 25 % = (½)^2: han pasado 2 vidas medias. t = 2·5 730,00 = 11 460,00 años."
+    },
+    {
+      "id": "FIS-3BGU-U6-004",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Desintegración radiactiva: datación",
+      "destreza": "CN.F.5.5.7",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Una fuente de cobalto-60 conserva 1/8 de su actividad inicial. Su vida media es 5,27 años. ¿Cuánto tiempo ha pasado?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "42,16 años",
+          "error": "Multiplicó por 8 en lugar de por el número de vidas medias."
+        },
+        {
+          "letra": "B",
+          "texto": "0,66 años",
+          "error": "Dividió la vida media para 8."
+        },
+        {
+          "letra": "C",
+          "texto": "10,54 años",
+          "error": "Contó dos vidas medias en lugar de tres."
+        },
+        {
+          "letra": "D",
+          "texto": "15,81 años",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "21,08 años",
+          "error": "Contó cuatro vidas medias en lugar de tres."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Queda 1/8 = (½)^3: han pasado 3 vidas medias. t = 3·5,27 = 15,81 años."
+    },
+    {
+      "id": "FIS-3BGU-U6-005",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Equivalencia masa-energía",
+      "destreza": "CN.F.5.5.8",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Si 1 g de materia se convirtiera completamente en energía, ¿cuánta energía se liberaría? (c = 3 × 10⁸ m/s)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "9,00 × 10¹³ J",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "4,50 × 10¹³ J",
+          "error": "Usó ½mc², confundiendo con energía cinética."
+        },
+        {
+          "letra": "C",
+          "texto": "9,00 × 10¹⁶ J",
+          "error": "No convirtió la masa a kilogramos."
+        },
+        {
+          "letra": "D",
+          "texto": "2,70 × 10²² J",
+          "error": "Elevó c al cubo."
+        },
+        {
+          "letra": "E",
+          "texto": "300 000,00 J",
+          "error": "No elevó la rapidez de la luz al cuadrado."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "1 g = 10⁻³ kg. E = m·c² = 1 × 10⁻³·(3 × 10⁸)² = 9,00 × 10¹³ J."
+    },
+    {
+      "id": "FIS-3BGU-U6-006",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Equivalencia masa-energía",
+      "destreza": "CN.F.5.5.8",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En una reacción nuclear desaparecen 5 mg de masa. ¿Cuánta energía se libera? (c = 3 × 10⁸ m/s)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "4,50 × 10¹¹ J",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "2,25 × 10¹¹ J",
+          "error": "Usó ½mc², confundiendo con energía cinética."
+        },
+        {
+          "letra": "C",
+          "texto": "1,35 × 10²⁰ J",
+          "error": "Elevó c al cubo."
+        },
+        {
+          "letra": "D",
+          "texto": "4,50 × 10¹⁷ J",
+          "error": "No convirtió la masa a kilogramos."
+        },
+        {
+          "letra": "E",
+          "texto": "1 500,00 J",
+          "error": "No elevó la rapidez de la luz al cuadrado."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "5 mg = 5 × 10⁻⁶ kg. E = m·c² = 5 × 10⁻⁶·(3 × 10⁸)² = 4,50 × 10¹¹ J."
+    },
+    {
+      "id": "FIS-3BGU-U6-007",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Desintegración alfa",
+      "destreza": "CN.F.5.5.7",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "El uranio-238 (Z = 92) emite una partícula alfa (dos protones y dos neutrones). ¿Qué núcleo se forma?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Protactinio-238 (Z = 91)",
+          "error": "Aplicó una desintegración beta."
+        },
+        {
+          "letra": "B",
+          "texto": "Radio-234 (Z = 88)",
+          "error": "Restó 4 también al número atómico."
+        },
+        {
+          "letra": "C",
+          "texto": "Torio-234 (Z = 90)",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Uranio-234 (Z = 92)",
+          "error": "No cambió el número atómico; el elemento sí cambia."
+        },
+        {
+          "letra": "E",
+          "texto": "Torio-236 (Z = 90)",
+          "error": "Restó solo 2 al número másico."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Una partícula alfa tiene A = 4 y Z = 2. A = 238 − 4 = 234; Z = 92 − 2 = 90, que corresponde al torio."
+    },
+    {
+      "id": "FIS-3BGU-U6-008",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Desintegración beta",
+      "destreza": "CN.F.5.5.7",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "El carbono-14 (Z = 6) sufre desintegración beta negativa: un neutrón se convierte en protón y se emite un electrón. ¿Qué núcleo se forma?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Nitrógeno-15 (Z = 7)",
+          "error": "Sumó un nucleón además del protón."
+        },
+        {
+          "letra": "B",
+          "texto": "Berilio-10 (Z = 4)",
+          "error": "Aplicó una desintegración alfa."
+        },
+        {
+          "letra": "C",
+          "texto": "Nitrógeno-14 (Z = 7)",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Boro-14 (Z = 5)",
+          "error": "Restó 1 al número atómico en lugar de sumarlo."
+        },
+        {
+          "letra": "E",
+          "texto": "Carbono-13 (Z = 6)",
+          "error": "Quitó un nucleón; en la beta el número másico no cambia."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "En la beta negativa Z aumenta en 1 y A no cambia: A = 14, Z = 7, que es nitrógeno-14."
+    },
+    {
+      "id": "FIS-3BGU-U6-009",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Energía de enlace nuclear",
+      "destreza": "CN.F.5.5.6",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "El defecto de masa del núcleo de helio-4 es 0,0304 u. Si 1 u equivale a 931,5 MeV, ¿cuál es su energía de enlace total?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "7,08 MeV",
+          "error": "Calculó la energía de enlace por nucleón."
+        },
+        {
+          "letra": "B",
+          "texto": "931,50 MeV",
+          "error": "Olvidó multiplicar por el defecto de masa."
+        },
+        {
+          "letra": "C",
+          "texto": "30 641,45 MeV",
+          "error": "Dividió el factor de conversión para el defecto de masa."
+        },
+        {
+          "letra": "D",
+          "texto": "28,32 MeV",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "2,74 × 10¹⁵ MeV",
+          "error": "Multiplicó por c² sin pasar la masa a kilogramos."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "E = Δm·931,5 MeV/u = 0,0304·931,5 ≈ 28,32 MeV."
+    },
+    {
+      "id": "FIS-3BGU-U6-010",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Fuerzas fundamentales",
+      "destreza": "CN.F.5.5.8",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En el núcleo hay varios protones muy cerca, que se repelen eléctricamente. ¿Qué fuerza mantiene unido al núcleo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La fuerza gravitacional.",
+          "error": "A esa escala la gravedad es despreciable."
+        },
+        {
+          "letra": "B",
+          "texto": "La fuerza centrípeta.",
+          "error": "No es una fuerza fundamental de la naturaleza."
+        },
+        {
+          "letra": "C",
+          "texto": "La fuerza nuclear débil.",
+          "error": "Interviene en la desintegración beta, no en la cohesión."
+        },
+        {
+          "letra": "D",
+          "texto": "La fuerza electromagnética.",
+          "error": "Es la que provoca la repulsión entre protones."
+        },
+        {
+          "letra": "E",
+          "texto": "La fuerza nuclear fuerte.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La fuerza nuclear fuerte es la más intensa de las cuatro fundamentales y actúa a distancias del tamaño del núcleo."
+    },
+    {
+      "id": "FIS-3BGU-U6-011",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Fuerzas fundamentales",
+      "destreza": "CN.F.5.5.7",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué fuerza fundamental es responsable de la desintegración beta?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La fuerza nuclear débil.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "La fuerza electromagnética.",
+          "error": "No transforma neutrones en protones."
+        },
+        {
+          "letra": "C",
+          "texto": "La fuerza de rozamiento.",
+          "error": "No es una fuerza fundamental."
+        },
+        {
+          "letra": "D",
+          "texto": "La gravedad.",
+          "error": "No interviene en procesos nucleares."
+        },
+        {
+          "letra": "E",
+          "texto": "La fuerza nuclear fuerte.",
+          "error": "La fuerte mantiene unido al núcleo."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La interacción débil permite que un neutrón se convierta en protón, emitiendo un electrón y un antineutrino."
+    },
+    {
+      "id": "FIS-3BGU-U6-012",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Penetración de las radiaciones",
+      "destreza": "CN.F.5.5.7",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "En un laboratorio se observa que una radiación es detenida por una hoja de papel, otra por una lámina de aluminio y la tercera atraviesa ambas y solo se reduce con plomo. ¿En qué orden aparecen?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Beta, alfa y gamma.",
+          "error": "La alfa es la menos penetrante."
+        },
+        {
+          "letra": "B",
+          "texto": "Gamma, beta y alfa.",
+          "error": "Invierte el poder de penetración."
+        },
+        {
+          "letra": "C",
+          "texto": "Alfa, beta y gamma.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Las tres son iguales.",
+          "error": "Su poder de penetración es muy distinto."
+        },
+        {
+          "letra": "E",
+          "texto": "Alfa, gamma y beta.",
+          "error": "La gamma es la más penetrante."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Las partículas alfa, grandes y con carga +2, se detienen con papel; las beta con aluminio; los rayos gamma, sin masa ni carga, necesitan plomo u hormigón."
+    },
+    {
+      "id": "FIS-3BGU-U6-013",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Quarks",
+      "destreza": "CN.F.5.5.9",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿De qué está formado un protón según el modelo estándar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "De tres quarks: dos quarks up y un quark down.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "De dos quarks: un quark y un antiquark.",
+          "error": "Esa combinación forma un mesón."
+        },
+        {
+          "letra": "C",
+          "texto": "De un electrón y un neutrón.",
+          "error": "El protón no contiene electrones."
+        },
+        {
+          "letra": "D",
+          "texto": "De dos quarks down y un quark up.",
+          "error": "Esa combinación forma un neutrón."
+        },
+        {
+          "letra": "E",
+          "texto": "No tiene partes: es una partícula elemental.",
+          "error": "El protón es una partícula compuesta."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "El protón (carga +1) está formado por uud: +2/3 + 2/3 − 1/3 = +1."
+    },
+    {
+      "id": "FIS-3BGU-U6-014",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Hadrones: mesones y bariones",
+      "destreza": "CN.F.5.5.10",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "En el modelo estándar, ¿qué diferencia a un mesón de un barión?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El mesón tiene dos quarks (quark y antiquark) y el barión tiene tres quarks.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "El mesón es un leptón y el barión un hadrón.",
+          "error": "Ambos son hadrones."
+        },
+        {
+          "letra": "C",
+          "texto": "El mesón tiene tres quarks y el barión dos.",
+          "error": "Invierte la clasificación."
+        },
+        {
+          "letra": "D",
+          "texto": "El mesón no tiene quarks.",
+          "error": "Los mesones están formados por quarks."
+        },
+        {
+          "letra": "E",
+          "texto": "Los bariones son siempre más livianos.",
+          "error": "No es la diferencia que los define."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Los hadrones se clasifican por su número de quarks: mesones (quark-antiquark) y bariones (tres quarks), como protones y neutrones."
+    },
+    {
+      "id": "FIS-3BGU-U6-015",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Neutrinos",
+      "destreza": "CN.F.5.5.11",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Cuántos tipos de neutrinos reconoce el modelo estándar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ninguno: son partículas hipotéticas.",
+          "error": "Los neutrinos se han detectado experimentalmente."
+        },
+        {
+          "letra": "B",
+          "texto": "Uno solo, asociado al electrón.",
+          "error": "Se han identificado tres tipos."
+        },
+        {
+          "letra": "C",
+          "texto": "Cuatro, uno por cada fuerza fundamental.",
+          "error": "No hay relación entre los tipos de neutrinos y las fuerzas."
+        },
+        {
+          "letra": "D",
+          "texto": "Dos: positivo y negativo.",
+          "error": "Los neutrinos no tienen carga eléctrica."
+        },
+        {
+          "letra": "E",
+          "texto": "Tres: electrónico, muónico y tauónico.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Hay tres tipos de neutrinos, uno por cada leptón cargado: electrón, muón y tau. Su masa exacta aún no se conoce."
+    },
+    {
+      "id": "FIS-3BGU-U6-016",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Bosones y campo de Higgs",
+      "destreza": "CN.F.5.5.13",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Según el modelo estándar, ¿qué papel cumple el campo de Higgs?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Produce la radiactividad alfa.",
+          "error": "No está relacionado con la desintegración alfa."
+        },
+        {
+          "letra": "B",
+          "texto": "Es la fuerza que une los quarks.",
+          "error": "Esa función corresponde a los gluones."
+        },
+        {
+          "letra": "C",
+          "texto": "Explica la gravedad.",
+          "error": "El modelo estándar no incluye la gravedad."
+        },
+        {
+          "letra": "D",
+          "texto": "Es la partícula de la luz.",
+          "error": "La partícula de la luz es el fotón."
+        },
+        {
+          "letra": "E",
+          "texto": "Explica cómo las partículas elementales adquieren masa.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Al interactuar con el campo de Higgs, las partículas adquieren masa. Su cuanto, el bosón de Higgs, se detectó en el CERN en 2012."
+    },
+    {
+      "id": "FIS-3BGU-U6-017",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Materia y energía oscura",
+      "destreza": "CN.F.5.5.15",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Cómo se sabe que existe la materia oscura, si no se puede ver?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque emite una luz oscura detectable.",
+          "error": "No emite ni refleja luz."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque el modelo estándar la describe completamente.",
+          "error": "El modelo estándar no la explica."
+        },
+        {
+          "letra": "C",
+          "texto": "Porque es la misma que forma los agujeros negros.",
+          "error": "Son conceptos distintos."
+        },
+        {
+          "letra": "D",
+          "texto": "Por los efectos gravitacionales que produce sobre la materia visible, como la rotación de las galaxias.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Porque se ha visto con telescopios ópticos.",
+          "error": "No es observable directamente con luz."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Las galaxias giran más rápido de lo que permite su materia visible. Esa gravedad adicional se atribuye a la materia oscura."
+    },
+    {
+      "id": "FIS-3BGU-U6-018",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Alcance del modelo estándar",
+      "destreza": "CN.F.5.5.14",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "¿Qué fenómeno NO explica el modelo estándar de partículas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La fuerza electromagnética.",
+          "error": "Sí la incluye, mediada por el fotón."
+        },
+        {
+          "letra": "B",
+          "texto": "La fuerza nuclear débil.",
+          "error": "Sí la incluye, mediada por los bosones W y Z."
+        },
+        {
+          "letra": "C",
+          "texto": "La composición del protón.",
+          "error": "Sí la explica mediante los quarks."
+        },
+        {
+          "letra": "D",
+          "texto": "La fuerza nuclear fuerte.",
+          "error": "Sí la incluye, mediada por los gluones."
+        },
+        {
+          "letra": "E",
+          "texto": "La gravedad.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "El modelo estándar describe tres fuerzas fundamentales, pero deja fuera la gravedad, la materia oscura y la energía oscura."
+    },
+    {
+      "id": "FIS-3BGU-U6-019",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Física moderna y sociedad",
+      "destreza": "CN.F.5.6.4",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Los equipos de resonancia magnética de los hospitales usan superconductores. ¿Qué ventaja ofrecen?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Reducen la masa del paciente.",
+          "error": "No tienen ese efecto."
+        },
+        {
+          "letra": "B",
+          "texto": "Conducen corriente sin resistencia y generan campos magnéticos muy intensos sin perder energía por calor.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Funcionan sin electricidad.",
+          "error": "Necesitan corriente eléctrica."
+        },
+        {
+          "letra": "D",
+          "texto": "Producen rayos X para las imágenes.",
+          "error": "La resonancia magnética no usa rayos X."
+        },
+        {
+          "letra": "E",
+          "texto": "Emiten radiación alfa para examinar tejidos.",
+          "error": "No se usa radiación alfa."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Un superconductor tiene resistencia nula a muy baja temperatura: puede llevar corrientes enormes y crear campos intensos sin efecto Joule."
+    },
+    {
+      "id": "FIS-3BGU-U6-020",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Desintegración radiactiva: vida media",
+      "destreza": "CN.F.5.5.7",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-3BGU-L6",
+      "enunciado": "Según la lectura, ¿cuál es la actividad de la dosis 24 horas después de aplicada?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "50 MBq",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "200 MBq",
+          "error": "Dividió para 4 en lugar de 2⁴."
+        },
+        {
+          "letra": "C",
+          "texto": "100 MBq",
+          "error": "Contó tres vidas medias en lugar de cuatro."
+        },
+        {
+          "letra": "D",
+          "texto": "0 MBq",
+          "error": "Supuso que a las 24 horas desaparece toda la actividad."
+        },
+        {
+          "letra": "E",
+          "texto": "400 MBq",
+          "error": "Consideró una sola vida media."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "24 h/6 h = 4 vidas medias. A = 800·(½)⁴ = 800/16 = 50 MBq."
+    },
+    {
+      "id": "FIS-3BGU-U6-021",
+      "materia": "Física",
+      "curso": "3ro BGU",
+      "unidad": 6,
+      "tema": "Penetración de las radiaciones",
+      "destreza": "CN.F.5.5.7",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-3BGU-L6",
+      "enunciado": "De acuerdo con la lectura, ¿por qué se usa un emisor de rayos gamma y no de partículas alfa para obtener la imagen?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque las partículas alfa no existen en el cuerpo.",
+          "error": "No responde a la pregunta sobre la detección."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque las partículas alfa son más penetrantes.",
+          "error": "Las alfa son las menos penetrantes."
+        },
+        {
+          "letra": "C",
+          "texto": "Porque los rayos gamma atraviesan el cuerpo y pueden detectarse desde fuera.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Porque los rayos gamma son ondas de sonido.",
+          "error": "Son radiación electromagnética."
+        },
+        {
+          "letra": "E",
+          "texto": "Porque los rayos gamma tienen carga eléctrica.",
+          "error": "Los rayos gamma no tienen carga."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Para formar la imagen, la radiación debe salir del cuerpo. Las alfa se detendrían en pocos milímetros de tejido; los gamma atraviesan y llegan a la cámara."
+    }
+  ]
+}

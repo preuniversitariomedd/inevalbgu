@@ -1,0 +1,5214 @@
+{
+  "materia": "Física",
+  "curso": "2do BGU",
+  "anio_lectivo": "2026-2027",
+  "institucion": "U.E. Diecinueve de Enero",
+  "lineamientos": "Currículo MinEduc 2016 (destrezas con criterios de desempeño) y pautas de construcción de ítems de opción múltiple tipo INEVAL: base con contexto, enunciado, una sola respuesta correcta y distractores plausibles basados en errores comunes.",
+  "total_preguntas": 126,
+  "lecturas": [
+    {
+      "id": "FIS-2BGU-L1",
+      "unidad": 1,
+      "titulo": "La noria del parque",
+      "texto": "El parque de diversiones del barrio instaló una noria de 50 m de diámetro. Según el operador, la rueda gira con rapidez constante y completa una vuelta cada 4 minutos, lo que permite a los pasajeros subir y bajar sin detenerla por completo. Las cabinas están fijas al borde de la rueda. Un grupo de estudiantes de segundo de bachillerato visitó el parque para medir el movimiento: con un cronómetro comprobaron el tiempo de una vuelta y con los planos del fabricante confirmaron las dimensiones. Su objetivo era calcular la velocidad angular de la rueda y la rapidez con la que se mueve cada cabina."
+    },
+    {
+      "id": "FIS-2BGU-L2",
+      "unidad": 2,
+      "titulo": "La suspensión de un auto",
+      "texto": "La suspensión de un automóvil usa cuatro resortes, uno por rueda, que absorben las irregularidades del camino. Un técnico explica a los estudiantes de Electromecánica que un auto de 1 200 kg reparte su peso por igual entre las cuatro ruedas. Cuando el auto está vacío y en reposo, cada resorte se comprime 3 cm respecto a su longitud natural. Cuando suben pasajeros, los resortes se comprimen un poco más. Para estos cálculos se puede suponer que los resortes cumplen la ley de Hooke y que g = 9,8 m/s²."
+    },
+    {
+      "id": "FIS-2BGU-L3",
+      "unidad": 3,
+      "titulo": "Una microcentral hidroeléctrica",
+      "texto": "En una comunidad de la Sierra, un río de montaña alimenta una pequeña central hidroeléctrica. El agua se conduce por una tubería y cae 50 m antes de mover la turbina. Los técnicos midieron un caudal de 2 m³ de agua por segundo; cada metro cúbico de agua tiene una masa de 1 000 kg. La potencia que entrega el agua al caer se calcula como P = ρ·Q·g·h. Sin embargo, la turbina y el generador no aprovechan toda esa energía: el sistema tiene una eficiencia del 85 %. La energía eléctrica abastece la escuela y el centro de salud de la comunidad."
+    },
+    {
+      "id": "FIS-2BGU-L4",
+      "unidad": 4,
+      "titulo": "Jugo con hielo",
+      "texto": "En un día caluroso en Guayaquil, Camila sirve 0,30 kg de jugo de naranjilla a 28 °C y le agrega un cubo de hielo de 0,05 kg que está justo a 0 °C. El vaso es de plástico grueso, por lo que se puede suponer que casi no intercambia calor con el ambiente. El jugo se comporta como agua (c = 4 186 J/kg·°C). Para derretir el hielo hace falta su calor latente de fusión, 334 000 J/kg; después, el agua del hielo derretido también se calienta hasta la temperatura final. Camila quiere saber a qué temperatura quedará su bebida."
+    },
+    {
+      "id": "FIS-2BGU-L5",
+      "unidad": 5,
+      "titulo": "Las pantallas digitales del aula",
+      "texto": "En el proyecto “Pantallas digitales para el aula”, los estudiantes de Electromecánica revisan la instalación eléctrica antes de conectar una pantalla nueva. La placa del equipo indica una potencia de 150 W y la red de la institución es de 120 V, como en la mayoría de hogares del Ecuador. La pantalla se usará unas 6 horas por día, 5 días a la semana. Los estudiantes deben comprobar que el tomacorriente soporte la corriente del equipo y estimar el consumo de energía semanal para incluirlo en su informe técnico a la comunidad educativa."
+    },
+    {
+      "id": "FIS-2BGU-L6",
+      "unidad": 6,
+      "titulo": "El reloj de péndulo del abuelo",
+      "texto": "El abuelo de Mateo conserva un reloj de péndulo que compró hace años en Guayaquil. El mecanismo está ajustado para que el péndulo tarde exactamente 2 s en completar una oscilación de ida y vuelta; con cada oscilación, el engranaje avanza las agujas. En el puerto principal la gravedad es de unos 9,8 m/s². La familia se mudará a Quito, a más de 2 800 m de altura, donde la gravedad es un poco menor, alrededor de 9,77 m/s². Mateo se pregunta qué longitud tiene el péndulo y si el reloj seguirá marcando bien la hora."
+    }
+  ],
+  "preguntas": [
+    {
+      "id": "FIS-2BGU-U1-001",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "Lanzamiento horizontal",
+      "destreza": "CN.F.5.1.29",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Desde una terraza de 20 m de altura se lanza horizontalmente una pelota a 15 m/s. Sin considerar la resistencia del aire y con g = 9,8 m/s², ¿a qué distancia horizontal del punto de lanzamiento cae?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "30,30 m",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "22,96 m",
+          "error": "Aplicó la fórmula de alcance de un tiro oblicuo, v²/g, que no corresponde."
+        },
+        {
+          "letra": "C",
+          "texto": "21,43 m",
+          "error": "Usó t = √(h/g) y olvidó el factor 2 de la ecuación de caída."
+        },
+        {
+          "letra": "D",
+          "texto": "2,02 m",
+          "error": "Dio el tiempo de caída como si fuera la distancia horizontal."
+        },
+        {
+          "letra": "E",
+          "texto": "61,22 m",
+          "error": "Calculó t = 2h/g y olvidó extraer la raíz cuadrada."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "El movimiento vertical es una caída libre: t = √(2h/g) = √(2·20/9,8) ≈ 2,02 s. En el eje horizontal la velocidad es constante: x = v·t = 15·2,02 ≈ 30,30 m."
+    },
+    {
+      "id": "FIS-2BGU-U1-002",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "Lanzamiento horizontal",
+      "destreza": "CN.F.5.1.29",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un dron que vuela a 45 m de altura con velocidad horizontal de 12 m/s suelta un paquete de ayuda humanitaria. Sin considerar la resistencia del aire y con g = 9,8 m/s², ¿a qué distancia horizontal del punto de lanzamiento cae?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "36,37 m",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "25,71 m",
+          "error": "Usó t = √(h/g) y olvidó el factor 2 de la ecuación de caída."
+        },
+        {
+          "letra": "C",
+          "texto": "3,03 m",
+          "error": "Dio el tiempo de caída como si fuera la distancia horizontal."
+        },
+        {
+          "letra": "D",
+          "texto": "110,20 m",
+          "error": "Calculó t = 2h/g y olvidó extraer la raíz cuadrada."
+        },
+        {
+          "letra": "E",
+          "texto": "14,69 m",
+          "error": "Aplicó la fórmula de alcance de un tiro oblicuo, v²/g, que no corresponde."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "El movimiento vertical es una caída libre: t = √(2h/g) = √(2·45/9,8) ≈ 3,03 s. En el eje horizontal la velocidad es constante: x = v·t = 12·3,03 ≈ 36,37 m."
+    },
+    {
+      "id": "FIS-2BGU-U1-003",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "Tiro oblicuo: tiempo de vuelo",
+      "destreza": "CN.F.5.1.29",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un futbolista patea el balón desde el césped con 18 m/s a 30° sobre la horizontal. Si el objeto cae al mismo nivel desde el que salió, ¿cuánto tiempo permanece en el aire? (g = 9,8 m/s²)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "3,67 s",
+          "error": "Ignoró el ángulo y usó la velocidad total como si fuera vertical."
+        },
+        {
+          "letra": "B",
+          "texto": "1,84 s",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "3,18 s",
+          "error": "Usó la componente horizontal (coseno) en lugar de la vertical (seno)."
+        },
+        {
+          "letra": "D",
+          "texto": "0,46 s",
+          "error": "Dividió para 2 en lugar de multiplicar por 2."
+        },
+        {
+          "letra": "E",
+          "texto": "0,92 s",
+          "error": "Calculó solo el tiempo de subida y olvidó duplicarlo."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "El tiempo de vuelo depende de la componente vertical: v_y = v·sen θ = 18·sen 30° ≈ 9,00 m/s. t = 2·v_y/g = 2·9,00/9,8 ≈ 1,84 s."
+    },
+    {
+      "id": "FIS-2BGU-U1-004",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "Tiro oblicuo: tiempo de vuelo",
+      "destreza": "CN.F.5.1.29",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "La catapulta del proyecto de ciencias lanza una piedra con 14 m/s a 53° sobre un terreno plano. Si el objeto cae al mismo nivel desde el que salió, ¿cuánto tiempo permanece en el aire? (g = 9,8 m/s²)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,14 s",
+          "error": "Calculó solo el tiempo de subida y olvidó duplicarlo."
+        },
+        {
+          "letra": "B",
+          "texto": "1,72 s",
+          "error": "Usó la componente horizontal (coseno) en lugar de la vertical (seno)."
+        },
+        {
+          "letra": "C",
+          "texto": "2,28 s",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "2,86 s",
+          "error": "Ignoró el ángulo y usó la velocidad total como si fuera vertical."
+        },
+        {
+          "letra": "E",
+          "texto": "0,57 s",
+          "error": "Dividió para 2 en lugar de multiplicar por 2."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "El tiempo de vuelo depende de la componente vertical: v_y = v·sen θ = 14·sen 53° ≈ 11,18 m/s. t = 2·v_y/g = 2·11,18/9,8 ≈ 2,28 s."
+    },
+    {
+      "id": "FIS-2BGU-U1-005",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "Tiro oblicuo: altura máxima",
+      "destreza": "CN.F.5.1.29",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "El chorro de una fuente del parque sale con 20 m/s formando 60° con el suelo. ¿Qué altura máxima alcanza? (g = 9,8 m/s², sin resistencia del aire)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "30,61 m",
+          "error": "Olvidó el 2 del denominador en H = v_y²/(2g)."
+        },
+        {
+          "letra": "B",
+          "texto": "5,10 m",
+          "error": "Usó la componente horizontal (coseno) en lugar de la vertical."
+        },
+        {
+          "letra": "C",
+          "texto": "17,67 m",
+          "error": "Elevó al cuadrado la velocidad pero no el seno del ángulo."
+        },
+        {
+          "letra": "D",
+          "texto": "15,31 m",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "20,41 m",
+          "error": "Ignoró el ángulo: usó la velocidad total como si fuera vertical."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "En el punto más alto v_y = 0. Con v_y0 = 20·sen 60° ≈ 17,32 m/s: H = v_y0²/(2g) = 17,32²/19,6 ≈ 15,31 m."
+    },
+    {
+      "id": "FIS-2BGU-U1-006",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "Tiro oblicuo: altura máxima",
+      "destreza": "CN.F.5.1.29",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una pelota de golf sale con 25 m/s a 40° sobre la horizontal. ¿Qué altura máxima alcanza? (g = 9,8 m/s², sin resistencia del aire)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "26,35 m",
+          "error": "Olvidó el 2 del denominador en H = v_y²/(2g)."
+        },
+        {
+          "letra": "B",
+          "texto": "18,71 m",
+          "error": "Usó la componente horizontal (coseno) en lugar de la vertical."
+        },
+        {
+          "letra": "C",
+          "texto": "31,89 m",
+          "error": "Ignoró el ángulo: usó la velocidad total como si fuera vertical."
+        },
+        {
+          "letra": "D",
+          "texto": "13,18 m",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "20,50 m",
+          "error": "Elevó al cuadrado la velocidad pero no el seno del ángulo."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "En el punto más alto v_y = 0. Con v_y0 = 25·sen 40° ≈ 16,07 m/s: H = v_y0²/(2g) = 16,07²/19,6 ≈ 13,18 m."
+    },
+    {
+      "id": "FIS-2BGU-U1-007",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "Tiro oblicuo: alcance horizontal",
+      "destreza": "CN.F.5.1.29",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "En un partido de vóley playa, el balón sale con 20 m/s a 30° sobre la horizontal. Si cae al mismo nivel del lanzamiento, ¿cuál es su alcance horizontal? (g = 9,8 m/s²)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,77 m",
+          "error": "No elevó la velocidad al cuadrado."
+        },
+        {
+          "letra": "B",
+          "texto": "40,82 m",
+          "error": "Escribió 2·sen θ en lugar de sen 2θ."
+        },
+        {
+          "letra": "C",
+          "texto": "35,35 m",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "20,41 m",
+          "error": "Usó sen θ en lugar de sen 2θ."
+        },
+        {
+          "letra": "E",
+          "texto": "17,67 m",
+          "error": "Dividió para 2g, confundiendo con la fórmula de altura máxima."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "R = v²·sen(2θ)/g = 20²·sen 60°/9,8 ≈ 35,35 m. Recuerda que sen 2θ ≠ 2·sen θ."
+    },
+    {
+      "id": "FIS-2BGU-U1-008",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "Tiro oblicuo: alcance horizontal",
+      "destreza": "CN.F.5.1.29",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "En la clase de Educación Física, una jabalina escolar se lanza con 15 m/s a 37°. Si cae al mismo nivel del lanzamiento, ¿cuál es su alcance horizontal? (g = 9,8 m/s²)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,47 m",
+          "error": "No elevó la velocidad al cuadrado."
+        },
+        {
+          "letra": "B",
+          "texto": "22,07 m",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "27,63 m",
+          "error": "Escribió 2·sen θ en lugar de sen 2θ."
+        },
+        {
+          "letra": "D",
+          "texto": "13,82 m",
+          "error": "Usó sen θ en lugar de sen 2θ."
+        },
+        {
+          "letra": "E",
+          "texto": "11,03 m",
+          "error": "Dividió para 2g, confundiendo con la fórmula de altura máxima."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "R = v²·sen(2θ)/g = 15²·sen 74°/9,8 ≈ 22,07 m. Recuerda que sen 2θ ≠ 2·sen θ."
+    },
+    {
+      "id": "FIS-2BGU-U1-009",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "MCU: relación entre magnitudes angulares y lineales",
+      "destreza": "CN.F.5.1.15",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un ventilador de techo gira a 120 rpm y la punta de sus aspas está a 0,60 m del eje. ¿Cuál es la rapidez lineal de un punto del borde?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,20 m/s",
+          "error": "Dividió para 60 pero olvidó multiplicar por 2π rad por vuelta."
+        },
+        {
+          "letra": "B",
+          "texto": "7,54 m/s",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "15,08 m/s",
+          "error": "Usó el diámetro en lugar del radio."
+        },
+        {
+          "letra": "D",
+          "texto": "72,00 m/s",
+          "error": "Multiplicó rpm por el radio sin convertir a rad/s."
+        },
+        {
+          "letra": "E",
+          "texto": "452,39 m/s",
+          "error": "Convirtió vueltas a radianes pero olvidó dividir para 60 s."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "ω = 120 rev/min · 2π rad/rev · 1 min/60 s ≈ 12,57 rad/s. v = ω·r = 12,57·0,60 ≈ 7,54 m/s."
+    },
+    {
+      "id": "FIS-2BGU-U1-010",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "MCU: relación entre magnitudes angulares y lineales",
+      "destreza": "CN.F.5.1.15",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "La rueda de una bicicleta, de 0,35 m de radio, gira a 180 rpm. ¿Cuál es la rapidez lineal de un punto del borde?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "6,60 m/s",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "63,00 m/s",
+          "error": "Multiplicó rpm por el radio sin convertir a rad/s."
+        },
+        {
+          "letra": "C",
+          "texto": "1,05 m/s",
+          "error": "Dividió para 60 pero olvidó multiplicar por 2π rad por vuelta."
+        },
+        {
+          "letra": "D",
+          "texto": "13,19 m/s",
+          "error": "Usó el diámetro en lugar del radio."
+        },
+        {
+          "letra": "E",
+          "texto": "395,84 m/s",
+          "error": "Convirtió vueltas a radianes pero olvidó dividir para 60 s."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "ω = 180 rev/min · 2π rad/rev · 1 min/60 s ≈ 18,85 rad/s. v = ω·r = 18,85·0,35 ≈ 6,60 m/s."
+    },
+    {
+      "id": "FIS-2BGU-U1-011",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "MCU: aceleración centrípeta",
+      "destreza": "CN.F.5.1.12",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un auto toma una curva de 50 m de radio a 15 m/s constantes. ¿Cuál es la magnitud de su aceleración centrípeta?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "4,50 m/s²",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "2,25 m/s²",
+          "error": "Usó el diámetro en lugar del radio."
+        },
+        {
+          "letra": "C",
+          "texto": "11 250,00 m/s²",
+          "error": "Multiplicó por el radio en lugar de dividir."
+        },
+        {
+          "letra": "D",
+          "texto": "0,09 m/s²",
+          "error": "Elevó al cuadrado el cociente v/r; eso es ω², no la aceleración."
+        },
+        {
+          "letra": "E",
+          "texto": "0,30 m/s²",
+          "error": "No elevó la velocidad al cuadrado (v/r es la velocidad angular)."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "a_c = v²/r = 15²/50,00 ≈ 4,50 m/s², dirigida hacia el centro de la curva."
+    },
+    {
+      "id": "FIS-2BGU-U1-012",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "MCU: aceleración centrípeta",
+      "destreza": "CN.F.5.1.12",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Una piedra atada a una cuerda de 0,80 m gira con rapidez constante de 4 m/s. ¿Cuál es la magnitud de su aceleración centrípeta?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "5,00 m/s²",
+          "error": "No elevó la velocidad al cuadrado (v/r es la velocidad angular)."
+        },
+        {
+          "letra": "B",
+          "texto": "20,00 m/s²",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "12,80 m/s²",
+          "error": "Multiplicó por el radio en lugar de dividir."
+        },
+        {
+          "letra": "D",
+          "texto": "25,00 m/s²",
+          "error": "Elevó al cuadrado el cociente v/r; eso es ω², no la aceleración."
+        },
+        {
+          "letra": "E",
+          "texto": "10,00 m/s²",
+          "error": "Usó el diámetro en lugar del radio."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "a_c = v²/r = 4²/0,80 ≈ 20,00 m/s², dirigida hacia el centro de la curva."
+    },
+    {
+      "id": "FIS-2BGU-U1-013",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "MCUV: desplazamiento angular",
+      "destreza": "CN.F.5.1.13",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "La rueda de un carro pasa de 10 rad/s a 30 rad/s en 5 s con aceleración angular constante. ¿Cuántas vueltas completa en ese intervalo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "31,83 vueltas",
+          "error": "Dividió para π en lugar de 2π."
+        },
+        {
+          "letra": "B",
+          "texto": "100,00 vueltas",
+          "error": "Calculó el ángulo en radianes y no lo dividió para 2π."
+        },
+        {
+          "letra": "C",
+          "texto": "7,96 vueltas",
+          "error": "Ignoró la aceleración y usó solo la velocidad inicial."
+        },
+        {
+          "letra": "D",
+          "texto": "15,92 vueltas",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "23,87 vueltas",
+          "error": "Supuso que giró todo el tiempo con la velocidad final."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "α = (ω_f − ω_0)/t = (30 − 10)/5 = 4,00 rad/s². θ = ω_0·t + ½·α·t² = 100,00 rad. Vueltas = θ/(2π) ≈ 15,92."
+    },
+    {
+      "id": "FIS-2BGU-U1-014",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "MCUV: desplazamiento angular",
+      "destreza": "CN.F.5.1.13",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un ventilador acelera uniformemente de 5 rad/s a 25 rad/s en 4 s. ¿Cuántas vueltas completa en ese intervalo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "9,55 vueltas",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "60,00 vueltas",
+          "error": "Calculó el ángulo en radianes y no lo dividió para 2π."
+        },
+        {
+          "letra": "C",
+          "texto": "15,92 vueltas",
+          "error": "Supuso que giró todo el tiempo con la velocidad final."
+        },
+        {
+          "letra": "D",
+          "texto": "3,18 vueltas",
+          "error": "Ignoró la aceleración y usó solo la velocidad inicial."
+        },
+        {
+          "letra": "E",
+          "texto": "19,10 vueltas",
+          "error": "Dividió para π en lugar de 2π."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "α = (ω_f − ω_0)/t = (25 − 5)/4 = 5,00 rad/s². θ = ω_0·t + ½·α·t² = 60,00 rad. Vueltas = θ/(2π) ≈ 9,55."
+    },
+    {
+      "id": "FIS-2BGU-U1-015",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "MCU: periodo, frecuencia y velocidad angular",
+      "destreza": "CN.F.5.1.15",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un carrusel da 6 vueltas en 1 minuto. ¿Cuál es su velocidad angular?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,63 rad/s",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "0,10 rad/s",
+          "error": "Dio la frecuencia (vueltas por segundo) sin multiplicar por 2π."
+        },
+        {
+          "letra": "C",
+          "texto": "0,31 rad/s",
+          "error": "Usó π rad por vuelta en lugar de 2π."
+        },
+        {
+          "letra": "D",
+          "texto": "62,83 rad/s",
+          "error": "Multiplicó 2π por el periodo en lugar de dividir."
+        },
+        {
+          "letra": "E",
+          "texto": "37,70 rad/s",
+          "error": "Calculó el ángulo total y no lo dividió para el tiempo."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "f = vueltas/tiempo = 6/60 ≈ 0,10 Hz y T = 1/f ≈ 10,00 s. ω = 2π·f ≈ 0,63 rad/s."
+    },
+    {
+      "id": "FIS-2BGU-U1-016",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "MCU: periodo, frecuencia y velocidad angular",
+      "destreza": "CN.F.5.1.15",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "En el centrifugado, el tambor de una lavadora da 20 vueltas en 2 s. ¿Cuál es su velocidad angular?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "125,66 rad/s",
+          "error": "Calculó el ángulo total y no lo dividió para el tiempo."
+        },
+        {
+          "letra": "B",
+          "texto": "62,83 rad/s",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "31,42 rad/s",
+          "error": "Usó π rad por vuelta en lugar de 2π."
+        },
+        {
+          "letra": "D",
+          "texto": "0,63 rad/s",
+          "error": "Multiplicó 2π por el periodo en lugar de dividir."
+        },
+        {
+          "letra": "E",
+          "texto": "10,00 rad/s",
+          "error": "Dio la frecuencia (vueltas por segundo) sin multiplicar por 2π."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "f = vueltas/tiempo = 20/2 ≈ 10,00 Hz y T = 1/f ≈ 0,10 s. ω = 2π·f ≈ 62,83 rad/s."
+    },
+    {
+      "id": "FIS-2BGU-U1-017",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "Proyectiles: naturaleza vectorial",
+      "destreza": "CN.F.5.1.28",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un balón pateado en forma oblicua llega al punto más alto de su trayectoria. Sin resistencia del aire, ¿qué afirmación es correcta en ese instante?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La velocidad vertical es cero y la aceleración sigue siendo 9,8 m/s² hacia abajo.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "La velocidad total es cero y la aceleración es 9,8 m/s² hacia abajo.",
+          "error": "Olvida que la componente horizontal de la velocidad se mantiene."
+        },
+        {
+          "letra": "C",
+          "texto": "La aceleración cambia de sentido y apunta hacia arriba.",
+          "error": "Cree que la gravedad invierte su sentido al subir y bajar."
+        },
+        {
+          "letra": "D",
+          "texto": "La velocidad horizontal es cero y la vertical es máxima.",
+          "error": "Intercambia el comportamiento de las componentes."
+        },
+        {
+          "letra": "E",
+          "texto": "La velocidad y la aceleración son cero.",
+          "error": "Confunde velocidad vertical nula con aceleración nula."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La gravedad actúa durante todo el vuelo, siempre hacia abajo. En la cima solo se anula la componente vertical de la velocidad; la horizontal sigue igual."
+    },
+    {
+      "id": "FIS-2BGU-U1-018",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "Independencia de los movimientos",
+      "destreza": "CN.F.5.1.5",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Desde el borde de una mesa, Ana deja caer una moneda y, en el mismo instante, Luis lanza otra moneda igual horizontalmente. Sin resistencia del aire, ¿qué ocurre?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La lanzada tarda el doble, porque recorre el doble de camino.",
+          "error": "Supone que el tiempo depende de la trayectoria total."
+        },
+        {
+          "letra": "B",
+          "texto": "Llegan al mismo tiempo, porque su movimiento vertical es igual.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Llega primero la lanzada horizontalmente, porque es más rápida.",
+          "error": "Cree que la velocidad horizontal acelera la caída."
+        },
+        {
+          "letra": "D",
+          "texto": "No se puede saber sin conocer la velocidad horizontal.",
+          "error": "No reconoce que los ejes perpendiculares son independientes."
+        },
+        {
+          "letra": "E",
+          "texto": "Llega primero la que se deja caer, porque recorre menos distancia.",
+          "error": "Confunde distancia total recorrida con tiempo de caída."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Las direcciones perpendiculares son independientes: ambas monedas parten con velocidad vertical cero y caen la misma altura con la misma aceleración g, así que tardan lo mismo."
+    },
+    {
+      "id": "FIS-2BGU-U1-019",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "MCU: aceleración centrípeta",
+      "destreza": "CN.F.5.1.12",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un satélite de comunicaciones gira alrededor de la Tierra con rapidez constante en una órbita circular. ¿Qué se puede afirmar sobre su aceleración?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Apunta hacia afuera de la órbita.",
+          "error": "Confunde la fuerza ficticia centrífuga con la aceleración real."
+        },
+        {
+          "letra": "B",
+          "texto": "Existe y apunta hacia el centro de la órbita.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Solo existe cuando el satélite frena.",
+          "error": "Cree que solo hay aceleración si cambia la rapidez."
+        },
+        {
+          "letra": "D",
+          "texto": "Apunta en la misma dirección de la velocidad.",
+          "error": "Confunde aceleración centrípeta con tangencial."
+        },
+        {
+          "letra": "E",
+          "texto": "Es cero, porque la rapidez no cambia.",
+          "error": "Confunde rapidez constante con velocidad constante; la dirección cambia."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "En el MCU la rapidez es constante, pero la dirección de la velocidad cambia continuamente. Ese cambio requiere una aceleración centrípeta dirigida hacia el centro."
+    },
+    {
+      "id": "FIS-2BGU-U1-020",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "MCU aplicado",
+      "destreza": "CN.F.5.1.15",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-2BGU-L1",
+      "enunciado": "Según la lectura, ¿cuál es la velocidad angular de la noria?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,0262 rad/s",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "1,5708 rad/s",
+          "error": "Usó el periodo en minutos sin convertirlo a segundos."
+        },
+        {
+          "letra": "C",
+          "texto": "1,5000 rad/s",
+          "error": "Usó 360° en lugar de 2π rad."
+        },
+        {
+          "letra": "D",
+          "texto": "0,0131 rad/s",
+          "error": "Usó π en lugar de 2π para una vuelta completa."
+        },
+        {
+          "letra": "E",
+          "texto": "0,0042 rad/s",
+          "error": "Calculó la frecuencia (1/T) sin multiplicar por 2π."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "T = 4 min = 240 s. ω = 2π/T = 2π/240 ≈ 0,0262 rad/s."
+    },
+    {
+      "id": "FIS-2BGU-U1-021",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 1,
+      "tema": "MCU aplicado",
+      "destreza": "CN.F.5.1.15",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-2BGU-L1",
+      "enunciado": "Con los datos de la lectura, ¿con qué rapidez lineal se mueve una cabina?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,21 m/s",
+          "error": "Dividió el diámetro para el periodo, sin 2π."
+        },
+        {
+          "letra": "B",
+          "texto": "0,10 m/s",
+          "error": "Dividió el radio para el periodo y olvidó el factor 2π."
+        },
+        {
+          "letra": "C",
+          "texto": "39,27 m/s",
+          "error": "Dejó el periodo en minutos."
+        },
+        {
+          "letra": "D",
+          "texto": "1,31 m/s",
+          "error": "Usó el diámetro (50 m) en lugar del radio (25 m)."
+        },
+        {
+          "letra": "E",
+          "texto": "0,65 m/s",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "v = ω·r = (2π/240 s)·25 m ≈ 0,65 m/s. El radio es la mitad del diámetro."
+    },
+    {
+      "id": "FIS-2BGU-U2-001",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Ley de Hooke",
+      "destreza": "CN.F.5.1.31",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un resorte de constante k = 250 N/m se estira 8 cm. ¿Qué fuerza ejerce el resorte?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "3 125,00 N",
+          "error": "Dividió k para x en lugar de multiplicar."
+        },
+        {
+          "letra": "B",
+          "texto": "0,80 N",
+          "error": "Calculó la energía elástica ½kx² en lugar de la fuerza."
+        },
+        {
+          "letra": "C",
+          "texto": "20,00 N",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "196,00 N",
+          "error": "Multiplicó además por g, como si la fuerza elástica fuera un peso."
+        },
+        {
+          "letra": "E",
+          "texto": "2 000,00 N",
+          "error": "No convirtió la deformación de cm a m."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Ley de Hooke: F = k·x, con x en metros: 8,0 cm = 0,080 m. F = 250·0,080 = 20,00 N, dirigida hacia la posición de equilibrio."
+    },
+    {
+      "id": "FIS-2BGU-U2-002",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Ley de Hooke",
+      "destreza": "CN.F.5.1.31",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "La suspensión de una moto, con k = 20 000 N/m, se comprime 2,5 cm. ¿Qué fuerza ejerce el resorte?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "50 000,00 N",
+          "error": "No convirtió la deformación de cm a m."
+        },
+        {
+          "letra": "B",
+          "texto": "500,00 N",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "4 900,00 N",
+          "error": "Multiplicó además por g, como si la fuerza elástica fuera un peso."
+        },
+        {
+          "letra": "D",
+          "texto": "800 000,00 N",
+          "error": "Dividió k para x en lugar de multiplicar."
+        },
+        {
+          "letra": "E",
+          "texto": "6,25 N",
+          "error": "Calculó la energía elástica ½kx² en lugar de la fuerza."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Ley de Hooke: F = k·x, con x en metros: 2,5 cm = 0,025 m. F = 20 000·0,025 = 500,00 N, dirigida hacia la posición de equilibrio."
+    },
+    {
+      "id": "FIS-2BGU-U2-003",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Ley de Hooke: constante elástica",
+      "destreza": "CN.F.5.1.31",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Al colgar una mochila de 2 kg de un dinamómetro casero, el resorte se estira 4 cm y queda en reposo. ¿Cuál es la constante elástica del resorte? (g = 9,8 m/s²)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "50,00 N/m",
+          "error": "Olvidó multiplicar la masa por g para obtener el peso."
+        },
+        {
+          "letra": "B",
+          "texto": "4,90 N/m",
+          "error": "No convirtió la deformación a metros."
+        },
+        {
+          "letra": "C",
+          "texto": "980,00 N/m",
+          "error": "Igualó la energía elástica ½kx² al producto peso·x, que no aplica en equilibrio."
+        },
+        {
+          "letra": "D",
+          "texto": "490,00 N/m",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "0,78 N/m",
+          "error": "Multiplicó el peso por la deformación en lugar de dividir."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "En equilibrio, la fuerza del resorte iguala al peso: k·x = m·g. k = m·g/x = 19,60/0,04 ≈ 490,00 N/m."
+    },
+    {
+      "id": "FIS-2BGU-U2-004",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Ley de Hooke: constante elástica",
+      "destreza": "CN.F.5.1.31",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una masa de 0,5 kg cuelga en reposo de un resorte y lo estira 5 cm. ¿Cuál es la constante elástica del resorte? (g = 9,8 m/s²)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,98 N/m",
+          "error": "No convirtió la deformación a metros."
+        },
+        {
+          "letra": "B",
+          "texto": "0,25 N/m",
+          "error": "Multiplicó el peso por la deformación en lugar de dividir."
+        },
+        {
+          "letra": "C",
+          "texto": "10,00 N/m",
+          "error": "Olvidó multiplicar la masa por g para obtener el peso."
+        },
+        {
+          "letra": "D",
+          "texto": "196,00 N/m",
+          "error": "Igualó la energía elástica ½kx² al producto peso·x, que no aplica en equilibrio."
+        },
+        {
+          "letra": "E",
+          "texto": "98,00 N/m",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "En equilibrio, la fuerza del resorte iguala al peso: k·x = m·g. k = m·g/x = 4,90/0,05 ≈ 98,00 N/m."
+    },
+    {
+      "id": "FIS-2BGU-U2-005",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Fuerza centrípeta",
+      "destreza": "CN.F.5.1.32",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un auto de 1 000 kg toma una curva de 40 m de radio a 12 m/s. ¿Qué fuerza centrípeta se necesita para mantener ese movimiento?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "3 600,00 N",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "300,00 N",
+          "error": "No elevó la velocidad al cuadrado."
+        },
+        {
+          "letra": "C",
+          "texto": "3,60 N",
+          "error": "Calculó la aceleración centrípeta y olvidó multiplicar por la masa."
+        },
+        {
+          "letra": "D",
+          "texto": "5 760 000,00 N",
+          "error": "Multiplicó por el radio en lugar de dividir."
+        },
+        {
+          "letra": "E",
+          "texto": "1 800,00 N",
+          "error": "Usó el diámetro en lugar del radio."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "F_c = m·v²/r = 1000·12²/40 = 3 600,00 N, dirigida hacia el centro de la trayectoria."
+    },
+    {
+      "id": "FIS-2BGU-U2-006",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Fuerza centrípeta",
+      "destreza": "CN.F.5.1.32",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Una niña de 30 kg en un carrusel, a 3 m del centro, gira a 3 m/s. ¿Qué fuerza centrípeta se necesita para mantener ese movimiento?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "3,00 N",
+          "error": "Calculó la aceleración centrípeta y olvidó multiplicar por la masa."
+        },
+        {
+          "letra": "B",
+          "texto": "30,00 N",
+          "error": "No elevó la velocidad al cuadrado."
+        },
+        {
+          "letra": "C",
+          "texto": "90,00 N",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "810,00 N",
+          "error": "Multiplicó por el radio en lugar de dividir."
+        },
+        {
+          "letra": "E",
+          "texto": "45,00 N",
+          "error": "Usó el diámetro en lugar del radio."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "F_c = m·v²/r = 30·3²/3 = 90,00 N, dirigida hacia el centro de la trayectoria."
+    },
+    {
+      "id": "FIS-2BGU-U2-007",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Fuerza centrípeta y rozamiento",
+      "destreza": "CN.F.5.1.32",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Una curva plana de 50 m de radio tiene un coeficiente de rozamiento de 0,6 entre llantas y asfalto. Si el rozamiento es la única fuerza centrípeta, ¿cuál es la rapidez máxima para tomar la curva sin derrapar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "5,48 m/s",
+          "error": "Olvidó la gravedad en la fuerza normal."
+        },
+        {
+          "letra": "B",
+          "texto": "13,28 m/s",
+          "error": "Sacó μ fuera de la raíz."
+        },
+        {
+          "letra": "C",
+          "texto": "294,00 m/s",
+          "error": "Olvidó extraer la raíz cuadrada (μgr es v²)."
+        },
+        {
+          "letra": "D",
+          "texto": "22,14 m/s",
+          "error": "Ignoró el coeficiente de rozamiento."
+        },
+        {
+          "letra": "E",
+          "texto": "17,15 m/s",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "El rozamiento máximo es μ·m·g y debe igualar m·v²/r. La masa se cancela: v = √(μ·g·r) = √(0,6·9,8·50) ≈ 17,15 m/s."
+    },
+    {
+      "id": "FIS-2BGU-U2-008",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Fuerza centrípeta y rozamiento",
+      "destreza": "CN.F.5.1.32",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "En un día de lluvia, el coeficiente de rozamiento de una curva plana de 80 m de radio baja a 0,3. Si el rozamiento es la única fuerza centrípeta, ¿cuál es la rapidez máxima para tomar la curva sin derrapar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "8,40 m/s",
+          "error": "Sacó μ fuera de la raíz."
+        },
+        {
+          "letra": "B",
+          "texto": "235,20 m/s",
+          "error": "Olvidó extraer la raíz cuadrada (μgr es v²)."
+        },
+        {
+          "letra": "C",
+          "texto": "28,00 m/s",
+          "error": "Ignoró el coeficiente de rozamiento."
+        },
+        {
+          "letra": "D",
+          "texto": "15,34 m/s",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "4,90 m/s",
+          "error": "Olvidó la gravedad en la fuerza normal."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "El rozamiento máximo es μ·m·g y debe igualar m·v²/r. La masa se cancela: v = √(μ·g·r) = √(0,3·9,8·80) ≈ 15,34 m/s."
+    },
+    {
+      "id": "FIS-2BGU-U2-009",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Gravitación universal",
+      "destreza": "CN.F.5.4.2",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un satélite de 500 kg orbita a 400 km sobre la superficie terrestre. Con M_Tierra = 5,97 × 10²⁴ kg, R_Tierra = 6,37 × 10⁶ m y G = 6,67 × 10⁻¹¹ N·m²/kg², ¿qué fuerza gravitacional ejerce la Tierra sobre el satélite?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "2,94 × 10¹⁰ N",
+          "error": "No elevó la distancia al cuadrado."
+        },
+        {
+          "letra": "B",
+          "texto": "4 906,72 N",
+          "error": "Usó solo el radio terrestre e ignoró la altura."
+        },
+        {
+          "letra": "C",
+          "texto": "4 344,03 N",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "8,69 N",
+          "error": "Olvidó la masa del satélite: calculó la intensidad del campo g."
+        },
+        {
+          "letra": "E",
+          "texto": "1 244 371,88 N",
+          "error": "Usó la altura como distancia, sin sumar el radio terrestre."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La distancia se mide entre centros: d = R + h = 6 770 000,00 m. F = G·M·m/d² ≈ 4 344,03 N."
+    },
+    {
+      "id": "FIS-2BGU-U2-010",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Gravitación universal",
+      "destreza": "CN.F.5.4.2",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un satélite GPS de 1 200 kg orbita a 20 200 km sobre la superficie terrestre. Con M_Tierra = 5,97 × 10²⁴ kg, R_Tierra = 6,37 × 10⁶ m y G = 6,67 × 10⁻¹¹ N·m²/kg², ¿qué fuerza gravitacional ejerce la Tierra sobre el satélite?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,56 N",
+          "error": "Olvidó la masa del satélite: calculó la intensidad del campo g."
+        },
+        {
+          "letra": "B",
+          "texto": "1 171,06 N",
+          "error": "Usó la altura como distancia, sin sumar el radio terrestre."
+        },
+        {
+          "letra": "C",
+          "texto": "1,80 × 10¹⁰ N",
+          "error": "No elevó la distancia al cuadrado."
+        },
+        {
+          "letra": "D",
+          "texto": "676,86 N",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "11 776,13 N",
+          "error": "Usó solo el radio terrestre e ignoró la altura."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "La distancia se mide entre centros: d = R + h = 2,66 × 10⁷ m. F = G·M·m/d² ≈ 676,86 N."
+    },
+    {
+      "id": "FIS-2BGU-U2-011",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Campo gravitacional",
+      "destreza": "CN.F.5.4.2",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En la superficie terrestre g = 9,8 m/s². ¿Cuánto vale la intensidad del campo gravitacional a una altura igual a un radio terrestre sobre la superficie?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "2,45 m/s²",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "9,80 m/s²",
+          "error": "Cree que g no cambia con la altura."
+        },
+        {
+          "letra": "C",
+          "texto": "4,90 m/s²",
+          "error": "Dividió para 2 porque la distancia se duplica, sin elevar al cuadrado."
+        },
+        {
+          "letra": "D",
+          "texto": "1,23 m/s²",
+          "error": "Dividió para 2³ = 8 en lugar de 2² = 4."
+        },
+        {
+          "letra": "E",
+          "texto": "19,60 m/s²",
+          "error": "Multiplicó en lugar de dividir."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "A una altura R, la distancia al centro es 2R. Como g ∝ 1/d², g' = 9,8/2² = 2,45 m/s²."
+    },
+    {
+      "id": "FIS-2BGU-U2-012",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Ley de Coulomb",
+      "destreza": "CN.F.5.1.43",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Dos esferas con cargas de +3 μC y +5 μC están separadas 10 cm en el aire. Con k = 9 × 10⁹ N·m²/C², ¿cuál es la magnitud de la fuerza eléctrica entre ellas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,35 × 10⁻³ N",
+          "error": "No convirtió la distancia de cm a m."
+        },
+        {
+          "letra": "B",
+          "texto": "1,35 N",
+          "error": "No elevó la distancia al cuadrado."
+        },
+        {
+          "letra": "C",
+          "texto": "13,50 N",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "7 200 000,00 N",
+          "error": "Sumó las cargas en lugar de multiplicarlas."
+        },
+        {
+          "letra": "E",
+          "texto": "1,35 × 10⁷ N",
+          "error": "Convirtió μC como si fuera 10⁻³ C (mili)."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "F = k·|q1·q2|/d² con q en C y d en m: F = 9 × 10⁹·(3 × 10⁻⁶)·(5 × 10⁻⁶)/(0,10)² ≈ 13,50 N."
+    },
+    {
+      "id": "FIS-2BGU-U2-013",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Ley de Coulomb",
+      "destreza": "CN.F.5.1.43",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Dos cargas de +2 μC y −4 μC están separadas 30 cm en el aire. Con k = 9 × 10⁹ N·m²/C², ¿cuál es la magnitud de la fuerza eléctrica entre ellas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "800 000,00 N",
+          "error": "Convirtió μC como si fuera 10⁻³ C (mili)."
+        },
+        {
+          "letra": "B",
+          "texto": "8,00 × 10⁻⁵ N",
+          "error": "No convirtió la distancia de cm a m."
+        },
+        {
+          "letra": "C",
+          "texto": "0,80 N",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "200 000,00 N",
+          "error": "Sumó las cargas en lugar de multiplicarlas."
+        },
+        {
+          "letra": "E",
+          "texto": "0,24 N",
+          "error": "No elevó la distancia al cuadrado."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "F = k·|q1·q2|/d² con q en C y d en m: F = 9 × 10⁹·(2 × 10⁻⁶)·(4 × 10⁻⁶)/(0,30)² ≈ 0,80 N."
+    },
+    {
+      "id": "FIS-2BGU-U2-014",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Gravitación: dependencia con la distancia",
+      "destreza": "CN.F.5.4.2",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Si la distancia entre dos cuerpos se triplica, ¿qué sucede con la fuerza gravitacional entre ellos?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Se triplica.",
+          "error": "Cree que la fuerza aumenta con la distancia."
+        },
+        {
+          "letra": "B",
+          "texto": "Se reduce a la tercera parte.",
+          "error": "Aplica una relación inversa simple en lugar de cuadrática."
+        },
+        {
+          "letra": "C",
+          "texto": "Se reduce a la sexta parte.",
+          "error": "Multiplicó 3 por 2 en lugar de elevar 3 al cuadrado."
+        },
+        {
+          "letra": "D",
+          "texto": "Se multiplica por 9.",
+          "error": "Recuerda el cuadrado pero invierte la relación."
+        },
+        {
+          "letra": "E",
+          "texto": "Se reduce a la novena parte.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "F ∝ 1/d². Si d pasa a 3d, F pasa a F/3² = F/9."
+    },
+    {
+      "id": "FIS-2BGU-U2-015",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Ley de Coulomb: proporcionalidad",
+      "destreza": "CN.F.5.1.43",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Dos cargas puntuales se atraen con una fuerza F. Si se duplica el valor de cada carga y también se duplica la distancia entre ellas, ¿cuál es la nueva fuerza?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "F",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "2F",
+          "error": "Tomó la distancia sin elevar al cuadrado: (2·2)/2."
+        },
+        {
+          "letra": "C",
+          "texto": "16F",
+          "error": "Multiplicó los efectos en lugar de dividirlos."
+        },
+        {
+          "letra": "D",
+          "texto": "4F",
+          "error": "Consideró el aumento de las cargas pero no el de la distancia."
+        },
+        {
+          "letra": "E",
+          "texto": "F/4",
+          "error": "Consideró el aumento de la distancia pero no el de las cargas."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "F' = k·(2q1)(2q2)/(2d)² = 4·k·q1·q2/(4d²) = F. Los efectos se compensan."
+    },
+    {
+      "id": "FIS-2BGU-U2-016",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Fuerza centrífuga como fuerza ficticia",
+      "destreza": "CN.F.5.1.33",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un pasajero de bus siente que es empujado hacia la ventana exterior cuando el bus toma una curva. Desde un sistema de referencia inercial (la calle), ¿cuál es la explicación correcta?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El peso del pasajero cambia de dirección en la curva.",
+          "error": "Cree que el peso deja de ser vertical."
+        },
+        {
+          "letra": "B",
+          "texto": "El aire del bus lo empuja hacia la ventana.",
+          "error": "Atribuye el efecto a una fuerza externa inexistente."
+        },
+        {
+          "letra": "C",
+          "texto": "Una fuerza centrífuga real lo empuja hacia afuera.",
+          "error": "Trata la fuerza centrífuga como si fuera real en un sistema inercial."
+        },
+        {
+          "letra": "D",
+          "texto": "La fuerza centrípeta lo empuja hacia afuera.",
+          "error": "Confunde el sentido de la fuerza centrípeta, que apunta al centro."
+        },
+        {
+          "letra": "E",
+          "texto": "Por inercia, su cuerpo tiende a seguir en línea recta mientras el bus gira.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La fuerza centrífuga solo aparece en el sistema no inercial del bus. Desde la calle, el pasajero tiende a seguir recto (inercia) hasta que el asiento o la pared ejercen la fuerza centrípeta."
+    },
+    {
+      "id": "FIS-2BGU-U2-017",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Fuerzas de tracción y compresión",
+      "destreza": "CN.F.5.1.30",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "En el puente colgante de una parroquia rural, los cables sostienen el tablero y los pilares de hormigón soportan el peso desde abajo. ¿Qué tipo de fuerza soporta cada elemento?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Los cables, tracción; los pilares, compresión.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Ambos soportan solo tracción.",
+          "error": "No reconoce que los pilares son aplastados por la carga."
+        },
+        {
+          "letra": "C",
+          "texto": "Los cables, compresión; los pilares, tracción.",
+          "error": "Intercambia los conceptos de estirar y aplastar."
+        },
+        {
+          "letra": "D",
+          "texto": "Ninguno soporta fuerza mientras el puente está quieto.",
+          "error": "Confunde reposo con ausencia de fuerzas."
+        },
+        {
+          "letra": "E",
+          "texto": "Ambos soportan solo compresión.",
+          "error": "No reconoce que los cables son estirados."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Un cable que sostiene una carga se estira: trabaja a tracción. Un pilar que recibe peso desde arriba se acorta: trabaja a compresión."
+    },
+    {
+      "id": "FIS-2BGU-U2-018",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Ley de Hooke: interpretación gráfica",
+      "destreza": "CN.F.5.1.31",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En el laboratorio se grafica la fuerza aplicada (eje y) contra el alargamiento de un resorte (eje x) y se obtiene una recta que pasa por el origen. ¿Qué representa la pendiente de esa recta?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La constante elástica k del resorte.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "La aceleración de la gravedad.",
+          "error": "Supone que toda pendiente de fuerza es g."
+        },
+        {
+          "letra": "C",
+          "texto": "El inverso de la constante elástica.",
+          "error": "Interpreta los ejes al revés."
+        },
+        {
+          "letra": "D",
+          "texto": "La masa del objeto colgado.",
+          "error": "Asocia la pendiente con la masa en lugar de la rigidez."
+        },
+        {
+          "letra": "E",
+          "texto": "La energía potencial elástica almacenada.",
+          "error": "Confunde la pendiente con el área bajo la recta."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Si F = k·x, en una gráfica F–x la pendiente es k. El área bajo la recta (½kx²) es la energía elástica."
+    },
+    {
+      "id": "FIS-2BGU-U2-019",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Carga eléctrica: atracción y repulsión",
+      "destreza": "CN.F.5.1.43",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Una esfera A repele a una esfera B, y B atrae a una esfera C que tiene carga negativa. ¿Qué carga tiene A?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Igual a la de C.",
+          "error": "Confunde atracción con cargas del mismo signo."
+        },
+        {
+          "letra": "B",
+          "texto": "Neutra.",
+          "error": "Una esfera neutra no repele a otra."
+        },
+        {
+          "letra": "C",
+          "texto": "Positiva.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Negativa.",
+          "error": "Cree que la atracción entre B y C implica cargas iguales."
+        },
+        {
+          "letra": "E",
+          "texto": "No se puede determinar.",
+          "error": "No encadena las dos relaciones de atracción y repulsión."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "B atrae a C (negativa), así que B es positiva. A repele a B, así que A tiene el mismo signo que B: positiva."
+    },
+    {
+      "id": "FIS-2BGU-U2-020",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Ley de Hooke aplicada",
+      "destreza": "CN.F.5.1.31",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-2BGU-L2",
+      "enunciado": "Según la lectura, ¿cuál es la constante elástica de cada resorte?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "392 000,00 N/m",
+          "error": "Usó el peso total del auto en un solo resorte."
+        },
+        {
+          "letra": "B",
+          "texto": "10 000,00 N/m",
+          "error": "Usó la masa en lugar del peso (olvidó g)."
+        },
+        {
+          "letra": "C",
+          "texto": "98 000,00 N/m",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "980,00 N/m",
+          "error": "No convirtió la compresión a metros."
+        },
+        {
+          "letra": "E",
+          "texto": "88,20 N/m",
+          "error": "Multiplicó por la compresión en lugar de dividir."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Cada resorte soporta 1 200·9,8/4 = 2 940 N. k = F/x = 2 940/0,03 = 98 000 N/m."
+    },
+    {
+      "id": "FIS-2BGU-U2-021",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 2,
+      "tema": "Ley de Hooke aplicada",
+      "destreza": "CN.F.5.1.31",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "FIS-2BGU-L2",
+      "enunciado": "Si suben al auto de la lectura pasajeros con una masa total de 280 kg, ¿cuánto se comprime adicionalmente cada resorte?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,07 cm",
+          "error": "Usó la masa en lugar del peso."
+        },
+        {
+          "letra": "B",
+          "texto": "7,00 × 10⁻³ cm",
+          "error": "Calculó en metros y lo escribió como centímetros."
+        },
+        {
+          "letra": "C",
+          "texto": "0,70 cm",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "2,80 cm",
+          "error": "No repartió la carga entre las cuatro ruedas."
+        },
+        {
+          "letra": "E",
+          "texto": "3,70 cm",
+          "error": "Dio la compresión total en lugar de la adicional."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Cada resorte recibe 280·9,8/4 = 686 N adicionales. Δx = 686/98 000 ≈ 0,0070 m ≈ 0,70 cm."
+    },
+    {
+      "id": "FIS-2BGU-U3-001",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Trabajo mecánico",
+      "destreza": "CN.F.5.2.1",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una estudiante arrastra una caja 8 m con una cuerda que forma 30° con el piso, aplicando 50 N. ¿Qué trabajo realiza esa fuerza?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "346,41 J",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "43,30 J",
+          "error": "Olvidó multiplicar por la distancia."
+        },
+        {
+          "letra": "C",
+          "texto": "200,00 J",
+          "error": "Usó el seno: tomó la componente perpendicular al desplazamiento."
+        },
+        {
+          "letra": "D",
+          "texto": "461,88 J",
+          "error": "Dividió para el coseno en lugar de multiplicar."
+        },
+        {
+          "letra": "E",
+          "texto": "400,00 J",
+          "error": "Ignoró el ángulo y usó la fuerza completa."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Solo trabaja la componente de la fuerza en la dirección del desplazamiento: W = F·d·cos θ = 50·8·cos 30° ≈ 346,41 J."
+    },
+    {
+      "id": "FIS-2BGU-U3-002",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Trabajo mecánico",
+      "destreza": "CN.F.5.2.1",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un trabajador empuja un carrito 15 m con una fuerza de 40 N que forma 25° con la horizontal. ¿Qué trabajo realiza esa fuerza?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "36,25 J",
+          "error": "Olvidó multiplicar por la distancia."
+        },
+        {
+          "letra": "B",
+          "texto": "600,00 J",
+          "error": "Ignoró el ángulo y usó la fuerza completa."
+        },
+        {
+          "letra": "C",
+          "texto": "662,03 J",
+          "error": "Dividió para el coseno en lugar de multiplicar."
+        },
+        {
+          "letra": "D",
+          "texto": "543,78 J",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "253,57 J",
+          "error": "Usó el seno: tomó la componente perpendicular al desplazamiento."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Solo trabaja la componente de la fuerza en la dirección del desplazamiento: W = F·d·cos θ = 40·15·cos 25° ≈ 543,78 J."
+    },
+    {
+      "id": "FIS-2BGU-U3-003",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Energía cinética",
+      "destreza": "CN.F.5.2.2",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un auto de 1 200 kg viaja a 72 km/h. ¿Cuál es su energía cinética?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "480 000,00 J",
+          "error": "Olvidó el factor ½."
+        },
+        {
+          "letra": "B",
+          "texto": "3 110 400,00 J",
+          "error": "No convirtió la velocidad de km/h a m/s."
+        },
+        {
+          "letra": "C",
+          "texto": "12 000,00 J",
+          "error": "No elevó la velocidad al cuadrado."
+        },
+        {
+          "letra": "D",
+          "texto": "4,03 × 10⁷ J",
+          "error": "Multiplicó por 3,6 en lugar de dividir al convertir."
+        },
+        {
+          "letra": "E",
+          "texto": "240 000,00 J",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "v = 72/3,6 = 20,00 m/s. E_c = ½·m·v² = ½·1200·20,00² = 240 000,00 J."
+    },
+    {
+      "id": "FIS-2BGU-U3-004",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Energía cinética",
+      "destreza": "CN.F.5.2.2",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un ciclista y su bicicleta, con masa total de 80 kg, avanzan a 36 km/h. ¿Cuál es su energía cinética?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "51 840,00 J",
+          "error": "No convirtió la velocidad de km/h a m/s."
+        },
+        {
+          "letra": "B",
+          "texto": "8 000,00 J",
+          "error": "Olvidó el factor ½."
+        },
+        {
+          "letra": "C",
+          "texto": "400,00 J",
+          "error": "No elevó la velocidad al cuadrado."
+        },
+        {
+          "letra": "D",
+          "texto": "671 846,40 J",
+          "error": "Multiplicó por 3,6 en lugar de dividir al convertir."
+        },
+        {
+          "letra": "E",
+          "texto": "4 000,00 J",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "v = 36/3,6 = 10,00 m/s. E_c = ½·m·v² = ½·80·10,00² = 4 000,00 J."
+    },
+    {
+      "id": "FIS-2BGU-U3-005",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Conservación de la energía mecánica",
+      "destreza": "CN.F.5.2.2",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un coco se desprende de una palmera a 12 m de altura. Sin resistencia del aire, ¿con qué rapidez llega al agua o al suelo? (g = 9,8 m/s²)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "10,84 m/s",
+          "error": "Olvidó el factor 2 al despejar de mgh = ½mv²."
+        },
+        {
+          "letra": "B",
+          "texto": "15,34 m/s",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "1,56 m/s",
+          "error": "Calculó el tiempo de caída, no la rapidez."
+        },
+        {
+          "letra": "D",
+          "texto": "117,60 m/s",
+          "error": "Igualó v a g·h sin el factor 2 ni la raíz."
+        },
+        {
+          "letra": "E",
+          "texto": "235,20 m/s",
+          "error": "Olvidó extraer la raíz cuadrada."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "m·g·h = ½·m·v² ⇒ v = √(2·g·h) = √(2·9,8·12) ≈ 15,34 m/s. La masa se cancela."
+    },
+    {
+      "id": "FIS-2BGU-U3-006",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Conservación de la energía mecánica",
+      "destreza": "CN.F.5.2.2",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un clavadista se deja caer desde una plataforma de 10 m. Sin resistencia del aire, ¿con qué rapidez llega al agua o al suelo? (g = 9,8 m/s²)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "9,90 m/s",
+          "error": "Olvidó el factor 2 al despejar de mgh = ½mv²."
+        },
+        {
+          "letra": "B",
+          "texto": "14,00 m/s",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "196,00 m/s",
+          "error": "Olvidó extraer la raíz cuadrada."
+        },
+        {
+          "letra": "D",
+          "texto": "98,00 m/s",
+          "error": "Igualó v a g·h sin el factor 2 ni la raíz."
+        },
+        {
+          "letra": "E",
+          "texto": "1,43 m/s",
+          "error": "Calculó el tiempo de caída, no la rapidez."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "m·g·h = ½·m·v² ⇒ v = √(2·g·h) = √(2·9,8·10) ≈ 14,00 m/s. La masa se cancela."
+    },
+    {
+      "id": "FIS-2BGU-U3-007",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Potencia",
+      "destreza": "CN.F.5.2.4",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Una estudiante de 60 kg sube por las gradas 9 m de altura (tres pisos) en 15 s. ¿Qué potencia media desarrolla?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "79 380,00 W",
+          "error": "Multiplicó por el tiempo en lugar de dividir."
+        },
+        {
+          "letra": "B",
+          "texto": "5 292,00 W",
+          "error": "Calculó el trabajo y no lo dividió para el tiempo."
+        },
+        {
+          "letra": "C",
+          "texto": "36,00 W",
+          "error": "Usó la masa en lugar del peso (olvidó g)."
+        },
+        {
+          "letra": "D",
+          "texto": "352,80 W",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "980,00 W",
+          "error": "Intercambió la altura y el tiempo."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "W = m·g·h = 60·9,8·9 = 5 292,00 J. P = W/t = 5 292,00/15 = 352,80 W."
+    },
+    {
+      "id": "FIS-2BGU-U3-008",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Potencia",
+      "destreza": "CN.F.5.2.4",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Una grúa levanta una carga de 500 kg a 20 m de altura en 40 s con velocidad constante. ¿Qué potencia media desarrolla?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "9 800,00 W",
+          "error": "Intercambió la altura y el tiempo."
+        },
+        {
+          "letra": "B",
+          "texto": "98 000,00 W",
+          "error": "Calculó el trabajo y no lo dividió para el tiempo."
+        },
+        {
+          "letra": "C",
+          "texto": "250,00 W",
+          "error": "Usó la masa en lugar del peso (olvidó g)."
+        },
+        {
+          "letra": "D",
+          "texto": "2 450,00 W",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "3 920 000,00 W",
+          "error": "Multiplicó por el tiempo en lugar de dividir."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "W = m·g·h = 500·9,8·20 = 98 000,00 J. P = W/t = 98 000,00/40 = 2 450,00 W."
+    },
+    {
+      "id": "FIS-2BGU-U3-009",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Fuerzas disipativas",
+      "destreza": "CN.F.5.2.3",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una caja de 20 kg se desliza 5 m sobre un piso horizontal con coeficiente de rozamiento 0,3. ¿Cuánta energía mecánica se disipa por el rozamiento?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "58,80 J",
+          "error": "Calculó la fuerza de rozamiento y no la multiplicó por la distancia."
+        },
+        {
+          "letra": "B",
+          "texto": "294,00 J",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "30,00 J",
+          "error": "Usó la masa en lugar del peso para la normal."
+        },
+        {
+          "letra": "D",
+          "texto": "980,00 J",
+          "error": "Olvidó el coeficiente de rozamiento."
+        },
+        {
+          "letra": "E",
+          "texto": "14,70 J",
+          "error": "Olvidó la masa del cuerpo."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "F_r = μ·m·g = 0,3·20·9,8 = 58,80 N. Energía disipada = F_r·d = 58,80·5 = 294,00 J (trabajo negativo del rozamiento)."
+    },
+    {
+      "id": "FIS-2BGU-U3-010",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Fuerzas disipativas",
+      "destreza": "CN.F.5.2.3",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un trineo de 50 kg recorre 12 m sobre una superficie horizontal con coeficiente de rozamiento 0,1. ¿Cuánta energía mecánica se disipa por el rozamiento?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "11,76 J",
+          "error": "Olvidó la masa del cuerpo."
+        },
+        {
+          "letra": "B",
+          "texto": "49,00 J",
+          "error": "Calculó la fuerza de rozamiento y no la multiplicó por la distancia."
+        },
+        {
+          "letra": "C",
+          "texto": "60,00 J",
+          "error": "Usó la masa en lugar del peso para la normal."
+        },
+        {
+          "letra": "D",
+          "texto": "588,00 J",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "5 880,00 J",
+          "error": "Olvidó el coeficiente de rozamiento."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "F_r = μ·m·g = 0,1·50·9,8 = 49,00 N. Energía disipada = F_r·d = 49,00·12 = 588,00 J (trabajo negativo del rozamiento)."
+    },
+    {
+      "id": "FIS-2BGU-U3-011",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Conservación de la energía mecánica",
+      "destreza": "CN.F.5.2.2",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un carrito de montaña rusa parte del reposo a 30 m de altura y pasa por una cima de 10 m. Sin rozamiento, ¿qué rapidez tiene en el punto más bajo de los dos indicados (la segunda altura)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "392,00 m/s",
+          "error": "Olvidó extraer la raíz cuadrada."
+        },
+        {
+          "letra": "B",
+          "texto": "14,00 m/s",
+          "error": "Usó la altura final en lugar de la diferencia."
+        },
+        {
+          "letra": "C",
+          "texto": "19,80 m/s",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "28,00 m/s",
+          "error": "Sumó las alturas en lugar de restarlas."
+        },
+        {
+          "letra": "E",
+          "texto": "24,25 m/s",
+          "error": "Usó solo la altura inicial, como si llegara al suelo."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "m·g·h1 = m·g·h2 + ½·m·v² ⇒ v = √(2·g·(h1 − h2)) = √(2·9,8·20,0) ≈ 19,80 m/s."
+    },
+    {
+      "id": "FIS-2BGU-U3-012",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Conservación de la energía mecánica",
+      "destreza": "CN.F.5.2.2",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un skater parte del reposo en lo alto de una rampa de 4 m y sube a una plataforma de 1,5 m. Sin rozamiento, ¿qué rapidez tiene en el punto más bajo de los dos indicados (la segunda altura)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "8,85 m/s",
+          "error": "Usó solo la altura inicial, como si llegara al suelo."
+        },
+        {
+          "letra": "B",
+          "texto": "10,38 m/s",
+          "error": "Sumó las alturas en lugar de restarlas."
+        },
+        {
+          "letra": "C",
+          "texto": "49,00 m/s",
+          "error": "Olvidó extraer la raíz cuadrada."
+        },
+        {
+          "letra": "D",
+          "texto": "5,42 m/s",
+          "error": "Usó la altura final en lugar de la diferencia."
+        },
+        {
+          "letra": "E",
+          "texto": "7,00 m/s",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "m·g·h1 = m·g·h2 + ½·m·v² ⇒ v = √(2·g·(h1 − h2)) = √(2·9,8·2,5) ≈ 7,00 m/s."
+    },
+    {
+      "id": "FIS-2BGU-U3-013",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Energía potencial elástica",
+      "destreza": "CN.F.5.2.2",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "El lanzador de un juguete tiene un resorte de k = 400 N/m comprimido 5 cm. ¿Cuánta energía potencial elástica almacena?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "10,00 J",
+          "error": "No elevó la deformación al cuadrado."
+        },
+        {
+          "letra": "B",
+          "texto": "5 000,00 J",
+          "error": "No convirtió la deformación a metros."
+        },
+        {
+          "letra": "C",
+          "texto": "20,00 J",
+          "error": "Calculó la fuerza k·x en lugar de la energía."
+        },
+        {
+          "letra": "D",
+          "texto": "1,00 J",
+          "error": "Olvidó el factor ½."
+        },
+        {
+          "letra": "E",
+          "texto": "0,50 J",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "E_pe = ½·k·x² = ½·400·(0,05)² = 0,50 J."
+    },
+    {
+      "id": "FIS-2BGU-U3-014",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Energía potencial elástica",
+      "destreza": "CN.F.5.2.2",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Una banda elástica de ejercicio, con k = 1 500 N/m, se estira 10 cm. ¿Cuánta energía potencial elástica almacena?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "75,00 J",
+          "error": "No elevó la deformación al cuadrado."
+        },
+        {
+          "letra": "B",
+          "texto": "15,00 J",
+          "error": "Olvidó el factor ½."
+        },
+        {
+          "letra": "C",
+          "texto": "75 000,00 J",
+          "error": "No convirtió la deformación a metros."
+        },
+        {
+          "letra": "D",
+          "texto": "150,00 J",
+          "error": "Calculó la fuerza k·x en lugar de la energía."
+        },
+        {
+          "letra": "E",
+          "texto": "7,50 J",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "E_pe = ½·k·x² = ½·1500·(0,10)² = 7,50 J."
+    },
+    {
+      "id": "FIS-2BGU-U3-015",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Trabajo nulo",
+      "destreza": "CN.F.5.2.1",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un estudiante camina por el patio con velocidad constante llevando su mochila a la misma altura. ¿Qué trabajo realiza la fuerza vertical con que sostiene la mochila?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Igual al peso por la distancia caminada.",
+          "error": "Multiplica fuerza y desplazamiento sin considerar el ángulo de 90°."
+        },
+        {
+          "letra": "B",
+          "texto": "Cero, porque la fuerza es perpendicular al desplazamiento.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Positivo, porque hace esfuerzo para sostenerla.",
+          "error": "Confunde esfuerzo muscular con trabajo mecánico."
+        },
+        {
+          "letra": "D",
+          "texto": "Depende de la rapidez con que camina.",
+          "error": "Mezcla trabajo con potencia."
+        },
+        {
+          "letra": "E",
+          "texto": "Negativo, porque el peso apunta hacia abajo.",
+          "error": "Atribuye a la fuerza de sostén el signo del peso."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "W = F·d·cos 90° = 0. La fuerza de sostén es vertical y el desplazamiento horizontal."
+    },
+    {
+      "id": "FIS-2BGU-U3-016",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Fuerzas disipativas",
+      "destreza": "CN.F.5.2.3",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Un bloque se arrastra sobre una mesa con rozamiento y regresa al punto de partida siguiendo un circuito cerrado. ¿Cómo es el trabajo total del rozamiento en ese recorrido?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Cero, porque la ida y la vuelta se compensan.",
+          "error": "Cree que el trabajo de ida y vuelta tienen signos opuestos."
+        },
+        {
+          "letra": "B",
+          "texto": "Negativo, porque el rozamiento siempre se opone al movimiento.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Igual al cambio de energía potencial.",
+          "error": "Confunde fuerza disipativa con fuerza conservativa."
+        },
+        {
+          "letra": "D",
+          "texto": "Cero, porque el desplazamiento total es cero.",
+          "error": "Aplica la propiedad de las fuerzas conservativas al rozamiento."
+        },
+        {
+          "letra": "E",
+          "texto": "Positivo, porque el bloque recorrió una distancia.",
+          "error": "Ignora que el rozamiento se opone al desplazamiento."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "El rozamiento apunta siempre contra el movimiento, así que cada tramo aporta trabajo negativo. Por eso es una fuerza disipativa: en una trayectoria cerrada su trabajo no es cero."
+    },
+    {
+      "id": "FIS-2BGU-U3-017",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Potencia",
+      "destreza": "CN.F.5.2.4",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Dos montacargas suben la misma carga a la misma altura. El primero tarda 20 s y el segundo 40 s. ¿Qué se puede afirmar?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Ambos desarrollan la misma potencia.",
+          "error": "Ignora que la potencia depende del tiempo."
+        },
+        {
+          "letra": "B",
+          "texto": "El primero hace el doble de trabajo.",
+          "error": "Confunde trabajo con potencia."
+        },
+        {
+          "letra": "C",
+          "texto": "El segundo hace la mitad del trabajo.",
+          "error": "Cree que el trabajo depende del tiempo empleado."
+        },
+        {
+          "letra": "D",
+          "texto": "Ambos hacen el mismo trabajo, pero el primero desarrolla el doble de potencia.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "El segundo desarrolla más potencia porque trabaja más tiempo.",
+          "error": "Cree que la potencia aumenta con el tiempo."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "W = m·g·h es igual para ambos. P = W/t: con la mitad del tiempo, el primero desarrolla el doble de potencia."
+    },
+    {
+      "id": "FIS-2BGU-U3-018",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Unidades de trabajo y potencia",
+      "destreza": "CN.F.5.2.4",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Cuál es la equivalencia correcta en el Sistema Internacional?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1 J = 1 W/s",
+          "error": "Invierte la relación entre energía y tiempo."
+        },
+        {
+          "letra": "B",
+          "texto": "1 W = 1 J·s",
+          "error": "Multiplica por el tiempo en lugar de dividir."
+        },
+        {
+          "letra": "C",
+          "texto": "1 W = 1 J/s",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "1 W = 1 N·m",
+          "error": "Confunde el watt con el joule."
+        },
+        {
+          "letra": "E",
+          "texto": "1 J = 1 N/m",
+          "error": "Divide en lugar de multiplicar fuerza por distancia."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "El joule es N·m (fuerza por distancia). El watt mide energía por unidad de tiempo: 1 W = 1 J/s."
+    },
+    {
+      "id": "FIS-2BGU-U3-019",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Transformaciones de energía",
+      "destreza": "CN.F.5.2.2",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un péndulo oscila sin rozamiento. ¿En qué punto su energía potencial gravitatoria es máxima y su energía cinética es mínima?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En todos los puntos por igual.",
+          "error": "Confunde la conservación de la energía total con energías parciales constantes."
+        },
+        {
+          "letra": "B",
+          "texto": "Solo al inicio del movimiento.",
+          "error": "No reconoce que el péndulo vuelve a los extremos en cada oscilación."
+        },
+        {
+          "letra": "C",
+          "texto": "En el punto más bajo de la trayectoria.",
+          "error": "Ahí la energía cinética es máxima, no mínima."
+        },
+        {
+          "letra": "D",
+          "texto": "En la mitad del camino entre el extremo y el punto más bajo.",
+          "error": "Supone que las energías se igualan en el máximo."
+        },
+        {
+          "letra": "E",
+          "texto": "En los extremos de la oscilación, donde se detiene un instante.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "En los extremos la altura es máxima y la velocidad es cero: toda la energía mecánica es potencial. En el punto más bajo ocurre lo contrario."
+    },
+    {
+      "id": "FIS-2BGU-U3-020",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Potencia y energía",
+      "destreza": "CN.F.5.2.4",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-2BGU-L3",
+      "enunciado": "Según la lectura, ¿cuál es la potencia que entrega el agua al caer, antes de considerar la eficiencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,98 kW",
+          "error": "Olvidó la densidad del agua."
+        },
+        {
+          "letra": "B",
+          "texto": "980,00 kW",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "100,00 kW",
+          "error": "Olvidó la aceleración de la gravedad."
+        },
+        {
+          "letra": "D",
+          "texto": "490,00 kW",
+          "error": "Olvidó el caudal."
+        },
+        {
+          "letra": "E",
+          "texto": "19,60 kW",
+          "error": "Olvidó la altura de caída."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "P = ρ·Q·g·h = 1 000·2·9,8·50 = 980 000 W = 980,00 kW."
+    },
+    {
+      "id": "FIS-2BGU-U3-021",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 3,
+      "tema": "Eficiencia energética",
+      "destreza": "CN.F.5.2.10",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "FIS-2BGU-L3",
+      "enunciado": "Con la eficiencia indicada en la lectura, ¿qué potencia eléctrica entrega la central?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "833,00 kW",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "85,00 kW",
+          "error": "Confundió el porcentaje con la potencia."
+        },
+        {
+          "letra": "C",
+          "texto": "1 152,94 kW",
+          "error": "Dividió para la eficiencia en lugar de multiplicar."
+        },
+        {
+          "letra": "D",
+          "texto": "147,00 kW",
+          "error": "Calculó las pérdidas (15 %) en lugar de la potencia útil."
+        },
+        {
+          "letra": "E",
+          "texto": "895,00 kW",
+          "error": "Restó 85 kW en lugar de aplicar el 85 %."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "P_útil = η·P = 0,85·980,00 kW = 833,00 kW. El resto se pierde como calor y rozamiento."
+    },
+    {
+      "id": "FIS-2BGU-U4-001",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Calor y calor específico",
+      "destreza": "CN.F.5.2.7",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Se calientan 2 kg de agua (c = 4 186 J/kg·°C) desde 20 °C hasta 80 °C. ¿Cuánto calor absorbe?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "837 200,00 J",
+          "error": "Sumó las temperaturas en lugar de restarlas."
+        },
+        {
+          "letra": "B",
+          "texto": "251 160,00 J",
+          "error": "Olvidó multiplicar por la masa."
+        },
+        {
+          "letra": "C",
+          "texto": "5,02 × 10⁸ J",
+          "error": "Expresó la masa en gramos con c en J/kg·°C."
+        },
+        {
+          "letra": "D",
+          "texto": "669 760,00 J",
+          "error": "Usó la temperatura final en lugar de la variación de temperatura."
+        },
+        {
+          "letra": "E",
+          "texto": "502 320,00 J",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Q = m·c·ΔT = 2,0·4 186·(80 − 20) = 502 320 J."
+    },
+    {
+      "id": "FIS-2BGU-U4-002",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Calor y calor específico",
+      "destreza": "CN.F.5.2.7",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Una olla de aluminio de 0,5 kg (c = 900 J/kg·°C) pasa de 25 °C a 125 °C. ¿Cuánto calor absorbe?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "45 000,00 J",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "4,50 × 10⁷ J",
+          "error": "Expresó la masa en gramos con c en J/kg·°C."
+        },
+        {
+          "letra": "C",
+          "texto": "67 500,00 J",
+          "error": "Sumó las temperaturas en lugar de restarlas."
+        },
+        {
+          "letra": "D",
+          "texto": "90 000,00 J",
+          "error": "Olvidó multiplicar por la masa."
+        },
+        {
+          "letra": "E",
+          "texto": "56 250,00 J",
+          "error": "Usó la temperatura final en lugar de la variación de temperatura."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "Q = m·c·ΔT = 0,5·900·(125 − 25) = 45 000 J."
+    },
+    {
+      "id": "FIS-2BGU-U4-003",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Equilibrio térmico",
+      "destreza": "CN.F.5.2.8",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Se mezcla 1 kg de agua a 80 °C con 3 kg de agua a 20 °C en un recipiente aislado. ¿Cuál es la temperatura de equilibrio?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "70,00 °C",
+          "error": "Dividió para 2 en lugar de dividir para la masa total."
+        },
+        {
+          "letra": "B",
+          "texto": "50,00 °C",
+          "error": "Promedió las temperaturas sin considerar las masas."
+        },
+        {
+          "letra": "C",
+          "texto": "35,00 °C",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "60,00 °C",
+          "error": "Restó las temperaturas."
+        },
+        {
+          "letra": "E",
+          "texto": "65,00 °C",
+          "error": "Cruzó cada masa con la temperatura de la otra porción."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Calor cedido = calor absorbido: m1·c·(T1 − Te) = m2·c·(Te − T2). Te = (m1·T1 + m2·T2)/(m1 + m2) = 35,00 °C."
+    },
+    {
+      "id": "FIS-2BGU-U4-004",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Equilibrio térmico",
+      "destreza": "CN.F.5.2.8",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En un termo se mezclan 0,2 kg de agua a 95 °C con 0,3 kg de agua a 25 °C. ¿Cuál es la temperatura de equilibrio?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "70,00 °C",
+          "error": "Restó las temperaturas."
+        },
+        {
+          "letra": "B",
+          "texto": "13,25 °C",
+          "error": "Dividió para 2 en lugar de dividir para la masa total."
+        },
+        {
+          "letra": "C",
+          "texto": "67,00 °C",
+          "error": "Cruzó cada masa con la temperatura de la otra porción."
+        },
+        {
+          "letra": "D",
+          "texto": "53,00 °C",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "60,00 °C",
+          "error": "Promedió las temperaturas sin considerar las masas."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Calor cedido = calor absorbido: m1·c·(T1 − Te) = m2·c·(Te − T2). Te = (m1·T1 + m2·T2)/(m1 + m2) = 53,00 °C."
+    },
+    {
+      "id": "FIS-2BGU-U4-005",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Calor latente",
+      "destreza": "CN.F.5.2.8",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Cuánto calor se necesita para derretir 0,5 kg de hielo que ya está a 0 °C? (L_f = 334 000 J/kg; L_v = 2 260 000 J/kg; c_agua = 4 186 J/kg·°C)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "668 000,00 J",
+          "error": "Dividió el calor latente para la masa."
+        },
+        {
+          "letra": "B",
+          "texto": "167 000,00 J",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "2 093,00 J",
+          "error": "Usó el calor específico; en un cambio de estado la temperatura no varía."
+        },
+        {
+          "letra": "D",
+          "texto": "1,67 × 10⁸ J",
+          "error": "Expresó la masa en gramos."
+        },
+        {
+          "letra": "E",
+          "texto": "1 130 000,00 J",
+          "error": "Usó el calor latente de vaporización."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Durante la fusión la temperatura se mantiene en 0 °C. Q = m·L_f = 0,5·334 000 = 167 000 J."
+    },
+    {
+      "id": "FIS-2BGU-U4-006",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Calor latente",
+      "destreza": "CN.F.5.2.8",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Cuánto calor se necesita para fundir completamente 2 kg de hielo a 0 °C? (L_f = 334 000 J/kg; L_v = 2 260 000 J/kg; c_agua = 4 186 J/kg·°C)",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "6,68 × 10⁸ J",
+          "error": "Expresó la masa en gramos."
+        },
+        {
+          "letra": "B",
+          "texto": "8 372,00 J",
+          "error": "Usó el calor específico; en un cambio de estado la temperatura no varía."
+        },
+        {
+          "letra": "C",
+          "texto": "4 520 000,00 J",
+          "error": "Usó el calor latente de vaporización."
+        },
+        {
+          "letra": "D",
+          "texto": "167 000,00 J",
+          "error": "Dividió el calor latente para la masa."
+        },
+        {
+          "letra": "E",
+          "texto": "668 000,00 J",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Durante la fusión la temperatura se mantiene en 0 °C. Q = m·L_f = 2,0·334 000 = 668 000 J."
+    },
+    {
+      "id": "FIS-2BGU-U4-007",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Máquinas térmicas: eficiencia",
+      "destreza": "CN.F.5.2.10",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un motor recibe 5 000 J de calor del foco caliente en cada ciclo y cede 3 500 J al ambiente. ¿Cuál es su eficiencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "142,86 %",
+          "error": "Invirtió la razón: una eficiencia no puede superar el 100 %."
+        },
+        {
+          "letra": "B",
+          "texto": "30,00 %",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "42,86 %",
+          "error": "Dividió el trabajo para el calor cedido."
+        },
+        {
+          "letra": "D",
+          "texto": "17,65 %",
+          "error": "Dividió para la suma de calores."
+        },
+        {
+          "letra": "E",
+          "texto": "70,00 %",
+          "error": "Calculó la fracción de calor perdido, no la de trabajo útil."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "W = Q_c − Q_f = 5000 − 3500 = 1500 J. e = W/Q_c = 1500/5000 = 30,00 %."
+    },
+    {
+      "id": "FIS-2BGU-U4-008",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Máquinas térmicas: eficiencia",
+      "destreza": "CN.F.5.2.10",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una máquina térmica absorbe 1 200 J y expulsa 900 J por ciclo. ¿Cuál es su eficiencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "133,33 %",
+          "error": "Invirtió la razón: una eficiencia no puede superar el 100 %."
+        },
+        {
+          "letra": "B",
+          "texto": "33,33 %",
+          "error": "Dividió el trabajo para el calor cedido."
+        },
+        {
+          "letra": "C",
+          "texto": "14,29 %",
+          "error": "Dividió para la suma de calores."
+        },
+        {
+          "letra": "D",
+          "texto": "25,00 %",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "75,00 %",
+          "error": "Calculó la fracción de calor perdido, no la de trabajo útil."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "W = Q_c − Q_f = 1200 − 900 = 300 J. e = W/Q_c = 300/1200 = 25,00 %."
+    },
+    {
+      "id": "FIS-2BGU-U4-009",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Máquinas térmicas: eficiencia máxima",
+      "destreza": "CN.F.5.2.10",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Una máquina térmica ideal opera entre un foco caliente a 500 °C y el ambiente a 20 °C. ¿Cuál es su eficiencia máxima teórica (ciclo de Carnot)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "37,90 %",
+          "error": "Calculó T_f/T_c sin restarlo de 1."
+        },
+        {
+          "letra": "B",
+          "texto": "62,10 %",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "96,00 %",
+          "error": "Usó grados Celsius en lugar de kelvin."
+        },
+        {
+          "letra": "D",
+          "texto": "4,00 %",
+          "error": "Usó Celsius y además no restó de 1."
+        },
+        {
+          "letra": "E",
+          "texto": "163,82 %",
+          "error": "Dividió para la temperatura fría en lugar de la caliente."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "Las temperaturas van en kelvin: T_c = 773 K, T_f = 293 K. e = 1 − T_f/T_c = 1 − 293/773 ≈ 62,10 %."
+    },
+    {
+      "id": "FIS-2BGU-U4-010",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Máquinas térmicas: eficiencia máxima",
+      "destreza": "CN.F.5.2.10",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Una máquina térmica ideal trabaja entre 327 °C y 47 °C. ¿Cuál es su eficiencia máxima teórica (ciclo de Carnot)?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "85,63 %",
+          "error": "Usó grados Celsius en lugar de kelvin."
+        },
+        {
+          "letra": "B",
+          "texto": "14,37 %",
+          "error": "Usó Celsius y además no restó de 1."
+        },
+        {
+          "letra": "C",
+          "texto": "46,67 %",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "53,33 %",
+          "error": "Calculó T_f/T_c sin restarlo de 1."
+        },
+        {
+          "letra": "E",
+          "texto": "87,50 %",
+          "error": "Dividió para la temperatura fría en lugar de la caliente."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Las temperaturas van en kelvin: T_c = 600 K, T_f = 320 K. e = 1 − T_f/T_c = 1 − 320/600 ≈ 46,67 %."
+    },
+    {
+      "id": "FIS-2BGU-U4-011",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Primera ley de la termodinámica",
+      "destreza": "CN.F.5.2.9",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un gas absorbe 800 J de calor y realiza 300 J de trabajo al expandirse. ¿Cuánto varía su energía interna?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1 100 J",
+          "error": "Sumó el trabajo hecho por el gas en lugar de restarlo."
+        },
+        {
+          "letra": "B",
+          "texto": "300 J",
+          "error": "Tomó el trabajo como variación de energía interna."
+        },
+        {
+          "letra": "C",
+          "texto": "800 J",
+          "error": "Supuso que todo el calor se convierte en energía interna."
+        },
+        {
+          "letra": "D",
+          "texto": "-500 J",
+          "error": "Invirtió el orden de la resta."
+        },
+        {
+          "letra": "E",
+          "texto": "500 J",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "ΔU = Q − W = 800 − 300 = 500 J. El gas gana 800 J de calor pero gasta 300 J en trabajo."
+    },
+    {
+      "id": "FIS-2BGU-U4-012",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Primera ley de la termodinámica",
+      "destreza": "CN.F.5.2.9",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "El aire de un pistón recibe 1 500 J de calor y hace 600 J de trabajo sobre el émbolo. ¿Cuánto varía su energía interna?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1 500 J",
+          "error": "Supuso que todo el calor se convierte en energía interna."
+        },
+        {
+          "letra": "B",
+          "texto": "900 J",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "2 100 J",
+          "error": "Sumó el trabajo hecho por el gas en lugar de restarlo."
+        },
+        {
+          "letra": "D",
+          "texto": "600 J",
+          "error": "Tomó el trabajo como variación de energía interna."
+        },
+        {
+          "letra": "E",
+          "texto": "-900 J",
+          "error": "Invirtió el orden de la resta."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "ΔU = Q − W = 1500 − 600 = 900 J. El gas gana 1500 J de calor pero gasta 600 J en trabajo."
+    },
+    {
+      "id": "FIS-2BGU-U4-013",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Temperatura y energía cinética",
+      "destreza": "CN.F.5.2.5",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Desde el punto de vista microscópico, ¿qué indica que un vaso de agua tenga mayor temperatura que otro?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Que tiene más masa de agua.",
+          "error": "Confunde temperatura con cantidad de sustancia."
+        },
+        {
+          "letra": "B",
+          "texto": "Que sus moléculas son más grandes.",
+          "error": "Cree que la temperatura cambia el tamaño de las moléculas."
+        },
+        {
+          "letra": "C",
+          "texto": "Que sus moléculas tienen mayor energía cinética promedio.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "Que contiene más calor almacenado.",
+          "error": "Confunde temperatura con calor; el calor es energía en tránsito."
+        },
+        {
+          "letra": "E",
+          "texto": "Que sus moléculas están quietas.",
+          "error": "Invierte la relación entre temperatura y movimiento."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La temperatura mide la energía cinética promedio de las partículas. Un vaso pequeño puede estar más caliente que una piscina aunque tenga menos energía térmica total."
+    },
+    {
+      "id": "FIS-2BGU-U4-014",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Transferencia de calor",
+      "destreza": "CN.F.5.2.6",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Al dejar una cuchara de metal dentro de una olla de sopa caliente, el mango se calienta aunque no toque la sopa. ¿Por qué mecanismo llega el calor al mango?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Evaporación.",
+          "error": "La evaporación es un cambio de estado, no un mecanismo de transferencia por el metal."
+        },
+        {
+          "letra": "B",
+          "texto": "Convección.",
+          "error": "La convección requiere movimiento de un fluido, no de un sólido."
+        },
+        {
+          "letra": "C",
+          "texto": "Radiación.",
+          "error": "La radiación no necesita contacto y no explica el calentamiento a lo largo del metal."
+        },
+        {
+          "letra": "D",
+          "texto": "Conducción.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Aislamiento.",
+          "error": "Un aislante impide la transferencia de calor."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "En un sólido, las partículas más energéticas transmiten su agitación a las vecinas por contacto: eso es conducción. Los metales son buenos conductores."
+    },
+    {
+      "id": "FIS-2BGU-U4-015",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Transferencia de calor",
+      "destreza": "CN.F.5.2.6",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En las playas de Santa Elena, durante el día sopla brisa desde el mar hacia la tierra. ¿Qué mecanismo de transferencia de calor la produce?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Convección: el aire frío sobre la tierra baja y empuja al aire del mar.",
+          "error": "Invierte cuál superficie se calienta más rápido durante el día."
+        },
+        {
+          "letra": "B",
+          "texto": "Conducción: el calor pasa de la arena al mar por contacto.",
+          "error": "La conducción no explica el movimiento de masas de aire."
+        },
+        {
+          "letra": "C",
+          "texto": "Evaporación: el agua del mar se convierte en viento.",
+          "error": "Confunde cambio de estado con corrientes de aire."
+        },
+        {
+          "letra": "D",
+          "texto": "Convección: el aire caliente sobre la tierra sube y el aire más frío del mar ocupa su lugar.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Radiación: el Sol empuja el aire hacia la tierra.",
+          "error": "La radiación calienta, pero no mueve el aire por sí sola."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "De día la tierra se calienta más rápido que el mar. El aire sobre la tierra se calienta, se vuelve menos denso y sube; el aire más frío del mar se desplaza a ocupar su lugar."
+    },
+    {
+      "id": "FIS-2BGU-U4-016",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Calor específico",
+      "destreza": "CN.F.5.2.7",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Al mediodía, la arena de la playa quema los pies, mientras el agua del mar se siente fresca, aunque ambas reciben la misma radiación solar. ¿Cuál es la explicación?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La arena tiene un calor específico mayor que el agua.",
+          "error": "Invierte la relación: mayor c implica menor aumento de temperatura."
+        },
+        {
+          "letra": "B",
+          "texto": "El agua no puede calentarse por radiación.",
+          "error": "La radiación calienta cualquier cuerpo que la absorbe."
+        },
+        {
+          "letra": "C",
+          "texto": "El agua tiene un calor específico mucho mayor que la arena.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "La arena recibe más radiación solar que el agua.",
+          "error": "Contradice el dato de que reciben la misma radiación."
+        },
+        {
+          "letra": "E",
+          "texto": "El agua refleja toda la radiación solar.",
+          "error": "Exagera la reflexión; el agua sí absorbe radiación."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "Con la misma energía, ΔT = Q/(m·c). El agua (c ≈ 4 186 J/kg·°C) se calienta mucho menos que la arena (c ≈ 800 J/kg·°C)."
+    },
+    {
+      "id": "FIS-2BGU-U4-017",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Escalas de temperatura",
+      "destreza": "CN.F.5.2.5",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "La temperatura de una sustancia aumenta 25 °C. ¿Cuánto aumenta expresada en kelvin?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "45 K",
+          "error": "Aplicó la conversión a Fahrenheit (×1,8)."
+        },
+        {
+          "letra": "B",
+          "texto": "248 K",
+          "error": "Restó 273 a la variación."
+        },
+        {
+          "letra": "C",
+          "texto": "77 K",
+          "error": "Convirtió 25 °C a Fahrenheit."
+        },
+        {
+          "letra": "D",
+          "texto": "298 K",
+          "error": "Sumó 273 a una variación; eso solo se hace con temperaturas, no con diferencias."
+        },
+        {
+          "letra": "E",
+          "texto": "25 K",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Un grado Celsius y un kelvin tienen el mismo tamaño. Por eso una variación de 25 °C equivale a una variación de 25 K."
+    },
+    {
+      "id": "FIS-2BGU-U4-018",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Entropía",
+      "destreza": "CN.F.5.2.11",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Se deja un cubo de hielo sobre la mesa a temperatura ambiente y se derrite. ¿Qué ocurre con la entropía del sistema hielo-ambiente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Disminuye, porque el agua líquida está más ordenada que el hielo.",
+          "error": "Invierte el orden: el sólido cristalino es más ordenado."
+        },
+        {
+          "letra": "B",
+          "texto": "Disminuye, porque el hielo pierde masa.",
+          "error": "Asocia la entropía con la masa en lugar del desorden."
+        },
+        {
+          "letra": "C",
+          "texto": "Solo cambia si se calienta el hielo con fuego.",
+          "error": "Cree que solo los procesos forzados cambian la entropía."
+        },
+        {
+          "letra": "D",
+          "texto": "Aumenta, porque las moléculas pasan a un estado más desordenado.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Se mantiene constante, porque la energía se conserva.",
+          "error": "Confunde la conservación de la energía con la de la entropía."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "En un proceso natural la entropía total aumenta. Al fundirse, las moléculas pasan de una red ordenada a un líquido con mayor desorden."
+    },
+    {
+      "id": "FIS-2BGU-U4-019",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Segunda ley de la termodinámica",
+      "destreza": "CN.F.5.2.10",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un vendedor asegura que su motor transforma el 100 % del calor del combustible en trabajo. ¿Qué responde la física?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Es posible si el motor es nuevo y bien lubricado.",
+          "error": "La lubricación reduce pérdidas, pero no las elimina."
+        },
+        {
+          "letra": "B",
+          "texto": "Es posible porque la energía se conserva.",
+          "error": "Conservar la energía no implica aprovecharla toda como trabajo."
+        },
+        {
+          "letra": "C",
+          "texto": "Es posible si el motor es eléctrico.",
+          "error": "Los motores eléctricos también pierden energía por calentamiento."
+        },
+        {
+          "letra": "D",
+          "texto": "Es posible a temperaturas muy altas.",
+          "error": "Aun con temperaturas altas, la eficiencia máxima es menor que 1."
+        },
+        {
+          "letra": "E",
+          "texto": "Es imposible: todo motor cede parte del calor al ambiente.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "La segunda ley establece que ninguna máquina térmica puede ser 100 % eficiente: siempre se transfiere calor a un foco frío."
+    },
+    {
+      "id": "FIS-2BGU-U4-020",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Equilibrio térmico con cambio de estado",
+      "destreza": "CN.F.5.2.8",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "FIS-2BGU-L4",
+      "enunciado": "Según la lectura, ¿cuál es la temperatura final de la bebida, si todo el hielo se derrite?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "14,00 °C",
+          "error": "Promedió 28 °C y 0 °C sin considerar masas ni calor latente."
+        },
+        {
+          "letra": "B",
+          "texto": "24,00 °C",
+          "error": "Ignoró el calor latente de fusión del hielo."
+        },
+        {
+          "letra": "C",
+          "texto": "14,70 °C",
+          "error": "No consideró que el agua del hielo derretido también se calienta."
+        },
+        {
+          "letra": "D",
+          "texto": "0,00 °C",
+          "error": "Supuso que el hielo deja toda la bebida a 0 °C."
+        },
+        {
+          "letra": "E",
+          "texto": "12,60 °C",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "Calor cedido por el jugo = calor para fundir el hielo + calor para calentar esa agua: 0,30·4 186·(28 − T) = 16 700 + 0,05·4 186·T. T ≈ 12,60 °C."
+    },
+    {
+      "id": "FIS-2BGU-U4-021",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 4,
+      "tema": "Calor latente",
+      "destreza": "CN.F.5.2.8",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-2BGU-L4",
+      "enunciado": "Con los datos de la lectura, ¿cuánto calor se necesita solo para derretir el cubo de hielo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "113 000 J",
+          "error": "Usó el calor latente de vaporización."
+        },
+        {
+          "letra": "B",
+          "texto": "2 × 10⁷ J",
+          "error": "Expresó la masa en gramos."
+        },
+        {
+          "letra": "C",
+          "texto": "5 860 J",
+          "error": "Usó el calor específico y una variación de temperatura; en la fusión T no cambia."
+        },
+        {
+          "letra": "D",
+          "texto": "16 700 J",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "334 000 J",
+          "error": "Olvidó multiplicar el calor latente por la masa."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "Q = m·L_f = 0,05 kg·334 000 J/kg = 16 700 J."
+    },
+    {
+      "id": "FIS-2BGU-U5-001",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Intensidad de corriente",
+      "destreza": "CN.F.5.1.47",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Por la sección de un cable pasan 180 C de carga en 2 minutos. ¿Cuál es la intensidad de la corriente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "21 600,00 A",
+          "error": "Multiplicó la carga por el tiempo."
+        },
+        {
+          "letra": "B",
+          "texto": "90,00 A",
+          "error": "No convirtió los minutos a segundos."
+        },
+        {
+          "letra": "C",
+          "texto": "1,50 A",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "0,67 A",
+          "error": "Dividió el tiempo para la carga."
+        },
+        {
+          "letra": "E",
+          "texto": "360,00 A",
+          "error": "Multiplicó la carga por el tiempo en minutos."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La intensidad es la carga que pasa por unidad de tiempo, con t en segundos: I = q/t = 180 C/120 s = 1,50 A."
+    },
+    {
+      "id": "FIS-2BGU-U5-002",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Intensidad de corriente",
+      "destreza": "CN.F.5.1.47",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Por un conductor pasan 36 C de carga en 30 s. ¿Cuál es la intensidad de la corriente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1 080,00 A",
+          "error": "Multiplicó la carga por el tiempo."
+        },
+        {
+          "letra": "B",
+          "texto": "72,00 A",
+          "error": "Convirtió 30 s a 0,5 min y dividió para ese valor."
+        },
+        {
+          "letra": "C",
+          "texto": "1,20 A",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "18,00 A",
+          "error": "Multiplicó la carga por el tiempo en minutos."
+        },
+        {
+          "letra": "E",
+          "texto": "0,83 A",
+          "error": "Dividió el tiempo para la carga."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La intensidad es la carga que pasa por unidad de tiempo, con t en segundos: I = q/t = 36 C/30 s = 1,20 A."
+    },
+    {
+      "id": "FIS-2BGU-U5-003",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Ley de Ohm",
+      "destreza": "CN.F.5.1.49",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una resistencia de 2 kΩ se conecta a una batería de 12 V. ¿Qué corriente circula?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "6,000 × 10⁻⁶ A",
+          "error": "Interpretó kΩ como MΩ (×10⁶)."
+        },
+        {
+          "letra": "B",
+          "texto": "24 000,000 A",
+          "error": "Multiplicó voltaje por resistencia."
+        },
+        {
+          "letra": "C",
+          "texto": "0,006 A",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "166,667 A",
+          "error": "Dividió la resistencia para el voltaje."
+        },
+        {
+          "letra": "E",
+          "texto": "6,000 A",
+          "error": "No convirtió los kΩ a Ω."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "R = 2,0 kΩ = 2 000 Ω. I = V/R = 12/2 000 = 0,006 A = 6,0 mA."
+    },
+    {
+      "id": "FIS-2BGU-U5-004",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Ley de Ohm",
+      "destreza": "CN.F.5.1.49",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un resistor de 4,5 kΩ recibe una diferencia de potencial de 9 V. ¿Qué corriente circula?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "2,000 × 10⁻⁶ A",
+          "error": "Interpretó kΩ como MΩ (×10⁶)."
+        },
+        {
+          "letra": "B",
+          "texto": "0,002 A",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "500,000 A",
+          "error": "Dividió la resistencia para el voltaje."
+        },
+        {
+          "letra": "D",
+          "texto": "40 500,000 A",
+          "error": "Multiplicó voltaje por resistencia."
+        },
+        {
+          "letra": "E",
+          "texto": "2,000 A",
+          "error": "No convirtió los kΩ a Ω."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "R = 4,5 kΩ = 4 500 Ω. I = V/R = 9/4 500 = 0,002 A = 2,0 mA."
+    },
+    {
+      "id": "FIS-2BGU-U5-005",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Circuitos en serie",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Dos resistencias de 4 Ω y 8 Ω se conectan en serie a una fuente de 12 V. ¿Cuál es la corriente del circuito?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,00 A",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "3,00 A",
+          "error": "Usó solo la primera resistencia."
+        },
+        {
+          "letra": "C",
+          "texto": "4,50 A",
+          "error": "Calculó la resistencia equivalente como si fuera paralelo."
+        },
+        {
+          "letra": "D",
+          "texto": "0,38 A",
+          "error": "Multiplicó las resistencias en lugar de sumarlas."
+        },
+        {
+          "letra": "E",
+          "texto": "144,00 A",
+          "error": "Multiplicó el voltaje por la resistencia equivalente."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "En serie R_eq = R1 + R2 = 12 Ω. I = V/R_eq = 12/12 = 1,00 A."
+    },
+    {
+      "id": "FIS-2BGU-U5-006",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Circuitos en serie",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Dos resistencias de 10 Ω y 30 Ω se conectan en serie a 24 V. ¿Cuál es la corriente del circuito?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "3,20 A",
+          "error": "Calculó la resistencia equivalente como si fuera paralelo."
+        },
+        {
+          "letra": "B",
+          "texto": "0,08 A",
+          "error": "Multiplicó las resistencias en lugar de sumarlas."
+        },
+        {
+          "letra": "C",
+          "texto": "2,40 A",
+          "error": "Usó solo la primera resistencia."
+        },
+        {
+          "letra": "D",
+          "texto": "0,60 A",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "960,00 A",
+          "error": "Multiplicó el voltaje por la resistencia equivalente."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "En serie R_eq = R1 + R2 = 40 Ω. I = V/R_eq = 24/40 = 0,60 A."
+    },
+    {
+      "id": "FIS-2BGU-U5-007",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Circuitos en paralelo",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Dos resistencias de 6 Ω y 3 Ω se conectan en paralelo. ¿Cuál es la resistencia equivalente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "2,00 Ω",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "0,50 Ω",
+          "error": "Sumó los inversos pero olvidó invertir el resultado."
+        },
+        {
+          "letra": "C",
+          "texto": "4,50 Ω",
+          "error": "Promedió las resistencias."
+        },
+        {
+          "letra": "D",
+          "texto": "18,00 Ω",
+          "error": "Multiplicó las resistencias sin dividir para su suma."
+        },
+        {
+          "letra": "E",
+          "texto": "9,00 Ω",
+          "error": "Sumó las resistencias como si estuvieran en serie."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "1/R_eq = 1/6 + 1/3 ⇒ R_eq = R1·R2/(R1 + R2) = 18/9 = 2,00 Ω. En paralelo, R_eq es menor que la menor resistencia."
+    },
+    {
+      "id": "FIS-2BGU-U5-008",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Circuitos en paralelo",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Dos resistencias de 20 Ω y 30 Ω se conectan en paralelo. ¿Cuál es la resistencia equivalente?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "25,00 Ω",
+          "error": "Promedió las resistencias."
+        },
+        {
+          "letra": "B",
+          "texto": "0,08 Ω",
+          "error": "Sumó los inversos pero olvidó invertir el resultado."
+        },
+        {
+          "letra": "C",
+          "texto": "12,00 Ω",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "600,00 Ω",
+          "error": "Multiplicó las resistencias sin dividir para su suma."
+        },
+        {
+          "letra": "E",
+          "texto": "50,00 Ω",
+          "error": "Sumó las resistencias como si estuvieran en serie."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "1/R_eq = 1/20 + 1/30 ⇒ R_eq = R1·R2/(R1 + R2) = 600/50 = 12,00 Ω. En paralelo, R_eq es menor que la menor resistencia."
+    },
+    {
+      "id": "FIS-2BGU-U5-009",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Potencia eléctrica y efecto Joule",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un foco de 240 Ω de resistencia se conecta a 120 V. ¿Qué potencia disipa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "60,00 W",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "28 800,00 W",
+          "error": "Multiplicó voltaje por resistencia."
+        },
+        {
+          "letra": "C",
+          "texto": "0,25 W",
+          "error": "Elevó la corriente al cuadrado pero olvidó multiplicar por R."
+        },
+        {
+          "letra": "D",
+          "texto": "0,50 W",
+          "error": "Calculó la corriente, no la potencia."
+        },
+        {
+          "letra": "E",
+          "texto": "3 456 000,00 W",
+          "error": "Multiplicó por la resistencia en lugar de dividir."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "P = V²/R = 120²/240 = 60,00 W. También: I = V/R = 0,50 A y P = V·I."
+    },
+    {
+      "id": "FIS-2BGU-U5-010",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Potencia eléctrica y efecto Joule",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una plancha de 12 Ω de resistencia funciona a 120 V. ¿Qué potencia disipa?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "100,00 W",
+          "error": "Elevó la corriente al cuadrado pero olvidó multiplicar por R."
+        },
+        {
+          "letra": "B",
+          "texto": "1 440,00 W",
+          "error": "Multiplicó voltaje por resistencia."
+        },
+        {
+          "letra": "C",
+          "texto": "10,00 W",
+          "error": "Calculó la corriente, no la potencia."
+        },
+        {
+          "letra": "D",
+          "texto": "1 200,00 W",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "172 800,00 W",
+          "error": "Multiplicó por la resistencia en lugar de dividir."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "P = V²/R = 120²/12 = 1 200,00 W. También: I = V/R = 10,00 A y P = V·I."
+    },
+    {
+      "id": "FIS-2BGU-U5-011",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Energía eléctrica consumida",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una refrigeradora de 150 W funciona 24 horas al día durante 30 días. ¿Cuánta energía consume en kWh?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1 080,00 kWh",
+          "error": "Dividió para 100 en lugar de 1 000."
+        },
+        {
+          "letra": "B",
+          "texto": "108,00 kWh",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "108 000,00 kWh",
+          "error": "Calculó Wh y no dividió para 1 000."
+        },
+        {
+          "letra": "D",
+          "texto": "3,60 kWh",
+          "error": "Calculó el consumo de un solo día."
+        },
+        {
+          "letra": "E",
+          "texto": "4,50 kWh",
+          "error": "Olvidó las horas de uso diario."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "E = P·t = 150 W·(24 h·30) = 108 000 Wh = 108,00 kWh."
+    },
+    {
+      "id": "FIS-2BGU-U5-012",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Energía eléctrica consumida",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una laptop de 60 W se usa 5 horas diarias durante 20 días. ¿Cuánta energía consume en kWh?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "6 000,00 kWh",
+          "error": "Calculó Wh y no dividió para 1 000."
+        },
+        {
+          "letra": "B",
+          "texto": "0,30 kWh",
+          "error": "Calculó el consumo de un solo día."
+        },
+        {
+          "letra": "C",
+          "texto": "1,20 kWh",
+          "error": "Olvidó las horas de uso diario."
+        },
+        {
+          "letra": "D",
+          "texto": "60,00 kWh",
+          "error": "Dividió para 100 en lugar de 1 000."
+        },
+        {
+          "letra": "E",
+          "texto": "6,00 kWh",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "E = P·t = 60 W·(5 h·20) = 6 000 Wh = 6,00 kWh."
+    },
+    {
+      "id": "FIS-2BGU-U5-013",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Corriente y carga elemental",
+      "destreza": "CN.F.5.1.47",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Por un conductor circula una corriente de 2 A durante 5 s. Con e = 1,6 × 10⁻¹⁹ C, ¿cuántos electrones atraviesan una sección del conductor?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "2,50 × 10¹⁸ electrones",
+          "error": "Dividió la corriente para el tiempo."
+        },
+        {
+          "letra": "B",
+          "texto": "1,25 × 10¹⁹ electrones",
+          "error": "Olvidó multiplicar por el tiempo."
+        },
+        {
+          "letra": "C",
+          "texto": "6,25 × 10¹⁹ electrones",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "1,60 × 10⁻¹⁸ electrones",
+          "error": "Multiplicó por la carga del electrón en lugar de dividir."
+        },
+        {
+          "letra": "E",
+          "texto": "10,00 electrones",
+          "error": "Calculó la carga (10 C) y no la dividió para la carga del electrón."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "q = I·t = 2·5 = 10 C. n = q/e = 10/(1,6 × 10⁻¹⁹) = 6,25 × 10¹⁹ electrones."
+    },
+    {
+      "id": "FIS-2BGU-U5-014",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Conservación de la carga en un nodo",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "A un nodo de un circuito llegan dos corrientes de 3 A y 2 A. De él salen dos cables: por uno sale 4 A. ¿Cuánta corriente sale por el otro?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1 A",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "4 A",
+          "error": "Supuso que ambos cables de salida llevan la misma corriente."
+        },
+        {
+          "letra": "C",
+          "texto": "9 A",
+          "error": "Sumó todas las corrientes sin distinguir entrada y salida."
+        },
+        {
+          "letra": "D",
+          "texto": "2,5 A",
+          "error": "Repartió la corriente de entrada en partes iguales."
+        },
+        {
+          "letra": "E",
+          "texto": "5 A",
+          "error": "Dio la corriente total que entra."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La carga se conserva: lo que entra al nodo sale de él. 3 + 2 = 4 + I ⇒ I = 1 A."
+    },
+    {
+      "id": "FIS-2BGU-U5-015",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Efecto Joule",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "¿Por qué se calienta el cable de una plancha o de una cocina eléctrica cuando funciona mucho tiempo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Porque el voltaje se acumula en el cable.",
+          "error": "Trata el voltaje como algo que se almacena."
+        },
+        {
+          "letra": "B",
+          "texto": "Porque entra aire caliente por el enchufe.",
+          "error": "Propone una causa externa sin base física."
+        },
+        {
+          "letra": "C",
+          "texto": "Porque la corriente se consume dentro del cable.",
+          "error": "Cree que la corriente se gasta; la carga se conserva."
+        },
+        {
+          "letra": "D",
+          "texto": "Porque los electrones chocan con la red del metal y parte de la energía se transforma en calor.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Porque el plástico del cable produce calor.",
+          "error": "Atribuye el calor al aislante y no al conductor."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "El efecto Joule se produce por las colisiones de los electrones libres con la red cristalina. La potencia disipada es P = I²·R."
+    },
+    {
+      "id": "FIS-2BGU-U5-016",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Resistor óhmico",
+      "destreza": "CN.F.5.1.48",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En el laboratorio se mide la corriente de un componente para distintos voltajes. ¿Qué gráfica V–I indica que el componente es un resistor óhmico?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Una recta que pasa por el origen.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Una recta horizontal.",
+          "error": "Indicaría voltaje constante sin importar la corriente."
+        },
+        {
+          "letra": "C",
+          "texto": "Una parábola.",
+          "error": "La relación óhmica es lineal, no cuadrática."
+        },
+        {
+          "letra": "D",
+          "texto": "Una curva que se aplana para voltajes altos.",
+          "error": "Esa forma corresponde a un componente no óhmico, como un foco."
+        },
+        {
+          "letra": "E",
+          "texto": "Una recta vertical.",
+          "error": "Indicaría corriente constante sin importar el voltaje."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "En un resistor óhmico V = R·I con R constante: la gráfica es una recta por el origen cuya pendiente es R."
+    },
+    {
+      "id": "FIS-2BGU-U5-017",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Fuerza electromotriz",
+      "destreza": "CN.F.5.1.50",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Una batería marca 12 V en sus bornes cuando no está conectada. Al conectarla a un motor, el voltímetro marca 11,4 V. ¿Cuál es la causa de la diferencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "El motor genera un voltaje opuesto de 12 V.",
+          "error": "Exagera el efecto y no explica la diferencia medida."
+        },
+        {
+          "letra": "B",
+          "texto": "La FEM depende del color de los cables.",
+          "error": "Introduce un factor irrelevante."
+        },
+        {
+          "letra": "C",
+          "texto": "La resistencia interna de la batería produce una caída de voltaje al circular corriente.",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "El voltímetro está dañado.",
+          "error": "Atribuye a error de medición un fenómeno físico esperable."
+        },
+        {
+          "letra": "E",
+          "texto": "La batería pierde carga en cuanto se conecta.",
+          "error": "Confunde la caída por resistencia interna con descarga instantánea."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "La FEM es el voltaje en circuito abierto. Con corriente, parte de esa FEM cae en la resistencia interna r: V = FEM − I·r."
+    },
+    {
+      "id": "FIS-2BGU-U5-018",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Circuitos en serie y en paralelo",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En una casa, al quemarse un foco de la sala, los demás focos y la refrigeradora siguen funcionando. ¿Cómo está conectada la instalación?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En paralelo, porque la corriente es la misma en todos.",
+          "error": "Atribuye al paralelo la propiedad de la serie."
+        },
+        {
+          "letra": "B",
+          "texto": "En serie, porque reciben el mismo voltaje.",
+          "error": "Confunde las propiedades: el mismo voltaje es característico del paralelo."
+        },
+        {
+          "letra": "C",
+          "texto": "En serie, porque todos usan la misma corriente.",
+          "error": "En serie, al abrirse un elemento se apaga todo el circuito."
+        },
+        {
+          "letra": "D",
+          "texto": "En paralelo, porque cada aparato tiene su propio camino para la corriente.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "No importa la conexión; un foco quemado nunca afecta a los demás.",
+          "error": "Ignora el comportamiento del circuito en serie."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "En paralelo, cada rama recibe el mismo voltaje y funciona de forma independiente. Si una rama se abre, las demás siguen funcionando."
+    },
+    {
+      "id": "FIS-2BGU-U5-019",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Caída de voltaje en serie",
+      "destreza": "CN.F.5.1.49",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En un circuito en serie con una fuente de 12 V, una resistencia de 2 Ω y otra de 4 Ω, ¿qué voltaje cae en la resistencia de 4 Ω?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "12 V",
+          "error": "Supuso que cada resistencia recibe todo el voltaje, como en paralelo."
+        },
+        {
+          "letra": "B",
+          "texto": "4 V",
+          "error": "Calculó la caída en la resistencia de 2 Ω."
+        },
+        {
+          "letra": "C",
+          "texto": "6 V",
+          "error": "Repartió el voltaje en partes iguales."
+        },
+        {
+          "letra": "D",
+          "texto": "3 V",
+          "error": "Dividió el voltaje de la fuente para la resistencia de 4 Ω."
+        },
+        {
+          "letra": "E",
+          "texto": "8 V",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "I = 12/(2 + 4) = 2 A. V₂ = I·R₂ = 2·4 = 8 V. En serie, la resistencia mayor recibe más voltaje."
+    },
+    {
+      "id": "FIS-2BGU-U5-020",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Potencia eléctrica",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-2BGU-L5",
+      "enunciado": "Según la lectura, ¿qué corriente consume la pantalla?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,25 A",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "0,80 A",
+          "error": "Dividió el voltaje para la potencia."
+        },
+        {
+          "letra": "C",
+          "texto": "0,01 A",
+          "error": "Usó P/V², que no corresponde a la corriente."
+        },
+        {
+          "letra": "D",
+          "texto": "0,68 A",
+          "error": "Usó 220 V, el voltaje de otros países, en lugar de 120 V."
+        },
+        {
+          "letra": "E",
+          "texto": "18 000,00 A",
+          "error": "Multiplicó potencia por voltaje."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "P = V·I ⇒ I = P/V = 150/120 = 1,25 A."
+    },
+    {
+      "id": "FIS-2BGU-U5-021",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 5,
+      "tema": "Energía eléctrica consumida",
+      "destreza": "CN.F.5.1.51",
+      "tipo": "lectura",
+      "dificultad": "basica",
+      "lectura_id": "FIS-2BGU-L5",
+      "enunciado": "Con los datos de la lectura, ¿cuánta energía consume la pantalla en una semana?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,75 kWh",
+          "error": "Olvidó las horas de uso diario."
+        },
+        {
+          "letra": "B",
+          "texto": "0,90 kWh",
+          "error": "Calculó el consumo de un solo día."
+        },
+        {
+          "letra": "C",
+          "texto": "6,30 kWh",
+          "error": "Usó 7 días en lugar de los 5 días de clase."
+        },
+        {
+          "letra": "D",
+          "texto": "4 500,00 kWh",
+          "error": "Calculó Wh y no convirtió a kWh."
+        },
+        {
+          "letra": "E",
+          "texto": "4,50 kWh",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "E = P·t = 150 W·(6 h·5) = 4 500 Wh = 4,5 kWh por semana."
+    },
+    {
+      "id": "FIS-2BGU-U6-001",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: periodo del sistema masa-resorte",
+      "destreza": "CN.F.5.1.35",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Una masa de 0,5 kg oscila sujeta a un resorte de k = 200 N/m. ¿Cuál es el periodo de oscilación?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,314 s",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "0,050 s",
+          "error": "Olvidó el factor 2π."
+        },
+        {
+          "letra": "C",
+          "texto": "0,016 s",
+          "error": "Olvidó la raíz cuadrada."
+        },
+        {
+          "letra": "D",
+          "texto": "0,157 s",
+          "error": "Usó π en lugar de 2π."
+        },
+        {
+          "letra": "E",
+          "texto": "125,664 s",
+          "error": "Invirtió masa y constante dentro de la raíz."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "T = 2π·√(m/k) = 2π·√(0,5/200) ≈ 0,314 s."
+    },
+    {
+      "id": "FIS-2BGU-U6-002",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: periodo del sistema masa-resorte",
+      "destreza": "CN.F.5.1.35",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un bloque de 2 kg oscila unido a un resorte de k = 50 N/m. ¿Cuál es el periodo de oscilación?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "31,416 s",
+          "error": "Invirtió masa y constante dentro de la raíz."
+        },
+        {
+          "letra": "B",
+          "texto": "0,200 s",
+          "error": "Olvidó el factor 2π."
+        },
+        {
+          "letra": "C",
+          "texto": "0,628 s",
+          "error": "Usó π en lugar de 2π."
+        },
+        {
+          "letra": "D",
+          "texto": "1,257 s",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "0,251 s",
+          "error": "Olvidó la raíz cuadrada."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "T = 2π·√(m/k) = 2π·√(2,0/50) ≈ 1,257 s."
+    },
+    {
+      "id": "FIS-2BGU-U6-003",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: péndulo simple",
+      "destreza": "CN.F.5.1.36",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un péndulo simple tiene una cuerda de 80 cm de longitud. Con g = 9,8 m/s², ¿cuál es su periodo para oscilaciones pequeñas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "21,991 s",
+          "error": "Invirtió L y g dentro de la raíz."
+        },
+        {
+          "letra": "B",
+          "texto": "0,286 s",
+          "error": "Olvidó el factor 2π."
+        },
+        {
+          "letra": "C",
+          "texto": "17,952 s",
+          "error": "No convirtió la longitud a metros."
+        },
+        {
+          "letra": "D",
+          "texto": "1,795 s",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "0,513 s",
+          "error": "Olvidó la raíz cuadrada."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "T = 2π·√(L/g) = 2π·√(0,8/9,8) ≈ 1,795 s."
+    },
+    {
+      "id": "FIS-2BGU-U6-004",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: péndulo simple",
+      "destreza": "CN.F.5.1.36",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "El péndulo de un reloj de pared mide 120 cm. Con g = 9,8 m/s², ¿cuál es su periodo para oscilaciones pequeñas?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "2,199 s",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "17,956 s",
+          "error": "Invirtió L y g dentro de la raíz."
+        },
+        {
+          "letra": "C",
+          "texto": "0,350 s",
+          "error": "Olvidó el factor 2π."
+        },
+        {
+          "letra": "D",
+          "texto": "21,987 s",
+          "error": "No convirtió la longitud a metros."
+        },
+        {
+          "letra": "E",
+          "texto": "0,769 s",
+          "error": "Olvidó la raíz cuadrada."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "T = 2π·√(L/g) = 2π·√(1,2/9,8) ≈ 2,199 s."
+    },
+    {
+      "id": "FIS-2BGU-U6-005",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: velocidad máxima",
+      "destreza": "CN.F.5.1.34",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una masa de 0,5 kg unida a un resorte de k = 200 N/m oscila con amplitud de 5 cm. ¿Cuál es su velocidad máxima?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,003 m/s",
+          "error": "Dividió la amplitud para ω."
+        },
+        {
+          "letra": "B",
+          "texto": "1,000 m/s",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "0,159 m/s",
+          "error": "Usó la frecuencia f en lugar de la frecuencia angular ω."
+        },
+        {
+          "letra": "D",
+          "texto": "20,000 m/s",
+          "error": "Calculó la aceleración máxima (A·ω²)."
+        },
+        {
+          "letra": "E",
+          "texto": "100,000 m/s",
+          "error": "No convirtió la amplitud a metros."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "ω = √(k/m) = √(200/0,5) = 20,00 rad/s. v_máx = A·ω = 0,05·20,00 = 1,000 m/s, en la posición de equilibrio."
+    },
+    {
+      "id": "FIS-2BGU-U6-006",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: velocidad máxima",
+      "destreza": "CN.F.5.1.34",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un bloque de 2 kg en un resorte de k = 50 N/m oscila con amplitud de 10 cm. ¿Cuál es su velocidad máxima?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "2,500 m/s",
+          "error": "Calculó la aceleración máxima (A·ω²)."
+        },
+        {
+          "letra": "B",
+          "texto": "0,020 m/s",
+          "error": "Dividió la amplitud para ω."
+        },
+        {
+          "letra": "C",
+          "texto": "0,080 m/s",
+          "error": "Usó la frecuencia f en lugar de la frecuencia angular ω."
+        },
+        {
+          "letra": "D",
+          "texto": "50,000 m/s",
+          "error": "No convirtió la amplitud a metros."
+        },
+        {
+          "letra": "E",
+          "texto": "0,500 m/s",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "ω = √(k/m) = √(50/2,0) = 5,00 rad/s. v_máx = A·ω = 0,10·5,00 = 0,500 m/s, en la posición de equilibrio."
+    },
+    {
+      "id": "FIS-2BGU-U6-007",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: aceleración máxima",
+      "destreza": "CN.F.5.1.34",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un objeto en MAS tiene amplitud de 4 cm y frecuencia angular de 10 rad/s. ¿Cuál es su aceleración máxima?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "100,000 m/s²",
+          "error": "Olvidó multiplicar por la amplitud."
+        },
+        {
+          "letra": "B",
+          "texto": "0,016 m/s²",
+          "error": "Elevó al cuadrado la amplitud en lugar de ω."
+        },
+        {
+          "letra": "C",
+          "texto": "4,000 m/s²",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "0,400 m/s²",
+          "error": "Calculó la velocidad máxima (A·ω)."
+        },
+        {
+          "letra": "E",
+          "texto": "400,000 m/s²",
+          "error": "No convirtió la amplitud a metros."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "a_máx = A·ω² = 0,04·10² = 4,000 m/s², en los extremos de la oscilación."
+    },
+    {
+      "id": "FIS-2BGU-U6-008",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: aceleración máxima",
+      "destreza": "CN.F.5.1.34",
+      "tipo": "ejercicio",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Un objeto en MAS oscila con amplitud de 8 cm y ω = 5 rad/s. ¿Cuál es su aceleración máxima?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "200,000 m/s²",
+          "error": "No convirtió la amplitud a metros."
+        },
+        {
+          "letra": "B",
+          "texto": "0,032 m/s²",
+          "error": "Elevó al cuadrado la amplitud en lugar de ω."
+        },
+        {
+          "letra": "C",
+          "texto": "25,000 m/s²",
+          "error": "Olvidó multiplicar por la amplitud."
+        },
+        {
+          "letra": "D",
+          "texto": "0,400 m/s²",
+          "error": "Calculó la velocidad máxima (A·ω)."
+        },
+        {
+          "letra": "E",
+          "texto": "2,000 m/s²",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "a_máx = A·ω² = 0,08·5² = 2,000 m/s², en los extremos de la oscilación."
+    },
+    {
+      "id": "FIS-2BGU-U6-009",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: energía mecánica",
+      "destreza": "CN.F.5.1.37",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un resorte de k = 200 N/m oscila con amplitud de 5 cm. Sin rozamiento, ¿cuál es la energía mecánica total del oscilador?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "10,000 J",
+          "error": "Calculó la fuerza máxima k·A."
+        },
+        {
+          "letra": "B",
+          "texto": "5,000 J",
+          "error": "No elevó la amplitud al cuadrado."
+        },
+        {
+          "letra": "C",
+          "texto": "0,250 J",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "0,500 J",
+          "error": "Olvidó el factor ½."
+        },
+        {
+          "letra": "E",
+          "texto": "2 500,000 J",
+          "error": "No convirtió la amplitud a metros."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "En el extremo toda la energía es elástica: E = ½·k·A² = ½·200·(0,05)² = 0,250 J."
+    },
+    {
+      "id": "FIS-2BGU-U6-010",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: energía mecánica",
+      "destreza": "CN.F.5.1.37",
+      "tipo": "ejercicio",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un resorte de k = 800 N/m oscila con amplitud de 3 cm. Sin rozamiento, ¿cuál es la energía mecánica total del oscilador?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "12,000 J",
+          "error": "No elevó la amplitud al cuadrado."
+        },
+        {
+          "letra": "B",
+          "texto": "24,000 J",
+          "error": "Calculó la fuerza máxima k·A."
+        },
+        {
+          "letra": "C",
+          "texto": "3 600,000 J",
+          "error": "No convirtió la amplitud a metros."
+        },
+        {
+          "letra": "D",
+          "texto": "0,720 J",
+          "error": "Olvidó el factor ½."
+        },
+        {
+          "letra": "E",
+          "texto": "0,360 J",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "En el extremo toda la energía es elástica: E = ½·k·A² = ½·800·(0,03)² = 0,360 J."
+    },
+    {
+      "id": "FIS-2BGU-U6-011",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: ecuación de posición",
+      "destreza": "CN.F.5.1.34",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "La posición de un oscilador es x = 0,1·cos(4π·t) en metros. ¿Cuál es su frecuencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "4,00 Hz",
+          "error": "Dividió para π en lugar de 2π."
+        },
+        {
+          "letra": "B",
+          "texto": "2,00 Hz",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "12,57 Hz",
+          "error": "Tomó la frecuencia angular ω como si fuera f."
+        },
+        {
+          "letra": "D",
+          "texto": "0,08 Hz",
+          "error": "Calculó 1/ω, que no es la frecuencia ni el periodo."
+        },
+        {
+          "letra": "E",
+          "texto": "78,96 Hz",
+          "error": "Multiplicó ω por 2π en lugar de dividir."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "En x = A·cos(ω·t), ω = 4π rad/s. f = ω/(2π) = 2,00 Hz."
+    },
+    {
+      "id": "FIS-2BGU-U6-012",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: ecuación de posición",
+      "destreza": "CN.F.5.1.34",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "La posición de un oscilador es x = 0,05·cos(10·t) en metros. ¿Cuál es su frecuencia?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "10,00 Hz",
+          "error": "Tomó la frecuencia angular ω como si fuera f."
+        },
+        {
+          "letra": "B",
+          "texto": "3,18 Hz",
+          "error": "Dividió para π en lugar de 2π."
+        },
+        {
+          "letra": "C",
+          "texto": "1,59 Hz",
+          "error": null
+        },
+        {
+          "letra": "D",
+          "texto": "0,10 Hz",
+          "error": "Calculó 1/ω, que no es la frecuencia ni el periodo."
+        },
+        {
+          "letra": "E",
+          "texto": "62,83 Hz",
+          "error": "Multiplicó ω por 2π en lugar de dividir."
+        }
+      ],
+      "respuesta_correcta": "C",
+      "explicacion": "En x = A·cos(ω·t), ω = 10 rad/s. f = ω/(2π) = 1,59 Hz."
+    },
+    {
+      "id": "FIS-2BGU-U6-013",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: constante elástica a partir del periodo",
+      "destreza": "CN.F.5.1.35",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Una masa de 0,4 kg colgada de un resorte oscila con periodo de 0,5 s. ¿Cuál es la constante elástica del resorte?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "1,60 N/m",
+          "error": "Olvidó el factor 4π²."
+        },
+        {
+          "letra": "B",
+          "texto": "10,05 N/m",
+          "error": "Usó 2π en lugar de (2π)²."
+        },
+        {
+          "letra": "C",
+          "texto": "24,67 N/m",
+          "error": "Invirtió masa y periodo al despejar."
+        },
+        {
+          "letra": "D",
+          "texto": "63,17 N/m",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "31,58 N/m",
+          "error": "No elevó el periodo al cuadrado."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "De T = 2π·√(m/k): k = 4π²·m/T² = 4π²·0,4/0,5² ≈ 63,17 N/m."
+    },
+    {
+      "id": "FIS-2BGU-U6-014",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: constante elástica a partir del periodo",
+      "destreza": "CN.F.5.1.35",
+      "tipo": "ejercicio",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Una masa de 1 kg en un resorte completa una oscilación cada 2 s. ¿Cuál es la constante elástica del resorte?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "9,87 N/m",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "157,91 N/m",
+          "error": "Invirtió masa y periodo al despejar."
+        },
+        {
+          "letra": "C",
+          "texto": "0,25 N/m",
+          "error": "Olvidó el factor 4π²."
+        },
+        {
+          "letra": "D",
+          "texto": "1,57 N/m",
+          "error": "Usó 2π en lugar de (2π)²."
+        },
+        {
+          "letra": "E",
+          "texto": "19,74 N/m",
+          "error": "No elevó el periodo al cuadrado."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "De T = 2π·√(m/k): k = 4π²·m/T² = 4π²·1,0/2,0² ≈ 9,87 N/m."
+    },
+    {
+      "id": "FIS-2BGU-U6-015",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: velocidad y posición",
+      "destreza": "CN.F.5.1.36",
+      "tipo": "situacion",
+      "dificultad": "basica",
+      "lectura_id": null,
+      "enunciado": "Un niño en un columpio oscila de un lado a otro. ¿En qué posición su rapidez es máxima?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "En la mitad entre el extremo y el punto más bajo.",
+          "error": "Supone que la rapidez máxima está a medio camino."
+        },
+        {
+          "letra": "B",
+          "texto": "Es la misma en todos los puntos.",
+          "error": "Confunde MAS con movimiento uniforme."
+        },
+        {
+          "letra": "C",
+          "texto": "En los extremos, donde llega más alto.",
+          "error": "En los extremos la velocidad es cero."
+        },
+        {
+          "letra": "D",
+          "texto": "Depende de la masa del niño.",
+          "error": "La masa no determina dónde está la rapidez máxima."
+        },
+        {
+          "letra": "E",
+          "texto": "En el punto más bajo, que es la posición de equilibrio.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "En el equilibrio la energía potencial es mínima y la cinética es máxima. En los extremos el columpio se detiene un instante."
+    },
+    {
+      "id": "FIS-2BGU-U6-016",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: aceleración y posición",
+      "destreza": "CN.F.5.1.35",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En un sistema masa-resorte en MAS, ¿dónde es máxima la aceleración?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Solo al soltar la masa por primera vez.",
+          "error": "No reconoce que el movimiento es periódico."
+        },
+        {
+          "letra": "B",
+          "texto": "En los extremos, donde la deformación del resorte es máxima.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Es constante en todo el movimiento.",
+          "error": "Confunde MAS con MRUV."
+        },
+        {
+          "letra": "D",
+          "texto": "Es cero en los extremos porque la masa se detiene.",
+          "error": "Confunde velocidad nula con aceleración nula."
+        },
+        {
+          "letra": "E",
+          "texto": "En la posición de equilibrio, donde la velocidad es máxima.",
+          "error": "Confunde velocidad máxima con aceleración máxima."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "a = −(k/m)·x: la aceleración es proporcional a la deformación. Es máxima en x = ±A y nula en el equilibrio."
+    },
+    {
+      "id": "FIS-2BGU-U6-017",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: péndulo y masa",
+      "destreza": "CN.F.5.1.36",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "En una práctica, un grupo cambia la esfera de un péndulo por otra del doble de masa, sin cambiar la longitud. ¿Qué pasa con el periodo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Se reduce a la mitad, porque la esfera cae más rápido.",
+          "error": "Cree que los cuerpos pesados caen más rápido."
+        },
+        {
+          "letra": "B",
+          "texto": "Se duplica, porque la masa es el doble.",
+          "error": "Aplica una proporcionalidad directa inexistente."
+        },
+        {
+          "letra": "C",
+          "texto": "Disminuye, porque aumenta la tensión de la cuerda.",
+          "error": "La tensión cambia, pero no altera el periodo."
+        },
+        {
+          "letra": "D",
+          "texto": "No cambia, porque el periodo del péndulo simple no depende de la masa.",
+          "error": null
+        },
+        {
+          "letra": "E",
+          "texto": "Aumenta √2 veces, como en el sistema masa-resorte.",
+          "error": "Traslada la fórmula del resorte al péndulo."
+        }
+      ],
+      "respuesta_correcta": "D",
+      "explicacion": "T = 2π·√(L/g) no contiene la masa. Solo la longitud y la gravedad determinan el periodo para oscilaciones pequeñas."
+    },
+    {
+      "id": "FIS-2BGU-U6-018",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS como proyección del MCU",
+      "destreza": "CN.F.5.1.36",
+      "tipo": "situacion",
+      "dificultad": "avanzada",
+      "lectura_id": null,
+      "enunciado": "Una pelota pegada al borde de un disco gira con MCU. Con una linterna se proyecta su sombra sobre la pared. ¿Qué movimiento describe la sombra?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Un MAS cuya amplitud es el radio del disco y cuya ω es la del disco.",
+          "error": null
+        },
+        {
+          "letra": "B",
+          "texto": "Un MRUV con aceleración constante.",
+          "error": "En el MAS la aceleración cambia con la posición."
+        },
+        {
+          "letra": "C",
+          "texto": "Un MRU de ida y vuelta con rapidez constante.",
+          "error": "Ignora que la sombra frena en los extremos."
+        },
+        {
+          "letra": "D",
+          "texto": "Un MCU igual al de la pelota.",
+          "error": "No reconoce que la proyección reduce el movimiento a una dimensión."
+        },
+        {
+          "letra": "E",
+          "texto": "Un MAS con amplitud igual al diámetro del disco.",
+          "error": "Confunde la amplitud con el recorrido total."
+        }
+      ],
+      "respuesta_correcta": "A",
+      "explicacion": "La proyección de un MCU sobre un diámetro es un MAS: x = R·cos(ω·t). La amplitud es el radio y la frecuencia angular coincide con la del MCU."
+    },
+    {
+      "id": "FIS-2BGU-U6-019",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: conservación de la energía",
+      "destreza": "CN.F.5.1.37",
+      "tipo": "situacion",
+      "dificultad": "media",
+      "lectura_id": null,
+      "enunciado": "Una masa oscila sin rozamiento en un resorte horizontal. Cuando pasa por la posición de equilibrio, ¿cómo está repartida su energía?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "La energía total es cero.",
+          "error": "Confunde el valor de una forma de energía con la total."
+        },
+        {
+          "letra": "B",
+          "texto": "Toda es energía potencial gravitatoria.",
+          "error": "En un resorte horizontal la altura no cambia."
+        },
+        {
+          "letra": "C",
+          "texto": "Toda es energía elástica; la cinética es cero.",
+          "error": "Describe los extremos, no el equilibrio."
+        },
+        {
+          "letra": "D",
+          "texto": "La mitad es cinética y la mitad elástica.",
+          "error": "Supone un reparto igual sin justificación."
+        },
+        {
+          "letra": "E",
+          "texto": "Toda es energía cinética; la elástica es cero.",
+          "error": null
+        }
+      ],
+      "respuesta_correcta": "E",
+      "explicacion": "En el equilibrio el resorte no está deformado (E_pe = 0) y la rapidez es máxima. La energía mecánica total se mantiene constante."
+    },
+    {
+      "id": "FIS-2BGU-U6-020",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: péndulo simple",
+      "destreza": "CN.F.5.1.36",
+      "tipo": "lectura",
+      "dificultad": "avanzada",
+      "lectura_id": "FIS-2BGU-L6",
+      "enunciado": "Según la lectura, ¿cuál es la longitud aproximada del péndulo en Guayaquil?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "0,010 m",
+          "error": "Despejó mal: dividió para g en lugar de multiplicar."
+        },
+        {
+          "letra": "B",
+          "texto": "0,993 m",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "6,239 m",
+          "error": "Dividió para 2π en lugar de 4π²."
+        },
+        {
+          "letra": "D",
+          "texto": "0,496 m",
+          "error": "No elevó el periodo al cuadrado."
+        },
+        {
+          "letra": "E",
+          "texto": "39,200 m",
+          "error": "Olvidó dividir para 4π²."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "De T = 2π·√(L/g): L = g·T²/(4π²) = 9,8·2²/(4π²) ≈ 0,993 m."
+    },
+    {
+      "id": "FIS-2BGU-U6-021",
+      "materia": "Física",
+      "curso": "2do BGU",
+      "unidad": 6,
+      "tema": "MAS: dependencia del periodo con g",
+      "destreza": "CN.F.5.1.36",
+      "tipo": "lectura",
+      "dificultad": "media",
+      "lectura_id": "FIS-2BGU-L6",
+      "enunciado": "De acuerdo con la lectura, ¿qué le pasará al reloj en Quito si no se ajusta el péndulo?",
+      "opciones": [
+        {
+          "letra": "A",
+          "texto": "Se adelantará, porque con menor gravedad el péndulo oscila más rápido.",
+          "error": "Invierte la relación: T es inversamente proporcional a √g."
+        },
+        {
+          "letra": "B",
+          "texto": "Se atrasará, porque con menor gravedad el periodo aumenta.",
+          "error": null
+        },
+        {
+          "letra": "C",
+          "texto": "Se adelantará, porque el aire de Quito es menos denso.",
+          "error": "Atribuye el cambio a la densidad del aire en lugar de a g."
+        },
+        {
+          "letra": "D",
+          "texto": "Marcará igual, porque la longitud no cambia.",
+          "error": "Ignora que el periodo depende de g."
+        },
+        {
+          "letra": "E",
+          "texto": "Se detendrá, porque la gravedad es insuficiente.",
+          "error": "Exagera un cambio de gravedad muy pequeño."
+        }
+      ],
+      "respuesta_correcta": "B",
+      "explicacion": "T = 2π·√(L/g). Si g disminuye, T aumenta: cada oscilación dura un poco más y el reloj avanza más lento, es decir, se atrasa."
+    }
+  ]
+}

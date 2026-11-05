@@ -1,3 +1,4 @@
+- [x] Incorporar 252 preguntas de Física y 126 de Historia a sus simulacros, conservando lecturas, claves y bancos anteriores; 7 pruebas aprobadas y ambos simulacros completados con resultados en sesión autenticada.
 - [x] Corregir metas y notas de Razonamiento usando el banco completo por nivel; 27 pruebas aprobadas y metas verificadas en pantalla con sesión autenticada.
 - [x] Añadir ojos para visibilidad global de los cinco apartados; 17 pruebas aprobadas, guardado tras recarga y bloqueo de enlace verificados con sesión administrativa, controles revisados en computadora y móvil.
 - [x] Reset admin password; specific login errors; 4-digit PIN recovery
