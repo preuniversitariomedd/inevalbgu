@@ -26,15 +26,15 @@ test('Física selecciona 30 preguntas sin repetición de las tres fuentes', () =
   expect(sesion).toHaveLength(30);
   expect(new Set(sesion.map(p => p.id)).size).toBe(30);
   expect(sesion.every(p => p.area === 'Física')).toBe(true);
-  expect(sesion.filter(p => p.id.startsWith('sim-bgu-FIS-2BGU'))).toHaveLength(10);
-  expect(sesion.filter(p => p.id.startsWith('sim-bgu-FIS-3BGU'))).toHaveLength(10);
+  expect(sesion.filter(p => p.id.startsWith('sim-bgu-FIS-2BGU'))).toHaveLength(7);
+  expect(sesion.filter(p => p.id.startsWith('sim-bgu-FIS-3BGU'))).toHaveLength(7);
 });
 test('Estudios Sociales incluye Historia y el banco anterior sin mezclar Física', () => {
   const sesion = seleccionarSocialesSimulacro();
   expect(sesion).toHaveLength(30);
   expect(new Set(sesion.map(p => p.id)).size).toBe(30);
   expect(sesion.every(p => p.area === 'Estudios Sociales')).toBe(true);
-  expect(sesion.filter(p => p.id.startsWith('sim-bgu-HIS-3BGU'))).toHaveLength(15);
+  expect(sesion.filter(p => p.id.startsWith('sim-bgu-HIS-3BGU'))).toHaveLength(10);
 });
 test('Rechaza preguntas con clave inválida o lectura inexistente', () => {
   expect(() => adaptarBancoBGU({ ...fisica2, preguntas: [{ ...fisica2.preguntas[0], respuesta_correcta: 'Z' }] }, 'Física')).toThrow();

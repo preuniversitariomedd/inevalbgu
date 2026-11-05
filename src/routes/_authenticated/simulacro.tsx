@@ -8,7 +8,7 @@ import { AREAS } from "@/data/tipos";
 import type { Pregunta } from "@/data/tipos";
 import { BANCO_SIMULACRO, preguntasAleatorias } from "@/data";
 import { preguntasRepaso } from "@/data";
-import { seleccionarFisicaSimulacro, seleccionarSocialesSimulacro } from "@/data/simulacro-bgu";
+import { seleccionarFisicaSimulacro, seleccionarSocialesSimulacro, conAnexos, MAT_10EGB_SIM, MAT_BGU_SIM, BIOLOGIA_SIM } from "@/data/simulacro-bgu";
 import { generarCienciasNaturales } from "@/data/basica/ciencias-naturales";
 import { generarEstudiosSociales } from "@/data/basica/estudios-sociales";
 import { generarMatematicaBasica } from "@/data/basica/matematica-basica";
@@ -84,9 +84,9 @@ function SimulacroVista({ guard, cerrarRef }: { guard: ReturnType<typeof useExam
   const cfg = SIM[asignatura];
   const sesion = useMemo<Pregunta[]>(() => {
     if (!iniciado) return [];
-    if (asignatura === "cn") return porTema(generarCienciasNaturales(), 30);
+    if (asignatura === "cn") return conAnexos(porTema(generarCienciasNaturales(), 30), BIOLOGIA_SIM, 30);
     if (asignatura === "es") return seleccionarSocialesSimulacro(cfg.total);
-    if (asignatura === "mbs") return porTema(generarMatematicaBasica(), 30);
+    if (asignatura === "mbs") return conAnexos(porTema(generarMatematicaBasica(), 30), MAT_10EGB_SIM, 30);
     if (asignatura === "bach") {
       const lc = preguntasLecturaCritica();
       const comp = [...bancoRazonamiento(2, 15), ...bancoRazonamiento(3, 15)];
@@ -125,7 +125,7 @@ function SimulacroVista({ guard, cerrarRef }: { guard: ReturnType<typeof useExam
       const extras = preguntasAleatorias(resto, TOTAL_PREG - elegidas.length);
       elegidas.push(...extras);
     }
-    return preguntasAleatorias(elegidas, elegidas.length).slice(0, TOTAL_PREG);
+    return conAnexos(preguntasAleatorias(elegidas, elegidas.length).slice(0, TOTAL_PREG), MAT_BGU_SIM, TOTAL_PREG);
   }, [iniciado, esFisica, asignatura]);
 
   useEffect(() => {
