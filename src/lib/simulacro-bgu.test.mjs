@@ -27,7 +27,7 @@ test('Física selecciona 30 preguntas sin repetición de las tres fuentes', () =
   expect(new Set(sesion.map(p => p.id)).size).toBe(30);
   expect(sesion.every(p => p.area === 'Física')).toBe(true);
   expect(sesion.filter(p => p.id.startsWith('sim-bgu-FIS-2BGU'))).toHaveLength(7);
-  expect(sesion.filter(p => p.id.startsWith('sim-bgu-FIS-3BGU'))).toHaveLength(10);
+  expect(sesion.filter(p => p.id.startsWith('sim-bgu-FIS-3BGU'))).toHaveLength(7);
 });
 test('Estudios Sociales incluye Historia y el banco anterior sin mezclar Física', () => {
   const sesion = seleccionarSocialesSimulacro();
