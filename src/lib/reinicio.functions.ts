@@ -20,7 +20,7 @@ export const prepararReinicioFn = createServerFn({ method: 'POST' }).middleware(
   if (error) throw new Error(mensajeError(error));
   const { data: respaldo, error: e } = await db.from('respaldos_academicos').select('*').eq('id', id).single();
   if (e || !respaldo) throw new Error('No se pudo leer el respaldo; no se borró ningún dato.');
-  const datos = respaldo.datos;
+  const datos = (respaldo.datos_json ?? respaldo.datos) as any;
   const notas = (datos.estudiantes ?? []).map((p: { id: string; nombres: string; cedula: string }) => {
     const filas = (tabla: string) => (datos[tabla] ?? []).filter((r: { user_id: string }) => r.user_id === p.id);
     const con = filas('sesiones_conexion'), ses = filas('sesiones_practica');
@@ -53,5 +53,5 @@ export const descargarRespaldoFn = createServerFn({ method: 'POST' }).middleware
     await administrador(context);
     const { data: b, error } = await (context.supabase as any).from('respaldos_academicos').select('*').eq('id',data.id).single();
     if (error || !b) throw new Error('Respaldo no disponible.');
-    return b;
+    return { ...b, datos: b.datos_json ?? b.datos, datos_json: undefined };
   });
