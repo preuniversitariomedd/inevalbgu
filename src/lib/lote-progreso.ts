@@ -22,10 +22,10 @@ export function crearLote(tabla: Tabla) {
       respuestas = []; progreso = null; avisar = false;
       if (!r.length && !p) return;
       try {
-        await Promise.all([
-          r.length ? guardarRespuestasLoteFn({ data: { respuestas: r } }) : null,
-          p ? (supabase as any).from(tabla).upsert(p).then(({ error }: any) => { if (error) throw error; }) : null,
-        ]);
+        // Primero las respuestas (corregidas en el servidor) y luego el avance,
+        // porque el servidor solo acepta aciertos con respuesta correcta guardada.
+        if (r.length) await guardarRespuestasLoteFn({ data: { respuestas: r } });
+        if (p) { const { error } = await (supabase as any).from(tabla).upsert(p); if (error) throw error; }
         if (a) avisarNotasActualizadas();
       } catch (e) {
         console.error("Lote no guardado", e);
