@@ -56,6 +56,7 @@ function PracticarFisica() {
   const [nivel, setNivel] = useState<NivelSel | null>(null);
   const [sesion, setSesion] = useState<PreguntaFisica[] | null>(null);
   const [sesionId, setSesionId] = useState<string | null>(null);
+  const lote = useLoteRespuestas();
   const [finalizada, setFinalizada] = useState(false);
   const [idx, setIdx] = useState(0);
   const [aciertos, setAciertos] = useState(0);

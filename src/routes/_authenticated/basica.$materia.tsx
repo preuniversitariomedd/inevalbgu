@@ -35,6 +35,7 @@ function Materia() {
   const [tema, setTema] = useState<string>("Todos");
   const [sesion, setSesion] = useState<Pregunta[] | null>(null);
   const [sesionId, setSesionId] = useState<string | null>(null);
+  const lote = useLoteRespuestas();
   const [idx, setIdx] = useState(0);
   const [aciertos, setAciertos] = useState(0);
   const [hecho, setHecho] = useState(false);
