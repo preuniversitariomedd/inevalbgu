@@ -38,7 +38,7 @@ export function ActualizacionesGrupo() {
   }, [qc, activa]);
   // Al volver tras la pausa, recuperar cambios que pudieron perderse.
   useEffect(() => {
-    if (!activa) return () => { for (const key of [...CLAVES_ACTUALIZACION_GRUPO, 'visibilidad-global']) void qc.invalidateQueries({ queryKey: [key], refetchType: 'none' }); };
+    if (!activa) return () => { for (const key of [...CLAVES_ACTUALIZACION_GRUPO, 'visibilidad-global']) void qc.invalidateQueries({ queryKey: [key], refetchType: 'active' }); };
   }, [qc, activa]);
   return null;
 }
