@@ -39,7 +39,7 @@ export function AusenciaDialog() {
         <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-gradient-to-br from-fuchsia-400/40 to-cyan-400/40 blur-2xl" />
         <button
           onClick={() => setAbierto(false)}
-          className="absolute right-3 top-3 rounded-full border p-1.5 hover:bg-secondary"
+          className="absolute right-3 top-3 z-10 rounded-full border bg-background p-1.5 hover:bg-secondary"
           aria-label="Cerrar"
         >
           <X className="h-4 w-4" />
