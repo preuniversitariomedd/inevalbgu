@@ -3,10 +3,13 @@ import { useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { CLAVES_ACTUALIZACION_GRUPO } from '@/lib/grupo-actualizaciones';
 import { toast } from 'sonner';
+import { usePestanaActiva } from '@/hooks/use-pestana-activa';
 
 export function ActualizacionesGrupo() {
   const qc = useQueryClient();
+  const activa = usePestanaActiva();
   useEffect(() => {
+    if (!activa) return; // pestaña oculta mucho tiempo: sin conexión en vivo
     const actualizar = () => {
       for (const key of CLAVES_ACTUALIZACION_GRUPO) void qc.invalidateQueries({ queryKey: [key], refetchType: document.hidden ? 'none' : 'active' });
     };
@@ -32,6 +35,10 @@ export function ActualizacionesGrupo() {
     const visible = () => { if (!document.hidden) { void qc.refetchQueries({ queryKey: ['mis-accesos'], type: 'active', stale: true }); } };
     document.addEventListener('visibilitychange', visible);
     return () => { window.removeEventListener('notas-actualizadas', notas); document.removeEventListener('visibilitychange', visible); void supabase.removeChannel(channel); if (canalReinicio) void supabase.removeChannel(canalReinicio); };
-  }, [qc]);
+  }, [qc, activa]);
+  // Al volver tras la pausa, recuperar cambios que pudieron perderse.
+  useEffect(() => {
+    if (!activa) return () => { for (const key of [...CLAVES_ACTUALIZACION_GRUPO, 'visibilidad-global']) void qc.invalidateQueries({ queryKey: [key], refetchType: 'none' }); };
+  }, [qc, activa]);
   return null;
 }
