@@ -106,6 +106,13 @@
       "when": 1794083859928,
       "tag": "0014_indices_notas",
       "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1794085590415,
+      "tag": "0015_corregir_validar_acceso_area",
+      "breakpoints": true
     }
   ]
 }
