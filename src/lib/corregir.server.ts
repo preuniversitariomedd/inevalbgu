@@ -7,6 +7,7 @@ const MAPA = claves as Record<string, string>;
 
 export function corregirRespuesta(preguntaId: string, elegida: string | undefined, correctaCliente: boolean): boolean {
   const clave = MAPA[preguntaId];
-  if (clave === undefined || elegida === undefined) return correctaCliente;
+  if (clave === undefined) return correctaCliente;
+  if (elegida === undefined) return false;
   return huellaRespuesta(elegida) === clave;
 }

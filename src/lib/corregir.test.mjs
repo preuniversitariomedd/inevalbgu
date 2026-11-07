@@ -15,3 +15,6 @@ test("el servidor acepta la opción correcta aunque el navegador diga falso", ()
 test("pregunta desconocida conserva la corrección del navegador", () => {
   expect(corregirRespuesta("manual-xyz", "a", true)).toBe(true);
 });
+test("sin opción elegida en pregunta conocida no cuenta como correcta", () => {
+  expect(corregirRespuesta(p.id, undefined, true)).toBe(false);
+});

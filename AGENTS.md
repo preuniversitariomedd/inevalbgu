@@ -23,3 +23,5 @@
 - Store global menu visibility separately from group permissions; compose both with deny-wins and refresh through the existing authenticated-layout subscription without polling. Global visibility affects navigation and route presentation, not historical grading or exam subject availability.
 - Adapt BGU annexes only for subject simulacros with stable source-prefixed IDs, embedded referenced readings and letter-key mapping; balance source sampling to retain historical and uploaded questions without changing grading.
 - Grade/progress code must use the precomputed level ID list (src/data/ids-niveles.json, regenerate with scripts/generar-ids-niveles.ts; a test checks it matches) instead of importing full question banks, so large banks load only on their own pages.
+- Answer correctness is decided server-side from src/lib/claves-respuestas.server.json (regenerate with scripts/generar-claves.ts when banks change); clients must send the chosen option text so grades cannot be forged.
+- Render teacher HTML only through sanitizarHtml (DOMPurify) to prevent script injection.
