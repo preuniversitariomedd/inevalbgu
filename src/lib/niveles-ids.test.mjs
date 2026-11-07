@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "bun:test";
 import ids from "@/data/ids-niveles.json";
 import { preguntasConocimiento } from "@/data/conocimiento";
 import { bancoRazonamiento, progresoRazonamiento } from "@/data/basica/razonamiento";
