@@ -8,9 +8,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { calcularEdad } from "@/lib/edad";
 import { bancoRazonamiento, CONFIG_RAZ, progresoRazonamiento, type NivelRaz, type PreguntaRaz } from "@/data/basica/razonamiento";
 import { PreguntaCard } from "@/components/PreguntaCard";
-import { guardarRespuesta } from "@/lib/progreso";
+import { crearLote } from "@/lib/lote-progreso";
 import { Button } from '@/components/ui/button';
-import { avisarNotasActualizadas } from '@/lib/actualizar-notas';
 
 export const Route = createFileRoute("/_authenticated/razonamiento")({
   head: () => ({ meta: [...pageMeta("Razonamiento — 3 niveles adaptativos — INEVAL_UEDE","Razonamiento en la plataforma educativa INEVAL_UEDE."),{ title: "Razonamiento — 3 niveles adaptativos — INEVAL_UEDE" }, { name: "description", content: "Preguntas de razonamiento y resolución de problemas de Básica Superior en tres niveles." }] }),
@@ -31,14 +30,23 @@ function Razonamiento() {
   const [pendiente, setPendiente] = useState<NivelRaz | null>(null);
   const [notaCierre, setNotaCierre] = useState<string | null>(null);
   const rondaRef = useRef({ ok: 0, resp: 0 });
+  const loteRef = useRef(crearLote("razonamiento_progreso"));
+  useEffect(() => {
+    const enviar = () => { if (document.visibilityState === "hidden") void loteRef.current.enviar(); };
+    const salir = () => void loteRef.current.enviar();
+    document.addEventListener("visibilitychange", enviar);
+    window.addEventListener("pagehide", salir);
+    return () => { document.removeEventListener("visibilitychange", enviar); window.removeEventListener("pagehide", salir); void loteRef.current.enviar(); };
+  }, []);
   const notaRonda = () => rondaRef.current.resp ? (rondaRef.current.ok / rondaRef.current.resp) * 10 : 0;
   const guard = useExamGuard("razonamiento", () => {
     const n = notaRonda();
     setNotaCierre(`${n.toFixed(2)} / 10 (${rondaRef.current.ok} de ${rondaRef.current.resp} correctas)`);
+    void loteRef.current.enviar();
     void guard.finalizar(n);
     setNivel(null);
   });
-  const terminarRonda = () => guard.finalizar(notaRonda());
+  const terminarRonda = () => { void loteRef.current.enviar(); return guard.finalizar(notaRonda()); };
   const [pista, setPista] = useState(false);
 
   useEffect(() => {
@@ -63,7 +71,7 @@ function Razonamiento() {
 
   const guardar = (e: Estado, nivelCompletado: boolean) => {
     setEst(e);
-    if (uid && uid !== "anon") void (supabase as any).from("razonamiento_progreso").upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos, ...(generacion ? { generacion } : {}) }).then(({ error }: any) => { if (error) console.error(error); else if (nivelCompletado) avisarNotasActualizadas(); });
+    if (uid && uid !== "anon") loteRef.current.progreso({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos, ...(generacion ? { generacion } : {}) }, nivelCompletado);
   };
   const bancos = useMemo(() => ({ 1: bancoRazonamiento(1, edad), 2: bancoRazonamiento(2, edad), 3: bancoRazonamiento(3, edad) }), [edad]);
   const aprobado = (n: NivelRaz) => progresoRazonamiento(n, est.aciertos[n]).aprobado;
@@ -104,7 +112,7 @@ function Razonamiento() {
             e.aciertos[nivel] = aciertos;
             if (!ok) e.fallos[p.subtema] = (e.fallos[p.subtema] ?? 0) + 1;
             guardar(e, !aprobado(nivel) && progresoRazonamiento(nivel, aciertos).aprobado);
-            guardarRespuesta({ preguntaId: p.id, area: "Razonamiento", subtema: p.subtema, nivel: p.nivel, correcta: ok });
+            loteRef.current.respuesta({ preguntaId: p.id, area: "Razonamiento", subtema: p.subtema, nivel: p.nivel, correcta: ok });
           }}
           onSiguiente={() => { if (idx >= ronda.length - 1) terminarRonda(); setIdx((i) => i + 1); setPista(false); }} />
       </div>

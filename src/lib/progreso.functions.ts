@@ -129,3 +129,22 @@ export const calificacionAsignaturasFn = createServerFn({ method: "POST" })
     const resultado = await notasUsuario(context.supabase, userId, periodo, data?.grupoId);
     return { viewedUserId: userId, ...resultado };
   });
+
+// Guardado por lotes: una sola escritura por ronda de preguntas.
+export const guardarRespuestasLoteFn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ respuestas: z.array(respuestaSchema).min(1).max(50) }).parse(d))
+  .handler(async ({ data, context }) => {
+    const filas = data.respuestas.map((r) => ({
+      user_id: context.userId,
+      sesion_id: r.sesionId ?? null,
+      pregunta_id: r.preguntaId,
+      area: r.area,
+      subtema: r.subtema,
+      nivel: r.nivel,
+      correcta: r.correcta,
+    }));
+    const { error } = await context.supabase.from("respuestas").insert(filas);
+    if (error) throw new Error(error.message);
+    return { ok: true, total: filas.length };
+  });

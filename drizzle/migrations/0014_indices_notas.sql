@@ -1,0 +1,2 @@
+CREATE INDEX IF NOT EXISTS idx_respuestas_user_fecha ON public.respuestas (user_id, respondida_en);
+CREATE INDEX IF NOT EXISTS idx_sesiones_practica_user_fecha ON public.sesiones_practica (user_id, iniciada_en);

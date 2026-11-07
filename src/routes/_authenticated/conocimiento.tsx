@@ -7,12 +7,11 @@ import { ArrowLeft, Lock, Trophy, BookOpenCheck, ShieldAlert } from "lucide-reac
 import { supabase } from "@/integrations/supabase/client";
 import { BANCO_CONOCIMIENTO, CONFIG_CON, preguntasConocimiento, type NivelCon } from "@/data/conocimiento";
 import { PreguntaCard } from "@/components/PreguntaCard";
-import { guardarRespuesta } from "@/lib/progreso";
+import { crearLote } from "@/lib/lote-progreso";
 import { useAccesos } from '@/components/AccesoModulo';
 import { useQuery } from '@tanstack/react-query';
 import { misAccesosFn } from '@/lib/grupo-config.functions';
 import { Button } from '@/components/ui/button';
-import { avisarNotasActualizadas } from '@/lib/actualizar-notas';
 
 export const Route = createFileRoute("/_authenticated/conocimiento")({
   head: () => ({
@@ -49,14 +48,23 @@ function Conocimiento() {
   const [pendiente, setPendiente] = useState<NivelCon | null>(null);
   const [notaCierre, setNotaCierre] = useState<string | null>(null);
   const rondaRef = useRef({ ok: 0, resp: 0 });
+  const loteRef = useRef(crearLote("conocimiento_progreso"));
+  useEffect(() => {
+    const enviar = () => { if (document.visibilityState === "hidden") void loteRef.current.enviar(); };
+    const salir = () => void loteRef.current.enviar();
+    document.addEventListener("visibilitychange", enviar);
+    window.addEventListener("pagehide", salir);
+    return () => { document.removeEventListener("visibilitychange", enviar); window.removeEventListener("pagehide", salir); void loteRef.current.enviar(); };
+  }, []);
   const notaRonda = () => rondaRef.current.resp ? (rondaRef.current.ok / rondaRef.current.resp) * 10 : 0;
   const guard = useExamGuard("conocimiento", () => {
     const n = notaRonda();
     setNotaCierre(`${n.toFixed(2)} / 10 (${rondaRef.current.ok} de ${rondaRef.current.resp} correctas)`);
+    void loteRef.current.enviar();
     void guard.finalizar(n);
     setNivel(null);
   });
-  const terminarRonda = () => guard.finalizar(notaRonda());
+  const terminarRonda = () => { void loteRef.current.enviar(); return guard.finalizar(notaRonda()); };
 
   useEffect(() => {
     (async () => {
@@ -89,12 +97,7 @@ function Conocimiento() {
 
   const guardar = (e: Estado, nivelCompletado: boolean) => {
     setEst(e);
-    if (uid && uid !== "anon") {
-      void (supabase as any)
-        .from("conocimiento_progreso")
-        .upsert({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos, ...(generacion ? { generacion } : {}) })
-        .then(({ error }: any) => { if (error) console.error(error); else if (nivelCompletado) avisarNotasActualizadas(); });
-    }
+    if (uid && uid !== "anon") loteRef.current.progreso({ user_id: uid, aciertos: e.aciertos, fallos: e.fallos, ...(generacion ? { generacion } : {}) }, nivelCompletado);
   };
 
   const bancos = useMemo(() => ({ 1: preguntasConocimiento(1), 2: preguntasConocimiento(2), 3: preguntasConocimiento(3) }), []);
@@ -140,7 +143,7 @@ function Conocimiento() {
             e.aciertos[nivel] = aciertos;
             if (!ok) e.fallos[p.subtema] = (e.fallos[p.subtema] ?? 0) + 1;
             guardar(e, (est.aciertos[nivel]?.length ?? 0) < metaDe(nivel) && aciertos.length >= metaDe(nivel));
-            guardarRespuesta({ preguntaId: p.id, area: "Conocimiento", subtema: p.subtema, nivel: p.nivel, correcta: ok });
+            loteRef.current.respuesta({ preguntaId: p.id, area: "Conocimiento", subtema: p.subtema, nivel: p.nivel, correcta: ok });
           }}
           onSiguiente={() => { if (idx >= ronda.length - 1) terminarRonda(); setIdx((i) => i + 1); }}
         />
