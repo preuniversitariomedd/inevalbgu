@@ -33,6 +33,7 @@ import {
   Reply,
 } from "lucide-react";
 import { toast } from "sonner";
+import { usePestanaActiva } from "@/hooks/use-pestana-activa";
 import { VisorArchivo, esImagen, tamanoLegible } from "@/components/VisorArchivo";
 
 const EMOJIS = [
@@ -99,8 +100,11 @@ export function ChatShell({
     refetchOnWindowFocus: false,
   });
 
-  // Realtime: cualquier mensaje nuevo o lectura → refetch lista y mensajes
+  // Realtime: cualquier mensaje nuevo o lectura → refetch lista y mensajes.
+  // Se cierra si la pestaña lleva 3 min oculta y se reabre al volver.
+  const activa = usePestanaActiva();
   useEffect(() => {
+    if (!activa) return () => { qc.invalidateQueries({ queryKey: ["mensajes"] }); };
     const ch = supabase
       .channel("mensajes-live-" + scope)
       .on(
@@ -137,7 +141,7 @@ export function ChatShell({
     return () => {
       supabase.removeChannel(ch);
     };
-  }, [qc, selectedId, scope]);
+  }, [qc, selectedId, scope, activa]);
 
   const convs = convsQ.data ?? [];
   const filtradas = useMemo(() => {
