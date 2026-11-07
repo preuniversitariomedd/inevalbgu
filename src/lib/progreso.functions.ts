@@ -8,6 +8,7 @@ const respuestaSchema = z.object({
   subtema: z.string(),
   nivel: z.string(),
   correcta: z.boolean(),
+  elegida: z.string().max(2000).optional(),
   sesionId: z.string().uuid().nullable().optional(),
 });
 
@@ -15,6 +16,7 @@ export const guardarRespuestaFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => respuestaSchema.parse(d))
   .handler(async ({ data, context }) => {
+    const { corregirRespuesta } = await import("./corregir.server");
     const { error } = await context.supabase.from("respuestas").insert({
       user_id: context.userId,
       sesion_id: data.sesionId ?? null,
@@ -22,7 +24,7 @@ export const guardarRespuestaFn = createServerFn({ method: "POST" })
       area: data.area,
       subtema: data.subtema,
       nivel: data.nivel,
-      correcta: data.correcta,
+      correcta: corregirRespuesta(data.preguntaId, data.elegida, data.correcta),
     });
     if (error) throw new Error(error.message);
     return { ok: true };
@@ -135,6 +137,7 @@ export const guardarRespuestasLoteFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ respuestas: z.array(respuestaSchema).min(1).max(50) }).parse(d))
   .handler(async ({ data, context }) => {
+    const { corregirRespuesta } = await import("./corregir.server");
     const filas = data.respuestas.map((r) => ({
       user_id: context.userId,
       sesion_id: r.sesionId ?? null,
@@ -142,7 +145,7 @@ export const guardarRespuestasLoteFn = createServerFn({ method: "POST" })
       area: r.area,
       subtema: r.subtema,
       nivel: r.nivel,
-      correcta: r.correcta,
+      correcta: corregirRespuesta(r.preguntaId, r.elegida, r.correcta),
     }));
     const { error } = await context.supabase.from("respuestas").insert(filas);
     if (error) throw new Error(error.message);
