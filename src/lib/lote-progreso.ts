@@ -26,7 +26,7 @@ export function crearLote(tabla: Tabla) {
           r.length ? guardarRespuestasLoteFn({ data: { respuestas: r } }) : null,
           p ? (supabase as any).from(tabla).upsert(p).then(({ error }: any) => { if (error) throw error; }) : null,
         ]);
-        if (a || r.length) avisarNotasActualizadas();
+        if (a) avisarNotasActualizadas();
       } catch (e) {
         console.error("Lote no guardado", e);
         respuestas = [...r, ...respuestas];
