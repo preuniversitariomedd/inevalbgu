@@ -8,7 +8,8 @@ import { generarMatematicaBasica, TEMAS_MBS, AREA_MBS } from "@/data/basica/mate
 import { preguntasAleatorias } from "@/data";
 import type { Pregunta } from "@/data/tipos";
 import { PreguntaCard } from "@/components/PreguntaCard";
-import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso";
+import { iniciarSesion, finalizarSesion } from "@/lib/progreso";
+import { useLoteRespuestas } from "@/hooks/use-lote-respuestas";
 
 const MATERIAS = {
   "ciencias-naturales": { area: AREA_CN, temas: TEMAS_CN as readonly string[], gen: generarCienciasNaturales },
@@ -77,7 +78,7 @@ function Materia() {
   }
 
   if (idx >= sesion.length) {
-    if (!hecho) { setHecho(true); void finalizarSesion(sesionId, sesion.length, aciertos); }
+    if (!hecho) { setHecho(true); void lote.enviar().then(() => finalizarSesion(sesionId, sesion.length, aciertos)); }
     return (
       <div className="mx-auto max-w-2xl px-5 py-10">
         <div className="rounded-2xl border bg-gradient-card p-8 text-center shadow-strong">
@@ -99,7 +100,7 @@ function Materia() {
       </div>
       <div className="mb-5 h-2 overflow-hidden rounded-full bg-muted"><div className="h-full bg-primary transition-all" style={{ width: `${(idx / sesion.length) * 100}%` }} /></div>
       <PreguntaCard key={p.id} pregunta={p} esUltima={idx === sesion.length - 1}
-        onResponder={(ok) => { if (ok) setAciertos((a) => a + 1); guardarRespuesta({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, sesionId }); }}
+        onResponder={(ok) => { if (ok) setAciertos((a) => a + 1); lote.agregar({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, sesionId }); }}
         onSiguiente={() => setIdx((i) => i + 1)} />
     </div>
   );
