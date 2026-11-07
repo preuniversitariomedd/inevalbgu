@@ -219,7 +219,7 @@ function SimulacroVista({ guard, cerrarRef }: { guard: ReturnType<typeof useExam
     if (!guardadoFinal) {
       setGuardadoFinal(true);
       void loteRef.current.enviar().then(() => finalizarSesion(sesionId, total, aciertos, score, nivel.nombre, cfg.min * 60 - restante));
-      guard.finalizar(score / 100);
+      setTimeout(() => guard.finalizar(score / 100), 0);
     }
 
 
