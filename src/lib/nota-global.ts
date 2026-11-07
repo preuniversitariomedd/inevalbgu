@@ -2,8 +2,8 @@
 //   40 % Conocimiento · 30 % Razonamiento · 30 % Simulacro.
 // Lógica pura compartida entre el panel del estudiante, el coach flotante
 // y el panel del administrador.
-import { CONFIG_CON, preguntasConocimiento, type NivelCon } from "@/data/conocimiento";
-import { progresoRazonamiento } from "@/data/basica/razonamiento";
+import { IDS_CON, METAS, progresoRazonamientoLigero as progresoRazonamiento } from "./niveles-ids";
+type NivelCon = 1 | 2 | 3;
 import { PESOS_DEFAULT, type Pesos } from './grupo-config';
 
 export interface AvanceNiveles {
@@ -30,9 +30,9 @@ export interface NotaGlobal {
 }
 
 const TOTALES_CON: Record<NivelCon, number> = {
-  1: preguntasConocimiento(1).length,
-  2: preguntasConocimiento(2).length,
-  3: preguntasConocimiento(3).length,
+  1: IDS_CON[1].size,
+  2: IDS_CON[2].size,
+  3: IDS_CON[3].size,
 };
 
 /** Avance 0–1 de un módulo por niveles: promedio de (aciertos / meta) por nivel. */
@@ -52,7 +52,7 @@ function avanceNiveles(
 }
 
 export function avanceConocimiento(prog: AvanceNiveles | null | undefined): number {
-  return avanceNiveles(prog, TOTALES_CON, { 1: CONFIG_CON[1].meta, 2: CONFIG_CON[2].meta, 3: CONFIG_CON[3].meta });
+  return avanceNiveles(prog, TOTALES_CON, METAS);
 }
 
 export function avanceRazonamiento(prog: AvanceNiveles | null | undefined): number {

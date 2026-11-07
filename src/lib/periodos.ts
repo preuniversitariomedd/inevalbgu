@@ -1,5 +1,4 @@
-import { BANCO_CONOCIMIENTO } from '@/data/conocimiento';
-import { bancoRazonamiento } from '@/data/basica/razonamiento';
+import { nivelDe } from './niveles-ids';
 import type { AvanceNiveles } from './nota-global';
 
 export type Periodo = { id: string; grupo_id: string; nombre: string; fecha_inicio: string; fecha_fin: string };
@@ -21,13 +20,11 @@ export function recortarTiempo(e: { inicio: string; fin: string; segundos_visibl
   const fraccion = b > a ? Math.max(0, Math.min(b, fin) - Math.max(a, inicio)) / (b - a) : 0;
   return { iniciada_en: new Date(Math.max(a, inicio)).toISOString(), segundos_visible: e.segundos_visible * fraccion, segundos_oculto: e.segundos_oculto * fraccion, segundos_interaccion: e.segundos_interaccion * fraccion };
 }
-const nivelesCon = new Map(BANCO_CONOCIMIENTO.map(p => [p.id, p.nivel]));
-const nivelesRaz = new Map(([1, 2, 3] as const).flatMap(n => bancoRazonamiento(n, 14).map(p => [p.id, String(n)] as const)));
 export function avanceDesdeEventos(respuestas: Array<{ pregunta_id: string; area: string; correcta: boolean }>, area: 'Conocimiento' | 'Razonamiento'): AvanceNiveles {
   const grupos: Record<string, Set<string>> = { '1': new Set(), '2': new Set(), '3': new Set() };
   for (const r of respuestas) {
     if (!r.correcta || r.area !== area) continue;
-    const nivel = area === 'Conocimiento' ? ({ 'Básico': '1', 'Intermedio': '2', 'Avanzado': '3' } as Record<string, string>)[nivelesCon.get(r.pregunta_id) ?? ''] : nivelesRaz.get(r.pregunta_id);
+    const nivel = nivelDe(area, r.pregunta_id);
     if (nivel) grupos[nivel]?.add(r.pregunta_id);
   }
   return { aciertos: Object.fromEntries(Object.entries(grupos).map(([n, ids]) => [n, [...ids]])) };
