@@ -15,7 +15,8 @@ import { generarMatematicaBasica } from "@/data/basica/matematica-basica";
 import { bancoRazonamiento } from "@/data/basica/razonamiento";
 import { preguntasLecturaCritica } from "@/data/basica/lectura-critica";
 import { PreguntaCard } from "@/components/PreguntaCard";
-import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso";
+import { iniciarSesion, finalizarSesion } from "@/lib/progreso";
+import { crearLoteRespuestas } from "@/lib/lote-progreso";
 
 const DURACION_MIN = 40;
 const TOTAL_PREG = 30;
@@ -77,6 +78,14 @@ function SimulacroVista({ guard, cerrarRef }: { guard: ReturnType<typeof useExam
   const [restante, setRestante] = useState(DURACION_MIN * 60);
   const [sesionId, setSesionId] = useState<string | null>(null);
   const [guardadoFinal, setGuardadoFinal] = useState(false);
+  const loteRef = useRef(crearLoteRespuestas());
+  useEffect(() => {
+    const flush = () => { if (document.visibilityState === "hidden") void loteRef.current.enviar(); };
+    const salir = () => void loteRef.current.enviar();
+    document.addEventListener("visibilitychange", flush);
+    window.addEventListener("pagehide", salir);
+    return () => { document.removeEventListener("visibilitychange", flush); window.removeEventListener("pagehide", salir); void loteRef.current.enviar(); };
+  }, []);
 
   const esFisica = asignatura === "fisica";
 
@@ -209,7 +218,7 @@ function SimulacroVista({ guard, cerrarRef }: { guard: ReturnType<typeof useExam
     const errores = respuestas.filter((r) => !r.correcta);
     if (!guardadoFinal) {
       setGuardadoFinal(true);
-      void finalizarSesion(sesionId, total, aciertos, score, nivel.nombre, cfg.min * 60 - restante);
+      void loteRef.current.enviar().then(() => finalizarSesion(sesionId, total, aciertos, score, nivel.nombre, cfg.min * 60 - restante));
       guard.finalizar(score / 100);
     }
 
@@ -330,7 +339,7 @@ function SimulacroVista({ guard, cerrarRef }: { guard: ReturnType<typeof useExam
           mostrarFeedback={false}
           onResponder={(ok, i) => {
             setRespuestas((r) => [...r, { pregunta: p, correcta: ok, idx: i }]);
-            guardarRespuesta({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, sesionId });
+            loteRef.current.agregar({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, sesionId });
             setTimeout(() => setIdx((x) => x + 1), 100);
           }}
           onSiguiente={() => setIdx((x) => x + 1)}

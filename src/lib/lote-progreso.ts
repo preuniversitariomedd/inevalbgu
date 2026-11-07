@@ -36,3 +36,18 @@ export function crearLote(tabla: Tabla) {
     },
   };
 }
+
+// Lote solo de respuestas (simulacros y prácticas): se envía al finalizar,
+// al ocultar la pestaña o al salir. Divide en paquetes de 50.
+export function crearLoteRespuestas() {
+  let pendientes: RespuestaInput[] = [];
+  const enviar = async () => {
+    const r = pendientes; pendientes = [];
+    for (let i = 0; i < r.length; i += 50) {
+      const parte = r.slice(i, i + 50);
+      try { await guardarRespuestasLoteFn({ data: { respuestas: parte } }); }
+      catch (e) { console.error("Lote no guardado", e); pendientes = [...r.slice(i), ...pendientes]; return; }
+    }
+  };
+  return { agregar(x: RespuestaInput) { pendientes.push(x); }, enviar, get tamano() { return pendientes.length; } };
+}
