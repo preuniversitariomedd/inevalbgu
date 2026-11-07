@@ -22,3 +22,4 @@
 - Exam anti-fraud counters and closure live in database RPCs (evaluacion_intentos/violations) called via server functions, so reloading cannot reset infractions; browser listeners only report events.
 - Store global menu visibility separately from group permissions; compose both with deny-wins and refresh through the existing authenticated-layout subscription without polling. Global visibility affects navigation and route presentation, not historical grading or exam subject availability.
 - Adapt BGU annexes only for subject simulacros with stable source-prefixed IDs, embedded referenced readings and letter-key mapping; balance source sampling to retain historical and uploaded questions without changing grading.
+- Grade/progress code must use the precomputed level ID list (src/data/ids-niveles.json, regenerate with scripts/generar-ids-niveles.ts; a test checks it matches) instead of importing full question banks, so large banks load only on their own pages.
