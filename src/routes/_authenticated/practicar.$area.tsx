@@ -5,7 +5,8 @@ import { ArrowLeft, Timer } from "lucide-react";
 import { preguntasAleatorias, preguntasPorAreaYNivel } from "@/data";
 import type { Pregunta } from "@/data/tipos";
 import { PreguntaCard } from "@/components/PreguntaCard";
-import { guardarRespuesta, iniciarSesion, finalizarSesion } from "@/lib/progreso";
+import { iniciarSesion, finalizarSesion } from "@/lib/progreso";
+import { useLoteRespuestas } from "@/hooks/use-lote-respuestas";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/practicar/$area")({
@@ -27,6 +28,7 @@ function PracticarArea() {
   const [nivel, setNivel] = useState<NivelSel | null>(null);
   const [sesion, setSesion] = useState<Pregunta[] | null>(null);
   const [sesionId, setSesionId] = useState<string | null>(null);
+  const lote = useLoteRespuestas();
   const [finalizada, setFinalizada] = useState(false);
   const [idx, setIdx] = useState(0);
   const [aciertos, setAciertos] = useState(0);
@@ -96,7 +98,7 @@ function PracticarArea() {
     if (!finalizada) {
       setFinalizada(true);
       const tiempoSeg = Math.floor(((inicio ? ahora - inicio : 0)) / 1000);
-      void finalizarSesion(sesionId, sesion.length, aciertos, null, null, tiempoSeg);
+      void lote.enviar().then(() => finalizarSesion(sesionId, sesion.length, aciertos, null, null, tiempoSeg));
     }
     return (
       <div className="min-h-screen bg-background">
@@ -143,7 +145,7 @@ function PracticarArea() {
           pregunta={p}
           onResponder={(ok) => {
             if (ok) setAciertos((a) => a + 1);
-            guardarRespuesta({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, sesionId });
+            lote.agregar({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, sesionId });
           }}
           onSiguiente={() => setIdx((i) => i + 1)}
           esUltima={idx === sesion.length - 1}
