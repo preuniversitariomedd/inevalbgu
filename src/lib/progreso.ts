@@ -72,6 +72,7 @@ export function guardarRespuesta(r: RespuestaInput) {
       subtema: r.subtema,
       nivel: r.nivel,
       correcta: r.correcta,
+      elegida: r.elegida,
       sesionId,
     },
   }).catch((e) => console.error("guardarRespuesta fallo", e));
