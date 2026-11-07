@@ -1,3 +1,4 @@
+import { sanitizarHtml } from "@/lib/sanitizar-html";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -411,7 +412,7 @@ function VisorRecurso({ recurso, onClose }: { recurso: Recurso; onClose: () => v
           {recurso.notas_html && (
             <div className="rounded-2xl border bg-gradient-card p-4">
               <h3 className="mb-2 text-sm font-bold">Apuntes</h3>
-              <div className="prose prose-sm max-w-none text-sm" dangerouslySetInnerHTML={{ __html: recurso.notas_html }} />
+              <div className="prose prose-sm max-w-none text-sm" dangerouslySetInnerHTML={{ __html: sanitizarHtml(recurso.notas_html) }} />
             </div>
           )}
         </div>
