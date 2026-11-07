@@ -135,7 +135,7 @@ function Conocimiento() {
           key={p.id}
           pregunta={p}
           esUltima={idx === ronda.length - 1}
-          onResponder={(ok) => {
+          onResponder={(ok, i) => {
             rondaRef.current.resp++; if (ok) rondaRef.current.ok++;
             const e: Estado = JSON.parse(JSON.stringify(est));
             const aciertos = e.aciertos[nivel] ?? [];
@@ -143,7 +143,7 @@ function Conocimiento() {
             e.aciertos[nivel] = aciertos;
             if (!ok) e.fallos[p.subtema] = (e.fallos[p.subtema] ?? 0) + 1;
             guardar(e, (est.aciertos[nivel]?.length ?? 0) < metaDe(nivel) && aciertos.length >= metaDe(nivel));
-            loteRef.current.respuesta({ preguntaId: p.id, area: "Conocimiento", subtema: p.subtema, nivel: p.nivel, correcta: ok });
+            loteRef.current.respuesta({ preguntaId: p.id, area: "Conocimiento", subtema: p.subtema, nivel: p.nivel, correcta: ok, elegida: p.opciones[i] });
           }}
           onSiguiente={() => { if (idx >= ronda.length - 1) terminarRonda(); setIdx((i) => i + 1); }}
         />

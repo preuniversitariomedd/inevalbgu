@@ -339,7 +339,7 @@ function SimulacroVista({ guard, cerrarRef }: { guard: ReturnType<typeof useExam
           mostrarFeedback={false}
           onResponder={(ok, i) => {
             setRespuestas((r) => [...r, { pregunta: p, correcta: ok, idx: i }]);
-            loteRef.current.agregar({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, sesionId });
+            loteRef.current.agregar({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, elegida: p.opciones[i], sesionId });
             setTimeout(() => setIdx((x) => x + 1), 100);
           }}
           onSiguiente={() => setIdx((x) => x + 1)}
