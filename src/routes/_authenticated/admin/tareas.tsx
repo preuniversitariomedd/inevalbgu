@@ -1,3 +1,4 @@
+import { sanitizarHtml } from "@/lib/sanitizar-html";
 import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
@@ -341,7 +342,7 @@ function AdminTareasPage() {
                             </div>
                           </div>
                           {t.descripcion_html ? (
-                            <div className="prose prose-sm dark:prose-invert mt-2 max-w-none" dangerouslySetInnerHTML={{ __html: t.descripcion_html }} />
+                            <div className="prose prose-sm dark:prose-invert mt-2 max-w-none" dangerouslySetInnerHTML={{ __html: sanitizarHtml(t.descripcion_html) }} />
                           ) : t.descripcion ? (
                             <p className="mt-2 whitespace-pre-wrap text-sm">{t.descripcion}</p>
                           ) : null}

@@ -1,3 +1,4 @@
+import { sanitizarHtml } from "@/lib/sanitizar-html";
 import { pageMeta } from "@/lib/page-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -136,7 +137,7 @@ function TareaCard({ t, onOpen, onSeen }: { t: any; onOpen: (id: string) => void
       {t.descripcion_html ? (
         <div
           className="prose prose-sm dark:prose-invert mt-3 max-w-none"
-          dangerouslySetInnerHTML={{ __html: t.descripcion_html }}
+          dangerouslySetInnerHTML={{ __html: sanitizarHtml(t.descripcion_html) }}
         />
       ) : t.descripcion ? (
         <p className="mt-3 whitespace-pre-wrap text-sm text-foreground/90">{t.descripcion}</p>
