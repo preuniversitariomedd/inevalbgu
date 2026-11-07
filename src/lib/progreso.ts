@@ -58,6 +58,7 @@ export interface RespuestaInput {
   subtema: string;
   nivel: string;
   correcta: boolean;
+  elegida?: string;
   sesionId?: string | null;
 }
 

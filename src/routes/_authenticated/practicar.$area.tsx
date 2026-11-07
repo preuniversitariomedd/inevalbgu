@@ -143,9 +143,9 @@ function PracticarArea() {
         <PreguntaCard
           key={p.id}
           pregunta={p}
-          onResponder={(ok) => {
+          onResponder={(ok, i) => {
             if (ok) setAciertos((a) => a + 1);
-            lote.agregar({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, sesionId });
+            lote.agregar({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, elegida: p.opciones[i], sesionId });
           }}
           onSiguiente={() => setIdx((i) => i + 1)}
           esUltima={idx === sesion.length - 1}

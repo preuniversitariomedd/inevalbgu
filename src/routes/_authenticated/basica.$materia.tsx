@@ -101,7 +101,7 @@ function Materia() {
       </div>
       <div className="mb-5 h-2 overflow-hidden rounded-full bg-muted"><div className="h-full bg-primary transition-all" style={{ width: `${(idx / sesion.length) * 100}%` }} /></div>
       <PreguntaCard key={p.id} pregunta={p} esUltima={idx === sesion.length - 1}
-        onResponder={(ok) => { if (ok) setAciertos((a) => a + 1); lote.agregar({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, sesionId }); }}
+        onResponder={(ok, i) => { if (ok) setAciertos((a) => a + 1); lote.agregar({ preguntaId: p.id, area: p.area, subtema: p.subtema, nivel: p.nivel, correcta: ok, elegida: p.opciones[i], sesionId }); }}
         onSiguiente={() => setIdx((i) => i + 1)} />
     </div>
   );
