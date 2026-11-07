@@ -18,8 +18,9 @@ export function ActualizacionesGrupo() {
       .on('postgres_changes', { event: '*', schema: 'public', table: 'apartados_visibilidad' }, () => { actualizar(); void qc.invalidateQueries({ queryKey: ['visibilidad-global'], refetchType: document.hidden ? 'none' : 'active' }); })
       .subscribe();
     let canalReinicio: ReturnType<typeof supabase.channel> | null = null;
+    let cerrado = false;
     void supabase.auth.getUser().then(({ data }) => {
-      const uid = data.user?.id; if (!uid) return;
+      const uid = data.user?.id; if (!uid || cerrado) return;
       canalReinicio = supabase.channel(`reinicio-${uid}-${crypto.randomUUID()}`)
         .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'conocimiento_progreso', filter: `user_id=eq.${uid}` }, (p: any) => {
           if (p.old?.generacion && p.new?.generacion && p.old.generacion === p.new.generacion) return;
@@ -34,7 +35,7 @@ export function ActualizacionesGrupo() {
     window.addEventListener('notas-actualizadas', notas);
     const visible = () => { if (!document.hidden) { void qc.refetchQueries({ queryKey: ['mis-accesos'], type: 'active', stale: true }); } };
     document.addEventListener('visibilitychange', visible);
-    return () => { window.removeEventListener('notas-actualizadas', notas); document.removeEventListener('visibilitychange', visible); void supabase.removeChannel(channel); if (canalReinicio) void supabase.removeChannel(canalReinicio); };
+    return () => { cerrado = true; window.removeEventListener('notas-actualizadas', notas); document.removeEventListener('visibilitychange', visible); void supabase.removeChannel(channel); if (canalReinicio) void supabase.removeChannel(canalReinicio); };
   }, [qc, activa]);
   // Al volver tras la pausa, recuperar cambios que pudieron perderse.
   useEffect(() => {
