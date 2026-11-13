@@ -81,7 +81,7 @@ function PodioPage() {
       Math.round(f.segundos_plataforma / 60), f.preguntas_resueltas, f.correctas,
       f.precision_pct, f.mejor_puntaje, f.encuesta_respondidas, f.puntaje_podio,
     ]);
-    const csv = [cols, ...rows].map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
+    const csv = [cols, ...rows].map((r) => r.map((c) => { let v = String(c); if (/^[=+\-@\t\r]/.test(v)) v = "'" + v; return `"${v.replace(/"/g, '""')}"`; }).join(",")).join("\n");
     const url = URL.createObjectURL(new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" }));
     const a = document.createElement("a");
     a.href = url;

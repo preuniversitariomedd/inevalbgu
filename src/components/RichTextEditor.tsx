@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { sanitizarHtml } from "@/lib/sanitizar-html";
 import { Bold, Italic, Underline as UnderlineIcon, Palette, Type, List } from "lucide-react";
 
 type Props = {
@@ -20,7 +21,7 @@ export function RichTextEditor({ value, onChange, placeholder }: Props) {
 
   useEffect(() => {
     if (ref.current && ref.current.innerHTML !== value) {
-      ref.current.innerHTML = value || "";
+      ref.current.innerHTML = sanitizarHtml(value);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

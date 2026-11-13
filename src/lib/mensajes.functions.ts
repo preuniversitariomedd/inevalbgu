@@ -19,6 +19,7 @@ async function esStaff(context: { supabase: any; userId: string }) {
 export const listarUsuariosChatFn = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    const staff = await esStaff(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     // profiles activos
     const { data: profs, error } = await supabaseAdmin
@@ -48,7 +49,7 @@ export const listarUsuariosChatFn = createServerFn({ method: "GET" })
           : rs.includes("docente")
             ? "docente"
             : "estudiante";
-        return { id: p.id, nombres: p.nombres, cedula: p.cedula, institucion: p.institucion, rol };
+        return { id: p.id, nombres: p.nombres, cedula: staff ? p.cedula : "", institucion: p.institucion, rol };
       });
   });
 

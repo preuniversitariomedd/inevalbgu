@@ -12,21 +12,29 @@ const respuestaSchema = z.object({
   sesionId: z.string().uuid().nullable().optional(),
 });
 
+// Las respuestas solo se insertan desde el servidor (corrección en servidor).
+async function insertarRespuestas(userId: string, filas: Array<Record<string, unknown>>) {
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const { error } = await (supabaseAdmin as any).rpc("insertar_respuestas_srv", { _uid: userId, _filas: filas });
+  if (error) {
+    console.error("insertar_respuestas_srv", error);
+    throw new Error(error.message?.includes("habilitad") ? error.message : "No se pudieron guardar las respuestas.");
+  }
+}
+
 export const guardarRespuestaFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => respuestaSchema.parse(d))
   .handler(async ({ data, context }) => {
     const { corregirRespuesta } = await import("./corregir.server");
-    const { error } = await context.supabase.from("respuestas").insert({
-      user_id: context.userId,
+    await insertarRespuestas(context.userId, [{
       sesion_id: data.sesionId ?? null,
       pregunta_id: data.preguntaId,
       area: data.area,
       subtema: data.subtema,
       nivel: data.nivel,
       correcta: corregirRespuesta(data.preguntaId, data.elegida, data.correcta),
-    });
-    if (error) throw new Error(error.message);
+    }]);
     return { ok: true };
   });
 
@@ -139,7 +147,6 @@ export const guardarRespuestasLoteFn = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { corregirRespuesta } = await import("./corregir.server");
     const filas = data.respuestas.map((r) => ({
-      user_id: context.userId,
       sesion_id: r.sesionId ?? null,
       pregunta_id: r.preguntaId,
       area: r.area,
@@ -147,7 +154,6 @@ export const guardarRespuestasLoteFn = createServerFn({ method: "POST" })
       nivel: r.nivel,
       correcta: corregirRespuesta(r.preguntaId, r.elegida, r.correcta),
     }));
-    const { error } = await context.supabase.from("respuestas").insert(filas);
-    if (error) throw new Error(error.message);
+    await insertarRespuestas(context.userId, filas);
     return { ok: true, total: filas.length };
   });

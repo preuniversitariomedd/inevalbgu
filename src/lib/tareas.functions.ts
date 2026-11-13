@@ -363,7 +363,11 @@ export const borrarTareaFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ tareaId: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
-    // RLS ya restringe a autor / admin
+    const { data: t } = await context.supabase
+      .from("tareas").select("creador_id").eq("id", data.tareaId).maybeSingle();
+    if (!t) throw new Error("Tarea no encontrada.");
+    const { data: isAdmin } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "administrador" });
+    if (!isAdmin && t.creador_id !== context.userId) throw new Error("No puedes borrar esta tarea.");
     const { data: adjs } = await context.supabase
       .from("tarea_adjuntos")
       .select("path")

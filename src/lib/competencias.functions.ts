@@ -440,6 +440,13 @@ export const unirseCompetenciaFn = createServerFn({ method: "POST" })
     const { data: comp } = await q.maybeSingle();
     if (!comp) throw new Error("Código no válido.");
     if (comp.estado === "finalizada") throw new Error("Esta competencia ya terminó.");
+    const { data: staff } = await context.supabase.rpc("is_staff", { _user_id: context.userId });
+    if (!staff) {
+      const gids: string[] = comp.grupo_ids ?? [];
+      const { data: mis } = await db.from("grupo_estudiantes").select("grupo_id").eq("user_id", context.userId);
+      const misIds = (mis ?? []).map((m: any) => m.grupo_id);
+      if (gids.length > 0 && !gids.some((g) => misIds.includes(g))) throw new Error("Código no válido.");
+    }
     const { data: prof } = await db.from("profiles").select("nombres").eq("id", context.userId).maybeSingle();
     await db
       .from("competencia_participantes")

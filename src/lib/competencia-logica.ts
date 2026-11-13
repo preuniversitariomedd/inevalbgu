@@ -89,5 +89,7 @@ export function opcionesAEliminar(n: number, correcta: number, casi: number | nu
 }
 
 export function generarCodigo() {
-  return String(Math.floor(100000 + Math.random() * 900000));
+  const a = new Uint32Array(1);
+  crypto.getRandomValues(a);
+  return String(100000 + (a[0] % 900000));
 }

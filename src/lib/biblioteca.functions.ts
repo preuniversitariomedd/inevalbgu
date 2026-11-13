@@ -212,11 +212,12 @@ export const guardarRecursoFn = createServerFn({ method: "POST" })
       const { data: aBorr } = await supabase
         .from("biblioteca_archivos")
         .select("id, path")
+        .eq("recurso_id", recursoId)
         .in("id", data.archivosBorrar);
       if (aBorr?.length) {
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         await supabaseAdmin.storage.from("biblioteca").remove(aBorr.map((a: any) => a.path));
-        await supabase.from("biblioteca_archivos").delete().in("id", data.archivosBorrar);
+        await supabase.from("biblioteca_archivos").delete().eq("recurso_id", recursoId).in("id", aBorr.map((a: any) => a.id));
       }
     }
 
@@ -246,7 +247,11 @@ export const borrarRecursoFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
-    await ensureStaff(context);
+    const { isAdmin } = await ensureStaff(context);
+    const { data: rec } = await context.supabase
+      .from("biblioteca_recursos").select("creador_id").eq("id", data.id).maybeSingle();
+    if (!rec) throw new Error("Recurso no encontrado.");
+    if (!isAdmin && rec.creador_id !== context.userId) throw new Error("No puedes borrar este recurso.");
     const { data: archs } = await context.supabase
       .from("biblioteca_archivos")
       .select("path")

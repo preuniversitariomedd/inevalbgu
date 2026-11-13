@@ -1646,6 +1646,10 @@ export type Database = {
         Returns: boolean
       }
       iniciar_evaluacion: { Args: { _modulo: string }; Returns: Json }
+      insertar_respuestas_srv: {
+        Args: { _filas: Json; _uid: string }
+        Returns: number
+      }
       is_staff: { Args: { _user_id: string }; Returns: boolean }
       modulo_habilitado: {
         Args: { _modulo: string; _user_id: string }

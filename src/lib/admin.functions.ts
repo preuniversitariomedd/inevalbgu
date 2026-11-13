@@ -27,6 +27,18 @@ async function ensureStaff(context: { supabase: any; userId: string }) {
   return { isAdmin: !!isAdmin, isDocente: !!isDocente };
 }
 
+// Docentes solo pueden actuar sobre cuentas de estudiantes (no personal).
+async function ensurePuedeGestionar(isAdmin: boolean, targetIds: string[]) {
+  if (isAdmin || targetIds.length === 0) return;
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const { data } = await supabaseAdmin
+    .from("user_roles")
+    .select("user_id")
+    .in("user_id", targetIds)
+    .in("role", ["administrador", "docente"]);
+  if ((data ?? []).length > 0) throw new Error("Solo puedes reiniciar cuentas de estudiantes.");
+}
+
 // ---------- Bootstrap ----------
 export const existeAdminFn = createServerFn({ method: "GET" }).handler(async () => {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -55,6 +67,8 @@ export const crearAdminInicialFn = createServerFn({ method: "POST" })
       .select("*", { count: "exact", head: true })
       .eq("role", "administrador");
     if ((count ?? 0) > 0) throw new Error("Ya existe un administrador.");
+    // Solo se permite si se configuró explícitamente para el arranque inicial.
+    if (process.env.PERMITIR_ADMIN_INICIAL !== "si") throw new Error("La creación del administrador inicial está deshabilitada.");
 
     const { data: created, error } = await supabaseAdmin.auth.admin.createUser({
       email: cedulaToEmail(data.cedula),
@@ -137,7 +151,8 @@ export const resetPasswordEstudianteFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ userId: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
-    await ensureStaff(context);
+    const { isAdmin } = await ensureStaff(context);
+    await ensurePuedeGestionar(isAdmin, [data.userId]);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.auth.admin.updateUserById(data.userId, {
       password: TEMP_PASSWORD,
@@ -538,6 +553,8 @@ export const obtenerBrandingFn = createServerFn({ method: "GET" }).handler(async
   };
 });
 
+const IMG_TIPO = z.enum(["image/png", "image/jpeg", "image/webp", "image/gif"]);
+
 export const actualizarBrandingFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) =>
@@ -545,10 +562,10 @@ export const actualizarBrandingFn = createServerFn({ method: "POST" })
       .object({
         titulo: z.string().max(120).nullable().optional(),
         subtitulo: z.string().max(280).nullable().optional(),
-        logoBase64: z.string().nullable().optional(),
-        logoContentType: z.string().nullable().optional(),
-        heroBase64: z.string().nullable().optional(),
-        heroContentType: z.string().nullable().optional(),
+        logoBase64: z.string().max(7_000_000).nullable().optional(),
+        logoContentType: IMG_TIPO.nullable().optional(),
+        heroBase64: z.string().max(7_000_000).nullable().optional(),
+        heroContentType: IMG_TIPO.nullable().optional(),
       })
       .parse(d),
   )
@@ -571,8 +588,9 @@ export const actualizarBrandingFn = createServerFn({ method: "POST" })
       ct?: string | null,
     ) {
       if (!base64) return;
-      const buf = Buffer.from(base64, "base64");
-      const ext = (ct ?? "image/png").split("/")[1] ?? "png";
+      const buf = Buffer.from(base64.replace(/^data:[^;]+;base64,/, ""), "base64");
+      if (buf.length > 5 * 1024 * 1024) throw new Error("La imagen debe pesar menos de 5 MB.");
+      const ext = ((ct ?? "image/png").split("/")[1] ?? "png").replace("jpeg", "jpg");
       const path = `${field}-${Date.now()}.${ext}`;
       const { error } = await supabaseAdmin.storage
         .from("branding")
@@ -661,7 +679,8 @@ export const resetPasswordMasivoFn = createServerFn({ method: "POST" })
     z.object({ userIds: z.array(z.string().uuid()).min(1).max(300) }).parse(d),
   )
   .handler(async ({ data, context }) => {
-    await ensureStaff(context);
+    const { isAdmin } = await ensureStaff(context);
+    await ensurePuedeGestionar(isAdmin, data.userIds);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     let ok = 0;
     const fallidos: string[] = [];

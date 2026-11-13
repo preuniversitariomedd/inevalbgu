@@ -35,8 +35,18 @@ export const Route = createFileRoute("/api/chat")({
         let body: ChatBody;
         try { body = (await request.json()) as ChatBody; }
         catch { return new Response("Bad JSON", { status: 400 }); }
-        const { messages, threadId } = body;
-        if (!Array.isArray(messages) || !threadId) return new Response("Invalid input", { status: 400 });
+        const { threadId } = body;
+        if (!Array.isArray(body.messages) || typeof threadId !== "string" || !threadId) return new Response("Invalid input", { status: 400 });
+        // Solo mensajes de usuario/asistente con texto; nunca roles "system" enviados por el cliente.
+        const messages = body.messages
+          .filter((m) => m && (m.role === "user" || m.role === "assistant") && Array.isArray(m.parts))
+          .slice(-30)
+          .map((m) => ({
+            ...m,
+            parts: m.parts
+              .filter((p) => p.type === "text" && typeof (p as { text?: unknown }).text === "string")
+              .map((p) => ({ type: "text" as const, text: (p as { text: string }).text.slice(0, 4000) })),
+          })) as UIMessage[];
 
         // Validar pertenencia del hilo
         const { data: thread, error: thErr } = await supa
