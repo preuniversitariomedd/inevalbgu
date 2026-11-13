@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { PinSeguridad } from "@/components/PinSeguridad";
 import { AccesoModulo, ContenidoModulo, useAccesos } from '@/components/AccesoModulo';
 import { ActualizacionesGrupo } from '@/components/ActualizacionesGrupo';
+import { useConexionLigera } from '@/lib/useConexionLigera';
 
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
@@ -75,6 +76,8 @@ function AuthedContent() {
 
   // Anti-copia: bloquea Ctrl+C / Ctrl+V / menú contextual fuera de campos de texto.
   useAntiCopia(true);
+  // Registro ligero de conexiones: solo entrada y salida.
+  useConexionLigera(ctx.user.id);
 
 
   useEffect(() => {

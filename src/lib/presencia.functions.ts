@@ -102,11 +102,25 @@ export const heartbeatSesionConexionFn = createServerFn({ method: "POST" })
 
 export const finalizarSesionConexionFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
+  .inputValidator((d: unknown) =>
+    z.object({
+      id: z.string().uuid(),
+      segundosVisible: z.number().int().min(0).max(86400).optional(),
+      segundosOculto: z.number().int().min(0).max(86400).optional(),
+      segundosInteraccion: z.number().int().min(0).max(86400).optional(),
+    }).parse(d),
+  )
   .handler(async ({ data, context }) => {
+    const now = new Date().toISOString();
+    const upd: { finalizada: boolean; finalizada_en: string; ultimo_heartbeat: string; segundos_visible?: number; segundos_oculto?: number; segundos_interaccion?: number } = { finalizada: true, finalizada_en: now, ultimo_heartbeat: now };
+    if (data.segundosVisible !== undefined) upd.segundos_visible = data.segundosVisible;
+    if (data.segundosOculto !== undefined) upd.segundos_oculto = data.segundosOculto;
+    if (data.segundosInteraccion !== undefined) {
+      upd.segundos_interaccion = Math.min(data.segundosInteraccion, data.segundosVisible ?? data.segundosInteraccion);
+    }
     const { error } = await context.supabase
       .from("sesiones_conexion")
-      .update({ finalizada: true, finalizada_en: new Date().toISOString() })
+      .update(upd)
       .eq("id", data.id)
       .eq("user_id", context.userId);
     if (error) throw new Error(error.message);
