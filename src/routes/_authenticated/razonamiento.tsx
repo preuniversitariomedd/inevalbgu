@@ -1,3 +1,4 @@
+import { GuiaNiveles, EstadoNivel, BarraNivel } from "@/components/AvanceNivel";
 import { useExamGuard } from "@/hooks/use-exam-guard";
 import { ReglasEvaluacion, AvisoExamen } from "@/components/ExamGuard";
 import { pageMeta } from "@/lib/page-meta";
@@ -30,6 +31,7 @@ function Razonamiento() {
   const [pendiente, setPendiente] = useState<NivelRaz | null>(null);
   const [notaCierre, setNotaCierre] = useState<string | null>(null);
   const rondaRef = useRef({ ok: 0, resp: 0 });
+  const [intentos, setIntentos] = useState<Record<number, number>>({ 1: 0, 2: 0, 3: 0 });
   const loteRef = useRef(crearLote("razonamiento_progreso"));
   useEffect(() => {
     const enviar = () => { if (document.visibilityState === "hidden") void loteRef.current.enviar(); };
@@ -54,6 +56,10 @@ function Razonamiento() {
       const { data } = await supabase.auth.getUser();
       const id = data.user?.id ?? "anon";
       setUid(id);
+      if (data.user) {
+        const cuentas = await Promise.all([1, 2, 3].map((n) => (supabase as any).from("respuestas").select("id", { count: "exact", head: true }).eq("user_id", id).eq("area", "Razonamiento").eq("nivel", n)));
+        setIntentos({ 1: cuentas[0].count ?? 0, 2: cuentas[1].count ?? 0, 3: cuentas[2].count ?? 0 });
+      }
       if (data.user) {
         const { data: prog } = await (supabase as any).from("razonamiento_progreso").select("*").eq("user_id", id).maybeSingle();
         if (prog) { setGeneracion(prog.generacion); setEst({ aciertos: { 1: [], 2: [], 3: [], ...prog.aciertos }, fallos: prog.fallos ?? {} }); }
@@ -87,7 +93,7 @@ function Razonamiento() {
   }
 
   if (pendiente) {
-    return <ReglasEvaluacion titulo="Razonamiento" guard={guard} onIniciar={() => { armarRonda(pendiente); setPendiente(null); }} onCancelar={() => setPendiente(null)} />;
+    return <><div className="mx-auto max-w-3xl px-5 pt-6"><div className="rounded-xl border bg-card p-4"><p className="mb-1 font-bold">Tu estado en {CONFIG_RAZ[pendiente].titulo}:</p><EstadoNivel correctas={progresoRazonamiento(pendiente, est.aciertos[pendiente]).correctas} intentadas={intentos[pendiente] ?? 0} meta={progresoRazonamiento(pendiente, est.aciertos[pendiente]).meta} nivel={pendiente} /></div></div><ReglasEvaluacion titulo="Razonamiento" guard={guard} onIniciar={() => { armarRonda(pendiente); setPendiente(null); }} onCancelar={() => setPendiente(null)} /></>;
   }
 
   const p = ronda[idx];
@@ -105,7 +111,7 @@ function Razonamiento() {
         {pista && <div className="mb-3 rounded-xl border border-primary/40 bg-primary/5 p-3 text-sm">{p.estrategia}</div>}
         <PreguntaCard key={p.id} pregunta={p} esUltima={idx === ronda.length - 1}
           onResponder={(ok, i) => {
-            rondaRef.current.resp++; if (ok) rondaRef.current.ok++;
+            rondaRef.current.resp++; if (ok) rondaRef.current.ok++; setIntentos((x) => ({ ...x, [nivel]: (x[nivel] ?? 0) + 1 }));
             const e: Estado = JSON.parse(JSON.stringify(est));
             const aciertos = e.aciertos[nivel] ?? [];
             if (ok && !aciertos.includes(p.id)) aciertos.push(p.id);
@@ -124,19 +130,19 @@ function Razonamiento() {
       <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Inicio</Link>
       <h1 className="mt-4 text-3xl font-extrabold">Razonamiento</h1>
       <p className="mt-1 text-muted-foreground">Lengua, Matemática, Estudios Sociales y Ciencias Naturales · Básica Superior. Las lecturas se adaptan a tu edad ({edad} años: {edad < 14 ? "textos concretos" : "textos con mayor abstracción"}).</p>
+      <GuiaNiveles />
       <AvisoExamen guard={guard} resultado={notaCierre ?? undefined} />
       {notaCierre && <div className="mt-4 rounded-xl border border-destructive/40 bg-destructive/10 p-3 text-sm font-medium">Ronda cerrada por infracciones. Nota de la ronda: {notaCierre}</div>}
-      {nivel && <div className="mt-4 rounded-xl border bg-success/10 p-3 text-sm font-medium">Ronda terminada. ¡Sigue practicando para llegar a la meta!</div>}
+      {nivel && <div className="mt-4 rounded-xl border bg-success/10 p-3 text-sm font-medium">Ronda completada: lograste {rondaRef.current.ok} de {rondaRef.current.resp} aciertos en esta ronda. Tu avance acumulado subió a {progresoRazonamiento(nivel, est.aciertos[nivel]).correctas} aciertos. ¡Continúa con otra ronda para alcanzar la meta!</div>}
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {([1, 2, 3] as NivelRaz[]).map((n) => {
-          const c = CONFIG_RAZ[n], { correctas: ok, meta, total } = progresoRazonamiento(n, est.aciertos[n]), libre = desbloqueado(n);
+          const c = CONFIG_RAZ[n], { correctas: ok, meta } = progresoRazonamiento(n, est.aciertos[n]), libre = desbloqueado(n);
           return (
             <div key={n} className={`rounded-2xl border bg-gradient-card p-5 shadow-soft ${libre ? "" : "opacity-60"}`}>
               <div className="flex items-center justify-between"><h3 className="font-bold">{c.titulo}</h3>{aprobado(n) ? <Trophy className="h-5 w-5 text-success" /> : !libre && <Lock className="h-5 w-5" />}</div>
               <p className="text-xs text-muted-foreground">{c.mezcla}</p>
-              <p className="mt-3 text-sm">{total} preguntas disponibles · meta: {Math.round(c.meta * 100)} % ({meta} correctas)</p>
-              <div className="mt-2 h-2 overflow-hidden rounded-full bg-muted"><div className="h-full bg-primary" style={{ width: `${Math.min(100, (ok / meta) * 100)}%` }} /></div>
-              <p className="mt-1 text-xs text-muted-foreground">{ok} / {meta} correctas</p>
+              <BarraNivel correctas={ok} meta={meta} nivel={n} />
+              {libre && <div className="mt-2 text-xs"><EstadoNivel correctas={ok} intentadas={intentos[n] ?? 0} meta={meta} nivel={n} /></div>}
               <Button disabled={!libre || ok >= bancos[n].length} onClick={() => setPendiente(n)} className="mt-4 w-full">
                 {!libre ? `Aprueba el nivel ${n - 1}` : ok >= bancos[n].length ? "Completado" : "Ronda de 10 preguntas"}
               </Button>

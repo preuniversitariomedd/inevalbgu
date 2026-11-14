@@ -1,3 +1,4 @@
+import { GuiaNiveles, EstadoNivel, BarraNivel } from "@/components/AvanceNivel";
 import { useExamGuard } from "@/hooks/use-exam-guard";
 import { ReglasEvaluacion, AvisoExamen } from "@/components/ExamGuard";
 import { pageMeta } from "@/lib/page-meta";
@@ -48,6 +49,7 @@ function Conocimiento() {
   const [pendiente, setPendiente] = useState<NivelCon | null>(null);
   const [notaCierre, setNotaCierre] = useState<string | null>(null);
   const rondaRef = useRef({ ok: 0, resp: 0 });
+  const [intentos, setIntentos] = useState<Record<number, number>>({ 1: 0, 2: 0, 3: 0 });
   const loteRef = useRef(crearLote("conocimiento_progreso"));
   useEffect(() => {
     const enviar = () => { if (document.visibilityState === "hidden") void loteRef.current.enviar(); };
@@ -71,6 +73,10 @@ function Conocimiento() {
       const { data } = await supabase.auth.getUser();
       const id = data.user?.id ?? "anon";
       setUid(id);
+      if (data.user) {
+        const cuentas = await Promise.all([1, 2, 3].map((n) => (supabase as any).from("respuestas").select("id", { count: "exact", head: true }).eq("user_id", id).eq("area", "Conocimiento").eq("nivel", n)));
+        setIntentos({ 1: cuentas[0].count ?? 0, 2: cuentas[1].count ?? 0, 3: cuentas[2].count ?? 0 });
+      }
       if (data.user) {
         const { data: prog } = await supabase
           .from("conocimiento_progreso")
@@ -116,7 +122,7 @@ function Conocimiento() {
   }
 
   if (pendiente) {
-    return <ReglasEvaluacion titulo="Conocimiento" guard={guard} onIniciar={() => { armarRonda(pendiente); setPendiente(null); }} onCancelar={() => setPendiente(null)} />;
+    return <><div className="mx-auto max-w-3xl px-5 pt-6"><div className="rounded-xl border bg-card p-4"><p className="mb-1 font-bold">Tu estado en {CONFIG_CON[pendiente].titulo}:</p><EstadoNivel correctas={est.aciertos[pendiente]?.length ?? 0} intentadas={intentos[pendiente] ?? 0} meta={metaDe(pendiente)} nivel={pendiente} /></div></div><ReglasEvaluacion titulo="Conocimiento" guard={guard} onIniciar={() => { armarRonda(pendiente); setPendiente(null); }} onCancelar={() => setPendiente(null)} /></>;
   }
 
   const p = ronda[idx];
@@ -136,7 +142,7 @@ function Conocimiento() {
           pregunta={p}
           esUltima={idx === ronda.length - 1}
           onResponder={(ok, i) => {
-            rondaRef.current.resp++; if (ok) rondaRef.current.ok++;
+            rondaRef.current.resp++; if (ok) rondaRef.current.ok++; setIntentos((x) => ({ ...x, [nivel]: (x[nivel] ?? 0) + 1 }));
             const e: Estado = JSON.parse(JSON.stringify(est));
             const aciertos = e.aciertos[nivel] ?? [];
             if (ok && !aciertos.includes(p.id)) aciertos.push(p.id);
@@ -158,14 +164,14 @@ function Conocimiento() {
       </Link>
       <h1 className="mt-4 text-3xl font-extrabold">Conocimiento</h1>
       <p className="mt-1 text-muted-foreground">
-        {BANCO_CONOCIMIENTO.length} preguntas de lectura comprensiva en situaciones reales y párrafos técnicos.
-        Supera cada nivel para desbloquear el siguiente.
+        Lectura comprensiva en situaciones reales y párrafos técnicos. Supera cada nivel para desbloquear el siguiente.
       </p>
+      <GuiaNiveles />
       <AvisoExamen guard={guard} resultado={notaCierre ?? undefined} />
       {notaCierre && <div className="mt-4 rounded-xl border border-destructive/40 bg-destructive/10 p-3 text-sm font-medium">Ronda cerrada por infracciones. Nota de la ronda: {notaCierre}</div>}
       {nivel && (
         <div className="mt-4 rounded-xl border bg-success/10 p-3 text-sm font-medium">
-          Ronda terminada. ¡Sigue practicando para llegar a la meta!
+          Ronda completada: lograste {rondaRef.current.ok} de {rondaRef.current.resp} aciertos en esta ronda. Tu avance acumulado subió a {est.aciertos[nivel]?.length ?? 0} aciertos. ¡Continúa con otra ronda para alcanzar la meta!
         </div>
       )}
       <div className="mt-6 grid gap-4 md:grid-cols-3">
@@ -181,11 +187,8 @@ function Conocimiento() {
                 {aprobado(n) ? <Trophy className="h-5 w-5 text-success" /> : !libre && <Lock className="h-5 w-5" />}
               </div>
               <p className="text-xs text-muted-foreground">{c.descripcion}</p>
-              <p className="mt-3 text-sm">{TOTALES[n]} preguntas · meta: {meta} correctas ({c.meta * 100} %)</p>
-              <div className="mt-2 h-2 overflow-hidden rounded-full bg-muted">
-                <div className="h-full bg-primary" style={{ width: `${Math.min(100, (ok / meta) * 100)}%` }} />
-              </div>
-              <p className="mt-1 text-xs text-muted-foreground">{ok} / {meta} correctas</p>
+              <BarraNivel correctas={ok} meta={meta} nivel={n} />
+              {libre && <div className="mt-2 text-xs"><EstadoNivel correctas={ok} intentadas={intentos[n] ?? 0} meta={meta} nivel={n} /></div>}
               <Button
                 disabled={!libre || ok >= TOTALES[n]}
                 onClick={() => setPendiente(n)}
