@@ -48,7 +48,7 @@ function parseGenero(v: unknown): "masculino" | "femenino" | "otro" | null {
   return null;
 }
 
-interface Fila { n: number; cedula: string; nombres: string; fecha: string | null; genero: ReturnType<typeof parseGenero>; institucion: string; errores: string[]; avisos: string[]; estado?: "ok" | "error"; msg?: string }
+interface Fila { n: number; cedula: string; nombres: string; fecha: string | null; genero: ReturnType<typeof parseGenero>; institucion: string; errores: string[]; avisos: string[]; estado?: "ok" | "error"; msg?: string; clave?: string }
 
 async function leerArchivo(file: File): Promise<string[][]> {
   const ext = file.name.toLowerCase().split(".").pop();
@@ -143,8 +143,8 @@ export function ImportarEstudiantes({ open, onOpenChange }: { open: boolean; onO
     for (const f of out) {
       if (f.errores.length) continue;
       try {
-        await crear({ data: { cedula: f.cedula, nombres: f.nombres, institucion: f.institucion, fechaNacimiento: f.fecha!, genero: f.genero!, rol: "estudiante" } });
-        f.estado = "ok";
+        const res = await crear({ data: { cedula: f.cedula, nombres: f.nombres, institucion: f.institucion, fechaNacimiento: f.fecha!, genero: f.genero!, rol: "estudiante" } });
+        f.estado = "ok"; f.clave = res.passwordTemporal;
       } catch (e) {
         const m = (e as Error).message;
         f.estado = "error"; f.msg = /already|registered|exists/i.test(m) ? "Ya existe un usuario con esta cédula" : m;
@@ -240,12 +240,13 @@ export function ImportarEstudiantes({ open, onOpenChange }: { open: boolean; onO
           <div className="space-y-4">
             <div className="h-3 overflow-hidden rounded-full bg-muted"><div className="h-full bg-primary transition-all" style={{ width: `${progreso}%` }} /></div>
             <p className="flex items-center gap-2 text-sm">{corriendo && <Loader2 className="h-4 w-4 animate-spin" />}{corriendo ? `Creando cuentas… ${progreso} %` : `Listo: ${filas.filter((f) => f.estado === "ok").length} creadas, ${filas.filter((f) => f.estado === "error").length} con problemas.`}</p>
-            {!corriendo && <Guia>Cada estudiante entra con su <b>cédula</b> y la contraseña temporal <b>123*789*h</b>; al entrar por primera vez deberá cambiarla.</Guia>}
+            {!corriendo && <Guia>Cada estudiante entra con su <b>cédula</b> y su contraseña temporal única (mostrada abajo); al entrar por primera vez deberá cambiarla. <b>Descarga la lista ahora</b>: las claves no se volverán a mostrar.
+              <div className="mt-2"><Button size="sm" variant="outline" onClick={() => { const filasCsv = filas.filter((f) => f.clave).map((f) => `"${f.cedula}","${f.nombres.replace(/"/g, '""')}","${f.clave}"`); const blob = new Blob(["\uFEFFCédula,Nombres,Contraseña temporal\n" + filasCsv.join("\n")], { type: "text/csv;charset=utf-8" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "claves-temporales.csv"; a.click(); URL.revokeObjectURL(a.href); }}>Descargar claves</Button></div></Guia>}
             <div className="max-h-[40vh] overflow-auto rounded-xl border text-xs">
               {filas.filter((f) => f.estado).map((f) => (
                 <div key={f.n} className="flex items-center gap-2 border-b px-3 py-1.5">
                   {f.estado === "ok" ? <CheckCircle2 className="h-4 w-4 text-success" /> : <XCircle className="h-4 w-4 text-destructive" />}
-                  <span className="font-mono">{f.cedula}</span><span>{f.nombres}</span>{f.msg && <span className="text-destructive">— {f.msg}</span>}
+                  <span className="font-mono">{f.cedula}</span><span>{f.nombres}</span>{f.clave && <span className="font-mono font-semibold">{f.clave}</span>}{f.msg && <span className="text-destructive">— {f.msg}</span>}
                 </div>
               ))}
             </div>
