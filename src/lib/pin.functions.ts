@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
+import { cedulaToEmail } from "@/lib/cedula";
 
 const PIN = z.string().regex(/^\d{4}$/, "El PIN debe tener exactamente 4 dígitos.");
 const MAX_INTENTOS = 5;
@@ -73,5 +74,50 @@ export const establecerPinFn = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
-// La recuperación pública con cédula + PIN fue retirada: un PIN de 4 dígitos no prueba
-// el control de la cuenta. Las contraseñas las reinicia el personal (clave temporal única).
+/** Restablece la contraseña con cédula + PIN (público, con bloqueo por intentos). */
+export const resetConPinFn = createServerFn({ method: "POST" })
+  .inputValidator((d: unknown) =>
+    z
+      .object({
+        cedula: z.string().min(1).max(20),
+        pin: PIN,
+        nueva: z.string().min(8, "La nueva contraseña debe tener mínimo 8 caracteres."),
+      })
+      .parse(d),
+  )
+  .handler(async ({ data }) => {
+    const { supabaseAdmin, perfil } = await perfilPorCedula(data.cedula);
+    if (!perfil) return { ok: false, error: "La cédula no está registrada." };
+    if (perfil.bloqueado) return { ok: false, error: "Esta cuenta está desactivada. Contacta al administrador." };
+    const { data: reg } = await supabaseAdmin
+      .from("user_pins")
+      .select("pin_hash, intentos, bloqueado_hasta")
+      .eq("user_id", perfil.id)
+      .maybeSingle();
+    if (!reg) return { ok: false, error: "Esta cuenta no tiene PIN creado. Pide al administrador que reinicie tu contraseña." };
+    if (reg.bloqueado_hasta && new Date(reg.bloqueado_hasta) > new Date()) {
+      return { ok: false, error: `Demasiados intentos. Intenta de nuevo después de las ${new Date(reg.bloqueado_hasta).toLocaleTimeString("es-EC", { hour: "2-digit", minute: "2-digit" })}.` };
+    }
+    if ((await hashPin(perfil.id, data.pin)) !== reg.pin_hash) {
+      const intentos = reg.intentos + 1;
+      const bloquear = intentos >= MAX_INTENTOS;
+      await supabaseAdmin
+        .from("user_pins")
+        .update({
+          intentos: bloquear ? 0 : intentos,
+          bloqueado_hasta: bloquear ? new Date(Date.now() + BLOQUEO_MIN * 60000).toISOString() : null,
+        })
+        .eq("user_id", perfil.id);
+      return {
+        ok: false,
+        error: bloquear
+          ? `PIN incorrecto. Se bloqueó la recuperación por ${BLOQUEO_MIN} minutos.`
+          : `PIN incorrecto. Te quedan ${MAX_INTENTOS - intentos} intentos.`,
+      };
+    }
+    const { error } = await supabaseAdmin.auth.admin.updateUserById(perfil.id, { password: data.nueva });
+    if (error) return { ok: false, error: error.message };
+    await supabaseAdmin.from("user_pins").update({ intentos: 0, bloqueado_hasta: null }).eq("user_id", perfil.id);
+    await supabaseAdmin.from("profiles").update({ primera_vez: false }).eq("id", perfil.id);
+    return { ok: true, email: cedulaToEmail(data.cedula) };
+  });

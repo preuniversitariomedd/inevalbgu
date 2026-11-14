@@ -533,7 +533,7 @@ function AdminEstudiantes() {
             <DialogDescription>
               {modoEdicion
                 ? "Actualiza los datos. La cédula no se puede cambiar."
-                : "Se creará con una contraseña temporal única (se mostrará una sola vez) y se forzará el cambio al primer ingreso."}
+                : "Se creará con la contraseña temporal 123*789*h y se forzará el cambio al primer ingreso."}
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={enviarForm} className="space-y-3">
@@ -678,7 +678,8 @@ function AdminEstudiantes() {
           <DialogHeader>
             <DialogTitle>Reiniciar {seleccion.size} contraseña(s)</DialogTitle>
             <DialogDescription>
-              Cada estudiante seleccionado recibirá una contraseña temporal única. Se descargará una lista con las nuevas claves (guárdala: no se volverá a mostrar).
+              Todos los estudiantes seleccionados recibirán la contraseña temporal{" "}
+              <b className="font-mono">123*789*h</b> y deberán cambiarla al ingresar.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -693,12 +694,6 @@ function AdminEstudiantes() {
                   const r: any = await resetearMasivo({
                     data: { userIds: Array.from(seleccion) },
                   });
-                  const filas = (r.credenciales ?? []).map((c: { userId: string; password: string }) => {
-                    const e = estudiantes.find((x) => x.id === c.userId);
-                    return `"${e?.cedula ?? ""}","${(e?.nombres ?? "").replace(/"/g, '""')}","${c.password}"`;
-                  });
-                  const blob = new Blob(["\uFEFFCédula,Nombres,Contraseña temporal\n" + filas.join("\n")], { type: "text/csv;charset=utf-8" });
-                  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "claves-temporales.csv"; a.click(); URL.revokeObjectURL(a.href);
                   toast.success(
                     `Se reiniciaron ${r.ok} contraseña(s)` +
                       (r.fallidos?.length ? ` · ${r.fallidos.length} con error` : ""),
@@ -785,7 +780,7 @@ function AdminEstudiantes() {
           <AlertDialogHeader>
             <AlertDialogTitle>¿Reiniciar contraseña?</AlertDialogTitle>
             <AlertDialogDescription>
-              Se asignará una contraseña temporal única a{" "}
+              Se asignará la contraseña temporal <b>123*789*h</b> a{" "}
               <b>{confirmarReset?.nombres}</b>. El estudiante deberá cambiarla al ingresar.
             </AlertDialogDescription>
           </AlertDialogHeader>

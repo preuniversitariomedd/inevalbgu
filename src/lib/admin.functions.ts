@@ -3,13 +3,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 import { validarCedulaEcuatoriana, cedulaToEmail } from "@/lib/cedula";
 
-/** Contraseña temporal aleatoria e individual (se muestra una sola vez al administrador). */
-function claveTemporal() {
-  const abc = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
-  const b = crypto.getRandomValues(new Uint8Array(10));
-  const s = Array.from(b, (x) => abc[x % abc.length]).join("");
-  return `${s.slice(0, 5)}-${s.slice(5)}`;
-}
+const TEMP_PASSWORD = "123*789*h";
 const GENERO = z.enum(["masculino", "femenino", "otro"]);
 
 // ---------- Helpers internos ----------
@@ -123,10 +117,9 @@ export const crearEstudianteFn = createServerFn({ method: "POST" })
 
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const clave = claveTemporal();
     const { data: created, error } = await supabaseAdmin.auth.admin.createUser({
       email: cedulaToEmail(data.cedula),
-      password: clave,
+      password: TEMP_PASSWORD,
       email_confirm: true,
       user_metadata: { cedula: data.cedula, nombres: data.nombres },
     });
@@ -150,7 +143,7 @@ export const crearEstudianteFn = createServerFn({ method: "POST" })
       .from("user_roles")
       .insert({ user_id: userId, role: data.rol });
     if (re) throw new Error(re.message);
-    return { ok: true, userId, cedula: data.cedula, passwordTemporal: clave, rol: data.rol };
+    return { ok: true, userId, cedula: data.cedula, passwordTemporal: TEMP_PASSWORD, rol: data.rol };
   });
 
 
@@ -161,13 +154,12 @@ export const resetPasswordEstudianteFn = createServerFn({ method: "POST" })
     const { isAdmin } = await ensureStaff(context);
     await ensurePuedeGestionar(isAdmin, [data.userId]);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const clave = claveTemporal();
     const { error } = await supabaseAdmin.auth.admin.updateUserById(data.userId, {
-      password: clave,
+      password: TEMP_PASSWORD,
     });
     if (error) throw new Error(error.message);
     await supabaseAdmin.from("profiles").update({ primera_vez: true }).eq("id", data.userId);
-    return { ok: true, passwordTemporal: clave };
+    return { ok: true, passwordTemporal: TEMP_PASSWORD };
   });
 
 export const eliminarEstudianteFn = createServerFn({ method: "POST" })
@@ -692,14 +684,12 @@ export const resetPasswordMasivoFn = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     let ok = 0;
     const fallidos: string[] = [];
-    const credenciales: { userId: string; password: string }[] = [];
     for (const id of data.userIds) {
-      const clave = claveTemporal();
       const { error } = await supabaseAdmin.auth.admin.updateUserById(id, {
-        password: clave,
+        password: TEMP_PASSWORD,
       });
       if (error) fallidos.push(id);
-      else { ok += 1; credenciales.push({ userId: id, password: clave }); }
+      else ok += 1;
     }
     if (ok > 0) {
       await supabaseAdmin
@@ -707,5 +697,5 @@ export const resetPasswordMasivoFn = createServerFn({ method: "POST" })
         .update({ primera_vez: true })
         .in("id", data.userIds.filter((i) => !fallidos.includes(i)));
     }
-    return { ok, fallidos, credenciales };
+    return { ok, fallidos, passwordTemporal: TEMP_PASSWORD };
   });
