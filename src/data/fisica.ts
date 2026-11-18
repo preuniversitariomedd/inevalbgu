@@ -21,7 +21,17 @@ export interface PreguntaFisica {
 
 // ---------- utilidades ----------
 function mezclarConRespuesta(correcta: string, distractores: string[], semilla: number) {
-  const opciones = [correcta, ...distractores];
+  // Evita opciones repetidas (p. ej. dos "20 m/s"), que marcaban mal una respuesta correcta.
+  const unicos: string[] = [];
+  for (const d of distractores) if (d !== correcta && !unicos.includes(d)) unicos.push(d);
+  const m = correcta.match(/^(-?[\d.]+)\s*(.*)$/);
+  let k = 1;
+  while (unicos.length < distractores.length && m) {
+    const c = `${Math.round((Number(m[1]) + k * 3) * 100) / 100} ${m[2]}`.trim();
+    if (c !== correcta && !unicos.includes(c)) unicos.push(c);
+    k++;
+  }
+  const opciones = [correcta, ...unicos];
   // Barajado determinista (para que la respuesta no quede siempre en A).
   const idx = semilla % opciones.length;
   const arr = [...opciones];
